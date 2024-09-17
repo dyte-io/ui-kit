@@ -5,6 +5,16 @@
 
 * feature release ([ca643ff](https://github.com/dyte-io/ui-kit/commit/ca643ffe0075e72b5e17b8f89dbb7f690a7f1b80))
 * feature release ([661ff63](https://github.com/dyte-io/ui-kit/commit/661ff633a363fcb5d1ee38b0dccdc28a124a0e4f))
+* **release:** created new package release ([9ef1088](https://github.com/dyte-io/ui-kit/commit/9ef10883a7078730f3d099c6a62baec53eda7caa))
+* **release:** created new package release ([6bfa5df](https://github.com/dyte-io/ui-kit/commit/6bfa5dfe7ff1fd144b7b1bc0026ded492052f3d1))
+
+# [2.1.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.3...@dyte-in/ui-kit-v2.1.0-staging.4) (2024-09-17)
+
+
+### Features
+
+* feature release ([ca643ff](https://github.com/dyte-io/ui-kit/commit/ca643ffe0075e72b5e17b8f89dbb7f690a7f1b80))
+* feature release ([661ff63](https://github.com/dyte-io/ui-kit/commit/661ff633a363fcb5d1ee38b0dccdc28a124a0e4f))
 * **release:** created new package release ([6bfa5df](https://github.com/dyte-io/ui-kit/commit/6bfa5dfe7ff1fd144b7b1bc0026ded492052f3d1))
 
 # [2.1.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.3...@dyte-in/ui-kit-v2.1.0-staging.4) (2024-09-17)
