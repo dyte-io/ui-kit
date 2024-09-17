@@ -1,3 +1,10 @@
+# [2.1.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.3...@dyte-in/ui-kit-v2.1.0-staging.4) (2024-09-17)
+
+
+### Features
+
+* feature release ([661ff63](https://github.com/dyte-io/ui-kit/commit/661ff633a363fcb5d1ee38b0dccdc28a124a0e4f))
+
 # [2.1.0-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.2...@dyte-in/ui-kit-v2.1.0-staging.3) (2024-09-17)
 
 
