@@ -1,3 +1,10 @@
+# [2.1.0-staging.7](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.6...@dyte-in/ui-kit-v2.1.0-staging.7) (2024-09-17)
+
+
+### Bug Fixes
+
+* publish using lerna ([1b072c2](https://github.com/dyte-io/ui-kit/commit/1b072c2de1a6154fd62510926637e06d6d0c5135))
+
 # [2.1.0-staging.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.5...@dyte-in/ui-kit-v2.1.0-staging.6) (2024-09-17)
 
 
