@@ -1,3 +1,11 @@
+# 1.0.0-staging.1 (2024-09-17)
+
+
+### Features
+
+* added ui-kit public source ([becdf7d](https://github.com/dyte-io/ui-kit/commit/becdf7d3eb6bdf5a2c023a426d10e8bc06852369))
+* initial commit ([a31f52c](https://github.com/dyte-io/ui-kit/commit/a31f52c2cab444fbd0f10d2219a790cf09ae23ea))
+
 # [2.1.0-staging.4](https://github.com/dyte-in/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.3...@dyte-in/ui-kit-v2.1.0-staging.4) (2024-09-12)
 
 
