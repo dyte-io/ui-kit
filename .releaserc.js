@@ -8,7 +8,7 @@ const baseConfig = {
     [
       '@semantic-release/npm',
       {
-        npmPublish: false,
+        npmPublish: true,
         pkgRoot: './packages/core/',
         tarballDir: 'dist',
       },
@@ -16,7 +16,7 @@ const baseConfig = {
     [
       '@semantic-release/npm',
       {
-        npmPublish: false,
+        npmPublish: true,
         pkgRoot: './packages/react-library/',
         tarballDir: 'dist',
       },
@@ -24,7 +24,7 @@ const baseConfig = {
     [
       '@semantic-release/npm',
       {
-        npmPublish: false,
+        npmPublish: true,
         pkgRoot: './packages/vue-library',
         tarballDir: 'dist',
       },
@@ -32,7 +32,7 @@ const baseConfig = {
     [
       '@semantic-release/npm',
       {
-        npmPublish: false,
+        npmPublish: true,
         pkgRoot: './packages/angular-library/projects/components',
         tarballDir: 'dist',
       },
