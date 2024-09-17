@@ -1,8 +1,9 @@
 name: Release to NPM Registry
 on:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
+      - staging
   repository_dispatch:
     types: [prod-release]
 
