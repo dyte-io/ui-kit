@@ -1,3 +1,11 @@
+# [2.1.0-staging.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.4...@dyte-in/ui-kit-v2.1.0-staging.5) (2024-09-17)
+
+
+### Features
+
+* **release:** created new package release ([f0eb31e](https://github.com/dyte-io/ui-kit/commit/f0eb31eca4e1bd6f04cfee1854f8ad195fee0959))
+* **release:** update package version ([00b2690](https://github.com/dyte-io/ui-kit/commit/00b2690f6697f3fed5cf245a2b8f3994f0c2a87c))
+
 # [2.1.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.3...@dyte-in/ui-kit-v2.1.0-staging.4) (2024-09-17)
 
 
