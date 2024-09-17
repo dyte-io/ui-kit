@@ -1,3 +1,10 @@
+# [2.1.0-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.1...@dyte-in/ui-kit-v2.1.0-staging.2) (2024-09-17)
+
+
+### Features
+
+* npm publish set to true ([c4d367b](https://github.com/dyte-io/ui-kit/commit/c4d367b13d0dc48522fca7181b0e080d22ad3730))
+
 # [2.1.0-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v1.0.0-staging.2...@dyte-in/ui-kit-v2.1.0-staging.1) (2024-09-17)
 
 
