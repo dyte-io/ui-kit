@@ -1,0 +1,27 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply flex flex-row items-center justify-center;
+  @apply bg-background-800;
+  @apply w-fit rounded-sm p-1;
+}
+
+p {
+  @apply m-0 px-2;
+}
+
+input {
+  @apply m-0 w-6 p-2;
+  @apply border-sm border-text-600 border-solid;
+  @apply bg-background-1000 text-text-900 text-center;
+  @apply text-text-lg rounded-sm outline-none transition;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  @apply m-0 appearance-none;
+  -webkit-appearance: none;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}

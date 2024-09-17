@@ -1,0 +1,45 @@
+@import '../../styles/reset.css';
+@import '../../styles/scrollbar.css';
+
+:host {
+  @apply w-full;
+}
+
+.emoji-parent {
+  @apply box-border inline-flex h-64 w-full max-w-screen-sm flex-col p-2 pb-0;
+  @apply select-none transition-colors;
+  @apply bg-background-800 text-text-1000;
+}
+
+.close-parent {
+  @apply flex flex-1 justify-end p-0;
+  @apply bg-background-800 text-text-1000;
+}
+
+#emoji-grid {
+  @apply mt-2 box-border flex flex-row flex-wrap;
+  @apply overflow-x-hidden overflow-y-scroll;
+  @apply h-full;
+  grid-auto-rows: minmax(min-content, max-content);
+}
+
+#loader {
+  @apply flex h-full w-full items-center justify-center;
+}
+
+input {
+  @apply text-text-md block h-8 px-2;
+  @apply border-text-700 border-solid border-none;
+  @apply bg-background-800 text-text-900 placeholder:text-text-700;
+  @apply rounded-sm outline-none transition;
+
+  border: theme('borderWidth.sm') solid theme('colors.background.600');
+}
+
+input:focus {
+  @apply border-brand-300 ring-brand-300 ring-4 ring-opacity-30;
+}
+
+.emoji {
+  @apply text-heading-sm text-text-1000 h-10 w-10;
+}

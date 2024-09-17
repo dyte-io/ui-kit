@@ -1,0 +1,34 @@
+@import '../../styles/reset.css';
+@import '../../styles/scrollbar.css';
+
+.loading {
+  @apply cursor-wait;
+}
+
+.content-wrapper {
+  @apply h-full overflow-y-auto;
+  @apply relative;
+  contain: strict;
+}
+
+.scroller {
+  width: 1px;
+  opacity: 0;
+}
+
+.content {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.smallest-dom-element {
+  width: 100%;
+  height: 2px;
+  background: red;
+}
+
+.loader {
+  @apply my-2;
+  @apply flex justify-center;
+}

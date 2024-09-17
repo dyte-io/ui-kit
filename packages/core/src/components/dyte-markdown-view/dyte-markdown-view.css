@@ -1,0 +1,20 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply break-words;
+}
+
+a {
+  @apply text-current;
+}
+
+.block-quote,
+blockquote {
+  @apply m-0 mb-3;
+  @apply border-l-md border-r-none border-y-none border-spacing-[1px] border-solid p-0.5 pl-2;
+  @apply rounded-sm rounded-tl-none rounded-bl-none;
+}
+
+pre {
+  white-space: pre-wrap;
+}

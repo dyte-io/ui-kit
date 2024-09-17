@@ -1,0 +1,9 @@
+{
+  "packages": [
+    "packages/core",
+    "packages/react-library",
+    "packages/vue-library",
+    "packages/angular-library/projects/components/"
+  ],
+  "version": "1.0.0"
+}

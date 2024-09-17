@@ -1,0 +1,11 @@
+@import '../../styles/reset.css';
+
+.text {
+  word-break: break-word;
+  @apply block;
+  @apply break-words leading-snug;
+
+  &.emoji {
+    @apply text-heading-md;
+  }
+}

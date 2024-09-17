@@ -1,0 +1,42 @@
+/* .title {
+  @apply text-text-md text-text-900 mb-2 font-semibold;
+}
+.chart {
+  @apply bg-background-1000 rounded-md;
+}
+.chart-line {
+  @apply stroke-brand-500 fill-brand-400/10 overflow-hidden;
+}
+
+.chart-tooltip {
+  @apply stroke-background-700 fill-background-600 transition-transform delay-100;
+}
+.y {
+  text {
+    @apply text-text-900;
+  }
+  line {
+    @apply !text-background-600;
+  }
+  path {
+    @apply !text-background-1000;
+  }
+}
+
+.tooltip-pointer {
+  @apply stroke-background-600 hidden;
+}
+
+.x {
+  text {
+    @apply text-text-600;
+  }
+
+  line {
+    @apply hidden;
+  }
+
+  path {
+    @apply !text-background-600;
+  }
+} */

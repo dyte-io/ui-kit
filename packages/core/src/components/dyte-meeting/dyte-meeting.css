@@ -1,0 +1,15 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply box-border flex flex-col;
+  @apply bg-background-1000 text-text-900;
+
+  @apply overflow-hidden;
+
+  /* fixed `mode` by default */
+  @apply fixed inset-0 h-full w-full;
+}
+
+:host([mode='fill']) {
+  @apply relative;
+}

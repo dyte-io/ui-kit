@@ -1,0 +1,67 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply pointer-events-none block;
+  @apply text-text-1000;
+  @apply flex justify-center align-middle;
+  animation: show 0.4s ease;
+  transition: 0.4s;
+  z-index: 5;
+  width: 100%;
+}
+
+.ctr {
+  @apply box-border inline-flex h-full items-center px-3;
+  @apply bg-background-600 select-none rounded-md;
+  @apply shadow-background-1000 shadow-md;
+  @apply pointer-events-auto;
+  @apply p-3;
+
+  overflow: auto;
+  max-width: 50%;
+}
+
+.message {
+  @apply m-0;
+  @apply inline-block;
+  @apply justify-center;
+  max-width: 100%;
+  text-wrap: wrap;
+  line-height: 1.5rem;
+
+  .name {
+    font-weight: bold;
+  }
+}
+
+:host(.exit) {
+  animation: exit 0.4s ease;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateY(120px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes exit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-120px);
+  }
+}
+
+:host([size='sm']) {
+  @apply text-text-md;
+}

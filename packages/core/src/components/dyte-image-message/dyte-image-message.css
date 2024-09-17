@@ -1,0 +1,9 @@
+@import '../../styles/reset.css';
+
+.image-spinner {
+  @apply cursor-wait;
+}
+
+.image-errored {
+  @apply cursor-not-allowed;
+}

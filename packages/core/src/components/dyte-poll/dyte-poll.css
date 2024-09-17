@@ -1,0 +1,83 @@
+@import '../../styles/reset.css';
+@import '../../styles/scrollbar.css';
+
+.ctr {
+  @apply mb-3 flex w-full flex-col;
+  @apply text-text-1000;
+}
+
+.poll-title {
+  @apply text-text-sm my-3 mr-4;
+}
+
+.poll {
+  @apply bg-background-800 rounded-md;
+  @apply flex flex-col p-4;
+}
+
+.poll-question {
+  @apply text-text-md px-2;
+  @apply break-words;
+}
+
+.poll-answers {
+  @apply flex flex-row justify-between;
+  @apply text-text-sm;
+  @apply mt-4 mb-1 pl-1 pr-3;
+}
+
+.poll-option {
+  @apply flex flex-col;
+  @apply bg-background-700 mt-2 rounded-md p-2;
+
+  word-break: break-word;
+}
+
+.poll-option.open-vote {
+  @apply hover:cursor-pointer;
+}
+
+.poll-option label {
+  @apply flex flex-row;
+  cursor: inherit;
+}
+
+.poll-option-header {
+  @apply flex flex-row justify-between p-1;
+}
+
+.poll-option-header[data-disabled='true'] {
+  @apply hover:cursor-default;
+}
+
+.poll-option-header input {
+  @apply my-0 ml-0.5 mr-2;
+  cursor: inherit;
+}
+
+.poll-option-header .counter {
+  @apply text-text-1000;
+  @apply text-text-sm;
+}
+
+.votes {
+  @apply mt-1;
+  @apply flex flex-row flex-wrap;
+}
+
+.vote {
+  @apply mr-1 h-8 w-8;
+  @apply flex items-center justify-center;
+  @apply bg-video-bg text-text-1000 rounded-md;
+  @apply rounded-none;
+  clip-path: circle();
+}
+
+.active {
+  @apply bg-brand-500;
+  @apply text-text-on-brand-900;
+}
+
+.active .counter {
+  @apply text-text-on-brand-900;
+}

@@ -1,0 +1,52 @@
+@import '../../styles/reset.css';
+@import '../../styles/scrollbar.css';
+
+.create-poll {
+  @apply my-3 flex flex-1 flex-col p-3;
+  @apply bg-background-700 rounded-md;
+}
+
+input {
+}
+
+.create-poll p {
+  @apply m-0 p-0 text-center;
+}
+
+.create-poll textarea {
+  @apply flex rounded-sm p-2 font-sans;
+  @apply border-none  font-medium outline-none;
+  @apply bg-background-900 text-text-700 my-3 resize-y;
+}
+
+.create-poll textarea:focus {
+  @apply outline-background-600 outline outline-offset-2;
+}
+
+.option {
+  @apply flex flex-row items-center;
+  @apply mb-3 w-full;
+}
+
+.option input {
+  @apply w-full rounded-sm  p-2;
+  @apply border-none outline-none;
+  @apply bg-background-900 text-text-700;
+}
+
+.remove-option {
+  @apply ml-2 w-10;
+  @apply rounded-sm;
+}
+
+.add-option {
+  @apply mb-3;
+}
+
+label {
+  @apply mb-3;
+}
+
+.error-text {
+  @apply text-danger text-text-sm mt-3 text-center;
+}

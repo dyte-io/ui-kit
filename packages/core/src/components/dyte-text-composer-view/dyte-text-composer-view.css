@@ -1,0 +1,31 @@
+.chat-input {
+  @apply relative;
+  @apply z-10 box-border flex flex-col rounded-t-md;
+
+  textarea {
+    @apply bg-background-800;
+    @apply text-text-1000 placeholder:text-text-1000 box-border p-3;
+    @apply font-sans outline-none;
+    @apply resize-none overflow-y-auto border-none;
+    @apply text-text-md min-h-[60px];
+  }
+}
+
+@container chatcontainer (height < 360px) {
+  textarea {
+    @apply !h-[30px] !min-h-[30px];
+  }
+}
+
+.text-error {
+  @apply w-fit bg-background-600 border-warning left-0 z-10 rounded-sm mt-1 ml-1 flex items-center justify-start text-warning px-2 font-semibold text-text-sm;
+  border: 1px solid;
+}
+
+#warning-indicator {
+  @apply w-3 h-3 mr-1;
+}
+
+.text-error.breached {
+  @apply border-danger text-danger;
+}

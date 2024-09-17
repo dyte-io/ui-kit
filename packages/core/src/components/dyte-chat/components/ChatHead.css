@@ -1,0 +1,11 @@
+.head {
+  @apply flex items-center;
+
+  .name {
+    @apply text-text-sm mr-4 font-bold;
+  }
+
+  .time {
+    @apply text-text-sm text-text-800;
+  }
+}

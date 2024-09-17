@@ -1,0 +1,72 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply flex h-full w-full;
+}
+
+main {
+  @apply flex-1;
+}
+
+.grid-width-sm {
+  @apply w-1/4;
+}
+.grid-width-md {
+  @apply w-1/2;
+}
+.grid-width-lg {
+  @apply w-2/3;
+}
+
+:host([size='sm']),
+:host([size='md']) {
+  @apply flex-col;
+}
+
+:host([size='md']) {
+  aside {
+    @apply max-h-96 w-full max-w-full;
+  }
+  .grid-width-sm {
+    @apply h-1/4;
+  }
+  .grid-width-md {
+    @apply h-1/2;
+  }
+  .grid-width-lg {
+    @apply h-2/3;
+  }
+}
+
+:host([size='sm']) {
+  aside {
+    @apply max-h-96 w-full max-w-full;
+  }
+  .grid-width-sm,
+  .grid-width-md,
+  .grid-width-lg {
+    @apply h-1/2;
+  }
+}
+
+:host([size='xl']) {
+  .grid-width-sm,
+  .grid-width-md,
+  .grid-width-lg {
+    @apply w-[400px];
+  }
+}
+
+:host([layout='column']) {
+  @apply flex-col;
+
+  main {
+    flex: 4;
+  }
+
+  aside {
+    flex: 2;
+    max-width: 100%;
+    width: 100%;
+  }
+}

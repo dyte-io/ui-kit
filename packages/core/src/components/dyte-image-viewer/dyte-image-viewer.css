@@ -1,0 +1,46 @@
+@import '../../styles/reset.css';
+@import '../../styles/scrollbar.css';
+
+:host {
+  @apply w-[1140px] max-w-full;
+  @apply box-border flex flex-col p-6 pt-5;
+  @apply text-text-1000 overflow-y-auto;
+  @apply z-40;
+  @apply bg-background-900 rounded-md;
+}
+
+.displayName {
+  @apply font-bold;
+}
+
+.image-ctr {
+  @apply mt-2 box-border flex justify-center;
+  overflow: hidden;
+}
+
+.actions {
+  @apply flex items-center justify-end gap-2;
+}
+
+img {
+  @apply box-border block max-h-full max-w-full;
+  object-fit: contain;
+}
+
+.header {
+  @apply flex items-center justify-between pb-4;
+}
+
+.shared-by-user {
+  @apply line-clamp-1;
+}
+
+:host([size='sm']) {
+  .header {
+    @apply flex-col;
+
+    .actions {
+      @apply mt-4;
+    }
+  }
+}

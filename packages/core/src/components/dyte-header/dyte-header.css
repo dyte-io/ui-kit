@@ -1,0 +1,17 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply bg-background-1000 flex h-12 items-center px-4;
+}
+
+@media only screen and (max-device-height: 480px) and (orientation: landscape) {
+  :host {
+    @apply !hidden;
+  }
+}
+
+@media only screen and (max-height: 480px) and (orientation: landscape) {
+  :host {
+    @apply !hidden;
+  }
+}

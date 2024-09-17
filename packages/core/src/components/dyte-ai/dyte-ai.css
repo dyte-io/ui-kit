@@ -1,0 +1,50 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply max-w-80 relative box-border flex w-full flex-col;
+  @apply text-text-1000 bg-background-1000;
+  @apply overflow-hidden;
+}
+
+.close {
+  @apply absolute top-3 left-3;
+}
+
+.title {
+  @apply text-text-lg mx-0 mt-4 mb-2 select-none p-0 text-center font-normal;
+}
+
+#mobile-header {
+  @apply mt-2 flex items-center justify-evenly;
+  border-bottom: theme('borderWidth.sm') solid theme('colors.background.600');
+}
+
+#mobile-header dyte-button {
+  border-bottom: theme('borderWidth.md') solid transparent;
+  @apply relative rounded-none hover:bg-transparent;
+}
+
+#mobile-header dyte-button.active {
+  border-color: theme('colors.brand.400');
+}
+
+#mobile-header dyte-button .dot {
+  font-size: 48px;
+  @apply text-brand-500 absolute -top-[26px] -right-1;
+}
+
+dyte-ai-home,
+dyte-ai-transcriptions,
+dyte-ai-chat {
+  flex: 1;
+}
+
+:host([view='sidebar']) {
+  @apply bg-background-900 mx-2 rounded-lg;
+}
+
+:host([view='full-screen']) {
+  @apply absolute;
+  @apply inset-0 z-50 max-w-full;
+  border: none;
+}

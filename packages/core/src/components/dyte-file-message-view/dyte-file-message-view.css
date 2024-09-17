@@ -1,0 +1,29 @@
+@import '../../styles/reset.css';
+
+.file {
+  @apply flex items-center gap-1 px-2 py-1;
+  @apply max-w-64 min-w-40;
+  @apply bg-background-700 text-text-700 rounded-sm;
+
+  .file-data {
+    @apply ml-1 flex-1;
+
+    .name {
+      @apply text-text-1000 line-clamp-1 break-all;
+    }
+
+    .file-data-split {
+      @apply text-text-sm mt-0.5 flex items-center;
+
+      .ext {
+        @apply line-clamp-1 mr-2 uppercase;
+      }
+      .divider {
+        @apply bg-background-600 h-4 w-0.5;
+      }
+      .size {
+        @apply ml-2;
+      }
+    }
+  }
+}

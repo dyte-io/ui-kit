@@ -1,0 +1,12 @@
+@import '../../styles/reset.css';
+
+input {
+  @apply text-text-md block h-10 px-3;
+  @apply border-md border-text-700 border-solid;
+  @apply bg-background-1000 text-text-900 placeholder:text-text-700;
+  @apply focus:text-text-1000;
+  @apply rounded-sm outline-none transition;
+
+  @apply focus:border-brand-500;
+  @apply disabled:cursor-not-allowed;
+}

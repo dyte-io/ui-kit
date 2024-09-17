@@ -1,0 +1,24 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply flex items-center px-3 py-2;
+  @apply cursor-pointer transition-colors;
+  @apply text-text-1000;
+  @apply text-button-md;
+}
+
+::slotted([slot='start']) {
+  @apply mr-2;
+}
+
+::slotted([slot='end']) {
+  @apply ml-2;
+}
+
+:host(:hover) {
+  @apply bg-background-600;
+}
+
+:host(.red) {
+  @apply text-danger;
+}

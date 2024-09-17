@@ -1,0 +1,14 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply text-text-lg mx-3 select-none;
+  @apply text-text-1000;
+}
+
+.title {
+  @apply line-clamp-1 text-center;
+}
+
+:host([size='sm']) {
+  @apply text-text-sm;
+}

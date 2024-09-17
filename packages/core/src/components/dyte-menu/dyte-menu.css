@@ -1,0 +1,10 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply relative inline-block;
+  @apply text-text-1000;
+}
+
+#menu-list {
+  @apply absolute z-20 hidden;
+}

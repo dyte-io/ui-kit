@@ -1,0 +1,58 @@
+{
+  "name": "@dytesdk/react-ui-kit",
+  "version": "2.1.0-staging.4",
+  "description": "Dyte's UI Kit to support easy UI development for React.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dyte-in/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://community.dyte.io"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/es/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./es": {
+      "default": "./dist/es/index.js",
+      "types": "./dist/es/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rm -rf dist",
+    "compile": "npm run tsc && tsc -p tsconfig.es.json",
+    "tsc": "tsc -p .",
+    "rollup": "rollup -c",
+    "lint": "echo \"No lint script\"",
+    "lint:fix": "echo \"No lint:fix script\"",
+    "test": "echo \"No test script\"",
+    "prepublishOnly": "cp package.json package.json.bak && node prepublish.js",
+    "postpublish": "mv package.json.bak package.json"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^15.12.2",
+    "@types/react": "^17.0.34",
+    "@types/react-dom": "^17.0.11",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "typescript": "^4.4.3"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.6",
+    "react-dom": ">=16.8.6"
+  },
+  "license": "UNLICENSED"
+}

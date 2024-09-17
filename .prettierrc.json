@@ -3,9 +3,16 @@
   "bracketSameLine": false,
   "jsxSingleQuote": false,
   "printWidth": 100,
-  "semi": false,
   "singleQuote": true,
   "tabWidth": 2,
   "trailingComma": "es5",
-  "useTabs": false
+  "useTabs": false,
+  "overrides": [
+    {
+      "files": ["*.md"],
+      "options": {
+        "printWidth": 80
+      }
+    }
+  ]
 }

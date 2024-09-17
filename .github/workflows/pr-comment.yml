@@ -1,0 +1,16 @@
+name: Add comment on PR
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment on PR
+        env:
+          PR_NUMBER: ${{ github.event.number }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo $PR_NUMBER
+          gh pr comment $PR_NUMBER --body 'If a `Release` job is running on staging, wait for it to complete before merging this PR.'

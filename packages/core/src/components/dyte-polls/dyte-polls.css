@@ -1,0 +1,26 @@
+@import '../../styles/reset.css';
+@import '../../styles/scrollbar.css';
+
+:host {
+  @apply mt-2 flex h-full w-full flex-col;
+  @apply text-text-md;
+}
+
+* {
+  @apply box-border;
+}
+
+.ctr {
+  @apply box-border p-3 pt-0;
+  @apply flex flex-1 flex-col;
+}
+
+.polls-view {
+  @apply overflow-y-auto;
+  @apply flex-1;
+  flex-basis: 0;
+}
+
+.empty-polls {
+  @apply flex justify-center items-center w-full h-full;
+}

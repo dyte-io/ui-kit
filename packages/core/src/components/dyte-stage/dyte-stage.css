@@ -1,0 +1,6 @@
+@import '../../styles/reset.css';
+
+:host {
+  display: block;
+  @apply relative overflow-hidden;
+}

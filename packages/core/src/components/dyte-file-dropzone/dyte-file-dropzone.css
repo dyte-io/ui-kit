@@ -1,0 +1,10 @@
+#dropzone {
+  @apply absolute inset-0 z-10 hidden;
+  @apply flex-col items-center justify-center;
+  @apply bg-background-800 text-text-700;
+}
+
+#dropzone.active {
+  @apply flex;
+  animation: 0.2s slide-up ease-in;
+}

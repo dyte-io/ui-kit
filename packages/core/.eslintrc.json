@@ -1,0 +1,28 @@
+{
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "extends": ["plugin:@stencil-community/recommended", "prettier"],
+  "plugins": ["prettier"],
+  "rules": {
+    "no-console": "warn",
+    "prettier/prettier": "error",
+    "@stencil-community/strict-boolean-conditions": "off",
+    "react/jsx-no-bind": [
+      "error",
+      {
+        // stencil requires arrow functions inside render()
+        "allowArrowFunctions": true,
+        "ignoreDOMComponents": false,
+        "ignoreRefs": false,
+        "allowFunctions": false,
+        "allowBind": false
+      }
+    ]
+  }
+}

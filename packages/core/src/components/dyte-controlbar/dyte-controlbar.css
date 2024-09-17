@@ -1,0 +1,12 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply bg-background-1000 box-border flex items-center px-4;
+  @apply relative z-10;
+}
+
+@media only screen and (max-device-height: 480px) and (orientation: landscape) {
+  :host {
+    @apply !pt-0;
+  }
+}

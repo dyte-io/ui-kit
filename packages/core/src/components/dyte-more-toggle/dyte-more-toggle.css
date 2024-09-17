@@ -1,0 +1,23 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply relative flex flex-col overflow-visible;
+}
+
+.more-menu {
+  @apply border-background-600 border-sm bg-background-1000 absolute -right-24 bottom-16 z-50 mb-3 box-border max-h-[60vh] w-64 overflow-auto rounded-md border-solid outline-none;
+}
+
+:host([size='sm']) {
+  .more-menu {
+    @apply bottom-10;
+  }
+}
+
+.more-menu::-webkit-scrollbar {
+  @apply bg-background-900 h-0 w-1.5;
+}
+
+.more-menu::-webkit-scrollbar-thumb {
+  @apply bg-background-600 rounded-sm;
+}

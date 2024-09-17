@@ -1,0 +1,5 @@
+@import '../../styles/reset.css';
+
+:host {
+  display: block;
+}

@@ -1,0 +1,11 @@
+@import '../../styles/reset.css';
+
+:host {
+  display: block;
+}
+
+:host(.audioDisabled) {
+  :slotted(dyte-icon) {
+    @apply text-danger;
+  }
+}

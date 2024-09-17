@@ -1,0 +1,22 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply relative block;
+}
+.unread-count {
+  @apply absolute right-3 box-border p-0.5;
+  @apply select-none;
+
+  @apply text-text-sm bg-brand-500 text-text-on-brand;
+  @apply min-w-5 flex h-5 items-center justify-center;
+  @apply rounded-full;
+  z-index: 1;
+}
+
+:host([variant='horizontal']) {
+  @apply flex flex-row-reverse items-center;
+
+  .unread-count {
+    @apply right-4 top-auto;
+  }
+}

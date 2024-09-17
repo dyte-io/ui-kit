@@ -1,0 +1,16 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply flex flex-col items-center justify-center;
+  @apply text-text-1000;
+  @apply h-full w-auto;
+}
+
+svg,
+img {
+  @apply h-full w-auto;
+}
+
+.brand-color {
+  @apply text-brand-500;
+}

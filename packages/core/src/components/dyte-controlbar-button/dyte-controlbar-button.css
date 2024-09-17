@@ -1,0 +1,126 @@
+@import '../../styles/reset.css';
+
+:host {
+  --background-color: var(
+    --dyte-controlbar-button-background-color,
+    theme('colors.background.1000')
+  );
+  --icon-size: var(--dyte-controlbar-button-icon-size, theme('spacing.7'));
+  --button-spacing: var(--dyte-controlbar-button-spacing, theme('spacing.1'));
+
+  @apply relative box-border inline-flex !outline-none;
+  @apply min-w-20 mx-0.5 h-full w-auto;
+  @apply select-none rounded-md transition-colors;
+  @apply text-text-1000;
+  border: theme('borderWidth.md') solid theme('colors.transparent');
+
+  background-color: var(--background-color);
+}
+
+button {
+  @apply p-1;
+}
+
+:host(.red-icon) #icon {
+  @apply text-danger;
+}
+
+:host([disabled]) {
+  @apply text-text-600;
+}
+
+button {
+  @apply box-border inline-flex h-full w-full flex-1 flex-col;
+  @apply items-center justify-center;
+  @apply cursor-pointer border-none bg-transparent text-inherit outline-none;
+}
+
+.label {
+  @apply text-text-sm line-clamp-1 text-center;
+}
+
+#warning-indicator {
+  @apply absolute top-1 right-2;
+  @apply h-4 w-4;
+  @apply text-warning;
+}
+
+:host([size='sm']) #warning-indicator {
+  @apply right-0 top-0;
+  @apply h-3 w-3;
+}
+
+:host(:hover) {
+  @apply bg-background-800;
+}
+
+#icon {
+  margin-bottom: var(--button-spacing);
+  width: var(--icon-size);
+  height: var(--icon-size);
+}
+
+/* Remove margin-bottom for `sm` buttons and in horizontal variant */
+:host([size='sm']),
+:host([variant='horizontal']) {
+  --button-spacing: 0px;
+}
+
+:host(.leave:hover) {
+  @apply bg-background-1000 text-danger;
+  border: theme('borderWidth.md') solid theme('colors.danger');
+}
+
+:host(.active) {
+  @apply text-brand-400;
+  border: theme('borderWidth.md') solid theme('colors.brand.400');
+}
+
+:host(.active-livestream) {
+  @apply text-danger;
+}
+
+:host([size='sm']) {
+  @apply min-w-14 mx-0;
+  .label {
+    @apply hidden;
+  }
+}
+
+:host([variant='horizontal']) {
+  @apply m-0 h-12 w-full px-5 py-3;
+
+  button {
+    @apply flex-row justify-start;
+  }
+
+  #icon {
+    @apply mr-3 w-6;
+  }
+
+  .label {
+    @apply text-button-md block leading-5;
+  }
+}
+
+:host([variant='horizontal']) #warning-indicator {
+  @apply right-auto left-4;
+}
+
+:host([brand-icon]) dyte-icon#icon {
+  @apply text-brand;
+}
+
+@media only screen and (max-device-height: 480px) and (orientation: landscape) {
+  :host {
+    @apply mx-0;
+
+    .label {
+      @apply hidden;
+    }
+  }
+
+  :slotted(dyte-icon) {
+    @apply h-4 w-4;
+  }
+}

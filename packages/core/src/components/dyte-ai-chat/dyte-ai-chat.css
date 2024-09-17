@@ -1,0 +1,20 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply flex h-full w-full flex-col;
+}
+
+.private-message {
+  @apply text-text-sm text-text-600 text-center;
+  @apply my-8 mx-10;
+}
+
+.hint-message {
+  @apply flex flex-col items-center justify-center text-center;
+  @apply flex-1;
+  @apply text-text-700 text-text-md leading-normal;
+}
+
+i {
+  @apply text-text-900 font-medium italic;
+}

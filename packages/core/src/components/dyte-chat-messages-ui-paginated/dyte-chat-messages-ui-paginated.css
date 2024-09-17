@@ -1,0 +1,5 @@
+:host {
+  @apply flex flex-col;
+  @apply bg-background-900;
+  flex: 1 0 0px;
+}

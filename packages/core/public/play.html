@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dyte UI Kit & Web Core Playground</title>
+
+    <meta name="description" content="A playground for Dyte's Web SDKs - UI Kit & Web Core" />
+
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+
+    <script id="web-core"></script>
+
+    <script type="module">
+      const url = new URL(window.location.href);
+
+      const authToken = url.searchParams.get('authToken');
+      const roomName = url.searchParams.get('roomName');
+
+      const uiKitVersion = url.searchParams.get('ui-kit') || 'latest';
+      const webCoreVersion = url.searchParams.get('web-core') || 'latest';
+
+      Object.assign(window, {
+        authToken,
+        roomName,
+        uiKitVersion,
+        webCoreVersion,
+      });
+
+      import(
+        `https://cdn.jsdelivr.net/npm/@dytesdk/ui-kit@${uiKitVersion}/loader/index.es2017.js`
+      ).then((res) => {
+        res.defineCustomElements();
+      });
+
+      document.getElementById(
+        'web-core'
+      ).src = `https://cdn.jsdelivr.net/npm/@dytesdk/web-core@${webCoreVersion}/dist/index.iife.js`;
+    </script>
+
+    <script>
+      window.onload = () => {
+        if (!authToken) {
+          alert("An authToken wasn't passed. Please pass authToken in the URL query.");
+          return;
+        }
+
+        const el = document.getElementById('my-meeting');
+        DyteClient.init({
+          authToken,
+          roomName,
+        }).then((meeting) => {
+          el.meeting = meeting;
+        });
+      };
+    </script>
+  </head>
+  <body>
+    <dyte-meeting id="my-meeting" show-setup-screen></dyte-meeting>
+  </body>
+</html>

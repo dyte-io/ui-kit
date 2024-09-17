@@ -1,2 +1,3 @@
-# since it is an auto-generated file
-src/components.d.ts
+# ignore auto-generated files
+components.d.ts
+react-library/

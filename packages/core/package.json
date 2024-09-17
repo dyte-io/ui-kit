@@ -1,0 +1,79 @@
+{
+  "name": "@dytesdk/ui-kit",
+  "version": "2.1.0-staging.4",
+  "description": "Dyte's UI kit to support easy UI development over the core web library.",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "es2015": "dist/esm/index.js",
+  "es2017": "dist/esm/index.js",
+  "types": "dist/types/index.d.ts",
+  "collection": "dist/collection/collection-manifest.json",
+  "collection:main": "dist/collection/index.js",
+  "unpkg": "dist/dyte-ui-kit/dyte-ui-kit.esm.js",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dyte-in/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://community.dyte.io"
+  },
+  "scripts": {
+    "build": "stencil build && rollup --config rollup.config.mjs",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test:spec": "stencil test --spec --watchAll",
+    "test:coverage": "stencil test --spec --coverage",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,css,html,json}'",
+    "lint": "eslint src/**/*.{ts,tsx}",
+    "lint:fix": "npm run lint -- --fix",
+    "prepublishOnly": "cp package.json package.json.bak && node prepublish.js",
+    "postpublish": "mv package.json.bak package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "peerDepdendencies": {
+    "@dytesdk/web-core": ">=2.0.0"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.1.0",
+    "@stencil/core": "2.20.0",
+    "hark": "^1.2.3",
+    "lodash-es": "^4.17.21",
+    "resize-observer-polyfill": "^1.5.1"
+  },
+  "devDependencies": {
+    "@dyteinternals/utils": "^1.7.10",
+    "@dytesdk/web-core": "2.1.0-staging.18",
+    "@rollup/plugin-commonjs": "24.0.1",
+    "@rollup/plugin-node-resolve": "15.0.1",
+    "@rollup/plugin-terser": "^0.4.0",
+    "@stencil-community/eslint-plugin": "^0.7.1",
+    "@stencil/angular-output-target": "^0.4.0",
+    "@stencil/postcss": "^2.1.0",
+    "@stencil/react-output-target": "^0.3.1",
+    "@stencil/store": "^2.0.1",
+    "@stencil/vue-output-target": "^0.6.2",
+    "@tailwindcss/line-clamp": "^0.3.1",
+    "@types/hark": "^1.2.2",
+    "@types/jest": "^26.0.24",
+    "@types/lodash-es": "^4.17.6",
+    "autoprefixer": "^10.4.7",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^26.6.3",
+    "jest-cli": "^26.6.3",
+    "puppeteer": "^10.0.0",
+    "rollup": "^3.15.0",
+    "rollup-plugin-node-polyfills": "^0.2.1",
+    "tailwindcss": "^3.0.24"
+  },
+  "license": "UNLICENSED"
+}

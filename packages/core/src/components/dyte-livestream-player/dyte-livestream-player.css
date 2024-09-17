@@ -1,0 +1,41 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply bg-background-900 mx-2 flex h-full w-full rounded-md;
+}
+
+.player-container {
+  @apply relative m-4 flex grow items-center justify-center overflow-hidden rounded-md;
+}
+
+video {
+  @apply bg-background-1000 z-0 h-full w-full rounded-md border-none;
+}
+
+.loader {
+  @apply bg-background-900 absolute z-10 h-full w-full;
+  @apply flex flex-col items-center justify-center;
+}
+
+p {
+  @apply text-text-700 text-text-lg my-1;
+}
+
+.latency-controls {
+  @apply absolute bottom-4 right-4 z-20 flex flex-row items-center;
+}
+
+.sync-live-stream {
+  @apply text-text-sm bg-brand-500 cursor-pointer rounded-sm px-2 py-1;
+}
+
+.unmute-popup {
+  @apply bg-background-800 absolute !z-30 flex w-72 flex-col rounded-md p-4 text-center;
+  max-width: 70%;
+  h3 {
+    @apply text-text-lg m-0 font-medium;
+  }
+  p {
+    @apply text-text-md my-3;
+  }
+}

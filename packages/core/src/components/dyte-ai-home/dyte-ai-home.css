@@ -1,0 +1,80 @@
+@import '../../styles/reset.css';
+@import '../dyte-chat/components/ChatHead.css';
+@import '../../styles/scrollbar.css';
+
+* {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+}
+
+:host {
+  @apply flex flex-col;
+}
+
+.public-message {
+  @apply text-text-sm text-text-600 text-center;
+  @apply my-8 mx-10;
+}
+
+.content {
+  @apply box-border flex flex-col p-3;
+  flex: 1 0 0px;
+  overflow-y: scroll;
+  /* @apply flex h-full flex-1 flex-col overflow-auto p-3;
+  @apply justify-end; */
+}
+
+.subtitle {
+  @apply text-text-sm text-text-600 mt-1;
+}
+
+.hint-message {
+  @apply flex flex-col items-center justify-center text-center;
+  @apply flex-1;
+  @apply text-text-700 text-text-md leading-normal;
+}
+
+i {
+  @apply text-text-900 font-medium italic;
+}
+
+.actions {
+  @apply px-3 py-3;
+  @apply text-text-sm flex items-center justify-between;
+}
+
+.actions div {
+  @apply flex items-center gap-2;
+}
+
+.actions button {
+  @apply inline-flex cursor-pointer rounded-md;
+  @apply py-1 px-2;
+  @apply bg-brand/50 text-text-on-brand;
+}
+
+.prompt {
+  @apply bg-background-800;
+}
+
+.prompt input {
+  @apply h-12 w-full resize-none bg-transparent p-4 font-sans;
+  @apply text-text outline-none;
+}
+
+.message .body {
+  @apply text-text-md my-2 whitespace-pre-wrap;
+}
+
+.message .loader {
+  @apply text-text-sm flex py-2;
+}
+
+.message {
+  @apply mb-3 last:mb-0;
+}
+
+.prompt-text {
+  @apply text-text-sm text-text-800 border-l-sm border-l-text-700 mt-2 ml-1 px-2;
+}

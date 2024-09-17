@@ -1,0 +1,25 @@
+@import '../../styles/reset.css';
+
+:host {
+  @apply max-w-80 h-full w-full;
+  @apply box-border flex flex-col;
+  @apply bg-background-1000;
+  @apply border-background-700 border-sm border-solid;
+}
+
+:host([view='sidebar']) {
+  @apply right-2 overflow-clip rounded-lg;
+  @apply shadow-background-900 shadow-2xl;
+}
+
+:host([view='full-screen']) {
+  @apply inset-0 max-w-full;
+}
+
+:host(.floating) {
+  @apply !absolute inset-0 left-auto z-50;
+}
+
+.pinned-state {
+  @apply absolute right-1 inline-flex w-2 justify-end;
+}
