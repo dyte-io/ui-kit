@@ -1,3 +1,10 @@
+# [2.1.0-staging.10](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.9...@dyte-in/ui-kit-v2.1.0-staging.10) (2024-09-18)
+
+
+### Bug Fixes
+
+* access to npm publish ([6508322](https://github.com/dyte-io/ui-kit/commit/6508322cd8ed3305e539c348505a8ac79cfd1a4a))
+
 # [2.1.0-staging.9](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.8...@dyte-in/ui-kit-v2.1.0-staging.9) (2024-09-18)
 
 
