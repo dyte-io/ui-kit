@@ -1,3 +1,10 @@
+# [2.1.0-staging.12](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.11...@dyte-in/ui-kit-v2.1.0-staging.12) (2024-09-18)
+
+
+### Bug Fixes
+
+* public repo final release ([89190db](https://github.com/dyte-io/ui-kit/commit/89190dba661f84554de174af0a84d6573b74a76d))
+
 # [2.1.0-staging.11](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.10...@dyte-in/ui-kit-v2.1.0-staging.11) (2024-09-18)
 
 
