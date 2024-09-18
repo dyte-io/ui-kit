@@ -1,3 +1,10 @@
+# [2.1.0-staging.13](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.12...@dyte-in/ui-kit-v2.1.0-staging.13) (2024-09-18)
+
+
+### Bug Fixes
+
+* added action step to auto-update staging branch ([6ff7104](https://github.com/dyte-io/ui-kit/commit/6ff7104afd6aa94dad677f66cf8be4203bd6dd41))
+
 # [2.1.0-staging.12](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.11...@dyte-in/ui-kit-v2.1.0-staging.12) (2024-09-18)
 
 
