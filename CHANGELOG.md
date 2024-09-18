@@ -1,3 +1,10 @@
+# [2.1.0-staging.11](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.10...@dyte-in/ui-kit-v2.1.0-staging.11) (2024-09-18)
+
+
+### Bug Fixes
+
+* create release ([c41905a](https://github.com/dyte-io/ui-kit/commit/c41905a7ad5c291b06a8b7479ae89c851dd797d5))
+
 # [2.1.0-staging.10](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.9...@dyte-in/ui-kit-v2.1.0-staging.10) (2024-09-18)
 
 
