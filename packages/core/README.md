@@ -90,4 +90,4 @@ You can now pass this object to most of the components, like so (with Vanilla JS
 
 The names and logos for Dyte are trademarks of Dyte, Inc.
 
-We love open source software! See [our other projects](https://github.com/dyte-in) and [our products](https://dyte.io).
+We love open source software! See [our other projects](https://github.com/dyte-io) and [our products](https://dyte.io).
