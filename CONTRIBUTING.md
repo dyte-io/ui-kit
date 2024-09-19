@@ -29,7 +29,7 @@ feat: Description # if a new feature is added
 fix: Description # if a bug is fixed
 refactor: Description # if code is refactored
 docs: Description # if documentation is added
-lint: Description # if a lint issue is fixed
+chore: Description # if a change is made that need not be released
 ```
 
 ### Issues
