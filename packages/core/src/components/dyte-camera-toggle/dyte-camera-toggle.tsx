@@ -29,11 +29,13 @@ export class DyteCameraToggle {
     }
   };
 
-  private meetingPermissionsUpdateListener = (patch?: { media?: { video?: { canProduce?: number } } }) => {
+  private meetingPermissionsUpdateListener = (patch?: {
+    media?: { video?: { canProduce?: number } };
+  }) => {
     if (patch?.media?.video) {
       this.canProduceVideo = this.meeting.self.permissions.canProduceVideo === 'ALLOWED';
     }
-  }
+  };
 
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
@@ -67,7 +69,10 @@ export class DyteCameraToggle {
     this.meeting?.self.removeListener('videoUpdate', this.videoUpdateListener);
     this.meeting?.self.removeListener('mediaPermissionUpdate', this.mediaPermissionUpdateListener);
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.stageStatusListener);
-    this.meeting?.self?.permissions?.removeListener('permissionsUpdate', this.meetingPermissionsUpdateListener);
+    this.meeting?.self?.permissions?.removeListener(
+      'permissionsUpdate',
+      this.meetingPermissionsUpdateListener
+    );
   }
 
   @Watch('meeting')
@@ -81,7 +86,10 @@ export class DyteCameraToggle {
       self.addListener('videoUpdate', this.videoUpdateListener);
       self.addListener('mediaPermissionUpdate', this.mediaPermissionUpdateListener);
       stage?.addListener('stageStatusUpdate', this.stageStatusListener);
-      meeting?.self?.permissions?.addListener('permissionsUpdate', this.meetingPermissionsUpdateListener);
+      meeting?.self?.permissions?.addListener(
+        'permissionsUpdate',
+        this.meetingPermissionsUpdateListener
+      );
     }
   }
 

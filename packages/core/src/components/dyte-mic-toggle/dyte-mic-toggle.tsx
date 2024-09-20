@@ -29,11 +29,13 @@ export class DyteMicToggle {
     }
   };
 
-  private meetingPermissionsUpdateListener = (patch?: { media?: { audio?: { canProduce?: number } } }) => {
+  private meetingPermissionsUpdateListener = (patch?: {
+    media?: { audio?: { canProduce?: number } };
+  }) => {
     if (patch?.media?.audio) {
       this.canProduceAudio = this.meeting.self.permissions.canProduceAudio === 'ALLOWED';
     }
-  }
+  };
 
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
@@ -67,7 +69,10 @@ export class DyteMicToggle {
     this.meeting?.self.removeListener('audioUpdate', this.audioUpdateListener);
     this.meeting?.self.removeListener('mediaPermissionUpdate', this.mediaPermissionUpdateListener);
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.stageStatusListener);
-    this.meeting?.self?.permissions?.removeListener('permissionsUpdate', this.meetingPermissionsUpdateListener);
+    this.meeting?.self?.permissions?.removeListener(
+      'permissionsUpdate',
+      this.meetingPermissionsUpdateListener
+    );
   }
 
   @Watch('meeting')
@@ -82,7 +87,10 @@ export class DyteMicToggle {
       self.addListener('audioUpdate', this.audioUpdateListener);
       self.addListener('mediaPermissionUpdate', this.mediaPermissionUpdateListener);
       stage?.addListener('stageStatusUpdate', this.stageStatusListener);
-      meeting.self?.permissions?.addListener('permissionsUpdate', this.meetingPermissionsUpdateListener);
+      meeting.self?.permissions?.addListener(
+        'permissionsUpdate',
+        this.meetingPermissionsUpdateListener
+      );
     }
   }
 
