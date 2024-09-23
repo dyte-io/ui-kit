@@ -1,3 +1,10 @@
+# [2.1.0-staging.14](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.13...@dyte-in/ui-kit-v2.1.0-staging.14) (2024-09-23)
+
+
+### Bug Fixes
+
+* toggle controlbar icon on dynamic permission change ([478e92d](https://github.com/dyte-io/ui-kit/commit/478e92d094a8608f32cb70dd883d7c294d924701))
+
 # [2.1.0-staging.13](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.12...@dyte-in/ui-kit-v2.1.0-staging.13) (2024-09-18)
 
 
