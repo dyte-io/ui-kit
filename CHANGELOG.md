@@ -1,3 +1,35 @@
+# 1.0.0-props-less-uikit.1 (2024-09-25)
+
+
+### Bug Fixes
+
+* access to npm publish ([6508322](https://github.com/dyte-io/ui-kit/commit/6508322cd8ed3305e539c348505a8ac79cfd1a4a))
+* added action step to auto-update staging branch ([6ff7104](https://github.com/dyte-io/ui-kit/commit/6ff7104afd6aa94dad677f66cf8be4203bd6dd41))
+* create patch release ([82237b1](https://github.com/dyte-io/ui-kit/commit/82237b1801540656ebc72466984ed71b29984c60))
+* create release ([c41905a](https://github.com/dyte-io/ui-kit/commit/c41905a7ad5c291b06a8b7479ae89c851dd797d5))
+* create release ([128b2a8](https://github.com/dyte-io/ui-kit/commit/128b2a8950dda0a6c16bc28d632a0b7c295181f9))
+* create release ([7c74b86](https://github.com/dyte-io/ui-kit/commit/7c74b864e839bc35557e46ace3eee02e0b5540e9))
+* create release ([eaafee2](https://github.com/dyte-io/ui-kit/commit/eaafee2642ae390f36e425743c23cb9c39e350d4))
+* patch release ([db325af](https://github.com/dyte-io/ui-kit/commit/db325af9326cdf7487e7043b34b2852acf557a3b))
+* patch release ([c084560](https://github.com/dyte-io/ui-kit/commit/c084560861d4845b963e645a7eeb7a467c3d1049))
+* public repo final release ([89190db](https://github.com/dyte-io/ui-kit/commit/89190dba661f84554de174af0a84d6573b74a76d))
+* publish using lerna ([1b072c2](https://github.com/dyte-io/ui-kit/commit/1b072c2de1a6154fd62510926637e06d6d0c5135))
+* toggle controlbar icon on dynamic permission change ([478e92d](https://github.com/dyte-io/ui-kit/commit/478e92d094a8608f32cb70dd883d7c294d924701))
+
+
+### Features
+
+* added ui-kit public source ([becdf7d](https://github.com/dyte-io/ui-kit/commit/becdf7d3eb6bdf5a2c023a426d10e8bc06852369))
+* feature release ([ca643ff](https://github.com/dyte-io/ui-kit/commit/ca643ffe0075e72b5e17b8f89dbb7f690a7f1b80))
+* feature release ([661ff63](https://github.com/dyte-io/ui-kit/commit/661ff633a363fcb5d1ee38b0dccdc28a124a0e4f))
+* feature release ([5dc0f57](https://github.com/dyte-io/ui-kit/commit/5dc0f575cca6a8918e1bd740a115ad0d842cdabc))
+* initial commit ([a31f52c](https://github.com/dyte-io/ui-kit/commit/a31f52c2cab444fbd0f10d2219a790cf09ae23ea))
+* npm publish set to true ([c4d367b](https://github.com/dyte-io/ui-kit/commit/c4d367b13d0dc48522fca7181b0e080d22ad3730))
+* **release:** created new package release ([f0eb31e](https://github.com/dyte-io/ui-kit/commit/f0eb31eca4e1bd6f04cfee1854f8ad195fee0959))
+* **release:** created new package release ([9ef1088](https://github.com/dyte-io/ui-kit/commit/9ef10883a7078730f3d099c6a62baec53eda7caa))
+* **release:** created new package release ([6bfa5df](https://github.com/dyte-io/ui-kit/commit/6bfa5dfe7ff1fd144b7b1bc0026ded492052f3d1))
+* **release:** update package version ([00b2690](https://github.com/dyte-io/ui-kit/commit/00b2690f6697f3fed5cf245a2b8f3994f0c2a87c))
+
 # [2.1.0-staging.14](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.13...@dyte-in/ui-kit-v2.1.0-staging.14) (2024-09-23)
 
 
