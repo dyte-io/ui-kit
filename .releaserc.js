@@ -68,7 +68,11 @@ const baseConfig = {
 
 const config = {
   ...baseConfig,
-  branches: ['main', { name: 'staging', prerelease: true }],
-}
+  branches: [
+    'main',
+    { name: 'staging', prerelease: true },
+    { name: 'feat/props-less-uikit', prerelease: true },
+  ],
+};
 
 module.exports = config;
