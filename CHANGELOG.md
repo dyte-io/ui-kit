@@ -1,3 +1,10 @@
+# [2.1.0-props-less-uikit.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v1.0.0-props-less-uikit.1...@dyte-in/ui-kit-v2.1.0-props-less-uikit.1) (2024-09-25)
+
+
+### Features
+
+* **internal:** added iconpack support for dyte-meeting ([31d2770](https://github.com/dyte-io/ui-kit/commit/31d2770605b8e676b9485480707eabd3c256fcfe))
+
 # 1.0.0-props-less-uikit.1 (2024-09-25)
 
 
