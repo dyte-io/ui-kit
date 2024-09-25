@@ -71,7 +71,7 @@ const config = {
   branches: [
     'main',
     { name: 'staging', prerelease: true },
-    { name: 'feat/props-less-uikit', prerelease: true },
+    { name: 'props-less-uikit', prerelease: true },
   ],
 };
 

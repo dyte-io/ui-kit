@@ -4,7 +4,7 @@ on:
     branches:
       - main
       - staging
-      - feat/props-less-uikit
+      - props-less-uikit
   repository_dispatch:
     types: [prod-release]
 
