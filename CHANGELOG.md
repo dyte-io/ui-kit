@@ -1,3 +1,10 @@
+# [2.1.0-staging.16](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.15...@dyte-in/ui-kit-v2.1.0-staging.16) (2024-09-25)
+
+
+### Bug Fixes
+
+* move pip controls to web-core ([1250d9a](https://github.com/dyte-io/ui-kit/commit/1250d9a991f5c4906d2ab9367b7f12d075b9de9f))
+
 # [2.1.0-staging.15](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.14...@dyte-in/ui-kit-v2.1.0-staging.15) (2024-09-25)
 
 
