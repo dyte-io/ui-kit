@@ -1,3 +1,16 @@
+# [2.1.0-staging.15](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.14...@dyte-in/ui-kit-v2.1.0-staging.15) (2024-09-25)
+
+
+### Bug Fixes
+
+* **off-stage-actions:** mic and camera toggle should not be shown off stage ([23ae96d](https://github.com/dyte-io/ui-kit/commit/23ae96d9fe494424d8cea0b0fd680de8b559eb25))
+* **offstage-screenshare:** permission update for screenshare was causing toggle to show up off stage ([4485515](https://github.com/dyte-io/ui-kit/commit/4485515faef3086d046e18ba652e89325f0764b7))
+
+
+### Features
+
+* **internal:** added ability to show view only public chat ([17d8b7a](https://github.com/dyte-io/ui-kit/commit/17d8b7a80c9abd169cbfacda19c62177259dd20c))
+
 # [2.1.0-staging.14](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.13...@dyte-in/ui-kit-v2.1.0-staging.14) (2024-09-23)
 
 
