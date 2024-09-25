@@ -1,7 +1,7 @@
 import type { ImageMessage, Message } from '@dytesdk/web-core';
 import { ButtonVariant } from '../components/dyte-button/dyte-button';
 import { RoomLeftState } from './dyte-client';
-import { LangDict } from '../exports';
+import { IconPack, LangDict } from '../exports';
 import type { ChatChannel as ChatChannelWebCore } from '@dytesdk/web-core';
 import { DyteSidebarSection } from '../components/dyte-sidebar/dyte-sidebar';
 import { IconVariant } from '../components/dyte-icon/dyte-icon';
@@ -87,6 +87,7 @@ export interface States {
   [state: string]: any;
   componentProps?: {
     meeting?: DyteClient;
+    iconPack?: IconPack;
   };
 }
 

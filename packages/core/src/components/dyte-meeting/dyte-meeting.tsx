@@ -14,7 +14,7 @@ import { PermissionSettings, Size, States } from '../../types/props';
 import { getSize } from '../../utils/size';
 import { Meeting, RoomLeftState } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { defaultIconPack, getIconPack, IconPack } from '../../lib/icons';
+import { getIconPack, IconPack } from '../../lib/icons';
 import { UIConfig } from '../../types/ui-config';
 import { defaultConfig } from '../../lib/default-ui-config';
 import { Render } from '../../lib/render';
@@ -128,7 +128,7 @@ export class DyteMeeting {
     prefs: getUserPreferences(),
   };
 
-  @State() iconPack: IconPack = defaultIconPack;
+  @State() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<Partial<States>>;
@@ -155,6 +155,9 @@ export class DyteMeeting {
     this.componentPropsCleanupFn = DyteUIKitStore.onChange('componentProps', (componentProps) => {
       if (componentProps.meeting) {
         this.meeting = componentProps.meeting;
+      }
+      if (componentProps.iconPack) {
+        this.iconPack = componentProps.iconPack;
       }
     });
   }

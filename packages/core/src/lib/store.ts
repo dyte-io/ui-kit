@@ -1,6 +1,7 @@
 import { createStore, ObservableMap } from '@stencil/store';
 import { States } from '../types/props';
 import { getUserPreferences } from '../utils/user-prefs';
+import { defaultIconPack } from './icons';
 
 const DyteUIKitStore: ObservableMap<States> & {
   setComponentProps?: (newProps: States['componentProps']) => void;
@@ -8,6 +9,7 @@ const DyteUIKitStore: ObservableMap<States> & {
   prefs: getUserPreferences(),
   componentProps: {
     meeting: null,
+    iconPack: defaultIconPack,
   },
 });
 
