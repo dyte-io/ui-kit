@@ -4,8 +4,9 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
+
 import { canToggleBreakout } from '../../utils/breakout-rooms';
+import { DyteUIKitStore } from '../../lib/store';
 
 /**
  * A button which toggles visibility of breakout rooms.
@@ -67,8 +68,8 @@ export class DyteBreakoutRoomsToggle {
         mode,
       },
     });
-    storeState.activeBreakoutRoomsManager = {
-      active: !storeState.activeBreakoutRoomsManager?.active,
+    DyteUIKitStore.state.activeBreakoutRoomsManager = {
+      active: !DyteUIKitStore.state.activeBreakoutRoomsManager?.active,
       mode,
     };
   };

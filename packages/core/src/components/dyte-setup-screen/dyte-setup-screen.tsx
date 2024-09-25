@@ -8,8 +8,9 @@ import { Render } from '../../lib/render';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import gracefulStorage from '../../utils/graceful-storage';
-import storeState from '../../lib/store';
+
 import { SocketConnectionState } from '@dytesdk/web-core';
+import { DyteUIKitStore } from '../../lib/store';
 
 /**
  * A screen shown before joining the meeting, where you can edit your display name,
@@ -26,7 +27,7 @@ export class DyteSetupScreen {
   @Prop() meeting!: Meeting;
 
   /** States object */
-  @Prop() states: States = storeState;
+  @Prop() states: States = DyteUIKitStore.state;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -71,7 +72,7 @@ export class DyteSetupScreen {
       this.connectionState = meeting.meta.socketState?.state;
       this.canEditName = meeting.self.permissions.canEditDisplayName ?? true;
       this.displayName = meeting.self.name?.trim() || (this.canEditName ? '' : 'Participant');
-      storeState.meeting = 'setup';
+      DyteUIKitStore.state.meeting = 'setup';
       meeting.meta.addListener('socketConnectionUpdate', this.socketStateUpdate);
     }
   }
@@ -102,7 +103,7 @@ export class DyteSetupScreen {
     const defaults = {
       meeting: this.meeting,
       config: this.config,
-      states: this.states || storeState,
+      states: this.states || DyteUIKitStore.state,
       size: this.size,
       iconPack: this.iconPack,
       t: this.t,

@@ -10,9 +10,16 @@ import {
   State,
   writeTask,
 } from '@stencil/core';
-import { defaultIconPack, DyteI18n, IconPack, States, useLanguage } from '../../exports';
+import {
+  defaultIconPack,
+  DyteI18n,
+  DyteUIKitStore,
+  IconPack,
+  States,
+  useLanguage,
+} from '../../exports';
 import { Meeting } from '../../types/dyte-client';
-import storeState from '../../lib/store';
+
 import { DyteBasicParticipant } from '@dytesdk/web-core';
 
 @Component({
@@ -95,7 +102,7 @@ export class DyteChannelCreator {
     });
     this.switchChannel.emit(newChannel.id);
     this.stateUpdate.emit({ activeChannelCreator: false });
-    storeState.activeChannelCreator = false;
+    DyteUIKitStore.state.activeChannelCreator = false;
   };
 
   private onMemberAdd = (id: string) => {

@@ -1,8 +1,9 @@
 import { States } from '../../types/props';
 import { Component, Event, EventEmitter, h, Host, Prop } from '@stencil/core';
-import storeState from '../../lib/store';
+
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
+import { DyteUIKitStore } from '../../lib/store';
 
 /**
  * A text field component.
@@ -35,7 +36,7 @@ export class DyteTextField {
 
   connectedCallback() {
     this.stateUpdate.emit({ abc: false });
-    storeState.abc = false;
+    DyteUIKitStore.state.abc = false;
   }
 
   get value() {

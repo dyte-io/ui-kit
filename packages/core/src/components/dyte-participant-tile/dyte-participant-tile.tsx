@@ -9,14 +9,13 @@ import {
   EventEmitter,
   forceUpdate,
 } from '@stencil/core';
-import storeState, { onChange } from '../../lib/store';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { FlagsmithFeatureFlags } from '../../utils/flags';
-import { defaultConfig } from '../../exports';
+import { defaultConfig, DyteUIKitStore } from '../../exports';
 import { DefaultProps, Render } from '../../lib/render';
 import { DyteParticipant } from '@dytesdk/web-core';
 
@@ -100,7 +99,7 @@ export class DyteParticipantTile {
       // This re-renders on any pref change
       // There are currently only two prefs, so it is fine
       // Could not find a way to subscribe to a nested property
-      this.removeStateChangeListener = onChange('prefs', () => forceUpdate(this));
+      this.removeStateChangeListener = DyteUIKitStore.onChange('prefs', () => forceUpdate(this));
     }
   }
 
@@ -161,7 +160,7 @@ export class DyteParticipantTile {
   private isMirrored() {
     if (this.participant != null) {
       if (this.isSelf()) {
-        const states = this.states || storeState;
+        const states = this.states || DyteUIKitStore.state;
         const mirrorVideo = states?.prefs?.mirrorVideo;
         if (typeof mirrorVideo === 'boolean') {
           return mirrorVideo;
@@ -193,7 +192,7 @@ export class DyteParticipantTile {
     const defaults: DefaultProps = {
       meeting: this.meeting,
       size: this.size,
-      states: this.states || storeState,
+      states: this.states || DyteUIKitStore.state,
       config: this.config,
       iconPack: this.iconPack,
       t: this.t,

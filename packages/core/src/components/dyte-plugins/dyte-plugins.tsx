@@ -5,8 +5,8 @@ import { UIConfig } from '../../types/ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DytePlugin } from '@dytesdk/web-core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState from '../../lib/store';
-import { defaultConfig } from '../../exports';
+
+import { defaultConfig, DyteUIKitStore } from '../../exports';
 
 /**
  * A component which lists all available plugins from their preset,
@@ -72,8 +72,8 @@ export class DytePlugins {
 
   private close = () => {
     this.stateUpdate.emit({ activeSidebar: false, sidebar: undefined });
-    storeState.activeSidebar = false;
-    storeState.sidebar = undefined;
+    DyteUIKitStore.state.activeSidebar = false;
+    DyteUIKitStore.state.sidebar = undefined;
   };
 
   render() {

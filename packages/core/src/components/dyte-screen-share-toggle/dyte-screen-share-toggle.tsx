@@ -5,7 +5,7 @@ import { PermissionSettings, Size, States } from '../../types/props';
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import logger from '../../utils/logger';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
+import { DyteUIKitStore } from '../../exports';
 
 const deviceCanScreenShare = () => {
   return (
@@ -141,7 +141,7 @@ export class DyteScreenShareToggle {
           kind: 'screenshare',
         };
         this.stateUpdate.emit({ activePermissionsMessage: permissionModalSettings });
-        storeState.activePermissionsMessage = permissionModalSettings;
+        DyteUIKitStore.state.activePermissionsMessage = permissionModalSettings;
       }
     }
   };
@@ -220,7 +220,7 @@ export class DyteScreenShareToggle {
         kind: 'screenshare',
       };
       this.stateUpdate.emit({ activePermissionsMessage: permissionModalSettings });
-      storeState.activePermissionsMessage = permissionModalSettings;
+      DyteUIKitStore.state.activePermissionsMessage = permissionModalSettings;
       return false;
     }
 
@@ -241,7 +241,7 @@ export class DyteScreenShareToggle {
     await self.enableScreenShare();
     this.screenShareState = { ...this.screenShareState, disable: false };
     this.stateUpdate.emit({ activeMoreMenu: false });
-    storeState.activeMoreMenu = false;
+    DyteUIKitStore.state.activeMoreMenu = false;
   };
 
   private getState() {

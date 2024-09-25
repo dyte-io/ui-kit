@@ -3,7 +3,7 @@ import { Meeting } from '../../types/dyte-client';
 import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import storeState from '../../lib/store';
+import { DyteUIKitStore } from '../../lib/store';
 
 /**
  * A confirmation modal.
@@ -46,15 +46,23 @@ export class DyteConfirmationModal {
   }
 
   private close = () => {
-    this.states.activeConfirmationModal.onClose(this.stateUpdate, storeState, this.meeting);
+    this.states.activeConfirmationModal.onClose(
+      this.stateUpdate,
+      DyteUIKitStore.state,
+      this.meeting
+    );
     this.stateUpdate.emit({ activeConfirmationModal: { active: false } });
-    storeState.activeConfirmationModal = { active: false };
+    DyteUIKitStore.state.activeConfirmationModal = { active: false };
   };
 
   private onConfirmation = async () => {
-    this.states.activeConfirmationModal.onClick(this.stateUpdate, storeState, this.meeting);
+    this.states.activeConfirmationModal.onClick(
+      this.stateUpdate,
+      DyteUIKitStore.state,
+      this.meeting
+    );
     this.stateUpdate.emit({ activeConfirmationModal: { active: false } });
-    storeState.activeConfirmationModal = { active: false };
+    DyteUIKitStore.state.activeConfirmationModal = { active: false };
   };
 
   render() {

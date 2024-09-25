@@ -5,6 +5,7 @@ import { LangDict } from '../exports';
 import type { ChatChannel as ChatChannelWebCore } from '@dytesdk/web-core';
 import { DyteSidebarSection } from '../components/dyte-sidebar/dyte-sidebar';
 import { IconVariant } from '../components/dyte-icon/dyte-icon';
+import DyteClient from '@dytesdk/web-core';
 
 /**
  * Screen breakpoints
@@ -84,6 +85,9 @@ export interface States {
   roomLeftState?: RoomLeftState;
   sidebarFloating?: boolean;
   [state: string]: any;
+  componentProps?: {
+    meeting?: DyteClient;
+  };
 }
 
 /**

@@ -6,7 +6,7 @@ import { Render } from '../../lib/render';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
-import storeState from '../../lib/store';
+import { DyteUIKitStore } from '../../lib/store';
 
 export interface ModalDataConfig {
   title: string;
@@ -66,7 +66,7 @@ export class DyteJoinStage {
     const defaults = {
       meeting: this.meeting,
       size: this.size,
-      states: this.states || storeState,
+      states: this.states || DyteUIKitStore.state,
       config: this.config,
       iconPack: this.iconPack,
       t: this.t,

@@ -3,7 +3,7 @@ import { Meeting } from '../../types/dyte-client';
 import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import storeState from '../../lib/store';
+import { DyteUIKitStore } from '../../lib/store';
 
 @Component({
   tag: 'dyte-mute-all-confirmation',
@@ -30,7 +30,7 @@ export class DyteMuteAllConfirmation {
 
   private onClose = () => {
     this.stateUpdate.emit({ activeMuteAllConfirmation: false });
-    storeState.activeMuteAllConfirmation = false;
+    DyteUIKitStore.state.activeMuteAllConfirmation = false;
   };
 
   private onMuteAll = () => {

@@ -2,11 +2,12 @@ import { Component, h, Host, Prop, Event, EventEmitter, State, Watch, Listen } f
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { States } from '../../types/props';
-import storeState from '../../lib/store';
+
 import { Meeting } from '../../types/dyte-client';
 import { participantIdentifier, resetRoomCount } from '../../utils/breakout-rooms';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 import BreakoutRoomsManager, { DraftMeeting } from '../../utils/breakout-rooms-manager';
+import { DyteUIKitStore } from '../../lib/store';
 
 export type BreakoutManagerState = 'room-config' | 'participants-config';
 export type BreakoutRoomConfig = {
@@ -266,8 +267,8 @@ export class DyteBreakoutRoomsManager {
       activeBreakoutRoomsManager: { active: false },
       activeConfirmationModal,
     });
-    storeState.activeBreakoutRoomsManager = { active: false };
-    storeState.activeConfirmationModal = activeConfirmationModal;
+    DyteUIKitStore.state.activeBreakoutRoomsManager = { active: false };
+    DyteUIKitStore.state.activeConfirmationModal = activeConfirmationModal;
   };
 
   private close = () => {
@@ -277,7 +278,7 @@ export class DyteBreakoutRoomsManager {
         active: false,
       },
     });
-    storeState.activeBreakoutRoomsManager = { active: false };
+    DyteUIKitStore.state.activeBreakoutRoomsManager = { active: false };
   };
 
   private applyChanges = async () => {

@@ -3,7 +3,7 @@ import { Meeting } from '../../types/dyte-client';
 import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import storeState from '../../lib/store';
+import { DyteUIKitStore } from '../../lib/store';
 
 /**
  * A confirmation modal.
@@ -33,7 +33,7 @@ export class DyteOverlayModal {
     if (this.states.activeOverlayModal.timeout) {
       setTimeout(() => {
         this.stateUpdate.emit({ activeOverlayModal: { active: false } });
-        storeState.activeOverlayModal = { active: false };
+        DyteUIKitStore.state.activeOverlayModal = { active: false };
       }, this.states.activeOverlayModal.timeout);
     }
   }

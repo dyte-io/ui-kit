@@ -4,8 +4,8 @@ import { Meeting } from '../../types/dyte-client';
 import { Transcript, States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { UIConfig } from '../../types/ui-config';
-import { defaultConfig } from '../../exports';
-import storeState from '../../lib/store';
+import { defaultConfig, DyteUIKitStore } from '../../exports';
+
 import clone from '../../utils/clone';
 
 /**
@@ -28,7 +28,7 @@ export class DyteTranscripts {
   @Prop() meeting!: Meeting;
 
   /** States object */
-  @Prop() states: States = storeState;
+  @Prop() states: States = DyteUIKitStore.state;
 
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;
@@ -74,7 +74,7 @@ export class DyteTranscripts {
 
   @Watch('states')
   statesChanged(s?: States) {
-    const states = s || storeState;
+    const states = s || DyteUIKitStore.state;
     if (states.activeCaptions && !this.listenerAttached) {
       this.addListener(this.meeting);
     }

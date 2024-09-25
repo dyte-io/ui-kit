@@ -1,11 +1,12 @@
 import { Component, Host, h, Prop, State, Event, EventEmitter, Watch } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState from '../../lib/store';
+
 import { Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { Meeting } from '../../types/dyte-client';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
+import { DyteUIKitStore } from '../../lib/store';
 
 @Component({
   tag: 'dyte-ai-toggle',
@@ -38,21 +39,21 @@ export class DyteAiToggle {
 
   @Watch('states')
   statesChanged(s?: States) {
-    const states = s || storeState;
+    const states = s || DyteUIKitStore.state;
     this.aiActive = states.activeAI;
   }
 
   private toggleAI() {
-    const states = this.states || storeState;
+    const states = this.states || DyteUIKitStore.state;
     this.aiActive = !states?.activeAI;
     this.stateUpdate.emit({
       activeAI: this.aiActive,
       activeMoreMenu: false,
       activeSidebar: false,
     });
-    storeState.activeAI = this.aiActive;
-    storeState.activeMoreMenu = false;
-    storeState.activeSidebar = false;
+    DyteUIKitStore.state.activeAI = this.aiActive;
+    DyteUIKitStore.state.activeMoreMenu = false;
+    DyteUIKitStore.state.activeSidebar = false;
   }
 
   render() {

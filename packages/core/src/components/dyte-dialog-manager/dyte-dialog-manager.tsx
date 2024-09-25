@@ -6,7 +6,7 @@ import { Render } from '../../lib/render';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
-import storeState from '../../lib/store';
+import { DyteUIKitStore } from '../../lib/store';
 
 /**
  * A component which handles all dialog elements in a component such as:
@@ -33,7 +33,7 @@ export class DyteDialogManager {
   @Prop() config: UIConfig = defaultConfig;
 
   /** States object */
-  @Prop() states: States = storeState;
+  @Prop() states: States = DyteUIKitStore.state;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -63,7 +63,7 @@ export class DyteDialogManager {
   }
 
   private updateStoreState = (state: keyof States, value: any) => {
-    storeState[state] = value;
+    DyteUIKitStore.state[state] = value;
     this.stateUpdate.emit({ [state]: value });
   };
 
@@ -80,7 +80,7 @@ export class DyteDialogManager {
   };
 
   private stageStatusUpdateListener = (status) => {
-    if (!this.states?.activeJoinStage && !storeState.activeJoinStage) return;
+    if (!this.states?.activeJoinStage && !DyteUIKitStore.state.activeJoinStage) return;
 
     if (status === 'ON_STAGE') this.updateStoreState('activeJoinStage', false);
   };
@@ -88,19 +88,19 @@ export class DyteDialogManager {
   render() {
     const defaults = {
       meeting: this.meeting,
-      states: this.states || storeState,
+      states: this.states || DyteUIKitStore.state,
       config: this.config,
       size: this.size,
       iconPack: this.iconPack,
       t: this.t,
     };
-    const states = this.states || storeState;
+    const states = this.states || DyteUIKitStore.state;
 
     if (states?.image != null) {
       const image = states.image;
       const onImageClose = () => {
         this.stateUpdate.emit({ image: null });
-        storeState.image = null;
+        DyteUIKitStore.state.image = null;
       };
 
       return (

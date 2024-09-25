@@ -1,10 +1,20 @@
-import { createStore } from '@stencil/store';
+import { createStore, ObservableMap } from '@stencil/store';
 import { States } from '../types/props';
 import { getUserPreferences } from '../utils/user-prefs';
 
-const { state, onChange } = createStore<States>({
+const DyteUIKitStore: ObservableMap<States> & {
+  setComponentProps?: (newProps: States['componentProps']) => void;
+} = createStore<States>({
   prefs: getUserPreferences(),
+  componentProps: {
+    meeting: null,
+  },
 });
 
-export default state;
-export { onChange };
+DyteUIKitStore.setComponentProps = (newProps: States['componentProps']) => {
+  DyteUIKitStore.state.componentProps = { ...DyteUIKitStore.state.componentProps, ...newProps };
+};
+
+(window as any).DyteUIKitStore = DyteUIKitStore;
+
+export { DyteUIKitStore };

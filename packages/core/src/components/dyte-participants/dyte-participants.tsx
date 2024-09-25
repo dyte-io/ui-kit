@@ -5,8 +5,8 @@ import { UIConfig } from '../../types/ui-config';
 import { Component, Host, h, Prop, State, Watch } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
-import storeState from '../../lib/store';
-import { defaultConfig } from '../../exports';
+
+import { defaultConfig, DyteUIKitStore } from '../../exports';
 
 export type ParticipantsViewMode = 'sidebar';
 /**
@@ -59,7 +59,7 @@ export class DyteParticipants {
   render() {
     const defaults = {
       meeting: this.meeting,
-      states: this.states || storeState,
+      states: this.states || DyteUIKitStore.state,
       config: this.config,
       size: this.size,
       iconPack: this.iconPack,

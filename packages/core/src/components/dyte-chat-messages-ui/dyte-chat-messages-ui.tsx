@@ -10,13 +10,12 @@ import {
   Event,
   EventEmitter,
 } from '@stencil/core';
-import { defaultIconPack, IconPack, Size } from '../../exports';
+import { defaultIconPack, DyteUIKitStore, IconPack, Size } from '../../exports';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Chat, ChatMessage, States } from '../../types/props';
 import { differenceInMinutes, elapsedDuration, formatDateTime } from '../../utils/date';
 import { smoothScrollToBottom } from '../../utils/scroll';
 import { chatUnreadTimestamps } from '../../utils/user-prefs';
-import storeState from '../../lib/store';
 
 @Component({
   tag: 'dyte-chat-messages-ui',
@@ -288,7 +287,7 @@ export class DyteChatMessagesUi {
                                 url={message.link}
                                 onPreview={() => {
                                   this.stateUpdate.emit({ image: message });
-                                  storeState.image = message;
+                                  DyteUIKitStore.state.image = message;
                                 }}
                               ></dyte-image-message-view>
                             )}

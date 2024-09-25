@@ -1,12 +1,11 @@
 import type { LivestreamState } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
-import { Size, States } from '../../exports';
+import { DyteUIKitStore, Size, States } from '../../exports';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { isLiveStreamHost } from '../../utils/livestream';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
 
 @Component({
   tag: 'dyte-livestream-toggle',
@@ -84,7 +83,7 @@ export class DyteLivestreamToggle {
     this.livestreamState = state;
     if (state === 'LIVESTREAMING' || state === 'IDLE') {
       this.stateUpdate.emit({ activeMoreMenu: false });
-      storeState.activeMoreMenu = false;
+      DyteUIKitStore.state.activeMoreMenu = false;
     }
   };
 

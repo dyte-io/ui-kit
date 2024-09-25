@@ -5,9 +5,8 @@ import { UIConfig } from '../../types/ui-config';
 import { Component, Host, h, Prop, State, Watch } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { ParticipantsViewMode } from '../dyte-participants/dyte-participants';
-import { defaultConfig } from '../../exports';
+import { defaultConfig, DyteUIKitStore } from '../../exports';
 import { Render } from '../../lib/render';
-import storeState from '../../lib/store';
 
 /**
  * A component which lists all participants, with ability to
@@ -132,7 +131,7 @@ export class DyteParticipants {
       view: this.view,
       t: this.t,
       config: this.config,
-      states: storeState,
+      states: DyteUIKitStore.state,
       size: this.size,
       iconPack: this.iconPack,
     };

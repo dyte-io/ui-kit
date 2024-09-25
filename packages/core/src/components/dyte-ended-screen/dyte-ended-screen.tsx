@@ -3,7 +3,7 @@ import { DyteI18n, defaultLanguage, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import storeState, { onChange } from '../../lib/store';
+import { DyteUIKitStore } from '../../lib/store';
 import { defaultConfig } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
 
@@ -42,7 +42,9 @@ export class DyteEndedScreen {
 
   connectedCallback() {
     this.statesChanged(this.states);
-    this.removeStateChangeListener = onChange('roomLeftState', () => this.statesChanged());
+    this.removeStateChangeListener = DyteUIKitStore.onChange('roomLeftState', () =>
+      this.statesChanged()
+    );
   }
 
   disconnectedCallback() {
@@ -53,7 +55,7 @@ export class DyteEndedScreen {
     let message: keyof typeof defaultLanguage;
     if (states?.roomLeftState === 'connected-meeting') {
       if (
-        storeState.activeBreakoutRoomsManager?.destinationMeetingId ===
+        DyteUIKitStore.state.activeBreakoutRoomsManager?.destinationMeetingId ===
         this.meeting.connectedMeetings.parentMeeting.id
       ) {
         message = 'breakout_rooms.move_reason.switch_main_room';
@@ -67,7 +69,7 @@ export class DyteEndedScreen {
 
   @Watch('states')
   statesChanged(s?: States) {
-    const states = s || storeState;
+    const states = s || DyteUIKitStore.state;
     if (states != null) {
       switch (states?.roomLeftState) {
         case 'left':
@@ -105,7 +107,7 @@ export class DyteEndedScreen {
   }
 
   render() {
-    const states = this.states || storeState;
+    const states = this.states || DyteUIKitStore.state;
     if (states.roomLeftState === 'connected-meeting') {
       return this.renderBreakoutRoomScreen();
     }

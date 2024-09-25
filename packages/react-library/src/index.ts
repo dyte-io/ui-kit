@@ -15,4 +15,5 @@ export {
     registerAddons,
     DyteUIBuilder,
     BreakoutRoomsManager,
+    DyteUIKitStore,
 } from "@dytesdk/ui-kit";

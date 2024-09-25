@@ -1,11 +1,11 @@
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
-import storeState from '../../lib/store';
+
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
-import { defaultConfig } from '../../exports';
+import { defaultConfig, DyteUIKitStore } from '../../exports';
 import { DyteSelf } from '@dytesdk/web-core';
 
 export type VideoState = Pick<Peer, 'videoEnabled' | 'videoTrack'>;
@@ -106,7 +106,7 @@ export class DyteParticipantSetup {
     if (this.participant != null) {
       const isSelf = 'preview' in this.participant || this.isPreview;
       if (isSelf) {
-        const states = this.states || storeState;
+        const states = this.states || DyteUIKitStore.state;
         const mirrorVideo = states?.prefs?.mirrorVideo;
         if (typeof mirrorVideo === 'boolean') {
           return mirrorVideo;

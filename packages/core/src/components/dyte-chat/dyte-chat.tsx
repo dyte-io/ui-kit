@@ -29,8 +29,8 @@ import {
 import { chatUnreadTimestamps } from '../../utils/user-prefs';
 import { FlagsmithFeatureFlags, usePaginatedChat } from '../../utils/flags';
 import { DyteChannelHeaderCustomEvent } from '../../components';
-import { States, UIConfig, defaultConfig } from '../../exports';
-import storeState from '../../lib/store';
+import { DyteUIKitStore, States, UIConfig, defaultConfig } from '../../exports';
+
 import { ChannelItem } from '../dyte-channel-selector-view/dyte-channel-selector-view';
 import { NewMessageEvent } from '../dyte-chat-composer-view/dyte-chat-composer-view';
 
@@ -586,7 +586,7 @@ export class DyteChat {
 
   private onChannelCreateClicked = () => {
     this.stateUpdate.emit({ activeChannelCreator: true });
-    storeState.activeChannelCreator = true;
+    DyteUIKitStore.state.activeChannelCreator = true;
   };
 
   private onPinMessage = (event: CustomEvent<Message>) => {

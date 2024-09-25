@@ -3,7 +3,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
+import { DyteUIKitStore } from '../../lib/store';
 
 /**
  * A button which toggles visibility of settings module.
@@ -43,8 +43,8 @@ export class DyteSettingsToggle {
       activeSettings: !this.states?.activeSettings,
       activeMoreMenu: false,
     });
-    storeState.activeSettings = !storeState.activeSettings;
-    storeState.activeMoreMenu = false;
+    DyteUIKitStore.state.activeSettings = !DyteUIKitStore.state.activeSettings;
+    DyteUIKitStore.state.activeMoreMenu = false;
   }
 
   render() {

@@ -1,9 +1,16 @@
 import { Component, Host, h, Event, EventEmitter, Prop, Watch, State } from '@stencil/core';
-import { defaultConfig, defaultIconPack, IconPack, Size, States, UIConfig } from '../../exports';
+import {
+  defaultConfig,
+  defaultIconPack,
+  DyteUIKitStore,
+  IconPack,
+  Size,
+  States,
+  UIConfig,
+} from '../../exports';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
 
 @Component({
   tag: 'dyte-pip-toggle',
@@ -61,7 +68,7 @@ export class DytePipToggle {
     }
 
     this.stateUpdate.emit({ activeMoreMenu: false });
-    storeState.activeMoreMenu = false;
+    DyteUIKitStore.state.activeMoreMenu = false;
   }
 
   render() {

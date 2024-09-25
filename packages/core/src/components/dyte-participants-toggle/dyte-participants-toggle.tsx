@@ -1,11 +1,11 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState, { onChange } from '../../lib/store';
 import { Meeting, Peer, WaitlistedParticipant } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { canViewParticipants } from '../../utils/sidebar';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { DyteUIKitStore } from '../../lib/store';
 
 /**
  * A button which toggles visibility of participants.
@@ -55,7 +55,7 @@ export class DyteParticipantsToggle {
   connectedCallback() {
     this.meetingChanged(this.meeting);
     this.statesChanged(this.states);
-    this.removeStateChangeListener = onChange('sidebar', () => this.statesChanged());
+    this.removeStateChangeListener = DyteUIKitStore.onChange('sidebar', () => this.statesChanged());
   }
 
   disconnectedCallback() {
@@ -134,7 +134,7 @@ export class DyteParticipantsToggle {
 
   @Watch('states')
   statesChanged(s?: States) {
-    const states = s || storeState;
+    const states = s || DyteUIKitStore.state;
     if (states != null) {
       this.participantsActive = states.activeSidebar === true && states.sidebar === 'participants';
     }
@@ -144,12 +144,12 @@ export class DyteParticipantsToggle {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   private toggleParticipantsTab() {
-    const states = this.states || storeState;
+    const states = this.states || DyteUIKitStore.state;
     this.participantsActive = !(states?.activeSidebar && states?.sidebar === 'participants');
-    storeState.activeSidebar = this.participantsActive;
-    storeState.sidebar = this.participantsActive ? 'participants' : undefined;
-    storeState.activeMoreMenu = false;
-    storeState.activeAI = false;
+    DyteUIKitStore.state.activeSidebar = this.participantsActive;
+    DyteUIKitStore.state.sidebar = this.participantsActive ? 'participants' : undefined;
+    DyteUIKitStore.state.activeMoreMenu = false;
+    DyteUIKitStore.state.activeAI = false;
     this.stateUpdate.emit({
       activeSidebar: this.participantsActive,
       sidebar: this.participantsActive ? 'participants' : undefined,

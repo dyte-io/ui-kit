@@ -3,7 +3,7 @@ import { Meeting } from '../../types/dyte-client';
 import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import storeState from '../../lib/store';
+import { DyteUIKitStore } from '../../lib/store';
 
 /**
  * A component which allows you to leave a meeting or
@@ -85,7 +85,7 @@ export class DyteLeaveMeeting {
 
   private close = () => {
     this.stateUpdate.emit({ activeLeaveConfirmation: false });
-    storeState.activeLeaveConfirmation = false;
+    DyteUIKitStore.state.activeLeaveConfirmation = false;
   };
 
   private handleLeave = () => {

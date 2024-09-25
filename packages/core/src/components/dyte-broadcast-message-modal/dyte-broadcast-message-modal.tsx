@@ -1,8 +1,8 @@
 import { Component, h, Host, Prop, Event, EventEmitter, State } from '@stencil/core';
-import { States } from '../../exports';
+import { DyteUIKitStore, States } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import storeState from '../../lib/store';
+
 import { DyteI18n, useLanguage } from '../../lib/lang';
 
 @Component({
@@ -39,7 +39,7 @@ export class DyteBroadcastMessageModal {
 
   private close() {
     this.stateUpdate?.emit({ activeBroadcastMessageModal: false });
-    storeState.activeBroadcastMessageModal = false;
+    DyteUIKitStore.state.activeBroadcastMessageModal = false;
   }
 
   private sendMessage() {

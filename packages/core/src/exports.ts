@@ -1,5 +1,3 @@
-import statesStore from './lib/store';
-
 // utilities
 import BreakoutRoomsManager from './utils/breakout-rooms-manager';
 export { BreakoutRoomsManager };
@@ -7,8 +5,7 @@ export { provideDyteDesignSystem } from './utils/provide-design-system';
 export { extendConfig, generateConfig } from './utils/config';
 export { sendNotification } from './utils/notification';
 export { DyteUIBuilder } from './lib/builder';
-export { onChange as onStateStoreChange } from './lib/store';
-export { statesStore };
+export { DyteUIKitStore } from './lib/store';
 
 // addons
 export { registerAddons, Addon } from './lib/addons';

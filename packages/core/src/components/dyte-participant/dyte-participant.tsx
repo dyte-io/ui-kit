@@ -14,8 +14,8 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { DefaultProps, lenChildren, Render } from '../../lib/render';
 import { Meeting, Participant, Peer } from '../../types/dyte-client';
 import { formatName, shorten } from '../../utils/string';
-import storeState from '../../lib/store';
-import { defaultConfig, UIConfig } from '../../exports';
+
+import { defaultConfig, DyteUIKitStore, UIConfig } from '../../exports';
 import { FlagsmithFeatureFlags } from '../../utils/flags';
 import { computePosition, flip, offset, shift } from '@floating-ui/dom';
 import type { DyteParticipant as DyteParticipantType } from '@dytesdk/web-core';
@@ -259,7 +259,7 @@ export class DyteParticipant {
     const defaults: DefaultProps = {
       meeting: this.meeting,
       size: 'sm',
-      states: storeState,
+      states: DyteUIKitStore.state,
       config: this.config,
       iconPack: this.iconPack,
       t: this.t,

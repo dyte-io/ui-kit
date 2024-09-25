@@ -1,11 +1,11 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState, { onChange } from '../../lib/store';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { canViewPolls } from '../../utils/sidebar';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { DyteUIKitStore } from '../../lib/store';
 
 /**
  * A button which toggles visibility of polls.
@@ -57,7 +57,7 @@ export class DytePollsToggle {
   connectedCallback() {
     this.meetingChanged(this.meeting);
     this.statesChanged(this.states);
-    this.removeStateChangeListener = onChange('sidebar', () => this.statesChanged());
+    this.removeStateChangeListener = DyteUIKitStore.onChange('sidebar', () => this.statesChanged());
   }
 
   disconnectedCallback() {
@@ -81,7 +81,7 @@ export class DytePollsToggle {
 
   @Watch('states')
   statesChanged(s?: States) {
-    const states = s || storeState;
+    const states = s || DyteUIKitStore.state;
     if (states != null) {
       this.pollsActive = states.activeSidebar === true && states.sidebar === 'polls';
     }
@@ -91,7 +91,7 @@ export class DytePollsToggle {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   private togglePollsTab() {
-    const states = this.states || storeState;
+    const states = this.states || DyteUIKitStore.state;
     this.unreadPollsCount = 0;
     this.pollsActive = !(states?.activeSidebar && states?.sidebar === 'polls');
     this.stateUpdate.emit({
@@ -100,10 +100,10 @@ export class DytePollsToggle {
       activeMoreMenu: false,
       activeAI: false,
     });
-    storeState.activeSidebar = this.pollsActive;
-    storeState.sidebar = this.pollsActive ? 'polls' : undefined;
-    storeState.activeMoreMenu = false;
-    storeState.activeAI = false;
+    DyteUIKitStore.state.activeSidebar = this.pollsActive;
+    DyteUIKitStore.state.sidebar = this.pollsActive ? 'polls' : undefined;
+    DyteUIKitStore.state.activeMoreMenu = false;
+    DyteUIKitStore.state.activeAI = false;
   }
 
   private updateCanView = () => {

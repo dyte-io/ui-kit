@@ -4,7 +4,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { PermissionSettings, Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
+import { DyteUIKitStore } from '../../lib/store';
 
 /**
  * A button which toggles your microphone.
@@ -124,7 +124,7 @@ export class DyteMicToggle {
         kind: 'audio',
       };
       this.stateUpdate.emit({ activePermissionsMessage: permissionModalSettings });
-      storeState.activePermissionsMessage = permissionModalSettings;
+      DyteUIKitStore.state.activePermissionsMessage = permissionModalSettings;
       return false;
     }
 

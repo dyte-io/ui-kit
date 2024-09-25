@@ -6,8 +6,9 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
 import { defaultConfig } from '../../lib/default-ui-config';
-import storeState from '../../lib/store';
+
 import { DytePermissionsPreset } from '@dytesdk/web-core';
+import { DyteUIKitStore } from '../../lib/store';
 
 export type AIView = 'default' | 'sidebar' | 'full-screen';
 
@@ -91,12 +92,12 @@ export class DyteAi {
 
   private viewSection(section: AISection) {
     this.tab = section;
-    storeState.activeSidebar = true;
+    DyteUIKitStore.state.activeSidebar = true;
   }
 
   private close = () => {
     this.stateUpdate.emit({ activeAI: false });
-    storeState.activeAI = false;
+    DyteUIKitStore.state.activeAI = false;
   };
 
   private transcriptionHandler = () => {
@@ -122,7 +123,7 @@ export class DyteAi {
     const defaults = {
       meeting: this.meeting,
       config: this.config,
-      states: this.states || storeState,
+      states: this.states || DyteUIKitStore.state,
       size: this.size,
       t: this.t,
       iconPack: this.iconPack,

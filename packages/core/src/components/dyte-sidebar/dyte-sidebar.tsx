@@ -5,7 +5,7 @@ import { UIConfig } from '../../types/ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultConfig } from '../../lib/default-ui-config';
-import storeState from '../../lib/store';
+
 import {
   canViewChat,
   canViewParticipants,
@@ -15,6 +15,7 @@ import {
 import { DyteSidebarTab, DyteSidebarView } from '../dyte-sidebar-ui/dyte-sidebar-ui';
 import { Render } from '../../lib/render';
 import { StageStatus } from '@dytesdk/web-core';
+import { DyteUIKitStore } from '../../lib/store';
 
 export type DyteSidebarSection = 'chat' | 'polls' | 'participants' | 'plugins';
 
@@ -72,7 +73,7 @@ export class DyteSidebar {
     this.viewChanged(this.view);
     this.statesChanged(this.states);
     this.meetingChanged(this.meeting);
-    this.isFloating = storeState?.sidebarFloating || false;
+    this.isFloating = DyteUIKitStore.state?.sidebarFloating || false;
   }
 
   disconnectedCallback() {
@@ -93,7 +94,7 @@ export class DyteSidebar {
 
   @Watch('states')
   statesChanged(s?: States) {
-    const states = s || storeState;
+    const states = s || DyteUIKitStore.state;
     if (states?.sidebar) {
       this.currentTab = states.sidebar;
     }
@@ -127,14 +128,14 @@ export class DyteSidebar {
   private viewSection(section: DyteSidebarSection) {
     this.currentTab = section;
     this.stateUpdate.emit({ activeSidebar: true, sidebar: this.currentTab });
-    storeState.activeSidebar = true;
-    storeState.sidebar = this.currentTab;
+    DyteUIKitStore.state.activeSidebar = true;
+    DyteUIKitStore.state.sidebar = this.currentTab;
   }
 
   private close = () => {
     this.stateUpdate.emit({ activeSidebar: false, sidebar: this.defaultSection });
-    storeState.sidebar = this.currentTab;
-    storeState.activeSidebar = false;
+    DyteUIKitStore.state.sidebar = this.currentTab;
+    DyteUIKitStore.state.activeSidebar = false;
   };
 
   private updateEnabledSections(meeting: Meeting = this.meeting) {
@@ -156,14 +157,14 @@ export class DyteSidebar {
 
   private toggleFloating = () => {
     this.isFloating = !this.isFloating;
-    storeState.sidebarFloating = this.isFloating;
+    DyteUIKitStore.state.sidebarFloating = this.isFloating;
   };
 
   render() {
     const defaults = {
       meeting: this.meeting,
       config: this.config,
-      states: this.states || storeState,
+      states: this.states || DyteUIKitStore.state,
       size: this.size,
       t: this.t,
       iconPack: this.iconPack,

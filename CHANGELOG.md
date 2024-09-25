@@ -1189,7 +1189,7 @@
 - stencil cleanup ([2e0d1af](https://github.com/dyte-in/ui-kit/commit/2e0d1af7f001ed25bac4bfd40262651b0b5ef016))
 - stencil memory leak ([805ca58](https://github.com/dyte-in/ui-kit/commit/805ca58cbeee162a63cce13c34af18b807decc89))
 - store state update for stage request ([d3a113b](https://github.com/dyte-in/ui-kit/commit/d3a113b00e2f8a3e50071a890104540c164fa540))
-- storeState update ([ecce142](https://github.com/dyte-in/ui-kit/commit/ecce142366c84a41aaa37eb990ebbfcf56b90de9))
+- DyteUIKitStore.state update ([ecce142](https://github.com/dyte-in/ui-kit/commit/ecce142366c84a41aaa37eb990ebbfcf56b90de9))
 - type of transcript object ([4bf4f7c](https://github.com/dyte-in/ui-kit/commit/4bf4f7c1bcb312b9793eede7cab978442e0a5c05))
 - update pagination on stge status change ([72028ca](https://github.com/dyte-in/ui-kit/commit/72028caf35c6e2458300a4b82aac7a4e93157e72))
 - update screenshare enabled on screenshare update ([b760fff](https://github.com/dyte-in/ui-kit/commit/b760fff68357fbb0be483f1fe68332d0cab15126))
@@ -1308,7 +1308,7 @@
 - stencil cleanup ([2e0d1af](https://github.com/dyte-in/ui-kit/commit/2e0d1af7f001ed25bac4bfd40262651b0b5ef016))
 - stencil memory leak ([805ca58](https://github.com/dyte-in/ui-kit/commit/805ca58cbeee162a63cce13c34af18b807decc89))
 - store state update for stage request ([d3a113b](https://github.com/dyte-in/ui-kit/commit/d3a113b00e2f8a3e50071a890104540c164fa540))
-- storeState update ([ecce142](https://github.com/dyte-in/ui-kit/commit/ecce142366c84a41aaa37eb990ebbfcf56b90de9))
+- DyteUIKitStore.state update ([ecce142](https://github.com/dyte-in/ui-kit/commit/ecce142366c84a41aaa37eb990ebbfcf56b90de9))
 - type of transcript object ([4bf4f7c](https://github.com/dyte-in/ui-kit/commit/4bf4f7c1bcb312b9793eede7cab978442e0a5c05))
 - update pagination on stge status change ([72028ca](https://github.com/dyte-in/ui-kit/commit/72028caf35c6e2458300a4b82aac7a4e93157e72))
 - update screenshare enabled on screenshare update ([b760fff](https://github.com/dyte-in/ui-kit/commit/b760fff68357fbb0be483f1fe68332d0cab15126))
@@ -1387,7 +1387,7 @@
 ### Bug Fixes
 
 - @dytesdk/web-core auto-updated ([8f07aad](https://github.com/dyte-in/ui-kit/commit/8f07aade9e44e2c92e2e8c3284ebbd071f53eb46))
-- storeState update ([ecce142](https://github.com/dyte-in/ui-kit/commit/ecce142366c84a41aaa37eb990ebbfcf56b90de9))
+- DyteUIKitStore.state update ([ecce142](https://github.com/dyte-in/ui-kit/commit/ecce142366c84a41aaa37eb990ebbfcf56b90de9))
 
 ## [1.61.3-staging.20](https://github.com/dyte-in/ui-kit/compare/@dyte-in/ui-kit-v1.61.3-staging.19...@dyte-in/ui-kit-v1.61.3-staging.20) (2024-01-12)
 
@@ -2369,7 +2369,7 @@
 - set chat autoscroll to default true ([2bffd95](https://github.com/dyte-in/ui-kit/commit/2bffd95fe5007899e900bf70272718cb5c3c4a61))
 - show disconnected screen when grid is used without calling room-joined ([0c8f045](https://github.com/dyte-in/ui-kit/commit/0c8f0453848eb487c837291ba451c91aa34b7b9a))
 - sidebar close button ([cdc28d2](https://github.com/dyte-in/ui-kit/commit/cdc28d2fe6c71a5907971dbd010e1a4e9feb71dd))
-- **sidebar:** hide with storeState ([e69e65f](https://github.com/dyte-in/ui-kit/commit/e69e65fa1581a21dbbfb54ea1805d0f2b4f53f4b))
+- **sidebar:** hide with DyteUIKitStore.state ([e69e65f](https://github.com/dyte-in/ui-kit/commit/e69e65fa1581a21dbbfb54ea1805d0f2b4f53f4b))
 - **sidebar:** make enabledSections mutable ([74b673b](https://github.com/dyte-in/ui-kit/commit/74b673b959046b31d615c2071917211ee9d50e36))
 - swap webinar methods with stage methods ([29b0f00](https://github.com/dyte-in/ui-kit/commit/29b0f001a89647c5e34613aeefba97f8cfade3ab))
 - typo and condition to show stage controllbar button ([c7cd841](https://github.com/dyte-in/ui-kit/commit/c7cd8419bd25af4537b717a0ab3548b7bfd88bd9))
@@ -2400,7 +2400,7 @@
 ### Bug Fixes
 
 - @dytesdk/web-core auto-updated ([c1d3a1d](https://github.com/dyte-in/ui-kit/commit/c1d3a1d7c3acd0193055551f151e07639ba01cb2))
-- **sidebar:** hide with storeState ([e69e65f](https://github.com/dyte-in/ui-kit/commit/e69e65fa1581a21dbbfb54ea1805d0f2b4f53f4b))
+- **sidebar:** hide with DyteUIKitStore.state ([e69e65f](https://github.com/dyte-in/ui-kit/commit/e69e65fa1581a21dbbfb54ea1805d0f2b4f53f4b))
 
 # [1.56.0-staging.47](https://github.com/dyte-in/ui-kit/compare/@dyte-in/ui-kit-v1.56.0-staging.46...@dyte-in/ui-kit-v1.56.0-staging.47) (2023-09-28)
 
@@ -3654,7 +3654,7 @@
 - update components.d.ts ([5a77908](https://github.com/dyte-in/ui-kit/commit/5a77908523d85cf2433334111708f377b2ce19d7))
 - update default-config ([f08354b](https://github.com/dyte-in/ui-kit/commit/f08354b0e081a8d298b4c96bcb4d589901d73da6))
 - update storestate for disabling the modal ([0451c8a](https://github.com/dyte-in/ui-kit/commit/0451c8a0f7cf0a65959ecb4c592ae9d855e703a6))
-- use states instead of storeState in permission-message ([134f2c4](https://github.com/dyte-in/ui-kit/commit/134f2c4f971bb5e9ac8e1176b2de1f5695655d31))
+- use states instead of DyteUIKitStore.state in permission-message ([134f2c4](https://github.com/dyte-in/ui-kit/commit/134f2c4f971bb5e9ac8e1176b2de1f5695655d31))
 
 ### Features
 
@@ -3708,7 +3708,7 @@
 
 - update components.d.ts ([5a77908](https://github.com/dyte-in/ui-kit/commit/5a77908523d85cf2433334111708f377b2ce19d7))
 - update storestate for disabling the modal ([0451c8a](https://github.com/dyte-in/ui-kit/commit/0451c8a0f7cf0a65959ecb4c592ae9d855e703a6))
-- use states instead of storeState in permission-message ([134f2c4](https://github.com/dyte-in/ui-kit/commit/134f2c4f971bb5e9ac8e1176b2de1f5695655d31))
+- use states instead of DyteUIKitStore.state in permission-message ([134f2c4](https://github.com/dyte-in/ui-kit/commit/134f2c4f971bb5e9ac8e1176b2de1f5695655d31))
 
 # [1.51.0-staging.14](https://github.com/dyte-in/ui-kit/compare/@dyte-in/ui-kit-v1.51.0-staging.13...@dyte-in/ui-kit-v1.51.0-staging.14) (2023-05-25)
 
@@ -6000,7 +6000,7 @@
 - **nullcheckonmeeting:** adding null check on meeting just to be safe ([d53c951](https://github.com/dyte-in/ui-kit/commit/d53c95177150a732c17239506bb8f5be4273b26a))
 - **privateChat:** handle state reset ([c5ecca5](https://github.com/dyte-in/ui-kit/commit/c5ecca5e75d5a187843f5961e786382647bc1d0b))
 - **removeTabsync:** remove tab sync from the notification sound ([ca7f1ec](https://github.com/dyte-in/ui-kit/commit/ca7f1ec22134afef3e33218ab05750fb1d12826a))
-- **storeState:** use store state for components ([0cb6874](https://github.com/dyte-in/ui-kit/commit/0cb6874ac55520ad8cf72fa094ccc331e3ebc0f2))
+- **DyteUIKitStore.state:** use store state for components ([0cb6874](https://github.com/dyte-in/ui-kit/commit/0cb6874ac55520ad8cf72fa094ccc331e3ebc0f2))
 - **typo:** cleanup typo ([a6407f4](https://github.com/dyte-in/ui-kit/commit/a6407f4f8b3456e40d081d205ecab9987c00ba43))
 - **typo:** typo in deprecated ([4981e9c](https://github.com/dyte-in/ui-kit/commit/4981e9c1e7a788b4a24f064f1033aa722c1fd2ba))
 
@@ -6032,7 +6032,7 @@
 
 ### Bug Fixes
 
-- **storeState:** use store state for components ([0cb6874](https://github.com/dyte-in/ui-kit/commit/0cb6874ac55520ad8cf72fa094ccc331e3ebc0f2))
+- **DyteUIKitStore.state:** use store state for components ([0cb6874](https://github.com/dyte-in/ui-kit/commit/0cb6874ac55520ad8cf72fa094ccc331e3ebc0f2))
 
 # [1.38.0-staging.4](https://github.com/dyte-in/ui-kit/compare/@dyte-in/ui-kit-v1.38.0-staging.3...@dyte-in/ui-kit-v1.38.0-staging.4) (2022-11-23)
 

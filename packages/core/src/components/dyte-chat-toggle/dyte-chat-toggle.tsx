@@ -1,13 +1,12 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState, { onChange } from '../../lib/store';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { usePaginatedChat } from '../../utils/flags';
 import { canViewChat } from '../../utils/sidebar';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-
+import { DyteUIKitStore } from '../../exports';
 /**
  * A button which toggles visibility of chat.
  *
@@ -59,7 +58,7 @@ export class DyteChatToggle {
   connectedCallback() {
     this.meetingChanged(this.meeting);
     this.statesChanged(this.states);
-    this.removeStateChangeListener = onChange('sidebar', () => this.statesChanged());
+    this.removeStateChangeListener = DyteUIKitStore.onChange('sidebar', () => this.statesChanged());
   }
 
   disconnectedCallback() {
@@ -89,7 +88,7 @@ export class DyteChatToggle {
 
   @Watch('states')
   statesChanged(s?: States) {
-    const states = s || storeState;
+    const states = s || DyteUIKitStore.state;
     if (states != null) {
       this.chatActive = states.activeSidebar === true && states.sidebar === 'chat';
     }
@@ -108,16 +107,16 @@ export class DyteChatToggle {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   private toggleChat = () => {
-    const states = this.states || storeState;
+    const states = this.states || DyteUIKitStore.state;
     this.chatActive = !(states?.activeSidebar && states?.sidebar === 'chat');
     if (this.chatActive) {
       this.unreadMessageCount = 0;
       this.hasNewMessages = false;
     }
-    storeState.activeSidebar = this.chatActive;
-    storeState.activeMoreMenu = false;
-    storeState.sidebar = this.chatActive ? 'chat' : undefined;
-    storeState.activeAI = false;
+    DyteUIKitStore.state.activeSidebar = this.chatActive;
+    DyteUIKitStore.state.activeMoreMenu = false;
+    DyteUIKitStore.state.sidebar = this.chatActive ? 'chat' : undefined;
+    DyteUIKitStore.state.activeAI = false;
     this.stateUpdate.emit({
       activeSidebar: this.chatActive,
       sidebar: this.chatActive ? 'chat' : undefined,

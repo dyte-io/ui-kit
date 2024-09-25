@@ -4,7 +4,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { States } from '../../types/props';
-import storeState from '../../lib/store';
+import { DyteUIKitStore } from '../../lib/store';
 
 const steps = {
   ChromeDesktop: ['Chrome1.svg', 'Chrome2.svg', 'Chrome3.svg'],
@@ -94,7 +94,7 @@ export class DytePermissionsMessage {
     this.stateUpdate.emit({
       activePermissionsMessage: { enabled: false },
     });
-    storeState.activePermissionsMessage = { enabled: false };
+    DyteUIKitStore.state.activePermissionsMessage = { enabled: false };
   };
 
   private reload = () => {
