@@ -8,7 +8,6 @@ import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { Dimensions, useGrid } from '../../lib/grid';
 import ResizeObserver from 'resize-observer-polyfill';
-import { getInitials } from '../../utils/string';
 import { MediaConnectionState } from '@dytesdk/web-core';
 
 /**
@@ -75,32 +74,6 @@ export class DyteSimpleGrid {
     this.resizeObserver?.disconnect();
   }
 
-  private onParticipantTileLoad = (
-    event: CustomEvent<{ participant: Peer; videoElement: HTMLVideoElement }>
-  ) => {
-    if (!this.meeting) return;
-
-    const { participant, videoElement } = event.detail;
-    if (!participant || !videoElement) return;
-
-    this.meeting.participants.pip?.addSource(
-      participant.id,
-      videoElement,
-      participant.videoEnabled,
-      false,
-      participant.name ?? getInitials(participant.name)
-    );
-    if (participant.videoEnabled) {
-      this.meeting.participants.pip?.enableSource(participant.id);
-    }
-  };
-  private onParticipantTileUnload = (event: CustomEvent<Peer>) => {
-    if (!this.meeting) return;
-
-    const participant = event.detail;
-    this.meeting.participants.pip?.removeSource(participant.id);
-  };
-
   render() {
     const defaults = {
       meeting: this.meeting,
@@ -138,8 +111,6 @@ export class DyteSimpleGrid {
                 },
                 key: participant.id,
                 'data-participant': participant.id,
-                onTileLoad: this.onParticipantTileLoad,
-                onTileUnload: this.onParticipantTileUnload,
                 mediaConnection: this.mediaConnection,
               }}
               childProps={{ participant }}
