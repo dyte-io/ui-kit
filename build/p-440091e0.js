@@ -1,0 +1,1 @@
+import{d as t}from"./p-cadf534b.js";const a=async a=>{if(null==a)return t;try{const r=await fetch(a);return r.ok?Object.assign({},t,await r.json()):t}catch(a){return t}},r=t=>t>=1080?"lg":t>=768?"md":"sm";export{r as a,a as g}

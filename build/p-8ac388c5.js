@@ -1,0 +1,1 @@
+const o=(o,t=!0)=>{null!=o&&o.scrollTo({top:o.scrollHeight,behavior:t?"smooth":"auto"})};export{o as s}
