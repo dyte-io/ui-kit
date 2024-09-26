@@ -70,7 +70,7 @@ const config = {
   ...baseConfig,
   branches: [
     'main',
-    { name: 'staging', prerelease: true },
+    // { name: 'staging', prerelease: true }, // PUT ME BACK
     { name: 'props-less-uikit', prerelease: true },
   ],
 };
