@@ -1,3 +1,10 @@
+# [2.1.0-staging.18](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.17...@dyte-in/ui-kit-v2.1.0-staging.18) (2024-09-26)
+
+
+### Bug Fixes
+
+* github actions deploy ([c6f4e24](https://github.com/dyte-io/ui-kit/commit/c6f4e24f93749e9c153f012065ab1295a6be8dd0))
+
 # [2.1.0-staging.17](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.16...@dyte-in/ui-kit-v2.1.0-staging.17) (2024-09-26)
 
 
