@@ -1,3 +1,11 @@
+# [2.1.0-staging.19](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.18...@dyte-in/ui-kit-v2.1.0-staging.19) (2024-09-26)
+
+
+### Bug Fixes
+
+* added checkout on pr-comment ([50c11cb](https://github.com/dyte-io/ui-kit/commit/50c11cb0f0fc34f275e7d05bb59fe521d24fdf93))
+* github actions build step ([804d011](https://github.com/dyte-io/ui-kit/commit/804d0118847e9a2edfcdbffd31cfed3d3ac4e385))
+
 # [2.1.0-staging.18](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.17...@dyte-in/ui-kit-v2.1.0-staging.18) (2024-09-26)
 
 
