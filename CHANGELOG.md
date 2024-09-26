@@ -1,3 +1,10 @@
+# [2.1.0-props-less-uikit.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-props-less-uikit.1...@dyte-in/ui-kit-v2.1.0-props-less-uikit.2) (2024-09-26)
+
+
+### Bug Fixes
+
+* **npm-tag:** branch was tagging branch based releases to staging ([2912d7c](https://github.com/dyte-io/ui-kit/commit/2912d7cbb647bd2c5573f15531f5f3933992b1ba))
+
 # [2.1.0-props-less-uikit.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v1.0.0-props-less-uikit.1...@dyte-in/ui-kit-v2.1.0-props-less-uikit.1) (2024-09-25)
 
 
