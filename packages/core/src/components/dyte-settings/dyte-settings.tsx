@@ -4,6 +4,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 type SettingsTab = 'audio' | 'video' | 'connection';
 
@@ -17,6 +18,7 @@ type SettingsTab = 'audio' | 'video' | 'connection';
   shadow: true,
 })
 export class DyteSettings {
+  private componentPropsCleanupFn: () => void = () => {};
   private poorConnectionListener: (data: { score: number; kind: string }) => void;
   private keyPressListener = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
@@ -56,6 +58,10 @@ export class DyteSettings {
   connectedCallback() {
     document.addEventListener('keydown', this.keyPressListener);
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -65,6 +71,8 @@ export class DyteSettings {
     this.poorConnectionListener &&
       this.meeting?.meta.removeListener('poorConnection', this.poorConnectionListener);
     this.meeting.stage.removeListener('stageStatusUpdate', this.stageStatusListener);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

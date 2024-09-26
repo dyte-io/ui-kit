@@ -3,6 +3,8 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Notification, Size } from '../../types/props';
 import { TextMessageView } from '../dyte-text-message/components/TextMessage';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which shows a notification.
@@ -16,6 +18,7 @@ import { TextMessageView } from '../dyte-text-message/components/TextMessage';
   shadow: true,
 })
 export class DyteNotification {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Message */
   @Prop() notification!: Notification;
 
@@ -35,6 +38,10 @@ export class DyteNotification {
 
   connectedCallback() {
     this.notificationChanged(this.notification);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   @Watch('notification')
@@ -96,5 +103,9 @@ export class DyteNotification {
         </div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

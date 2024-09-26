@@ -4,6 +4,8 @@ import { IconPack, defaultIconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Poll } from '../../types/props';
 import { formatName, getInitials, shorten } from '../../utils/string';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A poll component.
@@ -16,6 +18,13 @@ import { formatName, getInitials, shorten } from '../../utils/string';
   shadow: true,
 })
 export class DytePolls {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Poll */
   @Prop() poll!: Poll;
 
@@ -112,5 +121,9 @@ export class DytePolls {
         </div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

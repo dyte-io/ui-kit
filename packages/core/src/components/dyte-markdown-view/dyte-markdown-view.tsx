@@ -6,6 +6,8 @@ import {
   parseRichText,
   stripOutReplyBlock,
 } from '../../utils/chat';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-markdown-view',
@@ -13,6 +15,13 @@ import {
   shadow: true,
 })
 export class DyteMarkdownView {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** raw text to render as markdown */
   @Prop() text: string;
 
@@ -112,5 +121,9 @@ export class DyteMarkdownView {
         {withoutReply.length !== 0 && this.renderMessage(withoutReply)}
       </p>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

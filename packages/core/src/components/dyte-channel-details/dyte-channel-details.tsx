@@ -1,7 +1,8 @@
 import { Component, Host, Prop, h } from '@stencil/core';
-import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { ChatChannel } from '../../types/props';
 import { DyteBasicParticipant } from '@dytesdk/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-channel-details',
@@ -9,6 +10,7 @@ import { DyteBasicParticipant } from '@dytesdk/web-core';
   shadow: true,
 })
 export class DyteChannelDetails {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Channel object */
   @Prop() channel!: ChatChannel;
 
@@ -20,6 +22,17 @@ export class DyteChannelDetails {
 
   /** List of channel members */
   @Prop() members: DyteBasicParticipant[] = [];
+
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
+  }
 
   private renderMembers() {
     return (

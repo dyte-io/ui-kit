@@ -4,6 +4,8 @@ import { Size } from '../../types/props';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 import { Placement } from '../../types/floating-ui';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A menu component.
@@ -17,6 +19,7 @@ import { Placement } from '../../types/floating-ui';
   shadow: true,
 })
 export class DyteMenu {
+  private componentPropsCleanupFn: () => void = () => {};
   private triggerEl: HTMLSpanElement;
   private menuListEl: HTMLSpanElement;
 
@@ -42,8 +45,16 @@ export class DyteMenu {
     this.update();
   }
 
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
   disconnectedCallback() {
     document.removeEventListener('click', this.handleOutsideClick);
+    this.componentPropsCleanupFn();
   }
 
   private handleOutsideClick = () => {

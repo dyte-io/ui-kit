@@ -3,6 +3,8 @@ import { IconPack, defaultIconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { EmojiMetaData } from '../../types/props';
 import { fetchEmojis } from '../../utils/assets';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A very simple emoji picker component.
@@ -13,6 +15,13 @@ import { fetchEmojis } from '../../utils/assets';
   shadow: true,
 })
 export class DyteEmojiPicker {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
 
@@ -103,5 +112,9 @@ export class DyteEmojiPicker {
         </div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

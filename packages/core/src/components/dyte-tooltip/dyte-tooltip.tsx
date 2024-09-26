@@ -14,6 +14,8 @@ import { Size } from '../../types/props';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 import { Placement } from '../../types/floating-ui';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type TooltipVariant = 'primary' | 'secondary';
 export type TooltipKind = 'inline' | 'block';
@@ -30,6 +32,7 @@ export type TooltipKind = 'inline' | 'block';
   shadow: true,
 })
 export class DyteMenu {
+  private componentPropsCleanupFn: () => void = () => {};
   private triggerEl: HTMLSpanElement;
   private tooltipEl: HTMLDivElement;
   private arrowEl: HTMLDivElement;
@@ -81,6 +84,13 @@ export class DyteMenu {
     });
   }
 
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
   disconnectedCallback() {
     if (!this.triggerEl) return;
     this.triggerEl.removeEventListener('focusin', this.showMenu);
@@ -89,6 +99,8 @@ export class DyteMenu {
     this.triggerEl.removeEventListener('focusout', this.hideMenu);
     this.triggerEl.removeEventListener('mouseleave', this.hideMenu);
     this.triggerEl = undefined;
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('open')

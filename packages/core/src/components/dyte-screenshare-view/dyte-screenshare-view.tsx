@@ -21,6 +21,8 @@ import {
   requestFullScreen,
 } from '../../utils/full-screen';
 import { DyteParticipant, DyteSelf } from '@dytesdk/web-core';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which plays a participant's screenshared video.
@@ -35,6 +37,7 @@ import { DyteParticipant, DyteSelf } from '@dytesdk/web-core';
   shadow: true,
 })
 export class DyteScreenshareView {
+  private componentPropsCleanupFn: () => void = () => {};
   private videoEl: HTMLVideoElement;
   private screenShareListener: (
     data: Pick<Peer, 'screenShareEnabled' | 'screenShareTracks'>
@@ -101,6 +104,10 @@ export class DyteScreenshareView {
   connectedCallback() {
     window?.addEventListener('fullscreenchange', this.fullScreenListener);
     window?.addEventListener('webkitfullscreenchange', this.fullScreenListener);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   componentDidLoad() {
@@ -124,6 +131,7 @@ export class DyteScreenshareView {
 
     window?.removeEventListener('fullscreenchange', this.fullScreenListener);
     window?.removeEventListener('webkitfullscreenchange', this.fullScreenListener);
+    this.componentPropsCleanupFn();
   }
 
   @Watch('participant')

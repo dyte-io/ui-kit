@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
-import { DyteI18n, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, defaultIconPack, useLanguage } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 export interface DyteSidebarTab {
   id: string;
@@ -14,6 +15,13 @@ export type DyteSidebarView = 'sidebar' | 'full-screen';
   shadow: true,
 })
 export class DyteSidebarUi {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** View */
   @Prop({ reflect: true }) view: DyteSidebarView = 'sidebar';
 
@@ -84,5 +92,9 @@ export class DyteSidebarUi {
         <slot name={this.currentTab} />
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

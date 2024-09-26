@@ -2,6 +2,8 @@ import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 const addZero = (n: number) => Math.trunc(n).toString().padStart(2, '0');
 
@@ -14,6 +16,7 @@ const addZero = (n: number) => Math.trunc(n).toString().padStart(2, '0');
   shadow: true,
 })
 export class DyteClock {
+  private componentPropsCleanupFn: () => void = () => {};
   private timeout: NodeJS.Timer;
   private request: number;
 
@@ -31,6 +34,10 @@ export class DyteClock {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   private disconnectMeeting = () => {
@@ -45,6 +52,8 @@ export class DyteClock {
 
   disconnectedCallback() {
     this.disconnectMeeting();
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

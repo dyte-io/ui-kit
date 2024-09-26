@@ -1,8 +1,9 @@
 import { Component, Host, h, Prop, Event, EventEmitter, State } from '@stencil/core';
-import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { ChatChannel } from '../../types/props';
 import type { Message } from '@dytesdk/web-core';
 import { TextMessageView } from '../dyte-text-message/components/TextMessage';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-channel-selector-ui',
@@ -10,6 +11,7 @@ import { TextMessageView } from '../dyte-text-message/components/TextMessage';
   shadow: true,
 })
 export class DyteChannelSelectorUi {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Channels */
   @Prop() channels: ChatChannel[];
 
@@ -40,10 +42,16 @@ export class DyteChannelSelectorUi {
     this.matchMedia = window.matchMedia(`(orientation: landscape) and (min-width: 400px)`);
     this.matchMedia.addEventListener('change', this.handleResize);
     this.isHidden = !this.matchMedia.matches;
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.matchMedia.removeEventListener('change', this.handleResize);
+
+    this.componentPropsCleanupFn();
   }
 
   componentDidRender() {

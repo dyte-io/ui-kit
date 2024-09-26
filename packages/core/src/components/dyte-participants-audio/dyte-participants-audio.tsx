@@ -5,6 +5,8 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import type { StageStatus } from '@dytesdk/web-core';
 import { isLiveStreamViewer } from '../../utils/livestream';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which plays all the audio from participants and screenshares.
@@ -15,6 +17,7 @@ import { isLiveStreamViewer } from '../../utils/livestream';
   shadow: true,
 })
 export class DyteParticipantsAudio {
+  private componentPropsCleanupFn: () => void = () => {};
   private audio: DyteAudio;
 
   private audioUpdateListener: (
@@ -47,6 +50,10 @@ export class DyteParticipantsAudio {
   }
 
   disconnectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
     if (this.meeting == null) return;
 
     this.audioUpdateListener &&
@@ -67,6 +74,8 @@ export class DyteParticipantsAudio {
 
     this.stageStatusUpdateListener &&
       this.meeting.stage?.removeListener('stageStatusUpdate', this.stageStatusUpdateListener);
+
+    this.componentPropsCleanupFn();
   }
 
   private async setupAudio() {

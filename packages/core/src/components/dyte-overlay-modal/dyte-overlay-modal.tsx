@@ -4,6 +4,7 @@ import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A confirmation modal.
@@ -14,6 +15,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteOverlayModal {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting: Meeting;
 
@@ -36,11 +38,17 @@ export class DyteOverlayModal {
         DyteUIKitStore.state.activeOverlayModal = { active: false };
       }, this.states.activeOverlayModal.timeout);
     }
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   componentDidLoad() {}
 
-  disconnectedCallback() {}
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
+  }
 
   render() {
     return (

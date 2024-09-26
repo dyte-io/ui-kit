@@ -2,6 +2,8 @@ import { Meeting } from '../../types/dyte-client';
 import { Component, Host, h, Prop } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * Displays the title of the meeting.
@@ -12,6 +14,13 @@ import { useLanguage, DyteI18n } from '../../lib/lang';
   shadow: true,
 })
 export class DyteMeetingTitle {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting!: Meeting;
 
@@ -35,5 +44,9 @@ export class DyteMeetingTitle {
         </dyte-tooltip>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

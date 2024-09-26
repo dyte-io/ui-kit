@@ -10,6 +10,7 @@ import {
 } from '../../utils/full-screen';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A button which toggles full screen mode for any
@@ -21,6 +22,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteFullscreenToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   /** States object */
   @Prop() states: States;
 
@@ -50,11 +52,17 @@ export class DyteFullscreenToggle {
     this.onFullScreenchange();
     window.addEventListener('webkitfullscreenchange', this.onFullScreenchange);
     window.addEventListener('fullscreenchange', this.onFullScreenchange);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     window.removeEventListener('webkitfullscreenchange', this.onFullScreenchange);
     window.removeEventListener('fullscreenchange', this.onFullScreenchange);
+
+    this.componentPropsCleanupFn();
   }
 
   private onFullScreenchange = () => {

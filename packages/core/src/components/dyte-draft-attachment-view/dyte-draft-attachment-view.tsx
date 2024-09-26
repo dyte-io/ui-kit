@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
-import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which renders the draft attachment to send
@@ -10,6 +11,7 @@ import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports'
   shadow: true,
 })
 export class DyteDraftAttachmentView {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
 
@@ -40,8 +42,16 @@ export class DyteDraftAttachmentView {
         this.filePreview = e.target.result;
       }
     };
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
     // this.fileReader.onloadstart = () => {};
     // this.fileReader.onloadend = () => {};
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 
   componentWillLoad() {

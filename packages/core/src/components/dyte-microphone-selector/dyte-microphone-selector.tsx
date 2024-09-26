@@ -4,6 +4,8 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size } from '../../types/props';
 import { disableSettingSinkId } from '../../utils/flags';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which lets to manage your audio devices and audio preferences.
@@ -23,6 +25,7 @@ import { disableSettingSinkId } from '../../utils/flags';
   shadow: true,
 })
 export class DyteMicrophoneSelector {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting!: Meeting;
 
@@ -46,12 +49,18 @@ export class DyteMicrophoneSelector {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.stageStateListener);
     this.meeting?.self.removeListener('deviceListUpdate', this.deviceListUpdateListener);
     this.meeting?.self.removeListener('deviceUpdate', this.deviceUpdateListener);
+
+    this.componentPropsCleanupFn();
   }
 
   private stageStateListener = () => {

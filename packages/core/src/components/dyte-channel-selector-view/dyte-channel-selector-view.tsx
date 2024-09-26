@@ -1,6 +1,7 @@
 import { Host, Component, Event, EventEmitter, Prop, State, h, Element } from '@stencil/core';
-import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { debounce } from 'lodash-es';
+import { updateComponentProps } from '../../utils/component-props';
 
 export interface ChannelItem {
   id: string;
@@ -18,6 +19,7 @@ export interface ChannelItem {
   shadow: true,
 })
 export class DyteChannelSelectorView {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Channels */
   @Prop() channels!: {
     id: string;
@@ -72,6 +74,10 @@ export class DyteChannelSelectorView {
 
   connectedCallback() {
     this.resizeObserver = new ResizeObserver(this.calculateListHeight);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   componentDidLoad() {
@@ -82,6 +88,8 @@ export class DyteChannelSelectorView {
   disconnectedCallback() {
     this.resizeObserver?.disconnect();
     this.calculateListHeight.cancel();
+
+    this.componentPropsCleanupFn();
   }
 
   private calculateListHeight = debounce(() => {

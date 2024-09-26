@@ -5,6 +5,8 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A dialog component.
@@ -15,6 +17,7 @@ import { UIConfig } from '../../types/ui-config';
   shadow: true,
 })
 export class DyteDialog {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Whether to show the close button */
   @Prop() hideCloseButton: boolean = false;
 
@@ -47,10 +50,16 @@ export class DyteDialog {
 
   connectedCallback() {
     document.addEventListener('keydown', this.keydownListener);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     document.removeEventListener('keydown', this.keydownListener);
+
+    this.componentPropsCleanupFn();
   }
 
   private close = () => {

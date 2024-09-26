@@ -2,6 +2,7 @@ import { Component, Element, Prop, State, Watch, h } from '@stencil/core';
 import { Meeting } from '../../types/dyte-client';
 import {
   DyteI18n,
+  DyteUIKitStore,
   IconPack,
   Size,
   UIConfig,
@@ -13,11 +14,13 @@ import {
 } from '../../exports';
 import { getSize } from '../../utils/size';
 import { getIconPack } from '../../lib/icons';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-ui-provider',
 })
 export class DyteUiProvider {
+  private componentPropsCleanupFn: () => void = () => {};
   @Element() hostEl: HTMLDyteUiProviderElement;
 
   /** dyte meeting object */
@@ -102,6 +105,10 @@ export class DyteUiProvider {
     this.resizeObserver.observe(this.hostEl);
     this.meetingChanged(this.meeting);
     this.iconPackUrlChanged(this.iconPackUrl);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   private handleResize() {
@@ -111,5 +118,9 @@ export class DyteUiProvider {
   render() {
     if (!this.isReady) return null;
     return <slot />;
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

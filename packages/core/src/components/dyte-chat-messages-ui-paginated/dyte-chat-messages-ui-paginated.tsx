@@ -15,6 +15,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { ChatChannel, Size, States } from '../../types/props';
 import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-chat-messages-ui-paginated',
@@ -22,6 +23,7 @@ import { DyteUIKitStore } from '../../exports';
   shadow: true,
 })
 export class DyteChatMessagesUiPaginated {
+  private componentPropsCleanupFn: () => void = () => {};
   private $paginatedListRef: HTMLDytePaginatedListElement;
 
   @Element() host: HTMLDyteChatMessagesUiPaginatedElement;
@@ -82,10 +84,16 @@ export class DyteChatMessagesUiPaginated {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.disconnectMeeting(this.meeting);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

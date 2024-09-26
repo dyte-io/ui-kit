@@ -2,9 +2,17 @@ import { Component, Host, Prop, State, Watch, h } from '@stencil/core';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { UIConfig } from '../../types/ui-config';
 import { Size } from '../../types/props';
-import { DyteI18n, IconPack, States, defaultIconPack, useLanguage } from '../../exports';
+import {
+  DyteI18n,
+  DyteUIKitStore,
+  IconPack,
+  States,
+  defaultIconPack,
+  useLanguage,
+} from '../../exports';
 import hark from 'hark';
 import { DyteParticipant } from '@dytesdk/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-audio-tile',
@@ -12,6 +20,7 @@ import { DyteParticipant } from '@dytesdk/web-core';
   shadow: true,
 })
 export class DyteAudioTile {
+  private componentPropsCleanupFn: () => void = () => {};
   private hark: hark.Harker;
 
   /** Meeting */
@@ -41,11 +50,17 @@ export class DyteAudioTile {
 
   connectedCallback() {
     this.participantChanged(this.participant);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.hark?.stop();
     (this.participant as DyteParticipant)?.removeListener('audioUpdate', this.onAudioUpdate);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('participant')

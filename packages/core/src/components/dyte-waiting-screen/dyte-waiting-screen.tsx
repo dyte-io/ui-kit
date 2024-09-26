@@ -2,8 +2,9 @@ import { Component, Host, h, Prop } from '@stencil/core';
 import { UIConfig } from '../../types/ui-config';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { IconPack, defaultIconPack } from '../../lib/icons';
-import { defaultConfig } from '../../exports';
+import { defaultConfig, DyteUIKitStore } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-waiting-screen',
@@ -11,6 +12,13 @@ import { Meeting } from '../../types/dyte-client';
   shadow: true,
 })
 export class DyteWaitingScreen {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting: Meeting;
 
@@ -34,5 +42,9 @@ export class DyteWaitingScreen {
         </slot>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

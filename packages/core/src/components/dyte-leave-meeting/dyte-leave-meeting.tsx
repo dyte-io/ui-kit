@@ -4,6 +4,7 @@ import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which allows you to leave a meeting or
@@ -15,6 +16,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteLeaveMeeting {
+  private componentPropsCleanupFn: () => void = () => {};
   private keyPressListener = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       this.close();
@@ -47,6 +49,10 @@ export class DyteLeaveMeeting {
   connectedCallback() {
     this.meetingChanged(this.meeting);
     document.addEventListener('keydown', this.keyPressListener);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -55,6 +61,8 @@ export class DyteLeaveMeeting {
       'permissionsUpdate',
       this.permissionsUpdateListener
     );
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

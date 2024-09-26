@@ -18,6 +18,7 @@ import { FlagsmithFeatureFlags } from '../../utils/flags';
 import { defaultConfig, DyteUIKitStore } from '../../exports';
 import { DefaultProps, Render } from '../../lib/render';
 import { DyteParticipant } from '@dytesdk/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which plays a participants video and allows for placement
@@ -29,6 +30,7 @@ import { DyteParticipant } from '@dytesdk/web-core';
   shadow: true,
 })
 export class DyteParticipantTile {
+  private componentPropsCleanupFn: () => void = () => {};
   private videoEl: HTMLVideoElement;
 
   private removeStateChangeListener: () => void;
@@ -101,6 +103,10 @@ export class DyteParticipantTile {
       // Could not find a way to subscribe to a nested property
       this.removeStateChangeListener = DyteUIKitStore.onChange('prefs', () => forceUpdate(this));
     }
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -113,6 +119,8 @@ export class DyteParticipantTile {
     this.meeting.meta.off('mediaConnectionUpdate', this.mediaConnectionUpdateListener);
     this.tileUnload.emit(this.participant);
     this.removeStateChangeListener && this.removeStateChangeListener();
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

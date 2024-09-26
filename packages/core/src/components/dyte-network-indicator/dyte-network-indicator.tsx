@@ -1,9 +1,10 @@
 import { DyteParticipant } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
-import { defaultIconPack, DyteI18n, IconPack } from '../../exports';
+import { defaultIconPack, DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { MediaScoreUpdateParams } from '../../types/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-network-indicator',
@@ -11,6 +12,7 @@ import { MediaScoreUpdateParams } from '../../types/web-core';
   shadow: true,
 })
 export class DyteNetworkIndicator {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Participant or Self */
   @Prop() participant: Peer;
 
@@ -30,6 +32,10 @@ export class DyteNetworkIndicator {
 
   connectedCallback() {
     this.participantChanged(this.participant);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   @Watch('participant')
@@ -44,6 +50,8 @@ export class DyteNetworkIndicator {
       'mediaScoreUpdate',
       this.onMediaScoreUpdate
     );
+
+    this.componentPropsCleanupFn();
   }
 
   private onMediaScoreUpdate = ({ kind, isScreenshare, score }: MediaScoreUpdateParams) => {

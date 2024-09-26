@@ -4,6 +4,8 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { isLiveStreamViewer } from '../../utils/livestream';
 import { Size } from '../../types/props';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which shows count of total joined participants in a meeting.
@@ -14,6 +16,7 @@ import { Size } from '../../types/props';
   shadow: true,
 })
 export class DyteParticipantCount {
+  private componentPropsCleanupFn: () => void = () => {};
   private countListener: () => void;
 
   private stageUpdateListener: () => void;
@@ -36,6 +39,10 @@ export class DyteParticipantCount {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   private disconnectMeeting = (meeting: Meeting) => {
@@ -51,6 +58,8 @@ export class DyteParticipantCount {
 
   disconnectedCallback() {
     this.disconnectMeeting(this.meeting);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

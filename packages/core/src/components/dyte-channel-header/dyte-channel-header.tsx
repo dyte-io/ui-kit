@@ -1,14 +1,16 @@
 import { Component, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
 import { Meeting } from '../../types/dyte-client';
 import { ChatChannel } from '../../types/props';
-import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { DyteBasicParticipant } from '@dytesdk/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-channel-header',
   styleUrl: 'dyte-channel-header.css',
 })
 export class DyteChannelHeader {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting!: Meeting;
 
@@ -53,6 +55,10 @@ export class DyteChannelHeader {
 
   connectedCallback() {
     this.onChannelChanged();
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   private $searchInput: HTMLInputElement;
@@ -130,5 +136,10 @@ export class DyteChannelHeader {
         </header>
       </Host>
     );
+  }
+
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

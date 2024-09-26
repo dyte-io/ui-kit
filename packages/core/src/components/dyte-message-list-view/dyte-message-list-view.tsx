@@ -1,6 +1,7 @@
 import { Component, Prop, State, Watch, h, writeTask } from '@stencil/core';
-import { IconPack, defaultIconPack } from '../../exports';
+import { DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
 import { debounce } from 'lodash-es';
+import { updateComponentProps } from '../../utils/component-props';
 
 interface Message {
   id: string;
@@ -19,6 +20,7 @@ const OVERSCAN_BUFFER = 5;
   styleUrl: 'dyte-message-list-view.css',
 })
 export class DyteMessageListView {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Messages to render */
   @Prop() messages!: Message[];
 
@@ -87,6 +89,10 @@ export class DyteMessageListView {
     this.range = { start: total - this.visibleItemsCount, end: total };
     this.updateVisibleItems(this.range.start, this.range.end);
     this.totalHeight = this.getRangeSize(0, total);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   componentDidLoad() {
@@ -360,5 +366,9 @@ export class DyteMessageListView {
         </div>
       </div>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

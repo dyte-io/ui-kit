@@ -16,6 +16,7 @@ import { DyteSidebarTab, DyteSidebarView } from '../dyte-sidebar-ui/dyte-sidebar
 import { Render } from '../../lib/render';
 import { StageStatus } from '@dytesdk/web-core';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type DyteSidebarSection = 'chat' | 'polls' | 'participants' | 'plugins';
 
@@ -29,6 +30,7 @@ export type DyteSidebarSection = 'chat' | 'polls' | 'participants' | 'plugins';
   shadow: true,
 })
 export class DyteSidebar {
+  private componentPropsCleanupFn: () => void = () => {};
   private keydownListener: (e: KeyboardEvent) => void;
 
   private onStageStatusUpdate: (status: StageStatus) => void;
@@ -74,12 +76,18 @@ export class DyteSidebar {
     this.statesChanged(this.states);
     this.meetingChanged(this.meeting);
     this.isFloating = DyteUIKitStore.state?.sidebarFloating || false;
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     document.removeEventListener('keydown', this.keydownListener);
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.onStageStatusUpdate);
     this.onStageStatusUpdate = null;
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

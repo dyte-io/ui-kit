@@ -1,5 +1,6 @@
 import { Component, Prop, h } from '@stencil/core';
-import { IconPack, defaultIconPack, DyteI18n, useLanguage } from '../../exports';
+import { IconPack, defaultIconPack, DyteI18n, useLanguage, DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-emoji-picker-button',
@@ -7,6 +8,13 @@ import { IconPack, defaultIconPack, DyteI18n, useLanguage } from '../../exports'
   shadow: true,
 })
 export class DyteEmojiPickerButton {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
 
@@ -32,5 +40,9 @@ export class DyteEmojiPickerButton {
         </dyte-button>
       </dyte-tooltip>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

@@ -3,6 +3,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { DyteUIKitStore } from '../../lib/store';
 import { Size, States } from '../../types/props';
 import { Component, Host, h, Prop, Event, EventEmitter, Element } from '@stencil/core';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A button which toggles visibility of a more menu.
@@ -19,6 +20,7 @@ import { Component, Host, h, Prop, Event, EventEmitter, Element } from '@stencil
   shadow: true,
 })
 export class DyteMoreToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   @Element() host: HTMLDyteMoreToggleElement;
   /** States object */
   @Prop() states: States = DyteUIKitStore.state;
@@ -39,12 +41,18 @@ export class DyteMoreToggle {
     /** A11y */
     window.addEventListener('keydown', this.handleKeyDown);
     window.addEventListener('click', this.handleOnClick);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
     // };
   }
 
   disconnectedCallback() {
     window.removeEventListener('keydown', this.handleKeyDown);
     window.removeEventListener('click', this.handleOnClick);
+
+    this.componentPropsCleanupFn();
   }
 
   private handleKeyDown = ({ key }: { key: string }) => {

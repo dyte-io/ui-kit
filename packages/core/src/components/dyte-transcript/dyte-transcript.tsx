@@ -1,6 +1,8 @@
 import { Component, Host, h, Prop, EventEmitter, Event, Watch, State } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Transcript } from '../../types/props';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which shows a transcript.
@@ -14,6 +16,7 @@ import { Transcript } from '../../types/props';
   shadow: true,
 })
 export class DyteTranscript {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Message */
   @Prop() transcript!: Transcript & { renderedId?: string };
 
@@ -30,6 +33,10 @@ export class DyteTranscript {
 
   connectedCallback() {
     this.transcriptChanged(this.transcript);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   @Watch('transcript')
@@ -67,5 +74,9 @@ export class DyteTranscript {
         </div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

@@ -9,6 +9,8 @@ import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { formatName, shorten } from '../../utils/string';
 import { GridLayout } from '../dyte-grid/dyte-grid';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 export interface Tab {
   type: ActiveTabType;
@@ -22,6 +24,13 @@ export interface Tab {
   shadow: true,
 })
 export class DyteTabBar {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
@@ -130,5 +139,9 @@ export class DyteTabBar {
         })}
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

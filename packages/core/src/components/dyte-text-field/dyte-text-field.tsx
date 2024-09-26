@@ -4,6 +4,7 @@ import { Component, Event, EventEmitter, h, Host, Prop } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A text field component.
@@ -14,6 +15,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteTextField {
+  private componentPropsCleanupFn: () => void = () => {};
   private input: HTMLInputElement;
 
   /** Input type */
@@ -37,6 +39,10 @@ export class DyteTextField {
   connectedCallback() {
     this.stateUpdate.emit({ abc: false });
     DyteUIKitStore.state.abc = false;
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   get value() {
@@ -54,5 +60,9 @@ export class DyteTextField {
         />
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

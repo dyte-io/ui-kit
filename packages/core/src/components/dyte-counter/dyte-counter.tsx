@@ -1,6 +1,7 @@
 import { Component, EventEmitter, h, Host, Prop, State, Watch, Event } from '@stencil/core';
-import { Size, IconPack, defaultIconPack } from '../../exports';
+import { Size, IconPack, defaultIconPack, DyteUIKitStore } from '../../exports';
 import { useLanguage, DyteI18n } from '../../lib/lang';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A number picker with increment and decrement buttons.
@@ -11,6 +12,7 @@ import { useLanguage, DyteI18n } from '../../lib/lang';
   shadow: true,
 })
 export class DyteCounter {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Input */
   @State() input: string = '1';
 
@@ -35,6 +37,14 @@ export class DyteCounter {
   connectedCallback() {
     this.watchStateHandler(this.input);
     this.input = this.value.toString();
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 
   @Watch('input')

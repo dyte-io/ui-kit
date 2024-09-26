@@ -1,7 +1,8 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
-import { Size } from '../../exports';
+import { DyteUIKitStore, Size } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 const parseIcon = (icon: string) => {
   try {
@@ -22,6 +23,13 @@ export type IconVariant = 'primary' | 'secondary' | 'danger';
   shadow: true,
 })
 export class DyteIcon {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Icon */
   @Prop() icon: string;
 
@@ -43,5 +51,9 @@ export class DyteIcon {
         <div class="icon-wrapper" innerHTML={parseIcon(this.icon)} part="wrapper"></div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

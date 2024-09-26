@@ -9,7 +9,7 @@ import {
   writeTask,
   Watch,
 } from '@stencil/core';
-import { defaultIconPack, IconPack, Size } from '../../exports';
+import { defaultIconPack, DyteUIKitStore, IconPack, Size } from '../../exports';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import {
   handleFilesDataTransfer,
@@ -21,6 +21,7 @@ import {
 } from '../../utils/chat';
 import gracefulStorage from '../../utils/graceful-storage';
 import type { DyteBasicParticipant, TextMessage } from '@dytesdk/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 interface DyteText {
   type: 'text';
@@ -46,6 +47,7 @@ const MENTION_CHAR = '@';
   shadow: true,
 })
 export class DyteChatComposerUi {
+  private componentPropsCleanupFn: () => void = () => {};
   private $textArea: HTMLTextAreaElement;
 
   /** Whether user can send text messages */
@@ -112,6 +114,14 @@ export class DyteChatComposerUi {
     };
     // this.fileReader.onloadstart = () => {};
     // this.fileReader.onloadend = () => {};
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 
   @Watch('channelId')

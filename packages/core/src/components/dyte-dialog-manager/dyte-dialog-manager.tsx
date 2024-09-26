@@ -7,6 +7,7 @@ import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which handles all dialog elements in a component such as:
@@ -26,6 +27,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteDialogManager {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting: Meeting;
 
@@ -49,10 +51,16 @@ export class DyteDialogManager {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.meeting.stage?.removeListener('stageStatusUpdate', this.stageStatusUpdateListener);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

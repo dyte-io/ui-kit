@@ -1,8 +1,9 @@
 import { Component, Host, h, Prop, State, Element, Event, EventEmitter } from '@stencil/core';
-import { defaultIconPack, DyteI18n, IconPack } from '../../exports';
+import { defaultIconPack, DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Size } from '../../types/props';
 import type { Message } from '@dytesdk/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-chat-message',
@@ -10,6 +11,7 @@ import type { Message } from '@dytesdk/web-core';
   shadow: true,
 })
 export class DyteChatMessage {
+  private componentPropsCleanupFn: () => void = () => {};
   @Element() $el: HTMLDyteChatMessageElement;
 
   /**
@@ -84,6 +86,17 @@ export class DyteChatMessage {
 
   /** Whether to left align the chat bubbles */
   @Prop() leftAlign = false;
+
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
+  }
 
   private renderMessage = () => {
     switch (this.message.type) {

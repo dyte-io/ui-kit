@@ -6,6 +6,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { isLiveStreamHost } from '../../utils/livestream';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-livestream-toggle',
@@ -13,6 +14,7 @@ import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-but
   shadow: true,
 })
 export class DyteLivestreamToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
@@ -44,10 +46,16 @@ export class DyteLivestreamToggle {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.clearListeners();
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

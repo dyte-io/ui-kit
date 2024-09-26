@@ -1,6 +1,6 @@
 import type { LivestreamState } from '@dytesdk/web-core';
 import { Component, h, Host, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
-import { Size, DyteI18n, IconPack, defaultIconPack } from '../../exports';
+import { Size, DyteI18n, IconPack, defaultIconPack, DyteUIKitStore } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import {
@@ -10,6 +10,7 @@ import {
   PlayerEventType,
   PlayerState,
 } from '../../utils/livestream';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-livestream-player',
@@ -17,6 +18,7 @@ import {
   shadow: true,
 })
 export class DyteLivestreamPlayer {
+  private componentPropsCleanupFn: () => void = () => {};
   private player: HTMLVideoElement;
   private ivsPlayer: any;
   private showLatencyIndicator: boolean = false;
@@ -260,6 +262,10 @@ export class DyteLivestreamPlayer {
       this.fetchLatency();
       this.meeting.__internals__.callStats?.livestreamLatency(this.latency);
     }, 10000);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -269,6 +275,8 @@ export class DyteLivestreamPlayer {
     this.ivsPlayer.load('');
     this.ivsPlayer = undefined;
     this.player = undefined;
+
+    this.componentPropsCleanupFn();
   }
 
   async componentDidLoad() {

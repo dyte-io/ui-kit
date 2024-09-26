@@ -4,6 +4,8 @@ import { Meeting, Peer } from '../../types/dyte-client';
 import { formatName, shorten } from '../../utils/string';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { IconPack, defaultIconPack } from '../../lib/icons';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type DyteNameTagVariant = 'default' | 'text';
 
@@ -16,6 +18,13 @@ export type DyteNameTagVariant = 'default' | 'text';
   shadow: true,
 })
 export class DyteNameTag {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Participant object */
   @Prop() participant!: Peer;
 
@@ -65,5 +74,9 @@ export class DyteNameTag {
         <slot name="end" />
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

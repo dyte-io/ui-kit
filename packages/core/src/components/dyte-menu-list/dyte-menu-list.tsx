@@ -1,6 +1,8 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A menu list component.
@@ -13,6 +15,13 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
   shadow: true,
 })
 export class DyteMenuList {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
 
@@ -25,5 +34,9 @@ export class DyteMenuList {
         <slot></slot>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

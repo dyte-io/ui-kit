@@ -2,7 +2,8 @@ import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { Meeting } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import { Size } from '../../exports';
+import { DyteUIKitStore, Size } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-spotlight-indicator',
@@ -10,6 +11,7 @@ import { Size } from '../../exports';
   shadow: true,
 })
 export class DyteSpotlightIndicator {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting: Meeting;
 
@@ -27,6 +29,10 @@ export class DyteSpotlightIndicator {
   @State() isSpotlighted: boolean;
 
   connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
     this.meetingChanged(this.meeting);
   }
 
@@ -35,6 +41,8 @@ export class DyteSpotlightIndicator {
       'permissionsUpdate',
       this.permissionsUpdateListener
     );
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

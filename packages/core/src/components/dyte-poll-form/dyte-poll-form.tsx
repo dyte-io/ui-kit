@@ -2,6 +2,8 @@ import { Component, Host, h, Prop, State, EventEmitter, Event } from '@stencil/c
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { PollObject } from '../../types/props';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component that lets you create a poll.
@@ -12,6 +14,13 @@ import { PollObject } from '../../types/props';
   shadow: true,
 })
 export class DytePoll {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   private question: HTMLTextAreaElement;
 
   /** Event which is emitted when a poll is created */
@@ -149,5 +158,9 @@ export class DytePoll {
         </div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

@@ -5,6 +5,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { getPreference, setPreference } from '../../utils/user-prefs';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which lets to manage your camera devices and your video preferences.
@@ -24,6 +25,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteSettingsVideo {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting: Meeting;
 
@@ -56,8 +58,17 @@ export class DyteSettingsVideo {
     meeting.self?.addListener('videoUpdate', this.onVideoUpdate);
   }
 
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
   disconnectedCallback() {
     this.meeting.self?.removeListener('videoUpdate', this.onVideoUpdate);
+
+    this.componentPropsCleanupFn();
   }
 
   private onVideoUpdate = (videoState: Pick<Peer, 'videoEnabled'>) => {

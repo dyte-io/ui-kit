@@ -6,6 +6,7 @@ import { Size, States } from '../../types/props';
 import { canViewPolls } from '../../utils/sidebar';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A button which toggles visibility of polls.
@@ -24,6 +25,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DytePollsToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   private removeStateChangeListener: () => void;
 
   /** Variant */
@@ -58,6 +60,10 @@ export class DytePollsToggle {
     this.meetingChanged(this.meeting);
     this.statesChanged(this.states);
     this.removeStateChangeListener = DyteUIKitStore.onChange('sidebar', () => this.statesChanged());
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -65,6 +71,8 @@ export class DytePollsToggle {
     this.meeting?.polls?.removeListener('pollsUpdate', this.onPollsUpdate);
     this.meeting?.self?.permissions.removeListener('pollsUpdate', this.updateCanView);
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.updateCanView);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

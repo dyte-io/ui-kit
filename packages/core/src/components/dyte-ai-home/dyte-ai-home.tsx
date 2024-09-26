@@ -5,6 +5,8 @@ import { AIMessage } from '../../types/dyte-ai';
 // import { Middlewares } from '../../types/props';
 import { smoothScrollToBottom } from '../../utils/scroll';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-ai-home',
@@ -12,6 +14,8 @@ import { DytePermissionsPreset } from '@dytesdk/web-core';
   shadow: true,
 })
 export class DyteAiHome {
+  private componentPropsCleanupFn: () => void = () => {};
+
   private contentContainer!: HTMLDivElement;
 
   @State() prompt = '';
@@ -69,12 +73,18 @@ export class DyteAiHome {
         // }, 1000);
       }
     }
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
 
     // this.middlewares?.speech?.on('chatGPTReply', (data) => this.handleChatGPTReply(data));
   }
 
   disconnectedCallback() {
     // this.middlewares?.speech?.off('chatGPTReply', (data) => this.handleChatGPTReply(data));
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('messages')

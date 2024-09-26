@@ -2,6 +2,8 @@ import { Size } from '../../types/props';
 import { Component, Host, h, Prop } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
+import { updateComponentProps } from '../../utils/component-props';
+import { DyteUIKitStore } from '../..';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost';
 
@@ -20,6 +22,7 @@ export type ButtonKind = 'button' | 'icon' | 'wide';
   shadow: true,
 })
 export class DyteButton {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
@@ -43,6 +46,17 @@ export class DyteButton {
 
   /** Button type */
   @Prop({ reflect: true }) type: HTMLButtonElement['type'] = 'button';
+
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
+  }
 
   render() {
     return (

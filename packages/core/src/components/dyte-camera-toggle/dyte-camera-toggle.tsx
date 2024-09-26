@@ -5,6 +5,7 @@ import { Meeting, Peer, MediaPermission } from '../../types/dyte-client';
 import { PermissionSettings, Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A button which toggles your camera.
@@ -15,6 +16,7 @@ import { DyteUIKitStore } from '../../exports';
   shadow: true,
 })
 export class DyteCameraToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   private videoUpdateListener = ({ videoEnabled }: Peer) => {
     this.videoEnabled = videoEnabled;
   };
@@ -63,6 +65,10 @@ export class DyteCameraToggle {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -73,6 +79,8 @@ export class DyteCameraToggle {
       'permissionsUpdate',
       this.meetingPermissionsUpdateListener
     );
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

@@ -11,6 +11,8 @@ import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { GridLayout, GridSize } from '../dyte-grid/dyte-grid';
 import type { Tab } from '../dyte-tab-bar/dyte-tab-bar';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A grid component which handles screenshares, plugins and participants.
@@ -21,6 +23,7 @@ import type { Tab } from '../dyte-tab-bar/dyte-tab-bar';
   shadow: true,
 })
 export class DyteMixedGrid {
+  private componentPropsCleanupFn: () => void = () => {};
   private activeTabUpdateListener: (data: ActiveTab) => void;
 
   /** Grid Layout */
@@ -85,10 +88,16 @@ export class DyteMixedGrid {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.meeting.meta?.removeListener('activeTabUpdate', this.activeTabUpdateListener);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

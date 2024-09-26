@@ -1,9 +1,10 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { defaultConfig, defaultIconPack, IconPack, UIConfig } from '../../exports';
+import { defaultConfig, defaultIconPack, DyteUIKitStore, IconPack, UIConfig } from '../../exports';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component that houses all the header components.
@@ -16,6 +17,13 @@ import { Size, States } from '../../types/props';
   shadow: true,
 })
 export class DyteHeader {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Variant */
   @Prop({ reflect: true }) variant: 'solid' | 'boxed' = 'solid';
 
@@ -56,5 +64,9 @@ export class DyteHeader {
         <slot />
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

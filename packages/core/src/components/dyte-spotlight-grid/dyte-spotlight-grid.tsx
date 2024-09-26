@@ -8,6 +8,8 @@ import { Meeting, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { GridLayout, GridSize } from '../dyte-grid/dyte-grid';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A grid component that renders two lists of participants: `pinnedParticipants` and `participants`.
@@ -23,6 +25,13 @@ import { GridLayout, GridSize } from '../dyte-grid/dyte-grid';
   shadow: true,
 })
 export class DyteSpotlightGrid {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Grid Layout */
   @Prop({ reflect: true }) layout: GridLayout = 'row';
 
@@ -132,5 +141,9 @@ export class DyteSpotlightGrid {
         )}
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

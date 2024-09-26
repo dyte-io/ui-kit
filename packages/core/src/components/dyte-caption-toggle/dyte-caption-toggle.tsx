@@ -13,6 +13,7 @@ import { Meeting } from '../../types/dyte-client';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 
 import { DytePermissionsPreset } from '@dytesdk/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-caption-toggle',
@@ -20,6 +21,7 @@ import { DytePermissionsPreset } from '@dytesdk/web-core';
   shadow: true,
 })
 export class DyteCaptionToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
@@ -48,6 +50,10 @@ export class DyteCaptionToggle {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   @Watch('meeting')
@@ -63,6 +69,8 @@ export class DyteCaptionToggle {
       'permissionsUpdate',
       this.permissionsUpdateListener
     );
+
+    this.componentPropsCleanupFn();
   }
 
   private permissionsUpdateListener = () => {

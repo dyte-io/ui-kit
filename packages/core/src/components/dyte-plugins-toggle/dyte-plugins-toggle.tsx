@@ -6,6 +6,7 @@ import { Size, States } from '../../types/props';
 import { canViewPlugins } from '../../utils/sidebar';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A button which toggles visibility of plugins.
@@ -22,6 +23,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DytePluginsToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   private removeStateChangeListener: () => void;
 
   /** Variant */
@@ -50,12 +52,18 @@ export class DytePluginsToggle {
     this.removeStateChangeListener && this.removeStateChangeListener();
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.updateCanView);
     this.meeting?.self?.permissions.removeListener('pluginsUpdate', this.updateCanView);
+
+    this.componentPropsCleanupFn();
   }
 
   connectedCallback() {
     this.statesChanged(this.states);
     this.meetingChanged(this.meeting);
     this.removeStateChangeListener = DyteUIKitStore.onChange('sidebar', () => this.statesChanged());
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   @Watch('meeting')

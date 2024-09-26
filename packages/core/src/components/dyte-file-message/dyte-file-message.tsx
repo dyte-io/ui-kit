@@ -5,6 +5,8 @@ import { sanitizeLink } from '../../utils/string';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { downloadFile, getExtension, getFileSize } from '../../utils/file';
 import { useLanguage, DyteI18n } from '../../lib/lang';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which renders a file message from chat.
@@ -13,6 +15,13 @@ import { useLanguage, DyteI18n } from '../../lib/lang';
   tag: 'dyte-file-message',
 })
 export class DyteFileMessage {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Text message object */
   @Prop() message!: FileMessage;
 
@@ -69,5 +78,9 @@ export class DyteFileMessage {
         </div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

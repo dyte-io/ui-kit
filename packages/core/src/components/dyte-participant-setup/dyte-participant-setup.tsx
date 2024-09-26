@@ -7,6 +7,7 @@ import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { defaultConfig, DyteUIKitStore } from '../../exports';
 import { DyteSelf } from '@dytesdk/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type VideoState = Pick<Peer, 'videoEnabled' | 'videoTrack'>;
 
@@ -16,6 +17,7 @@ export type VideoState = Pick<Peer, 'videoEnabled' | 'videoTrack'>;
   shadow: true,
 })
 export class DyteParticipantSetup {
+  private componentPropsCleanupFn: () => void = () => {};
   private videoEl: HTMLVideoElement;
 
   @State() videoState: VideoState;
@@ -58,6 +60,10 @@ export class DyteParticipantSetup {
   connectedCallback() {
     // set videoState before initial render and initialize listeners
     this.participantsChanged(this.participant);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   componentDidLoad() {
@@ -69,6 +75,8 @@ export class DyteParticipantSetup {
     if (this.participant == null) return;
 
     (this.participant as DyteSelf).removeListener('videoUpdate', this.onVideoUpdate);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('participant')

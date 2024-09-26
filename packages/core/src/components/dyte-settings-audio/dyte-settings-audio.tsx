@@ -5,6 +5,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { getPreference, setPreference } from '../../utils/user-prefs';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which lets to manage your audio devices and audio preferences.
@@ -24,6 +25,13 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteSettingsAudio {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting!: Meeting;
 
@@ -93,5 +101,9 @@ export class DyteSettingsAudio {
         </div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

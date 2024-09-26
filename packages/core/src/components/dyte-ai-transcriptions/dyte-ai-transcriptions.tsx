@@ -5,6 +5,8 @@ import { Meeting } from '../../types/dyte-client';
 import { Transcript } from '../../types/props';
 import { smoothScrollToBottom } from '../../utils/scroll';
 import clone from '../../utils/clone';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-ai-transcriptions',
@@ -12,6 +14,8 @@ import clone from '../../utils/clone';
   shadow: true,
 })
 export class DyteAiTranscriptions {
+  private componentPropsCleanupFn: () => void = () => {};
+
   private contentContainer!: HTMLDivElement;
 
   @State() participantQuery = '';
@@ -51,6 +55,10 @@ export class DyteAiTranscriptions {
   }
 
   connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
     if (!this.meeting) return;
 
     this.meetingChanged(this.meeting);
@@ -58,6 +66,8 @@ export class DyteAiTranscriptions {
 
   disconnectedCallback() {
     this.meeting?.ai?.off('transcript', this.onTranscriptHandler);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

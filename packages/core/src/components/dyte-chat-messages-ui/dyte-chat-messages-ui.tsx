@@ -16,6 +16,7 @@ import { Chat, ChatMessage, States } from '../../types/props';
 import { differenceInMinutes, elapsedDuration, formatDateTime } from '../../utils/date';
 import { smoothScrollToBottom } from '../../utils/scroll';
 import { chatUnreadTimestamps } from '../../utils/user-prefs';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-chat-messages-ui',
@@ -23,6 +24,7 @@ import { chatUnreadTimestamps } from '../../utils/user-prefs';
   shadow: true,
 })
 export class DyteChatMessagesUi {
+  private componentPropsCleanupFn: () => void = () => {};
   private $chat: HTMLDivElement;
 
   private intersectionObserver: IntersectionObserver;
@@ -95,6 +97,10 @@ export class DyteChatMessagesUi {
     };
     this.request = requestAnimationFrame(updateNow);
     this.chatChanged(this.messages as ChatMessage[]);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   componentDidLoad() {
@@ -144,6 +150,8 @@ export class DyteChatMessagesUi {
     this.intersectionObserver.disconnect();
     clearTimeout(this.timeout);
     cancelAnimationFrame(this.request);
+
+    this.componentPropsCleanupFn();
   }
 
   private onScroll = (e: Event) => {

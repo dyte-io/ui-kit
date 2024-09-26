@@ -3,6 +3,8 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { showLivestream } from '../../utils/livestream';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type ViewerCountVariant = 'primary' | 'embedded';
 
@@ -15,6 +17,7 @@ export type ViewerCountVariant = 'primary' | 'embedded';
   shadow: true,
 })
 export class DyteViewerCount {
+  private componentPropsCleanupFn: () => void = () => {};
   private countListener: () => void;
 
   /** Meeting object */
@@ -33,6 +36,10 @@ export class DyteViewerCount {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   private disconnectMeeting = (meeting: Meeting) => {
@@ -43,6 +50,7 @@ export class DyteViewerCount {
 
   disconnectedCallback() {
     this.disconnectMeeting(this.meeting);
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

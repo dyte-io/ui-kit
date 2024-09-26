@@ -7,6 +7,7 @@ import { usePaginatedChat } from '../../utils/flags';
 import { canViewChat } from '../../utils/sidebar';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 /**
  * A button which toggles visibility of chat.
  *
@@ -24,6 +25,7 @@ import { DyteUIKitStore } from '../../exports';
   shadow: true,
 })
 export class DyteChatToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   private removeStateChangeListener: () => void;
 
   @State() unreadMessageCount: number = 0;
@@ -59,6 +61,10 @@ export class DyteChatToggle {
     this.meetingChanged(this.meeting);
     this.statesChanged(this.states);
     this.removeStateChangeListener = DyteUIKitStore.onChange('sidebar', () => this.statesChanged());
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -66,6 +72,8 @@ export class DyteChatToggle {
     this.meeting?.chat?.removeListener('chatUpdate', this.onChatUpdate);
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.updateCanView);
     this.meeting?.self?.permissions.removeListener('chatUpdate', this.updateCanView);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

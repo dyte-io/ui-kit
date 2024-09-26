@@ -1,8 +1,9 @@
 import { Component, Host, h, Prop, Event, EventEmitter, State } from '@stencil/core';
-import { defaultIconPack, IconPack } from '../../exports';
+import { defaultIconPack, DyteUIKitStore, IconPack } from '../../exports';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Peer } from '../../types/dyte-client';
 import { generateChatGroupKey } from '../../utils/chat';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type ChatGroup = Pick<Peer, 'userId' | 'name'>;
 
@@ -15,6 +16,7 @@ export type ChatGroupChangedType = ChatGroup | string;
   shadow: true,
 })
 export class DyteChatSelectorUi {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Self User ID */
   @Prop() selfUserId: string;
 
@@ -66,6 +68,17 @@ export class DyteChatSelectorUi {
     }
 
     return this.t('everyone');
+  }
+
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 
   render() {

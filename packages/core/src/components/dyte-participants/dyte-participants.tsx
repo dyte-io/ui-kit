@@ -7,6 +7,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
 
 import { defaultConfig, DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type ParticipantsViewMode = 'sidebar';
 /**
@@ -19,6 +20,7 @@ export type ParticipantsViewMode = 'sidebar';
   shadow: true,
 })
 export class DyteParticipants {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting!: Meeting;
 
@@ -41,10 +43,16 @@ export class DyteParticipants {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     if (this.meeting == null) return;
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

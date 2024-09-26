@@ -1,9 +1,10 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { defaultConfig, defaultIconPack, IconPack, UIConfig } from '../../exports';
+import { defaultConfig, defaultIconPack, DyteUIKitStore, IconPack, UIConfig } from '../../exports';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * Controlbar component provides you with various designs as variants.
@@ -16,6 +17,7 @@ import { Size, States } from '../../types/props';
   shadow: true,
 })
 export class DyteControlbar {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Variant */
   @Prop({ reflect: true }) variant: 'solid' | 'boxed' = 'solid';
 
@@ -39,6 +41,17 @@ export class DyteControlbar {
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
+
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
+  }
 
   render() {
     const defaults = {

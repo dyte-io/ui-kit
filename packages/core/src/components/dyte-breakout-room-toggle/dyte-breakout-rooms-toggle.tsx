@@ -7,6 +7,7 @@ import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-but
 
 import { canToggleBreakout } from '../../utils/breakout-rooms';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A button which toggles visibility of breakout rooms.
@@ -19,6 +20,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteBreakoutRoomsToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
@@ -44,9 +46,15 @@ export class DyteBreakoutRoomsToggle {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
   disconnectedCallback() {
     this.meeting?.self?.permissions?.off('permissionsUpdate', this.permissionsUpdateListener);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

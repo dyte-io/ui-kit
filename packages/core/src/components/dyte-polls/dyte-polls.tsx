@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
-import { defaultConfig } from '../../exports';
+import { defaultConfig, DyteUIKitStore } from '../../exports';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
@@ -7,6 +7,7 @@ import { PollObject, Size, Poll } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { smoothScrollToBottom } from '../../utils/scroll';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which lists all available plugins a user can access with
@@ -18,6 +19,7 @@ import { DytePermissionsPreset } from '@dytesdk/web-core';
   shadow: true,
 })
 export class DytePolls {
+  private componentPropsCleanupFn: () => void = () => {};
   private onCreate: (data: PollObject) => void;
   private onVote: (id: string, index: number) => void;
   private pollEl: HTMLDivElement;
@@ -47,12 +49,18 @@ export class DytePolls {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     if (this.meeting == null) return;
     this.meeting.polls?.removeListener('pollsUpdate', this.onPollsUpdate);
     this.meeting.self.permissions.removeListener('pollsUpdate', this.onUpdatePermissions);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

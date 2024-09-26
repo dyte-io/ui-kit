@@ -5,6 +5,8 @@ import { useLanguage, DyteI18n } from '../../lib/lang';
 import { hasOnlyEmojis } from '../../utils/string';
 import { ChatHead } from '../dyte-chat/components/ChatHead';
 import { TextMessageView } from './components/TextMessage';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which renders a text message from chat.
@@ -13,6 +15,13 @@ import { TextMessageView } from './components/TextMessage';
   tag: 'dyte-text-message',
 })
 export class DyteTextMessage {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Text message object */
   @Prop() message!: TextMessage;
 
@@ -50,5 +59,9 @@ export class DyteTextMessage {
         </div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

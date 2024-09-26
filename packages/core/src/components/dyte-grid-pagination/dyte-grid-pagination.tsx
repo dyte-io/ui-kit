@@ -5,6 +5,8 @@ import { Meeting } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { DyteParticipants } from '@dytesdk/web-core';
 import debounce from 'lodash/debounce';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type GridPaginationVariants = 'solid' | 'rounded' | 'grid';
 
@@ -20,6 +22,7 @@ const MASS_ACTIONS_DEBOUNCE_TIMER = 50; // In ms
   shadow: true,
 })
 export class DyteGridPagination {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting!: Meeting;
 
@@ -47,6 +50,10 @@ export class DyteGridPagination {
   connectedCallback() {
     this.meetingChanged(this.meeting);
     this.sizeChanged();
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -60,6 +67,7 @@ export class DyteGridPagination {
     participants.joined.removeListener('participantLeft', this.onParticipantLeave);
     participants.joined.removeListener('stageStatusUpdate', this.onStateStatusUpdate);
     stage.removeListener('stageStatusUpdate', this.onStateStatusUpdate);
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

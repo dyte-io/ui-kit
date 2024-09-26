@@ -1,7 +1,8 @@
 import { Component, Prop, h } from '@stencil/core';
-import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { sanitizeLink } from '../../utils/string';
 import { downloadFile, getExtension, getFileSize } from '../../utils/file';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which renders a file message.
@@ -12,6 +13,13 @@ import { downloadFile, getExtension, getFileSize } from '../../utils/file';
   shadow: true,
 })
 export class DyteFileMessageView {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Name of the file */
   @Prop() name!: string;
 
@@ -52,5 +60,9 @@ export class DyteFileMessageView {
         </div>
       </div>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

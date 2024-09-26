@@ -19,6 +19,7 @@ import { defaultConfig, DyteUIKitStore, UIConfig } from '../../exports';
 import { FlagsmithFeatureFlags } from '../../utils/flags';
 import { computePosition, flip, offset, shift } from '@floating-ui/dom';
 import type { DyteParticipant as DyteParticipantType } from '@dytesdk/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type ParticipantViewMode = 'sidebar';
 
@@ -34,6 +35,7 @@ export type ParticipantViewMode = 'sidebar';
   shadow: true,
 })
 export class DyteParticipant {
+  private componentPropsCleanupFn: () => void = () => {};
   private audioUpdateListener: (data: Pick<Peer, 'audioEnabled' | 'audioTrack'>) => void;
   private videoUpdateListener: (data: Pick<Peer, 'videoEnabled' | 'videoTrack'>) => void;
 
@@ -89,6 +91,10 @@ export class DyteParticipant {
   connectedCallback() {
     this.meetingChanged(this.meeting);
     this.participantChanged(this.participant);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -114,6 +120,8 @@ export class DyteParticipant {
       'stageStatusUpdate',
       this.stageListener
     );
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

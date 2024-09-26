@@ -4,6 +4,8 @@ import { Size } from '../../types/props';
 import { Peer, WaitlistedParticipant } from '../../types/dyte-client';
 import { formatName, getInitials } from '../../utils/string';
 import { useLanguage, DyteI18n } from '../../lib/lang';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type AvatarVariant = 'circular' | 'square' | 'hexagon';
 
@@ -16,6 +18,7 @@ export type AvatarVariant = 'circular' | 'square' | 'hexagon';
   shadow: true,
 })
 export class DyteAvatar {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Participant object */
   @Prop() participant: Peer | WaitlistedParticipant | { name: string; picture: string };
 
@@ -32,6 +35,17 @@ export class DyteAvatar {
   @Prop() t: DyteI18n = useLanguage();
 
   @State() imageState: 'loading' | 'loaded' | 'errored' = 'loading';
+
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
+  }
 
   private getAvatar = () => {
     const name = formatName(this.participant?.name || '');

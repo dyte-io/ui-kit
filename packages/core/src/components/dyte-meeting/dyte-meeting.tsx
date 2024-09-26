@@ -24,6 +24,7 @@ import { generateConfig } from '../../utils/config';
 
 import { GridLayout } from '../dyte-grid/dyte-grid';
 import ResizeObserver from 'resize-observer-polyfill';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type MeetingMode = 'fixed' | 'fill';
 
@@ -152,14 +153,10 @@ export class DyteMeeting {
     // TODO(ravindra-dyte): remove next line before merging this PR
     (window as any).dyteMeetingDyteUIKitStore = DyteUIKitStore;
 
-    this.componentPropsCleanupFn = DyteUIKitStore.onChange('componentProps', (componentProps) => {
-      if (componentProps.meeting) {
-        this.meeting = componentProps.meeting;
-      }
-      if (componentProps.iconPack) {
-        this.iconPack = componentProps.iconPack;
-      }
-    });
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   private clearListeners(meeting: Meeting) {

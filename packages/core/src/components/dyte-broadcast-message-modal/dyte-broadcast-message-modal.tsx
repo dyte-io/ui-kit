@@ -4,6 +4,7 @@ import { Meeting } from '../../types/dyte-client';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 
 import { DyteI18n, useLanguage } from '../../lib/lang';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-broadcast-message-modal',
@@ -11,6 +12,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
   shadow: true,
 })
 export class DyteBroadcastMessageModal {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting: Meeting;
 
@@ -48,6 +50,17 @@ export class DyteBroadcastMessageModal {
     setTimeout(() => {
       this.close();
     }, 2000);
+  }
+
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 
   render() {

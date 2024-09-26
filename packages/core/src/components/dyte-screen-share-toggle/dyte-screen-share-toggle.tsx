@@ -6,6 +6,7 @@ import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@st
 import logger from '../../utils/logger';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 const deviceCanScreenShare = () => {
   return (
@@ -33,6 +34,7 @@ interface ScreenShareState {
   shadow: true,
 })
 export class DyteScreenShareToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   /** States object */
   @Prop() states: States;
 
@@ -152,6 +154,10 @@ export class DyteScreenShareToggle {
       return;
     }
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -163,6 +169,8 @@ export class DyteScreenShareToggle {
     this.meeting?.self.removeListener('screenShareUpdate', this.screenShareListener);
     this.meeting?.self.removeListener('mediaPermissionUpdate', this.mediaPermissionUpdateListener);
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.stageStatusListener);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

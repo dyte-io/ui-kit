@@ -4,6 +4,7 @@ import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A confirmation modal.
@@ -14,6 +15,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteConfirmationModal {
+  private componentPropsCleanupFn: () => void = () => {};
   private keyPressListener = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
       this.close();
@@ -37,12 +39,18 @@ export class DyteConfirmationModal {
 
   connectedCallback() {
     document.addEventListener('keydown', this.keyPressListener);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   componentDidLoad() {}
 
   disconnectedCallback() {
     document.removeEventListener('keydown', this.keyPressListener);
+
+    this.componentPropsCleanupFn();
   }
 
   private close = () => {

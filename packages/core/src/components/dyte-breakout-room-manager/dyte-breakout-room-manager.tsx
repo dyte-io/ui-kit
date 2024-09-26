@@ -7,6 +7,8 @@ import { getAllConnectedParticipants, participantIdentifier } from '../../utils/
 import type { DyteConnectedMeetings, DytePermissionsPreset } from '@dytesdk/web-core';
 import { formatName, shorten } from '../../utils/string';
 import { DraftMeeting } from '../../utils/breakout-rooms-manager';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 const ROOM_TITLE_MIN_CHARS = 3;
 
@@ -16,6 +18,7 @@ const ROOM_TITLE_MIN_CHARS = 3;
   shadow: true,
 })
 export class DyteBreakoutRoomManager {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting!: Meeting;
 
@@ -95,10 +98,16 @@ export class DyteBreakoutRoomManager {
       !this.meeting.connectedMeetings.isActive; // TODO: remove this once socket supports update meetings
 
     this.meeting.self.permissions.on('permissionsUpdate', this.permissionsUpdateListener);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.meeting.self.permissions.off('permissionsUpdate', this.permissionsUpdateListener);
+
+    this.componentPropsCleanupFn();
   }
 
   private permissionsUpdateListener = () => {

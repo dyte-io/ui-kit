@@ -5,6 +5,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { PermissionSettings, Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A button which toggles your microphone.
@@ -15,6 +16,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteMicToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   private audioUpdateListener = ({ audioEnabled }: Peer) => {
     this.audioEnabled = audioEnabled;
   };
@@ -63,6 +65,10 @@ export class DyteMicToggle {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -73,6 +79,8 @@ export class DyteMicToggle {
       'permissionsUpdate',
       this.meetingPermissionsUpdateListener
     );
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

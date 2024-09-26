@@ -3,6 +3,8 @@ import { debounce } from 'lodash-es';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { smoothScrollToBottom } from '../../utils/scroll';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 export interface DataNode {
   id: string;
@@ -15,6 +17,7 @@ export interface DataNode {
   shadow: true,
 })
 export class DytePaginatedList {
+  private componentPropsCleanupFn: () => void = () => {};
   private intersectionObserver: IntersectionObserver;
 
   private $paginatedList: HTMLDivElement;
@@ -149,10 +152,16 @@ export class DytePaginatedList {
         }
       });
     });
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.intersectionObserver.disconnect();
+
+    this.componentPropsCleanupFn();
   }
 
   componentDidLoad() {

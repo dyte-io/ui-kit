@@ -10,6 +10,8 @@ import { Dimensions, useGrid } from '../../lib/grid';
 import ResizeObserver from 'resize-observer-polyfill';
 import { getInitials } from '../../utils/string';
 import { MediaConnectionState } from '@dytesdk/web-core';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A grid component which renders only the participants in a simple grid.
@@ -20,6 +22,7 @@ import { MediaConnectionState } from '@dytesdk/web-core';
   shadow: true,
 })
 export class DyteSimpleGrid {
+  private componentPropsCleanupFn: () => void = () => {};
   private resizeObserver: ResizeObserver;
 
   /** Participants */
@@ -69,10 +72,16 @@ export class DyteSimpleGrid {
     this.resizeObserver.observe(this.host);
     const { meta } = this.meeting;
     this.mediaConnection = { ...meta.mediaState };
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.resizeObserver?.disconnect();
+
+    this.componentPropsCleanupFn();
   }
 
   private onParticipantTileLoad = (

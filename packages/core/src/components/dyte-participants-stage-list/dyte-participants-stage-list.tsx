@@ -7,6 +7,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { ParticipantsViewMode } from '../dyte-participants/dyte-participants';
 import { defaultConfig, DyteUIKitStore } from '../../exports';
 import { Render } from '../../lib/render';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which lists all participants, with ability to
@@ -18,6 +19,7 @@ import { Render } from '../../lib/render';
   shadow: true,
 })
 export class DyteParticipants {
+  private componentPropsCleanupFn: () => void = () => {};
   private participantJoinedListener: (data: any) => void;
   private participantLeftListener: (data: any) => void;
 
@@ -49,6 +51,10 @@ export class DyteParticipants {
   connectedCallback() {
     this.meetingChanged(this.meeting);
     this.searchChanged(this.search);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -66,6 +72,7 @@ export class DyteParticipants {
       );
     participants.joined.removeListener('stageStatusUpdate', this.updateStageList);
     stage?.removeListener('stageStatusUpdate', this.updateStageList);
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

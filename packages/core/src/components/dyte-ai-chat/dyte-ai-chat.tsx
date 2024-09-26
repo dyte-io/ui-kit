@@ -1,5 +1,7 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-ai-chat',
@@ -7,8 +9,21 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
   shadow: true,
 })
 export class DyteAiChat {
+  private componentPropsCleanupFn: () => void = () => {};
+
   /** Language */
   @Prop() t: DyteI18n = useLanguage();
+
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
+  }
 
   render() {
     return (

@@ -7,6 +7,7 @@ import { UIConfig } from '../../types/ui-config';
 import { defaultConfig, DyteUIKitStore } from '../../exports';
 
 import clone from '../../utils/clone';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which handles transcripts.
@@ -20,6 +21,7 @@ import clone from '../../utils/clone';
   shadow: true,
 })
 export class DyteTranscripts {
+  private componentPropsCleanupFn: () => void = () => {};
   private disconnectTimeout: NodeJS.Timeout;
 
   @Element() host: HTMLDyteTranscriptsElement;
@@ -42,6 +44,10 @@ export class DyteTranscripts {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   private addListener(meeting: Meeting) {
@@ -59,6 +65,8 @@ export class DyteTranscripts {
   disconnectedCallback() {
     if (this.meeting == null) return;
     this.clearListeners(this.meeting);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

@@ -1,8 +1,17 @@
 import { Component, h, Prop, State, Watch } from '@stencil/core';
-import { UIConfig, Size, IconPack, defaultIconPack, DyteI18n, defaultConfig } from '../../exports';
+import {
+  UIConfig,
+  Size,
+  IconPack,
+  defaultIconPack,
+  DyteI18n,
+  defaultConfig,
+  DyteUIKitStore,
+} from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting, Participant, Peer } from '../../types/dyte-client';
 import { ParticipantsViewMode } from '../dyte-participants/dyte-participants';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-participants-stage-queue',
@@ -10,6 +19,7 @@ import { ParticipantsViewMode } from '../dyte-participants/dyte-participants';
   shadow: true,
 })
 export class DyteParticipantsStaged {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting!: Meeting;
 
@@ -32,11 +42,16 @@ export class DyteParticipantsStaged {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     const { stage } = this.meeting;
     stage?.removeListener('stageAccessRequestUpdate', this.updateRequestList);
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

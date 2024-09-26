@@ -1,6 +1,7 @@
 import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/core';
-import { defaultIconPack, DyteI18n, IconPack } from '../../exports';
+import { defaultIconPack, DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-file-dropzone',
@@ -8,6 +9,7 @@ import { useLanguage } from '../../lib/lang';
   shadow: true,
 })
 export class DyteFileDropzone {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Host element on which drop events to attach */
   @Prop() hostEl: HTMLElement;
 
@@ -38,6 +40,11 @@ export class DyteFileDropzone {
       this.dropzoneActivated = false;
       this.onDropCallback.emit(e);
     });
+
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   render() {
@@ -49,5 +56,9 @@ export class DyteFileDropzone {
         </div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

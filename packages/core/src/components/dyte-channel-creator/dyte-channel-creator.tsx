@@ -21,6 +21,7 @@ import {
 import { Meeting } from '../../types/dyte-client';
 
 import { DyteBasicParticipant } from '@dytesdk/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-channel-creator',
@@ -28,6 +29,7 @@ import { DyteBasicParticipant } from '@dytesdk/web-core';
   shadow: true,
 })
 export class DyteChannelCreator {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting!: Meeting;
 
@@ -67,6 +69,17 @@ export class DyteChannelCreator {
 
   componentDidLoad() {
     this.inputTextRef?.focus();
+  }
+
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 
   private focusOnSearch = (selectText = false) => {

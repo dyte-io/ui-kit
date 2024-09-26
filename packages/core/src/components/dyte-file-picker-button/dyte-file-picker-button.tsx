@@ -1,5 +1,6 @@
 import { Component, Event, Prop, h, EventEmitter } from '@stencil/core';
-import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-file-picker-button',
@@ -7,6 +8,7 @@ import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports'
   shadow: true,
 })
 export class DyteFilePickerButton {
+  private componentPropsCleanupFn: () => void = () => {};
   /** File type filter to open file picker with */
   @Prop() filter: string;
 
@@ -28,12 +30,18 @@ export class DyteFilePickerButton {
   private fileInputField: HTMLInputElement;
 
   connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
     this.fileInputField = document.createElement('input');
   }
 
   disconnectedCallback() {
     // For GC
     this.fileInputField = undefined;
+
+    this.componentPropsCleanupFn();
   }
 
   private uploadFile = () => {

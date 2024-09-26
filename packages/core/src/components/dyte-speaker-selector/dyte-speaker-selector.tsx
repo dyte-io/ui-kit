@@ -5,6 +5,8 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 
 import { disableSettingSinkId } from '../../utils/flags';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which lets to manage your audio devices and audio preferences.
@@ -24,6 +26,7 @@ import { disableSettingSinkId } from '../../utils/flags';
   shadow: true,
 })
 export class DyteSpeakerSelector {
+  private componentPropsCleanupFn: () => void = () => {};
   private testAudioEl: HTMLAudioElement;
 
   /** Meeting object */
@@ -51,11 +54,17 @@ export class DyteSpeakerSelector {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.meeting?.self.removeListener('deviceListUpdate', this.deviceListUpdateListener);
     this.meeting?.self.removeListener('deviceUpdate', this.deviceUpdateListener);
+
+    this.componentPropsCleanupFn();
   }
 
   private deviceListUpdateListener = ({ devices }) => {

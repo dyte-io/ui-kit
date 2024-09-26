@@ -12,6 +12,7 @@ import { DyteUIKitStore } from '../../lib/store';
 import { DytePlugin, leaveRoomState } from '@dytesdk/web-core';
 import { isLiveStreamViewer } from '../../utils/livestream';
 import { defaultGridSize } from '../../lib/grid';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type GridLayout = 'row' | 'column';
 
@@ -33,6 +34,7 @@ type RoomState = 'init' | 'joined' | 'waitlisted' | leaveRoomState;
   shadow: true,
 })
 export class DyteGrid {
+  private componentPropsCleanupFn: () => void = () => {};
   private hideSelf = false;
 
   @State() participants: Peer[] = [];
@@ -93,10 +95,16 @@ export class DyteGrid {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.disconnectMeeting(this.meeting);
+
+    this.componentPropsCleanupFn();
   }
 
   private disconnectMeeting(meeting: Meeting) {

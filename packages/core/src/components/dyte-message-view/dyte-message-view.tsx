@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 import { elapsedDuration, formatDateTime } from '../../utils/date';
-import { IconPack, defaultIconPack } from '../../exports';
+import { DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 export interface MessageAction {
   id: string;
@@ -14,6 +15,13 @@ export interface MessageAction {
   shadow: true,
 })
 export class DyteMessageView {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** List of actions to show in menu */
   @Prop() actions: MessageAction[] = [];
 
@@ -92,5 +100,9 @@ export class DyteMessageView {
         </div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

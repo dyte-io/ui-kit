@@ -11,6 +11,7 @@ import gracefulStorage from '../../utils/graceful-storage';
 
 import { SocketConnectionState } from '@dytesdk/web-core';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A screen shown before joining the meeting, where you can edit your display name,
@@ -22,6 +23,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteSetupScreen {
+  private componentPropsCleanupFn: () => void = () => {};
   private inputEl: HTMLInputElement;
   /** Meeting object */
   @Prop() meeting!: Meeting;
@@ -56,10 +58,16 @@ export class DyteSetupScreen {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.meeting.meta.removeListener('socketConnectionUpdate', this.socketStateUpdate);
+
+    this.componentPropsCleanupFn();
   }
 
   componentDidLoad() {

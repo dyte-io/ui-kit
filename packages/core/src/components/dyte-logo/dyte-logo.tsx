@@ -2,7 +2,8 @@ import { UIConfig } from '../../types/ui-config';
 import { Component, Host, h, Prop, Watch } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
-import { defaultConfig } from '../../exports';
+import { defaultConfig, DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which loads the logo from your config, or via the `logo-url` attribute.
@@ -13,6 +14,7 @@ import { defaultConfig } from '../../exports';
   shadow: true,
 })
 export class DyteLogo {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Logo URL */
   @Prop({ mutable: true }) logoUrl: string;
 
@@ -28,6 +30,10 @@ export class DyteLogo {
   connectedCallback() {
     this.configChanged(this.config);
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   @Watch('config')
@@ -64,5 +70,9 @@ export class DyteLogo {
         <img src={logo} alt={text} />
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

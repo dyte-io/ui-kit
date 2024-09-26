@@ -7,6 +7,7 @@ import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-but
 import { Meeting } from '../../types/dyte-client';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-ai-toggle',
@@ -41,6 +42,19 @@ export class DyteAiToggle {
   statesChanged(s?: States) {
     const states = s || DyteUIKitStore.state;
     this.aiActive = states.activeAI;
+  }
+
+  private componentPropsCleanupFn: () => void = () => {};
+
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 
   private toggleAI() {

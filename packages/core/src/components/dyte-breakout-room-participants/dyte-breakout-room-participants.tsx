@@ -5,6 +5,8 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { getAllConnectedParticipants, participantIdentifier } from '../../utils/breakout-rooms';
 import type { DyteConnectedMeetings } from '@dytesdk/web-core';
 import { formatName, shorten } from '../../utils/string';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 type ConnectedPeer = DyteConnectedMeetings['parentMeeting']['participants'][number];
 
@@ -18,6 +20,7 @@ type ConnectedPeer = DyteConnectedMeetings['parentMeeting']['participants'][numb
   shadow: true,
 })
 export class DyteBreakoutRoomParticipants {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting!: Meeting;
 
@@ -53,10 +56,16 @@ export class DyteBreakoutRoomParticipants {
   connectedCallback() {
     this.meetingChanged(this.meeting);
     this.searchChanged(this.search);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     if (this.meeting == null) return;
+
+    this.componentPropsCleanupFn();
   }
 
   private updateSelectedParticipants(participant: ConnectedPeer, selected: boolean) {

@@ -6,6 +6,8 @@ import { Size } from '../../types/props';
 import { drawBarsVisualizer } from '../../lib/visualizer';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { DyteParticipant } from '@dytesdk/web-core';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type AudioVisualizerVariant = 'bars';
 
@@ -20,6 +22,7 @@ export type AudioVisualizerVariant = 'bars';
   shadow: true,
 })
 export class DyteAudioVisualizer {
+  private componentPropsCleanupFn: () => void = () => {};
   private visualizer: HTMLCanvasElement;
   private hark: hark.Harker;
 
@@ -54,6 +57,10 @@ export class DyteAudioVisualizer {
 
   connectedCallback() {
     this.participantChanged(this.participant);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   componentDidLoad() {
@@ -73,6 +80,8 @@ export class DyteAudioVisualizer {
         'screenShareUpdate',
         this.screenShareUpdateListener
       );
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('participant')

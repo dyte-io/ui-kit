@@ -5,6 +5,8 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { Size } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A button which toggles recording state of a meeting.
@@ -19,6 +21,7 @@ import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-but
   shadow: true,
 })
 export class DyteRecordingToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   private recordingStateUpdateListener: (recordingState: RecordingState) => void;
 
   /** Variant */
@@ -53,6 +56,10 @@ export class DyteRecordingToggle {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -63,6 +70,8 @@ export class DyteRecordingToggle {
       'permissionsUpdate',
       this.permissionsUpdateListener
     );
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

@@ -2,6 +2,7 @@ import { Component, Element, Host, Prop, State, Watch, h } from '@stencil/core';
 import { Meeting, Peer } from '../../types/dyte-client';
 import {
   DyteI18n,
+  DyteUIKitStore,
   IconPack,
   Size,
   States,
@@ -10,6 +11,7 @@ import {
   useLanguage,
 } from '../../exports';
 import { Render } from '../../lib/render';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-audio-grid',
@@ -17,6 +19,7 @@ import { Render } from '../../lib/render';
   shadow: true,
 })
 export class DyteAudioGrid {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting */
   @Prop() meeting: Meeting;
 
@@ -50,6 +53,10 @@ export class DyteAudioGrid {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   @Watch('meeting')
@@ -89,6 +96,8 @@ export class DyteAudioGrid {
       'participantLeft',
       this.onParticipantListUpdate
     );
+
+    this.componentPropsCleanupFn();
   }
 
   private onParticipantListUpdate = () => {

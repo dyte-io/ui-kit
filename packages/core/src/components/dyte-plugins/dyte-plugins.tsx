@@ -7,6 +7,7 @@ import { DytePlugin } from '@dytesdk/web-core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 
 import { defaultConfig, DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which lists all available plugins from their preset,
@@ -18,6 +19,7 @@ import { defaultConfig, DyteUIKitStore } from '../../exports';
   shadow: true,
 })
 export class DytePlugins {
+  private componentPropsCleanupFn: () => void = () => {};
   private updateActivePlugins: () => void;
   /** Meeting object */
   @Prop() meeting!: Meeting;
@@ -47,10 +49,16 @@ export class DytePlugins {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.meeting?.plugins.all.removeListener('stateUpdate', this.updateActivePlugins);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

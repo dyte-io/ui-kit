@@ -11,6 +11,7 @@ import {
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-pip-toggle',
@@ -18,6 +19,7 @@ import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-but
   shadow: true,
 })
 export class DytePipToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
@@ -46,6 +48,10 @@ export class DytePipToggle {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   @Watch('meeting')
@@ -88,5 +94,9 @@ export class DytePipToggle {
         />
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

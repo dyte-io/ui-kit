@@ -5,6 +5,8 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size } from '../../types/props';
 import { downloadFile } from '../../utils/file';
 import { formatName, shorten } from '../../utils/string';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which shows an image sent via chat.
@@ -15,6 +17,7 @@ import { formatName, shorten } from '../../utils/string';
   shadow: true,
 })
 export class DyteImageViewer {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Image message */
   @Prop() image!: ImageMessage;
 
@@ -33,11 +36,17 @@ export class DyteImageViewer {
   connectedCallback() {
     document.addEventListener('keydown', this.keypressListener);
     document.addEventListener('click', this.handleOutsideClick);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     document.removeEventListener('keydown', this.keypressListener);
     document.removeEventListener('click', this.handleOutsideClick);
+
+    this.componentPropsCleanupFn();
   }
 
   private keypressListener = (e: KeyboardEvent) => {

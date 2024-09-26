@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, h, Method, Prop, State } from '@stencil/core';
-import { defaultIconPack, DyteI18n, IconPack, useLanguage } from '../../exports';
+import { defaultIconPack, DyteI18n, DyteUIKitStore, IconPack, useLanguage } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which renders a text composer
@@ -10,6 +11,13 @@ import { defaultIconPack, DyteI18n, IconPack, useLanguage } from '../../exports'
   shadow: true,
 })
 export class DyteTextComposerView {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Disable the text input (default = false) */
   @Prop() disabled: boolean = false;
 
@@ -125,5 +133,9 @@ export class DyteTextComposerView {
         ></textarea>
       </div>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

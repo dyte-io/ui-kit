@@ -2,6 +2,8 @@ import { Component, Host, h, Prop } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 import { Size } from '../../types/props';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type ControlBarVariant = 'button' | 'horizontal';
 
@@ -14,6 +16,7 @@ export type ControlBarVariant = 'button' | 'horizontal';
   shadow: true,
 })
 export class DyteControlbarButton {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
@@ -46,6 +49,17 @@ export class DyteControlbarButton {
 
   /** Whether icon requires brand color */
   @Prop({ reflect: true }) brandIcon = false;
+
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
+  }
 
   render() {
     return (

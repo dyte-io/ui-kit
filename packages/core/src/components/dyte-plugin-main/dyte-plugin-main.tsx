@@ -3,6 +3,8 @@ import { DytePermissionsPreset, DytePlugin } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State, writeTask } from '@stencil/core';
 import { Meeting } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which loads a plugin.
@@ -13,6 +15,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
   shadow: true,
 })
 export class DytePluginMain {
+  private componentPropsCleanupFn: () => void = () => {};
   private iframeEl: HTMLIFrameElement;
   private toggleViewModeListener: (data: boolean) => void;
 
@@ -61,9 +64,18 @@ export class DytePluginMain {
     }
   }
 
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
   disconnectedCallback() {
     this.plugin?.removePluginView('plugin-main');
     this.plugin?.removeListener('toggleViewMode', this.toggleViewModeListener);
+
+    this.componentPropsCleanupFn();
   }
 
   private canInteractWithPlugin = () => {

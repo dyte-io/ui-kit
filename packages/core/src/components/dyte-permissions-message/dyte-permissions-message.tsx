@@ -5,6 +5,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { States } from '../../types/props';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 const steps = {
   ChromeDesktop: ['Chrome1.svg', 'Chrome2.svg', 'Chrome3.svg'],
@@ -20,6 +21,7 @@ const steps = {
   shadow: true,
 })
 export class DytePermissionsMessage {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting: Meeting;
 
@@ -43,10 +45,16 @@ export class DytePermissionsMessage {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     if (this.stepsTimer) clearTimeout(this.stepsTimer);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

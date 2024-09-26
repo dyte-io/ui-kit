@@ -4,6 +4,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 
 import { Meeting } from '../../types/dyte-client';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-mute-all-button',
@@ -11,6 +12,7 @@ import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-but
   shadow: true,
 })
 export class DyteMuteAllButton {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
@@ -33,6 +35,10 @@ export class DyteMuteAllButton {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -40,6 +46,8 @@ export class DyteMuteAllButton {
       'permissionsUpdate',
       this.permissionsUpdateListener
     );
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

@@ -33,6 +33,7 @@ import { DyteUIKitStore, States, UIConfig, defaultConfig } from '../../exports';
 
 import { ChannelItem } from '../dyte-channel-selector-view/dyte-channel-selector-view';
 import { NewMessageEvent } from '../dyte-chat-composer-view/dyte-chat-composer-view';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * Fully featured chat component with image & file upload, emoji picker and auto-scroll.
@@ -43,6 +44,7 @@ import { NewMessageEvent } from '../dyte-chat-composer-view/dyte-chat-composer-v
   shadow: true,
 })
 export class DyteChat {
+  private componentPropsCleanupFn: () => void = () => {};
   private chatUpdateListener = ({ message }) => {
     if (message.channelId) return;
     this.addToChatGroup(message as Message);
@@ -169,6 +171,10 @@ export class DyteChat {
   };
 
   connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
     if (!this.meeting) return;
     this.meetingChanged(this.meeting);
 
@@ -216,6 +222,8 @@ export class DyteChat {
     this.host.removeEventListener('dragover', this.onDragOver);
     this.host.removeEventListener('dragleave', this.onDragLeave);
     this.host.removeEventListener('drop', this.onDrop);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

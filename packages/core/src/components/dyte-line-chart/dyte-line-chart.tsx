@@ -4,6 +4,9 @@
 // import { area } from 'd3-shape';
 // import * as d3 from 'd3';
 
+// import { DyteUIKitStore } from '../../exports';
+// import { updateComponentProps } from '../../utils/component-props';
+
 // export interface ChartConfig {
 //   height: number;
 //   width: number;
@@ -23,6 +26,7 @@
 //   shadow: true,
 // })
 // export class DyteLineChart {
+//   private componentPropsCleanupFn: () => void = () => {};
 //   private svg: any;
 //   private graphSvg: any;
 
@@ -66,11 +70,18 @@
 //       this.plotChart();
 //     }, 1000);
 //   }
+// connectedCallback(){
+//       this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+//       'componentProps',
+//       updateComponentProps.bind(this)
+//     );
+// }
 
 //   disconnectedCallback() {
 //     this.svg.removeListener('mouseenter', this.mouseenter);
 //     this.svg.removeListener('mouseleave', this.mouseleave);
 //     this.svg.removeListener('mousemove', this.mousemove);
+//   this.componentPropsCleanupFn();
 //   }
 
 //   private setupSvg() {

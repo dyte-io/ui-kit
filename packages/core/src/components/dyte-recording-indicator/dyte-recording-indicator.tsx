@@ -4,6 +4,8 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { Size } from '../../types/props';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which indicates the recording status of a meeting.
@@ -16,6 +18,7 @@ import { Size } from '../../types/props';
   shadow: true,
 })
 export class DyteRecordingIndicator {
+  private componentPropsCleanupFn: () => void = () => {};
   private updateRecordingStatus: (recordingState: RecordingState) => void;
 
   /** Meeting object */
@@ -34,10 +37,16 @@ export class DyteRecordingIndicator {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.meeting?.recording.removeListener('recordingUpdate', this.updateRecordingStatus);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

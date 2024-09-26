@@ -1,7 +1,8 @@
 import { h, Component, Prop, Host } from '@stencil/core';
-import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
 import type { Message } from '@dytesdk/web-core';
+import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
   tag: 'dyte-chat-search-results',
@@ -9,6 +10,7 @@ import type { Message } from '@dytesdk/web-core';
   shadow: true,
 })
 export class DyteChatSearchResults {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
   @Prop() meeting!: Meeting;
 
@@ -44,6 +46,17 @@ export class DyteChatSearchResults {
       ></dyte-chat-message>
     ));
   };
+
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
+  }
 
   render() {
     return (

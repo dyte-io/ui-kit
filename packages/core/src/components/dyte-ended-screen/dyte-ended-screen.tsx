@@ -6,6 +6,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteUIKitStore } from '../../lib/store';
 import { defaultConfig } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A screen which shows a meeting has ended.
@@ -16,6 +17,7 @@ import { Meeting } from '../../types/dyte-client';
   shadow: true,
 })
 export class DyteEndedScreen {
+  private componentPropsCleanupFn: () => void = () => {};
   private removeStateChangeListener: () => void;
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;
@@ -45,10 +47,16 @@ export class DyteEndedScreen {
     this.removeStateChangeListener = DyteUIKitStore.onChange('roomLeftState', () =>
       this.statesChanged()
     );
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.removeStateChangeListener && this.removeStateChangeListener();
+
+    this.componentPropsCleanupFn();
   }
 
   private getBreakoutRoomsMessage(states: States) {

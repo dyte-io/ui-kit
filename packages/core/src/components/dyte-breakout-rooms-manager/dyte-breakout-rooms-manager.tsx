@@ -8,6 +8,7 @@ import { participantIdentifier, resetRoomCount } from '../../utils/breakout-room
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 import BreakoutRoomsManager, { DraftMeeting } from '../../utils/breakout-rooms-manager';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type BreakoutManagerState = 'room-config' | 'participants-config';
 export type BreakoutRoomConfig = {
@@ -25,6 +26,7 @@ const MIN_ROOMS = 1;
   shadow: true,
 })
 export class DyteBreakoutRoomsManager {
+  private componentPropsCleanupFn: () => void = () => {};
   private selectorRef: HTMLDivElement;
 
   private permissions: DytePermissionsPreset['connectedMeetings'];
@@ -94,12 +96,18 @@ export class DyteBreakoutRoomsManager {
     this.stateManager = new BreakoutRoomsManager();
 
     this.fetchRoomState();
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.meeting.connectedMeetings.off('stateUpdate', this.updateLocalState);
     this.meeting.connectedMeetings.off('changingMeeting', this.close);
     this.meeting.self.permissions.off('permissionsUpdate', this.permissionsUpdateListener);
+
+    this.componentPropsCleanupFn();
   }
 
   private permissionsUpdateListener = () => {

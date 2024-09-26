@@ -9,6 +9,7 @@ import { defaultConfig } from '../../lib/default-ui-config';
 
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 export type AIView = 'default' | 'sidebar' | 'full-screen';
 
@@ -20,6 +21,8 @@ export type AISection = 'home' | 'transcriptions' | 'personal';
   shadow: true,
 })
 export class DyteAi {
+  private componentPropsCleanupFn: () => void = () => {};
+
   private keydownListener: (e: KeyboardEvent) => void;
 
   /** Default section */
@@ -59,12 +62,18 @@ export class DyteAi {
     this.viewChanged(this.view);
 
     this.meeting?.meta?.on('transcript', this.transcriptionHandler);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
     this.keydownListener && document.removeEventListener('keydown', this.keydownListener);
 
     this.meeting?.meta?.off('transcript', this.transcriptionHandler);
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('view')

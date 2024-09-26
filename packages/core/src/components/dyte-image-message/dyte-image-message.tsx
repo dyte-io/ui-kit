@@ -7,6 +7,7 @@ import { downloadFile } from '../../utils/file';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { States } from '../../types/props';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which renders an image message from chat.
@@ -16,6 +17,13 @@ import { DyteUIKitStore } from '../../lib/store';
   styleUrl: 'dyte-image-message.css',
 })
 export class DyteImageMessage {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Text message object */
   @Prop() message!: ImageMessage;
 
@@ -117,5 +125,9 @@ export class DyteImageMessage {
         </div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

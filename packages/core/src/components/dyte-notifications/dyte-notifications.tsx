@@ -19,9 +19,10 @@ import type {
   ChatUpdateParams,
   SocketConnectionState,
 } from '@dytesdk/web-core';
-import { defaultConfig } from '../../exports';
+import { defaultConfig, DyteUIKitStore } from '../../exports';
 import { parseMessageForTarget } from '../../utils/chat';
 import { showLivestream } from '../../utils/livestream';
+import { updateComponentProps } from '../../utils/component-props';
 
 function parseConfig(config: Config) {
   const permissions: NotificationConfig = Object.assign({}, DEFAULT_NOTIFICATION_CONFIG);
@@ -57,6 +58,7 @@ function getEnabledSounds(sounds: Partial<NotificationSoundsType>) {
   shadow: true,
 })
 export class DyteNotifications {
+  private componentPropsCleanupFn: () => void = () => {};
   private audio: DyteNotificationsAudio;
 
   private permissions: NotificationConfig = DEFAULT_NOTIFICATION_CONFIG;
@@ -109,6 +111,10 @@ export class DyteNotifications {
     this.meetingChanged(this.meeting);
     this.configChanged(this.config);
     this.statesChanged(this.states);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   private clearListeners(meeting: Meeting) {
@@ -138,6 +144,7 @@ export class DyteNotifications {
     if (typeof document !== 'undefined') {
       document?.removeEventListener('dyteNotification', this.onDyteNotification);
     }
+    this.componentPropsCleanupFn();
 
     if (this.meeting == null) return;
     this.clearListeners(this.meeting);

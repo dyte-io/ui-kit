@@ -1,6 +1,8 @@
 import { Component, Host, h, Event, EventEmitter, Prop, Watch } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
+import { DyteUIKitStore } from '../../exports';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A switch component which follows Dyte's Design System.
@@ -11,6 +13,7 @@ import { useLanguage, DyteI18n } from '../../lib/lang';
   shadow: true,
 })
 export class DyteSwitch {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Whether the switch is enabled/checked */
   @Prop({ mutable: true }) checked: boolean = false;
 
@@ -30,6 +33,10 @@ export class DyteSwitch {
   @Prop() t: DyteI18n = useLanguage();
 
   connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
     this.checkedChange(this.checked);
   }
 
@@ -71,5 +78,9 @@ export class DyteSwitch {
         <div class="switch" part="switch"></div>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

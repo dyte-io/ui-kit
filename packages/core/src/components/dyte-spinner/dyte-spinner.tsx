@@ -1,7 +1,8 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { Size } from '../../exports';
+import { DyteUIKitStore, Size } from '../../exports';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which shows an animating spinner.
@@ -12,6 +13,13 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
   shadow: true,
 })
 export class DyteSpinner {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
 
@@ -32,5 +40,9 @@ export class DyteSpinner {
         />
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

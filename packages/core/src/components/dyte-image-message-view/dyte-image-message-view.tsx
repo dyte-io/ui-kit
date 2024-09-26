@@ -1,7 +1,8 @@
 import { Component, Event, EventEmitter, Prop, State, h } from '@stencil/core';
-import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { sanitizeLink } from '../../utils/string';
 import { downloadFile } from '../../utils/file';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A component which renders an image message.
@@ -12,6 +13,13 @@ import { downloadFile } from '../../utils/file';
   shadow: true,
 })
 export class DyteImageMessageView {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Url of the image */
   @Prop() url!: string;
 
@@ -89,5 +97,9 @@ export class DyteImageMessageView {
         )}
       </div>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

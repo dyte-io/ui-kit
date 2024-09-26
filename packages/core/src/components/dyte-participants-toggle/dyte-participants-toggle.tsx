@@ -6,6 +6,7 @@ import { Size, States } from '../../types/props';
 import { canViewParticipants } from '../../utils/sidebar';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A button which toggles visibility of participants.
@@ -22,6 +23,7 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteParticipantsToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   private waitlistedParticipantJoinedListener: (participant: WaitlistedParticipant) => void;
   private waitlistedParticipantLeftListener: (participant: WaitlistedParticipant) => void;
   private removeStateChangeListener: () => void;
@@ -56,6 +58,10 @@ export class DyteParticipantsToggle {
     this.meetingChanged(this.meeting);
     this.statesChanged(this.states);
     this.removeStateChangeListener = DyteUIKitStore.onChange('sidebar', () => this.statesChanged());
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   disconnectedCallback() {
@@ -73,6 +79,8 @@ export class DyteParticipantsToggle {
         this.waitlistedParticipantLeftListener
       );
     this.meeting.stage?.removeListener('stageAccessRequestUpdate', this.updateStageRequests);
+
+    this.componentPropsCleanupFn();
   }
 
   private updateStageRequests = async (stageRequests?: any[]) => {

@@ -1,9 +1,22 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { Component, h } from '@stencil/core';
 import { TextMessageView } from './TextMessage';
+import { DyteUIKitStore } from '../../../exports';
+import { updateComponentProps } from '../../../utils/component-props';
 
 @Component({ tag: 'test-component' })
-class TestComponent {}
+class TestComponent {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
+  }
+}
 
 describe('TextMessageView', () => {
   describe('bold', () => {

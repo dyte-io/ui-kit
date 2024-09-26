@@ -4,6 +4,7 @@ import { States, Size } from '../../types/props';
 import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { DyteUIKitStore } from '../../lib/store';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A button which toggles visilibility of the leave confirmation dialog.
@@ -14,6 +15,13 @@ import { DyteUIKitStore } from '../../lib/store';
   shadow: true,
 })
 export class DyteLeaveButton {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
@@ -52,5 +60,9 @@ export class DyteLeaveButton {
         />
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }

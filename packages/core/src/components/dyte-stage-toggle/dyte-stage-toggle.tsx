@@ -5,6 +5,7 @@ import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { canRequestToJoinStage, canJoinStage } from '../../utils/stage';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { updateComponentProps } from '../../utils/component-props';
 
 interface DataState {
   label: string;
@@ -18,6 +19,7 @@ interface DataState {
   shadow: true,
 })
 export class DyteStageToggle {
+  private componentPropsCleanupFn: () => void = () => {};
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
@@ -43,6 +45,10 @@ export class DyteStageToggle {
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
   }
 
   private stageStatusHandler(meeting: Meeting, status: StageStatus) {
@@ -59,6 +65,8 @@ export class DyteStageToggle {
     this.meeting?.stage?.removeListener('stageStatusUpdate', (status) =>
       this.stageStatusHandler(this.meeting, status)
     );
+
+    this.componentPropsCleanupFn();
   }
 
   @Watch('meeting')

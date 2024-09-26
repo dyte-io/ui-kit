@@ -1,9 +1,10 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { defaultConfig } from '../../exports';
+import { defaultConfig, DyteUIKitStore } from '../../exports';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 import { UIConfig } from '../../types/ui-config';
 import { Meeting } from '../../types/dyte-client';
+import { updateComponentProps } from '../../utils/component-props';
 
 /**
  * A screen that handles the idle state,
@@ -15,6 +16,13 @@ import { Meeting } from '../../types/dyte-client';
   shadow: true,
 })
 export class DyteIdleScreen {
+  connectedCallback() {
+    this.componentPropsCleanupFn = DyteUIKitStore.onChange(
+      'componentProps',
+      updateComponentProps.bind(this)
+    );
+  }
+  private componentPropsCleanupFn: () => void = () => {};
   /** Meeting */
   @Prop() meeting: Meeting;
 
@@ -43,5 +51,9 @@ export class DyteIdleScreen {
         </slot>
       </Host>
     );
+  }
+
+  disconnectedCallback() {
+    this.componentPropsCleanupFn();
   }
 }
