@@ -1,7 +1,6 @@
 import type { StageStatus } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State, Event, EventEmitter } from '@stencil/core';
 import { Size, IconPack, DyteI18n, States, DyteUIKitStore } from '../../exports';
-import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { canRequestToJoinStage, canJoinStage } from '../../utils/stage';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';

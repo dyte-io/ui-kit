@@ -1,6 +1,6 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 import { elapsedDuration, formatDateTime } from '../../utils/date';
-import { DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
+import { DyteUIKitStore, IconPack } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
 
 export interface MessageAction {

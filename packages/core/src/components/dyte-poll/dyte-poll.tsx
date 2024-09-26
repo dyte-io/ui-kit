@@ -1,6 +1,6 @@
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, EventEmitter, Event } from '@stencil/core';
-import { IconPack, defaultIconPack } from '../../lib/icons';
+import { IconPack } from '../../lib/icons';
 import { DyteI18n } from '../../lib/lang';
 import { Poll } from '../../types/props';
 import { formatName, getInitials, shorten } from '../../utils/string';

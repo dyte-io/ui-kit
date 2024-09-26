@@ -1,6 +1,5 @@
 import { Component, Host, h, Prop, State, Element, Event, EventEmitter } from '@stencil/core';
 import { DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
-import { useLanguage } from '../../lib/lang';
 import { Size } from '../../types/props';
 import type { Message } from '@dytesdk/web-core';
 import { updateComponentProps } from '../../utils/component-props';

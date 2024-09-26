@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, Prop, State, h } from '@stencil/core';
-import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
 import { sanitizeLink } from '../../utils/string';
 import { downloadFile } from '../../utils/file';
 import { updateComponentProps } from '../../utils/component-props';

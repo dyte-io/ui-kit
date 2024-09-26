@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, Watch, State, Event, EventEmitter } from '@st
 import { Meeting, Peer } from '../../types/dyte-client';
 import DyteAudio from '../../lib/audio';
 import { DyteI18n } from '../../lib/lang';
-import { IconPack, defaultIconPack } from '../../lib/icons';
+import { IconPack } from '../../lib/icons';
 import type { StageStatus } from '@dytesdk/web-core';
 import { isLiveStreamViewer } from '../../utils/livestream';
 import { DyteUIKitStore } from '../../exports';

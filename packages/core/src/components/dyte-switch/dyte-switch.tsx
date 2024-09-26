@@ -1,6 +1,6 @@
 import { Component, Host, h, Event, EventEmitter, Prop, Watch } from '@stencil/core';
-import { IconPack, defaultIconPack } from '../../lib/icons';
-import { useLanguage, DyteI18n } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { DyteUIKitStore } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
 

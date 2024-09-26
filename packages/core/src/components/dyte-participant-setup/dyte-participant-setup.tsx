@@ -5,7 +5,7 @@ import { DyteI18n } from '../../lib/lang';
 import { Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
-import { defaultConfig, DyteUIKitStore } from '../../exports';
+import { DyteUIKitStore } from '../../exports';
 import { DyteSelf } from '@dytesdk/web-core';
 import { updateComponentProps } from '../../utils/component-props';
 

@@ -6,7 +6,7 @@ import { Component, Host, h, Prop, State, Watch } from '@stencil/core';
 import { DyteI18n } from '../../lib/lang';
 import { Render } from '../../lib/render';
 
-import { defaultConfig, DyteUIKitStore } from '../../exports';
+import { DyteUIKitStore } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
 
 export type ParticipantsViewMode = 'sidebar';

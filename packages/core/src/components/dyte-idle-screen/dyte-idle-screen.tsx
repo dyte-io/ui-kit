@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { defaultConfig, DyteUIKitStore } from '../../exports';
-import { IconPack, defaultIconPack } from '../../lib/icons';
-import { useLanguage, DyteI18n } from '../../lib/lang';
+import { DyteUIKitStore } from '../../exports';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { UIConfig } from '../../types/ui-config';
 import { Meeting } from '../../types/dyte-client';
 import { updateComponentProps } from '../../utils/component-props';

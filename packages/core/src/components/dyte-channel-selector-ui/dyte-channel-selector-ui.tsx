@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, Event, EventEmitter, State } from '@stencil/core';
-import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
 import { ChatChannel } from '../../types/props';
 import type { Message } from '@dytesdk/web-core';
 import { TextMessageView } from '../dyte-text-message/components/TextMessage';

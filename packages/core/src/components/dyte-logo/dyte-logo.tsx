@@ -2,7 +2,7 @@ import { UIConfig } from '../../types/ui-config';
 import { Component, Host, h, Prop, Watch } from '@stencil/core';
 import { DyteI18n } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
-import { defaultConfig, DyteUIKitStore } from '../../exports';
+import { DyteUIKitStore } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
 
 /**

@@ -1,7 +1,7 @@
 import type { TextMessage } from '@dytesdk/web-core';
 import { Component, Host, h, Prop } from '@stencil/core';
-import { IconPack, defaultIconPack } from '../../lib/icons';
-import { useLanguage, DyteI18n } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { hasOnlyEmojis } from '../../utils/string';
 import { ChatHead } from '../dyte-chat/components/ChatHead';
 import { TextMessageView } from './components/TextMessage';

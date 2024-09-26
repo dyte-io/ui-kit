@@ -6,7 +6,7 @@ import { IconPack } from '../../lib/icons';
 import { DytePlugin } from '@dytesdk/web-core';
 import { DyteI18n } from '../../lib/lang';
 
-import { defaultConfig, DyteUIKitStore } from '../../exports';
+import { DyteUIKitStore } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
 
 /**

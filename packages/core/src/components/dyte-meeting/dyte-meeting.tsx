@@ -18,7 +18,7 @@ import { getIconPack, IconPack } from '../../lib/icons';
 import { UIConfig } from '../../types/ui-config';
 
 import { Render } from '../../lib/render';
-import { defaultConfig, DyteUIKitStore, provideDyteDesignSystem } from '../../index';
+import { DyteUIKitStore, provideDyteDesignSystem } from '../../index';
 import { getUserPreferences } from '../../utils/user-prefs';
 import { generateConfig } from '../../utils/config';
 

@@ -1,7 +1,7 @@
 import { Component, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
 import { Meeting } from '../../types/dyte-client';
 import { ChatChannel } from '../../types/props';
-import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
 import { DyteBasicParticipant } from '@dytesdk/web-core';
 import { updateComponentProps } from '../../utils/component-props';
 

@@ -1,7 +1,6 @@
 import type { LivestreamState } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { Size, DyteI18n, IconPack, DyteUIKitStore } from '../../exports';
-import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { showLivestream } from '../../utils/livestream';
 import { updateComponentProps } from '../../utils/component-props';

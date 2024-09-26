@@ -15,7 +15,7 @@ import { Meeting, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { FlagsmithFeatureFlags } from '../../utils/flags';
-import { defaultConfig, DyteUIKitStore } from '../../exports';
+import { DyteUIKitStore } from '../../exports';
 import { DefaultProps, Render } from '../../lib/render';
 import { DyteParticipant } from '@dytesdk/web-core';
 import { updateComponentProps } from '../../utils/component-props';

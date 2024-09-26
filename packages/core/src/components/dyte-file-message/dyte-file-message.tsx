@@ -4,7 +4,7 @@ import { ChatHead } from '../dyte-chat/components/ChatHead';
 import { sanitizeLink } from '../../utils/string';
 import { IconPack } from '../../lib/icons';
 import { downloadFile, getExtension, getFileSize } from '../../utils/file';
-import { useLanguage, DyteI18n } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { DyteUIKitStore } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
 

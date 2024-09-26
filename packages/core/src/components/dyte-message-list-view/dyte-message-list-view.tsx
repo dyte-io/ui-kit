@@ -1,5 +1,5 @@
 import { Component, Prop, State, Watch, h, writeTask } from '@stencil/core';
-import { DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
+import { DyteUIKitStore, IconPack } from '../../exports';
 import { debounce } from 'lodash-es';
 import { updateComponentProps } from '../../utils/component-props';
 

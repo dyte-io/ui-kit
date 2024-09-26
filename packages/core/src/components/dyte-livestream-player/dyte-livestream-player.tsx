@@ -1,7 +1,6 @@
 import type { LivestreamState } from '@dytesdk/web-core';
 import { Component, h, Host, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { Size, DyteI18n, IconPack, DyteUIKitStore } from '../../exports';
-import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import {
   awsIvsPlayerEventsToIgnore,

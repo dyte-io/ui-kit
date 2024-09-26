@@ -1,14 +1,5 @@
 import { Component, h, Prop, State, Watch } from '@stencil/core';
-import {
-  UIConfig,
-  Size,
-  IconPack,
-  defaultIconPack,
-  DyteI18n,
-  defaultConfig,
-  DyteUIKitStore,
-} from '../../exports';
-import { useLanguage } from '../../lib/lang';
+import { UIConfig, Size, IconPack, DyteI18n, DyteUIKitStore } from '../../exports';
 import { Meeting, Participant, Peer } from '../../types/dyte-client';
 import { ParticipantsViewMode } from '../dyte-participants/dyte-participants';
 import { updateComponentProps } from '../../utils/component-props';

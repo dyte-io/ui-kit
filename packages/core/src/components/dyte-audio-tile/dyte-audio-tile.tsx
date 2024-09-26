@@ -2,7 +2,7 @@ import { Component, Host, Prop, State, Watch, h } from '@stencil/core';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { UIConfig } from '../../types/ui-config';
 import { Size } from '../../types/props';
-import { DyteI18n, DyteUIKitStore, IconPack, States, defaultIconPack } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, States } from '../../exports';
 import hark from 'hark';
 import { DyteParticipant } from '@dytesdk/web-core';
 import { updateComponentProps } from '../../utils/component-props';
@@ -140,7 +140,7 @@ export class DyteAudioTile {
           <dyte-avatar participant={this.participant} size={this.size}>
             {!this.audioEnabled && (
               <div class="mic-icon">
-                <dyte-icon icon={defaultIconPack.mic_off} />
+                <dyte-icon icon={this.iconPack.mic_off} />
               </div>
             )}
           </dyte-avatar>

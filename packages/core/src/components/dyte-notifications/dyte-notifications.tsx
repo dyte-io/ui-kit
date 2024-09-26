@@ -19,7 +19,7 @@ import type {
   ChatUpdateParams,
   SocketConnectionState,
 } from '@dytesdk/web-core';
-import { defaultConfig, DyteUIKitStore } from '../../exports';
+import { DyteUIKitStore } from '../../exports';
 import { parseMessageForTarget } from '../../utils/chat';
 import { showLivestream } from '../../utils/livestream';
 import { updateComponentProps } from '../../utils/component-props';

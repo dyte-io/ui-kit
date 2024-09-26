@@ -3,7 +3,7 @@ import { IconPack } from '../../lib/icons';
 import { Size } from '../../types/props';
 import { Peer, WaitlistedParticipant } from '../../types/dyte-client';
 import { formatName, getInitials } from '../../utils/string';
-import { useLanguage, DyteI18n } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { DyteUIKitStore } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
 

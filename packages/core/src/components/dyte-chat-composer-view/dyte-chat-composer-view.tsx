@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, Prop, State, h, Host, writeTask } from '@stencil/core';
-import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
 import gracefulStorage from '../../utils/graceful-storage';
 import { MAX_TEXT_LENGTH } from '../../utils/chat';
 import { updateComponentProps } from '../../utils/component-props';

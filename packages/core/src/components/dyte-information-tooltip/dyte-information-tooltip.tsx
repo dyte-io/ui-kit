@@ -1,5 +1,5 @@
 import { Component, h, Host, Prop } from '@stencil/core';
-import { DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
+import { DyteUIKitStore, IconPack } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
 
 @Component({

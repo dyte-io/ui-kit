@@ -15,7 +15,7 @@ import { DefaultProps, lenChildren, Render } from '../../lib/render';
 import { Meeting, Participant, Peer } from '../../types/dyte-client';
 import { formatName, shorten } from '../../utils/string';
 
-import { defaultConfig, DyteUIKitStore, UIConfig } from '../../exports';
+import { DyteUIKitStore, UIConfig } from '../../exports';
 import { FlagsmithFeatureFlags } from '../../utils/flags';
 import { computePosition, flip, offset, shift } from '@floating-ui/dom';
 import type { DyteParticipant as DyteParticipantType } from '@dytesdk/web-core';

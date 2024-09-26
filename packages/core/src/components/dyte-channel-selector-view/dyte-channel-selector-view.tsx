@@ -1,5 +1,5 @@
 import { Host, Component, Event, EventEmitter, Prop, State, h, Element } from '@stencil/core';
-import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
 import { debounce } from 'lodash-es';
 import { updateComponentProps } from '../../utils/component-props';
 

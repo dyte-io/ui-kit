@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { IconPack } from '../../lib/icons';
-import { useLanguage, DyteI18n } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { Size } from '../../types/props';
 import { DyteUIKitStore } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';

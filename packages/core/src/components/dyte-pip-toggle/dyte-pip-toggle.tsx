@@ -1,13 +1,5 @@
 import { Component, Host, h, Event, EventEmitter, Prop, Watch, State } from '@stencil/core';
-import {
-  defaultConfig,
-  defaultIconPack,
-  DyteUIKitStore,
-  IconPack,
-  Size,
-  States,
-  UIConfig,
-} from '../../exports';
+import { DyteUIKitStore, IconPack, Size, States, UIConfig } from '../../exports';
 import { DyteI18n } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';

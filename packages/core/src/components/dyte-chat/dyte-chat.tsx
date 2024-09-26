@@ -29,7 +29,7 @@ import {
 import { chatUnreadTimestamps } from '../../utils/user-prefs';
 import { FlagsmithFeatureFlags, usePaginatedChat } from '../../utils/flags';
 import { DyteChannelHeaderCustomEvent } from '../../components';
-import { DyteUIKitStore, States, UIConfig, defaultConfig } from '../../exports';
+import { DyteUIKitStore, States, UIConfig } from '../../exports';
 
 import { ChannelItem } from '../dyte-channel-selector-view/dyte-channel-selector-view';
 import { NewMessageEvent } from '../dyte-chat-composer-view/dyte-chat-composer-view';

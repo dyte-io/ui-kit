@@ -4,7 +4,6 @@ import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { IconPack } from '../../lib/icons';
 import { DyteUIKitStore } from '../../lib/store';
-import { defaultConfig } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
 import { updateComponentProps } from '../../utils/component-props';
 
@@ -24,9 +23,6 @@ export class DyteEndedScreen {
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
-
-  /** Icon */
-  @State() icon: IconPack = defaultIconPack;
 
   /** Global states */
   @Prop() states: States;

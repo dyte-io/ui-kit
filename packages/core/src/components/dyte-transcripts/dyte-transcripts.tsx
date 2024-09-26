@@ -4,7 +4,7 @@ import { Meeting } from '../../types/dyte-client';
 import { Transcript, States } from '../../types/props';
 import { DyteI18n } from '../../lib/lang';
 import { UIConfig } from '../../types/ui-config';
-import { defaultConfig, DyteUIKitStore } from '../../exports';
+import { DyteUIKitStore } from '../../exports';
 
 import clone from '../../utils/clone';
 import { updateComponentProps } from '../../utils/component-props';

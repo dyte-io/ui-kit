@@ -1,5 +1,5 @@
 import { Component, Host, Prop, h } from '@stencil/core';
-import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
 import { ChatChannel } from '../../types/props';
 import { DyteBasicParticipant } from '@dytesdk/web-core';
 import { updateComponentProps } from '../../utils/component-props';

@@ -11,8 +11,8 @@ import {
 } from '@stencil/core';
 import { arrow, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { Size } from '../../types/props';
-import { IconPack, defaultIconPack } from '../../lib/icons';
-import { useLanguage, DyteI18n } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { Placement } from '../../types/floating-ui';
 import { DyteUIKitStore } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';

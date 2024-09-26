@@ -1,5 +1,5 @@
 import { Component, Host, h, State, EventEmitter, Event, Prop } from '@stencil/core';
-import { IconPack, defaultIconPack } from '../../lib/icons';
+import { IconPack } from '../../lib/icons';
 import { DyteI18n } from '../../lib/lang';
 import { EmojiMetaData } from '../../types/props';
 import { fetchEmojis } from '../../utils/assets';
