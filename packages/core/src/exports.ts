@@ -18,7 +18,7 @@ export { Peer } from './types/dyte-client';
 // UIConfig, Icon Pack, i18n and Notification Sounds
 export { defaultConfig } from './lib/default-ui-config';
 export { IconPack, defaultIconPack } from './lib/icons';
-export { LangDict, defaultLanguage, DyteI18n } from './lib/lang';
+export { LangDict, defaultLanguage, useLanguage, DyteI18n } from './lib/lang';
 export { Sound, default as DyteNotificationsAudio } from './lib/notification';
 
 export {

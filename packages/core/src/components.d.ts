@@ -2925,7 +2925,7 @@ export namespace Components {
         /**
           * Icon Pack
          */
-        "iconPack": { people: string; people_checked: string; chat: string; poll: string; participants: string; rocket: string; call_end: string; share: string; mic_on: string; mic_off: string; video_on: string; video_off: string; share_screen_start: string; share_screen_stop: string; share_screen_person: string; clock: string; dismiss: string; send: string; search: string; more_vertical: string; chevron_down: string; chevron_up: string; chevron_left: string; chevron_right: string; settings: string; wifi: string; speaker: string; speaker_off: string; download: string; full_screen_maximize: string; full_screen_minimize: string; copy: string; attach: string; image: string; emoji_multiple: string; image_off: string; disconnected: string; wand: string; recording: string; subtract: string; stop_recording: string; warning: string; pin: string; pin_off: string; spinner: string; breakout_rooms: string; add: string; shuffle: string; edit: string; delete: string; back: string; save: string; web: string; checkmark: string; spotlight: string; join_stage: string; leave_stage: string; pip_off: string; pip_on: string; signal_1: string; signal_2: string; signal_3: string; signal_4: string; signal_5: string; start_livestream: string; stop_livestream: string; viewers: string; debug: string; info: string; devices: string; horizontal_dots: string; ai_sparkle: string; meeting_ai: string; create_channel: string; create_channel_illustration: string; captionsOn: string; captionsOff: string; };
+        "iconPack": IconPack1;
         /**
           * Language
          */
@@ -4677,7 +4677,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -4713,7 +4713,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
     }
     interface DyteAiToggle {
         /**
@@ -4723,7 +4723,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -4753,7 +4753,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Language
          */
@@ -4895,7 +4895,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Mode in which selector is used
          */
@@ -4946,7 +4946,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits an event when all participants are selected or deselected
          */
@@ -4980,7 +4980,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -5002,7 +5002,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -5088,7 +5088,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -5140,7 +5140,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -5170,7 +5170,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -5214,7 +5214,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Event emitted when back button is clicked
          */
@@ -5606,7 +5606,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Event emitted when a message is deleted
          */
@@ -5655,7 +5655,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Search query
          */
@@ -5733,7 +5733,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Language
          */
@@ -6164,7 +6164,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -6194,7 +6194,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size Prop
          */
@@ -6456,7 +6456,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -6474,7 +6474,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emit API error events
          */
@@ -6610,7 +6610,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Language
          */
@@ -6768,7 +6768,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -6996,7 +6996,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -7111,7 +7111,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -7231,7 +7231,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -7253,7 +7253,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Callback to execute when the dialog is closed
          */
@@ -7275,7 +7275,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Search
          */
@@ -7305,7 +7305,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -7361,7 +7361,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Search
          */
@@ -7391,7 +7391,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -7439,7 +7439,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -7469,7 +7469,7 @@ declare namespace LocalJSX {
         /**
           * Meeting
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Plugin
          */
@@ -7491,7 +7491,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -7590,7 +7590,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -7638,7 +7638,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -7776,7 +7776,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -7802,7 +7802,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Event updated state
          */
@@ -7884,7 +7884,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -7952,7 +7952,7 @@ declare namespace LocalJSX {
         /**
           * Icon Pack
          */
-        "iconPack"?: { people: string; people_checked: string; chat: string; poll: string; participants: string; rocket: string; call_end: string; share: string; mic_on: string; mic_off: string; video_on: string; video_off: string; share_screen_start: string; share_screen_stop: string; share_screen_person: string; clock: string; dismiss: string; send: string; search: string; more_vertical: string; chevron_down: string; chevron_up: string; chevron_left: string; chevron_right: string; settings: string; wifi: string; speaker: string; speaker_off: string; download: string; full_screen_maximize: string; full_screen_minimize: string; copy: string; attach: string; image: string; emoji_multiple: string; image_off: string; disconnected: string; wand: string; recording: string; subtract: string; stop_recording: string; warning: string; pin: string; pin_off: string; spinner: string; breakout_rooms: string; add: string; shuffle: string; edit: string; delete: string; back: string; save: string; web: string; checkmark: string; spotlight: string; join_stage: string; leave_stage: string; pip_off: string; pip_on: string; signal_1: string; signal_2: string; signal_3: string; signal_4: string; signal_5: string; start_livestream: string; stop_livestream: string; viewers: string; debug: string; info: string; devices: string; horizontal_dots: string; ai_sparkle: string; meeting_ai: string; create_channel: string; create_channel_illustration: string; captionsOn: string; captionsOff: string; };
+        "iconPack"?: IconPack1;
         /**
           * Tab change event
          */
@@ -8020,7 +8020,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -8399,7 +8399,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * States object
          */
@@ -8451,7 +8451,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Language
          */

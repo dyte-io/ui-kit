@@ -1,7 +1,6 @@
 import { DyteParticipant } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
-import { useLanguage } from '../../lib/lang';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { MediaScoreUpdateParams } from '../../types/web-core';
 import { updateComponentProps } from '../../utils/component-props';

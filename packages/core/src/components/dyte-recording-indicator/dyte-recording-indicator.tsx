@@ -45,7 +45,6 @@ export class DyteRecordingIndicator {
 
   disconnectedCallback() {
     this.meeting?.recording.removeListener('recordingUpdate', this.updateRecordingStatus);
-
     this.componentPropsCleanupFn();
   }
 
@@ -53,7 +52,6 @@ export class DyteRecordingIndicator {
   meetingChanged(meeting: Meeting) {
     if (meeting != null) {
       this.setIsRecording(meeting.recording.recordingState);
-
       this.updateRecordingStatus = (recordingState) => {
         this.setIsRecording(recordingState);
       };
