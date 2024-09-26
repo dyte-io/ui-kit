@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State } from '@stencil/core';
-import { defaultIconPack, IconPack } from '../../lib/icons';
+import { IconPack } from '../../lib/icons';
 import { Size } from '../../types/props';
 import { Peer, WaitlistedParticipant } from '../../types/dyte-client';
 import { formatName, getInitials } from '../../utils/string';
@@ -32,7 +32,7 @@ export class DyteAvatar {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   @State() imageState: 'loading' | 'loaded' | 'errored' = 'loading';
 

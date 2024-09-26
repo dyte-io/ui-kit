@@ -1,15 +1,6 @@
 import { Component, Element, Host, Prop, State, Watch, h } from '@stencil/core';
 import { Meeting, Peer } from '../../types/dyte-client';
-import {
-  DyteI18n,
-  DyteUIKitStore,
-  IconPack,
-  Size,
-  States,
-  UIConfig,
-  defaultIconPack,
-  useLanguage,
-} from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, Size, States, UIConfig } from '../../exports';
 import { Render } from '../../lib/render';
 import { updateComponentProps } from '../../utils/component-props';
 
@@ -21,7 +12,7 @@ import { updateComponentProps } from '../../utils/component-props';
 export class DyteAudioGrid {
   private componentPropsCleanupFn: () => void = () => {};
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Config */
   @Prop() config: UIConfig;
@@ -36,7 +27,7 @@ export class DyteAudioGrid {
   @Prop({ reflect: true }) size: Size;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Whether to hide self in the grid */
   @Prop() hideSelf = false;

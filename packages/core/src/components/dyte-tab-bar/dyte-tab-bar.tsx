@@ -1,9 +1,9 @@
 import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 import { DytePlugin } from '@dytesdk/web-core';
 import type { ActiveTabType } from '@dytesdk/web-core';
-import { defaultConfig } from '../../lib/default-ui-config';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
@@ -35,13 +35,13 @@ export class DyteTabBar {
   @Prop({ reflect: true }) size: Size;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** States object */
   @Prop() states: States;
 
   /** UI Config */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Grid Layout */
   @Prop({ reflect: true }) layout: GridLayout = 'row';
@@ -50,7 +50,7 @@ export class DyteTabBar {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Active tab */
   @Prop() activeTab: Tab;

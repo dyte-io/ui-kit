@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop, State, EventEmitter, Event } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { PollObject } from '../../types/props';
 import { DyteUIKitStore } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
@@ -30,7 +30,7 @@ export class DytePoll {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Options */
   @State() options = ['', ''];

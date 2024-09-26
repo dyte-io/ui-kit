@@ -1,6 +1,6 @@
 import type { StageStatus } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State, Event, EventEmitter } from '@stencil/core';
-import { Size, IconPack, defaultIconPack, DyteI18n, States, DyteUIKitStore } from '../../exports';
+import { Size, IconPack, DyteI18n, States, DyteUIKitStore } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { canRequestToJoinStage, canJoinStage } from '../../utils/stage';
@@ -24,7 +24,7 @@ export class DyteStageToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -133,7 +133,7 @@ export class DyteStageToggle {
   }
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
   render() {
     if (!canRequestToJoinStage(this.meeting)) return;
     return (

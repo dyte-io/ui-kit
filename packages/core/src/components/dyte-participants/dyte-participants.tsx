@@ -1,9 +1,9 @@
-import { defaultIconPack, IconPack } from '../../lib/icons';
+import { IconPack } from '../../lib/icons';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { Component, Host, h, Prop, State, Watch } from '@stencil/core';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { Render } from '../../lib/render';
 
 import { defaultConfig, DyteUIKitStore } from '../../exports';
@@ -22,13 +22,13 @@ export type ParticipantsViewMode = 'sidebar';
 export class DyteParticipants {
   private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** States object */
   @Prop() states: States;
 
   /** Config */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -37,7 +37,7 @@ export class DyteParticipants {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   @State() search: string = '';
 

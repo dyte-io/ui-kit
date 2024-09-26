@@ -1,8 +1,8 @@
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
-import { DyteI18n, defaultLanguage, useLanguage } from '../../lib/lang';
+import { DyteI18n, defaultLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
-import { defaultIconPack, IconPack } from '../../lib/icons';
+import { IconPack } from '../../lib/icons';
 import { DyteUIKitStore } from '../../lib/store';
 import { defaultConfig } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
@@ -20,7 +20,7 @@ export class DyteEndedScreen {
   private componentPropsCleanupFn: () => void = () => {};
   private removeStateChangeListener: () => void;
   /** Config object */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -32,7 +32,7 @@ export class DyteEndedScreen {
   @Prop() states: States;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
@@ -40,7 +40,7 @@ export class DyteEndedScreen {
   @State() message: string = '';
 
   /** Global states */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   connectedCallback() {
     this.statesChanged(this.states);

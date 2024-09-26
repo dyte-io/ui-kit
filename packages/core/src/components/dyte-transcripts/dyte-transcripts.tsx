@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, State, Element, Watch, writeTask } from '@ste
 import { Meeting } from '../../types/dyte-client';
 
 import { Transcript, States } from '../../types/props';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { UIConfig } from '../../types/ui-config';
 import { defaultConfig, DyteUIKitStore } from '../../exports';
 
@@ -27,16 +27,16 @@ export class DyteTranscripts {
   @Element() host: HTMLDyteTranscriptsElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** States object */
   @Prop() states: States = DyteUIKitStore.state;
 
   /** Config object */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   @State() transcripts: Array<Transcript & { renderedId?: string }> = [];
 

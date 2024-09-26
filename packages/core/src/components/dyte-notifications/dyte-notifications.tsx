@@ -3,8 +3,8 @@ import { Meeting, Participant, Peer, WaitlistedParticipant } from '../../types/d
 import { Size, Notification, States, Poll } from '../../types/props';
 import DyteNotificationsAudio, { Sound } from '../../lib/notification';
 import { formatName } from '../../utils/string';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { UIConfig } from '../../types/ui-config';
 import {
   Config,
@@ -85,16 +85,16 @@ export class DyteNotifications {
   @Element() host: HTMLDyteNotificationsElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** States object */
   @Prop() states: States;
 
   /** Config object */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;

@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/core';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import {
   exitFullSreen,
@@ -39,7 +39,7 @@ export class DyteFullscreenToggle {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;

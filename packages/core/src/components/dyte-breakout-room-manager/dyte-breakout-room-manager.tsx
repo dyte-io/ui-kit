@@ -1,6 +1,6 @@
 import { Component, h, Host, Prop, Event, EventEmitter, State, writeTask } from '@stencil/core';
-import { DyteI18n, useLanguage } from '../../lib/lang';
-import { defaultIconPack, IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
 import { ConnectedMeetingParticipant, States } from '../../types/props';
 import { Meeting } from '../../types/dyte-client';
 import { getAllConnectedParticipants, participantIdentifier } from '../../utils/breakout-rooms';
@@ -20,7 +20,7 @@ const ROOM_TITLE_MIN_CHARS = 3;
 export class DyteBreakoutRoomManager {
   private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Enable updating participants */
   @Prop() assigningParticipants: boolean;
@@ -38,7 +38,7 @@ export class DyteBreakoutRoomManager {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Drag mode */
   @Prop() isDragMode: boolean = false;

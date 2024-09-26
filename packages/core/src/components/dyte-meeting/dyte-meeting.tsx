@@ -13,12 +13,12 @@ import deepMerge from 'lodash-es/merge';
 import { PermissionSettings, Size, States } from '../../types/props';
 import { getSize } from '../../utils/size';
 import { Meeting, RoomLeftState } from '../../types/dyte-client';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { getIconPack, IconPack } from '../../lib/icons';
 import { UIConfig } from '../../types/ui-config';
-import { defaultConfig } from '../../lib/default-ui-config';
+
 import { Render } from '../../lib/render';
-import { DyteUIKitStore, provideDyteDesignSystem } from '../../index';
+import { defaultConfig, DyteUIKitStore, provideDyteDesignSystem } from '../../index';
 import { getUserPreferences } from '../../utils/user-prefs';
 import { generateConfig } from '../../utils/config';
 
@@ -110,10 +110,10 @@ export class DyteMeeting {
   @Prop({ mutable: true }) showSetupScreen: boolean;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** UI Config */
-  @Prop({ mutable: true }) config: UIConfig = defaultConfig;
+  @Prop({ mutable: true }) config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Icon Pack URL */
   @Prop({ reflect: true }) iconPackUrl: string;

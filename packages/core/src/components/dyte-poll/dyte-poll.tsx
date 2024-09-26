@@ -1,7 +1,7 @@
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, EventEmitter, Event } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { Poll } from '../../types/props';
 import { formatName, getInitials, shorten } from '../../utils/string';
 import { DyteUIKitStore } from '../../exports';
@@ -44,7 +44,7 @@ export class DytePolls {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   private MAX_VOTES_RENDER = 10;
 

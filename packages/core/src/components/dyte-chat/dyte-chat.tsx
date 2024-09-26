@@ -13,9 +13,9 @@ import {
 } from '@stencil/core';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { Chat, ChatChannel, Size } from '../../types/props';
-import { defaultIconPack, IconPack } from '../../lib/icons';
+import { IconPack } from '../../lib/icons';
 import type { Message, TextMessage } from '@dytesdk/web-core';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import {
   TEMPORARY_CHANNEL_PREFIX,
   alphabeticalSorter,
@@ -61,10 +61,10 @@ export class DyteChat {
   @Element() host: HTMLDyteChatElement;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Config */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -73,7 +73,7 @@ export class DyteChat {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** disables private chat */
   @Prop() disablePrivateChat: boolean = false;

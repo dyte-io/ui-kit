@@ -1,5 +1,5 @@
 import { Component, Prop, h } from '@stencil/core';
-import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
 import { sanitizeLink } from '../../utils/string';
 import { downloadFile, getExtension, getFileSize } from '../../utils/file';
 import { updateComponentProps } from '../../utils/component-props';
@@ -33,7 +33,7 @@ export class DyteFileMessageView {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   render() {
     return (

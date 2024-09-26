@@ -3,10 +3,10 @@ import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { shorten } from '../../utils/string';
 import { UIConfig } from '../../types/ui-config';
-import { defaultConfig } from '../../lib/default-ui-config';
+
 import { Render } from '../../lib/render';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import gracefulStorage from '../../utils/graceful-storage';
 
 import { SocketConnectionState } from '@dytesdk/web-core';
@@ -26,7 +26,7 @@ export class DyteSetupScreen {
   private componentPropsCleanupFn: () => void = () => {};
   private inputEl: HTMLInputElement;
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** States object */
   @Prop() states: States = DyteUIKitStore.state;
@@ -35,7 +35,7 @@ export class DyteSetupScreen {
   @Prop({ reflect: true }) size: Size;
 
   /** Config object */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
@@ -44,7 +44,7 @@ export class DyteSetupScreen {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   @State() displayName: string;
 

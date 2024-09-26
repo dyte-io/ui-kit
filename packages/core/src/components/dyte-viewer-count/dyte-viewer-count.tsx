@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { showLivestream } from '../../utils/livestream';
 import { DyteUIKitStore } from '../../exports';
@@ -21,7 +21,7 @@ export class DyteViewerCount {
   private countListener: () => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Viewer count variant */
   @Prop({ reflect: true }) variant: ViewerCountVariant = 'primary';
@@ -30,7 +30,7 @@ export class DyteViewerCount {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   @State() viewerCount: number = 0;
 

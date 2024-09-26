@@ -19,7 +19,7 @@ export const getIconPack = async (url: string): Promise<IconPack> => {
     }
     // merge defaultIconPack with the received iconPack so as to
     // fill the missing icons with default ones
-    return Object.assign({}, defaultIconPack, await res.json()) as IconPack;
+    return Object.assign({}, await res.json()) as IconPack;
   } catch (_) {
     return defaultIconPack as IconPack;
   }

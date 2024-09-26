@@ -1,7 +1,7 @@
 import { Component, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
 import { Meeting } from '../../types/dyte-client';
 import { ChatChannel } from '../../types/props';
-import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
 import { DyteBasicParticipant } from '@dytesdk/web-core';
 import { updateComponentProps } from '../../utils/component-props';
 
@@ -12,7 +12,7 @@ import { updateComponentProps } from '../../utils/component-props';
 export class DyteChannelHeader {
   private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Channel object */
   @Prop() channel: ChatChannel;
@@ -21,7 +21,7 @@ export class DyteChannelHeader {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** event triggered for search */
   @Event() search: EventEmitter<string>;

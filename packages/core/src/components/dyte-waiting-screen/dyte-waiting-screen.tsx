@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { UIConfig } from '../../types/ui-config';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { defaultConfig, DyteUIKitStore } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
@@ -20,16 +20,16 @@ export class DyteWaitingScreen {
   }
   private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Config */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   render() {
     return (

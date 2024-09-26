@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { defaultIconPack, IconPack } from '../../lib/icons';
+import { IconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 import { Size } from '../../types/props';
 import { DyteUIKitStore } from '../../exports';
@@ -45,7 +45,7 @@ export class DyteControlbarButton {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Whether icon requires brand color */
   @Prop({ reflect: true }) brandIcon = false;

@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { DyteUIKitStore, Size } from '../../exports';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { updateComponentProps } from '../../utils/component-props';
 
 /**
@@ -27,7 +27,7 @@ export class DyteSpinner {
   @Prop({ reflect: true }) size: Size = 'md';
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   render() {
     return (

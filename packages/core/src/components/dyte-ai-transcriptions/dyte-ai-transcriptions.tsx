@@ -1,5 +1,5 @@
 import { Component, Host, Prop, State, Watch, h } from '@stencil/core';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { ChatHead } from '../dyte-chat/components/ChatHead';
 import { Meeting } from '../../types/dyte-client';
 import { Transcript } from '../../types/props';
@@ -25,10 +25,10 @@ export class DyteAiTranscriptions {
   @State() captionViewEnabled = false;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   @State() transcriptions: Transcript[] = [];
 

@@ -1,9 +1,9 @@
 import { Component, h, Host, Prop, Event, EventEmitter, State } from '@stencil/core';
 import { DyteUIKitStore, States } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
-import { defaultIconPack, IconPack } from '../../lib/icons';
+import { IconPack } from '../../lib/icons';
 
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
@@ -14,7 +14,7 @@ import { updateComponentProps } from '../../utils/component-props';
 export class DyteBroadcastMessageModal {
   private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** States object */
   @Prop() states: States;
@@ -23,7 +23,7 @@ export class DyteBroadcastMessageModal {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;

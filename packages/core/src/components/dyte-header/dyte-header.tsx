@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
-import { defaultConfig, defaultIconPack, DyteUIKitStore, IconPack, UIConfig } from '../../exports';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { defaultConfig, DyteUIKitStore, IconPack, UIConfig } from '../../exports';
+import { DyteI18n } from '../../lib/lang';
 import { Render } from '../../lib/render';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
@@ -31,10 +31,10 @@ export class DyteHeader {
   @Prop() disableRender = false;
 
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Config */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** States */
   @Prop() states: States;
@@ -43,7 +43,7 @@ export class DyteHeader {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;

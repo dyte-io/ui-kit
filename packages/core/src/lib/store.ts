@@ -2,6 +2,8 @@ import { createStore, ObservableMap } from '@stencil/store';
 import { States } from '../types/props';
 import { getUserPreferences } from '../utils/user-prefs';
 import { defaultIconPack } from './icons';
+import { defaultConfig } from '../exports';
+import { useLanguage } from './lang';
 
 const DyteUIKitStore: ObservableMap<States> & {
   setComponentProps?: (newProps: States['componentProps']) => void;
@@ -10,6 +12,8 @@ const DyteUIKitStore: ObservableMap<States> & {
   componentProps: {
     meeting: null,
     iconPack: defaultIconPack,
+    t: useLanguage(),
+    config: defaultConfig,
   },
 });
 

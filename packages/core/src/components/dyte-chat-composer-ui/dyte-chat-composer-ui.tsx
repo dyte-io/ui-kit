@@ -9,8 +9,8 @@ import {
   writeTask,
   Watch,
 } from '@stencil/core';
-import { defaultIconPack, DyteUIKitStore, IconPack, Size } from '../../exports';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteUIKitStore, IconPack, Size } from '../../exports';
+import { DyteI18n } from '../../lib/lang';
 import {
   handleFilesDataTransfer,
   reverse,
@@ -63,7 +63,7 @@ export class DyteChatComposerUi {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Whether to show emoji picker */
   @Prop() disableEmojiPicker? = false;

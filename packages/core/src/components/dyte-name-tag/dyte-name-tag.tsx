@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, State, Watch } from '@stencil/core';
 import { Size } from '../../types/props';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { formatName, shorten } from '../../utils/string';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { DyteUIKitStore } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
@@ -29,7 +29,7 @@ export class DyteNameTag {
   @Prop() participant!: Peer;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -44,7 +44,7 @@ export class DyteNameTag {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   @State() length: number = 13;
 

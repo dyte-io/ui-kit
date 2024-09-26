@@ -1,5 +1,5 @@
 import { h, Component, Prop, Host } from '@stencil/core';
-import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
 import type { Message } from '@dytesdk/web-core';
 import { updateComponentProps } from '../../utils/component-props';
@@ -12,7 +12,7 @@ import { updateComponentProps } from '../../utils/component-props';
 export class DyteChatSearchResults {
   private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Search query */
   @Prop() query: string;
@@ -24,7 +24,7 @@ export class DyteChatSearchResults {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   private pageSize = 50;
 

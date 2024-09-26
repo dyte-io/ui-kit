@@ -1,7 +1,7 @@
 import { Component, Host, h, VNode, State, Prop, writeTask, Method, Watch } from '@stencil/core';
 import { debounce } from 'lodash-es';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { smoothScrollToBottom } from '../../utils/scroll';
 import { DyteUIKitStore } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
@@ -50,7 +50,7 @@ export class DytePaginatedList {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** label to show when empty */
   @Prop() emptyListLabel: string = null;

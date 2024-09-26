@@ -1,6 +1,6 @@
 import { DyteParticipant } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
-import { defaultIconPack, DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { MediaScoreUpdateParams } from '../../types/web-core';
@@ -17,13 +17,13 @@ export class DyteNetworkIndicator {
   @Prop() participant: Peer;
 
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Is for screenshare */
   @Prop() isScreenShare = false;

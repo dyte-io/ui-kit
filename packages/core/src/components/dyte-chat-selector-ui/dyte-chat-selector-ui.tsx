@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop, Event, EventEmitter, State } from '@stencil/core';
-import { defaultIconPack, DyteUIKitStore, IconPack } from '../../exports';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteUIKitStore, IconPack } from '../../exports';
+import { DyteI18n } from '../../lib/lang';
 import { Peer } from '../../types/dyte-client';
 import { generateChatGroupKey } from '../../utils/chat';
 import { updateComponentProps } from '../../utils/component-props';
@@ -33,7 +33,7 @@ export class DyteChatSelectorUi {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   @State() showParticipantsPanel: boolean = false;
 

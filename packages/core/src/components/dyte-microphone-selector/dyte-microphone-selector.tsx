@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop, Watch, State, writeTask } from '@stencil/core';
 import { Meeting } from '../../types/dyte-client';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { Size } from '../../types/props';
 import { disableSettingSinkId } from '../../utils/flags';
 import { DyteUIKitStore } from '../../exports';
@@ -27,7 +27,7 @@ import { updateComponentProps } from '../../utils/component-props';
 export class DyteMicrophoneSelector {
   private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -39,7 +39,7 @@ export class DyteMicrophoneSelector {
   @Prop() variant: 'full' | 'inline' = 'full';
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   @State() audioinputDevices: MediaDeviceInfo[] = [];
   @State() canProduceAudio: boolean = true;

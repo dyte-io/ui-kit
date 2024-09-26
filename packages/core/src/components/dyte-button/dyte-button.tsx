@@ -42,7 +42,7 @@ export class DyteButton {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Button type */
   @Prop({ reflect: true }) type: HTMLButtonElement['type'] = 'button';

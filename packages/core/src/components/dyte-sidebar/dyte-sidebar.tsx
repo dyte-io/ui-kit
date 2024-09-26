@@ -2,9 +2,8 @@ import { Component, Host, h, State, Prop, Watch, Event, EventEmitter } from '@st
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
-import { defaultConfig } from '../../lib/default-ui-config';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 
 import {
   canViewChat,
@@ -42,19 +41,19 @@ export class DyteSidebar {
   @Prop() defaultSection: DyteSidebarSection = 'chat';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** States object */
   @Prop() states: States;
 
   /** Config */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;

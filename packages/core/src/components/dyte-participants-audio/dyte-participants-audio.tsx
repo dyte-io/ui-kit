@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop, Watch, State, Event, EventEmitter } from '@stencil/core';
 import { Meeting, Peer } from '../../types/dyte-client';
 import DyteAudio from '../../lib/audio';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import type { StageStatus } from '@dytesdk/web-core';
 import { isLiveStreamViewer } from '../../utils/livestream';
@@ -32,13 +32,13 @@ export class DyteParticipantsAudio {
   private stageStatusUpdateListener: (status: StageStatus) => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Callback to execute when the dialog is closed */
   @Event({ eventName: 'dialogClose' }) dialogClose: EventEmitter<void>;

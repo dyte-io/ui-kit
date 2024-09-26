@@ -1,6 +1,6 @@
 import type { LivestreamState } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
-import { Size, DyteI18n, IconPack, defaultIconPack, DyteUIKitStore } from '../../exports';
+import { Size, DyteI18n, IconPack, DyteUIKitStore } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { showLivestream } from '../../utils/livestream';
@@ -14,13 +14,13 @@ import { updateComponentProps } from '../../utils/component-props';
 export class DyteLivestreamIndicator {
   private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   @State() isLivestreaming: boolean;
 

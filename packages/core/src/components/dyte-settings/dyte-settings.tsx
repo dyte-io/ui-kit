@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { Meeting } from '../../types/dyte-client';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { DyteUIKitStore } from '../../lib/store';
 import { updateComponentProps } from '../../utils/component-props';
@@ -31,7 +31,7 @@ export class DyteSettings {
   };
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** States object */
   @Prop() states: States;
@@ -43,7 +43,7 @@ export class DyteSettings {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   @State() activeTab: SettingsTab = 'connection';
   @State() isMobileMainVisible: boolean = false;

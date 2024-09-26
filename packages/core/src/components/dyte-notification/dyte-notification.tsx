@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop, EventEmitter, Event, Watch, State } from '@stencil/core';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { Notification, Size } from '../../types/props';
 import { TextMessageView } from '../dyte-text-message/components/TextMessage';
 import { DyteUIKitStore } from '../../exports';
@@ -29,7 +29,7 @@ export class DyteNotification {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Dismiss event */
   @Event({ eventName: 'dyteNotificationDismiss' }) dismiss: EventEmitter<string>;

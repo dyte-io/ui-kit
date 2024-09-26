@@ -1,10 +1,10 @@
 import { Component, Host, h, Prop, State, Watch } from '@stencil/core';
 import hark from 'hark';
 import { Peer } from '../../types/dyte-client';
-import { defaultIconPack, IconPack } from '../../lib/icons';
+import { IconPack } from '../../lib/icons';
 import { Size } from '../../types/props';
 import { drawBarsVisualizer } from '../../lib/visualizer';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { DyteParticipant } from '@dytesdk/web-core';
 import { DyteUIKitStore } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
@@ -44,7 +44,7 @@ export class DyteAudioVisualizer {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Hide when there is no audio / audio is muted */
   @Prop() hideMuted: boolean = false;

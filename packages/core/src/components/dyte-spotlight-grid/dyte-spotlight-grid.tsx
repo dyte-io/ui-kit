@@ -1,8 +1,8 @@
 import { Component, Host, h, Prop, Element } from '@stencil/core';
-import { defaultConfig } from '../../lib/default-ui-config';
+
 import { defaultGridSize } from '../../lib/grid';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { Render } from '../../lib/render';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
@@ -55,19 +55,19 @@ export class DyteSpotlightGrid {
   @Prop({ reflect: true }) size: Size;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** States object */
   @Prop() states: States;
 
   /** UI Config */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Icon Pack */
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Grid size */
   @Prop() gridSize: GridSize = defaultGridSize;

@@ -40,7 +40,7 @@ export class DyteIcon {
   @Prop({ reflect: true }) variant: IconVariant = 'primary';
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Size */
   @Prop({ reflect: true }) size: Size = 'lg';

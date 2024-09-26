@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop, Watch, State, Event, EventEmitter } from '@stencil/core';
 import type { DeviceConfig } from '@dytesdk/web-core';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { States } from '../../types/props';
 import { DyteUIKitStore } from '../../lib/store';
@@ -23,10 +23,10 @@ const steps = {
 export class DytePermissionsMessage {
   private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Icon Pack */
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;

@@ -1,6 +1,6 @@
 import { Component, Host, h, Prop, Event, EventEmitter, State, Watch } from '@stencil/core';
-import { defaultIconPack, DyteUIKitStore, IconPack, Size, States } from '../../exports';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteUIKitStore, IconPack, Size, States } from '../../exports';
+import { DyteI18n } from '../../lib/lang';
 
 import { Meeting } from '../../types/dyte-client';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
@@ -17,7 +17,7 @@ export class DyteMuteAllButton {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -26,7 +26,7 @@ export class DyteMuteAllButton {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;

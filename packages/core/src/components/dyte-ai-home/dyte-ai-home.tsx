@@ -23,7 +23,7 @@ export class DyteAiHome {
   @State() messages: AIMessage[] = [];
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Initial messages */
   @Prop() initialMessages: AIMessage[];

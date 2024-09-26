@@ -10,14 +10,7 @@ import {
   State,
   writeTask,
 } from '@stencil/core';
-import {
-  defaultIconPack,
-  DyteI18n,
-  DyteUIKitStore,
-  IconPack,
-  States,
-  useLanguage,
-} from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, States } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
 
 import { DyteBasicParticipant } from '@dytesdk/web-core';
@@ -31,10 +24,10 @@ import { updateComponentProps } from '../../utils/component-props';
 export class DyteChannelCreator {
   private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;

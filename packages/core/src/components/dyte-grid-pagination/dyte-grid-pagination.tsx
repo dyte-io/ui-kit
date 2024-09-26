@@ -1,8 +1,8 @@
 import { Component, Host, h, Prop, State, Watch } from '@stencil/core';
-import { defaultIconPack, IconPack } from '../../lib/icons';
+import { IconPack } from '../../lib/icons';
 import { Size, States } from '../../types/props';
 import { Meeting } from '../../types/dyte-client';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { DyteParticipants } from '@dytesdk/web-core';
 import debounce from 'lodash/debounce';
 import { DyteUIKitStore } from '../../exports';
@@ -24,7 +24,7 @@ const MASS_ACTIONS_DEBOUNCE_TIMER = 50; // In ms
 export class DyteGridPagination {
   private componentPropsCleanupFn: () => void = () => {};
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** States */
   @Prop() states: States;
@@ -39,7 +39,7 @@ export class DyteGridPagination {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   @State() page: number = 1;
   @State() pageCount: number = 0;

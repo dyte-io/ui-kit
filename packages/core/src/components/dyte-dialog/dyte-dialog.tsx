@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
-import { defaultConfig } from '../../lib/default-ui-config';
-import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+
+import { IconPack } from '../../lib/icons';
+import { DyteI18n } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
@@ -25,10 +25,10 @@ export class DyteDialog {
   @Prop() disableEscapeKey = false;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** UI Config */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** States object */
   @Prop() states: States;
@@ -40,7 +40,7 @@ export class DyteDialog {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Whether a dialog is open or not */
   @Prop({ reflect: true, mutable: true }) open: boolean = true;

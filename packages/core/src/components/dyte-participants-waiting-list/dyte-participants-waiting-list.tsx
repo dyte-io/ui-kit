@@ -25,9 +25,9 @@ export class DyteParticipantsWaitlisted {
   private waitlistedParticipantsClearedListener: () => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
   /** Config */
-  @Prop() config: UIConfig = defaultConfig;
+  @Prop() config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -39,7 +39,7 @@ export class DyteParticipantsWaitlisted {
   @Prop() view: ParticipantsViewMode = 'sidebar';
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
   private acceptWaitingRoomRequest = async (id: WaitlistedParticipant['id']) => {
     await this.meeting.participants.acceptWaitingRoomRequest(id);
   };

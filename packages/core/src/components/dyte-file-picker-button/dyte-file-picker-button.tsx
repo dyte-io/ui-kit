@@ -1,5 +1,5 @@
 import { Component, Event, Prop, h, EventEmitter } from '@stencil/core';
-import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
 import { updateComponentProps } from '../../utils/component-props';
 
 @Component({
@@ -22,7 +22,7 @@ export class DyteFilePickerButton {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Event when a file is selected for upload */
   @Event({ eventName: 'fileChange' }) onFileChange: EventEmitter<File>;

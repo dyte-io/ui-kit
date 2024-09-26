@@ -2,9 +2,9 @@ import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/c
 import type { ImageMessage } from '@dytesdk/web-core';
 import { ChatHead } from '../dyte-chat/components/ChatHead';
 import { sanitizeLink } from '../../utils/string';
-import { defaultIconPack, IconPack } from '../../lib/icons';
+import { IconPack } from '../../lib/icons';
 import { downloadFile } from '../../utils/file';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteI18n } from '../../lib/lang';
 import { States } from '../../types/props';
 import { DyteUIKitStore } from '../../lib/store';
 import { updateComponentProps } from '../../utils/component-props';
@@ -37,7 +37,7 @@ export class DyteImageMessage {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** show message in bubble */
   @Prop() showBubble: boolean = false;

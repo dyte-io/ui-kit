@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, Event, EventEmitter, State } from '@stencil/core';
-import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, defaultIconPack } from '../../exports';
 import { ChatChannel } from '../../types/props';
 import type { Message } from '@dytesdk/web-core';
 import { TextMessageView } from '../dyte-text-message/components/TextMessage';
@@ -25,7 +25,7 @@ export class DyteChannelSelectorUi {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** show recent message in channel */
   @Prop() showRecentMessage = false;

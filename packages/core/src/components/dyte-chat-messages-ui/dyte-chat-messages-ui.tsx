@@ -10,8 +10,8 @@ import {
   Event,
   EventEmitter,
 } from '@stencil/core';
-import { defaultIconPack, DyteUIKitStore, IconPack, Size } from '../../exports';
-import { DyteI18n, useLanguage } from '../../lib/lang';
+import { DyteUIKitStore, IconPack, Size } from '../../exports';
+import { DyteI18n } from '../../lib/lang';
 import { Chat, ChatMessage, States } from '../../types/props';
 import { differenceInMinutes, elapsedDuration, formatDateTime } from '../../utils/date';
 import { smoothScrollToBottom } from '../../utils/scroll';
@@ -56,7 +56,7 @@ export class DyteChatMessagesUi {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Event emitted when a message is pinned or unpinned */
   @Event({ eventName: 'pinMessage' }) onPinMessage: EventEmitter<Message>;

@@ -7,10 +7,8 @@ import {
   Size,
   UIConfig,
   defaultConfig,
-  defaultIconPack,
   generateConfig,
   provideDyteDesignSystem,
-  useLanguage,
 } from '../../exports';
 import { getSize } from '../../utils/size';
 import { getIconPack } from '../../lib/icons';
@@ -24,16 +22,16 @@ export class DyteUiProvider {
   @Element() hostEl: HTMLDyteUiProviderElement;
 
   /** dyte meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Size */
   @Prop({ reflect: true, mutable: true }) size: Size;
 
   /** UI Config */
-  @Prop({ mutable: true }) config: UIConfig = defaultConfig;
+  @Prop({ mutable: true }) config: UIConfig = DyteUIKitStore.state.componentProps.config;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Icon Pack URL */
   @Prop({ reflect: true }) iconPackUrl: string;

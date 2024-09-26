@@ -2,14 +2,7 @@ import { Component, Host, Prop, State, Watch, h } from '@stencil/core';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { UIConfig } from '../../types/ui-config';
 import { Size } from '../../types/props';
-import {
-  DyteI18n,
-  DyteUIKitStore,
-  IconPack,
-  States,
-  defaultIconPack,
-  useLanguage,
-} from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack, States, defaultIconPack } from '../../exports';
 import hark from 'hark';
 import { DyteParticipant } from '@dytesdk/web-core';
 import { updateComponentProps } from '../../utils/component-props';
@@ -24,7 +17,7 @@ export class DyteAudioTile {
   private hark: hark.Harker;
 
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Config */
   @Prop() config: UIConfig;
@@ -39,7 +32,7 @@ export class DyteAudioTile {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Participant object */
   @Prop() participant: Peer;

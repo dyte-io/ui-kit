@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State, Element, Event, EventEmitter } from '@stencil/core';
-import { defaultIconPack, DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
+import { DyteI18n, DyteUIKitStore, IconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Size } from '../../types/props';
 import type { Message } from '@dytesdk/web-core';
@@ -41,7 +41,7 @@ export class DyteChatMessage {
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** if sender is self */
   @Prop() isSelf = false;

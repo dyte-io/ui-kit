@@ -1,6 +1,6 @@
 import type { LivestreamState } from '@dytesdk/web-core';
 import { Component, h, Host, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
-import { Size, DyteI18n, IconPack, defaultIconPack, DyteUIKitStore } from '../../exports';
+import { Size, DyteI18n, IconPack, DyteUIKitStore } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import {
@@ -26,13 +26,13 @@ export class DyteLivestreamPlayer {
   private sendLatencyToCallStats: any;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting: Meeting = DyteUIKitStore.state.componentProps.meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @Prop() t: DyteI18n = DyteUIKitStore.state.componentProps.t;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
