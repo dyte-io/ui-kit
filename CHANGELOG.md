@@ -1,3 +1,10 @@
+# [2.1.0-props-less-uikit.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-props-less-uikit.3...@dyte-in/ui-kit-v2.1.0-props-less-uikit.4) (2024-09-26)
+
+
+### Bug Fixes
+
+* **build:** fixing refactoring issues ([123bc9e](https://github.com/dyte-io/ui-kit/commit/123bc9ef4e7ac3c6ad711a7177617ce24aeddc74))
+
 # [2.1.0-props-less-uikit.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-props-less-uikit.2...@dyte-in/ui-kit-v2.1.0-props-less-uikit.3) (2024-09-26)
 
 
