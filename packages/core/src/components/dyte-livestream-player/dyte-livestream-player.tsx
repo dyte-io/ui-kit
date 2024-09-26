@@ -35,7 +35,7 @@ export class DyteLivestreamPlayer {
   @Prop() t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   @State() playbackUrl: string;
 

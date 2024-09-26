@@ -16,7 +16,7 @@ export class DyteInformationTooltip {
   }
   private componentPropsCleanupFn: () => void = () => {};
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   render() {
     return (

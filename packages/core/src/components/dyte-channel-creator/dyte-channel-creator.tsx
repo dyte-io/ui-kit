@@ -37,7 +37,7 @@ export class DyteChannelCreator {
   @Prop() t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;

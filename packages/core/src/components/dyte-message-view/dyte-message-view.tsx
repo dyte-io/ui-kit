@@ -50,7 +50,7 @@ export class DyteMessageView {
   @Prop() time: Date;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** action event */
   @Event({ eventName: 'action' }) onAction: EventEmitter<string>;

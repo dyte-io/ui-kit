@@ -34,7 +34,7 @@ export class DyteIcon {
   @Prop() icon: string;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Icon variant */
   @Prop({ reflect: true }) variant: IconVariant = 'primary';

@@ -49,7 +49,7 @@ export class DyteUiProvider {
 
   @State() isReady = false;
 
-  @State() iconPack: IconPack = defaultIconPack;
+  @State() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   @Watch('iconPackUrl')
   async iconPackUrlChanged(url: string) {

@@ -31,7 +31,7 @@ export class DyteTextField {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
   @Prop() t: DyteI18n = useLanguage();

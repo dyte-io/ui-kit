@@ -25,7 +25,7 @@ export class DyteLivestreamIndicator {
   @State() isLivestreaming: boolean;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   connectedCallback() {
     this.meetingChanged(this.meeting);

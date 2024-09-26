@@ -70,7 +70,7 @@ export class DyteChat {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
   @Prop() t: DyteI18n = useLanguage();

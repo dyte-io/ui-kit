@@ -28,7 +28,7 @@ export class DyteImageViewer {
   @Prop() t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Emitted when viewer should be closed */
   @Event() close: EventEmitter<void>;

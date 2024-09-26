@@ -33,7 +33,7 @@ export class DyteParticipantsWaitlisted {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** View mode for participants list */
   @Prop() view: ParticipantsViewMode = 'sidebar';

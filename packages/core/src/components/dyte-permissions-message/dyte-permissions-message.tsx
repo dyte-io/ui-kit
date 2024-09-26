@@ -29,7 +29,7 @@ export class DytePermissionsMessage {
   @Prop() t: DyteI18n = useLanguage();
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** States object */
   @Prop() states: States;

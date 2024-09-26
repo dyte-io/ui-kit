@@ -33,7 +33,7 @@ export class DytePipToggle {
   @Prop() config: UIConfig = defaultConfig;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;

@@ -47,7 +47,7 @@ export class DyteTabBar {
   @Prop({ reflect: true }) layout: GridLayout = 'row';
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
   @Prop() t: DyteI18n = useLanguage();

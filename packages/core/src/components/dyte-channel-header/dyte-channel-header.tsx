@@ -18,7 +18,7 @@ export class DyteChannelHeader {
   @Prop() channel: ChatChannel;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
   @Prop() t: DyteI18n = useLanguage();
@@ -137,7 +137,6 @@ export class DyteChannelHeader {
       </Host>
     );
   }
-
 
   disconnectedCallback() {
     this.componentPropsCleanupFn();

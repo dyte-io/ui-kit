@@ -40,7 +40,7 @@ export class DyteMessageListView {
   @Prop() estimateItemSize: number = 100;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   @State() range: { start: number; end: number };
 

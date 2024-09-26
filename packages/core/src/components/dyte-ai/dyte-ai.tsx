@@ -38,7 +38,7 @@ export class DyteAi {
   @Prop() config: UIConfig = defaultConfig;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Language */
   @Prop() t: DyteI18n = useLanguage();

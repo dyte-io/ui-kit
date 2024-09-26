@@ -30,7 +30,7 @@ export class DyteAudioGrid {
   @Prop() states: States;
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @Prop() iconPack: IconPack = DyteUIKitStore.state.componentProps.iconPack;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
