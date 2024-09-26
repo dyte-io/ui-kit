@@ -1,3 +1,11 @@
+# [2.1.0-staging.20](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.19...@dyte-in/ui-kit-v2.1.0-staging.20) (2024-09-26)
+
+
+### Bug Fixes
+
+* run npm i and npm i --ws ([46eeeae](https://github.com/dyte-io/ui-kit/commit/46eeeaeffa3abf86a054a44569cdf34dcb8fed0a))
+* run npm i inside workspaces ([4aa2968](https://github.com/dyte-io/ui-kit/commit/4aa2968fc42eb431a67043c1307211a76ebacd05))
+
 # [2.1.0-staging.19](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.18...@dyte-in/ui-kit-v2.1.0-staging.19) (2024-09-26)
 
 
