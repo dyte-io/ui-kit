@@ -1,4 +1,9 @@
 export * from "./components";
+
+export {
+    useDyteUIKitStore,
+} from "./hooks";
+
 export {
     sendNotification,
     provideDyteDesignSystem,
