@@ -7,12 +7,12 @@ export default {
   input: 'dist/esm/loader.js',
   output: [
     {
-      inlineDynamicImports: true,
+      inlineDynamicImports: false,
       file: 'dist/esm/loader.js',
       format: 'esm',
     },
     {
-      inlineDynamicImports: true,
+      inlineDynamicImports: false,
       file: 'dist/browser.js',
       name: 'DyteUIKit',
       format: 'iife',
