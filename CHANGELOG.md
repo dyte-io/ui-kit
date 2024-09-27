@@ -1,3 +1,11 @@
+# [2.1.0-props-less-uikit.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-props-less-uikit.5...@dyte-in/ui-kit-v2.1.0-props-less-uikit.6) (2024-09-27)
+
+
+### Bug Fixes
+
+* **build:** testing build without dynamic import ([88a54dd](https://github.com/dyte-io/ui-kit/commit/88a54ddd85a8790b23c19be700c5beeabea1bb42))
+* **build:** testing multiple store creation fault ([aa1ebda](https://github.com/dyte-io/ui-kit/commit/aa1ebdaff941c539cf2249813102ea4f460c4105))
+
 # [2.1.0-props-less-uikit.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-props-less-uikit.4...@dyte-in/ui-kit-v2.1.0-props-less-uikit.5) (2024-09-27)
 
 
