@@ -18,6 +18,10 @@
   }
 }
 
+dyte-avatar {
+  z-index: -1;
+}
+
 /**
   NOTE: provided :slotted(dyte-name-tag) & dyte-name-tag separately
   because ::slotted isn't applied on default slots.
