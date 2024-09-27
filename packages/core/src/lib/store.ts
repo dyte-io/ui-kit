@@ -21,6 +21,10 @@ DyteUIKitStore.setComponentProps = (newProps: States['componentProps']) => {
   DyteUIKitStore.state.componentProps = { ...DyteUIKitStore.state.componentProps, ...newProps };
 };
 
-(window as any).DyteUIKitStore = DyteUIKitStore;
+const storeId = 'DyteUIKitStore' + Math.random().toString().replace('.', '');
+
+console.warn('Creating a new store:: ', storeId);
+
+(window as any)[storeId] = DyteUIKitStore;
 
 export { DyteUIKitStore };
