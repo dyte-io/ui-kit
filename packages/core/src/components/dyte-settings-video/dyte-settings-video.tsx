@@ -91,7 +91,6 @@ export class DyteSettingsVideo {
                 t={this.t}
                 states={states}
                 size={this.size}
-                isPreview
               />
             ) : (
               <div class="camera-off-helper">
