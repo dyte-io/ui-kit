@@ -1,3 +1,10 @@
+# [2.1.0-props-less-uikit.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-props-less-uikit.4...@dyte-in/ui-kit-v2.1.0-props-less-uikit.5) (2024-09-27)
+
+
+### Features
+
+* **internal:** custom hook for DyteUIKitStore ([a3f2710](https://github.com/dyte-io/ui-kit/commit/a3f2710015b85c8d308432b3276d761b0a9d8743))
+
 # [2.1.0-props-less-uikit.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-props-less-uikit.3...@dyte-in/ui-kit-v2.1.0-props-less-uikit.4) (2024-09-26)
 
 
