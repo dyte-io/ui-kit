@@ -1,3 +1,10 @@
+# [2.1.0-staging.23](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.22...@dyte-in/ui-kit-v2.1.0-staging.23) (2024-09-27)
+
+
+### Bug Fixes
+
+* register video element on video re renders ([725fb96](https://github.com/dyte-io/ui-kit/commit/725fb968a883e734560597e20930a9402003c678))
+
 # [2.1.0-staging.22](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.21...@dyte-in/ui-kit-v2.1.0-staging.22) (2024-09-27)
 
 
