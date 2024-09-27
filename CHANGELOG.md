@@ -1,3 +1,10 @@
+# [2.1.0-staging.21](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.20...@dyte-in/ui-kit-v2.1.0-staging.21) (2024-09-27)
+
+
+### Bug Fixes
+
+* push avatar behind the video element ([8a1b1d7](https://github.com/dyte-io/ui-kit/commit/8a1b1d7da68fe45642c8341b112f63b4b58f595c))
+
 # [2.1.0-staging.20](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.19...@dyte-in/ui-kit-v2.1.0-staging.20) (2024-09-26)
 
 
