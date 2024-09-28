@@ -1,3 +1,10 @@
+# [2.1.0-staging.24](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.23...@dyte-in/ui-kit-v2.1.0-staging.24) (2024-09-28)
+
+
+### Bug Fixes
+
+* render preview video with new render API ([66903a0](https://github.com/dyte-io/ui-kit/commit/66903a07a7fd174e79c4eba7cc4ccf62b2237eb5))
+
 # [2.1.0-staging.23](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.22...@dyte-in/ui-kit-v2.1.0-staging.23) (2024-09-27)
 
 
