@@ -98,6 +98,7 @@ export class DyteSettingsVideo {
                   meeting={this.meeting}
                   participant={this.meeting?.self}
                   size={this.size}
+                  isPreview
                 >
                   <div>
                     <dyte-icon

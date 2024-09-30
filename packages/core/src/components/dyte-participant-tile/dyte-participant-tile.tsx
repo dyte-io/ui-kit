@@ -30,7 +30,7 @@ import { DyteParticipant } from '@dytesdk/web-core';
   shadow: true,
 })
 export class DyteParticipantTile {
-  private videoEl: HTMLVideoElement;
+  @State() videoEl: HTMLVideoElement;
 
   private removeStateChangeListener: () => void;
 
@@ -95,6 +95,7 @@ export class DyteParticipantTile {
     // set videoState before initial render and initialize listeners
     if (this.meeting) this.meetingChanged(this.meeting);
     else this.participantsChanged(this.participant);
+    this.videoElChanged(this.videoEl);
     if (this.states === undefined) {
       // This re-renders on any pref change
       // There are currently only two prefs, so it is fine
@@ -139,6 +140,14 @@ export class DyteParticipantTile {
     (participant as DyteParticipant).addListener('pinned', this.onPinned);
     (participant as DyteParticipant).addListener('unpinned', this.onPinned);
     this.meeting.meta.on('mediaConnectionUpdate', this.mediaConnectionUpdateListener.bind(this));
+  }
+
+  @Watch('videoEl')
+  videoElChanged(video: HTMLVideoElement) {
+    if (this.isPreview) {
+      if (this.participant == undefined) return;
+      video && this.participant.registerVideoElement(video);
+    }
   }
 
   private mediaConnectionUpdateListener() {
