@@ -83,7 +83,7 @@ export class DyteParticipantTile {
   @Event() tileUnload: EventEmitter<Peer>;
 
   private onVideoRef(el: HTMLVideoElement) {
-    if (!this.participant || !this.meeting) {
+    if (this.isPreview || !this.participant || !this.meeting) {
       return;
     }
     this.videoEl = el;
