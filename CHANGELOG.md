@@ -1,3 +1,10 @@
+# [2.1.0-staging.25](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.24...@dyte-in/ui-kit-v2.1.0-staging.25) (2024-10-01)
+
+
+### Bug Fixes
+
+* pip misc bugs ([8d3c213](https://github.com/dyte-io/ui-kit/commit/8d3c21382cc9b2101ca632b71245640b877cba0e))
+
 # [2.1.0-staging.24](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.23...@dyte-in/ui-kit-v2.1.0-staging.24) (2024-09-28)
 
 
