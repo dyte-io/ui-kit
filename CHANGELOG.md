@@ -1,3 +1,10 @@
+# [2.1.0-staging.28](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.27...@dyte-in/ui-kit-v2.1.0-staging.28) (2024-10-01)
+
+
+### Bug Fixes
+
+* use absolute dimensions for avatar ([d9da4ed](https://github.com/dyte-io/ui-kit/commit/d9da4ed5eee984105b7efcf1eed94797a458c2d0))
+
 # [2.1.0-staging.27](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.26...@dyte-in/ui-kit-v2.1.0-staging.27) (2024-10-01)
 
 
