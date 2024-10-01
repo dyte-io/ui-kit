@@ -1,3 +1,10 @@
+# [2.1.0-staging.26](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.25...@dyte-in/ui-kit-v2.1.0-staging.26) (2024-10-01)
+
+
+### Bug Fixes
+
+* always deploy staging web-core ([f0c4713](https://github.com/dyte-io/ui-kit/commit/f0c47138eecbc90090340cbb27e3fb0ed0c03159))
+
 # [2.1.0-staging.25](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.24...@dyte-in/ui-kit-v2.1.0-staging.25) (2024-10-01)
 
 
