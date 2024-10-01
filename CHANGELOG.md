@@ -1,3 +1,10 @@
+# [2.1.0-staging.27](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.26...@dyte-in/ui-kit-v2.1.0-staging.27) (2024-10-01)
+
+
+### Bug Fixes
+
+* update z-index for dyte-avatar ([2f1ff72](https://github.com/dyte-io/ui-kit/commit/2f1ff7286af084310d8f4286e973eb066bcf55cf))
+
 # [2.1.0-staging.26](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.25...@dyte-in/ui-kit-v2.1.0-staging.26) (2024-10-01)
 
 
