@@ -24,6 +24,9 @@ jobs:
         run: |
           npm i
           npm i --workspaces
+
+          # Always install web-core staging
+          npm i -w packages/core @dytesdk/web-core@staging
           npm run build
 
       - name: Deploy 🚀

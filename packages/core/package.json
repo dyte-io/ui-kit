@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@dyteinternals/utils": "^1.7.10",
-    "@dytesdk/web-core": "2.1.0-staging.30",
+    "@dytesdk/web-core": "staging",
     "@rollup/plugin-commonjs": "24.0.1",
     "@rollup/plugin-node-resolve": "15.0.1",
     "@rollup/plugin-terser": "^0.4.0",
