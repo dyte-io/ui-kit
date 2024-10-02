@@ -6,6 +6,7 @@ import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@st
 import logger from '../../utils/logger';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import storeState from '../../lib/store';
+import { StageStatus } from '@dytesdk/web-core';
 
 const deviceCanScreenShare = () => {
   return (
@@ -77,6 +78,8 @@ export class DyteScreenShareToggle {
     disable: false,
   };
 
+  @State() stageStatus: StageStatus = 'OFF_STAGE';
+
   /**
    * Emit api error events
    */
@@ -122,6 +125,7 @@ export class DyteScreenShareToggle {
   };
 
   private stageStatusListener = () => {
+    this.stageStatus = this.meeting.stage.status;
     this.canScreenShare = this.meeting.self.permissions.canProduceScreenshare === 'ALLOWED';
   };
 
@@ -193,6 +197,7 @@ export class DyteScreenShareToggle {
         },
       });
 
+      this.stageStatus = meeting.stage.status;
       meeting.participants.joined.addListener('screenShareUpdate', this.screenShareListener);
       meeting.participants.joined.addListener('participantLeft', this.participantLeftListener);
       self.addListener('screenShareUpdate', this.screenShareListener);
@@ -291,7 +296,11 @@ export class DyteScreenShareToggle {
   }
 
   render() {
-    if (!deviceCanScreenShare() || !this.canScreenShare) {
+    if (
+      !deviceCanScreenShare() ||
+      !this.canScreenShare ||
+      ['OFF_STAGE', 'REQUESTED_TO_JOIN_STAGE'].includes(this.stageStatus)
+    ) {
       return null;
     }
 

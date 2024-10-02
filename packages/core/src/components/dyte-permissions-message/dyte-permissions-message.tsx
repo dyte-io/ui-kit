@@ -7,7 +7,8 @@ import { States } from '../../types/props';
 import storeState from '../../lib/store';
 
 const steps = {
-  ChromeDesktop: ['Chrome1.svg', 'Chrome2.svg', 'Chrome3.svg'],
+  'Chrome.Desktop.audio': ['Chrome1.svg', 'Chrome2.svg', 'Chrome3.svg'],
+  'Chrome.Desktop.video': ['Chrome1.svg', 'Chrome2.svg', 'Chrome3.svg'],
 };
 
 /**
@@ -54,7 +55,9 @@ export class DytePermissionsMessage {
     if (meeting != null) {
       this.device = meeting.self.device;
       const deviceType = this.device?.isMobile ? 'Mobile' : 'Desktop';
-      const currentSteps = steps[this.device?.browserName + deviceType] ?? [];
+      const currentSteps =
+        steps[`${this.device?.browserName}.${deviceType}.${this.mediaType}`] ?? [];
+
       Promise.all(currentSteps.map(this.getImage)).then((currentImages) => {
         this.svgSteps = currentImages;
       });
@@ -107,7 +110,7 @@ export class DytePermissionsMessage {
     const permissionsMessage = this.meeting?.self.mediaPermissions;
     if (permissionsMessage == null) return false;
 
-    if (Object.values(permissionsMessage).includes('SYSTEM_DENIED')) {
+    if (permissionsMessage[this.mediaType] === 'SYSTEM_DENIED') {
       return true;
     }
 
@@ -116,11 +119,14 @@ export class DytePermissionsMessage {
 
   private getTitle() {
     const isDeniedBySystem = this.isDeniedBySystem();
-    const media = this.states?.activePermissionsMessage?.kind ?? 'audio';
     if (isDeniedBySystem) {
-      return this.t(`perm_sys_denied.${media}`);
+      return this.t(`perm_sys_denied.${this.mediaType}`);
     }
-    return this.t(`perm_denied.${media}`);
+    return this.t(`perm_denied.${this.mediaType}`);
+  }
+
+  private get mediaType() {
+    return this.states?.activePermissionsMessage?.kind ?? 'audio';
   }
 
   private getMessage() {
@@ -128,7 +134,6 @@ export class DytePermissionsMessage {
     const isDeniedBySystem = this.isDeniedBySystem();
     const browser = browserName.toLowerCase() ?? 'others';
     const os = osName ?? 'others';
-    const media = this.states?.activePermissionsMessage?.kind ?? 'audio';
 
     /* NOTE(ravindra-dyte):
       If in case a unknown browser or os doesn't have a translation,
@@ -136,15 +141,15 @@ export class DytePermissionsMessage {
       such as `perm_denied.video.yandex browser.message`.
     */
     if (isDeniedBySystem) {
-      const systemErrorKey = `perm_sys_denied.${media}.${os.toLowerCase()}.message`;
+      const systemErrorKey = `perm_sys_denied.${this.mediaType}.${os.toLowerCase()}.message`;
       return this.t(systemErrorKey) === systemErrorKey
-        ? this.t(`perm_sys_denied.${media}.others.message`)
+        ? this.t(`perm_sys_denied.${this.mediaType}.others.message`)
         : this.t(systemErrorKey);
     }
 
-    const browserErrorKey = `perm_denied.${media}.${browser}.message`;
+    const browserErrorKey = `perm_denied.${this.mediaType}.${browser}.message`;
     return this.t(browserErrorKey) === browserErrorKey
-      ? this.t(`perm_denied.${media}.others.message`)
+      ? this.t(`perm_denied.${this.mediaType}.others.message`)
       : this.t(browserErrorKey);
   }
 
@@ -167,6 +172,22 @@ export class DytePermissionsMessage {
     this.currentStep = (this.currentStep + 1) % this.svgSteps.length;
   };
 
+  private openMacSystemSettings = () => {
+    const l = document.createElement('a');
+    switch (this.mediaType) {
+      case 'audio':
+        l.href = 'x-apple.systempreferences:com.apple.preference.security?Privacy_Microphone';
+        break;
+      case 'screenshare':
+        l.href = 'x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture';
+        break;
+      case 'video':
+        l.href = 'x-apple.systempreferences:com.apple.preference.security?Privacy_Camera';
+        break;
+    }
+    l.click();
+  };
+
   private stepsTimer: NodeJS.Timeout;
 
   render() {
@@ -175,6 +196,8 @@ export class DytePermissionsMessage {
       if (this.stepsTimer) clearTimeout(this.stepsTimer);
       this.stepsTimer = setTimeout(this.nextStep, 2500);
     }
+
+    const showMacDeepLink = isDeniedBySystem && this.meeting.self.device.osName == 'macOS';
 
     return (
       <Host>
@@ -228,15 +251,27 @@ export class DytePermissionsMessage {
           >
             {this.t('cta.continue')}
           </dyte-button>
-          <dyte-button
-            size="lg"
-            kind="wide"
-            onClick={this.reload}
-            iconPack={this.iconPack}
-            t={this.t}
-          >
-            {this.t('cta.reload')}
-          </dyte-button>
+          {showMacDeepLink ? (
+            <dyte-button
+              size="lg"
+              kind="wide"
+              onClick={this.openMacSystemSettings}
+              iconPack={this.iconPack}
+              t={this.t}
+            >
+              {this.t('cta.system_settings')}
+            </dyte-button>
+          ) : (
+            <dyte-button
+              size="lg"
+              kind="wide"
+              onClick={this.reload}
+              iconPack={this.iconPack}
+              t={this.t}
+            >
+              {this.t('cta.reload')}
+            </dyte-button>
+          )}
         </div>
 
         <slot></slot>

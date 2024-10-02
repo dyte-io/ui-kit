@@ -7,6 +7,9 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Comment on PR
         env:
           PR_NUMBER: ${{ github.event.number }}

@@ -83,12 +83,11 @@ export class DyteParticipantTile {
   @Event() tileUnload: EventEmitter<Peer>;
 
   private onVideoRef(el: HTMLVideoElement) {
-    this.videoEl = el;
-    if (this.isPreview || this.participant == null || this.meeting == null) {
+    if (!this.participant || !this.meeting) {
       return;
     }
-    this.participant && this.participant.registerVideoElement(el);
-
+    this.videoEl = el;
+    this.participant.registerVideoElement(this.videoEl, this.isPreview);
     this.tileLoad.emit({ participant: this.participant, videoElement: this.videoEl });
   }
 
@@ -108,7 +107,7 @@ export class DyteParticipantTile {
     if (this.playTimeout) clearTimeout(this.playTimeout);
     if (this.participant == null) return;
 
-    this.participant.deregisterVideoElement(this.videoEl);
+    this.participant.deregisterVideoElement(this.videoEl, this.isPreview);
     (this.participant as DyteParticipant).removeListener('pinned', this.onPinned);
     (this.participant as DyteParticipant).removeListener('unpinned', this.onPinned);
     this.meeting.meta.off('mediaConnectionUpdate', this.mediaConnectionUpdateListener);
@@ -128,14 +127,14 @@ export class DyteParticipantTile {
 
     if (this.meeting === undefined) {
       if (this.isPreview) {
-        this.videoEl && this.participant.registerVideoElement(this.videoEl);
+        this.videoEl && this.participant.registerVideoElement(this.videoEl, this.isPreview);
       }
       return;
     }
 
     this.isPinned = participant.isPinned;
 
-    this.videoEl && this.participant.registerVideoElement(this.videoEl);
+    this.videoEl && this.participant.registerVideoElement(this.videoEl, this.isPreview);
 
     (participant as DyteParticipant).addListener('pinned', this.onPinned);
     (participant as DyteParticipant).addListener('unpinned', this.onPinned);

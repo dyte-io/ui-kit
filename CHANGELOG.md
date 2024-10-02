@@ -1,3 +1,258 @@
+# [2.1.0-staging.29](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.28...@dyte-in/ui-kit-v2.1.0-staging.29) (2024-10-02)
+
+
+### Features
+
+* improve macos permission messages ([1dc9735](https://github.com/dyte-io/ui-kit/commit/1dc973560b076ad58515a41c223ef1031934f4f9))
+
+# [2.1.0-staging.28](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.27...@dyte-in/ui-kit-v2.1.0-staging.28) (2024-10-01)
+
+
+### Bug Fixes
+
+* use absolute dimensions for avatar ([d9da4ed](https://github.com/dyte-io/ui-kit/commit/d9da4ed5eee984105b7efcf1eed94797a458c2d0))
+
+# [2.1.0-staging.27](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.26...@dyte-in/ui-kit-v2.1.0-staging.27) (2024-10-01)
+
+
+### Bug Fixes
+
+* update z-index for dyte-avatar ([2f1ff72](https://github.com/dyte-io/ui-kit/commit/2f1ff7286af084310d8f4286e973eb066bcf55cf))
+
+# [2.1.0-staging.26](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.25...@dyte-in/ui-kit-v2.1.0-staging.26) (2024-10-01)
+
+
+### Bug Fixes
+
+* always deploy staging web-core ([f0c4713](https://github.com/dyte-io/ui-kit/commit/f0c47138eecbc90090340cbb27e3fb0ed0c03159))
+
+# [2.1.0-staging.25](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.24...@dyte-in/ui-kit-v2.1.0-staging.25) (2024-10-01)
+
+
+### Bug Fixes
+
+* pip misc bugs ([8d3c213](https://github.com/dyte-io/ui-kit/commit/8d3c21382cc9b2101ca632b71245640b877cba0e))
+
+# [2.1.0-staging.24](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.23...@dyte-in/ui-kit-v2.1.0-staging.24) (2024-09-28)
+
+
+### Bug Fixes
+
+* render preview video with new render API ([66903a0](https://github.com/dyte-io/ui-kit/commit/66903a07a7fd174e79c4eba7cc4ccf62b2237eb5))
+
+# [2.1.0-staging.23](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.22...@dyte-in/ui-kit-v2.1.0-staging.23) (2024-09-27)
+
+
+### Bug Fixes
+
+* register video element on video re renders ([725fb96](https://github.com/dyte-io/ui-kit/commit/725fb968a883e734560597e20930a9402003c678))
+
+# [2.1.0-staging.22](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.21...@dyte-in/ui-kit-v2.1.0-staging.22) (2024-09-27)
+
+
+### Bug Fixes
+
+* upgrade web-core ([3aebb6c](https://github.com/dyte-io/ui-kit/commit/3aebb6c58b6f9331b84c0ee8639b6942222a4fb1))
+
+# [2.1.0-staging.21](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.20...@dyte-in/ui-kit-v2.1.0-staging.21) (2024-09-27)
+
+
+### Bug Fixes
+
+* push avatar behind the video element ([8a1b1d7](https://github.com/dyte-io/ui-kit/commit/8a1b1d7da68fe45642c8341b112f63b4b58f595c))
+
+# [2.1.0-staging.20](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.19...@dyte-in/ui-kit-v2.1.0-staging.20) (2024-09-26)
+
+
+### Bug Fixes
+
+* run npm i and npm i --ws ([46eeeae](https://github.com/dyte-io/ui-kit/commit/46eeeaeffa3abf86a054a44569cdf34dcb8fed0a))
+* run npm i inside workspaces ([4aa2968](https://github.com/dyte-io/ui-kit/commit/4aa2968fc42eb431a67043c1307211a76ebacd05))
+
+# [2.1.0-staging.19](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.18...@dyte-in/ui-kit-v2.1.0-staging.19) (2024-09-26)
+
+
+### Bug Fixes
+
+* added checkout on pr-comment ([50c11cb](https://github.com/dyte-io/ui-kit/commit/50c11cb0f0fc34f275e7d05bb59fe521d24fdf93))
+* github actions build step ([804d011](https://github.com/dyte-io/ui-kit/commit/804d0118847e9a2edfcdbffd31cfed3d3ac4e385))
+
+# [2.1.0-staging.18](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.17...@dyte-in/ui-kit-v2.1.0-staging.18) (2024-09-26)
+
+
+### Bug Fixes
+
+* github actions deploy ([c6f4e24](https://github.com/dyte-io/ui-kit/commit/c6f4e24f93749e9c153f012065ab1295a6be8dd0))
+
+# [2.1.0-staging.17](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.16...@dyte-in/ui-kit-v2.1.0-staging.17) (2024-09-26)
+
+
+### Bug Fixes
+
+* update web-core version ([eb497d9](https://github.com/dyte-io/ui-kit/commit/eb497d958ad034b12931c38e3e56143fa3b690a6))
+
+# [2.1.0-staging.16](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.15...@dyte-in/ui-kit-v2.1.0-staging.16) (2024-09-25)
+
+
+### Bug Fixes
+
+* move pip controls to web-core ([1250d9a](https://github.com/dyte-io/ui-kit/commit/1250d9a991f5c4906d2ab9367b7f12d075b9de9f))
+
+# [2.1.0-staging.15](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.14...@dyte-in/ui-kit-v2.1.0-staging.15) (2024-09-25)
+
+
+### Bug Fixes
+
+* **off-stage-actions:** mic and camera toggle should not be shown off stage ([23ae96d](https://github.com/dyte-io/ui-kit/commit/23ae96d9fe494424d8cea0b0fd680de8b559eb25))
+* **offstage-screenshare:** permission update for screenshare was causing toggle to show up off stage ([4485515](https://github.com/dyte-io/ui-kit/commit/4485515faef3086d046e18ba652e89325f0764b7))
+
+
+### Features
+
+* **internal:** added ability to show view only public chat ([17d8b7a](https://github.com/dyte-io/ui-kit/commit/17d8b7a80c9abd169cbfacda19c62177259dd20c))
+
+# [2.1.0-staging.14](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.13...@dyte-in/ui-kit-v2.1.0-staging.14) (2024-09-23)
+
+
+### Bug Fixes
+
+* toggle controlbar icon on dynamic permission change ([478e92d](https://github.com/dyte-io/ui-kit/commit/478e92d094a8608f32cb70dd883d7c294d924701))
+
+# [2.1.0-staging.13](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.12...@dyte-in/ui-kit-v2.1.0-staging.13) (2024-09-18)
+
+
+### Bug Fixes
+
+* added action step to auto-update staging branch ([6ff7104](https://github.com/dyte-io/ui-kit/commit/6ff7104afd6aa94dad677f66cf8be4203bd6dd41))
+
+# [2.1.0-staging.12](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.11...@dyte-in/ui-kit-v2.1.0-staging.12) (2024-09-18)
+
+
+### Bug Fixes
+
+* public repo final release ([89190db](https://github.com/dyte-io/ui-kit/commit/89190dba661f84554de174af0a84d6573b74a76d))
+
+# [2.1.0-staging.11](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.10...@dyte-in/ui-kit-v2.1.0-staging.11) (2024-09-18)
+
+
+### Bug Fixes
+
+* create release ([c41905a](https://github.com/dyte-io/ui-kit/commit/c41905a7ad5c291b06a8b7479ae89c851dd797d5))
+
+# [2.1.0-staging.10](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.9...@dyte-in/ui-kit-v2.1.0-staging.10) (2024-09-18)
+
+
+### Bug Fixes
+
+* access to npm publish ([6508322](https://github.com/dyte-io/ui-kit/commit/6508322cd8ed3305e539c348505a8ac79cfd1a4a))
+
+# [2.1.0-staging.9](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.8...@dyte-in/ui-kit-v2.1.0-staging.9) (2024-09-18)
+
+
+### Bug Fixes
+
+* create release ([128b2a8](https://github.com/dyte-io/ui-kit/commit/128b2a8950dda0a6c16bc28d632a0b7c295181f9))
+
+# [2.1.0-staging.8](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.7...@dyte-in/ui-kit-v2.1.0-staging.8) (2024-09-17)
+
+
+### Bug Fixes
+
+* create release ([7c74b86](https://github.com/dyte-io/ui-kit/commit/7c74b864e839bc35557e46ace3eee02e0b5540e9))
+
+# [2.1.0-staging.7](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.6...@dyte-in/ui-kit-v2.1.0-staging.7) (2024-09-17)
+
+
+### Bug Fixes
+
+* publish using lerna ([1b072c2](https://github.com/dyte-io/ui-kit/commit/1b072c2de1a6154fd62510926637e06d6d0c5135))
+
+# [2.1.0-staging.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.5...@dyte-in/ui-kit-v2.1.0-staging.6) (2024-09-17)
+
+
+### Bug Fixes
+
+* create release ([eaafee2](https://github.com/dyte-io/ui-kit/commit/eaafee2642ae390f36e425743c23cb9c39e350d4))
+
+# [2.1.0-staging.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.4...@dyte-in/ui-kit-v2.1.0-staging.5) (2024-09-17)
+
+
+### Features
+
+* **release:** created new package release ([f0eb31e](https://github.com/dyte-io/ui-kit/commit/f0eb31eca4e1bd6f04cfee1854f8ad195fee0959))
+* **release:** update package version ([00b2690](https://github.com/dyte-io/ui-kit/commit/00b2690f6697f3fed5cf245a2b8f3994f0c2a87c))
+
+# [2.1.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.3...@dyte-in/ui-kit-v2.1.0-staging.4) (2024-09-17)
+
+
+### Features
+
+* feature release ([ca643ff](https://github.com/dyte-io/ui-kit/commit/ca643ffe0075e72b5e17b8f89dbb7f690a7f1b80))
+* feature release ([661ff63](https://github.com/dyte-io/ui-kit/commit/661ff633a363fcb5d1ee38b0dccdc28a124a0e4f))
+* **release:** created new package release ([9ef1088](https://github.com/dyte-io/ui-kit/commit/9ef10883a7078730f3d099c6a62baec53eda7caa))
+* **release:** created new package release ([6bfa5df](https://github.com/dyte-io/ui-kit/commit/6bfa5dfe7ff1fd144b7b1bc0026ded492052f3d1))
+
+# [2.1.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.3...@dyte-in/ui-kit-v2.1.0-staging.4) (2024-09-17)
+
+
+### Features
+
+* feature release ([ca643ff](https://github.com/dyte-io/ui-kit/commit/ca643ffe0075e72b5e17b8f89dbb7f690a7f1b80))
+* feature release ([661ff63](https://github.com/dyte-io/ui-kit/commit/661ff633a363fcb5d1ee38b0dccdc28a124a0e4f))
+* **release:** created new package release ([6bfa5df](https://github.com/dyte-io/ui-kit/commit/6bfa5dfe7ff1fd144b7b1bc0026ded492052f3d1))
+
+# [2.1.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.3...@dyte-in/ui-kit-v2.1.0-staging.4) (2024-09-17)
+
+
+### Features
+
+* feature release ([ca643ff](https://github.com/dyte-io/ui-kit/commit/ca643ffe0075e72b5e17b8f89dbb7f690a7f1b80))
+* feature release ([661ff63](https://github.com/dyte-io/ui-kit/commit/661ff633a363fcb5d1ee38b0dccdc28a124a0e4f))
+
+# [2.1.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.3...@dyte-in/ui-kit-v2.1.0-staging.4) (2024-09-17)
+
+
+### Features
+
+* feature release ([661ff63](https://github.com/dyte-io/ui-kit/commit/661ff633a363fcb5d1ee38b0dccdc28a124a0e4f))
+
+# [2.1.0-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.2...@dyte-in/ui-kit-v2.1.0-staging.3) (2024-09-17)
+
+
+### Features
+
+* feature release ([5dc0f57](https://github.com/dyte-io/ui-kit/commit/5dc0f575cca6a8918e1bd740a115ad0d842cdabc))
+
+# [2.1.0-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.1...@dyte-in/ui-kit-v2.1.0-staging.2) (2024-09-17)
+
+
+### Features
+
+* npm publish set to true ([c4d367b](https://github.com/dyte-io/ui-kit/commit/c4d367b13d0dc48522fca7181b0e080d22ad3730))
+
+# [2.1.0-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v1.0.0-staging.2...@dyte-in/ui-kit-v2.1.0-staging.1) (2024-09-17)
+
+
+### Bug Fixes
+
+* patch release ([db325af](https://github.com/dyte-io/ui-kit/commit/db325af9326cdf7487e7043b34b2852acf557a3b))
+
+# [1.0.0-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v1.0.0-staging.1...@dyte-in/ui-kit-v1.0.0-staging.2) (2024-09-17)
+
+
+### Bug Fixes
+
+* create patch release ([82237b1](https://github.com/dyte-io/ui-kit/commit/82237b1801540656ebc72466984ed71b29984c60))
+* patch release ([c084560](https://github.com/dyte-io/ui-kit/commit/c084560861d4845b963e645a7eeb7a467c3d1049))
+
+# 1.0.0-staging.1 (2024-09-17)
+
+
+### Features
+
+* added ui-kit public source ([becdf7d](https://github.com/dyte-io/ui-kit/commit/becdf7d3eb6bdf5a2c023a426d10e8bc06852369))
+* initial commit ([a31f52c](https://github.com/dyte-io/ui-kit/commit/a31f52c2cab444fbd0f10d2219a790cf09ae23ea))
+
 # [2.1.0-staging.4](https://github.com/dyte-in/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.3...@dyte-in/ui-kit-v2.1.0-staging.4) (2024-09-12)
 
 

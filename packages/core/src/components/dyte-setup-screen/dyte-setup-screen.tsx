@@ -115,7 +115,7 @@ export class DyteSetupScreen {
             <Render
               element="dyte-participant-tile"
               defaults={defaults}
-              props={{ participant: this.meeting?.self, size: 'md' }}
+              props={{ participant: this.meeting?.self, size: 'md', isPreview: true }}
               childProps={{ participant: this.meeting?.self, size: 'md' }}
               deepProps
             />

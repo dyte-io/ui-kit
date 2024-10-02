@@ -1,8 +1,9 @@
 name: Release to NPM Registry
 on:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
+      - staging
   repository_dispatch:
     types: [prod-release]
 
@@ -32,3 +33,19 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           ENVIRONMENT: ${{ github.ref }}
         run: npx semantic-release
+
+      - name: Publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
+        run: npx lerna exec -- npm publish --access public
+
+      - name: Update staging branch
+        if: |
+          contains('refs/heads/main', github.ref)
+        run: |
+          git pull
+          git stash
+          git checkout staging
+          git merge main
+          git push --set-upstream origin staging

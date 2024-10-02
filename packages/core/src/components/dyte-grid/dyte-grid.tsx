@@ -130,6 +130,12 @@ export class DyteGrid {
     if (oldMeeting !== null) this.disconnectMeeting(oldMeeting);
     if (meeting != null) {
       const { self, participants, plugins, stage } = meeting;
+      // Check if PiP is supported and enabled
+      this.pipSupported =
+        this.meeting.participants.pip?.isSupported() && meeting.self.config?.pipMode;
+      if (this.pipSupported) {
+        this.meeting.participants.pip.init();
+      }
       // Initialize values
       const { permissions } = self;
 
@@ -159,13 +165,6 @@ export class DyteGrid {
       if (permissions?.stageEnabled) {
         this.canCurrentPeerHost = permissions.acceptStageRequests || permissions.canPresent;
         this.updateStage();
-      }
-
-      // Check if PiP is supported and enabled
-      this.pipSupported =
-        this.meeting.participants.pip?.isSupported() && meeting.self.config?.pipMode;
-      if (this.pipSupported) {
-        this.meeting.participants.pip.init();
       }
 
       // Add all listeners

@@ -18,6 +18,10 @@
   }
 }
 
+dyte-avatar {
+  z-index: -1;
+}
+
 /**
   NOTE: provided :slotted(dyte-name-tag) & dyte-name-tag separately
   because ::slotted isn't applied on default slots.
@@ -146,8 +150,7 @@ video.mirror {
 
   ::slotted(dyte-avatar),
   dyte-avatar {
-    transform: scale(0.6);
-    @apply min-w-14;
+    @apply h-12 w-12;
   }
 
   :host([size='sm'][variant='solid']) {
@@ -172,8 +175,7 @@ video.mirror {
 
   ::slotted(dyte-avatar),
   dyte-avatar {
-    transform: scale(0.6);
-    @apply min-w-14;
+    @apply h-12 w-12;
   }
 
   :host([size='sm'][variant='solid']) {
@@ -196,7 +198,7 @@ video.mirror {
 
   ::slotted(dyte-avatar),
   dyte-avatar {
-    transform: scale(0.8);
+    @apply !h-8 !w-8;
   }
 }
 
@@ -211,6 +213,6 @@ video.mirror {
 
   ::slotted(dyte-avatar),
   dyte-avatar {
-    transform: scale(0.6);
+    @apply !h-[6] !w-[6];
   }
 }

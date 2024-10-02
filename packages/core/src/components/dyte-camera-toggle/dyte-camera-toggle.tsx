@@ -5,6 +5,7 @@ import state from '../../lib/store';
 import { Meeting, Peer, MediaPermission } from '../../types/dyte-client';
 import { PermissionSettings, Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { StageStatus } from '@dytesdk/web-core';
 
 /**
  * A button which toggles your camera.
@@ -20,12 +21,21 @@ export class DyteCameraToggle {
   };
 
   private stageStatusListener = () => {
+    this.stageStatus = this.meeting.stage.status;
     this.canProduceVideo = this.meeting.self.permissions.canProduceVideo === 'ALLOWED';
   };
 
   private mediaPermissionUpdateListener = ({ kind, message }) => {
     if (kind === 'video') {
       this.cameraPermission = message;
+    }
+  };
+
+  private meetingPermissionsUpdateListener = (patch?: {
+    media?: { video?: { canProduce?: number } };
+  }) => {
+    if (patch?.media?.video) {
+      this.canProduceVideo = this.meeting.self.permissions.canProduceVideo === 'ALLOWED';
     }
   };
 
@@ -50,6 +60,8 @@ export class DyteCameraToggle {
 
   @State() cameraPermission: MediaPermission = 'NOT_REQUESTED';
 
+  @State() stageStatus: StageStatus = 'OFF_STAGE';
+
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
@@ -61,6 +73,10 @@ export class DyteCameraToggle {
     this.meeting?.self.removeListener('videoUpdate', this.videoUpdateListener);
     this.meeting?.self.removeListener('mediaPermissionUpdate', this.mediaPermissionUpdateListener);
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.stageStatusListener);
+    this.meeting?.self?.permissions?.removeListener(
+      'permissionsUpdate',
+      this.meetingPermissionsUpdateListener
+    );
   }
 
   @Watch('meeting')
@@ -71,9 +87,14 @@ export class DyteCameraToggle {
       this.cameraPermission = self.mediaPermissions.video || 'NOT_REQUESTED';
       this.videoEnabled = self.videoEnabled;
 
+      this.stageStatus = meeting.stage.status;
       self.addListener('videoUpdate', this.videoUpdateListener);
       self.addListener('mediaPermissionUpdate', this.mediaPermissionUpdateListener);
       stage?.addListener('stageStatusUpdate', this.stageStatusListener);
+      meeting?.self?.permissions?.addListener(
+        'permissionsUpdate',
+        this.meetingPermissionsUpdateListener
+      );
     }
   }
 
@@ -160,7 +181,11 @@ export class DyteCameraToggle {
   }
 
   render() {
-    if (!this.canProduceVideo || this.meeting?.meta.viewType === 'AUDIO_ROOM') {
+    if (
+      !this.canProduceVideo ||
+      this.meeting?.meta.viewType === 'AUDIO_ROOM' ||
+      ['OFF_STAGE', 'REQUESTED_TO_JOIN_STAGE'].includes(this.stageStatus)
+    ) {
       return null;
     }
 
