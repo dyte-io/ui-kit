@@ -306,6 +306,7 @@ export const defaultLanguage = {
   'cta.continue': 'Ignore',
   'cta.reload': 'Reload',
   'cta.confirmation': 'Are you sure?',
+  'cta.system_settings': 'Open Settings',
   'remote_access.empty': 'There are no remote requests, yet.',
   'remote_access.requests':
     'The following people have requested remote control to your screen share.',
