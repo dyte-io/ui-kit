@@ -1,3 +1,10 @@
+# [2.1.0-staging.29](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.28...@dyte-in/ui-kit-v2.1.0-staging.29) (2024-10-02)
+
+
+### Features
+
+* improve macos permission messages ([1dc9735](https://github.com/dyte-io/ui-kit/commit/1dc973560b076ad58515a41c223ef1031934f4f9))
+
 # [2.1.0-staging.28](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.27...@dyte-in/ui-kit-v2.1.0-staging.28) (2024-10-01)
 
 
