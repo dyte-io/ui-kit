@@ -56,6 +56,7 @@ export class DyteSpeakerSelector {
   disconnectedCallback() {
     this.meeting?.self.removeListener('deviceListUpdate', this.deviceListUpdateListener);
     this.meeting?.self.removeListener('deviceUpdate', this.deviceUpdateListener);
+    this.meeting?.self.addListener('mediaPermissionUpdate', this.mediaPermissionUpdate);
   }
 
   private deviceListUpdateListener = ({ devices }) => {
@@ -77,6 +78,13 @@ export class DyteSpeakerSelector {
     }
   };
 
+  private mediaPermissionUpdate = async ({ kind, message }) => {
+    if (!this.meeting) return;
+    if (kind === 'audio' && message === 'ACCEPTED') {
+      this.speakerDevices = await this.meeting.self.getSpeakerDevices();
+    }
+  };
+
   @Watch('meeting')
   meetingChanged(meeting: Meeting) {
     if (meeting == null) return;
@@ -91,6 +99,7 @@ export class DyteSpeakerSelector {
 
       self.addListener('deviceListUpdate', this.deviceListUpdateListener);
       self.addListener('deviceUpdate', this.deviceUpdateListener);
+      self.addListener('mediaPermissionUpdate', this.mediaPermissionUpdate);
 
       if (currentSpeakerDevice != undefined) {
         this.speakerDevices = [
