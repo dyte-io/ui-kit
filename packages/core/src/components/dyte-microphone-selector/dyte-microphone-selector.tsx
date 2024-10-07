@@ -52,6 +52,7 @@ export class DyteMicrophoneSelector {
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.stageStateListener);
     this.meeting?.self.removeListener('deviceListUpdate', this.deviceListUpdateListener);
     this.meeting?.self.removeListener('deviceUpdate', this.deviceUpdateListener);
+    this.meeting?.self.removeListener('mediaPermissionUpdate', this.mediaPermissionUpdateListener);
   }
 
   private stageStateListener = () => {
@@ -77,6 +78,13 @@ export class DyteMicrophoneSelector {
     }
   };
 
+  private mediaPermissionUpdateListener = async ({ kind, message }) => {
+    if (!this.meeting) return;
+    if (kind === 'audio' && message === 'ACCEPTED') {
+      this.audioinputDevices = await this.meeting.self.getAudioDevices();
+    }
+  };
+
   @Watch('meeting')
   meetingChanged(meeting: Meeting) {
     if (meeting == null) return;
@@ -93,6 +101,7 @@ export class DyteMicrophoneSelector {
       stage?.addListener('stageStatusUpdate', this.stageStateListener);
       self.addListener('deviceListUpdate', this.deviceListUpdateListener);
       self.addListener('deviceUpdate', this.deviceUpdateListener);
+      self.addListener('mediaPermissionUpdate', this.mediaPermissionUpdateListener);
 
       if (currentAudioDevice != undefined) {
         this.audioinputDevices = [

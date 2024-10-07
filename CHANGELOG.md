@@ -1,3 +1,11 @@
+# [2.1.0-staging.30](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.29...@dyte-in/ui-kit-v2.1.0-staging.30) (2024-10-07)
+
+
+### Bug Fixes
+
+* build trigger ([4899df0](https://github.com/dyte-io/ui-kit/commit/4899df04225ab39e4bf0bce48f0d2ab3d208e1bc))
+* update device selector state as per media permission state ([655a505](https://github.com/dyte-io/ui-kit/commit/655a505f0c5fd01d71d4720b0d720b324fd126ff))
+
 ## [2.0.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.0.3...@dyte-in/ui-kit-v2.0.4) (2024-10-02)
 
 

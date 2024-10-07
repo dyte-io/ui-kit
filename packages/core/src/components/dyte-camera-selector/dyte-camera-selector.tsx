@@ -49,6 +49,7 @@ export class DyteCameraSelector {
 
     meeting.self?.addListener('deviceListUpdate', this.deviceListUpdateListener);
     meeting.self?.addListener('deviceUpdate', this.deviceUpdateListener);
+    meeting.self?.addListener('mediaPermissionUpdate', this.mediaPermissionUpdateListener);
 
     writeTask(async () => {
       const videoDevices = await meeting.self.getVideoDevices();
@@ -75,6 +76,7 @@ export class DyteCameraSelector {
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.stageStateListener);
     this.meeting?.self.removeListener('deviceListUpdate', this.deviceListUpdateListener);
     this.meeting?.self.removeListener('deviceUpdate', this.deviceUpdateListener);
+    this.meeting?.self.removeListener('mediaPermissionUpdate', this.mediaPermissionUpdateListener);
   }
 
   private stageStateListener = () => {
@@ -88,6 +90,13 @@ export class DyteCameraSelector {
   private deviceUpdateListener = ({ device }) => {
     if (device.kind !== 'videoinput') return;
     this.currentDevice = device;
+  };
+
+  private mediaPermissionUpdateListener = async ({ kind, message }) => {
+    if (!this.meeting) return;
+    if (kind === 'video' && message === 'ACCEPTED') {
+      this.videoDevices = await this.meeting.self.getVideoDevices();
+    }
   };
 
   private async setDevice(deviceId: string) {
