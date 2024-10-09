@@ -8,8 +8,8 @@
   @apply relative m-4 flex grow items-center justify-center overflow-hidden rounded-md;
 }
 
-video {
-  @apply bg-background-1000 z-0 h-full w-full rounded-md border-none;
+.player {
+  @apply bg-background-1000 rounded-md left-0 h-full w-auto aspect-video z-20 border-[0px];;
 }
 
 .loader {
