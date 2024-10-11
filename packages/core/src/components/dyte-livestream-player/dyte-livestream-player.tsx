@@ -3,13 +3,14 @@ import { Component, h, Host, Prop, State, Watch, Event, EventEmitter } from '@st
 import { Size, DyteI18n, IconPack, defaultIconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
-import {
-  awsIvsPlayerEventsToIgnore,
-  isIvsPlayerCallStatsEvent,
-  showLivestream,
-  PlayerEventType,
-  PlayerState,
-} from '../../utils/livestream';
+import { showLivestream, PlayerEventType, PlayerState } from '../../utils/livestream';
+
+const sdkScriptLocation = 'https://embed.cloudflarestream.com/embed/sdk.latest.js';
+
+const safelyAccessStreamSDK = () => {
+  if (typeof window === 'undefined') return undefined;
+  return window['Stream'];
+};
 
 @Component({
   tag: 'dyte-livestream-player',
@@ -18,10 +19,6 @@ import {
 })
 export class DyteLivestreamPlayer {
   private player: HTMLVideoElement;
-  private ivsPlayer: any;
-  private showLatencyIndicator: boolean = false;
-  private updateLatency: any;
-  private sendLatencyToCallStats: any;
 
   /** Meeting object */
   @Prop() meeting!: Meeting;
@@ -49,6 +46,12 @@ export class DyteLivestreamPlayer {
 
   @State() audioPlaybackError: boolean = false;
 
+  @State() streamSDK: any = undefined;
+
+  @State() streamInstance: any = undefined;
+
+  private playerElement: HTMLIFrameElement;
+
   /**
    * Emit API error events
    */
@@ -57,87 +60,10 @@ export class DyteLivestreamPlayer {
     message: string;
   }>;
 
-  private AddPlayerListeners(player: any = this.ivsPlayer) {
-    Object.values({
-      ...PlayerEventType,
-      ...PlayerState,
-    }).forEach((key: PlayerState | PlayerEventType) => {
-      if (awsIvsPlayerEventsToIgnore.includes(key as PlayerEventType)) return;
-      player?.addEventListener(key, (event: any) => {
-        if (
-          key === PlayerState.IDLE ||
-          key === PlayerState.PLAYING ||
-          key === PlayerEventType.ERROR ||
-          key === PlayerState.READY
-        )
-          this.playerState = key;
-        if (key === PlayerEventType.ERROR) {
-          this.playerError = event;
-        }
-        if (key === PlayerState.IDLE && player.isPaused()) {
-          player.play();
-        }
-        if (key === PlayerEventType.AUDIO_BLOCKED) {
-          this.audioPlaybackError = true;
-        }
-        if (
-          this.playerState === PlayerState.PLAYING &&
-          !this.meeting.__internals__?.browserSpecs?.isIOSMobile()
-        ) {
-          this.showLatencyIndicator = true;
-        } else this.showLatencyIndicator = false;
-        this.meeting.__internals__.logger.info(`IVS.Player.${key}`, event);
-
-        // Send selected data to CallStats
-        if (isIvsPlayerCallStatsEvent.includes(key as PlayerEventType)) {
-          this.meeting.__internals__.callStats?.ivsPlayerEvent(key, event);
-        }
-      });
-    });
-  }
-
-  private LoadPlayer = (player: any = this.ivsPlayer) => {
-    if (this.player && player) {
-      player.attachHTMLVideoElement(this.player);
-      player.setAutoplay(true);
-      player.setVolume(1);
-    }
-  };
-
-  private getPlaybackUrl(player: any = this.ivsPlayer) {
-    this.playbackUrl = this.meeting.livestream.playbackUrl;
-    if (this.playbackUrl && player) {
-      player.load(this.playbackUrl);
-      player.play();
-    }
-  }
-
   private livestreamUpdateListener = (state: LivestreamState) => {
+    console.log('Livestream state updated', state);
     this.livestreamState = state;
-    if (state === 'LIVESTREAMING') {
-      this.LoadPlayer();
-      this.getPlaybackUrl();
-      if (!this.meeting.__internals__?.browserSpecs?.isIOSMobile()) {
-        this.fetchLatency();
-        this.updateLatency = setInterval(this.fetchLatency, 2000);
-      }
-      this.meeting.participants.pip?.enableSource('livestream-player');
-    } else {
-      this.showLatencyIndicator = false;
-      if (this.updateLatency) clearInterval(this.updateLatency);
-      this.meeting.participants.pip?.disableSource('livestream-player');
-    }
   };
-
-  private onPlayerRef(el: HTMLVideoElement) {
-    this.player = el;
-    this.meeting.participants.pip?.addSource(
-      'livestream-player',
-      this.player,
-      this.playbackUrl ? true : false
-    );
-    if (this.playbackUrl) this.meeting.participants.pip?.enableSource('livestream-player');
-  }
 
   private getLoadingState = () => {
     let loadingMessage = '';
@@ -187,7 +113,7 @@ export class DyteLivestreamPlayer {
       isError = true;
       errorMessage = this.t('livestream.error.not_supported');
     }
-    if (!this.playbackUrl) {
+    if (!this.meeting.livestream.playbackUrl) {
       isError = true;
       errorMessage = this.t('livestream.error.not_found');
     }
@@ -198,108 +124,65 @@ export class DyteLivestreamPlayer {
     return { isError, errorMessage };
   };
 
-  private fetchLatency = () => {
-    if (this.ivsPlayer) {
-      this.latency = this.ivsPlayer.getLiveLatency();
-      this.meeting.__internals__.logger.info('IVS.Player.LivestreamLatency', {
-        livestream: {
-          latency: this.latency,
-        },
+  initializeStreamInstance = async () => {
+    if (this.streamSDK && this.playerElement && !this.streamInstance) {
+      const player = new this.streamSDK(this.playerElement);
+      this.streamInstance = player;
+
+      player.addEventListener('play', () => {
+        this.playerState = PlayerState.PLAYING;
+      });
+
+      player.addEventListener('error', (error) => {
+        this.playerError = error;
+        this.playerState = PlayerEventType.ERROR;
       });
     }
   };
 
-  // private stopRebuffer = (latency: number) => {
-  //   this.ivsPlayer.setRebufferToLive(false);
-  //   this.latency = latency;
-  //   clearInterval(this.updateLatency);
-  //   this.updateLatency = setInterval(this.fetchLatency, 2000);
-  // };
+  setupStreamSDK = async () => {
+    const streamSDK = safelyAccessStreamSDK();
+    if (streamSDK) {
+      this.streamSDK = streamSDK;
+      return;
+    }
 
-  // private resetSyncLivestream = () => {
-  //   const latency = this.ivsPlayer.getLiveLatency();
-  //   this.stopRebuffer(latency);
-  //   this.dyteAPIError.emit({
-  //     trace: this.t('livestreamPlayer.rebuffer.error'),
-  //     message: this.t('livestream.error.sync'),
-  //   });
-  // };
+    const existingScript = document.querySelector<HTMLScriptElement>(
+      `script[src='${sdkScriptLocation}']`
+    );
+    const script = existingScript ?? document.createElement('script');
+    script.addEventListener('load', () => {
+      this.streamSDK = safelyAccessStreamSDK();
+      this.initializeStreamInstance();
+    });
+    if (!existingScript) {
+      script.src = sdkScriptLocation;
+      document.head.appendChild(script);
+    }
+  };
 
-  // private syncLiveStream = () => {
-  //   clearInterval(this.updateLatency);
-  //   // set latency to -1, to show loading icon
-  //   this.latency = -1;
-  //   this.ivsPlayer.setRebufferToLive(true);
-
-  //   // Reset after 15 seconds
-  //   const resetTimeout = setTimeout(this.resetSyncLivestream, 15000);
-
-  //   this.updateLatency = setInterval(() => {
-  //     const latency = this.ivsPlayer.getLiveLatency();
-  //     if (latency < 10) {
-  //       // Stop dropping frames
-  //       this.stopRebuffer(latency);
-  //       clearTimeout(resetTimeout);
-  //     }
-  //   }, 1000);
-  // };
+  cleanupStreamSDK = () => {
+    const script = document.querySelector<HTMLScriptElement>(`script[src='${sdkScriptLocation}']`);
+    if (script) {
+      script.remove();
+    }
+  };
 
   connectedCallback() {
     this.meetingChanged(this.meeting);
-    (window as any).onDyteLivestreamPlayer = (player) => {
-      if (player) {
-        this.isSupported = true;
-        this.ivsPlayer = player;
-        this.AddPlayerListeners(player);
-        this.LoadPlayer(player);
-        this.getPlaybackUrl(player);
-      } else this.isSupported = false;
-    };
-
-    this.sendLatencyToCallStats = setInterval(() => {
-      this.fetchLatency();
-      this.meeting.__internals__.callStats?.livestreamLatency(this.latency);
-    }, 10000);
+    this.setupStreamSDK();
   }
 
   disconnectedCallback() {
-    (window as any).onDyteLivestreamPlayer = undefined;
     this.meeting.livestream.removeListener('livestreamUpdate', this.livestreamUpdateListener);
-    clearInterval(this.sendLatencyToCallStats);
-    this.ivsPlayer.load('');
-    this.ivsPlayer = undefined;
     this.player = undefined;
-  }
-
-  async componentDidLoad() {
-    const IVSPlayerImport = `
-    import IVSPlayer from 'https://cdn.jsdelivr.net/npm/amazon-ivs-player@1.16.0/+esm'
-    let player = undefined;
-    if (IVSPlayer.isPlayerSupported) {
-      player = IVSPlayer.create({
-        wasmBinary:
-          'https://unpkg.com/amazon-ivs-player@1.11.0/dist/assets/amazon-ivs-wasmworker.min.wasm',
-        wasmWorker:
-          'https://unpkg.com/amazon-ivs-player@1.11.0/dist/assets/amazon-ivs-wasmworker.min.js',
-      });
-    }
-    window.onDyteLivestreamPlayer && window.onDyteLivestreamPlayer(player);
-    `;
-    const pScript = document.createElement('script');
-    pScript.type = 'module';
-    pScript.innerHTML = IVSPlayerImport;
-    document.body.appendChild(pScript);
+    this.cleanupStreamSDK();
   }
 
   @Watch('meeting')
   meetingChanged(meeting) {
     if (meeting == null) return;
     this.livestreamState = this.meeting.livestream.state;
-    if (this.livestreamState === 'LIVESTREAMING') {
-      this.LoadPlayer();
-      this.getPlaybackUrl();
-      this.meeting.participants.pip?.enableSource('livestream-player');
-    }
     this.meeting.livestream.on('livestreamUpdate', this.livestreamUpdateListener);
   }
 
@@ -311,7 +194,29 @@ export class DyteLivestreamPlayer {
     return (
       <Host>
         <div class="player-container">
-          <video ref={(el) => this.onPlayerRef(el)} playsInline></video>
+          {this.livestreamState === 'LIVESTREAMING' ? (
+            <iframe
+              src={this.meeting.livestream.playbackUrl.replace(
+                '/manifest/video.m3u8',
+                '/iframe?autoplay=true'
+              )}
+              allowFullScreen
+              allowTransparency
+              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+              style={{
+                border: 'none',
+                position: 'absolute',
+                top: '0',
+                height: '100%',
+                width: '100%',
+              }}
+              class={'player z-10'}
+              ref={(el) => {
+                this.playerElement = el;
+                this.initializeStreamInstance();
+              }}
+            ></iframe>
+          ) : null}
           {this.audioPlaybackError && (
             <div class="unmute-popup">
               <h3>{this.t('audio_playback.title')}</h3>
@@ -328,25 +233,6 @@ export class DyteLivestreamPlayer {
               >
                 {this.t('audio_playback')}
               </dyte-button>
-            </div>
-          )}
-          {this.livestreamState === 'LIVESTREAMING' && this.showLatencyIndicator && (
-            <div class="latency-controls">
-              {/* {(this.latency > 10 || this.latency < 0) && (
-                <div class="sync-live-stream" onClick={this.syncLiveStream}>
-                  {this.latency === -1 ? (
-                    <dyte-spinner
-                      id="icon"
-                      part="spinner"
-                      iconPack={this.iconPack}
-                      t={this.t}
-                      size="sm"
-                    />
-                  ) : (
-                    this.t('livestream.skip')
-                  )}
-                </div>
-              )} */}
             </div>
           )}
           {isError && (
