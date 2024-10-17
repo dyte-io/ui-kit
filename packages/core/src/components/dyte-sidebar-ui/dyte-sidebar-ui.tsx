@@ -20,6 +20,12 @@ export class DyteSidebarUi {
   /** Tabs */
   @Prop() tabs: DyteSidebarTab[] = [];
 
+  /** Hide Main Header */
+  @Prop() hideHeader: boolean = false;
+
+  /** Hide Close Action */
+  @Prop() hideCloseAction: boolean = false;
+
   /** Default tab to open */
   @Prop() currentTab: string;
 
@@ -47,17 +53,19 @@ export class DyteSidebarUi {
     return (
       <Host class={this.view}>
         {/* Close button */}
-        <dyte-button
-          variant="ghost"
-          kind="icon"
-          class="close"
-          onClick={this.onClose}
-          aria-label={this.t('close')}
-        >
-          <dyte-icon icon={this.iconPack.dismiss} />
-        </dyte-button>
+        {!this.hideCloseAction && (
+          <dyte-button
+            variant="ghost"
+            kind="icon"
+            class="close"
+            onClick={this.onClose}
+            aria-label={this.t('close')}
+          >
+            <dyte-icon icon={this.iconPack.dismiss} />
+          </dyte-button>
+        )}
 
-        {activeTab && (
+        {activeTab && !this.hideHeader && (
           <header class="main-header">
             <h3>{activeTab.name}</h3>
             <slot name="pinned-state" />

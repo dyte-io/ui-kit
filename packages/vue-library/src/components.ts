@@ -948,7 +948,9 @@ export const DyteParticipants = /*@__PURE__*/ defineContainer<JSX.DyteParticipan
   'config',
   'size',
   'iconPack',
-  't'
+  'defaultSection',
+  't',
+  'dyteStateUpdate'
 ]);
 
 
@@ -1213,6 +1215,8 @@ export const DyteSidebar = /*@__PURE__*/ defineContainer<JSX.DyteSidebar>('dyte-
 export const DyteSidebarUi = /*@__PURE__*/ defineContainer<JSX.DyteSidebarUi>('dyte-sidebar-ui', undefined, [
   'view',
   'tabs',
+  'hideHeader',
+  'hideCloseAction',
   'currentTab',
   'iconPack',
   't',
@@ -1402,6 +1406,15 @@ export const DyteViewerCount = /*@__PURE__*/ defineContainer<JSX.DyteViewerCount
   'variant',
   'iconPack',
   't'
+]);
+
+
+export const DyteVirtualizedParticipantList = /*@__PURE__*/ defineContainer<JSX.DyteVirtualizedParticipantList>('dyte-virtualized-participant-list', undefined, [
+  'items',
+  'renderItem',
+  'itemHeight',
+  'bufferedItemsCount',
+  'emptyListElement'
 ]);
 
 

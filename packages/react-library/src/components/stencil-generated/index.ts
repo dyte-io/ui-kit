@@ -141,4 +141,5 @@ export const DyteTranscript = /*@__PURE__*/createReactComponent<JSX.DyteTranscri
 export const DyteTranscripts = /*@__PURE__*/createReactComponent<JSX.DyteTranscripts, HTMLDyteTranscriptsElement>('dyte-transcripts');
 export const DyteUiProvider = /*@__PURE__*/createReactComponent<JSX.DyteUiProvider, HTMLDyteUiProviderElement>('dyte-ui-provider');
 export const DyteViewerCount = /*@__PURE__*/createReactComponent<JSX.DyteViewerCount, HTMLDyteViewerCountElement>('dyte-viewer-count');
+export const DyteVirtualizedParticipantList = /*@__PURE__*/createReactComponent<JSX.DyteVirtualizedParticipantList, HTMLDyteVirtualizedParticipantListElement>('dyte-virtualized-participant-list');
 export const DyteWaitingScreen = /*@__PURE__*/createReactComponent<JSX.DyteWaitingScreen, HTMLDyteWaitingScreenElement>('dyte-waiting-screen');

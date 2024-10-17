@@ -6,7 +6,7 @@
 }
 
 .participants-container {
-  @apply mb-4 w-full;
+  @apply mb-4 w-full h-full;
 }
 
 h3,

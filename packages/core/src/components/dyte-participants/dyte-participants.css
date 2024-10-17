@@ -19,6 +19,9 @@ input {
   flex-grow: 1;
   flex-basis: 0;
 }
+.ctr.virtualised{
+  @apply overflow-y-hidden;
+}
 
 .search {
   @apply bg-background-700 sticky box-border flex items-center rounded-sm;
