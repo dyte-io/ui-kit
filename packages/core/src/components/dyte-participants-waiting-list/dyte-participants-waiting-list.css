@@ -58,3 +58,7 @@ h3,
     }
   }
 }
+
+.empty-message {
+  @apply text-text-sm text-text-700 my-4 text-center;
+}

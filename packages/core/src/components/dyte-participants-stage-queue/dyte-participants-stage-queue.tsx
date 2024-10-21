@@ -78,8 +78,7 @@ export class DyteParticipantsStaged {
   private shouldShowStageRequests = () => {
     return (
       this.meeting.self.permissions.stageEnabled &&
-      this.meeting.self.permissions.acceptStageRequests &&
-      this.stageRequestedParticipants.length > 0
+      this.meeting.self.permissions.acceptStageRequests
     );
   };
 
@@ -118,6 +117,20 @@ export class DyteParticipantsStaged {
 
   render() {
     if (this.view !== 'sidebar' || !this.shouldShowStageRequests()) return;
+
+    if (!this.stageRequestedParticipants?.length) {
+      return (
+        <div class="stage-requested-participants">
+          <div class="heading-count" part="staged-heading-count">
+            {this.t('stage_request.header_title')} ({this.stageRequestedParticipants.length})
+          </div>
+          <div class="empty-message" part="empty-message">
+            {this.t('stage_request.no_requests')}
+          </div>
+        </div>
+      );
+    }
+
     return (
       <div class="stage-requested-participants">
         <div class="heading-count" part="staged-heading-count">
