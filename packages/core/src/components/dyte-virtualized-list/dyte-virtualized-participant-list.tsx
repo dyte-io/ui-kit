@@ -169,6 +169,7 @@ export class DyteVirtualizedParticipantList {
         style={{
           position: 'relative',
           height: '100%',
+          overflowX: 'hidden',
           overflowY: 'auto',
         }}
       >

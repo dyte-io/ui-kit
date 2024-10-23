@@ -25,6 +25,9 @@ export class DyteParticipantsViewers {
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
+  /** Hide Viewer Count Header */
+  @Prop() hideHeader: boolean = false;
+
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
 
@@ -132,9 +135,11 @@ export class DyteParticipantsViewers {
 
     return (
       <div class="list">
-        <div class="heading-count" part="heading-count">
-          {this.t('viewers')} ({this.stageViewers.length})
-        </div>
+        {!this.hideHeader && (
+          <div class="heading-count" part="heading-count">
+            {this.t('viewers')} ({this.stageViewers.length})
+          </div>
+        )}
         <dyte-virtualized-participant-list
           items={this.stageViewers}
           renderItem={this.createParticipantNode}

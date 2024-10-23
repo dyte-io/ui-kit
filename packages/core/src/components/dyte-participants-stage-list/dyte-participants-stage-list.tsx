@@ -31,6 +31,9 @@ export class DyteParticipants {
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
+  /** Hide Stage Participants Count Header */
+  @Prop() hideHeader: boolean = false;
+
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
 
@@ -153,9 +156,11 @@ export class DyteParticipants {
     return (
       <Host>
         <div class="participants-container">
-          <div class="heading-count" part="heading-count">
-            {this.t('participants')} ({this.participants.length})
-          </div>
+          {!this.hideHeader && (
+            <div class="heading-count" part="heading-count">
+              {this.t('participants')} ({this.participants.length})
+            </div>
+          )}
           <dyte-virtualized-participant-list
             items={this.participants}
             renderItem={this.createParticipantNode}

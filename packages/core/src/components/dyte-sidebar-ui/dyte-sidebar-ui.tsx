@@ -3,7 +3,7 @@ import { DyteI18n, defaultIconPack, useLanguage } from '../../exports';
 
 export interface DyteSidebarTab {
   id: string;
-  name: string;
+  name: string | HTMLElement;
 }
 
 export type DyteSidebarView = 'sidebar' | 'full-screen';

@@ -2336,6 +2336,10 @@ export namespace Components {
          */
         "config": UIConfig;
         /**
+          * Hide Stage Participants Count Header
+         */
+        "hideHeader": boolean;
+        /**
           * Icon pack
          */
         "iconPack": IconPack;
@@ -2417,6 +2421,10 @@ export namespace Components {
           * Config
          */
         "config": UIConfig1;
+        /**
+          * Hide Viewer Count Header
+         */
+        "hideHeader": boolean;
         /**
           * Icon pack
          */
@@ -7324,6 +7332,10 @@ declare namespace LocalJSX {
          */
         "config"?: UIConfig;
         /**
+          * Hide Stage Participants Count Header
+         */
+        "hideHeader"?: boolean;
+        /**
           * Icon pack
          */
         "iconPack"?: IconPack;
@@ -7409,6 +7421,10 @@ declare namespace LocalJSX {
           * Config
          */
         "config"?: UIConfig1;
+        /**
+          * Hide Viewer Count Header
+         */
+        "hideHeader"?: boolean;
         /**
           * Icon pack
          */

@@ -7,10 +7,17 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
 import storeState from '../../lib/store';
 import { defaultConfig } from '../../exports';
+import { debounce } from 'lodash-es';
 
 export type ParticipantsViewMode = 'sidebar';
 
 export type ParticipantsTabedViews = 'requests' | 'stage-list' | 'viewer-list';
+
+export type Tab = {
+  id: ParticipantsTabedViews;
+  name: string | HTMLElement;
+};
+
 /**
  * A component which lists all participants, with ability to
  * run privileged actions on each participant according to your permissions.
@@ -44,6 +51,8 @@ export class DyteParticipants {
 
   @State() currentTab: ParticipantsTabedViews = this.defaultSection;
 
+  @State() tabs: Tab[] = [];
+
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
@@ -55,12 +64,105 @@ export class DyteParticipants {
 
   disconnectedCallback() {
     if (this.meeting == null) return;
+    this.meeting.participants.joined.off('participantJoined', this.updateParticipantCountsInTabs);
+    this.meeting.participants.joined.off('participantLeft', this.updateParticipantCountsInTabs);
+    this.meeting.participants.joined.off('stageStatusUpdate', this.updateParticipantCountsInTabs);
+    this.meeting.stage.off('stageStatusUpdate', this.updateParticipantCountsInTabs);
+    this.meeting.participants.waitlisted.off(
+      'participantJoined',
+      this.updateParticipantCountsInTabs
+    );
+    this.meeting.participants.waitlisted.off('participantLeft', this.updateParticipantCountsInTabs);
+    this.meeting.participants.waitlisted.off(
+      'stageStatusUpdate',
+      this.updateParticipantCountsInTabs
+    );
   }
 
   @Watch('meeting')
   meetingChanged(meeting: Meeting) {
     if (meeting == null) return;
+    meeting.participants.joined.on('participantsUpdate', this.updateParticipantCountsInTabs);
+    meeting.participants.joined.on('participantLeft', this.updateParticipantCountsInTabs);
+    meeting.participants.joined.on('stageStatusUpdate', this.updateParticipantCountsInTabs);
+    meeting.stage.on('stageStatusUpdate', this.updateParticipantCountsInTabs);
+    meeting.participants.waitlisted.on('participantJoined', this.updateParticipantCountsInTabs);
+    meeting.participants.waitlisted.on('participantLeft', this.updateParticipantCountsInTabs);
+    meeting.participants.waitlisted.on('stageStatusUpdate', this.updateParticipantCountsInTabs);
+    this.updateParticipantCountsInTabs();
   }
+
+  private updateParticipantCountsInTabs = debounce(() => {
+    // totalRequests consist of stage requests & waitlisted ones
+    let totalRequests = this.meeting.participants.waitlisted?.size || 0;
+    let totalOnStage = 0;
+    let totalViewers = 0;
+
+    this.meeting.participants.joined.toArray().forEach((participant) => {
+      if (participant.stageStatus === 'ON_STAGE') {
+        totalOnStage++;
+      }
+      if (participant.stageStatus === 'OFF_STAGE') {
+        totalViewers++;
+      }
+      if (participant.stageStatus === 'REQUESTED_TO_JOIN_STAGE') {
+        totalRequests++;
+        totalViewers++;
+      }
+      if (participant.stageStatus === 'ACCEPTED_TO_JOIN_STAGE') {
+        totalViewers++;
+      }
+    });
+
+    if (this.meeting.self.stageStatus === 'ON_STAGE') {
+      totalOnStage++;
+    }
+    if (this.meeting.self.stageStatus === 'OFF_STAGE') {
+      totalViewers++;
+    }
+    if (this.meeting.self.stageStatus === 'REQUESTED_TO_JOIN_STAGE') {
+      totalRequests++;
+      totalViewers++;
+    }
+    if (this.meeting.self.stageStatus === 'ACCEPTED_TO_JOIN_STAGE') {
+      totalViewers++;
+    }
+
+    const tabs = [];
+    if (this.shouldShowRequestsTab()) {
+      tabs.push({
+        id: 'requests',
+        name: (
+          <span>
+            Requests&nbsp;
+            <span class={`tab-participant-count-badge ${totalRequests > 0 ? 'red' : ''}`}>
+              {totalRequests}
+            </span>
+          </span>
+        ),
+      });
+    }
+    tabs.push({
+      id: 'stage-list',
+      name: (
+        <span>
+          Stage&nbsp;<span class="tab-participant-count-badge">{totalOnStage}</span>
+        </span>
+      ),
+    });
+
+    if (this.shouldShowViewersTab()) {
+      tabs.push({
+        id: 'viewer-list',
+        name: (
+          <span>
+            Viewers&nbsp;<span class="tab-participant-count-badge">{totalViewers}</span>
+          </span>
+        ),
+      });
+    }
+    this.tabs = tabs;
+  }, 50);
 
   private onSearchInput = (e: KeyboardEvent) => {
     this.search = (e.target as HTMLInputElement).value;
@@ -77,7 +179,9 @@ export class DyteParticipants {
     if (this.meeting.meta.viewType === 'LIVESTREAM') {
       shouldShowWaitlist = false;
     } else {
-      shouldShowWaitlist = this.meeting.self.permissions.acceptWaitingRequests;
+      shouldShowWaitlist =
+        this.meeting.self.config.waitingRoom?.isEnabled &&
+        this.meeting.self.permissions.acceptWaitingRequests;
     }
 
     return (
@@ -85,28 +189,6 @@ export class DyteParticipants {
         this.meeting.self.permissions.acceptStageRequests) ||
       shouldShowWaitlist
     );
-  };
-
-  private getTabs = () => {
-    const tabs = [];
-    if (this.shouldShowRequestsTab()) {
-      tabs.push({
-        id: 'requests',
-        name: 'Requests',
-      });
-    }
-    tabs.push({
-      id: 'stage-list',
-      name: 'Stage',
-    });
-
-    if (this.shouldShowViewersTab()) {
-      tabs.push({
-        id: 'viewer-list',
-        name: 'Viewers',
-      });
-    }
-    return tabs;
   };
 
   private viewSection = (section: ParticipantsTabedViews) => {
@@ -149,7 +231,7 @@ export class DyteParticipants {
           part="container"
         >
           <dyte-sidebar-ui
-            tabs={this.getTabs()}
+            tabs={this.tabs}
             currentTab={this.currentTab}
             view="full-screen"
             hideHeader={true}
@@ -168,6 +250,7 @@ export class DyteParticipants {
                   defaults={defaults}
                   props={{
                     search: this.search,
+                    hideHeader: true,
                   }}
                 />
               </div>
@@ -185,7 +268,7 @@ export class DyteParticipants {
                   defaults={defaults}
                   props={{
                     search: this.search,
-                    slot: 'viewer-list',
+                    hideHeader: true,
                   }}
                 />
               </div>
