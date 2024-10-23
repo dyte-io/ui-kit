@@ -73,7 +73,7 @@ header h3 {
   display: inline-block;
   padding: 5px 10px;
   border-radius: 12px;
-  background-color: 'rgba(var(--dyte-colors-background-1000, 0 0 0) / 0.6)';
+  background-color: rgba(var(--dyte-colors-background-600, 0, 0, 0) / 0.6);
   font-size: 14px;
   color: white;
   font-weight: bold;
