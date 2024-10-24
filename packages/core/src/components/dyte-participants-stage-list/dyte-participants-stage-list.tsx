@@ -31,6 +31,9 @@ export class DyteParticipants {
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
+  /** Hide Stage Participants Count Header */
+  @Prop() hideHeader: boolean = false;
+
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
 
@@ -103,6 +106,29 @@ export class DyteParticipants {
     this.getParticipants(search);
   }
 
+  private createParticipantNode = (participant: Peer) => {
+    const defaults = {
+      meeting: this.meeting,
+      view: this.view,
+      t: this.t,
+      config: this.config,
+      states: storeState,
+      size: this.size,
+      iconPack: this.iconPack,
+    };
+    return (
+      <div>
+        <Render
+          element="dyte-participant"
+          defaults={defaults}
+          props={{ role: 'listitem', participant, key: participant.id }}
+          childProps={{ ...defaults, participant, size: this.size }}
+          deepProps={true}
+        />
+      </div>
+    );
+  };
+
   private getParticipants(search = this.search) {
     let list: Peer[] = this.meeting.stage.status === 'ON_STAGE' ? [this.meeting.self] : [];
     list = [
@@ -127,37 +153,25 @@ export class DyteParticipants {
 
   render() {
     if (!this.showStageList) return;
-    const defaults = {
-      meeting: this.meeting,
-      view: this.view,
-      t: this.t,
-      config: this.config,
-      states: storeState,
-      size: this.size,
-      iconPack: this.iconPack,
-    };
     return (
       <Host>
         <div class="participants-container">
-          <div class="heading-count" part="heading-count">
-            {this.t('participants')} ({this.participants.length})
-          </div>
-          <ul class="participants" part="participants">
-            {this.participants.map((participant) => (
-              <Render
-                element="dyte-participant"
-                defaults={defaults}
-                props={{ role: 'listitem', participant, key: participant.id }}
-                childProps={{ ...defaults, participant, size: this.size }}
-                deepProps={true}
-              />
-            ))}
-            {this.participants.length === 0 && (
-              <div class="empty-message" part="empty-message">
+          {!this.hideHeader && (
+            <div class="heading-count" part="heading-count">
+              {this.t('participants')} ({this.participants.length})
+            </div>
+          )}
+          <dyte-virtualized-participant-list
+            items={this.participants}
+            renderItem={this.createParticipantNode}
+            part="participants"
+            class="participants"
+            emptyListElement={
+              <div class="empty-stage-list">
                 {this.search.length > 0 ? this.t('search.could_not_find') : this.t('search.empty')}
               </div>
-            )}
-          </ul>
+            }
+          />
         </div>
       </Host>
     );

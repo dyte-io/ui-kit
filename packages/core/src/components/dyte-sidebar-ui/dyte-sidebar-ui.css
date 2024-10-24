@@ -68,3 +68,17 @@ header h3 {
     @apply !hidden;
   }
 }
+
+.tab-participant-count-badge {
+  display: inline-block;
+  padding: 2px 5px;
+  @apply text-text-sm bg-brand-500 text-text-700 rounded-full;
+}
+
+.tab-participant-count-badge:not(.selected-tab){
+  @apply bg-background-600; 
+}
+
+.tab-participant-count-badge.requests-pending{
+  background-color: rgba(var(--dyte-colors-danger));
+}

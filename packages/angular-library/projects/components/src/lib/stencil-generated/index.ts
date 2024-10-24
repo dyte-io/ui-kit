@@ -135,5 +135,6 @@ export const DIRECTIVES = [
   d.DyteTranscripts,
   d.DyteUiProvider,
   d.DyteViewerCount,
+  d.DyteVirtualizedParticipantList,
   d.DyteWaitingScreen
 ];

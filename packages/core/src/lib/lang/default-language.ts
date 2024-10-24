@@ -67,6 +67,7 @@ export const defaultLanguage = {
   participants: 'Participants',
   'participants.errors.empty_results': "Couldn't find a participant with the specified name or ID.",
   'participants.empty_list': 'It looks like nobody is here.',
+  'participants.no_pending_requests': 'There are no pending requests.',
   'participants.turn_off_video': 'Turn off video',
   polls: 'Polls',
   'polls.by': 'Poll by',

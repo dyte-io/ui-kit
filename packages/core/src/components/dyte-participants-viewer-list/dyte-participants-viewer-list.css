@@ -1,12 +1,12 @@
 @import '../../styles/reset.css';
 
 :host {
-  @apply flex w-full flex-col;
+  @apply flex w-full flex-col h-full;
   @apply text-text-md;
 }
 
 .list {
-  @apply mb-4 flex flex-col;
+  @apply mb-4 flex flex-col h-full;
 }
 
 h3,
@@ -24,6 +24,6 @@ h3,
   @apply mt-2 mb-0 p-0;
 }
 
-.empty-message {
+.empty-viewers-list {
   @apply text-text-sm text-text-700 my-2 text-center;
 }

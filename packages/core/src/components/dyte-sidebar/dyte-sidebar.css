@@ -1,7 +1,7 @@
 @import '../../styles/reset.css';
 
 :host {
-  @apply max-w-80 h-full w-full;
+  @apply max-w-96 h-full w-full;
   @apply box-border flex flex-col;
   @apply bg-background-1000;
   @apply border-background-700 border-sm border-solid;
