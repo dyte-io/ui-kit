@@ -118,7 +118,6 @@ export class DyteParticipantsStaged {
 
   render() {
     if (this.view !== 'sidebar' || !this.shouldShowStageRequests()) return;
-
     return (
       <div class="stage-requested-participants">
         <div class="heading-count" part="staged-heading-count">

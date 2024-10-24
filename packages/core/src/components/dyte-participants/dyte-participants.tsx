@@ -44,12 +44,12 @@ export class DyteParticipants {
   @Prop() iconPack: IconPack = defaultIconPack;
 
   /** Default section */
-  @Prop() defaultSection: ParticipantsTabId = 'stage-list';
+  @Prop() defaultParticipantsTabId: ParticipantsTabId = 'stage-list';
 
   /** Language */
   @Prop() t: DyteI18n = useLanguage();
 
-  @State() currentTab: ParticipantsTabId = this.defaultSection;
+  @State() currentParticipantsTabId: ParticipantsTabId = this.defaultParticipantsTabId;
 
   @State() tabs: Tab[] = [];
 
@@ -94,8 +94,8 @@ export class DyteParticipants {
     this.updateParticipantCountsInTabs();
   }
 
-  @Watch('currentTab')
-  currentTabChanged() {
+  @Watch('currentParticipantsTabId')
+  currentParticipantsTabIdChanged() {
     this.updateParticipantCountsInTabs();
   }
 
@@ -144,7 +144,7 @@ export class DyteParticipants {
             Requests&nbsp;
             <span
               class={`tab-participant-count-badge ${totalRequests > 0 ? 'requests-pending' : ''} ${
-                this.currentTab === 'requests' ? 'selected-tab' : ''
+                this.currentParticipantsTabId === 'requests' ? 'selected-tab' : ''
               }`}
             >
               {totalRequests}
@@ -160,7 +160,7 @@ export class DyteParticipants {
           Stage&nbsp;
           <span
             class={`tab-participant-count-badge ${
-              this.currentTab === 'stage-list' ? 'selected-tab' : ''
+              this.currentParticipantsTabId === 'stage-list' ? 'selected-tab' : ''
             }`}
           >
             {totalOnStage}
@@ -177,7 +177,7 @@ export class DyteParticipants {
             Viewers&nbsp;
             <span
               class={`tab-participant-count-badge ${
-                this.currentTab === 'viewer-list' ? 'selected-tab' : ''
+                this.currentParticipantsTabId === 'viewer-list' ? 'selected-tab' : ''
               }`}
             >
               {totalViewers}
@@ -218,11 +218,11 @@ export class DyteParticipants {
   };
 
   private viewSection = (section: ParticipantsTabId) => {
-    this.currentTab = section;
+    this.currentParticipantsTabId = section;
     this.stateUpdate.emit({
       participantsTabId: section,
     });
-    storeState.participantsTabId = this.currentTab;
+    storeState.participantsTabId = this.currentParticipantsTabId;
   };
 
   render() {
@@ -253,12 +253,14 @@ export class DyteParticipants {
         </div>
         <slot name="start" />
         <div
-          class={`ctr scrollbar ${this.currentTab !== 'requests' ? 'virtualised' : ''}`}
+          class={`ctr scrollbar ${
+            this.currentParticipantsTabId !== 'requests' ? 'virtualised' : ''
+          }`}
           part="container"
         >
           <dyte-sidebar-ui
             tabs={this.tabs}
-            currentTab={this.currentTab}
+            currentTab={this.currentParticipantsTabId}
             view="full-screen"
             hideHeader={true}
             hideCloseAction={true}

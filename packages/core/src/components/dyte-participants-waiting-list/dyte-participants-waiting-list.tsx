@@ -113,7 +113,6 @@ export class DyteParticipantsWaitlisted {
 
   render() {
     if (this.view !== 'sidebar' || !this.shouldShowWaitlist()) return;
-
     return (
       <div class="waiting-participants">
         <div class="heading-count" part="waitlisted-heading-count">

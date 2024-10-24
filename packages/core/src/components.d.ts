@@ -2294,7 +2294,7 @@ export namespace Components {
         /**
           * Default section
          */
-        "defaultSection": ParticipantsTabId;
+        "defaultParticipantsTabId": ParticipantsTabId;
         /**
           * Icon pack
          */
@@ -7282,7 +7282,7 @@ declare namespace LocalJSX {
         /**
           * Default section
          */
-        "defaultSection"?: ParticipantsTabId;
+        "defaultParticipantsTabId"?: ParticipantsTabId;
         /**
           * Icon pack
          */
