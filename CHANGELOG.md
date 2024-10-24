@@ -1,3 +1,15 @@
+# [2.1.0-staging.31](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.30...@dyte-in/ui-kit-v2.1.0-staging.31) (2024-10-24)
+
+
+### Bug Fixes
+
+* **participant-count-badge:** badge/pill was not showing the background color ([423e1f6](https://github.com/dyte-io/ui-kit/commit/423e1f660f25c5b9d4c4400b98c958ff341f2ae1))
+
+
+### Features
+
+* **internal:** showing badges against the participant tabs with respective count ([d3c7844](https://github.com/dyte-io/ui-kit/commit/d3c784491015d8a6b78b1c3e57d9b5ae1d6a9ed1))
+
 ## [2.0.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.0.4...@dyte-in/ui-kit-v2.0.5) (2024-10-08)
 
 
