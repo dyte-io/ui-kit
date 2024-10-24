@@ -147,7 +147,7 @@ export class DyteParticipantsViewers {
           part="participants"
           style={{ height: '100%' }}
           emptyListElement={
-            <div class="empty-message" part="empty-message">
+            <div class="empty-viewers-list">
               {this.search.length > 0
                 ? this.t('participants.errors.empty_results')
                 : this.t('participants.empty_list')}

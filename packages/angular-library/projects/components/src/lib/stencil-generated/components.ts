@@ -2317,13 +2317,13 @@ export declare interface DyteParticipants extends Components.DyteParticipants {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['config', 'defaultSection', 'iconPack', 'meeting', 'size', 'states', 't']
+  inputs: ['config', 'defaultParticipantsTabId', 'iconPack', 'meeting', 'size', 'states', 't']
 })
 @Component({
   selector: 'dyte-participants',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['config', 'defaultSection', 'iconPack', 'meeting', 'size', 'states', 't']
+  inputs: ['config', 'defaultParticipantsTabId', 'iconPack', 'meeting', 'size', 'states', 't']
 })
 export class DyteParticipants {
   protected el: HTMLElement;

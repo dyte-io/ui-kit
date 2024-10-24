@@ -948,7 +948,7 @@ export const DyteParticipants = /*@__PURE__*/ defineContainer<JSX.DyteParticipan
   'config',
   'size',
   'iconPack',
-  'defaultSection',
+  'defaultParticipantsTabId',
   't',
   'dyteStateUpdate'
 ]);

@@ -167,7 +167,7 @@ export class DyteParticipants {
             part="participants"
             class="participants"
             emptyListElement={
-              <div class="empty-message" part="empty-message">
+              <div class="empty-stage-list">
                 {this.search.length > 0 ? this.t('search.could_not_find') : this.t('search.empty')}
               </div>
             }

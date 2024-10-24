@@ -24,6 +24,6 @@ h3,
   @apply mt-2 mb-0 p-0;
 }
 
-.empty-message {
+.empty-viewers-list {
   @apply text-text-sm text-text-700 my-2 text-center;
 }
