@@ -11,10 +11,10 @@ import { debounce } from 'lodash-es';
 
 export type ParticipantsViewMode = 'sidebar';
 
-export type ParticipantsTabedViews = 'requests' | 'stage-list' | 'viewer-list';
+export type ParticipantsTabId = 'requests' | 'stage-list' | 'viewer-list';
 
 export type Tab = {
-  id: ParticipantsTabedViews;
+  id: ParticipantsTabId;
   name: string | HTMLElement;
 };
 
@@ -44,14 +44,16 @@ export class DyteParticipants {
   @Prop() iconPack: IconPack = defaultIconPack;
 
   /** Default section */
-  @Prop() defaultSection: ParticipantsTabedViews = 'stage-list';
+  @Prop() defaultSection: ParticipantsTabId = 'stage-list';
 
   /** Language */
   @Prop() t: DyteI18n = useLanguage();
 
-  @State() currentTab: ParticipantsTabedViews = this.defaultSection;
+  @State() currentTab: ParticipantsTabId = this.defaultSection;
 
   @State() tabs: Tab[] = [];
+
+  @State() hasRequests: boolean = false;
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
@@ -89,6 +91,11 @@ export class DyteParticipants {
     meeting.participants.waitlisted.on('participantJoined', this.updateParticipantCountsInTabs);
     meeting.participants.waitlisted.on('participantLeft', this.updateParticipantCountsInTabs);
     meeting.participants.waitlisted.on('stageStatusUpdate', this.updateParticipantCountsInTabs);
+    this.updateParticipantCountsInTabs();
+  }
+
+  @Watch('currentTab')
+  currentTabChanged() {
     this.updateParticipantCountsInTabs();
   }
 
@@ -135,7 +142,11 @@ export class DyteParticipants {
         name: (
           <span>
             Requests&nbsp;
-            <span class={`tab-participant-count-badge ${totalRequests > 0 ? 'red' : ''}`}>
+            <span
+              class={`tab-participant-count-badge ${totalRequests > 0 ? 'requests-pending' : ''} ${
+                this.currentTab === 'requests' ? 'selected-tab' : ''
+              }`}
+            >
               {totalRequests}
             </span>
           </span>
@@ -146,7 +157,14 @@ export class DyteParticipants {
       id: 'stage-list',
       name: (
         <span>
-          Stage&nbsp;<span class="tab-participant-count-badge">{totalOnStage}</span>
+          Stage&nbsp;
+          <span
+            class={`tab-participant-count-badge ${
+              this.currentTab === 'stage-list' ? 'selected-tab' : ''
+            }`}
+          >
+            {totalOnStage}
+          </span>
         </span>
       ),
     });
@@ -156,13 +174,21 @@ export class DyteParticipants {
         id: 'viewer-list',
         name: (
           <span>
-            Viewers&nbsp;<span class="tab-participant-count-badge">{totalViewers}</span>
+            Viewers&nbsp;
+            <span
+              class={`tab-participant-count-badge ${
+                this.currentTab === 'viewer-list' ? 'selected-tab' : ''
+              }`}
+            >
+              {totalViewers}
+            </span>
           </span>
         ),
       });
     }
     this.tabs = tabs;
-  }, 50);
+    this.hasRequests = totalRequests > 0;
+  });
 
   private onSearchInput = (e: KeyboardEvent) => {
     this.search = (e.target as HTMLInputElement).value;
@@ -191,12 +217,12 @@ export class DyteParticipants {
     );
   };
 
-  private viewSection = (section: ParticipantsTabedViews) => {
+  private viewSection = (section: ParticipantsTabId) => {
     this.currentTab = section;
     this.stateUpdate.emit({
-      participantsTabedView: section,
+      participantsTabId: section,
     });
-    storeState.participantsTabedView = this.currentTab;
+    storeState.participantsTabId = this.currentTab;
   };
 
   render() {
@@ -238,12 +264,12 @@ export class DyteParticipants {
             hideCloseAction={true}
             style={{ position: 'relative' }}
             onTabChange={(e) => {
-              this.viewSection(e.detail as ParticipantsTabedViews);
+              this.viewSection(e.detail as ParticipantsTabId);
               e.stopPropagation();
             }}
           >
-            {(!defaults.states.participantsTabedView ||
-              defaults.states.participantsTabedView === 'stage-list') && (
+            {(!defaults.states.participantsTabId ||
+              defaults.states.participantsTabId === 'stage-list') && (
               <div slot="stage-list" style={{ marginTop: '10px', height: '100%' }}>
                 <Render
                   element="dyte-participants-stage-list"
@@ -255,13 +281,18 @@ export class DyteParticipants {
                 />
               </div>
             )}
-            {defaults.states.participantsTabedView === 'requests' && (
+            {defaults.states.participantsTabId === 'requests' && (
               <div slot="requests" style={{ marginTop: '10px', height: '100%' }}>
+                {!this.hasRequests && (
+                  <div class="no-pending-requests">
+                    {this.t('participants.no_pending_requests')}
+                  </div>
+                )}
                 <Render element="dyte-participants-stage-queue" defaults={defaults} />
                 <Render element="dyte-participants-waiting-list" defaults={defaults} />
               </div>
             )}
-            {defaults.states.participantsTabedView === 'viewer-list' && (
+            {defaults.states.participantsTabId === 'viewer-list' && (
               <div slot="viewer-list" style={{ marginTop: '10px', height: '100%' }}>
                 <Render
                   element="dyte-participants-viewer-list"

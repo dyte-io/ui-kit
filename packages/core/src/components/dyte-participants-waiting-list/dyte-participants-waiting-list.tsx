@@ -105,24 +105,14 @@ export class DyteParticipantsWaitlisted {
 
   private shouldShowWaitlist = () => {
     if (this.meeting.meta.viewType === 'LIVESTREAM') return false;
-    return this.meeting.self.permissions.acceptWaitingRequests;
+    return (
+      this.meeting.self.permissions.acceptWaitingRequests &&
+      this.waitlistedParticipants.length !== 0
+    );
   };
 
   render() {
     if (this.view !== 'sidebar' || !this.shouldShowWaitlist()) return;
-
-    if (!this.waitlistedParticipants?.length) {
-      return (
-        <div class="waiting-participants">
-          <div class="heading-count" part="waitlisted-heading-count">
-            {this.t('waitlist.header_title')} ({this.waitlistedParticipants.length})
-          </div>
-          <div class="empty-message" part="empty-message">
-            {this.t('waitlist.no_requests')}
-          </div>
-        </div>
-      );
-    }
 
     return (
       <div class="waiting-participants">

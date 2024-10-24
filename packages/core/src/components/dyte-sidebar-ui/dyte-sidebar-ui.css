@@ -73,11 +73,13 @@ header h3 {
   display: inline-block;
   padding: 5px 10px;
   border-radius: 12px;
-  background-color: rgba(var(--dyte-colors-background-600, 0, 0, 0) / 0.6);
-  font-size: 14px;
-  color: white;
-  font-weight: bold;
+  @apply text-text-sm bg-brand-500 text-text-700;
 }
-.tab-participant-count-badge.red{
-  color: red;
+
+.tab-participant-count-badge:not(.selected-tab){
+  @apply bg-background-600; 
+}
+
+.tab-participant-count-badge.requests-pending{
+  background-color: rgba(var(--dyte-colors-danger));
 }

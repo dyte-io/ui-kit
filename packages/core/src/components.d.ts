@@ -35,7 +35,7 @@ import { DyteNameTagVariant } from "./components/dyte-name-tag/dyte-name-tag";
 import { VNode } from "@stencil/core";
 import { DataNode } from "./components/dyte-paginated-list/dyte-paginated-list";
 import { ParticipantViewMode } from "./components/dyte-participant/dyte-participant";
-import { ParticipantsTabedViews } from "./components/dyte-participants/dyte-participants";
+import { ParticipantsTabId } from "./components/dyte-participants/dyte-participants";
 import { ParticipantsViewMode } from "./components/dyte-participants/dyte-participants";
 import { DyteSidebarTab, DyteSidebarView } from "./components/dyte-sidebar-ui/dyte-sidebar-ui";
 import { DyteSidebarSection } from "./components/dyte-sidebar/dyte-sidebar";
@@ -2294,7 +2294,7 @@ export namespace Components {
         /**
           * Default section
          */
-        "defaultSection": ParticipantsTabedViews;
+        "defaultSection": ParticipantsTabId;
         /**
           * Icon pack
          */
@@ -7282,7 +7282,7 @@ declare namespace LocalJSX {
         /**
           * Default section
          */
-        "defaultSection"?: ParticipantsTabedViews;
+        "defaultSection"?: ParticipantsTabId;
         /**
           * Icon pack
          */

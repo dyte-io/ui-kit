@@ -2367,13 +2367,13 @@ export declare interface DyteParticipantsStageList extends Components.DytePartic
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['config', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
+  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
 })
 @Component({
   selector: 'dyte-participants-stage-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['config', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
+  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
 })
 export class DyteParticipantsStageList {
   protected el: HTMLElement;
@@ -2437,13 +2437,13 @@ export declare interface DyteParticipantsViewerList extends Components.DyteParti
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['config', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
+  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
 })
 @Component({
   selector: 'dyte-participants-viewer-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['config', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
+  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
 })
 export class DyteParticipantsViewerList {
   protected el: HTMLElement;

@@ -49,3 +49,6 @@ input {
     @apply !my-4;
   }
 }
+.no-pending-requests {
+  @apply text-text-sm text-text-700 my-4 text-center;
+}
