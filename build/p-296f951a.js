@@ -1,0 +1,1 @@
+import{h as s}from"./p-f3ae5269.js";import{f as a,e}from"./p-7fbac17c.js";import{s as m,f as i}from"./p-4de316e3.js";const o=({name:o,time:t,now:f})=>s("div",{class:"head"},s("div",{class:"name"},m(i(o),20)),s("div",{class:"time",title:a(t)},e(t,f)));export{o as C}
