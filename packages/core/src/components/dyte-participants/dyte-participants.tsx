@@ -67,6 +67,7 @@ export class DyteParticipants {
   disconnectedCallback() {
     if (this.meeting == null) return;
     this.meeting.participants.joined.off('participantJoined', this.updateParticipantCountsInTabs);
+    this.meeting.participants.joined.off('participantsUpdate', this.updateParticipantCountsInTabs);
     this.meeting.participants.joined.off('participantLeft', this.updateParticipantCountsInTabs);
     this.meeting.participants.joined.off('stageStatusUpdate', this.updateParticipantCountsInTabs);
     this.meeting.stage.off('stageStatusUpdate', this.updateParticipantCountsInTabs);
@@ -84,6 +85,7 @@ export class DyteParticipants {
   @Watch('meeting')
   meetingChanged(meeting: Meeting) {
     if (meeting == null) return;
+    meeting.participants.joined.on('participantJoined', this.updateParticipantCountsInTabs);
     meeting.participants.joined.on('participantsUpdate', this.updateParticipantCountsInTabs);
     meeting.participants.joined.on('participantLeft', this.updateParticipantCountsInTabs);
     meeting.participants.joined.on('stageStatusUpdate', this.updateParticipantCountsInTabs);
@@ -96,6 +98,10 @@ export class DyteParticipants {
 
   @Watch('currentParticipantsTabId')
   currentParticipantsTabIdChanged() {
+    storeState.participantsTabId = this.currentParticipantsTabId;
+    this.stateUpdate.emit({
+      participantsTabId: this.currentParticipantsTabId,
+    });
     this.updateParticipantCountsInTabs();
   }
 
@@ -157,7 +163,7 @@ export class DyteParticipants {
       id: 'stage-list',
       name: (
         <span>
-          Stage&nbsp;
+          Participants&nbsp;
           <span
             class={`tab-participant-count-badge ${
               this.currentParticipantsTabId === 'stage-list' ? 'selected-tab' : ''
@@ -195,9 +201,7 @@ export class DyteParticipants {
   };
 
   private shouldShowViewersTab = () => {
-    return (
-      this.meeting?.self?.permissions?.stageEnabled && this.meeting?.meta?.viewType !== 'LIVESTREAM'
-    );
+    return this.meeting?.self?.permissions?.stageEnabled;
   };
 
   private shouldShowRequestsTab = () => {
@@ -219,10 +223,6 @@ export class DyteParticipants {
 
   private viewSection = (section: ParticipantsTabId) => {
     this.currentParticipantsTabId = section;
-    this.stateUpdate.emit({
-      participantsTabId: section,
-    });
-    storeState.participantsTabId = this.currentParticipantsTabId;
   };
 
   render() {
@@ -270,8 +270,7 @@ export class DyteParticipants {
               e.stopPropagation();
             }}
           >
-            {(!defaults.states.participantsTabId ||
-              defaults.states.participantsTabId === 'stage-list') && (
+            {(!this.currentParticipantsTabId || this.currentParticipantsTabId === 'stage-list') && (
               <div slot="stage-list" style={{ marginTop: '10px', height: '100%' }}>
                 <Render
                   element="dyte-participants-stage-list"
@@ -283,7 +282,7 @@ export class DyteParticipants {
                 />
               </div>
             )}
-            {defaults.states.participantsTabId === 'requests' && (
+            {this.currentParticipantsTabId === 'requests' && (
               <div slot="requests" style={{ marginTop: '10px', height: '100%' }}>
                 {!this.hasRequests && (
                   <div class="no-pending-requests">
@@ -294,7 +293,7 @@ export class DyteParticipants {
                 <Render element="dyte-participants-waiting-list" defaults={defaults} />
               </div>
             )}
-            {defaults.states.participantsTabId === 'viewer-list' && (
+            {this.currentParticipantsTabId === 'viewer-list' && (
               <div slot="viewer-list" style={{ marginTop: '10px', height: '100%' }}>
                 <Render
                   element="dyte-participants-viewer-list"

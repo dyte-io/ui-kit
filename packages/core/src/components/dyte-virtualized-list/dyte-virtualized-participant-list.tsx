@@ -39,14 +39,14 @@ export class DyteVirtualizedParticipantList {
 
   componentDidLoad() {
     this.recalculatePositioning();
+    // Set up the scroll event listener
+    this.el.querySelector('.virtual-list-container').addEventListener('scroll', this.onScroll);
+    window.addEventListener('resize', this.recalculatePositioning);
   }
 
   private recalculatePositioning = () => {
     // Measure container height and update visible items
     this.updateContainerHeight();
-    // Set up the scroll event listener
-    this.el.querySelector('.virtual-list-container').addEventListener('scroll', this.onScroll);
-    window.addEventListener('resize', this.updateContainerHeight);
 
     // Check for the first item height
     requestAnimationFrame(() => {
@@ -62,7 +62,7 @@ export class DyteVirtualizedParticipantList {
   disconnectedCallback() {
     // Remove event listeners to prevent memory leaks
     this.el.querySelector('.virtual-list-container').removeEventListener('scroll', this.onScroll);
-    window.removeEventListener('resize', this.updateContainerHeight);
+    window.removeEventListener('resize', this.recalculatePositioning);
   }
 
   private updateContainerHeight = () => {
