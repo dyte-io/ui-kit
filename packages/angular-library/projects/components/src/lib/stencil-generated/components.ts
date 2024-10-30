@@ -628,13 +628,13 @@ export declare interface DyteChat extends Components.DyteChat {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['config', 'disablePrivateChat', 'iconPack', 'meeting', 'privatePresetFilter', 'size', 't']
+  inputs: ['config', 'disablePrivateChat', 'displayFilter', 'iconPack', 'meeting', 'privatePresetFilter', 'size', 't']
 })
 @Component({
   selector: 'dyte-chat',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['config', 'disablePrivateChat', 'iconPack', 'meeting', 'privatePresetFilter', 'size', 't']
+  inputs: ['config', 'disablePrivateChat', 'displayFilter', 'iconPack', 'meeting', 'privatePresetFilter', 'size', 't']
 })
 export class DyteChat {
   protected el: HTMLElement;

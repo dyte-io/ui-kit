@@ -1,3 +1,10 @@
+# [2.1.0-staging.33](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.32...@dyte-in/ui-kit-v2.1.0-staging.33) (2024-10-30)
+
+
+### Bug Fixes
+
+* add private chat filter ([4654cf9](https://github.com/dyte-io/ui-kit/commit/4654cf963f0b80d39625f098334388e9a74ce645))
+
 # [2.1.0-staging.32](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.31...@dyte-in/ui-kit-v2.1.0-staging.32) (2024-10-30)
 
 

@@ -254,6 +254,7 @@ export const DyteChat = /*@__PURE__*/ defineContainer<JSX.DyteChat>('dyte-chat',
   't',
   'disablePrivateChat',
   'privatePresetFilter',
+  'displayFilter',
   'dyteStateUpdate'
 ]);
 
