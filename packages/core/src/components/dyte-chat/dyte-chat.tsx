@@ -34,6 +34,8 @@ import storeState from '../../lib/store';
 import { ChannelItem } from '../dyte-channel-selector-view/dyte-channel-selector-view';
 import { NewMessageEvent } from '../dyte-chat-composer-view/dyte-chat-composer-view';
 
+export type ChatFilter = (message: Message) => boolean;
+
 /**
  * Fully featured chat component with image & file upload, emoji picker and auto-scroll.
  */
@@ -45,9 +47,11 @@ import { NewMessageEvent } from '../dyte-chat-composer-view/dyte-chat-composer-v
 export class DyteChat {
   private chatUpdateListener = ({ message }) => {
     if (message.channelId) return;
-    this.addToChatGroup(message as Message);
-    // shallow copy to trigger render
-    this.chatGroups = { ...this.chatGroups };
+    if (!this.displayFilter || this.displayFilter(message)) {
+      this.addToChatGroup(message as Message);
+      // shallow copy to trigger render
+      this.chatGroups = { ...this.chatGroups };
+    }
   };
 
   private chatPermissionUpdateListener = () => {
@@ -85,6 +89,13 @@ export class DyteChat {
    * List of target presets allowed as private chat recipient
    */
   @Prop() privatePresetFilter: String[] = [];
+
+  /**
+   * @deprecated
+   * Beta API, will change in future
+   * A filter function for messages to be displayed
+   */
+  @Prop() displayFilter: ChatFilter = undefined;
 
   @State() unreadCountGroups: Record<string, number> = {};
 
@@ -356,8 +367,18 @@ export class DyteChat {
 
   private initializeChatGroups() {
     this.meeting.chat?.messages.forEach((message) => {
-      this.addToChatGroup(message);
+      if (!this.displayFilter || this.displayFilter(message)) {
+        this.addToChatGroup(message);
+      }
     });
+  }
+
+  @Watch('displayFilter')
+  private onDisplayFilterChanged(newFilter: ChatFilter, oldFilter: ChatFilter) {
+    if (newFilter !== oldFilter) {
+      this.chatGroups = {};
+      this.initializeChatGroups();
+    }
   }
 
   private addToChatGroup(message: Message) {
