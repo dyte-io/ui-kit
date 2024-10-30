@@ -1,3 +1,10 @@
+# [2.1.0-staging.32](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.31...@dyte-in/ui-kit-v2.1.0-staging.32) (2024-10-30)
+
+
+### Bug Fixes
+
+* remove IVS ([4be485e](https://github.com/dyte-io/ui-kit/commit/4be485e0844e5dfb259ad2cb759da79988d996b6))
+
 # [2.1.0-staging.31](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.30...@dyte-in/ui-kit-v2.1.0-staging.31) (2024-10-24)
 
 
