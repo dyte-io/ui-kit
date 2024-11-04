@@ -1,3 +1,18 @@
+# [2.1.0-staging.34](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.33...@dyte-in/ui-kit-v2.1.0-staging.34) (2024-11-04)
+
+
+### Bug Fixes
+
+* **debugger:** added jitter unit ([20ace1d](https://github.com/dyte-io/ui-kit/commit/20ace1d3051ef961adbe22aac15ed60c63661577))
+* **debugger:** fixed colors post status label refactoring ([502bd49](https://github.com/dyte-io/ui-kit/commit/502bd49a7492c0990f00cbac0e5119c82e79db8a))
+
+
+### Features
+
+* **debugger:** added systems tab for battery - works in chromium only, hidden for others ([6042e9f](https://github.com/dyte-io/ui-kit/commit/6042e9f973f447a953b13b26336734c89b9602a7))
+* **debugger:** adding cpu and bandwidth limitations in debugger ([849eed4](https://github.com/dyte-io/ui-kit/commit/849eed436d85be3fdf105edd37636f9ccbfbd46c))
+* **troubleshooter:** added basic troubleshooter ([21d9253](https://github.com/dyte-io/ui-kit/commit/21d92530fb08d4a21e8a2d2f71913a0f05465840))
+
 # [2.1.0-staging.33](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.32...@dyte-in/ui-kit-v2.1.0-staging.33) (2024-10-30)
 
 
