@@ -1,3 +1,10 @@
+# [2.1.0-staging.35](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.34...@dyte-in/ui-kit-v2.1.0-staging.35) (2024-11-04)
+
+
+### Bug Fixes
+
+* update web-core ([d066ab0](https://github.com/dyte-io/ui-kit/commit/d066ab05e69f4ba0a3d14d5f497a52975f24d81f))
+
 # [2.1.0-staging.34](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.33...@dyte-in/ui-kit-v2.1.0-staging.34) (2024-11-04)
 
 
