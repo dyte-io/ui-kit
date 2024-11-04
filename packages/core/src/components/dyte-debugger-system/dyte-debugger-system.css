@@ -103,11 +103,11 @@ h3 {
   color: rgba(var(--dyte-colors-success));
 }
 
-.status.normal {
+.status.average {
   color: rgba(var(--dyte-colors-warning));
 }
 
-.status.worst {
+.status.poor {
   color: rgba(var(--dyte-colors-danger));
 }
 
