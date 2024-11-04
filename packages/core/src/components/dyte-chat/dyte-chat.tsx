@@ -401,9 +401,7 @@ export class DyteChat {
   private isPrivateChatSupported = () => {
     return (
       this.canPrivateMessage &&
-      !this.disablePrivateChat &&
-      this.meeting?.__internals__?.features?.getFeatureValue('chat_socket_server') ===
-        'socket-service'
+      !this.disablePrivateChat
     );
   };
 
