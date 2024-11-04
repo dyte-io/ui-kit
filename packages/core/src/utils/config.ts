@@ -90,6 +90,8 @@ export const generateConfig = (
       moreElements.push('dyte-caption-toggle');
     }
 
+    if (navigator.product !== 'ReactNative') moreElements.push('dyte-debugger-toggle');
+
     if (isLiveStreamHost(meeting)) {
       leftElements.push('dyte-livestream-toggle');
     }

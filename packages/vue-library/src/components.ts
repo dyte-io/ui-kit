@@ -431,6 +431,54 @@ export const DyteCounter = /*@__PURE__*/ defineContainer<JSX.DyteCounter>('dyte-
 ]);
 
 
+export const DyteDebugger = /*@__PURE__*/ defineContainer<JSX.DyteDebugger>('dyte-debugger', undefined, [
+  'meeting',
+  'states',
+  'size',
+  'iconPack',
+  't',
+  'dyteStateUpdate'
+]);
+
+
+export const DyteDebuggerAudio = /*@__PURE__*/ defineContainer<JSX.DyteDebuggerAudio>('dyte-debugger-audio', undefined, [
+  'meeting',
+  'states',
+  'size',
+  'iconPack',
+  't'
+]);
+
+
+export const DyteDebuggerScreenshare = /*@__PURE__*/ defineContainer<JSX.DyteDebuggerScreenshare>('dyte-debugger-screenshare', undefined, [
+  'meeting',
+  'states',
+  'size',
+  'iconPack',
+  't'
+]);
+
+
+export const DyteDebuggerToggle = /*@__PURE__*/ defineContainer<JSX.DyteDebuggerToggle>('dyte-debugger-toggle', undefined, [
+  'variant',
+  'meeting',
+  'states',
+  't',
+  'iconPack',
+  'size',
+  'dyteStateUpdate'
+]);
+
+
+export const DyteDebuggerVideo = /*@__PURE__*/ defineContainer<JSX.DyteDebuggerVideo>('dyte-debugger-video', undefined, [
+  'meeting',
+  'states',
+  'size',
+  'iconPack',
+  't'
+]);
+
+
 export const DyteDialog = /*@__PURE__*/ defineContainer<JSX.DyteDialog>('dyte-dialog', undefined, [
   'hideCloseButton',
   'disableEscapeKey',

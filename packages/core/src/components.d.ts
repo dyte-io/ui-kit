@@ -19,6 +19,7 @@ import { AvatarVariant } from "./components/dyte-avatar/dyte-avatar";
 import { DraftMeeting } from "./utils/breakout-rooms-manager";
 import { ButtonKind, ButtonVariant } from "./components/dyte-button/dyte-button";
 import { DyteBasicParticipant, DytePermissionsPreset, DytePlugin, FileMessage, ImageMessage, Message, TextMessage } from "@dytesdk/web-core";
+import { ChatFilter } from "./components/dyte-chat/dyte-chat";
 import { DyteNewMessageEvent } from "./components/dyte-chat-composer-ui/dyte-chat-composer-ui";
 import { NewMessageEvent } from "./components/dyte-chat-composer-view/dyte-chat-composer-view";
 import { ChatGroup, ChatGroupChangedType } from "./components/dyte-chat-selector-ui/dyte-chat-selector-ui";
@@ -605,6 +606,10 @@ export namespace Components {
          */
         "disablePrivateChat": boolean;
         /**
+          * @deprecated Beta API, will change in future A filter function for messages to be displayed
+         */
+        "displayFilter": ChatFilter;
+        /**
           * Icon pack
          */
         "iconPack": IconPack;
@@ -1050,6 +1055,120 @@ export namespace Components {
           * Initial value
          */
         "value": number;
+    }
+    interface DyteDebugger {
+        /**
+          * Icon pack
+         */
+        "iconPack": IconPack;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size": Size;
+        /**
+          * States object
+         */
+        "states": States;
+        /**
+          * Language
+         */
+        "t": DyteI18n;
+    }
+    interface DyteDebuggerAudio {
+        /**
+          * Icon pack
+         */
+        "iconPack": IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size": Size1;
+        /**
+          * States object
+         */
+        "states": States1;
+        /**
+          * Language
+         */
+        "t": DyteI18n1;
+    }
+    interface DyteDebuggerScreenshare {
+        /**
+          * Icon pack
+         */
+        "iconPack": IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size": Size1;
+        /**
+          * States object
+         */
+        "states": States1;
+        /**
+          * Language
+         */
+        "t": DyteI18n1;
+    }
+    interface DyteDebuggerToggle {
+        /**
+          * Icon pack
+         */
+        "iconPack": IconPack;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size": Size;
+        /**
+          * States object
+         */
+        "states": States;
+        /**
+          * Language
+         */
+        "t": DyteI18n;
+        /**
+          * Variant
+         */
+        "variant": ControlBarVariant;
+    }
+    interface DyteDebuggerVideo {
+        /**
+          * Icon pack
+         */
+        "iconPack": IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size": Size1;
+        /**
+          * States object
+         */
+        "states": States1;
+        /**
+          * Language
+         */
+        "t": DyteI18n1;
     }
     interface DyteDialog {
         /**
@@ -3550,6 +3669,14 @@ export interface DyteCounterCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDyteCounterElement;
 }
+export interface DyteDebuggerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDyteDebuggerElement;
+}
+export interface DyteDebuggerToggleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDyteDebuggerToggleElement;
+}
 export interface DyteDialogCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDyteDialogElement;
@@ -3988,6 +4115,36 @@ declare global {
     var HTMLDyteCounterElement: {
         prototype: HTMLDyteCounterElement;
         new (): HTMLDyteCounterElement;
+    };
+    interface HTMLDyteDebuggerElement extends Components.DyteDebugger, HTMLStencilElement {
+    }
+    var HTMLDyteDebuggerElement: {
+        prototype: HTMLDyteDebuggerElement;
+        new (): HTMLDyteDebuggerElement;
+    };
+    interface HTMLDyteDebuggerAudioElement extends Components.DyteDebuggerAudio, HTMLStencilElement {
+    }
+    var HTMLDyteDebuggerAudioElement: {
+        prototype: HTMLDyteDebuggerAudioElement;
+        new (): HTMLDyteDebuggerAudioElement;
+    };
+    interface HTMLDyteDebuggerScreenshareElement extends Components.DyteDebuggerScreenshare, HTMLStencilElement {
+    }
+    var HTMLDyteDebuggerScreenshareElement: {
+        prototype: HTMLDyteDebuggerScreenshareElement;
+        new (): HTMLDyteDebuggerScreenshareElement;
+    };
+    interface HTMLDyteDebuggerToggleElement extends Components.DyteDebuggerToggle, HTMLStencilElement {
+    }
+    var HTMLDyteDebuggerToggleElement: {
+        prototype: HTMLDyteDebuggerToggleElement;
+        new (): HTMLDyteDebuggerToggleElement;
+    };
+    interface HTMLDyteDebuggerVideoElement extends Components.DyteDebuggerVideo, HTMLStencilElement {
+    }
+    var HTMLDyteDebuggerVideoElement: {
+        prototype: HTMLDyteDebuggerVideoElement;
+        new (): HTMLDyteDebuggerVideoElement;
     };
     interface HTMLDyteDialogElement extends Components.DyteDialog, HTMLStencilElement {
     }
@@ -4615,6 +4772,11 @@ declare global {
         "dyte-controlbar": HTMLDyteControlbarElement;
         "dyte-controlbar-button": HTMLDyteControlbarButtonElement;
         "dyte-counter": HTMLDyteCounterElement;
+        "dyte-debugger": HTMLDyteDebuggerElement;
+        "dyte-debugger-audio": HTMLDyteDebuggerAudioElement;
+        "dyte-debugger-screenshare": HTMLDyteDebuggerScreenshareElement;
+        "dyte-debugger-toggle": HTMLDyteDebuggerToggleElement;
+        "dyte-debugger-video": HTMLDyteDebuggerVideoElement;
         "dyte-dialog": HTMLDyteDialogElement;
         "dyte-dialog-manager": HTMLDyteDialogManagerElement;
         "dyte-draft-attachment-view": HTMLDyteDraftAttachmentViewElement;
@@ -5377,6 +5539,10 @@ declare namespace LocalJSX {
          */
         "disablePrivateChat"?: boolean;
         /**
+          * @deprecated Beta API, will change in future A filter function for messages to be displayed
+         */
+        "displayFilter"?: ChatFilter;
+        /**
           * Icon pack
          */
         "iconPack"?: IconPack;
@@ -5917,6 +6083,128 @@ declare namespace LocalJSX {
           * Initial value
          */
         "value"?: number;
+    }
+    interface DyteDebugger {
+        /**
+          * Icon pack
+         */
+        "iconPack"?: IconPack;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Emits updated state data
+         */
+        "onDyteStateUpdate"?: (event: DyteDebuggerCustomEvent<States>) => void;
+        /**
+          * Size
+         */
+        "size"?: Size;
+        /**
+          * States object
+         */
+        "states"?: States;
+        /**
+          * Language
+         */
+        "t"?: DyteI18n;
+    }
+    interface DyteDebuggerAudio {
+        /**
+          * Icon pack
+         */
+        "iconPack"?: IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size"?: Size1;
+        /**
+          * States object
+         */
+        "states"?: States1;
+        /**
+          * Language
+         */
+        "t"?: DyteI18n1;
+    }
+    interface DyteDebuggerScreenshare {
+        /**
+          * Icon pack
+         */
+        "iconPack"?: IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size"?: Size1;
+        /**
+          * States object
+         */
+        "states"?: States1;
+        /**
+          * Language
+         */
+        "t"?: DyteI18n1;
+    }
+    interface DyteDebuggerToggle {
+        /**
+          * Icon pack
+         */
+        "iconPack"?: IconPack;
+        /**
+          * Meeting object
+         */
+        "meeting"?: Meeting;
+        /**
+          * Emits updated state data
+         */
+        "onDyteStateUpdate"?: (event: DyteDebuggerToggleCustomEvent<States>) => void;
+        /**
+          * Size
+         */
+        "size"?: Size;
+        /**
+          * States object
+         */
+        "states"?: States;
+        /**
+          * Language
+         */
+        "t"?: DyteI18n;
+        /**
+          * Variant
+         */
+        "variant"?: ControlBarVariant;
+    }
+    interface DyteDebuggerVideo {
+        /**
+          * Icon pack
+         */
+        "iconPack"?: IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size"?: Size1;
+        /**
+          * States object
+         */
+        "states"?: States1;
+        /**
+          * Language
+         */
+        "t"?: DyteI18n1;
     }
     interface DyteDialog {
         /**
@@ -8618,6 +8906,11 @@ declare namespace LocalJSX {
         "dyte-controlbar": DyteControlbar;
         "dyte-controlbar-button": DyteControlbarButton;
         "dyte-counter": DyteCounter;
+        "dyte-debugger": DyteDebugger;
+        "dyte-debugger-audio": DyteDebuggerAudio;
+        "dyte-debugger-screenshare": DyteDebuggerScreenshare;
+        "dyte-debugger-toggle": DyteDebuggerToggle;
+        "dyte-debugger-video": DyteDebuggerVideo;
         "dyte-dialog": DyteDialog;
         "dyte-dialog-manager": DyteDialogManager;
         "dyte-draft-attachment-view": DyteDraftAttachmentView;
@@ -8759,6 +9052,11 @@ declare module "@stencil/core" {
             "dyte-controlbar": LocalJSX.DyteControlbar & JSXBase.HTMLAttributes<HTMLDyteControlbarElement>;
             "dyte-controlbar-button": LocalJSX.DyteControlbarButton & JSXBase.HTMLAttributes<HTMLDyteControlbarButtonElement>;
             "dyte-counter": LocalJSX.DyteCounter & JSXBase.HTMLAttributes<HTMLDyteCounterElement>;
+            "dyte-debugger": LocalJSX.DyteDebugger & JSXBase.HTMLAttributes<HTMLDyteDebuggerElement>;
+            "dyte-debugger-audio": LocalJSX.DyteDebuggerAudio & JSXBase.HTMLAttributes<HTMLDyteDebuggerAudioElement>;
+            "dyte-debugger-screenshare": LocalJSX.DyteDebuggerScreenshare & JSXBase.HTMLAttributes<HTMLDyteDebuggerScreenshareElement>;
+            "dyte-debugger-toggle": LocalJSX.DyteDebuggerToggle & JSXBase.HTMLAttributes<HTMLDyteDebuggerToggleElement>;
+            "dyte-debugger-video": LocalJSX.DyteDebuggerVideo & JSXBase.HTMLAttributes<HTMLDyteDebuggerVideoElement>;
             "dyte-dialog": LocalJSX.DyteDialog & JSXBase.HTMLAttributes<HTMLDyteDialogElement>;
             "dyte-dialog-manager": LocalJSX.DyteDialogManager & JSXBase.HTMLAttributes<HTMLDyteDialogManagerElement>;
             "dyte-draft-attachment-view": LocalJSX.DyteDraftAttachmentView & JSXBase.HTMLAttributes<HTMLDyteDraftAttachmentViewElement>;
