@@ -99,6 +99,21 @@ export class DyteDebuggerScreenShare {
     const statsObj = newVideoProducerScoreStats;
 
     const newStatsList: FormattedStatsObj[] = [];
+
+    newStatsList.push({
+      name: `CPU Limitations`,
+      value: statsObj.cpuLimitations ? 'Yes' : 'No',
+      description: 'CPU limitations can impact WebRTC call quality and performance.',
+      verdict: statsObj.cpuLimitations ? 'Poor' : 'Good',
+    });
+
+    newStatsList.push({
+      name: `Bandwidth Limitations`,
+      value: statsObj.bandwidthLimitations ? 'Yes' : 'No',
+      description: 'Slow internet speeds can degrade video quality.',
+      verdict: statsObj.bandwidthLimitations ? 'Poor' : 'Good',
+    });
+
     newStatsList.push({
       name: `Bitrate`,
       value: `${Math.round(statsObj.bitrate / 1024)} kbps`,
