@@ -111,7 +111,7 @@ export class DyteDebuggerAudio {
     });
     newStatsList.push({
       name: `Jitter`,
-      value: `${Math.round(statsObj.jitter * 1000)}`,
+      value: `${Math.round(statsObj.jitter * 1000)} ms`,
       description: 'Variance or fluctuation in latency',
       verdict: getJitterVerdict({ jitterInMS: statsObj.jitter * 1000 }),
     });
