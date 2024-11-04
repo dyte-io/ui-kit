@@ -77,8 +77,8 @@ export class DyteDebuggerSystem {
 
     newBatteryStats.push({
       name: 'Battery Charging Status',
-      value: `${batteryLevelPercentage}%`,
-      description: 'A low battery charge may result in reduced performance.',
+      value: `${this.battery.charging ? 'Charging' : 'Not charging'}`,
+      description: 'A device running on power performs optimally.',
       verdict: getBatteryChargingVerdict({
         batteryLevelPercentage,
         chargingTimeInSeconds: this.battery.chargingTime,
