@@ -3,7 +3,7 @@ import { States, Size, IconPack, defaultIconPack, DyteI18n } from '../../exports
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { VideoProducerScoreStats, MediaKind, ProducerScoreStats } from '@dytesdk/web-core';
-import storeState from '../../lib/store';
+// import storeState from '../../lib/store';
 import {
   FormattedStatsObj,
   getBitrateVerdict,
@@ -52,10 +52,10 @@ export class DyteDebuggerVideo {
   /** Summarised health of devices */
   @State() devicesHealth: StatsHealth = null;
 
-  private toggleSection(section: string) {
-    if (section === 'network') this.isNetworkOpen = !this.isNetworkOpen;
-    else if (section === 'devices') this.isDevicesOpen = !this.isDevicesOpen;
-  }
+  // private toggleSection(section: string) {
+  //   if (section === 'network') this.isNetworkOpen = !this.isNetworkOpen;
+  //   else if (section === 'devices') this.isDevicesOpen = !this.isDevicesOpen;
+  // }
 
   private mediaScoreUpdateListener = ({
     kind,
@@ -73,7 +73,7 @@ export class DyteDebuggerVideo {
 
   private deviceListUpdateListener = async () => {
     const videoDevices = await this.meeting.self.getVideoDevices();
-    this.devicesHealth = videoDevices?.length > 0 ? 'Good' : 'Worst';
+    this.devicesHealth = videoDevices?.length > 0 ? 'Good' : 'Poor';
   };
 
   private videoUpdateListener = () => {
@@ -151,12 +151,12 @@ export class DyteDebuggerVideo {
       return;
     }
 
-    const defaults = {
-      meeting: this.meeting,
-      states: this.states || storeState,
-      iconPack: this.iconPack,
-      t: this.t,
-    };
+    // const defaults = {
+    //   meeting: this.meeting,
+    //   states: this.states || storeState,
+    //   iconPack: this.iconPack,
+    //   t: this.t,
+    // };
 
     return (
       <Host>
@@ -164,19 +164,25 @@ export class DyteDebuggerVideo {
         <div class="tab-body">
           <div class="status-container">
             <div class="status-section">
-              <div class="section-header" onClick={() => this.toggleSection('network')}>
+              <div
+                class={`section-header ${!this.networkBasedMediaHealth ? 'only-child' : ''}`}
+                // onClick={() => this.toggleSection('network')}
+              >
                 <span>Network & Media</span>
                 {this.networkBasedMediaHealth && (
                   <span class={`status ${this.networkBasedMediaHealth?.toLowerCase()}`}>
                     {this.networkBasedMediaHealth}
                   </span>
                 )}
-                <span class="arrow">{this.isNetworkOpen ? '▾' : '▸'}</span>
+                {/* <span class="arrow">{this.isNetworkOpen ? '▾' : '▸'}</span> */}
               </div>
               {this.isNetworkOpen && !this.videoProducerFormattedStats.length && (
                 <div class="section-body missing-stats">
-                  Please enable camera to see stats.<br></br> Wait for a few seconds if camera is
-                  enabled.
+                  {this.meeting.self.videoEnabled ? (
+                    <span>Generating report. Please wait for a few seconds.</span>
+                  ) : (
+                    <span>Please enable camera to see the report.</span>
+                  )}
                 </div>
               )}
               {this.isNetworkOpen && !!this.videoProducerFormattedStats.length && (
@@ -199,7 +205,8 @@ export class DyteDebuggerVideo {
               )}
             </div>
 
-            <div class="status-section">
+            {/** Hiding devices section for now, Will add more functionality later */}
+            {/* <div class="status-section">
               <div class="section-header" onClick={() => this.toggleSection('devices')}>
                 <span>Devices</span>
                 {this.devicesHealth && <span class="status">{this.devicesHealth}</span>}
@@ -210,7 +217,7 @@ export class DyteDebuggerVideo {
                   <dyte-settings-video {...defaults} />
                 </div>
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </Host>

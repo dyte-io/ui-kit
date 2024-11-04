@@ -1,6 +1,6 @@
 import { MediaKind } from '@dytesdk/web-core';
 
-export type StatsHealth = 'Good' | 'Normal' | 'Worst';
+export type StatsHealth = 'Good' | 'Average' | 'Poor';
 
 export interface FormattedStatsObj {
   name: string;
@@ -24,10 +24,10 @@ export function getNetworkBasedMediaHealth({
   let networkHealth: StatsHealth = 'Good';
 
   const allStatsHealths = stats.map((statsObj) => statsObj.verdict);
-  if (allStatsHealths.includes('Worst')) {
-    networkHealth = 'Worst';
-  } else if (allStatsHealths.includes('Normal')) {
-    networkHealth = 'Normal';
+  if (allStatsHealths.includes('Poor')) {
+    networkHealth = 'Poor';
+  } else if (allStatsHealths.includes('Average')) {
+    networkHealth = 'Average';
   }
   return networkHealth;
 }
@@ -40,10 +40,10 @@ export function getPacketLossVerdict({
 }): StatsHealth {
   let verdict: StatsHealth = 'Good';
 
-  if (packetLossPercentage > 5) {
-    verdict = 'Worst';
-  } else if (packetLossPercentage > 0) {
-    verdict = 'Normal';
+  if (packetLossPercentage > 4) {
+    verdict = 'Poor';
+  } else if (packetLossPercentage >= 1 && packetLossPercentage <= 4) {
+    verdict = 'Average';
   }
 
   return verdict;
@@ -53,10 +53,10 @@ export function getPacketLossVerdict({
 export function getJitterVerdict({ jitterInMS }: { jitterInMS: number }): StatsHealth {
   let verdict: StatsHealth = 'Good';
 
-  if (jitterInMS > 300) {
-    verdict = 'Worst';
-  } else if (jitterInMS > 0) {
-    verdict = 'Normal';
+  if (jitterInMS > 100) {
+    verdict = 'Poor';
+  } else if (jitterInMS >= 50 && jitterInMS <= 100) {
+    verdict = 'Average';
   }
 
   return verdict;
@@ -74,8 +74,63 @@ export function getBitrateVerdict({
   const bitrateInKbps = Math.round(bitrate / 1024); // it is Kilo bits
 
   if (bitrateInKbps === 0) {
-    verdict = 'Worst';
+    verdict = 'Poor';
   }
 
   return verdict;
+}
+
+export function getOverallBatteryVerdict({ stats }: { stats: FormattedStatsObj[] }): StatsHealth {
+  if (!stats || !stats.length) {
+    return null;
+  }
+
+  let networkHealth: StatsHealth = 'Good';
+
+  const allStatsHealths = stats.map((statsObj) => statsObj.verdict);
+  if (allStatsHealths.includes('Poor')) {
+    networkHealth = 'Poor';
+  } else if (allStatsHealths.includes('Average')) {
+    networkHealth = 'Average';
+  }
+  return networkHealth;
+}
+
+export function getBatteryLevelVerdict({
+  batteryLevelPercentage,
+}: {
+  batteryLevelPercentage: number;
+}): StatsHealth {
+  let batteryLevelVerdict: StatsHealth = 'Good';
+  if (batteryLevelPercentage < 20) {
+    batteryLevelVerdict = 'Poor';
+  } else if (batteryLevelPercentage < 50) {
+    batteryLevelVerdict = 'Average';
+  }
+  return batteryLevelVerdict;
+}
+
+export function getBatteryChargingVerdict({
+  charging,
+  dischargingTimeInSeconds,
+  batteryLevelPercentage,
+}: {
+  charging: boolean;
+  chargingTimeInSeconds: number;
+  dischargingTimeInSeconds: number;
+  batteryLevelPercentage: number;
+}): StatsHealth {
+  const MINS_30 = 30 * 60;
+
+  if (batteryLevelPercentage < 20) {
+    return 'Poor';
+  }
+
+  if (charging) {
+    return 'Good';
+  }
+
+  if (dischargingTimeInSeconds < MINS_30) {
+    return 'Poor';
+  }
 }

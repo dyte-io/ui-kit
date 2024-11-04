@@ -60,10 +60,10 @@ export class DyteDebuggerScreenShare {
   /** Summarised health of network stats */
   @State() networkBasedMediaHealth: StatsHealth = null;
 
-  private toggleSection(section: string) {
-    if (section === 'network') this.isNetworkOpen = !this.isNetworkOpen;
-    else if (section === 'devices') this.isDevicesOpen = !this.isDevicesOpen;
-  }
+  // private toggleSection(section: string) {
+  //   if (section === 'network') this.isNetworkOpen = !this.isNetworkOpen;
+  //   else if (section === 'devices') this.isDevicesOpen = !this.isDevicesOpen;
+  // }
 
   private mediaScoreUpdateListener = ({
     kind,
@@ -74,7 +74,6 @@ export class DyteDebuggerScreenShare {
     isScreenshare: boolean;
     scoreStats: ProducerScoreStats;
   }) => {
-    console.log('mediaScoreUpdate:: ', { kind, isScreenshare });
     if (kind === 'video' && isScreenshare) {
       this.videoProducerScoreStats = scoreStats as VideoProducerScoreStats;
     }
@@ -205,19 +204,25 @@ export class DyteDebuggerScreenShare {
         <div class="tab-body">
           <div class="status-container">
             <div class="status-section">
-              <div class="section-header" onClick={() => this.toggleSection('network')}>
+              <div
+                class={`section-header ${!this.networkBasedMediaHealth ? 'only-child' : ''}`}
+                // onClick={() => this.toggleSection('network')}
+              >
                 <span>Network & Media</span>
                 {this.networkBasedMediaHealth && (
                   <span class={`status ${this.networkBasedMediaHealth?.toLowerCase()}`}>
                     {this.networkBasedMediaHealth}
                   </span>
                 )}
-                <span class="arrow">{this.isNetworkOpen ? '▾' : '▸'}</span>
+                {/* <span class="arrow">{this.isNetworkOpen ? '▾' : '▸'}</span> */}
               </div>
               {this.isNetworkOpen && !this.videoProducerFormattedStats.length && (
                 <div class="section-body missing-stats">
-                  Please share screen to see stats.<br></br> Wait for a few seconds if screen is
-                  already shared.
+                  {this.meeting.self.screenShareEnabled ? (
+                    <span>Generating report. Please wait for a few seconds.</span>
+                  ) : (
+                    <span>Please share the screen to see the report.</span>
+                  )}
                 </div>
               )}
               {this.isNetworkOpen && !!this.videoProducerFormattedStats.length && (
@@ -236,7 +241,8 @@ export class DyteDebuggerScreenShare {
                       </div>
                     </div>
                   ))}
-                  {this.audioProducerFormattedStats.map((formattedStatsObj) => (
+                  {/** Hiding Audio stats for now to declutter */}
+                  {/* {this.audioProducerFormattedStats.map((formattedStatsObj) => (
                     <div class="network-row">
                       <div class="network-cell label">
                         <strong>{formattedStatsObj.name} (Audio)</strong>
@@ -249,7 +255,7 @@ export class DyteDebuggerScreenShare {
                         <span class="value">{formattedStatsObj.value}</span>
                       </div>
                     </div>
-                  ))}
+                  ))} */}
                 </div>
               )}
             </div>

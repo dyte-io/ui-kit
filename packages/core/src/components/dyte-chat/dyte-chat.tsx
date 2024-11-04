@@ -374,6 +374,7 @@ export class DyteChat {
   }
 
   @Watch('displayFilter')
+  // @ts-ignore
   private onDisplayFilterChanged(newFilter: ChatFilter, oldFilter: ChatFilter) {
     if (newFilter !== oldFilter) {
       this.chatGroups = {};

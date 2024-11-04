@@ -43,8 +43,12 @@ h3 {
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
-  cursor: pointer;
+  /* cursor: pointer; */
   padding: 8px 0;
+}
+
+.section-header.only-child{
+  justify-content: center;
 }
 
 .section-body.missing-stats{

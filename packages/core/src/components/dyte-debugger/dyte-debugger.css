@@ -45,6 +45,10 @@ aside {
   button.active {
     @apply border-brand bg-brand/20 hover:bg-brand/20;
   }
+
+  button.hidden {
+    display: none;
+  }
 }
 
 main {
@@ -65,6 +69,10 @@ main {
 
     button.active {
       @apply hover:bg-background-700 border-none bg-transparent;
+    }
+
+    button.hidden {
+      display: none;
     }
   }
 

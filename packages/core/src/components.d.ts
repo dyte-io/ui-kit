@@ -1122,6 +1122,28 @@ export namespace Components {
          */
         "t": DyteI18n1;
     }
+    interface DyteDebuggerSystem {
+        /**
+          * Icon pack
+         */
+        "iconPack": IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size": Size1;
+        /**
+          * States object
+         */
+        "states": States1;
+        /**
+          * Language
+         */
+        "t": DyteI18n1;
+    }
     interface DyteDebuggerToggle {
         /**
           * Icon pack
@@ -4134,6 +4156,12 @@ declare global {
         prototype: HTMLDyteDebuggerScreenshareElement;
         new (): HTMLDyteDebuggerScreenshareElement;
     };
+    interface HTMLDyteDebuggerSystemElement extends Components.DyteDebuggerSystem, HTMLStencilElement {
+    }
+    var HTMLDyteDebuggerSystemElement: {
+        prototype: HTMLDyteDebuggerSystemElement;
+        new (): HTMLDyteDebuggerSystemElement;
+    };
     interface HTMLDyteDebuggerToggleElement extends Components.DyteDebuggerToggle, HTMLStencilElement {
     }
     var HTMLDyteDebuggerToggleElement: {
@@ -4775,6 +4803,7 @@ declare global {
         "dyte-debugger": HTMLDyteDebuggerElement;
         "dyte-debugger-audio": HTMLDyteDebuggerAudioElement;
         "dyte-debugger-screenshare": HTMLDyteDebuggerScreenshareElement;
+        "dyte-debugger-system": HTMLDyteDebuggerSystemElement;
         "dyte-debugger-toggle": HTMLDyteDebuggerToggleElement;
         "dyte-debugger-video": HTMLDyteDebuggerVideoElement;
         "dyte-dialog": HTMLDyteDialogElement;
@@ -6133,6 +6162,28 @@ declare namespace LocalJSX {
         "t"?: DyteI18n1;
     }
     interface DyteDebuggerScreenshare {
+        /**
+          * Icon pack
+         */
+        "iconPack"?: IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size"?: Size1;
+        /**
+          * States object
+         */
+        "states"?: States1;
+        /**
+          * Language
+         */
+        "t"?: DyteI18n1;
+    }
+    interface DyteDebuggerSystem {
         /**
           * Icon pack
          */
@@ -8909,6 +8960,7 @@ declare namespace LocalJSX {
         "dyte-debugger": DyteDebugger;
         "dyte-debugger-audio": DyteDebuggerAudio;
         "dyte-debugger-screenshare": DyteDebuggerScreenshare;
+        "dyte-debugger-system": DyteDebuggerSystem;
         "dyte-debugger-toggle": DyteDebuggerToggle;
         "dyte-debugger-video": DyteDebuggerVideo;
         "dyte-dialog": DyteDialog;
@@ -9055,6 +9107,7 @@ declare module "@stencil/core" {
             "dyte-debugger": LocalJSX.DyteDebugger & JSXBase.HTMLAttributes<HTMLDyteDebuggerElement>;
             "dyte-debugger-audio": LocalJSX.DyteDebuggerAudio & JSXBase.HTMLAttributes<HTMLDyteDebuggerAudioElement>;
             "dyte-debugger-screenshare": LocalJSX.DyteDebuggerScreenshare & JSXBase.HTMLAttributes<HTMLDyteDebuggerScreenshareElement>;
+            "dyte-debugger-system": LocalJSX.DyteDebuggerSystem & JSXBase.HTMLAttributes<HTMLDyteDebuggerSystemElement>;
             "dyte-debugger-toggle": LocalJSX.DyteDebuggerToggle & JSXBase.HTMLAttributes<HTMLDyteDebuggerToggleElement>;
             "dyte-debugger-video": LocalJSX.DyteDebuggerVideo & JSXBase.HTMLAttributes<HTMLDyteDebuggerVideoElement>;
             "dyte-dialog": LocalJSX.DyteDialog & JSXBase.HTMLAttributes<HTMLDyteDialogElement>;

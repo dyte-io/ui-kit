@@ -48,6 +48,7 @@ export const DyteCounter = /*@__PURE__*/createReactComponent<JSX.DyteCounter, HT
 export const DyteDebugger = /*@__PURE__*/createReactComponent<JSX.DyteDebugger, HTMLDyteDebuggerElement>('dyte-debugger');
 export const DyteDebuggerAudio = /*@__PURE__*/createReactComponent<JSX.DyteDebuggerAudio, HTMLDyteDebuggerAudioElement>('dyte-debugger-audio');
 export const DyteDebuggerScreenshare = /*@__PURE__*/createReactComponent<JSX.DyteDebuggerScreenshare, HTMLDyteDebuggerScreenshareElement>('dyte-debugger-screenshare');
+export const DyteDebuggerSystem = /*@__PURE__*/createReactComponent<JSX.DyteDebuggerSystem, HTMLDyteDebuggerSystemElement>('dyte-debugger-system');
 export const DyteDebuggerToggle = /*@__PURE__*/createReactComponent<JSX.DyteDebuggerToggle, HTMLDyteDebuggerToggleElement>('dyte-debugger-toggle');
 export const DyteDebuggerVideo = /*@__PURE__*/createReactComponent<JSX.DyteDebuggerVideo, HTMLDyteDebuggerVideoElement>('dyte-debugger-video');
 export const DyteDialog = /*@__PURE__*/createReactComponent<JSX.DyteDialog, HTMLDyteDialogElement>('dyte-dialog');

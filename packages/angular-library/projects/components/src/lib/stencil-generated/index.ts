@@ -42,6 +42,7 @@ export const DIRECTIVES = [
   d.DyteDebugger,
   d.DyteDebuggerAudio,
   d.DyteDebuggerScreenshare,
+  d.DyteDebuggerSystem,
   d.DyteDebuggerToggle,
   d.DyteDebuggerVideo,
   d.DyteDialog,

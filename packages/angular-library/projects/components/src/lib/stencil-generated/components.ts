@@ -1102,6 +1102,27 @@ export class DyteDebuggerScreenshare {
   }
 }
 
+
+export declare interface DyteDebuggerSystem extends Components.DyteDebuggerSystem {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't']
+})
+@Component({
+  selector: 'dyte-debugger-system',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't']
+})
+export class DyteDebuggerSystem {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
 import type { States as IDyteDebuggerToggleStates } from '@dytesdk/ui-kit';
 export declare interface DyteDebuggerToggle extends Components.DyteDebuggerToggle {
   /**

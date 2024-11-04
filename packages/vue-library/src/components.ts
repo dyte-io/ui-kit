@@ -459,6 +459,15 @@ export const DyteDebuggerScreenshare = /*@__PURE__*/ defineContainer<JSX.DyteDeb
 ]);
 
 
+export const DyteDebuggerSystem = /*@__PURE__*/ defineContainer<JSX.DyteDebuggerSystem>('dyte-debugger-system', undefined, [
+  'meeting',
+  'states',
+  'size',
+  'iconPack',
+  't'
+]);
+
+
 export const DyteDebuggerToggle = /*@__PURE__*/ defineContainer<JSX.DyteDebuggerToggle>('dyte-debugger-toggle', undefined, [
   'variant',
   'meeting',

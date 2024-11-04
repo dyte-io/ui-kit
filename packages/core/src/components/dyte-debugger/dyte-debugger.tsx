@@ -5,7 +5,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import storeState from '../../lib/store';
 
-export type DebuggerTab = 'audio' | 'video' | 'screenshare';
+export type DebuggerTab = 'audio' | 'video' | 'screenshare' | 'system';
 
 /**
  * A troubleshooting component to identify and fix any issues in the meeting.
@@ -78,6 +78,8 @@ export class DyteDebugger {
         return this.t('Media Troubleshooting');
       case 'video':
         return this.t('Video Troubleshooting');
+      case 'system':
+        return this.t('System Troubleshooting');
       default:
         return this.t('Troubleshooting');
     }
@@ -95,6 +97,10 @@ export class DyteDebugger {
     };
 
     const tab = this.getActiveTab();
+
+    const showSystemsTab = typeof (navigator as any).getBattery !== 'undefined';
+
+    console.log('Show systems battery:: ', showSystemsTab, (navigator as any).getBattery);
 
     return (
       <Host>
@@ -145,6 +151,19 @@ export class DyteDebugger {
               )}
             </div>
           </button>
+          <button
+            type="button"
+            class={{ active: this.activeTab === 'system', hidden: !showSystemsTab }}
+            onClick={() => this.changeTab('system')}
+          >
+            {this.t('System')}
+            <div class="right">
+              <dyte-icon icon={this.iconPack.settings} iconPack={this.iconPack} t={this.t} />
+              {this.size === 'sm' && (
+                <dyte-icon icon={this.iconPack.chevron_right} iconPack={this.iconPack} t={this.t} />
+              )}
+            </div>
+          </button>
         </aside>
 
         <main class={{ active: this.isMobileMainVisible }} part="main-content">
@@ -166,6 +185,9 @@ export class DyteDebugger {
           {this.activeTab === 'video' && <dyte-debugger-video {...defaults}></dyte-debugger-video>}
           {this.activeTab === 'screenshare' && (
             <dyte-debugger-screenshare {...defaults}></dyte-debugger-screenshare>
+          )}
+          {this.activeTab === 'system' && showSystemsTab && (
+            <dyte-debugger-system {...defaults}></dyte-debugger-system>
           )}
         </main>
       </Host>
