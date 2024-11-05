@@ -94,23 +94,23 @@ export class DyteDebuggerVideo {
     const newStatsList: FormattedStatsObj[] = [];
 
     newStatsList.push({
-      name: `CPU Limitations`,
+      name: this.t('debugger.stats.cpu_limitations.label'),
       value: statsObj.cpuLimitations ? 'Yes' : 'No',
-      description: 'CPU limitations can impact WebRTC call quality and performance.',
+      description: this.t('debugger.stats.cpu_limitations.description'),
       verdict: statsObj.cpuLimitations ? 'Poor' : 'Good',
     });
 
     newStatsList.push({
-      name: `Bandwidth Limitations`,
+      name: this.t('debugger.stats.bandwidth_limitations.label'),
       value: statsObj.bandwidthLimitations ? 'Yes' : 'No',
-      description: 'Slow internet speeds can degrade video quality.',
+      description: this.t('debugger.stats.bandwidth_limitations.description'),
       verdict: statsObj.bandwidthLimitations ? 'Poor' : 'Good',
     });
 
     newStatsList.push({
-      name: `Bitrate`,
+      name: this.t('debugger.stats.bitrate.label'),
       value: `${Math.round(statsObj.bitrate / 1024)} kbps`,
-      description: 'Data transmitted per second, affects quality and file size.',
+      description: this.t('debugger.stats.bitrate.description'),
       verdict: getBitrateVerdict({
         bitrate: statsObj.bitrate,
         kind: 'video',
@@ -119,15 +119,15 @@ export class DyteDebuggerVideo {
     });
 
     newStatsList.push({
-      name: `Packet Loss`,
+      name: this.t('debugger.stats.packet_loss.label'),
       value: `${statsObj.packetsLostPercentage}%`,
-      description: 'Amount of data lost during transfer',
+      description: this.t('debugger.stats.packet_loss.description'),
       verdict: getPacketLossVerdict({ packetLossPercentage: statsObj.packetsLostPercentage }),
     });
     newStatsList.push({
-      name: `Jitter`,
+      name: this.t('debugger.stats.jitter.label'),
       value: `${Math.round(statsObj.jitter * 1000)} ms`,
-      description: 'Variance or fluctuation in latency',
+      description: this.t('debugger.stats.jitter.description'),
       verdict: getJitterVerdict({ jitterInMS: statsObj.jitter * 1000 }),
     });
 
@@ -183,10 +183,10 @@ export class DyteDebuggerVideo {
                 class={`section-header ${!this.networkBasedMediaHealth ? 'only-child' : ''}`}
                 // onClick={() => this.toggleSection('network')}
               >
-                <span>Network & Media</span>
+                <span>{this.t('debugger.video.sections.network_media')}</span>
                 {this.networkBasedMediaHealth && (
                   <span class={`status ${this.networkBasedMediaHealth?.toLowerCase()}`}>
-                    {this.networkBasedMediaHealth}
+                    {this.t(`debugger.quality.${this.networkBasedMediaHealth?.toLowerCase()}`)}
                   </span>
                 )}
                 {/* <span class="arrow">{this.isNetworkOpen ? '▾' : '▸'}</span> */}
@@ -194,9 +194,9 @@ export class DyteDebuggerVideo {
               {this.isNetworkOpen && !this.videoProducerFormattedStats.length && (
                 <div class="section-body missing-stats">
                   {this.meeting.self.videoEnabled ? (
-                    <span>Generating report. Please wait for a few seconds.</span>
+                    <span>{this.t('debugger.video.messages.generating_report')}</span>
                   ) : (
-                    <span>Please enable camera to see the report.</span>
+                    <span>{this.t('debugger.video.messages.enable_media')}</span>
                   )}
                 </div>
               )}
@@ -210,7 +210,7 @@ export class DyteDebuggerVideo {
                       </div>
                       <div class="network-cell value">
                         <span class={`status ${formattedStatsObj.verdict?.toLowerCase()}`}>
-                          {formattedStatsObj.verdict}
+                          {this.t(`debugger.quality.${formattedStatsObj.verdict?.toLowerCase()}`)}
                         </span>
                         <span class="value">{formattedStatsObj.value}</span>
                       </div>
