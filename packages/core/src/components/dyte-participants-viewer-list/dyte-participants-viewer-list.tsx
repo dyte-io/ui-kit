@@ -125,9 +125,7 @@ export class DyteParticipantsViewers {
 
   // TODO: (ishita1805) Remove viewtype check when we start supporting viewers in livestream.
   private shouldShowViewers = () => {
-    return (
-      this.meeting?.self?.permissions?.stageEnabled && this.meeting?.meta?.viewType !== 'LIVESTREAM'
-    );
+    return this.meeting?.self?.permissions?.stageEnabled;
   };
 
   render() {

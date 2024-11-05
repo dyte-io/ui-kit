@@ -48,8 +48,6 @@ export class DyteParticipants {
 
   @State() participants: Peer[] = [];
 
-  @State() showStageList: boolean = false;
-
   connectedCallback() {
     this.meetingChanged(this.meeting);
     this.searchChanged(this.search);
@@ -145,14 +143,10 @@ export class DyteParticipants {
   }
 
   private updateStageList = () => {
-    if (this.meeting?.meta.viewType === 'LIVESTREAM') {
-      this.showStageList = this.meeting?.stage?.status === 'ON_STAGE';
-    } else this.showStageList = true;
     this.getParticipants(this.search);
   };
 
   render() {
-    if (!this.showStageList) return;
     return (
       <Host>
         <div class="participants-container">
