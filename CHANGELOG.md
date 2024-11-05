@@ -1,3 +1,10 @@
+# [2.1.0-staging.36](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.35...@dyte-in/ui-kit-v2.1.0-staging.36) (2024-11-05)
+
+
+### Features
+
+* **livestream:** show livestream viewers and stage list ([23b4040](https://github.com/dyte-io/ui-kit/commit/23b4040125d0435e7b80fc2f2b0a58a22e8f7b20))
+
 # [2.1.0-staging.35](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.34...@dyte-in/ui-kit-v2.1.0-staging.35) (2024-11-04)
 
 
