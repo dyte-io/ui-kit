@@ -1,3 +1,10 @@
+# [2.1.0-staging.37](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.36...@dyte-in/ui-kit-v2.1.0-staging.37) (2024-11-06)
+
+
+### Bug Fixes
+
+* **debugger-i18n:** fixed the lack of i18n in debugger files ([3962e80](https://github.com/dyte-io/ui-kit/commit/3962e803a9e3526a617f70b7cf0e1078a73d87a3))
+
 # [2.1.0-staging.36](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.35...@dyte-in/ui-kit-v2.1.0-staging.36) (2024-11-05)
 
 
