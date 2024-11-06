@@ -133,4 +133,5 @@ export function getBatteryChargingVerdict({
   if (dischargingTimeInSeconds < MINS_30) {
     return 'Poor';
   }
+  return 'Average';
 }

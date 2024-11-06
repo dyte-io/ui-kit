@@ -384,4 +384,51 @@ export const defaultLanguage = {
   'notifications.remote_control_request_accepted': 'has granted remote control',
   'notifications.remote_control_granted': 'Granted remote control to',
   'notifications.remote_control_terminated': 'Existing remote control has been terminated',
+  'debugger.troubleshooting.label': 'Troubleshooting',
+  'debugger.quality.good': 'Good',
+  'debugger.quality.average': 'Average',
+  'debugger.quality.poor': 'Poor',
+  'debugger.stats.bitrate.label': 'Bitrate',
+  'debugger.stats.bitrate.description':
+    'Data transmitted per second, affects quality and file size.',
+  'debugger.stats.packet_loss.label': 'Packet Loss',
+  'debugger.stats.packet_loss.description': 'Amount of data lost during transfer',
+  'debugger.stats.jitter.label': 'Jitter',
+  'debugger.stats.jitter.description': 'Variance or fluctuation in latency',
+  'debugger.stats.cpu_limitations.label': 'CPU Limitations',
+  'debugger.stats.cpu_limitations.description':
+    'CPU limitations can impact WebRTC call quality and performance.',
+  'debugger.stats.bandwidth_limitations.label': 'Bandwidth Limitations',
+  'debugger.stats.bandwidth_limitations.description':
+    'Slow internet speeds can degrade video quality.',
+
+  'debugger.audio.label': 'Audio',
+  'debugger.audio.troubleshooting.label': 'Audio Troubleshooting',
+  'debugger.audio.messages.generating_report': 'Generating report. Please wait for a few seconds.',
+  'debugger.audio.messages.enable_media': 'Please enable mic to see the report.',
+  'debugger.audio.sections.network_media': 'Network & Media',
+
+  'debugger.video.label': 'Video',
+  'debugger.video.troubleshooting.label': 'Video Troubleshooting',
+  'debugger.video.messages.generating_report': 'Generating report. Please wait for a few seconds.',
+  'debugger.video.messages.enable_media': 'Please enable camera to see the report.',
+  'debugger.video.sections.network_media': 'Network & Media',
+
+  'debugger.screenshare.label': 'Screenshare',
+  'debugger.screenshare.troubleshooting.label': 'Screenshare Troubleshooting',
+  'debugger.screenshare.sections.network_media': 'Network & Media',
+  'debugger.screenshare.messages.generating_report':
+    'Generating report. Please wait for a few seconds.',
+  'debugger.screenshare.messages.enable_media': 'Please share screen to see the report.',
+
+  'debugger.system.label': 'System',
+  'debugger.system.troubleshooting.label': 'System Troubleshooting',
+  'debugger.system.sections.battery': 'Battery',
+  'debugger.system.battery.level.label': 'Battery Level',
+  'debugger.system.battery.level.description':
+    'A low battery charge may result in reduced performance.',
+  'debugger.system.battery.charging.label': 'Battery Charging Status',
+  'debugger.system.battery.charging.description': 'A device running on power performs optimally.',
+  'debugger.system.battery.charging.is_charging': 'Charging',
+  'debugger.system.battery.charging.is_not_charging': 'Not charging',
 };

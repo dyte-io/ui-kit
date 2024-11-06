@@ -93,9 +93,9 @@ export class DyteDebuggerAudio {
 
     const newStatsList: FormattedStatsObj[] = [];
     newStatsList.push({
-      name: `Bitrate`,
+      name: this.t('debugger.stats.bitrate.label'),
       value: `${Math.round(statsObj.bitrate / 1024)} kbps`,
-      description: 'Data transmitted per second, affects quality and file size.',
+      description: this.t('debugger.stats.bitrate.description'),
       verdict: getBitrateVerdict({
         bitrate: statsObj.bitrate,
         kind: 'audio',
@@ -104,15 +104,15 @@ export class DyteDebuggerAudio {
     });
 
     newStatsList.push({
-      name: `Packet Loss`,
+      name: this.t('debugger.stats.packet_loss.label'),
       value: `${statsObj.packetsLostPercentage}%`,
-      description: 'Amount of data lost during transfer',
+      description: this.t('debugger.stats.packet_loss.description'),
       verdict: getPacketLossVerdict({ packetLossPercentage: statsObj.packetsLostPercentage }),
     });
     newStatsList.push({
-      name: `Jitter`,
+      name: this.t('debugger.stats.jitter.label'),
       value: `${Math.round(statsObj.jitter * 1000)} ms`,
-      description: 'Variance or fluctuation in latency',
+      description: this.t('debugger.stats.jitter.description'),
       verdict: getJitterVerdict({ jitterInMS: statsObj.jitter * 1000 }),
     });
 
@@ -168,10 +168,10 @@ export class DyteDebuggerAudio {
                 class={`section-header ${!this.networkBasedMediaHealth ? 'only-child' : ''}`}
                 // onClick={() => this.toggleSection('network')}
               >
-                <span>Network & Media</span>
+                <span>{this.t('debugger.audio.sections.network_media')}</span>
                 {this.networkBasedMediaHealth && (
                   <span class={`status ${this.networkBasedMediaHealth?.toLowerCase()}`}>
-                    {this.networkBasedMediaHealth}
+                    {this.t(`debugger.quality.${this.networkBasedMediaHealth?.toLowerCase()}`)}
                   </span>
                 )}
                 {/* <span class="arrow">{this.isNetworkOpen ? '▾' : '▸'}</span> */}
@@ -179,9 +179,9 @@ export class DyteDebuggerAudio {
               {this.isNetworkOpen && !this.audioProducerFormattedStats.length && (
                 <div class="section-body missing-stats">
                   {this.meeting.self.audioEnabled ? (
-                    <span>Generating report. Please wait for a few seconds.</span>
+                    <span>{this.t('debugger.audio.messages.generating_report')}</span>
                   ) : (
-                    <span>Please enable mic to see the report.</span>
+                    <span>{this.t('debugger.audio.messages.enable_media')}</span>
                   )}
                 </div>
               )}
@@ -195,7 +195,7 @@ export class DyteDebuggerAudio {
                       </div>
                       <div class="network-cell value">
                         <span class={`status ${formattedStatsObj.verdict?.toLowerCase()}`}>
-                          {formattedStatsObj.verdict}
+                          {this.t(`debugger.quality.${formattedStatsObj.verdict?.toLowerCase()}`)}
                         </span>
                         <span class="value">{formattedStatsObj.value}</span>
                       </div>

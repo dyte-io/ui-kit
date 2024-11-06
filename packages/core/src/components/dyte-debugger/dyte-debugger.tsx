@@ -73,15 +73,15 @@ export class DyteDebugger {
   private getActiveTab() {
     switch (this.activeTab) {
       case 'audio':
-        return this.t('Audio Troubleshooting');
+        return this.t('debugger.audio.troubleshooting.label');
       case 'screenshare':
-        return this.t('Media Troubleshooting');
+        return this.t('debugger.screenshare.troubleshooting.label');
       case 'video':
-        return this.t('Video Troubleshooting');
+        return this.t('debugger.video.troubleshooting.label');
       case 'system':
-        return this.t('System Troubleshooting');
+        return this.t('debugger.system.troubleshooting.label');
       default:
-        return this.t('Troubleshooting');
+        return this.t('debugger.troubleshooting.label');
     }
   }
 
@@ -100,20 +100,18 @@ export class DyteDebugger {
 
     const showSystemsTab = typeof (navigator as any).getBattery !== 'undefined';
 
-    console.log('Show systems battery:: ', showSystemsTab, (navigator as any).getBattery);
-
     return (
       <Host>
         <aside class={{ hide: this.isMobileMainVisible }} part="menu">
           <header>
-            <h3>{this.t('Troubleshooting')}</h3>
+            <h3>{this.t('debugger.troubleshooting')}</h3>
           </header>
           <button
             type="button"
             class={{ active: this.activeTab === 'audio' }}
             onClick={() => this.changeTab('audio')}
           >
-            {this.t('audio')}
+            {this.t('debugger.audio.label')}
             <div class="right">
               <dyte-icon icon={this.iconPack.mic_on} iconPack={this.iconPack} t={this.t} />
               {this.size === 'sm' && (
@@ -126,7 +124,7 @@ export class DyteDebugger {
             class={{ active: this.activeTab === 'video' }}
             onClick={() => this.changeTab('video')}
           >
-            {this.t('video')}
+            {this.t('debugger.video.label')}
             <div class="right">
               <dyte-icon icon={this.iconPack.video_on} iconPack={this.iconPack} t={this.t} />
               {this.size === 'sm' && (
@@ -139,7 +137,7 @@ export class DyteDebugger {
             class={{ active: this.activeTab === 'screenshare' }}
             onClick={() => this.changeTab('screenshare')}
           >
-            {this.t('Screenshare')}
+            {this.t('debugger.screenshare.label')}
             <div class="right">
               <dyte-icon
                 icon={this.iconPack.share_screen_start}
@@ -156,7 +154,7 @@ export class DyteDebugger {
             class={{ active: this.activeTab === 'system', hidden: !showSystemsTab }}
             onClick={() => this.changeTab('system')}
           >
-            {this.t('System')}
+            {this.t('debugger.system.label')}
             <div class="right">
               <dyte-icon icon={this.iconPack.settings} iconPack={this.iconPack} t={this.t} />
               {this.size === 'sm' && (

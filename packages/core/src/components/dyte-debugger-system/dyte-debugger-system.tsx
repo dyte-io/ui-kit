@@ -67,18 +67,22 @@ export class DyteDebuggerSystem {
     const newBatteryStats: FormattedStatsObj[] = [];
 
     newBatteryStats.push({
-      name: 'Battery Level',
+      name: this.t('debugger.system.battery.level.label'),
       value: `${batteryLevelPercentage}%`,
-      description: 'A low battery charge may result in reduced performance.',
+      description: this.t('debugger.system.battery.level.description'),
       verdict: getBatteryLevelVerdict({
         batteryLevelPercentage,
       }),
     });
 
     newBatteryStats.push({
-      name: 'Battery Charging Status',
-      value: `${this.battery.charging ? 'Charging' : 'Not charging'}`,
-      description: 'A device running on power performs optimally.',
+      name: this.t('debugger.system.battery.charging.label'),
+      value: `${
+        this.battery.charging
+          ? this.t('debugger.system.battery.charging.is_charging')
+          : this.t('debugger.system.battery.charging.is_not_charging')
+      }`,
+      description: this.t('debugger.system.battery.charging.description'),
       verdict: getBatteryChargingVerdict({
         batteryLevelPercentage,
         chargingTimeInSeconds: this.battery.chargingTime,
@@ -131,10 +135,10 @@ export class DyteDebuggerSystem {
           <div class="status-container">
             <div class="status-section">
               <div class="section-header" onClick={() => this.toggleSection('battery')}>
-                <span>Battery</span>
+                <span>{this.t('debugger.system.sections.battery')}</span>
                 {this.batterySectionHealth && (
                   <span class={`status ${this.batterySectionHealth?.toLowerCase()}`}>
-                    {this.batterySectionHealth}
+                    {this.t(`debugger.quality.${this.batterySectionHealth?.toLowerCase()}`)}
                   </span>
                 )}
                 {/* <span class="arrow">{this.isBatterySectionOpen ? '▾' : '▸'}</span> */}
@@ -149,7 +153,7 @@ export class DyteDebuggerSystem {
                       </div>
                       <div class="battery-cell value">
                         <span class={`status ${formattedStatsObj.verdict?.toLowerCase()}`}>
-                          {formattedStatsObj.verdict}
+                          {this.t(`debugger.quality.${formattedStatsObj.verdict?.toLowerCase()}`)}
                         </span>
                         <span class="value">{formattedStatsObj.value}</span>
                       </div>
