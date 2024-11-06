@@ -1,3 +1,10 @@
+# [2.1.0-staging.38](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.37...@dyte-in/ui-kit-v2.1.0-staging.38) (2024-11-06)
+
+
+### Bug Fixes
+
+* github action for staging updatE ([852cd6f](https://github.com/dyte-io/ui-kit/commit/852cd6fa14aecef5d8903a4f6d3a00d63d7374e0))
+
 # [2.1.0-staging.37](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.36...@dyte-in/ui-kit-v2.1.0-staging.37) (2024-11-06)
 
 
