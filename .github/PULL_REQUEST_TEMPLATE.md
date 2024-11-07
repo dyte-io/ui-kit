@@ -1,6 +1,6 @@
 | Linear Issue |
 | :----------: |
-|  Fixes WEB-  |
+| fixes WEB- |
 
 ### Description
 

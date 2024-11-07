@@ -41,6 +41,7 @@ export const defaultLanguage = {
   ask: 'Ask',
   type: 'Type',
   activate: 'Activate',
+  requests: 'Requests',
   mic_off: 'Mic Off',
   disable_mic: 'Disable Mic',
   mic_on: 'Mic On',
