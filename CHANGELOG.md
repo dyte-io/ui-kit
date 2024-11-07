@@ -1,3 +1,10 @@
+# [2.1.0-staging.39](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.38...@dyte-in/ui-kit-v2.1.0-staging.39) (2024-11-07)
+
+
+### Bug Fixes
+
+* remove socket service check ([1e1f3ee](https://github.com/dyte-io/ui-kit/commit/1e1f3eee6323102c6f1d84fcc20fa4abc5944c9f))
+
 # [2.1.0-staging.38](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.37...@dyte-in/ui-kit-v2.1.0-staging.38) (2024-11-06)
 
 
