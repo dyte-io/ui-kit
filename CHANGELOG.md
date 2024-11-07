@@ -1,3 +1,10 @@
+# [2.1.0-staging.40](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.39...@dyte-in/ui-kit-v2.1.0-staging.40) (2024-11-07)
+
+
+### Bug Fixes
+
+* **participants-tab-i18n:** fixed i18n issues in the participants tab ([100dbc0](https://github.com/dyte-io/ui-kit/commit/100dbc072b841e1614958276804cf44e50eb8543))
+
 # [2.1.0-staging.39](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.38...@dyte-in/ui-kit-v2.1.0-staging.39) (2024-11-07)
 
 
