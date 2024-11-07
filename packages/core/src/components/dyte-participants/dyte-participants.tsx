@@ -147,7 +147,7 @@ export class DyteParticipants {
         id: 'requests',
         name: (
           <span>
-            Requests&nbsp;
+            {this.t('requests')}&nbsp;
             <span
               class={`tab-participant-count-badge ${totalRequests > 0 ? 'requests-pending' : ''} ${
                 this.currentParticipantsTabId === 'requests' ? 'selected-tab' : ''
@@ -163,7 +163,7 @@ export class DyteParticipants {
       id: 'stage-list',
       name: (
         <span>
-          Participants&nbsp;
+          {this.t('participants')}&nbsp;
           <span
             class={`tab-participant-count-badge ${
               this.currentParticipantsTabId === 'stage-list' ? 'selected-tab' : ''
@@ -180,7 +180,7 @@ export class DyteParticipants {
         id: 'viewer-list',
         name: (
           <span>
-            Viewers&nbsp;
+            {this.t('viewers')}&nbsp;
             <span
               class={`tab-participant-count-badge ${
                 this.currentParticipantsTabId === 'viewer-list' ? 'selected-tab' : ''
