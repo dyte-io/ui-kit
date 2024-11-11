@@ -142,9 +142,9 @@ export class DyteLivestreamPlayer {
   }
 
   /**
-   * Make sure to call loadLivestreamPlayer before playLivestreamPlayer.
+   * Make sure to call loadLivestreamPlayer before startLivestreamPlayer.
    */
-  private playLivestreamPlayer = async () => {
+  private startLivestreamPlayer = async () => {
     try {
       this.meeting.__internals__.logger.info(
         'dyte-livestream-player:: Initialising player element.'
@@ -250,7 +250,7 @@ export class DyteLivestreamPlayer {
                   window.dyteLivestreamPlayerElement = self;
                   const isPlayerLoaded = await this.loadLivestreamPlayer();
                   if (isPlayerLoaded) {
-                    await this.playLivestreamPlayer();
+                    await this.startLivestreamPlayer();
                   }
                 }}
                 cmcd
