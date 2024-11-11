@@ -141,22 +141,42 @@ export class DyteLivestreamPlayer {
     return false;
   }
 
-  private loadPlayerAndPlayLivestream = () => {
+  /**
+   * Make sure to call loadLivestreamPlayer before playLivestreamPlayer.
+   */
+  private playLivestreamPlayer = async () => {
+    try {
+      this.meeting.__internals__.logger.info(
+        'dyte-livestream-player:: Initialising player element.'
+      );
+      // @ts-ignore
+      await window.__stream.initElement(this.player);
+      this.meeting.__internals__.logger.info('dyte-livestream-player:: About to start player.');
+      // @ts-ignore
+      await window.dyte_hls.play();
+      this.playerState = PlayerState.PLAYING;
+      this.audioPlaybackError = false;
+      this.meeting.__internals__.logger.info(
+        'dyte-livestream-player:: Player has started playing.'
+      );
+    } catch (error) {
+      this.meeting.__internals__.logger.error(`dyte-livestream-player:: Player couldn't start.`, {
+        error,
+      });
+      // Retry with user gesture
+      this.audioPlaybackError = true;
+    }
+  };
+
+  private loadLivestreamPlayer = async () => {
     const playerSrc = `https://cdn.dyte.in/streams/script.js`;
     if (!(window as any).__stream && this.isScriptWithSrcPresent(playerSrc)) {
       // Script loading is ongoing; Do Nothing
-      return;
+      return false;
     }
+
     if ((window as any).__stream) {
-      // Already loaded, let's initialize the player element and play
-      setTimeout(async () => {
-        // @ts-ignore
-        await window.__stream.initElement(this.player);
-        // @ts-ignore
-        await window.dyte_hls.play();
-        this.playerState = PlayerState.PLAYING;
-      }, 200);
-      return;
+      return true;
     }
 
     // Since script is not there, let's add script first
@@ -164,15 +184,26 @@ export class DyteLivestreamPlayer {
       const script = document.createElement('script');
       script.src = playerSrc;
       script.onload = () => {
-        setTimeout(async () => {
-          // Script loaded, let's initialize the player element and play
-          // @ts-ignore
-          await window.__stream.initElement(this.player);
-          // @ts-ignore
-          await window.dyte_hls.play();
-          this.playerState = PlayerState.PLAYING;
-          resolve(true);
-        }, 200);
+        setTimeout(() => {
+          if ((window as any).__stream) {
+            this.meeting.__internals__.logger.info(
+              `dyte-livestream-player:: Finished script load. Added window._stream.`
+            );
+            resolve(true);
+            return;
+          }
+          this.meeting.__internals__.logger.error(
+            `dyte-livestream-player:: onLoad didn't add window._stream in time.`
+          );
+          resolve(false);
+        }, 1000);
+      };
+      script.onerror = (error: any) => {
+        this.meeting.__internals__.logger.error(
+          `dyte-livestream-player:: CDN script didn't load.`,
+          { error }
+        );
+        resolve(false);
       };
       document.head.appendChild(script);
     });
@@ -205,7 +236,7 @@ export class DyteLivestreamPlayer {
     return (
       <Host>
         <div class="player-container">
-          {this.livestreamState === 'LIVESTREAMING' && this.livestreamId ? (
+          {this.livestreamState === 'LIVESTREAMING' && this.livestreamId && (
             <div class="flex h-full w-full items-start justify-center pb-20">
               <stream
                 width="100%"
@@ -217,16 +248,18 @@ export class DyteLivestreamPlayer {
                   // Add player instance on window to satisfy cdn script
                   // @ts-ignore
                   window.dyteLivestreamPlayerElement = self;
-                  await this.loadPlayerAndPlayLivestream();
+                  const isPlayerLoaded = await this.loadLivestreamPlayer();
+                  if (isPlayerLoaded) {
+                    await this.playLivestreamPlayer();
+                  }
                 }}
                 cmcd
                 autoplay
-                controls
                 force-flavor="llhls"
                 customer-domain-prefix="customer-s8oj0c1n5ek8ah1e"
               ></stream>
             </div>
-          ) : null}
+          )}
           {this.audioPlaybackError && (
             <div class="unmute-popup">
               <h3>{this.t('audio_playback.title')}</h3>
@@ -234,7 +267,9 @@ export class DyteLivestreamPlayer {
               <dyte-button
                 kind="wide"
                 onClick={() => {
-                  this.player.muted = false;
+                  if (this.player) {
+                    this.player.muted = false;
+                  }
                   this.audioPlaybackError = false;
                 }}
                 title={this.t('audio_playback')}
