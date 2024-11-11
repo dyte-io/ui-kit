@@ -37,6 +37,8 @@ export class DyteLivestreamPlayer {
 
   @State() latency: number = 0;
 
+  @State() livestreamId: string = null;
+
   @State() audioPlaybackError: boolean = false;
 
   /**
@@ -49,7 +51,26 @@ export class DyteLivestreamPlayer {
 
   private livestreamUpdateListener = (state: LivestreamState) => {
     this.livestreamState = state;
+    this.playbackUrl = this.meeting.livestream.playbackUrl;
   };
+
+  @Watch('livestreamState')
+  // @ts-ignore
+  private updateLivestreamId() {
+    const url = this.meeting.livestream.playbackUrl;
+    if (!url || this.livestreamState !== 'LIVESTREAMING') {
+      this.livestreamId = null;
+      this.player = null;
+      // @ts-ignore
+      window.dyteLivestreamPlayerElement = null;
+      return;
+    }
+
+    const parts = url.split('/');
+    const manifestIndex = parts.findIndex((part) => part === 'manifest');
+    const streamId = parts[manifestIndex - 1];
+    this.livestreamId = streamId;
+  }
 
   private getLoadingState = () => {
     let loadingMessage = '';
@@ -110,19 +131,69 @@ export class DyteLivestreamPlayer {
     return { isError, errorMessage };
   };
 
-  connectedCallback() {
+  private isScriptWithSrcPresent(srcUrl) {
+    const scripts = document.querySelectorAll('script');
+    for (let script of scripts) {
+      if (script.src === srcUrl) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private loadPlayerAndPlayLivestream = () => {
+    const playerSrc = `https://cdn.dyte.in/streams/script.js`;
+    if (!(window as any).__stream && this.isScriptWithSrcPresent(playerSrc)) {
+      // Script loading is ongoing; Do Nothing
+      return;
+    }
+    if ((window as any).__stream) {
+      // Already loaded, let's initialize the player element and play
+      setTimeout(async () => {
+        // @ts-ignore
+        await window.__stream.initElement(this.player);
+        // @ts-ignore
+        await window.dyte_hls.play();
+        this.playerState = PlayerState.PLAYING;
+      }, 200);
+      return;
+    }
+
+    // Since script is not there, let's add script first
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = playerSrc;
+      script.onload = () => {
+        setTimeout(async () => {
+          // Script loaded, let's initialize the player element and play
+          // @ts-ignore
+          await window.__stream.initElement(this.player);
+          // @ts-ignore
+          await window.dyte_hls.play();
+          this.playerState = PlayerState.PLAYING;
+          resolve(true);
+        }, 200);
+      };
+      document.head.appendChild(script);
+    });
+  };
+
+  async connectedCallback() {
     this.meetingChanged(this.meeting);
   }
 
   disconnectedCallback() {
     this.meeting.livestream.removeListener('livestreamUpdate', this.livestreamUpdateListener);
-    this.player = undefined;
+    this.player = null;
+    // @ts-ignore
+    window.dyteLivestreamPlayerElement = null;
   }
 
   @Watch('meeting')
   meetingChanged(meeting) {
     if (meeting == null) return;
     this.livestreamState = this.meeting.livestream.state;
+    this.playbackUrl = this.meeting.livestream.playbackUrl;
     this.meeting.livestream.on('livestreamUpdate', this.livestreamUpdateListener);
   }
 
@@ -134,17 +205,27 @@ export class DyteLivestreamPlayer {
     return (
       <Host>
         <div class="player-container">
-          {this.livestreamState === 'LIVESTREAMING' ? (
-            <iframe
-              src={this.meeting.livestream.playbackUrl.replace(
-                '/manifest/video.m3u8',
-                '/iframe?autoplay=true'
-              )}
-              allowFullScreen
-              allowTransparency
-              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-              class={'player z-10'}
-            ></iframe>
+          {this.livestreamState === 'LIVESTREAMING' && this.livestreamId ? (
+            <div class="flex h-full w-full items-start justify-center pb-20">
+              <stream
+                width="100%"
+                height="80vh"
+                className="overflow-hidden rounded-lg"
+                src={this.livestreamId}
+                ref={async (self) => {
+                  this.player = self;
+                  // Add player instance on window to satisfy cdn script
+                  // @ts-ignore
+                  window.dyteLivestreamPlayerElement = self;
+                  await this.loadPlayerAndPlayLivestream();
+                }}
+                cmcd
+                autoplay
+                controls
+                force-flavor="llhls"
+                customer-domain-prefix="customer-s8oj0c1n5ek8ah1e"
+              ></stream>
+            </div>
           ) : null}
           {this.audioPlaybackError && (
             <div class="unmute-popup">
