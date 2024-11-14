@@ -1,3 +1,15 @@
+# [2.1.0-staging.43](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.42...@dyte-in/ui-kit-v2.1.0-staging.43) (2024-11-14)
+
+
+### Bug Fixes
+
+* **livestream-viewer:** fixed some edge cases around playback, added logs for tracking ([210309b](https://github.com/dyte-io/ui-kit/commit/210309bd690a09552fea837fadf96f61be9f9f1e))
+
+
+### Features
+
+* **internal:** livestream viewer with stats ([945e2b5](https://github.com/dyte-io/ui-kit/commit/945e2b56a00acf42f8591e3f62c686bde7947b27))
+
 # [2.1.0-staging.42](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.41...@dyte-in/ui-kit-v2.1.0-staging.42) (2024-11-14)
 
 
