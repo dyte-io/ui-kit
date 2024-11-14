@@ -1,3 +1,10 @@
+# [2.1.0-staging.41](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.40...@dyte-in/ui-kit-v2.1.0-staging.41) (2024-11-14)
+
+
+### Bug Fixes
+
+* scroll lock in transcriptions ([71a9ca5](https://github.com/dyte-io/ui-kit/commit/71a9ca54e0b77ef765bcd20de678f8531dd3f5c2))
+
 # [2.1.0-staging.40](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.39...@dyte-in/ui-kit-v2.1.0-staging.40) (2024-11-07)
 
 
