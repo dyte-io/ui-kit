@@ -37,6 +37,8 @@ export class DyteLivestreamPlayer {
 
   @State() latency: number = 0;
 
+  @State() livestreamId: string = null;
+
   @State() audioPlaybackError: boolean = false;
 
   /**
@@ -49,7 +51,26 @@ export class DyteLivestreamPlayer {
 
   private livestreamUpdateListener = (state: LivestreamState) => {
     this.livestreamState = state;
+    this.playbackUrl = this.meeting.livestream.playbackUrl;
   };
+
+  @Watch('livestreamState')
+  // @ts-ignore
+  private updateLivestreamId() {
+    const url = this.meeting.livestream.playbackUrl;
+    if (!url || this.livestreamState !== 'LIVESTREAMING') {
+      this.livestreamId = null;
+      this.player = null;
+      // @ts-ignore
+      window.dyteLivestreamPlayerElement = null;
+      return;
+    }
+
+    const parts = url.split('/');
+    const manifestIndex = parts.findIndex((part) => part === 'manifest');
+    const streamId = parts[manifestIndex - 1];
+    this.livestreamId = streamId;
+  }
 
   private getLoadingState = () => {
     let loadingMessage = '';
@@ -110,19 +131,100 @@ export class DyteLivestreamPlayer {
     return { isError, errorMessage };
   };
 
-  connectedCallback() {
+  private isScriptWithSrcPresent(srcUrl) {
+    const scripts = document.querySelectorAll('script');
+    for (let script of scripts) {
+      if (script.src === srcUrl) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /**
+   * Make sure to call loadLivestreamPlayer before startLivestreamPlayer.
+   */
+  private startLivestreamPlayer = async () => {
+    try {
+      this.meeting.__internals__.logger.info(
+        'dyte-livestream-player:: Initialising player element.'
+      );
+      // @ts-ignore
+      await window.__stream.initElement(this.player);
+      this.meeting.__internals__.logger.info('dyte-livestream-player:: About to start player.');
+      // @ts-ignore
+      await window.dyte_hls.play();
+      this.playerState = PlayerState.PLAYING;
+      this.audioPlaybackError = false;
+      this.meeting.__internals__.logger.info(
+        'dyte-livestream-player:: Player has started playing.'
+      );
+    } catch (error) {
+      this.meeting.__internals__.logger.error(`dyte-livestream-player:: Player couldn't start.`, {
+        error,
+      });
+      // Retry with user gesture
+      this.audioPlaybackError = true;
+    }
+  };
+
+  private loadLivestreamPlayer = async () => {
+    const playerSrc = `https://cdn.dyte.in/streams/script.js`;
+    if (!(window as any).__stream && this.isScriptWithSrcPresent(playerSrc)) {
+      // Script loading is ongoing; Do Nothing
+      return false;
+    }
+
+    if ((window as any).__stream) {
+      return true;
+    }
+
+    // Since script is not there, let's add script first
+    return new Promise((resolve) => {
+      const script = document.createElement('script');
+      script.src = playerSrc;
+      script.onload = () => {
+        setTimeout(() => {
+          if ((window as any).__stream) {
+            this.meeting.__internals__.logger.info(
+              `dyte-livestream-player:: Finished script load. Added window._stream.`
+            );
+            resolve(true);
+            return;
+          }
+          this.meeting.__internals__.logger.error(
+            `dyte-livestream-player:: onLoad didn't add window._stream in time.`
+          );
+          resolve(false);
+        }, 1000);
+      };
+      script.onerror = (error: any) => {
+        this.meeting.__internals__.logger.error(
+          `dyte-livestream-player:: CDN script didn't load.`,
+          { error }
+        );
+        resolve(false);
+      };
+      document.head.appendChild(script);
+    });
+  };
+
+  async connectedCallback() {
     this.meetingChanged(this.meeting);
   }
 
   disconnectedCallback() {
     this.meeting.livestream.removeListener('livestreamUpdate', this.livestreamUpdateListener);
-    this.player = undefined;
+    this.player = null;
+    // @ts-ignore
+    window.dyteLivestreamPlayerElement = null;
   }
 
   @Watch('meeting')
   meetingChanged(meeting) {
     if (meeting == null) return;
     this.livestreamState = this.meeting.livestream.state;
+    this.playbackUrl = this.meeting.livestream.playbackUrl;
     this.meeting.livestream.on('livestreamUpdate', this.livestreamUpdateListener);
   }
 
@@ -134,18 +236,30 @@ export class DyteLivestreamPlayer {
     return (
       <Host>
         <div class="player-container">
-          {this.livestreamState === 'LIVESTREAMING' ? (
-            <iframe
-              src={this.meeting.livestream.playbackUrl.replace(
-                '/manifest/video.m3u8',
-                '/iframe?autoplay=true'
-              )}
-              allowFullScreen
-              allowTransparency
-              allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-              class={'player z-10'}
-            ></iframe>
-          ) : null}
+          {this.livestreamState === 'LIVESTREAMING' && this.livestreamId && (
+            <div class="flex h-full w-full items-start justify-center pb-20">
+              <stream
+                width="100%"
+                height="80vh"
+                className="overflow-hidden rounded-lg"
+                src={this.livestreamId}
+                ref={async (self) => {
+                  this.player = self;
+                  // Add player instance on window to satisfy cdn script
+                  // @ts-ignore
+                  window.dyteLivestreamPlayerElement = self;
+                  const isPlayerLoaded = await this.loadLivestreamPlayer();
+                  if (isPlayerLoaded) {
+                    await this.startLivestreamPlayer();
+                  }
+                }}
+                cmcd
+                autoplay
+                force-flavor="llhls"
+                customer-domain-prefix="customer-s8oj0c1n5ek8ah1e"
+              ></stream>
+            </div>
+          )}
           {this.audioPlaybackError && (
             <div class="unmute-popup">
               <h3>{this.t('audio_playback.title')}</h3>
@@ -153,7 +267,9 @@ export class DyteLivestreamPlayer {
               <dyte-button
                 kind="wide"
                 onClick={() => {
-                  this.player.muted = false;
+                  if (this.player) {
+                    this.player.muted = false;
+                  }
                   this.audioPlaybackError = false;
                 }}
                 title={this.t('audio_playback')}

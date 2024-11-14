@@ -421,10 +421,7 @@ export class DyteChat {
   }
 
   private isPrivateChatSupported = () => {
-    return (
-      this.canPrivateMessage &&
-      !this.disablePrivateChat
-    );
+    return this.canPrivateMessage && !this.disablePrivateChat;
   };
 
   private updateRecipients = (event: CustomEvent<ChannelItem>) => {
