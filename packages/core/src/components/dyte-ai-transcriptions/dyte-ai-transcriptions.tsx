@@ -56,7 +56,9 @@ export class DyteAiTranscriptions {
     if (!this.meeting) return;
 
     this.meetingChanged(this.meeting);
+  }
 
+  componentDidLoad() {
     this.contentContainer?.addEventListener('scroll', this.onScroll);
   }
 
