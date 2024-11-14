@@ -1,3 +1,10 @@
+# [2.1.0-staging.42](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.41...@dyte-in/ui-kit-v2.1.0-staging.42) (2024-11-14)
+
+
+### Bug Fixes
+
+* add event listener in componentDidLoad ([d99524a](https://github.com/dyte-io/ui-kit/commit/d99524ab2f2cdbdddb6671972c0169e724c53383))
+
 # [2.1.0-staging.41](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.40...@dyte-in/ui-kit-v2.1.0-staging.41) (2024-11-14)
 
 
