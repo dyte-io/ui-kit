@@ -25,6 +25,7 @@ export enum PlayerState {
   BUFFERING = 'Buffering',
   ENDED = 'Ended',
   IDLE = 'Idle',
+  PAUSED = 'Paused',
   PLAYING = 'Playing',
   READY = 'Ready',
 }

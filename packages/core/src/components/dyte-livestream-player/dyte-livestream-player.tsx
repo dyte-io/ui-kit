@@ -1,5 +1,16 @@
 import type { LivestreamState } from '@dytesdk/web-core';
-import { Component, h, Host, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
+import Hls from 'hls.js';
+import {
+  Component,
+  h,
+  Host,
+  Prop,
+  Element,
+  State,
+  Watch,
+  Event,
+  EventEmitter,
+} from '@stencil/core';
 import { Size, DyteI18n, IconPack, defaultIconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
@@ -11,7 +22,13 @@ import { showLivestream, PlayerEventType, PlayerState } from '../../utils/livest
   shadow: true,
 })
 export class DyteLivestreamPlayer {
-  private player: HTMLVideoElement;
+  private videoRef: HTMLVideoElement;
+
+  private progressBarRef: HTMLInputElement;
+
+  @Element() el: HTMLDyteLivestreamPlayerElement; // This gives you a reference to the root DOM element
+
+  private hls: Hls;
 
   /** Meeting object */
   @Prop() meeting!: Meeting;
@@ -35,11 +52,15 @@ export class DyteLivestreamPlayer {
 
   @State() playerError: any;
 
-  @State() latency: number = 0;
-
   @State() livestreamId: string = null;
 
   @State() audioPlaybackError: boolean = false;
+
+  @State() volume: number = 1;
+
+  @State() qualityLevels: Array<{ level: number; resolution: string }> = [];
+
+  @State() selectedQuality: number = -1; // -1 for auto
 
   /**
    * Emit API error events
@@ -50,19 +71,16 @@ export class DyteLivestreamPlayer {
   }>;
 
   private livestreamUpdateListener = (state: LivestreamState) => {
-    this.livestreamState = state;
     this.playbackUrl = this.meeting.livestream.playbackUrl;
+    this.livestreamState = state;
   };
 
   @Watch('livestreamState')
   // @ts-ignore
-  private updateLivestreamId() {
+  private async updateLivestreamId() {
     const url = this.meeting.livestream.playbackUrl;
     if (!url || this.livestreamState !== 'LIVESTREAMING') {
       this.livestreamId = null;
-      this.player = null;
-      // @ts-ignore
-      window.dyteLivestreamPlayerElement = null;
       return;
     }
 
@@ -70,7 +88,55 @@ export class DyteLivestreamPlayer {
     const manifestIndex = parts.findIndex((part) => part === 'manifest');
     const streamId = parts[manifestIndex - 1];
     this.livestreamId = streamId;
+    await this.conditionallyStartLivestreamViewer();
   }
+
+  private async conditionallyStartLivestreamViewer() {
+    if (this.videoRef && this.playbackUrl && !this.hls) {
+      await this.initialiseAndPlayStream();
+      // Update progress bar on playback progress
+      this.videoRef.addEventListener('timeupdate', () => {
+        if (this.videoRef.duration && this.progressBarRef) {
+          const progress = (this.videoRef.currentTime / this.videoRef.duration) * 100;
+          console.log(
+            'Current time:: ',
+            this.videoRef.currentTime,
+            ' duration:: ',
+            this.videoRef.duration
+          );
+          this.progressBarRef.value = Math.round(progress).toString();
+        }
+      });
+    }
+  }
+
+  private togglePlay = () => {
+    if (this.videoRef.paused) {
+      this.videoRef.play();
+      this.playerState = PlayerState.PLAYING;
+    } else {
+      this.videoRef.pause();
+      this.playerState = PlayerState.IDLE;
+    }
+  };
+
+  private setVolume = (e: Event) => {
+    const volume = (e.target as HTMLInputElement).valueAsNumber;
+    this.videoRef.volume = volume;
+    this.volume = volume;
+  };
+
+  private changeQuality = (level: number) => {
+    this.selectedQuality = level;
+    if (this.hls) {
+      if (level === -1) {
+        // Auto
+        this.hls.currentLevel = -1;
+      } else {
+        this.hls.currentLevel = level;
+      }
+    }
+  };
 
   private getLoadingState = () => {
     let loadingMessage = '';
@@ -93,7 +159,7 @@ export class DyteLivestreamPlayer {
         showIcon = true;
         break;
       case 'LIVESTREAMING':
-        if (this.playerState !== PlayerState.PLAYING) {
+        if (this.playerState !== PlayerState.PLAYING && this.playerState !== PlayerState.PAUSED) {
           loadingMessage = this.t('livestream.starting');
           showIcon = true;
           isLoading = true;
@@ -131,82 +197,74 @@ export class DyteLivestreamPlayer {
     return { isError, errorMessage };
   };
 
-  private isScriptWithSrcPresent(srcUrl) {
-    const scripts = document.querySelectorAll('script');
-    for (let script of scripts) {
-      if (script.src === srcUrl) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Make sure to call loadLivestreamPlayer before startLivestreamPlayer.
-   */
-  private startLivestreamPlayer = async () => {
+  private initialiseAndPlayStream = async () => {
     try {
       this.meeting.__internals__.logger.info(
-        'dyte-livestream-player:: Initialising player element.'
+        `dyte-livestream-player:: About to initialise HLS. VideoRef? ${!!this
+          .videoRef} playbackUrl: ${this.playbackUrl}`
       );
-      // @ts-ignore
-      await window.__stream.initElement(this.player);
-      this.meeting.__internals__.logger.info('dyte-livestream-player:: About to start player.');
-      // @ts-ignore
-      await window.dyte_hls.play();
-      this.playerState = PlayerState.PLAYING;
-      this.audioPlaybackError = false;
-      this.meeting.__internals__.logger.info(
-        'dyte-livestream-player:: Player has started playing.'
-      );
+      if (Hls.isSupported()) {
+        this.meeting.__internals__.logger.info(
+          `dyte-livestream-player:: Initialising HLS. HLS is Supported`
+        );
+        this.hls = new Hls({
+          lowLatencyMode: false,
+        });
+        this.meeting.__internals__.logger.info(`dyte-livestream-player:: Loading source`);
+        this.hls.loadSource(this.playbackUrl);
+        this.meeting.__internals__.logger.info(
+          `dyte-livestream-player:: Attaching video element to HLS`
+        );
+        this.hls.attachMedia(this.videoRef);
+
+        this.meeting.__internals__.logger.info(
+          `dyte-livestream-player:: Waiting async for HLS manifest parsing`
+        );
+
+        this.hls.on(Hls.Events.ERROR, (_event, data) => {
+          if (data.fatal) {
+            console.error('Fatal error:', data);
+          } else {
+            console.warn('Non-fatal error:', data);
+          }
+        });
+
+        // Listen for manifest parsed to populate quality levels
+        this.hls.on(Hls.Events.MANIFEST_PARSED, async (_, data) => {
+          this.meeting.__internals__.logger.info(`dyte-livestream-player:: HLS manifest parsed`);
+          this.qualityLevels = data.levels.map((level, index) => ({
+            level: index,
+            resolution: level.height ? `${level.height}p` : 'auto',
+          }));
+
+          try {
+            this.meeting.__internals__.logger.info(
+              'dyte-livestream-player:: About to start video.'
+            );
+            await this.videoRef.play(); // Starts playing the video after it is ready
+            this.meeting.__internals__.logger.info(
+              'dyte-livestream-player:: Video has started playing.'
+            );
+            this.playerState = PlayerState.PLAYING;
+          } catch (error) {
+            this.audioPlaybackError = true;
+            this.meeting.__internals__.logger.error(
+              `dyte-livestream-player:: Video couldn't start. Trying with user gesture again.`,
+              {
+                error,
+              }
+            );
+          }
+        });
+      } else {
+        this.isSupported = false;
+      }
     } catch (error) {
-      this.meeting.__internals__.logger.error(`dyte-livestream-player:: Player couldn't start.`, {
+      this.meeting.__internals__.logger.error(`dyte-livestream-player:: HLS couldn't initialise.`, {
         error,
       });
       // Retry with user gesture
-      this.audioPlaybackError = true;
     }
-  };
-
-  private loadLivestreamPlayer = async () => {
-    const playerSrc = `https://cdn.dyte.in/streams/script.js`;
-    if (!(window as any).__stream && this.isScriptWithSrcPresent(playerSrc)) {
-      // Script loading is ongoing; Do Nothing
-      return false;
-    }
-
-    if ((window as any).__stream) {
-      return true;
-    }
-
-    // Since script is not there, let's add script first
-    return new Promise((resolve) => {
-      const script = document.createElement('script');
-      script.src = playerSrc;
-      script.onload = () => {
-        setTimeout(() => {
-          if ((window as any).__stream) {
-            this.meeting.__internals__.logger.info(
-              `dyte-livestream-player:: Finished script load. Added window._stream.`
-            );
-            resolve(true);
-            return;
-          }
-          this.meeting.__internals__.logger.error(
-            `dyte-livestream-player:: onLoad didn't add window._stream in time.`
-          );
-          resolve(false);
-        }, 1000);
-      };
-      script.onerror = (error: any) => {
-        this.meeting.__internals__.logger.error(
-          `dyte-livestream-player:: CDN script didn't load.`,
-          { error }
-        );
-        resolve(false);
-      };
-      document.head.appendChild(script);
-    });
   };
 
   async connectedCallback() {
@@ -215,16 +273,17 @@ export class DyteLivestreamPlayer {
 
   disconnectedCallback() {
     this.meeting.livestream.removeListener('livestreamUpdate', this.livestreamUpdateListener);
-    this.player = null;
-    // @ts-ignore
-    window.dyteLivestreamPlayerElement = null;
+    this.videoRef = null;
+    if (this.hls) {
+      this.hls.destroy();
+    }
   }
 
   @Watch('meeting')
   meetingChanged(meeting) {
     if (meeting == null) return;
-    this.livestreamState = this.meeting.livestream.state;
     this.playbackUrl = this.meeting.livestream.playbackUrl;
+    this.livestreamState = this.meeting.livestream.state;
     this.meeting.livestream.on('livestreamUpdate', this.livestreamUpdateListener);
   }
 
@@ -235,31 +294,97 @@ export class DyteLivestreamPlayer {
 
     return (
       <Host>
-        <div class="player-container">
-          {this.livestreamState === 'LIVESTREAMING' && this.livestreamId && (
-            <div class="flex h-full w-full items-start justify-center pb-20">
-              <stream
-                width="100%"
-                height="80vh"
-                className="overflow-hidden rounded-lg"
-                src={this.livestreamId}
-                ref={async (self) => {
-                  this.player = self;
-                  // Add player instance on window to satisfy cdn script
-                  // @ts-ignore
-                  window.dyteLivestreamPlayerElement = self;
-                  const isPlayerLoaded = await this.loadLivestreamPlayer();
-                  if (isPlayerLoaded) {
-                    await this.startLivestreamPlayer();
+        <div class="player-container h-full max-h-full min-h-full w-full min-w-full max-w-full">
+          <div class="video-container flex h-full max-h-full min-h-full w-full min-w-full max-w-full flex-col items-center justify-center pb-20">
+            <video
+              ref={async (el) => {
+                this.videoRef = el;
+                await this.conditionallyStartLivestreamViewer();
+              }}
+              class="h-full max-h-full min-h-full w-full min-w-full max-w-full"
+              controls={false} // Custom controls
+              onPlay={() => {
+                if (this.playerState === PlayerState.PAUSED) {
+                  this.playerState = PlayerState.PLAYING;
+                }
+              }}
+              onPause={() => (this.playerState = PlayerState.PAUSED)}
+            ></video>
+            {this.playerState !== PlayerState.IDLE && (
+              // <!-- Control Bar -->
+              <div class="control-bar">
+                {/* <!-- Play/Pause Button --> */}
+                <button id="playPause" class="control-btn" onClick={this.togglePlay}>
+                  <dyte-icon
+                    icon={
+                      this.playerState === PlayerState.PLAYING
+                        ? this.iconPack.pause
+                        : this.iconPack.play
+                    }
+                  />
+                </button>
+
+                {/* <!-- Progress Bar --> */}
+                <input
+                  type="range"
+                  id="progress"
+                  ref={(el) => {
+                    this.progressBarRef = el;
+                  }}
+                  onInput={(event) => {
+                    const progressPercentage = (event.target as HTMLInputElement).valueAsNumber;
+                    const newTime = progressPercentage * this.videoRef.duration;
+                    this.videoRef.currentTime = newTime;
+                  }}
+                  class="progress-bar"
+                  value="0"
+                  max="100"
+                  step="0.1"
+                />
+
+                {/* <!-- Volume Control --> */}
+                <div class="volume-control-holder">
+                  <dyte-icon icon={this.iconPack.speaker} />
+                  <input
+                    type="range"
+                    id="volume"
+                    class="volume-bar"
+                    max="1"
+                    step="0.1"
+                    value={this.volume}
+                    onInput={this.setVolume}
+                  />
+                </div>
+
+                {/* <!-- Quality --> */}
+                <select
+                  class="level-select"
+                  onChange={(e) =>
+                    this.changeQuality(parseInt((e.target as HTMLSelectElement).value))
                   }
-                }}
-                cmcd
-                autoplay
-                force-flavor="llhls"
-                customer-domain-prefix="customer-s8oj0c1n5ek8ah1e"
-              ></stream>
-            </div>
-          )}
+                >
+                  <option value={-1} selected={this.selectedQuality === -1}>
+                    Auto
+                  </option>
+                  {this.qualityLevels.map((level) => (
+                    <option value={level.level} selected={this.selectedQuality === level.level}>
+                      {level.resolution}
+                    </option>
+                  ))}
+                </select>
+
+                {/* <!-- Fullscreen Button --> */}
+                <dyte-fullscreen-toggle
+                  id="fullscreen"
+                  class="control-btn"
+                  targetElement={this.el}
+                  size="sm"
+                  iconPack={this.iconPack}
+                  t={this.t}
+                />
+              </div>
+            )}
+          </div>
           {this.audioPlaybackError && (
             <div class="unmute-popup">
               <h3>{this.t('audio_playback.title')}</h3>
@@ -267,10 +392,12 @@ export class DyteLivestreamPlayer {
               <dyte-button
                 kind="wide"
                 onClick={() => {
-                  if (this.player) {
-                    this.player.muted = false;
-                  }
                   this.audioPlaybackError = false;
+                  if (this.videoRef) {
+                    this.videoRef.muted = false;
+                    this.videoRef.play();
+                    this.playerState = PlayerState.PLAYING;
+                  }
                 }}
                 title={this.t('audio_playback')}
                 iconPack={this.iconPack}

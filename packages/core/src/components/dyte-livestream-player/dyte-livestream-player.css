@@ -1,11 +1,11 @@
 @import '../../styles/reset.css';
 
 :host {
-  @apply bg-background-900 mx-2 flex h-full w-full rounded-md;
+  @apply bg-background-900 mx-2 flex h-full max-h-full min-h-full w-full min-w-full max-w-full rounded-md;
 }
 
 .player-container {
-  @apply relative m-4 flex grow items-center justify-center overflow-hidden rounded-md;
+  @apply relative m-4 flex grow items-center justify-center rounded-md;
 }
 
 .player {
@@ -38,4 +38,93 @@ p {
   p {
     @apply text-text-md my-3;
   }
+}
+
+.control-bar {
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  color: white;
+  z-index: 10; /* Ensures the control bar is above the video */
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.control-btn:hover {
+  opacity: 0.8;
+}
+
+.control-btn:focus {
+  outline: none;
+}
+
+.progress-bar {
+  width: 60%;
+  cursor: pointer;
+  appearance: none;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+}
+
+.progress-bar::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.volume-bar {
+  height: 5px; 
+  cursor: pointer;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.volume-bar::-webkit-slider-thumb {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+
+.level-select {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.level-select:focus {
+  outline: none;
+}
+
+.level-select option {
+  background-color: #000;
+}
+
+.volume-control-holder{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
