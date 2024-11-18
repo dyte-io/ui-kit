@@ -43,8 +43,8 @@ p {
 .control-bar {
   position: absolute;
   bottom: 0;
-  width: 50%;
   display: flex;
+  height: auto;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
@@ -68,23 +68,13 @@ p {
   outline: none;
 }
 
-.progress-bar {
-  width: 60%;
-  cursor: pointer;
-  appearance: none;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
+
+.control-groups{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.progress-bar::-webkit-slider-thumb {
-  appearance: none;
-  width: 12px;
-  height: 12px;
-  background: white;
-  border-radius: 50%;
-  cursor: pointer;
-}
 
 .volume-bar {
   height: 5px; 
@@ -104,6 +94,11 @@ p {
   cursor: pointer;
 }
 
+#livestream-video {
+  aspect-ratio: 16/9;
+  /* TODO: fix me from changing shapes */
+}
+
 
 .level-select {
   background-color: rgba(255, 255, 255, 0.3);
@@ -113,6 +108,7 @@ p {
   font-size: 14px;
   cursor: pointer;
   border-radius: 5px;
+  margin-right: 10px;
 }
 
 .level-select:focus {

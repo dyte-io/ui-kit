@@ -15,6 +15,7 @@ import { Size, DyteI18n, IconPack, defaultIconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { showLivestream, PlayerEventType, PlayerState } from '../../utils/livestream';
+import { formatSecondsToHHMMSS } from '../../utils/time';
 
 @Component({
   tag: 'dyte-livestream-player',
@@ -24,11 +25,11 @@ import { showLivestream, PlayerEventType, PlayerState } from '../../utils/livest
 export class DyteLivestreamPlayer {
   private videoRef: HTMLVideoElement;
 
-  private progressBarRef: HTMLInputElement;
-
   @Element() el: HTMLDyteLivestreamPlayerElement; // This gives you a reference to the root DOM element
 
   private hls: Hls;
+
+  private statsIntervalTimer = null;
 
   /** Meeting object */
   @Prop() meeting!: Meeting;
@@ -56,11 +57,13 @@ export class DyteLivestreamPlayer {
 
   @State() audioPlaybackError: boolean = false;
 
-  @State() volume: number = 1;
-
   @State() qualityLevels: Array<{ level: number; resolution: string }> = [];
 
   @State() selectedQuality: number = -1; // -1 for auto
+
+  @State() currentTime: number = 0;
+
+  @State() duration: number = 0;
 
   /**
    * Emit API error events
@@ -73,6 +76,19 @@ export class DyteLivestreamPlayer {
   private livestreamUpdateListener = (state: LivestreamState) => {
     this.playbackUrl = this.meeting.livestream.playbackUrl;
     this.livestreamState = state;
+  };
+
+  private updateProgress = () => {
+    this.currentTime = this.videoRef.currentTime;
+  };
+
+  private updateHlsStatsPeriodically = () => {
+    // Total duration is where video is + the latency that is there
+    this.duration = (this.videoRef?.currentTime || 0) + (this.hls?.latency || 0);
+  };
+
+  private fastForwardToLatest = () => {
+    this.videoRef.currentTime = this.duration - 1; // Move to the latest time
   };
 
   @Watch('livestreamState')
@@ -94,19 +110,6 @@ export class DyteLivestreamPlayer {
   private async conditionallyStartLivestreamViewer() {
     if (this.videoRef && this.playbackUrl && !this.hls) {
       await this.initialiseAndPlayStream();
-      // Update progress bar on playback progress
-      this.videoRef.addEventListener('timeupdate', () => {
-        if (this.videoRef.duration && this.progressBarRef) {
-          const progress = (this.videoRef.currentTime / this.videoRef.duration) * 100;
-          console.log(
-            'Current time:: ',
-            this.videoRef.currentTime,
-            ' duration:: ',
-            this.videoRef.duration
-          );
-          this.progressBarRef.value = Math.round(progress).toString();
-        }
-      });
     }
   }
 
@@ -118,12 +121,6 @@ export class DyteLivestreamPlayer {
       this.videoRef.pause();
       this.playerState = PlayerState.IDLE;
     }
-  };
-
-  private setVolume = (e: Event) => {
-    const volume = (e.target as HTMLInputElement).valueAsNumber;
-    this.videoRef.volume = volume;
-    this.volume = volume;
   };
 
   private changeQuality = (level: number) => {
@@ -207,9 +204,13 @@ export class DyteLivestreamPlayer {
         this.meeting.__internals__.logger.info(
           `dyte-livestream-player:: Initialising HLS. HLS is Supported`
         );
+
         this.hls = new Hls({
           lowLatencyMode: false,
         });
+
+        (window as any).dyte_hls = this.hls;
+
         this.meeting.__internals__.logger.info(`dyte-livestream-player:: Loading source`);
         this.hls.loadSource(this.playbackUrl);
         this.meeting.__internals__.logger.info(
@@ -223,9 +224,9 @@ export class DyteLivestreamPlayer {
 
         this.hls.on(Hls.Events.ERROR, (_event, data) => {
           if (data.fatal) {
-            console.error('Fatal error:', data);
+            this.meeting.__internals__.logger.error('Fatal error:', data);
           } else {
-            console.warn('Non-fatal error:', data);
+            this.meeting.__internals__.logger.warn('Non-fatal error:', data);
           }
         });
 
@@ -256,6 +257,10 @@ export class DyteLivestreamPlayer {
             );
           }
         });
+
+        // Setup listeners to show current time and total duration
+        this.videoRef.addEventListener('timeupdate', this.updateProgress);
+        this.statsIntervalTimer = setInterval(this.updateHlsStatsPeriodically, 1000);
       } else {
         this.isSupported = false;
       }
@@ -273,10 +278,13 @@ export class DyteLivestreamPlayer {
 
   disconnectedCallback() {
     this.meeting.livestream.removeListener('livestreamUpdate', this.livestreamUpdateListener);
+    this.videoRef.removeEventListener('timeupdate', this.updateProgress);
+    clearInterval(this.statsIntervalTimer);
     this.videoRef = null;
     if (this.hls) {
       this.hls.destroy();
     }
+    (window as any).dyte_hls = null;
   }
 
   @Watch('meeting')
@@ -295,13 +303,13 @@ export class DyteLivestreamPlayer {
     return (
       <Host>
         <div class="player-container h-full max-h-full min-h-full w-full min-w-full max-w-full">
-          <div class="video-container flex h-full max-h-full min-h-full w-full min-w-full max-w-full flex-col items-center justify-center pb-20">
+          <div class="video-container relative flex h-96 w-96 flex-col items-center justify-center pb-20">
             <video
               ref={async (el) => {
                 this.videoRef = el;
                 await this.conditionallyStartLivestreamViewer();
               }}
-              class="h-full max-h-full min-h-full w-full min-w-full max-w-full"
+              id="livestream-video"
               controls={false} // Custom controls
               onPlay={() => {
                 if (this.playerState === PlayerState.PAUSED) {
@@ -312,76 +320,59 @@ export class DyteLivestreamPlayer {
             ></video>
             {this.playerState !== PlayerState.IDLE && (
               // <!-- Control Bar -->
-              <div class="control-bar">
-                {/* <!-- Play/Pause Button --> */}
-                <button id="playPause" class="control-btn" onClick={this.togglePlay}>
+              <div class="control-bar" style={{ width: `${this.videoRef.clientWidth}px` }}>
+                <div class="control-groups">
+                  {/* <!-- Play/Pause Button --> */}
+                  <button id="playPause" class="control-btn" onClick={this.togglePlay}>
+                    <dyte-icon
+                      icon={
+                        this.playerState === PlayerState.PLAYING
+                          ? this.iconPack.pause
+                          : this.iconPack.play
+                      }
+                    />
+                  </button>
+
                   <dyte-icon
-                    icon={
-                      this.playerState === PlayerState.PLAYING
-                        ? this.iconPack.pause
-                        : this.iconPack.play
-                    }
+                    size="lg"
+                    icon={this.iconPack.fastForward}
+                    onClick={this.fastForwardToLatest}
                   />
-                </button>
-
-                {/* <!-- Progress Bar --> */}
-                <input
-                  type="range"
-                  id="progress"
-                  ref={(el) => {
-                    this.progressBarRef = el;
-                  }}
-                  onInput={(event) => {
-                    const progressPercentage = (event.target as HTMLInputElement).valueAsNumber;
-                    const newTime = progressPercentage * this.videoRef.duration;
-                    this.videoRef.currentTime = newTime;
-                  }}
-                  class="progress-bar"
-                  value="0"
-                  max="100"
-                  step="0.1"
-                />
-
-                {/* <!-- Volume Control --> */}
-                <div class="volume-control-holder">
-                  <dyte-icon icon={this.iconPack.speaker} />
-                  <input
-                    type="range"
-                    id="volume"
-                    class="volume-bar"
-                    max="1"
-                    step="0.1"
-                    value={this.volume}
-                    onInput={this.setVolume}
-                  />
+                  <span>
+                    {formatSecondsToHHMMSS(this.currentTime)} /{' '}
+                    {formatSecondsToHHMMSS(this.duration)}
+                  </span>
                 </div>
 
-                {/* <!-- Quality --> */}
-                <select
-                  class="level-select"
-                  onChange={(e) =>
-                    this.changeQuality(parseInt((e.target as HTMLSelectElement).value))
-                  }
-                >
-                  <option value={-1} selected={this.selectedQuality === -1}>
-                    Auto
-                  </option>
-                  {this.qualityLevels.map((level) => (
-                    <option value={level.level} selected={this.selectedQuality === level.level}>
-                      {level.resolution}
+                <div class="control-groups">
+                  {/* <!-- Quality --> */}
+                  <select
+                    class="level-select"
+                    onChange={(e) =>
+                      this.changeQuality(parseInt((e.target as HTMLSelectElement).value))
+                    }
+                  >
+                    <option value={-1} selected={this.selectedQuality === -1}>
+                      Auto
                     </option>
-                  ))}
-                </select>
+                    {this.qualityLevels.map((level) => (
+                      <option value={level.level} selected={this.selectedQuality === level.level}>
+                        {level.resolution}
+                      </option>
+                    ))}
+                  </select>
 
-                {/* <!-- Fullscreen Button --> */}
-                <dyte-fullscreen-toggle
-                  id="fullscreen"
-                  class="control-btn"
-                  targetElement={this.el}
-                  size="sm"
-                  iconPack={this.iconPack}
-                  t={this.t}
-                />
+                  {/* <!-- Fullscreen Button --> */}
+                  <dyte-fullscreen-toggle
+                    id="fullscreen"
+                    class="control-btn"
+                    targetElement={this.el}
+                    style={{ marginRight: '20px' }}
+                    size="sm"
+                    iconPack={this.iconPack}
+                    t={this.t}
+                  />
+                </div>
               </div>
             )}
           </div>
