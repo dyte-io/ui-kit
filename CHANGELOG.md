@@ -1,3 +1,10 @@
+# [2.1.0-staging.46](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.45...@dyte-in/ui-kit-v2.1.0-staging.46) (2024-11-19)
+
+
+### Bug Fixes
+
+* **debugger:** fixed label, rounding battery percentage ([760726e](https://github.com/dyte-io/ui-kit/commit/760726e8275f96cd648290e5a7fb36addbebf829))
+
 # [2.1.0-staging.45](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.44...@dyte-in/ui-kit-v2.1.0-staging.45) (2024-11-19)
 
 
