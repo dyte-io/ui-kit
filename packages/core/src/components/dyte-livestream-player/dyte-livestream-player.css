@@ -41,12 +41,12 @@ p {
 }
 
 .timings {
-  color: white; /** Not sure what to put here **/
+  @apply text-text-on-brand;
 }
 
 .control-btn {
   border: none;
-  @apply bg-background-700 text-text-900 rounded-sm mr-2;
+  @apply bg-brand-500 text-text-on-brand rounded-sm mr-2;
   cursor: pointer;
   font-size: 24px;
 }
@@ -75,7 +75,7 @@ p {
 
 
 .level-select {
-  @apply bg-background-700 text-text-900 rounded-sm;
+  @apply bg-brand-500 text-text-on-brand rounded-sm;
   border: none;
   padding: 5px 10px;
   font-size: 14px;
@@ -89,7 +89,7 @@ p {
 }
 
 .level-select option {
-  @apply bg-background-700 text-text-900 rounded-sm;
+  @apply bg-brand-500 text-text-on-brand rounded-sm;
 }
 
 .volume-control-holder{
