@@ -25,7 +25,9 @@ import { formatSecondsToHHMMSS } from '../../utils/time';
 export class DyteLivestreamPlayer {
   private videoRef: HTMLVideoElement;
 
-  @Element() el: HTMLDyteLivestreamPlayerElement; // This gives you a reference to the root DOM element
+  private videoContainerRef: HTMLDivElement;
+
+  @Element() el: HTMLDyteLivestreamPlayerElement;
 
   private hls: Hls;
 
@@ -303,13 +305,19 @@ export class DyteLivestreamPlayer {
     return (
       <Host>
         <div class="player-container h-full max-h-full min-h-full w-full min-w-full max-w-full">
-          <div class="video-container relative flex h-96 w-96 flex-col items-center justify-center pb-20">
+          <div
+            ref={async (el) => {
+              this.videoContainerRef = el;
+            }}
+            class="video-container relative flex h-full w-full flex-col items-center justify-center pb-20"
+          >
             <video
               ref={async (el) => {
                 this.videoRef = el;
                 await this.conditionallyStartLivestreamViewer();
               }}
               id="livestream-video"
+              style={{ height: `${this.el?.clientHeight}px` }}
               controls={false} // Custom controls
               onPlay={() => {
                 if (this.playerState === PlayerState.PAUSED) {
@@ -320,7 +328,7 @@ export class DyteLivestreamPlayer {
             ></video>
             {this.playerState !== PlayerState.IDLE && (
               // <!-- Control Bar -->
-              <div class="control-bar" style={{ width: `${this.videoRef.clientWidth}px` }}>
+              <div class="control-bar" style={{ width: `${this.videoRef?.clientWidth}px` }}>
                 <div class="control-groups">
                   {/* <!-- Play/Pause Button --> */}
                   <button id="playPause" class="control-btn" onClick={this.togglePlay}>
@@ -335,10 +343,11 @@ export class DyteLivestreamPlayer {
 
                   <dyte-icon
                     size="lg"
+                    class="control-btn"
                     icon={this.iconPack.fastForward}
                     onClick={this.fastForwardToLatest}
                   />
-                  <span>
+                  <span class="timings">
                     {formatSecondsToHHMMSS(this.currentTime)} /{' '}
                     {formatSecondsToHHMMSS(this.duration)}
                   </span>
@@ -366,7 +375,7 @@ export class DyteLivestreamPlayer {
                   <dyte-fullscreen-toggle
                     id="fullscreen"
                     class="control-btn"
-                    targetElement={this.el}
+                    targetElement={this.videoContainerRef}
                     style={{ marginRight: '20px' }}
                     size="sm"
                     iconPack={this.iconPack}
