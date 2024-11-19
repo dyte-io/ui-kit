@@ -1,3 +1,10 @@
+# [2.1.0-staging.45](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.44...@dyte-in/ui-kit-v2.1.0-staging.45) (2024-11-19)
+
+
+### Bug Fixes
+
+* **participants:** participant menu list was not closing, actions were invisible for last 2 ([15ab76a](https://github.com/dyte-io/ui-kit/commit/15ab76a7011650ba0e7240fed39764519838603e))
+
 # [2.1.0-staging.44](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.43...@dyte-in/ui-kit-v2.1.0-staging.44) (2024-11-19)
 
 
