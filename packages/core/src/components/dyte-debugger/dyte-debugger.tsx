@@ -104,7 +104,7 @@ export class DyteDebugger {
       <Host>
         <aside class={{ hide: this.isMobileMainVisible }} part="menu">
           <header>
-            <h3>{this.t('debugger.troubleshooting')}</h3>
+            <h3>{this.t('debugger.troubleshooting.label')}</h3>
           </header>
           <button
             type="button"

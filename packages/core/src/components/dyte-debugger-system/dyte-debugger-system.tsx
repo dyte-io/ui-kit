@@ -63,7 +63,7 @@ export class DyteDebuggerSystem {
   }
 
   private batteryUpdateListener = () => {
-    const batteryLevelPercentage = this.battery.level * 100;
+    const batteryLevelPercentage = Math.round(this.battery.level * 100);
     const newBatteryStats: FormattedStatsObj[] = [];
 
     newBatteryStats.push({
