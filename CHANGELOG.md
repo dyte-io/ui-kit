@@ -1,8 +1,6 @@
 # [2.1.0-staging.43](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.42...@dyte-in/ui-kit-v2.1.0-staging.43) (2024-11-14)
 
-
 ### Bug Fixes
-
 * **livestream-viewer:** fixed some edge cases around playback, added logs for tracking ([210309b](https://github.com/dyte-io/ui-kit/commit/210309bd690a09552fea837fadf96f61be9f9f1e))
 
 
@@ -106,6 +104,9 @@
 ### Features
 
 * **internal:** showing badges against the participant tabs with respective count ([d3c7844](https://github.com/dyte-io/ui-kit/commit/d3c784491015d8a6b78b1c3e57d9b5ae1d6a9ed1))
+
+## [2.0.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.0.5...@dyte-in/ui-kit-v2.0.6) (2024-11-04)
+* remove socket service flag check ([b4b3289](https://github.com/dyte-io/ui-kit/commit/b4b32897bd2f3fbd4e2b4aea8172550b8727dcca))
 
 ## [2.0.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.0.4...@dyte-in/ui-kit-v2.0.5) (2024-10-08)
 
