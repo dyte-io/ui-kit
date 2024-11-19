@@ -17,7 +17,7 @@ import { formatName, shorten } from '../../utils/string';
 import storeState from '../../lib/store';
 import { defaultConfig, UIConfig } from '../../exports';
 import { FlagsmithFeatureFlags } from '../../utils/flags';
-import { computePosition, flip, offset, shift } from '@floating-ui/dom';
+import { autoPlacement, computePosition, hide, offset, shift } from '@floating-ui/dom';
 import type { DyteParticipant as DyteParticipantType } from '@dytesdk/web-core';
 
 export type ParticipantViewMode = 'sidebar';
@@ -89,6 +89,7 @@ export class DyteParticipant {
   connectedCallback() {
     this.meetingChanged(this.meeting);
     this.participantChanged(this.participant);
+    document.addEventListener('click', this.handleOutsideClick);
   }
 
   disconnectedCallback() {
@@ -202,37 +203,48 @@ export class DyteParticipant {
     this.isOnStage = p.stageStatus === 'ON_STAGE';
   };
 
-  componentDidLoad() {
-    document.addEventListener('click', this.handleOutsideClick);
-  }
+  private handleOutsideClick = (event) => {
+    const path = event.composedPath();
+    const clickedOutside = !path.includes(this.host);
 
-  private handleOutsideClick = () => {
     // handles clicking on other menu triggers
-    if (!this.clickedThis && this.menuOpen) {
-      // if other trigger is clicked, hide this menu-list
+    if (clickedOutside && this.menuOpen) {
       this.menuOpen = false;
     }
-    this.clickedThis = false;
   };
-
-  private clickedThis: boolean = false;
 
   private update = () => {
     const triggerEl = this.host.shadowRoot.getElementById('trigger');
     const menuListEl = this.host.shadowRoot.getElementById('menu-list');
     computePosition(triggerEl, menuListEl, {
-      placement: 'bottom-end',
-      middleware: [offset(10), flip(), shift({ padding: 5 })],
-    }).then(({ x, y }) => {
-      Object.assign(menuListEl.style, {
-        right: `${x}px`,
-        top: `${y}px`,
-      });
+      placement: 'bottom-end', // Default placement
+      middleware: [
+        autoPlacement({
+          allowedPlacements: ['bottom-end', 'top-end'], // Prioritize bottom alignment
+          alignment: 'end', // Align to start of the trigger
+        }),
+        offset(4), // Add space between the trigger and menu
+        shift({ padding: 8 }), // Adjust if the menu is too close to the viewport edges
+        hide(),
+      ],
+    }).then(({ x, y, placement }) => {
+      let position = null;
+      if (placement === 'bottom-end') {
+        position = {
+          right: `${x}px`,
+          top: `${y}px`,
+        };
+      } else {
+        position = {
+          right: `${x}px`,
+          bottom: `${y}px`,
+        };
+      }
+      Object.assign(menuListEl.style, position);
     });
   };
 
   private onMenuToggle = () => {
-    this.clickedThis = true;
     this.menuOpen = !this.menuOpen;
     if (this.menuOpen) {
       this.update();
@@ -266,7 +278,7 @@ export class DyteParticipant {
     };
     return (
       <Host>
-        <div class="left">
+        <div class="left" key={this.participant?.id}>
           <dyte-avatar
             participant={this.participant}
             size="sm"
