@@ -19,6 +19,9 @@ input {
   flex-grow: 1;
   flex-basis: 0;
 }
+.ctr.virtualised{
+  @apply overflow-y-hidden;
+}
 
 .search {
   @apply bg-background-700 sticky box-border flex items-center rounded-sm;
@@ -45,4 +48,7 @@ input {
   .search {
     @apply !my-4;
   }
+}
+.no-pending-requests {
+  @apply text-text-sm text-text-700 my-4 text-center;
 }

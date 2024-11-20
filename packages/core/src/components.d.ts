@@ -19,6 +19,7 @@ import { AvatarVariant } from "./components/dyte-avatar/dyte-avatar";
 import { DraftMeeting } from "./utils/breakout-rooms-manager";
 import { ButtonKind, ButtonVariant } from "./components/dyte-button/dyte-button";
 import { DyteBasicParticipant, DytePermissionsPreset, DytePlugin, FileMessage, ImageMessage, Message, TextMessage } from "@dytesdk/web-core";
+import { ChatFilter } from "./components/dyte-chat/dyte-chat";
 import { DyteNewMessageEvent } from "./components/dyte-chat-composer-ui/dyte-chat-composer-ui";
 import { NewMessageEvent } from "./components/dyte-chat-composer-view/dyte-chat-composer-view";
 import { ChatGroup, ChatGroupChangedType } from "./components/dyte-chat-selector-ui/dyte-chat-selector-ui";
@@ -35,6 +36,7 @@ import { DyteNameTagVariant } from "./components/dyte-name-tag/dyte-name-tag";
 import { VNode } from "@stencil/core";
 import { DataNode } from "./components/dyte-paginated-list/dyte-paginated-list";
 import { ParticipantViewMode } from "./components/dyte-participant/dyte-participant";
+import { ParticipantsTabId } from "./components/dyte-participants/dyte-participants";
 import { ParticipantsViewMode } from "./components/dyte-participants/dyte-participants";
 import { DyteSidebarTab, DyteSidebarView } from "./components/dyte-sidebar-ui/dyte-sidebar-ui";
 import { DyteSidebarSection } from "./components/dyte-sidebar/dyte-sidebar";
@@ -42,6 +44,7 @@ import { DyteSidebarTab as DyteSidebarTab1, DyteSidebarView as DyteSidebarView1 
 import { Tab } from "./components/dyte-tab-bar/dyte-tab-bar";
 import { TooltipKind, TooltipVariant } from "./components/dyte-tooltip/dyte-tooltip";
 import { ViewerCountVariant } from "./components/dyte-viewer-count/dyte-viewer-count";
+import { Peer as Peer1 } from ".";
 export namespace Components {
     interface DyteAi {
         /**
@@ -603,6 +606,10 @@ export namespace Components {
          */
         "disablePrivateChat": boolean;
         /**
+          * @deprecated Beta API, will change in future A filter function for messages to be displayed
+         */
+        "displayFilter": ChatFilter;
+        /**
           * Icon pack
          */
         "iconPack": IconPack;
@@ -1048,6 +1055,142 @@ export namespace Components {
           * Initial value
          */
         "value": number;
+    }
+    interface DyteDebugger {
+        /**
+          * Icon pack
+         */
+        "iconPack": IconPack;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size": Size;
+        /**
+          * States object
+         */
+        "states": States;
+        /**
+          * Language
+         */
+        "t": DyteI18n;
+    }
+    interface DyteDebuggerAudio {
+        /**
+          * Icon pack
+         */
+        "iconPack": IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size": Size1;
+        /**
+          * States object
+         */
+        "states": States1;
+        /**
+          * Language
+         */
+        "t": DyteI18n1;
+    }
+    interface DyteDebuggerScreenshare {
+        /**
+          * Icon pack
+         */
+        "iconPack": IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size": Size1;
+        /**
+          * States object
+         */
+        "states": States1;
+        /**
+          * Language
+         */
+        "t": DyteI18n1;
+    }
+    interface DyteDebuggerSystem {
+        /**
+          * Icon pack
+         */
+        "iconPack": IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size": Size1;
+        /**
+          * States object
+         */
+        "states": States1;
+        /**
+          * Language
+         */
+        "t": DyteI18n1;
+    }
+    interface DyteDebuggerToggle {
+        /**
+          * Icon pack
+         */
+        "iconPack": IconPack;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size": Size;
+        /**
+          * States object
+         */
+        "states": States;
+        /**
+          * Language
+         */
+        "t": DyteI18n;
+        /**
+          * Variant
+         */
+        "variant": ControlBarVariant;
+    }
+    interface DyteDebuggerVideo {
+        /**
+          * Icon pack
+         */
+        "iconPack": IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size": Size1;
+        /**
+          * States object
+         */
+        "states": States1;
+        /**
+          * Language
+         */
+        "t": DyteI18n1;
     }
     interface DyteDialog {
         /**
@@ -2290,6 +2433,10 @@ export namespace Components {
          */
         "config": UIConfig;
         /**
+          * Default section
+         */
+        "defaultParticipantsTabId": ParticipantsTabId;
+        /**
           * Icon pack
          */
         "iconPack": IconPack;
@@ -2329,6 +2476,10 @@ export namespace Components {
           * Config
          */
         "config": UIConfig;
+        /**
+          * Hide Stage Participants Count Header
+         */
+        "hideHeader": boolean;
         /**
           * Icon pack
          */
@@ -2411,6 +2562,10 @@ export namespace Components {
           * Config
          */
         "config": UIConfig1;
+        /**
+          * Hide Viewer Count Header
+         */
+        "hideHeader": boolean;
         /**
           * Icon pack
          */
@@ -2923,6 +3078,14 @@ export namespace Components {
          */
         "currentTab": string;
         /**
+          * Hide Close Action
+         */
+        "hideCloseAction": boolean;
+        /**
+          * Hide Main Header
+         */
+        "hideHeader": boolean;
+        /**
           * Icon Pack
          */
         "iconPack": { people: string; people_checked: string; chat: string; poll: string; participants: string; rocket: string; call_end: string; share: string; mic_on: string; mic_off: string; video_on: string; video_off: string; share_screen_start: string; share_screen_stop: string; share_screen_person: string; clock: string; dismiss: string; send: string; search: string; more_vertical: string; chevron_down: string; chevron_up: string; chevron_left: string; chevron_right: string; settings: string; wifi: string; speaker: string; speaker_off: string; download: string; full_screen_maximize: string; full_screen_minimize: string; copy: string; attach: string; image: string; emoji_multiple: string; image_off: string; disconnected: string; wand: string; recording: string; subtract: string; stop_recording: string; warning: string; pin: string; pin_off: string; spinner: string; breakout_rooms: string; add: string; shuffle: string; edit: string; delete: string; back: string; save: string; web: string; checkmark: string; spotlight: string; join_stage: string; leave_stage: string; pip_off: string; pip_on: string; signal_1: string; signal_2: string; signal_3: string; signal_4: string; signal_5: string; start_livestream: string; stop_livestream: string; viewers: string; debug: string; info: string; devices: string; horizontal_dots: string; ai_sparkle: string; meeting_ai: string; create_channel: string; create_channel_illustration: string; captionsOn: string; captionsOff: string; };
@@ -3395,6 +3558,28 @@ export namespace Components {
          */
         "variant": ViewerCountVariant;
     }
+    interface DyteVirtualizedParticipantList {
+        /**
+          * Buffer items to render before and after the visible area
+         */
+        "bufferedItemsCount": number;
+        /**
+          * Element to render if list is empty
+         */
+        "emptyListElement": HTMLElement;
+        /**
+          * Height of each item in pixels (assumed fixed)
+         */
+        "itemHeight": number;
+        /**
+          * Items to be virtualized
+         */
+        "items": Peer1[];
+        /**
+          * Function to render each item
+         */
+        "renderItem": (item: Peer1, index: number) => HTMLElement;
+    }
     interface DyteWaitingScreen {
         /**
           * Config
@@ -3506,6 +3691,14 @@ export interface DyteCounterCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDyteCounterElement;
 }
+export interface DyteDebuggerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDyteDebuggerElement;
+}
+export interface DyteDebuggerToggleCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDyteDebuggerToggleElement;
+}
 export interface DyteDialogCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDyteDialogElement;
@@ -3609,6 +3802,10 @@ export interface DyteParticipantCustomEvent<T> extends CustomEvent<T> {
 export interface DyteParticipantTileCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDyteParticipantTileElement;
+}
+export interface DyteParticipantsCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDyteParticipantsElement;
 }
 export interface DyteParticipantsAudioCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -3940,6 +4137,42 @@ declare global {
     var HTMLDyteCounterElement: {
         prototype: HTMLDyteCounterElement;
         new (): HTMLDyteCounterElement;
+    };
+    interface HTMLDyteDebuggerElement extends Components.DyteDebugger, HTMLStencilElement {
+    }
+    var HTMLDyteDebuggerElement: {
+        prototype: HTMLDyteDebuggerElement;
+        new (): HTMLDyteDebuggerElement;
+    };
+    interface HTMLDyteDebuggerAudioElement extends Components.DyteDebuggerAudio, HTMLStencilElement {
+    }
+    var HTMLDyteDebuggerAudioElement: {
+        prototype: HTMLDyteDebuggerAudioElement;
+        new (): HTMLDyteDebuggerAudioElement;
+    };
+    interface HTMLDyteDebuggerScreenshareElement extends Components.DyteDebuggerScreenshare, HTMLStencilElement {
+    }
+    var HTMLDyteDebuggerScreenshareElement: {
+        prototype: HTMLDyteDebuggerScreenshareElement;
+        new (): HTMLDyteDebuggerScreenshareElement;
+    };
+    interface HTMLDyteDebuggerSystemElement extends Components.DyteDebuggerSystem, HTMLStencilElement {
+    }
+    var HTMLDyteDebuggerSystemElement: {
+        prototype: HTMLDyteDebuggerSystemElement;
+        new (): HTMLDyteDebuggerSystemElement;
+    };
+    interface HTMLDyteDebuggerToggleElement extends Components.DyteDebuggerToggle, HTMLStencilElement {
+    }
+    var HTMLDyteDebuggerToggleElement: {
+        prototype: HTMLDyteDebuggerToggleElement;
+        new (): HTMLDyteDebuggerToggleElement;
+    };
+    interface HTMLDyteDebuggerVideoElement extends Components.DyteDebuggerVideo, HTMLStencilElement {
+    }
+    var HTMLDyteDebuggerVideoElement: {
+        prototype: HTMLDyteDebuggerVideoElement;
+        new (): HTMLDyteDebuggerVideoElement;
     };
     interface HTMLDyteDialogElement extends Components.DyteDialog, HTMLStencilElement {
     }
@@ -4517,6 +4750,12 @@ declare global {
         prototype: HTMLDyteViewerCountElement;
         new (): HTMLDyteViewerCountElement;
     };
+    interface HTMLDyteVirtualizedParticipantListElement extends Components.DyteVirtualizedParticipantList, HTMLStencilElement {
+    }
+    var HTMLDyteVirtualizedParticipantListElement: {
+        prototype: HTMLDyteVirtualizedParticipantListElement;
+        new (): HTMLDyteVirtualizedParticipantListElement;
+    };
     interface HTMLDyteWaitingScreenElement extends Components.DyteWaitingScreen, HTMLStencilElement {
     }
     var HTMLDyteWaitingScreenElement: {
@@ -4561,6 +4800,12 @@ declare global {
         "dyte-controlbar": HTMLDyteControlbarElement;
         "dyte-controlbar-button": HTMLDyteControlbarButtonElement;
         "dyte-counter": HTMLDyteCounterElement;
+        "dyte-debugger": HTMLDyteDebuggerElement;
+        "dyte-debugger-audio": HTMLDyteDebuggerAudioElement;
+        "dyte-debugger-screenshare": HTMLDyteDebuggerScreenshareElement;
+        "dyte-debugger-system": HTMLDyteDebuggerSystemElement;
+        "dyte-debugger-toggle": HTMLDyteDebuggerToggleElement;
+        "dyte-debugger-video": HTMLDyteDebuggerVideoElement;
         "dyte-dialog": HTMLDyteDialogElement;
         "dyte-dialog-manager": HTMLDyteDialogManagerElement;
         "dyte-draft-attachment-view": HTMLDyteDraftAttachmentViewElement;
@@ -4657,6 +4902,7 @@ declare global {
         "dyte-transcripts": HTMLDyteTranscriptsElement;
         "dyte-ui-provider": HTMLDyteUiProviderElement;
         "dyte-viewer-count": HTMLDyteViewerCountElement;
+        "dyte-virtualized-participant-list": HTMLDyteVirtualizedParticipantListElement;
         "dyte-waiting-screen": HTMLDyteWaitingScreenElement;
     }
 }
@@ -5322,6 +5568,10 @@ declare namespace LocalJSX {
          */
         "disablePrivateChat"?: boolean;
         /**
+          * @deprecated Beta API, will change in future A filter function for messages to be displayed
+         */
+        "displayFilter"?: ChatFilter;
+        /**
           * Icon pack
          */
         "iconPack"?: IconPack;
@@ -5862,6 +6112,150 @@ declare namespace LocalJSX {
           * Initial value
          */
         "value"?: number;
+    }
+    interface DyteDebugger {
+        /**
+          * Icon pack
+         */
+        "iconPack"?: IconPack;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Emits updated state data
+         */
+        "onDyteStateUpdate"?: (event: DyteDebuggerCustomEvent<States>) => void;
+        /**
+          * Size
+         */
+        "size"?: Size;
+        /**
+          * States object
+         */
+        "states"?: States;
+        /**
+          * Language
+         */
+        "t"?: DyteI18n;
+    }
+    interface DyteDebuggerAudio {
+        /**
+          * Icon pack
+         */
+        "iconPack"?: IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size"?: Size1;
+        /**
+          * States object
+         */
+        "states"?: States1;
+        /**
+          * Language
+         */
+        "t"?: DyteI18n1;
+    }
+    interface DyteDebuggerScreenshare {
+        /**
+          * Icon pack
+         */
+        "iconPack"?: IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size"?: Size1;
+        /**
+          * States object
+         */
+        "states"?: States1;
+        /**
+          * Language
+         */
+        "t"?: DyteI18n1;
+    }
+    interface DyteDebuggerSystem {
+        /**
+          * Icon pack
+         */
+        "iconPack"?: IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size"?: Size1;
+        /**
+          * States object
+         */
+        "states"?: States1;
+        /**
+          * Language
+         */
+        "t"?: DyteI18n1;
+    }
+    interface DyteDebuggerToggle {
+        /**
+          * Icon pack
+         */
+        "iconPack"?: IconPack;
+        /**
+          * Meeting object
+         */
+        "meeting"?: Meeting;
+        /**
+          * Emits updated state data
+         */
+        "onDyteStateUpdate"?: (event: DyteDebuggerToggleCustomEvent<States>) => void;
+        /**
+          * Size
+         */
+        "size"?: Size;
+        /**
+          * States object
+         */
+        "states"?: States;
+        /**
+          * Language
+         */
+        "t"?: DyteI18n;
+        /**
+          * Variant
+         */
+        "variant"?: ControlBarVariant;
+    }
+    interface DyteDebuggerVideo {
+        /**
+          * Icon pack
+         */
+        "iconPack"?: IconPack1;
+        /**
+          * Meeting object
+         */
+        "meeting": Meeting;
+        /**
+          * Size
+         */
+        "size"?: Size1;
+        /**
+          * States object
+         */
+        "states"?: States1;
+        /**
+          * Language
+         */
+        "t"?: DyteI18n1;
     }
     interface DyteDialog {
         /**
@@ -7225,6 +7619,10 @@ declare namespace LocalJSX {
          */
         "config"?: UIConfig;
         /**
+          * Default section
+         */
+        "defaultParticipantsTabId"?: ParticipantsTabId;
+        /**
           * Icon pack
          */
         "iconPack"?: IconPack;
@@ -7232,6 +7630,10 @@ declare namespace LocalJSX {
           * Meeting object
          */
         "meeting": Meeting;
+        /**
+          * Emits updated state data
+         */
+        "onDyteStateUpdate"?: (event: DyteParticipantsCustomEvent<States>) => void;
         /**
           * Size
          */
@@ -7268,6 +7670,10 @@ declare namespace LocalJSX {
           * Config
          */
         "config"?: UIConfig;
+        /**
+          * Hide Stage Participants Count Header
+         */
+        "hideHeader"?: boolean;
         /**
           * Icon pack
          */
@@ -7354,6 +7760,10 @@ declare namespace LocalJSX {
           * Config
          */
         "config"?: UIConfig1;
+        /**
+          * Hide Viewer Count Header
+         */
+        "hideHeader"?: boolean;
         /**
           * Icon pack
          */
@@ -7950,6 +8360,14 @@ declare namespace LocalJSX {
          */
         "currentTab"?: string;
         /**
+          * Hide Close Action
+         */
+        "hideCloseAction"?: boolean;
+        /**
+          * Hide Main Header
+         */
+        "hideHeader"?: boolean;
+        /**
           * Icon Pack
          */
         "iconPack"?: { people: string; people_checked: string; chat: string; poll: string; participants: string; rocket: string; call_end: string; share: string; mic_on: string; mic_off: string; video_on: string; video_off: string; share_screen_start: string; share_screen_stop: string; share_screen_person: string; clock: string; dismiss: string; send: string; search: string; more_vertical: string; chevron_down: string; chevron_up: string; chevron_left: string; chevron_right: string; settings: string; wifi: string; speaker: string; speaker_off: string; download: string; full_screen_maximize: string; full_screen_minimize: string; copy: string; attach: string; image: string; emoji_multiple: string; image_off: string; disconnected: string; wand: string; recording: string; subtract: string; stop_recording: string; warning: string; pin: string; pin_off: string; spinner: string; breakout_rooms: string; add: string; shuffle: string; edit: string; delete: string; back: string; save: string; web: string; checkmark: string; spotlight: string; join_stage: string; leave_stage: string; pip_off: string; pip_on: string; signal_1: string; signal_2: string; signal_3: string; signal_4: string; signal_5: string; start_livestream: string; stop_livestream: string; viewers: string; debug: string; info: string; devices: string; horizontal_dots: string; ai_sparkle: string; meeting_ai: string; create_channel: string; create_channel_illustration: string; captionsOn: string; captionsOff: string; };
@@ -8461,6 +8879,28 @@ declare namespace LocalJSX {
          */
         "variant"?: ViewerCountVariant;
     }
+    interface DyteVirtualizedParticipantList {
+        /**
+          * Buffer items to render before and after the visible area
+         */
+        "bufferedItemsCount"?: number;
+        /**
+          * Element to render if list is empty
+         */
+        "emptyListElement"?: HTMLElement;
+        /**
+          * Height of each item in pixels (assumed fixed)
+         */
+        "itemHeight"?: number;
+        /**
+          * Items to be virtualized
+         */
+        "items"?: Peer1[];
+        /**
+          * Function to render each item
+         */
+        "renderItem"?: (item: Peer1, index: number) => HTMLElement;
+    }
     interface DyteWaitingScreen {
         /**
           * Config
@@ -8517,6 +8957,12 @@ declare namespace LocalJSX {
         "dyte-controlbar": DyteControlbar;
         "dyte-controlbar-button": DyteControlbarButton;
         "dyte-counter": DyteCounter;
+        "dyte-debugger": DyteDebugger;
+        "dyte-debugger-audio": DyteDebuggerAudio;
+        "dyte-debugger-screenshare": DyteDebuggerScreenshare;
+        "dyte-debugger-system": DyteDebuggerSystem;
+        "dyte-debugger-toggle": DyteDebuggerToggle;
+        "dyte-debugger-video": DyteDebuggerVideo;
         "dyte-dialog": DyteDialog;
         "dyte-dialog-manager": DyteDialogManager;
         "dyte-draft-attachment-view": DyteDraftAttachmentView;
@@ -8613,6 +9059,7 @@ declare namespace LocalJSX {
         "dyte-transcripts": DyteTranscripts;
         "dyte-ui-provider": DyteUiProvider;
         "dyte-viewer-count": DyteViewerCount;
+        "dyte-virtualized-participant-list": DyteVirtualizedParticipantList;
         "dyte-waiting-screen": DyteWaitingScreen;
     }
 }
@@ -8657,6 +9104,12 @@ declare module "@stencil/core" {
             "dyte-controlbar": LocalJSX.DyteControlbar & JSXBase.HTMLAttributes<HTMLDyteControlbarElement>;
             "dyte-controlbar-button": LocalJSX.DyteControlbarButton & JSXBase.HTMLAttributes<HTMLDyteControlbarButtonElement>;
             "dyte-counter": LocalJSX.DyteCounter & JSXBase.HTMLAttributes<HTMLDyteCounterElement>;
+            "dyte-debugger": LocalJSX.DyteDebugger & JSXBase.HTMLAttributes<HTMLDyteDebuggerElement>;
+            "dyte-debugger-audio": LocalJSX.DyteDebuggerAudio & JSXBase.HTMLAttributes<HTMLDyteDebuggerAudioElement>;
+            "dyte-debugger-screenshare": LocalJSX.DyteDebuggerScreenshare & JSXBase.HTMLAttributes<HTMLDyteDebuggerScreenshareElement>;
+            "dyte-debugger-system": LocalJSX.DyteDebuggerSystem & JSXBase.HTMLAttributes<HTMLDyteDebuggerSystemElement>;
+            "dyte-debugger-toggle": LocalJSX.DyteDebuggerToggle & JSXBase.HTMLAttributes<HTMLDyteDebuggerToggleElement>;
+            "dyte-debugger-video": LocalJSX.DyteDebuggerVideo & JSXBase.HTMLAttributes<HTMLDyteDebuggerVideoElement>;
             "dyte-dialog": LocalJSX.DyteDialog & JSXBase.HTMLAttributes<HTMLDyteDialogElement>;
             "dyte-dialog-manager": LocalJSX.DyteDialogManager & JSXBase.HTMLAttributes<HTMLDyteDialogManagerElement>;
             "dyte-draft-attachment-view": LocalJSX.DyteDraftAttachmentView & JSXBase.HTMLAttributes<HTMLDyteDraftAttachmentViewElement>;
@@ -8753,6 +9206,7 @@ declare module "@stencil/core" {
             "dyte-transcripts": LocalJSX.DyteTranscripts & JSXBase.HTMLAttributes<HTMLDyteTranscriptsElement>;
             "dyte-ui-provider": LocalJSX.DyteUiProvider & JSXBase.HTMLAttributes<HTMLDyteUiProviderElement>;
             "dyte-viewer-count": LocalJSX.DyteViewerCount & JSXBase.HTMLAttributes<HTMLDyteViewerCountElement>;
+            "dyte-virtualized-participant-list": LocalJSX.DyteVirtualizedParticipantList & JSXBase.HTMLAttributes<HTMLDyteVirtualizedParticipantListElement>;
             "dyte-waiting-screen": LocalJSX.DyteWaitingScreen & JSXBase.HTMLAttributes<HTMLDyteWaitingScreenElement>;
         }
     }

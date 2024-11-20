@@ -25,6 +25,9 @@ export class DyteParticipantsViewers {
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
+  /** Hide Viewer Count Header */
+  @Prop() hideHeader: boolean = false;
+
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
 
@@ -105,11 +108,24 @@ export class DyteParticipantsViewers {
     }
   }
 
+  private createParticipantNode = (participant: Peer) => {
+    return (
+      <dyte-participant
+        role="listitem"
+        key={participant.id}
+        meeting={this.meeting}
+        participant={participant}
+        view={this.view}
+        iconPack={this.iconPack}
+        config={this.config}
+        t={this.t}
+      />
+    );
+  };
+
   // TODO: (ishita1805) Remove viewtype check when we start supporting viewers in livestream.
   private shouldShowViewers = () => {
-    return (
-      this.meeting?.self?.permissions?.stageEnabled && this.meeting?.meta?.viewType !== 'LIVESTREAM'
-    );
+    return this.meeting?.self?.permissions?.stageEnabled;
   };
 
   render() {
@@ -117,32 +133,25 @@ export class DyteParticipantsViewers {
 
     return (
       <div class="list">
-        <div class="heading-count" part="heading-count">
-          {this.t('viewers')} ({this.stageViewers.length})
-        </div>
-        <ul class="participants" part="participants">
-          {this.stageViewers.map((participant) => {
-            return (
-              <dyte-participant
-                role="listitem"
-                key={participant.id}
-                meeting={this.meeting}
-                participant={participant}
-                view={this.view}
-                iconPack={this.iconPack}
-                config={this.config}
-                t={this.t}
-              />
-            );
-          })}
-          {this.stageViewers.length === 0 && (
-            <div class="empty-message" part="empty-message">
+        {!this.hideHeader && (
+          <div class="heading-count" part="heading-count">
+            {this.t('viewers')} ({this.stageViewers.length})
+          </div>
+        )}
+        <dyte-virtualized-participant-list
+          items={this.stageViewers}
+          renderItem={this.createParticipantNode}
+          class="participants"
+          part="participants"
+          style={{ height: '100%' }}
+          emptyListElement={
+            <div class="empty-viewers-list">
               {this.search.length > 0
                 ? this.t('participants.errors.empty_results')
                 : this.t('participants.empty_list')}
             </div>
-          )}
-        </ul>
+          }
+        />
       </div>
     );
   }

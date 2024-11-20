@@ -1,5 +1,5 @@
 import { Meeting } from '../types/dyte-client';
-import { isLiveStreamViewer, showLivestream } from './livestream';
+import { isLiveStreamViewer } from './livestream';
 
 export const canViewChat = (meeting: Meeting) => {
   if (meeting && !meeting.chat) return false;
@@ -33,11 +33,7 @@ export const canViewParticipants = (meeting: Meeting) => {
   if (!meeting.self.permissions?.showParticipantList) {
     return false;
   }
-  if (showLivestream(meeting) && !meeting.self.permissions?.acceptStageRequests) return false;
   if (meeting && !meeting.participants) return false;
-  if (meeting.meta.viewType === 'LIVESTREAM') {
-    return meeting.self.permissions.acceptStageRequests || meeting?.stage?.status === 'ON_STAGE';
-  }
   const config = meeting?.self.config;
   if (config && !config.controlBar.elements.participants) return false;
   return true;

@@ -31,6 +31,8 @@ export class DyteAiTranscriptions {
   /** Initial transcriptions */
   @Prop() initialTranscriptions: Transcript[];
 
+  private autoScrollEnabled = true;
+
   // private transcriptionHandler(data: Transcript) {
   //   this.transcriptions = [...this.transcriptions, data];
   // }
@@ -56,8 +58,13 @@ export class DyteAiTranscriptions {
     this.meetingChanged(this.meeting);
   }
 
+  componentDidLoad() {
+    this.contentContainer?.addEventListener('scroll', this.onScroll);
+  }
+
   disconnectedCallback() {
     this.meeting?.ai?.off('transcript', this.onTranscriptHandler);
+    this.contentContainer?.removeEventListener('scroll', this.onScroll);
   }
 
   @Watch('meeting')
@@ -70,16 +77,31 @@ export class DyteAiTranscriptions {
 
   @Watch('transcriptions')
   transcriptionsChanged() {
-    setTimeout(() => {
-      smoothScrollToBottom(this.contentContainer, false);
-    }, 100);
+    if (this.autoScrollEnabled) {
+      setTimeout(() => {
+        smoothScrollToBottom(this.contentContainer, false);
+      }, 100);
+    }
   }
+
+  private onScroll = (e: Event) => {
+    const { scrollTop, clientHeight, scrollHeight } = e.target as HTMLDivElement;
+    const fromTop = scrollTop + clientHeight;
+
+    if (fromTop + 10 >= scrollHeight) {
+      // at bottom
+      this.autoScrollEnabled = true;
+    } else {
+      // not at bottom
+      this.autoScrollEnabled = false;
+    }
+  };
 
   private onTranscriptHandler = (data: Transcript) => {
     this.transcriptions = this.transcriptionsReducer(this.transcriptions, data);
   };
 
-  renderTranscripts() {
+  private renderTranscripts() {
     const transcripts = this.transcriptions.filter((t) =>
       this.participantQuery
         ? t.name.toLowerCase().includes(this.participantQuery.toLowerCase())

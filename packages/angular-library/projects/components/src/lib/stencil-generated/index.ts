@@ -39,6 +39,12 @@ export const DIRECTIVES = [
   d.DyteControlbar,
   d.DyteControlbarButton,
   d.DyteCounter,
+  d.DyteDebugger,
+  d.DyteDebuggerAudio,
+  d.DyteDebuggerScreenshare,
+  d.DyteDebuggerSystem,
+  d.DyteDebuggerToggle,
+  d.DyteDebuggerVideo,
   d.DyteDialog,
   d.DyteDialogManager,
   d.DyteDraftAttachmentView,
@@ -135,5 +141,6 @@ export const DIRECTIVES = [
   d.DyteTranscripts,
   d.DyteUiProvider,
   d.DyteViewerCount,
+  d.DyteVirtualizedParticipantList,
   d.DyteWaitingScreen
 ];

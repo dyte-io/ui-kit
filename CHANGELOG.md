@@ -1,8 +1,132 @@
-## [2.0.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.0.5...@dyte-in/ui-kit-v2.0.6) (2024-11-04)
+# [2.1.0-staging.46](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.45...@dyte-in/ui-kit-v2.1.0-staging.46) (2024-11-19)
 
 
 ### Bug Fixes
 
+* **debugger:** fixed label, rounding battery percentage ([760726e](https://github.com/dyte-io/ui-kit/commit/760726e8275f96cd648290e5a7fb36addbebf829))
+
+# [2.1.0-staging.45](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.44...@dyte-in/ui-kit-v2.1.0-staging.45) (2024-11-19)
+
+
+### Bug Fixes
+
+* **participants:** participant menu list was not closing, actions were invisible for last 2 ([15ab76a](https://github.com/dyte-io/ui-kit/commit/15ab76a7011650ba0e7240fed39764519838603e))
+
+# [2.1.0-staging.44](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.43...@dyte-in/ui-kit-v2.1.0-staging.44) (2024-11-19)
+
+
+### Bug Fixes
+
+* remove socket service flag check ([b4b3289](https://github.com/dyte-io/ui-kit/commit/b4b32897bd2f3fbd4e2b4aea8172550b8727dcca))
+
+# [2.1.0-staging.43](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.42...@dyte-in/ui-kit-v2.1.0-staging.43) (2024-11-14)
+
+### Bug Fixes
+* **livestream-viewer:** fixed some edge cases around playback, added logs for tracking ([210309b](https://github.com/dyte-io/ui-kit/commit/210309bd690a09552fea837fadf96f61be9f9f1e))
+
+
+### Features
+
+* **internal:** livestream viewer with stats ([945e2b5](https://github.com/dyte-io/ui-kit/commit/945e2b56a00acf42f8591e3f62c686bde7947b27))
+
+# [2.1.0-staging.42](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.41...@dyte-in/ui-kit-v2.1.0-staging.42) (2024-11-14)
+
+
+### Bug Fixes
+
+* add event listener in componentDidLoad ([d99524a](https://github.com/dyte-io/ui-kit/commit/d99524ab2f2cdbdddb6671972c0169e724c53383))
+
+# [2.1.0-staging.41](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.40...@dyte-in/ui-kit-v2.1.0-staging.41) (2024-11-14)
+
+
+### Bug Fixes
+
+* scroll lock in transcriptions ([71a9ca5](https://github.com/dyte-io/ui-kit/commit/71a9ca54e0b77ef765bcd20de678f8531dd3f5c2))
+
+# [2.1.0-staging.40](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.39...@dyte-in/ui-kit-v2.1.0-staging.40) (2024-11-07)
+
+
+### Bug Fixes
+
+* **participants-tab-i18n:** fixed i18n issues in the participants tab ([100dbc0](https://github.com/dyte-io/ui-kit/commit/100dbc072b841e1614958276804cf44e50eb8543))
+
+# [2.1.0-staging.39](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.38...@dyte-in/ui-kit-v2.1.0-staging.39) (2024-11-07)
+
+
+### Bug Fixes
+
+* remove socket service check ([1e1f3ee](https://github.com/dyte-io/ui-kit/commit/1e1f3eee6323102c6f1d84fcc20fa4abc5944c9f))
+
+# [2.1.0-staging.38](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.37...@dyte-in/ui-kit-v2.1.0-staging.38) (2024-11-06)
+
+
+### Bug Fixes
+
+* github action for staging updatE ([852cd6f](https://github.com/dyte-io/ui-kit/commit/852cd6fa14aecef5d8903a4f6d3a00d63d7374e0))
+
+# [2.1.0-staging.37](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.36...@dyte-in/ui-kit-v2.1.0-staging.37) (2024-11-06)
+
+
+### Bug Fixes
+
+* **debugger-i18n:** fixed the lack of i18n in debugger files ([3962e80](https://github.com/dyte-io/ui-kit/commit/3962e803a9e3526a617f70b7cf0e1078a73d87a3))
+
+# [2.1.0-staging.36](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.35...@dyte-in/ui-kit-v2.1.0-staging.36) (2024-11-05)
+
+
+### Features
+
+* **livestream:** show livestream viewers and stage list ([23b4040](https://github.com/dyte-io/ui-kit/commit/23b4040125d0435e7b80fc2f2b0a58a22e8f7b20))
+
+# [2.1.0-staging.35](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.34...@dyte-in/ui-kit-v2.1.0-staging.35) (2024-11-04)
+
+
+### Bug Fixes
+
+* update web-core ([d066ab0](https://github.com/dyte-io/ui-kit/commit/d066ab05e69f4ba0a3d14d5f497a52975f24d81f))
+
+# [2.1.0-staging.34](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.33...@dyte-in/ui-kit-v2.1.0-staging.34) (2024-11-04)
+
+
+### Bug Fixes
+
+* **debugger:** added jitter unit ([20ace1d](https://github.com/dyte-io/ui-kit/commit/20ace1d3051ef961adbe22aac15ed60c63661577))
+* **debugger:** fixed colors post status label refactoring ([502bd49](https://github.com/dyte-io/ui-kit/commit/502bd49a7492c0990f00cbac0e5119c82e79db8a))
+
+
+### Features
+
+* **debugger:** added systems tab for battery - works in chromium only, hidden for others ([6042e9f](https://github.com/dyte-io/ui-kit/commit/6042e9f973f447a953b13b26336734c89b9602a7))
+* **debugger:** adding cpu and bandwidth limitations in debugger ([849eed4](https://github.com/dyte-io/ui-kit/commit/849eed436d85be3fdf105edd37636f9ccbfbd46c))
+* **troubleshooter:** added basic troubleshooter ([21d9253](https://github.com/dyte-io/ui-kit/commit/21d92530fb08d4a21e8a2d2f71913a0f05465840))
+
+# [2.1.0-staging.33](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.32...@dyte-in/ui-kit-v2.1.0-staging.33) (2024-10-30)
+
+
+### Bug Fixes
+
+* add private chat filter ([4654cf9](https://github.com/dyte-io/ui-kit/commit/4654cf963f0b80d39625f098334388e9a74ce645))
+
+# [2.1.0-staging.32](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.31...@dyte-in/ui-kit-v2.1.0-staging.32) (2024-10-30)
+
+
+### Bug Fixes
+
+* remove IVS ([4be485e](https://github.com/dyte-io/ui-kit/commit/4be485e0844e5dfb259ad2cb759da79988d996b6))
+
+# [2.1.0-staging.31](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.30...@dyte-in/ui-kit-v2.1.0-staging.31) (2024-10-24)
+
+
+### Bug Fixes
+
+* **participant-count-badge:** badge/pill was not showing the background color ([423e1f6](https://github.com/dyte-io/ui-kit/commit/423e1f660f25c5b9d4c4400b98c958ff341f2ae1))
+
+
+### Features
+
+* **internal:** showing badges against the participant tabs with respective count ([d3c7844](https://github.com/dyte-io/ui-kit/commit/d3c784491015d8a6b78b1c3e57d9b5ae1d6a9ed1))
+
+## [2.0.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.0.5...@dyte-in/ui-kit-v2.0.6) (2024-11-04)
 * remove socket service flag check ([b4b3289](https://github.com/dyte-io/ui-kit/commit/b4b32897bd2f3fbd4e2b4aea8172550b8727dcca))
 
 ## [2.0.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.0.4...@dyte-in/ui-kit-v2.0.5) (2024-10-08)

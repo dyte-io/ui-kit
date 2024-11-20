@@ -628,13 +628,13 @@ export declare interface DyteChat extends Components.DyteChat {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['config', 'disablePrivateChat', 'iconPack', 'meeting', 'privatePresetFilter', 'size', 't']
+  inputs: ['config', 'disablePrivateChat', 'displayFilter', 'iconPack', 'meeting', 'privatePresetFilter', 'size', 't']
 })
 @Component({
   selector: 'dyte-chat',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['config', 'disablePrivateChat', 'iconPack', 'meeting', 'privatePresetFilter', 'size', 't']
+  inputs: ['config', 'disablePrivateChat', 'displayFilter', 'iconPack', 'meeting', 'privatePresetFilter', 'size', 't']
 })
 export class DyteChat {
   protected el: HTMLElement;
@@ -1029,6 +1029,146 @@ export class DyteCounter {
     c.detach();
     this.el = r.nativeElement;
     proxyOutputs(this, this.el, ['valueChange']);
+  }
+}
+
+import type { States as IDyteDebuggerStates } from '@dytesdk/ui-kit';
+export declare interface DyteDebugger extends Components.DyteDebugger {
+  /**
+   * Emits updated state data 
+   */
+  dyteStateUpdate: EventEmitter<CustomEvent<IDyteDebuggerStates>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't']
+})
+@Component({
+  selector: 'dyte-debugger',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't']
+})
+export class DyteDebugger {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['dyteStateUpdate']);
+  }
+}
+
+
+export declare interface DyteDebuggerAudio extends Components.DyteDebuggerAudio {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't']
+})
+@Component({
+  selector: 'dyte-debugger-audio',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't']
+})
+export class DyteDebuggerAudio {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface DyteDebuggerScreenshare extends Components.DyteDebuggerScreenshare {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't']
+})
+@Component({
+  selector: 'dyte-debugger-screenshare',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't']
+})
+export class DyteDebuggerScreenshare {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface DyteDebuggerSystem extends Components.DyteDebuggerSystem {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't']
+})
+@Component({
+  selector: 'dyte-debugger-system',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't']
+})
+export class DyteDebuggerSystem {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+import type { States as IDyteDebuggerToggleStates } from '@dytesdk/ui-kit';
+export declare interface DyteDebuggerToggle extends Components.DyteDebuggerToggle {
+  /**
+   * Emits updated state data 
+   */
+  dyteStateUpdate: EventEmitter<CustomEvent<IDyteDebuggerToggleStates>>;
+
+}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't', 'variant']
+})
+@Component({
+  selector: 'dyte-debugger-toggle',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't', 'variant']
+})
+export class DyteDebuggerToggle {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['dyteStateUpdate']);
+  }
+}
+
+
+export declare interface DyteDebuggerVideo extends Components.DyteDebuggerVideo {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't']
+})
+@Component({
+  selector: 'dyte-debugger-video',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't']
+})
+export class DyteDebuggerVideo {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
   }
 }
 
@@ -2306,24 +2446,31 @@ export class DyteParticipantTile {
   }
 }
 
+import type { States as IDyteParticipantsStates } from '@dytesdk/ui-kit';
+export declare interface DyteParticipants extends Components.DyteParticipants {
+  /**
+   * Emits updated state data 
+   */
+  dyteStateUpdate: EventEmitter<CustomEvent<IDyteParticipantsStates>>;
 
-export declare interface DyteParticipants extends Components.DyteParticipants {}
+}
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['config', 'iconPack', 'meeting', 'size', 'states', 't']
+  inputs: ['config', 'defaultParticipantsTabId', 'iconPack', 'meeting', 'size', 'states', 't']
 })
 @Component({
   selector: 'dyte-participants',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['config', 'iconPack', 'meeting', 'size', 'states', 't']
+  inputs: ['config', 'defaultParticipantsTabId', 'iconPack', 'meeting', 'size', 'states', 't']
 })
 export class DyteParticipants {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['dyteStateUpdate']);
   }
 }
 
@@ -2360,13 +2507,13 @@ export declare interface DyteParticipantsStageList extends Components.DytePartic
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['config', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
+  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
 })
 @Component({
   selector: 'dyte-participants-stage-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['config', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
+  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
 })
 export class DyteParticipantsStageList {
   protected el: HTMLElement;
@@ -2430,13 +2577,13 @@ export declare interface DyteParticipantsViewerList extends Components.DyteParti
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['config', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
+  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
 })
 @Component({
   selector: 'dyte-participants-viewer-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['config', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
+  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
 })
 export class DyteParticipantsViewerList {
   protected el: HTMLElement;
@@ -3002,13 +3149,13 @@ export declare interface DyteSidebarUi extends Components.DyteSidebarUi {
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['currentTab', 'iconPack', 't', 'tabs', 'view']
+  inputs: ['currentTab', 'hideCloseAction', 'hideHeader', 'iconPack', 't', 'tabs', 'view']
 })
 @Component({
   selector: 'dyte-sidebar-ui',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['currentTab', 'iconPack', 't', 'tabs', 'view']
+  inputs: ['currentTab', 'hideCloseAction', 'hideHeader', 'iconPack', 't', 'tabs', 'view']
 })
 export class DyteSidebarUi {
   protected el: HTMLElement;
@@ -3447,6 +3594,27 @@ export declare interface DyteViewerCount extends Components.DyteViewerCount {}
   inputs: ['iconPack', 'meeting', 't', 'variant']
 })
 export class DyteViewerCount {
+  protected el: HTMLElement;
+  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
+    c.detach();
+    this.el = r.nativeElement;
+  }
+}
+
+
+export declare interface DyteVirtualizedParticipantList extends Components.DyteVirtualizedParticipantList {}
+
+@ProxyCmp({
+  defineCustomElementFn: undefined,
+  inputs: ['bufferedItemsCount', 'emptyListElement', 'itemHeight', 'items', 'renderItem']
+})
+@Component({
+  selector: 'dyte-virtualized-participant-list',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: '<ng-content></ng-content>',
+  inputs: ['bufferedItemsCount', 'emptyListElement', 'itemHeight', 'items', 'renderItem']
+})
+export class DyteVirtualizedParticipantList {
   protected el: HTMLElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();

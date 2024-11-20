@@ -44,6 +44,8 @@ jobs:
         if: |
           contains('refs/heads/main', github.ref)
         run: |
+          git config --global user.email "dev@dyte.io"
+          git config --global user.name "dyte-devel"
           git pull
           git stash
           git checkout staging

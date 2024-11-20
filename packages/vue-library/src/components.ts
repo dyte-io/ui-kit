@@ -254,6 +254,7 @@ export const DyteChat = /*@__PURE__*/ defineContainer<JSX.DyteChat>('dyte-chat',
   't',
   'disablePrivateChat',
   'privatePresetFilter',
+  'displayFilter',
   'dyteStateUpdate'
 ]);
 
@@ -427,6 +428,63 @@ export const DyteCounter = /*@__PURE__*/ defineContainer<JSX.DyteCounter>('dyte-
   'iconPack',
   't',
   'valueChange'
+]);
+
+
+export const DyteDebugger = /*@__PURE__*/ defineContainer<JSX.DyteDebugger>('dyte-debugger', undefined, [
+  'meeting',
+  'states',
+  'size',
+  'iconPack',
+  't',
+  'dyteStateUpdate'
+]);
+
+
+export const DyteDebuggerAudio = /*@__PURE__*/ defineContainer<JSX.DyteDebuggerAudio>('dyte-debugger-audio', undefined, [
+  'meeting',
+  'states',
+  'size',
+  'iconPack',
+  't'
+]);
+
+
+export const DyteDebuggerScreenshare = /*@__PURE__*/ defineContainer<JSX.DyteDebuggerScreenshare>('dyte-debugger-screenshare', undefined, [
+  'meeting',
+  'states',
+  'size',
+  'iconPack',
+  't'
+]);
+
+
+export const DyteDebuggerSystem = /*@__PURE__*/ defineContainer<JSX.DyteDebuggerSystem>('dyte-debugger-system', undefined, [
+  'meeting',
+  'states',
+  'size',
+  'iconPack',
+  't'
+]);
+
+
+export const DyteDebuggerToggle = /*@__PURE__*/ defineContainer<JSX.DyteDebuggerToggle>('dyte-debugger-toggle', undefined, [
+  'variant',
+  'meeting',
+  'states',
+  't',
+  'iconPack',
+  'size',
+  'dyteStateUpdate'
+]);
+
+
+export const DyteDebuggerVideo = /*@__PURE__*/ defineContainer<JSX.DyteDebuggerVideo>('dyte-debugger-video', undefined, [
+  'meeting',
+  'states',
+  'size',
+  'iconPack',
+  't'
 ]);
 
 
@@ -948,7 +1006,9 @@ export const DyteParticipants = /*@__PURE__*/ defineContainer<JSX.DyteParticipan
   'config',
   'size',
   'iconPack',
-  't'
+  'defaultParticipantsTabId',
+  't',
+  'dyteStateUpdate'
 ]);
 
 
@@ -964,6 +1024,7 @@ export const DyteParticipantsStageList = /*@__PURE__*/ defineContainer<JSX.DyteP
   'meeting',
   'config',
   'size',
+  'hideHeader',
   'iconPack',
   'view',
   't',
@@ -996,6 +1057,7 @@ export const DyteParticipantsViewerList = /*@__PURE__*/ defineContainer<JSX.Dyte
   'meeting',
   'config',
   'size',
+  'hideHeader',
   'iconPack',
   'view',
   'search',
@@ -1213,6 +1275,8 @@ export const DyteSidebar = /*@__PURE__*/ defineContainer<JSX.DyteSidebar>('dyte-
 export const DyteSidebarUi = /*@__PURE__*/ defineContainer<JSX.DyteSidebarUi>('dyte-sidebar-ui', undefined, [
   'view',
   'tabs',
+  'hideHeader',
+  'hideCloseAction',
   'currentTab',
   'iconPack',
   't',
@@ -1402,6 +1466,15 @@ export const DyteViewerCount = /*@__PURE__*/ defineContainer<JSX.DyteViewerCount
   'variant',
   'iconPack',
   't'
+]);
+
+
+export const DyteVirtualizedParticipantList = /*@__PURE__*/ defineContainer<JSX.DyteVirtualizedParticipantList>('dyte-virtualized-participant-list', undefined, [
+  'items',
+  'renderItem',
+  'itemHeight',
+  'bufferedItemsCount',
+  'emptyListElement'
 ]);
 
 
