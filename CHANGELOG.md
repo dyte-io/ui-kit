@@ -1,3 +1,34 @@
+# [2.1.0](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.0.6...@dyte-in/ui-kit-v2.1.0) (2024-11-20)
+
+
+### Bug Fixes
+
+* add event listener in componentDidLoad ([d99524a](https://github.com/dyte-io/ui-kit/commit/d99524ab2f2cdbdddb6671972c0169e724c53383))
+* add private chat filter ([4654cf9](https://github.com/dyte-io/ui-kit/commit/4654cf963f0b80d39625f098334388e9a74ce645))
+* **debugger-i18n:** fixed the lack of i18n in debugger files ([3962e80](https://github.com/dyte-io/ui-kit/commit/3962e803a9e3526a617f70b7cf0e1078a73d87a3))
+* **debugger:** added jitter unit ([20ace1d](https://github.com/dyte-io/ui-kit/commit/20ace1d3051ef961adbe22aac15ed60c63661577))
+* **debugger:** fixed colors post status label refactoring ([502bd49](https://github.com/dyte-io/ui-kit/commit/502bd49a7492c0990f00cbac0e5119c82e79db8a))
+* **debugger:** fixed label, rounding battery percentage ([760726e](https://github.com/dyte-io/ui-kit/commit/760726e8275f96cd648290e5a7fb36addbebf829))
+* github action for staging updatE ([852cd6f](https://github.com/dyte-io/ui-kit/commit/852cd6fa14aecef5d8903a4f6d3a00d63d7374e0))
+* **livestream-viewer:** fixed some edge cases around playback, added logs for tracking ([210309b](https://github.com/dyte-io/ui-kit/commit/210309bd690a09552fea837fadf96f61be9f9f1e))
+* **participant-count-badge:** badge/pill was not showing the background color ([423e1f6](https://github.com/dyte-io/ui-kit/commit/423e1f660f25c5b9d4c4400b98c958ff341f2ae1))
+* **participants-tab-i18n:** fixed i18n issues in the participants tab ([100dbc0](https://github.com/dyte-io/ui-kit/commit/100dbc072b841e1614958276804cf44e50eb8543))
+* **participants:** participant menu list was not closing, actions were invisible for last 2 ([15ab76a](https://github.com/dyte-io/ui-kit/commit/15ab76a7011650ba0e7240fed39764519838603e))
+* remove IVS ([4be485e](https://github.com/dyte-io/ui-kit/commit/4be485e0844e5dfb259ad2cb759da79988d996b6))
+* remove socket service check ([1e1f3ee](https://github.com/dyte-io/ui-kit/commit/1e1f3eee6323102c6f1d84fcc20fa4abc5944c9f))
+* scroll lock in transcriptions ([71a9ca5](https://github.com/dyte-io/ui-kit/commit/71a9ca54e0b77ef765bcd20de678f8531dd3f5c2))
+* update web-core ([d066ab0](https://github.com/dyte-io/ui-kit/commit/d066ab05e69f4ba0a3d14d5f497a52975f24d81f))
+
+
+### Features
+
+* **debugger:** added systems tab for battery - works in chromium only, hidden for others ([6042e9f](https://github.com/dyte-io/ui-kit/commit/6042e9f973f447a953b13b26336734c89b9602a7))
+* **debugger:** adding cpu and bandwidth limitations in debugger ([849eed4](https://github.com/dyte-io/ui-kit/commit/849eed436d85be3fdf105edd37636f9ccbfbd46c))
+* **internal:** livestream viewer with stats ([945e2b5](https://github.com/dyte-io/ui-kit/commit/945e2b56a00acf42f8591e3f62c686bde7947b27))
+* **internal:** showing badges against the participant tabs with respective count ([d3c7844](https://github.com/dyte-io/ui-kit/commit/d3c784491015d8a6b78b1c3e57d9b5ae1d6a9ed1))
+* **livestream:** show livestream viewers and stage list ([23b4040](https://github.com/dyte-io/ui-kit/commit/23b4040125d0435e7b80fc2f2b0a58a22e8f7b20))
+* **troubleshooter:** added basic troubleshooter ([21d9253](https://github.com/dyte-io/ui-kit/commit/21d92530fb08d4a21e8a2d2f71913a0f05465840))
+
 # [2.1.0-staging.46](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0-staging.45...@dyte-in/ui-kit-v2.1.0-staging.46) (2024-11-19)
 
 
