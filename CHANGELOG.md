@@ -1,3 +1,10 @@
+## [2.1.2-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.1...@dyte-in/ui-kit-v2.1.2-staging.1) (2024-12-02)
+
+
+### Bug Fixes
+
+* **network-indicator:** show network indicator for self as well ([efff3f3](https://github.com/dyte-io/ui-kit/commit/efff3f3e96c3e358df6fb591cc84d9cc1fa933bc))
+
 ## [2.1.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.0...@dyte-in/ui-kit-v2.1.1) (2024-11-20)
 
 
