@@ -14,7 +14,12 @@ import {
 import { Size, DyteI18n, IconPack, defaultIconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
-import { showLivestream, PlayerEventType, PlayerState } from '../../utils/livestream';
+import {
+  showLivestream,
+  PlayerEventType,
+  PlayerState,
+  getLivestreamViewerAllowedQualityLevels,
+} from '../../utils/livestream';
 import { formatSecondsToHHMMSS } from '../../utils/time';
 
 @Component({
@@ -235,10 +240,21 @@ export class DyteLivestreamPlayer {
         // Listen for manifest parsed to populate quality levels
         this.hls.on(Hls.Events.MANIFEST_PARSED, async (_, data) => {
           this.meeting.__internals__.logger.info(`dyte-livestream-player:: HLS manifest parsed`);
-          this.qualityLevels = data.levels.map((level, index) => ({
+          const { levels: levelsToUse, autoLevelChangeAllowed } =
+            getLivestreamViewerAllowedQualityLevels({
+              meeting: this.meeting,
+              hlsLevels: data.levels,
+            });
+
+          this.qualityLevels = levelsToUse.map((level, index) => ({
             level: index,
             resolution: level.height ? `${level.height}p` : 'auto',
           }));
+          if (autoLevelChangeAllowed) {
+            this.qualityLevels = [{ level: -1, resolution: 'Auto' }, ...this.qualityLevels];
+          }
+          // Set a reasonable starting quality
+          this.hls.currentLevel = this.qualityLevels[0].level;
 
           try {
             this.meeting.__internals__.logger.info(
@@ -361,9 +377,6 @@ export class DyteLivestreamPlayer {
                       this.changeQuality(parseInt((e.target as HTMLSelectElement).value))
                     }
                   >
-                    <option value={-1} selected={this.selectedQuality === -1}>
-                      Auto
-                    </option>
                     {this.qualityLevels.map((level) => (
                       <option value={level.level} selected={this.selectedQuality === level.level}>
                         {level.resolution}
@@ -380,6 +393,22 @@ export class DyteLivestreamPlayer {
                     size="sm"
                     iconPack={this.iconPack}
                     t={this.t}
+                    ref={(fullScreenToggle) => {
+                      // TODO: remove this hack
+                      // Create a <style> element
+                      const style = document.createElement('style');
+
+                      // Add CSS rules
+                      style.textContent = `
+                        dyte-controlbar-button {
+                          background-color: var(--bg-brand-500);
+                          color: var(--text-text-on-brand);
+                        }
+                      `;
+
+                      // Append the <style> to the Shadow DOM
+                      fullScreenToggle.shadowRoot.appendChild(style);
+                    }}
                   />
                 </div>
               </div>
