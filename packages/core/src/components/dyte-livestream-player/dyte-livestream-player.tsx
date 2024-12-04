@@ -133,12 +133,7 @@ export class DyteLivestreamPlayer {
   private changeQuality = (level: number) => {
     this.selectedQuality = level;
     if (this.hls) {
-      if (level === -1) {
-        // Auto
-        this.hls.currentLevel = -1;
-      } else {
-        this.hls.currentLevel = level;
-      }
+      this.hls.currentLevel = level;
     }
   };
 
@@ -231,9 +226,12 @@ export class DyteLivestreamPlayer {
 
         this.hls.on(Hls.Events.ERROR, (_event, data) => {
           if (data.fatal) {
-            this.meeting.__internals__.logger.error('Fatal error:', data);
+            this.meeting.__internals__.logger.error('dyte-livestream-player:: fatal error:', data);
           } else {
-            this.meeting.__internals__.logger.warn('Non-fatal error:', data);
+            this.meeting.__internals__.logger.warn(
+              'dyte-livestream-player:: non-fatal error:',
+              data
+            );
           }
         });
 
