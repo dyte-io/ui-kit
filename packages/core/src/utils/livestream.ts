@@ -105,7 +105,6 @@ export function getLivestreamViewerAllowedQualityLevels({
 } {
   let allowedQualities = meeting.self.config.livestreamViewerQualities || [];
 
-  allowedQualities = [160, 480];
   if (!allowedQualities.length) {
     return { autoLevelChangeAllowed: true, levels: hlsLevels };
   }

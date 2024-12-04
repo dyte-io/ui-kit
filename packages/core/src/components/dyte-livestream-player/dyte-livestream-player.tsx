@@ -394,7 +394,6 @@ export class DyteLivestreamPlayer {
                     iconPack={this.iconPack}
                     t={this.t}
                     ref={(fullScreenToggle) => {
-                      // TODO: remove this hack
                       // Create a <style> element
                       const style = document.createElement('style');
 
