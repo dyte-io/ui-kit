@@ -224,7 +224,7 @@ export class DyteParticipantTile {
           />
         )}
         {this.mediaConnectionError && (
-          <div class="network-container">
+          <div class="network-container" part="network-indicator">
             <dyte-icon
               class="network-icon"
               icon={this.iconPack.disconnected}
