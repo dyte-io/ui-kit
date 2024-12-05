@@ -1,3 +1,10 @@
+## [2.1.2-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.2-staging.1...@dyte-in/ui-kit-v2.1.2-staging.2) (2024-12-05)
+
+
+### Bug Fixes
+
+* **tile:** add network-indicator part attr ([218f94f](https://github.com/dyte-io/ui-kit/commit/218f94f957c94fcbb1135f7b8a27ff5b97adcafa))
+
 ## [2.1.2-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.1...@dyte-in/ui-kit-v2.1.2-staging.1) (2024-12-02)
 
 
