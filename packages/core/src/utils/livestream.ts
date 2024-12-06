@@ -1,5 +1,6 @@
 /* eslint-disable @stencil-community/ban-exported-const-enums */
 import DyteClient from '@dytesdk/web-core';
+import { Level } from 'hls.js';
 
 /**
  * Can view the livestream
@@ -25,6 +26,7 @@ export enum PlayerState {
   BUFFERING = 'Buffering',
   ENDED = 'Ended',
   IDLE = 'Idle',
+  PAUSED = 'Paused',
   PLAYING = 'Playing',
   READY = 'Ready',
 }
@@ -90,3 +92,30 @@ export const isIvsPlayerCallStatsEvent: PlayerEventType[] = [
   PlayerEventType.QUALITY_CHANGED,
   PlayerEventType.INITIALIZED, // no payload
 ];
+
+export function getLivestreamViewerAllowedQualityLevels({
+  meeting,
+  hlsLevels,
+}: {
+  meeting: DyteClient;
+  hlsLevels: Level[];
+}): {
+  autoLevelChangeAllowed: boolean;
+  levels: Level[];
+} {
+  let allowedQualities = meeting.self.config.livestreamViewerQualities || [];
+
+  if (!allowedQualities.length) {
+    return { autoLevelChangeAllowed: true, levels: hlsLevels };
+  }
+
+  // Filter allowed qualities
+  const desiredLevels = hlsLevels.filter((level) =>
+    (allowedQualities as number[]).includes(level.height)
+  );
+
+  if (!desiredLevels.length) {
+    return { autoLevelChangeAllowed: true, levels: hlsLevels };
+  }
+  return { autoLevelChangeAllowed: false, levels: desiredLevels };
+}
