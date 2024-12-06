@@ -95,7 +95,7 @@ export class DyteMarkdownView {
     });
 
     if (isCodeBlock) {
-      return <pre>{message}</pre>;
+      return <pre style={{ whiteSpace: 'pre', overflow: 'scroll' }}>{lines.join('\n')}</pre>;
     }
 
     return message;
