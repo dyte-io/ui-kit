@@ -1,4 +1,3 @@
-import cloneDeep from 'lodash-es/cloneDeep';
 import { UIConfig } from '../../exports';
 import { UIRoot, Element as E, StyleProps } from '../../types/ui-config/root';
 import { defaultConfig } from '../default-ui-config';
@@ -139,7 +138,7 @@ export class DyteUIBuilder {
   private config: UIConfig;
 
   constructor(config?: UIConfig) {
-    this.config = cloneDeep(config || defaultConfig);
+    this.config = config || defaultConfig;
   }
 
   /**
