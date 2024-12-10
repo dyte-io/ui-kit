@@ -53,10 +53,6 @@ export class DyteNetworkIndicator {
   };
 
   render() {
-    if (this.meeting && this.meeting.self.userId === this.participant.userId) {
-      return null;
-    }
-
     let signal_strength = Math.round(this.score / 2);
     let signal_status: 'good' | 'poor' | 'poorest' = 'good';
 
