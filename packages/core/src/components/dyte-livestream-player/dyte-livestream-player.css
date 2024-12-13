@@ -49,6 +49,13 @@ p {
   @apply bg-brand-500 text-text-on-brand rounded-sm mr-2;
   cursor: pointer;
   font-size: 24px;
+  height: 30px;
+  width: 30px;
+}
+
+.fullscreen-btn {
+  margin-right: 20px;
+  height: 30px;
 }
 
 .control-btn:hover {
@@ -79,6 +86,7 @@ p {
   border: none;
   padding: 5px 10px;
   font-size: 14px;
+  height: 30px;
   cursor: pointer;
   border-radius: 5px;
   margin-right: 10px;

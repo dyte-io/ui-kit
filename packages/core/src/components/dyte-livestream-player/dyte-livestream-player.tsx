@@ -345,15 +345,17 @@ export class DyteLivestreamPlayer {
               <div class="control-bar" style={{ width: `${this.videoRef?.clientWidth}px` }}>
                 <div class="control-groups">
                   {/* <!-- Play/Pause Button --> */}
-                  <button id="playPause" class="control-btn" onClick={this.togglePlay}>
-                    <dyte-icon
-                      icon={
-                        this.playerState === PlayerState.PLAYING
-                          ? this.iconPack.pause
-                          : this.iconPack.play
-                      }
-                    />
-                  </button>
+                  <dyte-icon
+                    id="playPause"
+                    onClick={this.togglePlay}
+                    size="lg"
+                    class="control-btn"
+                    icon={
+                      this.playerState === PlayerState.PLAYING
+                        ? this.iconPack.pause
+                        : this.iconPack.play
+                    }
+                  />
 
                   <dyte-icon
                     size="lg"
@@ -385,9 +387,8 @@ export class DyteLivestreamPlayer {
                   {/* <!-- Fullscreen Button --> */}
                   <dyte-fullscreen-toggle
                     id="fullscreen"
-                    class="control-btn"
+                    class="control-btn fullscreen-btn"
                     targetElement={this.videoContainerRef}
-                    style={{ marginRight: '20px' }}
                     size="sm"
                     iconPack={this.iconPack}
                     t={this.t}
@@ -398,6 +399,7 @@ export class DyteLivestreamPlayer {
                       // Add CSS rules
                       style.textContent = `
                         dyte-controlbar-button {
+                          display: contents;
                           background-color: var(--bg-brand-500);
                           color: var(--text-text-on-brand);
                         }
