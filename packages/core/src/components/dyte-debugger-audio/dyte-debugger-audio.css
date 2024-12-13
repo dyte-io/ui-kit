@@ -25,7 +25,7 @@ h3 {
 }
 
 .tab-body {
-  @apply flex h-full flex-col justify-between overflow-y-auto m-4;
+  @apply flex h-full flex-col justify-between overflow-y-auto m-4 overflow-x-hidden;
 }
 
 .status-container {
@@ -57,9 +57,10 @@ h3 {
   justify-content: center;
 }
 
-.section-header .status {
+.section-header-status {
   color: rgba(var(--dyte-colors-success));
   font-weight: bold;
+  margin-right: 10px;
 }
 
 .section-header .arrow {
@@ -103,6 +104,40 @@ h3 {
   text-align: right;
 }
 
+.device-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: theme('borderWidth.sm') solid theme('colors.background.600');
+}
+
+.device-row:last-child {
+  border-bottom: none;
+}
+
+.device-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.device-cell.label strong {
+  font-size: 14px;
+}
+
+.device-cell.label .description {
+  font-size: 12px;
+  @apply text-text-700;
+  margin-top: 4px;
+}
+
+.device-cell.value {
+  text-align: right;
+}
+
+.device-cell.value .value {
+  font-size: 10px;
+}
+
 .status.good {
   color: rgba(var(--dyte-colors-success));
 }
@@ -124,4 +159,5 @@ h3 {
 dyte-settings-audio {
   display: flex;
   flex-direction: column;
+  padding: 12px;
 }

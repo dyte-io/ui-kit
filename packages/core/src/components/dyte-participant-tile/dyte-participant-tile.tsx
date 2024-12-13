@@ -142,7 +142,7 @@ export class DyteParticipantTile {
   }
 
   private mediaConnectionUpdateListener() {
-    const { consuming, producing } = this.meeting?.meta?.mediaState ?? {};
+    const { recv: consuming, send: producing } = this.meeting?.meta?.mediaState ?? {};
 
     if (consuming?.state !== 'connected' && !this.isSelf()) {
       this.mediaConnectionError = true;

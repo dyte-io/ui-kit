@@ -3,7 +3,7 @@ import { States, Size, IconPack, defaultIconPack, DyteI18n } from '../../exports
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { AudioProducerScoreStats, MediaKind, ProducerScoreStats } from '@dytesdk/web-core';
-// import storeState from '../../lib/store';
+import storeState from '../../lib/store';
 import {
   FormattedStatsObj,
   getBitrateVerdict,
@@ -38,10 +38,13 @@ export class DyteDebuggerAudio {
   @State() isNetworkOpen: boolean = true;
 
   /** Is Devices section expanded */
-  @State() isDevicesOpen: boolean = false;
+  @State() isDevicesOpen: boolean = true;
 
-  /** Stats as formatted array to display */
+  /** Audio Producer Stats as formatted array to display */
   @State() audioProducerFormattedStats: FormattedStatsObj[] = [];
+
+  /** Audio Device Stats as formatted array to display */
+  @State() audioDeviceFormattedStats: FormattedStatsObj[] = [];
 
   /** Last raw audio score stats obj */
   @State() audioProducerScoreStats: AudioProducerScoreStats = null;
@@ -52,10 +55,10 @@ export class DyteDebuggerAudio {
   /** Summarised health of devices */
   @State() devicesHealth: StatsHealth = null;
 
-  // private toggleSection(section: string) {
-  //   if (section === 'network') this.isNetworkOpen = !this.isNetworkOpen;
-  //   else if (section === 'devices') this.isDevicesOpen = !this.isDevicesOpen;
-  // }
+  private toggleSection(section: string) {
+    if (section === 'network') this.isNetworkOpen = !this.isNetworkOpen;
+    else if (section === 'devices') this.isDevicesOpen = !this.isDevicesOpen;
+  }
 
   private mediaScoreUpdateListener = ({
     kind,
@@ -71,9 +74,31 @@ export class DyteDebuggerAudio {
     }
   };
 
-  private deviceListUpdateListener = async () => {
-    const audioDevices = await this.meeting.self.getAudioDevices();
-    this.devicesHealth = audioDevices?.length > 0 ? 'Good' : 'Poor';
+  private deviceHealthCheckListener = async () => {
+    const mediaPermission = this.meeting.self.mediaPermissions.audio;
+
+    let mediaPermissionHealth: StatsHealth = 'Good';
+    if (
+      ['DENIED', 'SYSTEM_DENIED', 'COULD_NOT_START', 'CANCELED', 'NO_DEVICES_AVAILABLE'].includes(
+        mediaPermission
+      )
+    ) {
+      mediaPermissionHealth = 'Poor';
+    } else if (['NOT_REQUESTED'].includes(mediaPermission)) {
+      mediaPermissionHealth = 'Average';
+    }
+
+    // Only mediaPermissionHealth is there currently for devices
+    this.devicesHealth = mediaPermissionHealth;
+
+    this.audioDeviceFormattedStats = [
+      {
+        name: 'Media Permission',
+        value: mediaPermission,
+        description: 'Indicates your media permission status.',
+        verdict: mediaPermissionHealth,
+      },
+    ];
   };
 
   private audioUpdateListener = () => {
@@ -134,7 +159,8 @@ export class DyteDebuggerAudio {
     }
     this.meeting.self.off('mediaScoreUpdate', this.mediaScoreUpdateListener);
     this.meeting.self.off('audioUpdate', this.audioUpdateListener);
-    this.meeting.self.off('deviceListUpdate', this.deviceListUpdateListener);
+    this.meeting.self.off('deviceListUpdate', this.deviceHealthCheckListener);
+    this.meeting.self.on('mediaPermissionUpdate', this.deviceHealthCheckListener);
   }
 
   @Watch('meeting')
@@ -142,21 +168,58 @@ export class DyteDebuggerAudio {
     if (!meeting) return;
     meeting.self.on('mediaScoreUpdate', this.mediaScoreUpdateListener);
     meeting.self.on('audioUpdate', this.audioUpdateListener);
-    meeting.self.on('deviceListUpdate', this.deviceListUpdateListener);
-    await this.deviceListUpdateListener();
+    meeting.self.on('deviceListUpdate', this.deviceHealthCheckListener);
+    meeting.self.on('mediaPermissionUpdate', this.deviceHealthCheckListener);
+    await this.deviceHealthCheckListener();
   }
+
+  private onSettingsAudioRef = (dyteSettingsAudio) => {
+    // Create a <style> element
+    const micophoneStyle = document.createElement('style');
+    const speakerStyle = document.createElement('style');
+
+    // Add CSS rules
+    micophoneStyle.textContent = `
+       label {
+          font-weight: 500;
+          color: rgb(var(--dyte-colors-text-1000, 255 255 255));
+       }
+       [part="microphone-selection"].container .dyte-select {
+            color: rgb(var(--dyte-colors-text-700, 255 255 255 / 0.64));
+        }
+      `;
+
+    speakerStyle.textContent = `
+      label {
+         font-weight: 500;
+         color: rgb(var(--dyte-colors-text-1000, 255 255 255)) !important;
+      }
+       [part="speaker-selection"] .dyte-select {
+           color: rgb(var(--dyte-colors-text-700, 255 255 255 / 0.64)) !important;
+       }
+     `;
+
+    dyteSettingsAudio?.shadowRoot
+      ?.querySelector('dyte-speaker-selector')
+      ?.shadowRoot?.appendChild(speakerStyle);
+
+    // Append the <style> to the Shadow DOM
+    dyteSettingsAudio?.shadowRoot
+      ?.querySelector('dyte-microphone-selector')
+      ?.shadowRoot?.appendChild(micophoneStyle);
+  };
 
   render() {
     if (!this.meeting) {
       return;
     }
 
-    // const defaults = {
-    //   meeting: this.meeting,
-    //   states: this.states || storeState,
-    //   iconPack: this.iconPack,
-    //   t: this.t,
-    // };
+    const defaults = {
+      meeting: this.meeting,
+      states: this.states || storeState,
+      iconPack: this.iconPack,
+      t: this.t,
+    };
 
     return (
       <Host>
@@ -164,17 +227,48 @@ export class DyteDebuggerAudio {
         <div class="tab-body">
           <div class="status-container">
             <div class="status-section">
-              <div
-                class={`section-header ${!this.networkBasedMediaHealth ? 'only-child' : ''}`}
-                // onClick={() => this.toggleSection('network')}
-              >
+              <div class="section-header" onClick={() => this.toggleSection('devices')}>
+                <span>Devices</span>
+                <div class="section-header-end-group">
+                  {this.devicesHealth && (
+                    <span class="section-header-status status">{this.devicesHealth}</span>
+                  )}
+                  <span class="arrow">{this.isDevicesOpen ? '▾' : '▸'}</span>
+                </div>
+              </div>
+              {this.isDevicesOpen && (
+                <div class="section-body">
+                  {this.audioDeviceFormattedStats.map((formattedStatsObj) => (
+                    <div class="device-row">
+                      <div class="device-cell label">
+                        <strong>{formattedStatsObj.name}</strong>
+                        <span class="description">{formattedStatsObj.description}</span>
+                      </div>
+                      <div class="device-cell value">
+                        <span class={`status ${formattedStatsObj.verdict?.toLowerCase()}`}>
+                          {this.t(`debugger.quality.${formattedStatsObj.verdict?.toLowerCase()}`)}
+                        </span>
+                        <span class="value">{formattedStatsObj.value}</span>
+                      </div>
+                    </div>
+                  ))}
+                  <dyte-settings-audio {...defaults} ref={this.onSettingsAudioRef} />
+                </div>
+              )}
+            </div>
+            <div class="status-section">
+              <div class={`section-header`} onClick={() => this.toggleSection('network')}>
                 <span>{this.t('debugger.audio.sections.network_media')}</span>
-                {this.networkBasedMediaHealth && (
-                  <span class={`status ${this.networkBasedMediaHealth?.toLowerCase()}`}>
-                    {this.t(`debugger.quality.${this.networkBasedMediaHealth?.toLowerCase()}`)}
-                  </span>
-                )}
-                {/* <span class="arrow">{this.isNetworkOpen ? '▾' : '▸'}</span> */}
+                <div class="section-header-end-group">
+                  {this.networkBasedMediaHealth && (
+                    <span
+                      class={`section-header-status status ${this.networkBasedMediaHealth?.toLowerCase()}`}
+                    >
+                      {this.t(`debugger.quality.${this.networkBasedMediaHealth?.toLowerCase()}`)}
+                    </span>
+                  )}
+                  <span class="arrow">{this.isNetworkOpen ? '▾' : '▸'}</span>
+                </div>
               </div>
               {this.isNetworkOpen && !this.audioProducerFormattedStats.length && (
                 <div class="section-body missing-stats">
@@ -204,19 +298,6 @@ export class DyteDebuggerAudio {
                 </div>
               )}
             </div>
-            {/** Hiding devices section for now, Will add more functionality later */}
-            {/* <div class="status-section">
-              <div class="section-header" onClick={() => this.toggleSection('devices')}>
-                <span>Devices</span>
-                {this.devicesHealth && <span class="status">{this.devicesHealth}</span>}
-                <span class="arrow">{this.isDevicesOpen ? '▾' : '▸'}</span>
-              </div>
-              {this.isDevicesOpen && (
-                <div class="section-body">
-                  <dyte-settings-audio {...defaults} />
-                </div>
-              )}
-            </div> */}
           </div>
         </div>
       </Host>
