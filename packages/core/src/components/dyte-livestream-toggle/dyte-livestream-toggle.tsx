@@ -98,6 +98,8 @@ export class DyteLivestreamToggle {
         return this.t('livestream.go_live');
       case 'LIVESTREAMING':
         return this.t('livestream.end_live');
+      case 'WAITING_ON_MANUAL_INGESTION':
+        return this.t('livestream.waiting_on_manual_ingestion');
       case 'STARTING':
         return this.t('livestream.starting');
       case 'STOPPING':
@@ -113,6 +115,8 @@ export class DyteLivestreamToggle {
         return this.iconPack.start_livestream;
       case 'LIVESTREAMING':
         return this.iconPack.stop_livestream;
+      case 'WAITING_ON_MANUAL_INGESTION':
+        return this.iconPack.start_livestream;
       case 'STARTING':
       case 'STOPPING':
       default:
