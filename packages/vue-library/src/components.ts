@@ -1016,6 +1016,7 @@ export const DyteParticipantsAudio = /*@__PURE__*/ defineContainer<JSX.DyteParti
   'meeting',
   'iconPack',
   't',
+  'preloadedAudioElem',
   'dialogClose'
 ]);
 

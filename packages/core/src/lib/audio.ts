@@ -19,9 +19,9 @@ export default class DyteAudio {
 
   private _onError: () => void;
 
-  constructor(meeting: Meeting) {
+  constructor(meeting: Meeting, audio?: HTMLAudioElement) {
     this.meeting = meeting;
-    this.audio = document.createElement('audio');
+    this.audio = audio ?? document.createElement('audio');
     this.audio.autoplay = true;
 
     this.audioStream = new MediaStream();
