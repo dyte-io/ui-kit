@@ -1,3 +1,10 @@
+## [2.1.3-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.3-staging.1...@dyte-in/ui-kit-v2.1.3-staging.2) (2024-12-24)
+
+
+### Bug Fixes
+
+* allow passing a pre-loaded audio element ([822d9c0](https://github.com/dyte-io/ui-kit/commit/822d9c028e607d66d875e164654dcb96a6bf6d0f))
+
 ## [2.1.3-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.2...@dyte-in/ui-kit-v2.1.3-staging.1) (2024-12-13)
 
 
