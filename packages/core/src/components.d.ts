@@ -2467,6 +2467,10 @@ export namespace Components {
          */
         "meeting": Meeting;
         /**
+          * Pass existing audio element
+         */
+        "preloadedAudioElem": HTMLAudioElement;
+        /**
           * Language
          */
         "t": DyteI18n;
@@ -7660,6 +7664,10 @@ declare namespace LocalJSX {
           * Callback to execute when the dialog is closed
          */
         "onDialogClose"?: (event: DyteParticipantsAudioCustomEvent<void>) => void;
+        /**
+          * Pass existing audio element
+         */
+        "preloadedAudioElem"?: HTMLAudioElement;
         /**
           * Language
          */

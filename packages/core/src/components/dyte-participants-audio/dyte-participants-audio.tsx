@@ -37,6 +37,9 @@ export class DyteParticipantsAudio {
   /** Language */
   @Prop() t: DyteI18n = useLanguage();
 
+  /** Pass existing audio element */
+  @Prop() preloadedAudioElem: HTMLAudioElement = undefined;
+
   /** Callback to execute when the dialog is closed */
   @Event({ eventName: 'dialogClose' }) dialogClose: EventEmitter<void>;
 
@@ -70,7 +73,7 @@ export class DyteParticipantsAudio {
   }
 
   private async setupAudio() {
-    this.audio = new DyteAudio(this.meeting);
+    this.audio = new DyteAudio(this.meeting, this.preloadedAudioElem);
     // Set the device to the current speaker device
     const currentDevices = this.meeting.self.getCurrentDevices();
     if (currentDevices.speaker != null) {

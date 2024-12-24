@@ -2485,13 +2485,13 @@ export declare interface DyteParticipantsAudio extends Components.DyteParticipan
 
 @ProxyCmp({
   defineCustomElementFn: undefined,
-  inputs: ['iconPack', 'meeting', 't']
+  inputs: ['iconPack', 'meeting', 'preloadedAudioElem', 't']
 })
 @Component({
   selector: 'dyte-participants-audio',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
-  inputs: ['iconPack', 'meeting', 't']
+  inputs: ['iconPack', 'meeting', 'preloadedAudioElem', 't']
 })
 export class DyteParticipantsAudio {
   protected el: HTMLElement;
