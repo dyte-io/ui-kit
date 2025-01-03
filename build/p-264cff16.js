@@ -1,1 +1,0 @@
-import{c as r}from"./p-c2c75ac6.js";function c(c){return structuredClone?structuredClone(c):r(c)}export{c}
