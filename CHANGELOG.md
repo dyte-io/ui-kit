@@ -1,3 +1,12 @@
+## [2.1.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.2...@dyte-in/ui-kit-v2.1.3) (2025-01-03)
+
+
+### Bug Fixes
+
+* allow passing a pre-loaded audio element ([822d9c0](https://github.com/dyte-io/ui-kit/commit/822d9c028e607d66d875e164654dcb96a6bf6d0f))
+* **dyte-chat:** fixed code indentation for chat messages ([dae6425](https://github.com/dyte-io/ui-kit/commit/dae64258577a8e4e72eba31eeba4f40d82e7397e))
+* **ui-kit-addons:** fixed hand raise icon ordering issue ([8131e71](https://github.com/dyte-io/ui-kit/commit/8131e71a71189ee7011f82b798408248805a6de0))
+
 ## [2.1.3-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.3-staging.1...@dyte-in/ui-kit-v2.1.3-staging.2) (2024-12-24)
 
 
