@@ -46,11 +46,12 @@
     "@floating-ui/dom": "^1.1.0",
     "@stencil/core": "2.20.0",
     "hark": "^1.2.3",
+    "hls.js": "^1.5.17",
     "lodash-es": "^4.17.21",
     "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
-    "@dyteinternals/utils": "^1.7.10",
+    "@dyteinternals/utils": "^3.1.0",
     "@dytesdk/web-core": "staging",
     "@rollup/plugin-commonjs": "24.0.1",
     "@rollup/plugin-node-resolve": "15.0.1",

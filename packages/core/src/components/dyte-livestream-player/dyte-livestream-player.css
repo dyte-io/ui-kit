@@ -1,15 +1,11 @@
 @import '../../styles/reset.css';
 
 :host {
-  @apply bg-background-900 mx-2 flex h-full w-full rounded-md;
+  @apply bg-background-900 flex h-full max-h-full min-h-full w-full min-w-full max-w-full rounded-md;
 }
 
 .player-container {
-  @apply relative m-4 flex grow items-center justify-center overflow-hidden rounded-md;
-}
-
-.player {
-  @apply bg-background-1000 rounded-md left-0 h-full w-auto aspect-video z-20 border-[0px];;
+  @apply relative m-4 flex grow items-center justify-center rounded-md;
 }
 
 .loader {
@@ -21,13 +17,6 @@ p {
   @apply text-text-700 text-text-lg my-1;
 }
 
-.latency-controls {
-  @apply absolute bottom-4 right-4 z-20 flex flex-row items-center;
-}
-
-.sync-live-stream {
-  @apply text-text-sm bg-brand-500 cursor-pointer rounded-sm px-2 py-1;
-}
 
 .unmute-popup {
   @apply bg-background-800 absolute !z-30 flex w-72 flex-col rounded-md p-4 text-center;
@@ -38,4 +27,81 @@ p {
   p {
     @apply text-text-md my-3;
   }
+}
+
+.control-bar {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  height: auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10px 0px 10px;
+  z-index: 10; /* Ensures the control bar is above the video */
+}
+
+.timings {
+  @apply text-text-on-brand;
+}
+
+.control-btn {
+  border: none;
+  @apply bg-brand-500 text-text-on-brand rounded-sm mr-2;
+  cursor: pointer;
+  font-size: 24px;
+  height: 30px;
+  width: 30px;
+}
+
+.fullscreen-btn {
+  margin-right: 20px;
+  height: 30px;
+}
+
+.control-btn:hover {
+  opacity: 0.8;
+}
+
+.control-btn:focus {
+  outline: none;
+}
+
+
+.control-groups{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#livestream-video {
+  aspect-ratio: 16/9;
+  max-width: 100%;
+  min-width: 100%;
+  @apply rounded-md left-0 w-auto aspect-video z-20 border-[0px];;
+}
+
+
+.level-select {
+  @apply bg-brand-500 text-text-on-brand rounded-sm;
+  border: none;
+  padding: 5px 10px;
+  font-size: 14px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.level-select:focus {
+  outline: none;
+}
+
+.level-select option {
+  @apply bg-brand-500 text-text-on-brand rounded-sm;
+}
+
+.volume-control-holder{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

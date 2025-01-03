@@ -295,6 +295,7 @@ export const defaultLanguage = {
   'livestream.idle': 'Waiting to go live.',
   'livestream.starting': 'Livestream is starting...',
   'livestream.stopping': 'Livestream is stopping...',
+  'livestream.waiting_on_manual_ingestion': 'Please ingest livestream media.',
   'livestream.error.not_supported': 'Player not supported.',
   'livestream.error.not_found': 'Playback URL not found.',
   'livestream.error.unknown': 'An unknown error occured.',
