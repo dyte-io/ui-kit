@@ -1,3 +1,22 @@
+# [2.2.0-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.3...@dyte-in/ui-kit-v2.2.0-staging.1) (2025-01-03)
+
+
+### Bug Fixes
+
+* **build:** build was failing due to web-core and utils mismatch ([cb2f911](https://github.com/dyte-io/ui-kit/commit/cb2f911b0dd6a02caec4f3ff3149a2ce99b8fc54))
+* **livestream-viewer:** level selector and safari fixes ([07f0e99](https://github.com/dyte-io/ui-kit/commit/07f0e99cd2c9f981b95c3d245ea9940b04896d2c))
+* **livestream:** adding proper brand colors for player ([331d88a](https://github.com/dyte-io/ui-kit/commit/331d88ac036d1590e16cead5a3115c9471286fa9))
+* **livestream:** reduced fast forward width ([98385f0](https://github.com/dyte-io/ui-kit/commit/98385f0f1b372474d5cb0e5a2bcbee2467b82546))
+* **livestream:** removed hardcoded allowed qualities, fixed web-core package ([b847ed6](https://github.com/dyte-io/ui-kit/commit/b847ed6a34af9bc7ba6592c95fad1ed2bd146ceb))
+* **livestream:** video dimension fixes for poor quality ([b1b5e15](https://github.com/dyte-io/ui-kit/commit/b1b5e152923596dc113ca9424a46fa4caed628b7))
+* **player:** added fast forward, made some fixes ([f2bd2b2](https://github.com/dyte-io/ui-kit/commit/f2bd2b2d835c2f39e03ff5dab6bb2ef009d9b949))
+
+
+### Features
+
+* **livestream:** added ability to control livestream viewer quality ([9db7720](https://github.com/dyte-io/ui-kit/commit/9db77207e876c197a048755d3133cfe52c3f2c12))
+* **player:** adding custom hls based livestream player ([413bb3d](https://github.com/dyte-io/ui-kit/commit/413bb3d28c2004975f20e5e25e1d7657cfd76ad8))
+
 ## [2.1.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.2...@dyte-in/ui-kit-v2.1.3) (2025-01-03)
 
 
