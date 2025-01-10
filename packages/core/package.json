@@ -40,7 +40,7 @@
     "tag": "latest"
   },
   "peerDepdendencies": {
-    "@dytesdk/web-core": ">=2.0.0"
+    "@dytesdk/web-core": ">=2.2.0"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.1.0",
@@ -50,7 +50,7 @@
     "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
-    "@dyteinternals/utils": "^1.7.10",
+    "@dyteinternals/utils": "^3.1.0",
     "@dytesdk/web-core": "staging",
     "@rollup/plugin-commonjs": "24.0.1",
     "@rollup/plugin-node-resolve": "15.0.1",
