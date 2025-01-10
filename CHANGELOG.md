@@ -1,3 +1,10 @@
+## [2.1.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.3...@dyte-in/ui-kit-v2.1.4) (2025-01-10)
+
+
+### Bug Fixes
+
+* **dyte-participant-tile:** network disconnected icon is not going away due to incorrect field ([65eca1c](https://github.com/dyte-io/ui-kit/commit/65eca1cf9f003d90cb0cdf096233647986baec14))
+
 ## [2.1.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.2...@dyte-in/ui-kit-v2.1.3) (2025-01-03)
 
 
