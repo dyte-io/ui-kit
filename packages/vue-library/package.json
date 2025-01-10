@@ -1,6 +1,6 @@
 {
   "name": "@dytesdk/vue-ui-kit",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Dyte's UI Kit to support easy UI development for Vue.",
   "license": "UNLICENSED",
   "main": "lib/index.js",

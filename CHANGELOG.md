@@ -1,3 +1,10 @@
+## [2.1.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.4...@dyte-in/ui-kit-v2.1.5) (2025-01-10)
+
+
+### Bug Fixes
+
+* **release:** empty commit to fix previous empty no-dist npm release ([0157d66](https://github.com/dyte-io/ui-kit/commit/0157d666953796f64ec071311fd8744778055b4d))
+
 ## [2.1.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.3...@dyte-in/ui-kit-v2.1.4) (2025-01-10)
 
 
