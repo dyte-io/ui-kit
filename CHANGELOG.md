@@ -1,3 +1,10 @@
+# [2.2.0-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.1...@dyte-in/ui-kit-v2.2.0-staging.2) (2025-01-13)
+
+
+### Bug Fixes
+
+* join in as text ([8f9ff5d](https://github.com/dyte-io/ui-kit/commit/8f9ff5dffdca7ea42e3c6e2102a8ef84dd1e1fc9))
+
 # [2.2.0-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.3...@dyte-in/ui-kit-v2.2.0-staging.1) (2025-01-03)
 
 
