@@ -72,6 +72,10 @@ export class DyteLivestreamPlayer {
 
   @State() duration: number = 0;
 
+  @State() hideControls: boolean = true;
+
+  private hideControlsTimeout: NodeJS.Timeout = null;
+
   /**
    * Emit API error events
    */
@@ -103,7 +107,10 @@ export class DyteLivestreamPlayer {
   private async updateLivestreamId() {
     const url = this.meeting.livestream.playbackUrl;
     if (!url || this.livestreamState !== 'LIVESTREAMING') {
+      // If there was a player, clean that up, cleanup all stencil states
+      this.playbackUrl = null;
       this.livestreamId = null;
+      this.cleanupPlayer();
       return;
     }
 
@@ -135,6 +142,22 @@ export class DyteLivestreamPlayer {
     if (this.hls) {
       this.hls.currentLevel = level;
     }
+  };
+
+  private cleanupPlayer = () => {
+    this.playerState = PlayerState.IDLE;
+    if (this.videoRef) {
+      this.hls?.destroy();
+      this.hls = null;
+    }
+  };
+
+  private onMouseMovePlayer = () => {
+    this.hideControls = false;
+    clearTimeout(this.hideControlsTimeout);
+    this.hideControlsTimeout = setTimeout(() => {
+      this.hideControls = true;
+    }, 5000);
   };
 
   private getLoadingState = () => {
@@ -226,13 +249,50 @@ export class DyteLivestreamPlayer {
 
         this.hls.on(Hls.Events.ERROR, (_event, data) => {
           if (data.fatal) {
-            this.meeting.__internals__.logger.error('dyte-livestream-player:: fatal error:', data);
+            this.meeting.__internals__.logger.error(
+              `dyte-livestream-player:: fatal error: ${data.details}`,
+              {
+                error: data.error,
+              }
+            );
+            if (this.playbackUrl && this.livestreamState === 'LIVESTREAMING') {
+              /* 
+                NOTE(ravindra-dyte): Maybe manifest is not ready,
+                maybe levels are not available yet.
+                Keep on retrying every 5 seconds till either livestream is stopped or error is resolved.
+              */
+              setTimeout(() => {
+                if (this.playbackUrl && this.livestreamState === 'LIVESTREAMING') {
+                  this.meeting.__internals__.logger.info(
+                    'dyte-livestream-player:: Retrying playbackUrl'
+                  );
+                  this.hls.loadSource(this.playbackUrl);
+                }
+              }, 5000);
+              return;
+            }
           } else {
             this.meeting.__internals__.logger.warn(
-              'dyte-livestream-player:: non-fatal error:',
-              data
+              `dyte-livestream-player:: non-fatal error: ${data.details}`,
+              {
+                error: data.error,
+              }
             );
           }
+        });
+
+        this.hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+          this.meeting.__internals__.logger.info('dyte-livestream-player:: media attached');
+        });
+
+        this.hls.on(Hls.Events.MEDIA_DETACHED, () => {
+          this.meeting.__internals__.logger.info('dyte-livestream-player:: media detached');
+        });
+
+        this.hls.on(Hls.Events.DESTROYING, () => {
+          this.meeting.__internals__.logger.info(
+            'dyte-livestream-player:: hls is getting destroyed'
+          );
         });
 
         // Listen for manifest parsed to populate quality levels
@@ -326,6 +386,7 @@ export class DyteLivestreamPlayer {
             class="video-container relative flex h-full w-full flex-col items-center justify-center pb-20"
           >
             <video
+              onMouseMove={this.onMouseMovePlayer}
               ref={async (el) => {
                 this.videoRef = el;
                 await this.conditionallyStartLivestreamViewer();
@@ -340,7 +401,7 @@ export class DyteLivestreamPlayer {
               }}
               onPause={() => (this.playerState = PlayerState.PAUSED)}
             ></video>
-            {this.playerState !== PlayerState.IDLE && (
+            {this.playerState !== PlayerState.IDLE && !this.hideControls && (
               // <!-- Control Bar -->
               <div class="control-bar" style={{ width: `${this.videoRef?.clientWidth}px` }}>
                 <div class="control-groups">
@@ -368,7 +429,6 @@ export class DyteLivestreamPlayer {
                     {formatSecondsToHHMMSS(this.duration)}
                   </span>
                 </div>
-
                 <div class="control-groups">
                   {/* <!-- Quality --> */}
                   <select
@@ -406,7 +466,7 @@ export class DyteLivestreamPlayer {
                       `;
 
                       // Append the <style> to the Shadow DOM
-                      fullScreenToggle.shadowRoot.appendChild(style);
+                      fullScreenToggle?.shadowRoot?.appendChild(style);
                     }}
                   />
                 </div>
