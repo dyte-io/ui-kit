@@ -6,7 +6,6 @@ import { isValidHexColor } from './color';
 import deepMerge from 'lodash-es/merge';
 import { Meeting } from '../types/dyte-client';
 import { isLiveStreamHost } from './livestream';
-import { canToggleBreakout } from './breakout-rooms';
 
 /**
  * Extend the default UI Config with your own
@@ -78,9 +77,7 @@ export const generateConfig = (
       moreElements.push('dyte-mute-all-button');
     }
 
-    if (canToggleBreakout(meeting)) {
-      moreElements.push('dyte-breakout-rooms-toggle');
-    }
+    moreElements.push('dyte-breakout-rooms-toggle');
 
     if (meeting.self?.permissions.canRecord) {
       moreElements.push('dyte-recording-toggle');
