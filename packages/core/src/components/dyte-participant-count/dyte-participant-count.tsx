@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { isLiveStreamViewer } from '../../utils/livestream';
 import { Size } from '../../types/props';
 
@@ -19,7 +19,7 @@ export class DyteParticipantCount {
   private stageUpdateListener: () => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
@@ -38,7 +38,7 @@ export class DyteParticipantCount {
     this.meetingChanged(this.meeting);
   }
 
-  private disconnectMeeting = (meeting: Meeting) => {
+  private disconnectMeeting = (meeting: DyteClient) => {
     if (meeting != null && this.countListener != null) {
       meeting.participants.joined.removeListener('participantJoined', this.countListener);
       meeting.participants.joined.removeListener('participantLeft', this.countListener);
@@ -54,7 +54,7 @@ export class DyteParticipantCount {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting, oldMeeting?: Meeting) {
+  meetingChanged(meeting: DyteClient, oldMeeting?: DyteClient) {
     this.disconnectMeeting(oldMeeting);
     if (meeting != null) {
       this.countListener = () => {

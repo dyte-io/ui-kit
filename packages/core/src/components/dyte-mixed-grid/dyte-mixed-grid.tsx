@@ -6,7 +6,7 @@ import { defaultGridSize } from '../../lib/grid';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
-import { Meeting, Peer } from '../../types/dyte-client';
+import { DyteClient, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { GridLayout, GridSize } from '../dyte-grid/dyte-grid';
@@ -52,7 +52,7 @@ export class DyteMixedGrid {
   @Prop({ reflect: true }) size: Size;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** States object */
   @Prop() states: States;
@@ -92,7 +92,7 @@ export class DyteMixedGrid {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting != null) {
       if (meeting.meta?.selfActiveTab != undefined) {
         this.onActiveTabUpdate(meeting.meta.selfActiveTab?.type, meeting.meta.selfActiveTab?.id);

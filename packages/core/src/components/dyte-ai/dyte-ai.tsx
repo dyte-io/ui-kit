@@ -1,5 +1,5 @@
 import { Component, Host, h, State, Prop, Watch, Event, EventEmitter } from '@stencil/core';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import type { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
@@ -25,7 +25,7 @@ export class DyteAi {
   @Prop() defaultSection: AISection = 'home';
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** States object */
   @Prop() states: States;

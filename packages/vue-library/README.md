@@ -1,3 +1,0 @@
-# `vue-library`
-
-> TODO: description

@@ -2,7 +2,7 @@ import type { LivestreamState } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { Size, DyteI18n, IconPack, defaultIconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { showLivestream } from '../../utils/livestream';
 
 @Component({
@@ -12,7 +12,7 @@ import { showLivestream } from '../../utils/livestream';
 })
 export class DyteLivestreamIndicator {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -32,7 +32,7 @@ export class DyteLivestreamIndicator {
     this.meeting?.livestream?.removeListener('livestreamUpdate', this.setIsLivestreaming);
   }
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
     this.setIsLivestreaming(this.meeting.livestream?.state);
     this.meeting.livestream?.on('livestreamUpdate', this.setIsLivestreaming);

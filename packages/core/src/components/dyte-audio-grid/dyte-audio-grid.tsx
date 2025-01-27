@@ -1,5 +1,5 @@
 import { Component, Element, Host, Prop, State, Watch, h } from '@stencil/core';
-import { Meeting, Peer } from '../../types/dyte-client';
+import { DyteClient, Peer } from '../../types/dyte-client';
 import {
   DyteI18n,
   IconPack,
@@ -18,7 +18,7 @@ import { Render } from '../../lib/render';
 })
 export class DyteAudioGrid {
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Config */
   @Prop() config: UIConfig;
@@ -53,7 +53,7 @@ export class DyteAudioGrid {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting?: Meeting) {
+  meetingChanged(meeting?: DyteClient) {
     if (!meeting || meeting.self.config.viewType !== 'AUDIO_ROOM') {
       return;
     }

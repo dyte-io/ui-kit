@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { ChatChannel, Size, States } from '../../types/props';
 import storeState from '../../lib/store';
 
@@ -27,7 +27,7 @@ export class DyteChatMessagesUiPaginated {
   @Element() host: HTMLDyteChatMessagesUiPaginatedElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /**
    * Selected channel
@@ -89,7 +89,7 @@ export class DyteChatMessagesUiPaginated {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting, oldMeeting?: Meeting) {
+  meetingChanged(meeting: DyteClient, oldMeeting?: DyteClient) {
     if (oldMeeting != undefined) this.disconnectMeeting(oldMeeting);
     if (meeting && !meeting.chat) return;
     if (meeting != null) {

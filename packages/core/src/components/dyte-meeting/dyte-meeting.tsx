@@ -12,7 +12,7 @@ import {
 import deepMerge from 'lodash-es/merge';
 import { PermissionSettings, Size, States } from '../../types/props';
 import { getSize } from '../../utils/size';
-import { Meeting, RoomLeftState } from '../../types/dyte-client';
+import { DyteClient, RoomLeftState } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, getIconPack, IconPack } from '../../lib/icons';
 import { UIConfig } from '../../types/ui-config';
@@ -23,7 +23,6 @@ import { getUserPreferences } from '../../utils/user-prefs';
 import { generateConfig } from '../../utils/config';
 import storeState from '../../lib/store';
 import { GridLayout } from '../dyte-grid/dyte-grid';
-import ResizeObserver from 'resize-observer-polyfill';
 
 export type MeetingMode = 'fixed' | 'fill';
 
@@ -102,7 +101,7 @@ export class DyteMeeting {
   @Prop() leaveOnUnmount = false;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Whether to show setup screen or not */
   @Prop({ mutable: true }) showSetupScreen: boolean;
@@ -149,7 +148,7 @@ export class DyteMeeting {
     this.iconPackUrlChanged(this.iconPackUrl);
   }
 
-  private clearListeners(meeting: Meeting) {
+  private clearListeners(meeting: DyteClient) {
     if (meeting == undefined) return;
     meeting.self.removeListener('roomLeft', this.roomLeftListener);
     meeting.self.removeListener('roomJoined', this.roomJoinedListener);
@@ -167,7 +166,7 @@ export class DyteMeeting {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
 
     this.setStates({ viewType: meeting.meta.viewType });

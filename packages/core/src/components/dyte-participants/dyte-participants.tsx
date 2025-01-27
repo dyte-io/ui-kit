@@ -1,5 +1,5 @@
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
@@ -29,7 +29,7 @@ export type Tab = {
 })
 export class DyteParticipants {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** States object */
   @Prop() states: States;
@@ -83,7 +83,7 @@ export class DyteParticipants {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
     meeting.participants.joined.on('participantJoined', this.updateParticipantCountsInTabs);
     meeting.participants.joined.on('participantsUpdate', this.updateParticipantCountsInTabs);
@@ -196,7 +196,7 @@ export class DyteParticipants {
     this.hasRequests = totalRequests > 0;
   });
 
-  private onSearchInput = (e: KeyboardEvent) => {
+  private onSearchInput = (e: InputEvent) => {
     this.search = (e.target as HTMLInputElement).value;
   };
 

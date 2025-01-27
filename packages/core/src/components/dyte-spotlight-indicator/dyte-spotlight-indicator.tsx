@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { Size } from '../../exports';
@@ -11,7 +11,7 @@ import { Size } from '../../exports';
 })
 export class DyteSpotlightIndicator {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
@@ -38,7 +38,7 @@ export class DyteSpotlightIndicator {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting != null) {
       this.canSpotlight = meeting.self.permissions.canSpotlight;
       this.isSpotlighted = meeting.meta?.broadcastTabChanges ?? false;

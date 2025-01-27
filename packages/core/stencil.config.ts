@@ -1,13 +1,8 @@
 import { Config } from '@stencil/core';
-import { postcss } from '@stencil/postcss';
-import { reactOutputTarget as react } from '@stencil/react-output-target';
-import { vueOutputTarget as vue } from '@stencil/vue-output-target';
-import { angularOutputTarget } from '@stencil/angular-output-target';
-import nodePolyfills from 'rollup-plugin-node-polyfills';
+
+import { postcss } from '@stencil-community/postcss';
 
 const webCorePath = require.resolve('@dytesdk/web-core/inlined');
-
-const esModules = ['lodash-es'].join('|');
 
 export const config: Config = {
   namespace: 'dyte-ui-kit',
@@ -19,28 +14,9 @@ export const config: Config = {
     experimentalImportInjection: true,
   },
   testing: {
-    transform: {
-      '^.+\\.(ts|tsx|js|jsx|css)$': '@stencil/core/testing/jest-preprocessor',
+      browserHeadless: "shell",
     },
-    transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
-  },
   outputTargets: [
-    react({
-      componentCorePackage: '@dytesdk/ui-kit',
-      proxiesFile: '../react-library/src/components/stencil-generated/index.ts',
-      includeDefineCustomElements: true,
-    }),
-    angularOutputTarget({
-      componentCorePackage: '@dytesdk/ui-kit',
-      directivesProxyFile:
-        '../angular-library/projects/components/src/lib/stencil-generated/components.ts',
-      directivesArrayFile:
-        '../angular-library/projects/components/src/lib/stencil-generated/index.ts',
-    }),
-    vue({
-      componentCorePackage: '@dytesdk/ui-kit',
-      proxiesFile: '../vue-library/src/components.ts',
-    }),
     {
       type: 'dist',
       esmLoaderPath: '../loader',
@@ -77,7 +53,4 @@ export const config: Config = {
       plugins: [require('tailwindcss/nesting'), require('tailwindcss'), require('autoprefixer')],
     }),
   ],
-  rollupPlugins: {
-    after: [nodePolyfills()],
-  },
 };

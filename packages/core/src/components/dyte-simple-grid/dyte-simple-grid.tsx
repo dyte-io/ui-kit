@@ -3,11 +3,10 @@ import { defaultConfig } from '../../lib/default-ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
-import { Meeting, Peer } from '../../types/dyte-client';
+import { DyteClient, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { Dimensions, useGrid } from '../../lib/grid';
-import ResizeObserver from 'resize-observer-polyfill';
 import { MediaConnectionState } from '@dytesdk/web-core';
 
 /**
@@ -38,7 +37,7 @@ export class DyteSimpleGrid {
   @Prop({ reflect: true }) size: Size;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** States object */
   @Prop() states: States;

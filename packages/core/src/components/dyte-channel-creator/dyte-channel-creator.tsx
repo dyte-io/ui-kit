@@ -11,7 +11,7 @@ import {
   writeTask,
 } from '@stencil/core';
 import { defaultIconPack, DyteI18n, IconPack, States, useLanguage } from '../../exports';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import storeState from '../../lib/store';
 import { DyteBasicParticipant } from '@dytesdk/web-core';
 
@@ -22,7 +22,7 @@ import { DyteBasicParticipant } from '@dytesdk/web-core';
 })
 export class DyteChannelCreator {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Language */
   @Prop() t: DyteI18n = useLanguage();

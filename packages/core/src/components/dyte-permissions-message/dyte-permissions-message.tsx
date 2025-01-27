@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, Watch, State, Event, EventEmitter } from '@st
 import type { DeviceConfig } from '@dytesdk/web-core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { States } from '../../types/props';
 import storeState from '../../lib/store';
 
@@ -22,7 +22,7 @@ const steps = {
 })
 export class DytePermissionsMessage {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Language */
   @Prop() t: DyteI18n = useLanguage();
@@ -51,7 +51,7 @@ export class DytePermissionsMessage {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting != null) {
       this.device = meeting.self.device;
       const deviceType = this.device?.isMobile ? 'Mobile' : 'Desktop';

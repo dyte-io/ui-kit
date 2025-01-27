@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State, Element, Watch, writeTask, Listen } from '@stencil/core';
-import { Meeting, Participant, Peer, WaitlistedParticipant } from '../../types/dyte-client';
+import { DyteClient, Participant, Peer, WaitlistedParticipant } from '../../types/dyte-client';
 import { Size, Notification, States, Poll } from '../../types/props';
 import DyteNotificationsAudio, { Sound } from '../../lib/notification';
 import { formatName } from '../../utils/string';
@@ -83,7 +83,7 @@ export class DyteNotifications {
   @Element() host: HTMLDyteNotificationsElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** States object */
   @Prop() states: States;
@@ -111,7 +111,7 @@ export class DyteNotifications {
     this.statesChanged(this.states);
   }
 
-  private clearListeners(meeting: Meeting) {
+  private clearListeners(meeting: DyteClient) {
     const isLivestream = meeting.meta.viewType === 'LIVESTREAM';
 
     if ((isLivestream && meeting.stage?.status === 'ON_STAGE') || !isLivestream) {
@@ -163,7 +163,7 @@ export class DyteNotifications {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting, oldMeeting?: Meeting) {
+  meetingChanged(meeting: DyteClient, oldMeeting?: DyteClient) {
     clearTimeout(this.disconnectTimeout);
     if (oldMeeting !== undefined) this.clearListeners(oldMeeting);
     if (meeting == null) return;
@@ -503,12 +503,12 @@ export class DyteNotifications {
     }
   }
 
-  private addStagePeersListeners = (meeting: Meeting) => {
+  private addStagePeersListeners = (meeting: DyteClient) => {
     meeting.participants.joined.addListener('participantJoined', this.participantJoinedListener);
     meeting.participants.joined.addListener('participantLeft', this.participantLeftListener);
   };
 
-  private removeStagePeersListeners = (meeting: Meeting) => {
+  private removeStagePeersListeners = (meeting: DyteClient) => {
     meeting.participants.joined.removeListener('participantJoined', this.participantJoinedListener);
     meeting.participants.joined.removeListener('participantLeft', this.participantLeftListener);
   };

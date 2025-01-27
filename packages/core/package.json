@@ -22,7 +22,7 @@
     "url": "https://community.dyte.io"
   },
   "scripts": {
-    "build": "stencil build && rollup --config rollup.config.mjs",
+    "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test:spec": "stencil test --spec --watchAll",
@@ -44,37 +44,32 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.1.0",
-    "@stencil/core": "2.20.0",
     "hark": "^1.2.3",
     "hls.js": "^1.5.17",
-    "lodash-es": "^4.17.21",
-    "resize-observer-polyfill": "^1.5.1"
+    "lodash-es": "^4.17.21"
   },
   "devDependencies": {
     "@dyteinternals/utils": "^3.1.0",
     "@dytesdk/web-core": "staging",
-    "@rollup/plugin-commonjs": "24.0.1",
-    "@rollup/plugin-node-resolve": "15.0.1",
-    "@rollup/plugin-terser": "^0.4.0",
-    "@stencil-community/eslint-plugin": "^0.7.1",
-    "@stencil/angular-output-target": "^0.4.0",
-    "@stencil/postcss": "^2.1.0",
-    "@stencil/react-output-target": "^0.3.1",
-    "@stencil/store": "^2.0.1",
-    "@stencil/vue-output-target": "^0.6.2",
+    "@stencil-community/eslint-plugin": "^0.9.0",
+    "@stencil-community/postcss": "^2.2.0",
+    "@stencil/core": "4.25.1",
+    "@stencil/angular-output-target": "^0.10.2",
+    "@stencil/react-output-target": "^0.8.2",
+    "@stencil/store": "^2.0.16",
+    "@stencil/vue-output-target": "^0.9.2",
     "@tailwindcss/line-clamp": "^0.3.1",
     "@types/hark": "^1.2.2",
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^29.5.6",
+    "@types/node": "^16.18.11",
     "@types/lodash-es": "^4.17.6",
     "autoprefixer": "^10.4.7",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^26.6.3",
-    "jest-cli": "^26.6.3",
-    "puppeteer": "^10.0.0",
-    "rollup": "^3.15.0",
-    "rollup-plugin-node-polyfills": "^0.2.1",
-    "tailwindcss": "^3.0.24"
+    "jest": "^29.7.0",
+    "jest-cli": "^29.7.0",
+    "puppeteer": "^21.9.0",
+    "tailwindcss": "3.1.0"
   },
   "license": "UNLICENSED"
 }

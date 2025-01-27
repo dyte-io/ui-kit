@@ -1,4 +1,4 @@
-import { Meeting } from '../types/dyte-client';
+import { DyteClient } from '../types/dyte-client';
 import { ConnectedMeetingParticipant } from '../types/props';
 import { ConnectedMeetingState } from '../types/props';
 import {
@@ -306,7 +306,7 @@ export default class BreakoutRoomsManager {
     });
   }
 
-  async applyChanges(meeting: Meeting) {
+  async applyChanges(meeting: DyteClient) {
     // create new rooms
     const createMeetingsPromise =
       this.meetingsToCreate.length !== 0

@@ -1,6 +1,6 @@
 import { Component, Host, Prop, State, Watch, h } from '@stencil/core';
 import { ChatHead } from '../dyte-chat/components/ChatHead';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { AIMessage } from '../../types/dyte-ai';
 // import { Middlewares } from '../../types/props';
 import { smoothScrollToBottom } from '../../utils/scroll';
@@ -19,7 +19,7 @@ export class DyteAiHome {
   @State() messages: AIMessage[] = [];
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Initial messages */
   @Prop() initialMessages: AIMessage[];

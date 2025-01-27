@@ -1,5 +1,5 @@
 import { Component, Host, h, State, Prop, Watch, Event, EventEmitter } from '@stencil/core';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
@@ -39,7 +39,7 @@ export class DyteSidebar {
   @Prop() defaultSection: DyteSidebarSection = 'chat';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** States object */
   @Prop() states: States;
@@ -82,7 +82,7 @@ export class DyteSidebar {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     this.updateEnabledSections(meeting);
     this.onStageStatusUpdate = (_status: StageStatus) => {
       this.updateEnabledSections(this.meeting);
@@ -137,7 +137,7 @@ export class DyteSidebar {
     storeState.activeSidebar = false;
   };
 
-  private updateEnabledSections(meeting: Meeting = this.meeting) {
+  private updateEnabledSections(meeting: DyteClient = this.meeting) {
     const list: DyteSidebarTab[] = [];
     if (canViewChat(meeting)) {
       list.push({ id: 'chat', name: this.t('chat') });

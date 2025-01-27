@@ -1,5 +1,5 @@
 import { Component, Element, Prop, State, Watch, h } from '@stencil/core';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import {
   DyteI18n,
   IconPack,
@@ -21,7 +21,7 @@ export class DyteUiProvider {
   @Element() hostEl: HTMLDyteUiProviderElement;
 
   /** dyte meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Size */
   @Prop({ reflect: true, mutable: true }) size: Size;
@@ -54,7 +54,7 @@ export class DyteUiProvider {
   }
 
   @Watch('meeting')
-  async meetingChanged(meeting: Meeting) {
+  async meetingChanged(meeting: DyteClient) {
     if (!meeting) return;
     if (!meeting.self.roomJoined && this.joinRoom) {
       this.isReady = false;

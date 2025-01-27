@@ -1,7 +1,7 @@
 import { Component, h, Host, Prop, State, Watch } from '@stencil/core';
 import { States, Size, IconPack, defaultIconPack, DyteI18n } from '../../exports';
 import { useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { AudioProducerScoreStats, MediaKind, ProducerScoreStats } from '@dytesdk/web-core';
 // import storeState from '../../lib/store';
 import {
@@ -20,7 +20,7 @@ import {
 })
 export class DyteDebuggerAudio {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** States object */
   @Prop() states: States;
@@ -138,7 +138,7 @@ export class DyteDebuggerAudio {
   }
 
   @Watch('meeting')
-  async meetingChanged(meeting: Meeting) {
+  async meetingChanged(meeting: DyteClient) {
     if (!meeting) return;
     meeting.self.on('mediaScoreUpdate', this.mediaScoreUpdateListener);
     meeting.self.on('audioUpdate', this.audioUpdateListener);

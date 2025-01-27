@@ -1,5 +1,5 @@
 import { h, FunctionalComponent, Host } from '@stencil/core';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { Element } from '../../types/ui-config/root';
@@ -8,7 +8,7 @@ import { IconPack } from '../icons';
 import { DyteI18n } from '../lang';
 
 export interface DefaultProps {
-  meeting: Meeting;
+  meeting: DyteClient;
   config: UIConfig;
   size: Size;
   states: States;

@@ -1,5 +1,5 @@
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { getAllConnectedParticipants, participantIdentifier } from '../../utils/breakout-rooms';
@@ -19,7 +19,7 @@ type ConnectedPeer = DyteConnectedMeetings['parentMeeting']['participants'][numb
 })
 export class DyteBreakoutRoomParticipants {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Participant ids */
   @Prop() participantIds: string[] = [];
@@ -71,7 +71,7 @@ export class DyteBreakoutRoomParticipants {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
     this.getParticipants(this.search);
   }
@@ -97,7 +97,7 @@ export class DyteBreakoutRoomParticipants {
     });
   }
 
-  private onSearchInput = (e: KeyboardEvent) => {
+  private onSearchInput = (e: InputEvent) => {
     this.search = (e.target as HTMLInputElement).value;
   };
 

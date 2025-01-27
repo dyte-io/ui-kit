@@ -1,7 +1,7 @@
 import { Component, Host, Prop, State, Watch, h } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { ChatHead } from '../dyte-chat/components/ChatHead';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Transcript } from '../../types/props';
 import { smoothScrollToBottom } from '../../utils/scroll';
 import clone from '../../utils/clone';
@@ -24,7 +24,7 @@ export class DyteAiTranscriptions {
   @Prop() t: DyteI18n = useLanguage();
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   @State() transcriptions: Transcript[] = [];
 
@@ -68,7 +68,7 @@ export class DyteAiTranscriptions {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     this.transcriptions = clone(meeting?.ai?.transcripts);
     this.transcriptions = this.transcriptions.reduce(this.transcriptionsReducer, []);
 

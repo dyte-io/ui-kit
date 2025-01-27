@@ -13,7 +13,7 @@ import {
 } from '@stencil/core';
 import { Size, DyteI18n, IconPack, defaultIconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import {
   showLivestream,
   PlayerEventType,
@@ -39,7 +39,7 @@ export class DyteLivestreamPlayer {
   private statsIntervalTimer = null;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;

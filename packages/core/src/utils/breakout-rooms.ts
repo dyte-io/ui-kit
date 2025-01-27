@@ -1,4 +1,4 @@
-import { Meeting } from '../types/dyte-client';
+import { DyteClient } from '../types/dyte-client';
 import { isBreakoutRoomsEnabled } from './flags';
 
 let roomCount = 0;
@@ -46,7 +46,7 @@ export function participantIdentifier(participant) {
   return participant.customParticipantId ?? participant.clientSpecificId;
 }
 
-export function getAllConnectedParticipants(meeting: Meeting) {
+export function getAllConnectedParticipants(meeting: DyteClient) {
   // TODO: remove this once we start getting display pics from socket
   const map = new Map<string, string>();
   [meeting.self, ...meeting.participants.joined.toArray()].map((participant) => {
@@ -67,7 +67,7 @@ export function getAllConnectedParticipants(meeting: Meeting) {
     });
 }
 
-export const canToggleBreakout = (meeting: Meeting) => {
+export const canToggleBreakout = (meeting: DyteClient) => {
   if (!isBreakoutRoomsEnabled(meeting)) return false;
 
   const permissions = meeting.self.permissions.connectedMeetings;

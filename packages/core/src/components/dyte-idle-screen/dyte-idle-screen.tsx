@@ -3,7 +3,7 @@ import { defaultConfig } from '../../exports';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 import { UIConfig } from '../../types/ui-config';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 
 /**
  * A screen that handles the idle state,
@@ -16,7 +16,7 @@ import { Meeting } from '../../types/dyte-client';
 })
 export class DyteIdleScreen {
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;

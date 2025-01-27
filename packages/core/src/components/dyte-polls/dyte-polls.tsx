@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { defaultConfig } from '../../exports';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { PollObject, Size, Poll } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { smoothScrollToBottom } from '../../utils/scroll';
@@ -23,7 +23,7 @@ export class DytePolls {
   private pollEl: HTMLDivElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -56,7 +56,7 @@ export class DytePolls {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == undefined) return;
 
     if (meeting && !meeting.polls) return;

@@ -12,7 +12,7 @@ import {
 import storeState, { onChange } from '../../lib/store';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting, Peer } from '../../types/dyte-client';
+import { DyteClient, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { FlagsmithFeatureFlags } from '../../utils/flags';
@@ -56,7 +56,7 @@ export class DyteParticipantTile {
   @Prop() participant!: Peer;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** States object */
   @Prop() states: States;
@@ -116,7 +116,7 @@ export class DyteParticipantTile {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == undefined) return;
     this.participantsChanged(this.participant);
   }

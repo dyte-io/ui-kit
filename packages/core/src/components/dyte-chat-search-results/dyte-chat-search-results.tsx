@@ -1,6 +1,6 @@
 import { h, Component, Prop, Host } from '@stencil/core';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import type { Message } from '@dytesdk/web-core';
 
 @Component({
@@ -10,7 +10,7 @@ import type { Message } from '@dytesdk/web-core';
 })
 export class DyteChatSearchResults {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Search query */
   @Prop() query: string;

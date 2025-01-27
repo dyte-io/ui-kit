@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop, State, Watch } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { Size, States } from '../../types/props';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { DyteParticipants } from '@dytesdk/web-core';
 import debounce from 'lodash/debounce';
@@ -21,7 +21,7 @@ const MASS_ACTIONS_DEBOUNCE_TIMER = 50; // In ms
 })
 export class DyteGridPagination {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** States */
   @Prop() states: States;
@@ -63,7 +63,7 @@ export class DyteGridPagination {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting != null) {
       const { stage, participants } = meeting;
 

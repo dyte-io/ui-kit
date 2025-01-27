@@ -3,7 +3,7 @@ import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@st
 import { Size, States } from '../../exports';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { isLiveStreamHost } from '../../utils/livestream';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import storeState from '../../lib/store';
@@ -18,7 +18,7 @@ export class DyteLivestreamToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -52,7 +52,7 @@ export class DyteLivestreamToggle {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
     this.livestreamState = this.meeting.livestream?.state;
     this.meeting.livestream?.on('livestreamUpdate', this.livestreamStateListener);

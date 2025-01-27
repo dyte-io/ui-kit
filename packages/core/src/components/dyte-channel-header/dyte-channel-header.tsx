@@ -1,5 +1,5 @@
 import { Component, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { ChatChannel } from '../../types/props';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { DyteBasicParticipant } from '@dytesdk/web-core';
@@ -10,7 +10,7 @@ import { DyteBasicParticipant } from '@dytesdk/web-core';
 })
 export class DyteChannelHeader {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Channel object */
   @Prop() channel: ChatChannel;

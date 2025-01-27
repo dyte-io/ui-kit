@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@st
 import { defaultConfig } from '../../lib/default-ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting, Peer } from '../../types/dyte-client';
+import { DyteClient, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import debounce from 'lodash/debounce';
@@ -62,7 +62,7 @@ export class DyteGrid {
   @Prop({ reflect: true }) aspectRatio: string = '16:9';
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Gap between participants */
   @Prop({ reflect: true }) gap: number = 8;
@@ -99,7 +99,7 @@ export class DyteGrid {
     this.disconnectMeeting(this.meeting);
   }
 
-  private disconnectMeeting(meeting: Meeting) {
+  private disconnectMeeting(meeting: DyteClient) {
     if (meeting == null) return;
     this.participants = [];
     this.plugins = [];
@@ -126,7 +126,7 @@ export class DyteGrid {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting, oldMeeting?: Meeting) {
+  meetingChanged(meeting: DyteClient, oldMeeting?: DyteClient) {
     if (oldMeeting !== null) this.disconnectMeeting(oldMeeting);
     if (meeting != null) {
       const { self, participants, plugins, stage } = meeting;

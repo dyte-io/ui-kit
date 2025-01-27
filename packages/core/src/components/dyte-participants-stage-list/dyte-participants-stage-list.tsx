@@ -1,5 +1,5 @@
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import { Meeting, Participant, Peer } from '../../types/dyte-client';
+import { DyteClient, Participant, Peer } from '../../types/dyte-client';
 import { Size } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { Component, Host, h, Prop, State, Watch } from '@stencil/core';
@@ -23,7 +23,7 @@ export class DyteParticipants {
   private participantLeftListener: (data: any) => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -71,7 +71,7 @@ export class DyteParticipants {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
 
     this.participantJoinedListener = (participant: Participant) => {

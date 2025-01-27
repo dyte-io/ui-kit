@@ -11,7 +11,7 @@ type WaitlistedParticipant = Readonly<
 >;
 type Peer = Self | Participant;
 
-export type { Meeting, Peer, Self, Participant, WaitlistedParticipant };
+export type { Meeting as DyteClient, Peer, Self, Participant, WaitlistedParticipant };
 
 export type RoomLeftState = leaveRoomState;
 

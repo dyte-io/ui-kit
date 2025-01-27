@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, Watch, State, writeTask } from '@stencil/core';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size } from '../../types/props';
@@ -23,7 +23,7 @@ import { Size } from '../../types/props';
 })
 export class DyteCameraSelector {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -44,7 +44,7 @@ export class DyteCameraSelector {
   @State() canProduceVideo: boolean = true;
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
 
     meeting.self?.addListener('deviceListUpdate', this.deviceListUpdateListener);

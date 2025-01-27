@@ -5,7 +5,7 @@ import { UIConfig } from '../../types/ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import storeState, { onChange } from '../../lib/store';
 import { defaultConfig } from '../../exports';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 
 /**
  * A screen which shows a meeting has ended.
@@ -38,7 +38,7 @@ export class DyteEndedScreen {
   @State() message: string = '';
 
   /** Global states */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   connectedCallback() {
     this.statesChanged(this.states);

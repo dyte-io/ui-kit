@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, Watch, State, Event, EventEmitter } from '@stencil/core';
-import { Meeting, Peer } from '../../types/dyte-client';
+import { DyteClient, Peer } from '../../types/dyte-client';
 import DyteAudio from '../../lib/audio';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { IconPack, defaultIconPack } from '../../lib/icons';
@@ -29,7 +29,7 @@ export class DyteParticipantsAudio {
   private stageStatusUpdateListener: (status: StageStatus) => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
@@ -93,7 +93,7 @@ export class DyteParticipantsAudio {
     return;
   }
 
-  private async handleEvents(meeting: Meeting) {
+  private async handleEvents(meeting: DyteClient) {
     this.audioUpdateListener = ({ id, audioEnabled, audioTrack }) => {
       const audioId = `audio-${id}`;
       if (audioEnabled && audioTrack != null) {
@@ -137,7 +137,7 @@ export class DyteParticipantsAudio {
   }
 
   @Watch('meeting')
-  async meetingChanged(meeting: Meeting) {
+  async meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
     this.setupAudio();
     if (isLiveStreamViewer(meeting)) {

@@ -1,6 +1,6 @@
 import { Component, h, Host, Prop, Event, EventEmitter, State } from '@stencil/core';
 import { States } from '../../exports';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import storeState from '../../lib/store';
 import { DyteI18n, useLanguage } from '../../lib/lang';
@@ -12,7 +12,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 })
 export class DyteBroadcastMessageModal {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** States object */
   @Prop() states: States;

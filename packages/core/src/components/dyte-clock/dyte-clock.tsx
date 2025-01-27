@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 
 const addZero = (n: number) => Math.trunc(n).toString().padStart(2, '0');
 
@@ -14,11 +14,11 @@ const addZero = (n: number) => Math.trunc(n).toString().padStart(2, '0');
   shadow: true,
 })
 export class DyteClock {
-  private timeout: NodeJS.Timer;
+  private timeout: NodeJS.Timeout;
   private request: number;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;
@@ -48,7 +48,7 @@ export class DyteClock {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     this.disconnectMeeting();
     if (meeting != null) {
       this.startedTime = meeting.meta?.meetingStartedTimestamp?.toISOString();

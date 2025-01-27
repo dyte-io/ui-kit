@@ -1,4 +1,4 @@
-import { Meeting } from '../types/dyte-client';
+import { DyteClient } from '../types/dyte-client';
 import { disableSettingSinkId } from '../utils/flags';
 import logger from '../utils/logger';
 
@@ -16,9 +16,9 @@ export type Sound = keyof typeof SOUNDS;
 export default class DyteNotificationsAudio {
   private audio: HTMLAudioElement;
   private playing: boolean;
-  private meeting: Meeting;
+  private meeting: DyteClient;
 
-  constructor(meeting: Meeting) {
+  constructor(meeting: DyteClient) {
     this.meeting = meeting;
     this.audio = document.createElement('audio');
     this.audio.volume = 0.3;
