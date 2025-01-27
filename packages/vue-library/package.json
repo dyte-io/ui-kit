@@ -11,7 +11,9 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "build": "npm run tsc",
-    "tsc": "tsc -p . --outDir ./dist"
+    "tsc": "tsc -p . --outDir ./dist",
+    "prepublishOnly": "cp package.json package.json.bak && node prepublish.js",
+    "postpublish": "mv package.json.bak package.json"
   },
   "publishConfig": {
     "access": "public"

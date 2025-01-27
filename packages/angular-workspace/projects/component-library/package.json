@@ -17,5 +17,9 @@
   "bugs": {
     "url": "https://community.dyte.io"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "cp package.json package.json.bak && node prepublish.js",
+    "postpublish": "mv package.json.bak package.json"
+  }
 }
