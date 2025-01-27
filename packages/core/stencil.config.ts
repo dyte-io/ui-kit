@@ -5,6 +5,7 @@ import { vueOutputTarget } from '@stencil/vue-output-target';
 import { angularOutputTarget } from '@stencil/angular-output-target';
 
 import { postcss } from '@stencil-community/postcss';
+import nodePolyfills from 'rollup-plugin-node-polyfills';
 
 const webCorePath = require.resolve('@dytesdk/web-core/inlined');
 
@@ -67,4 +68,7 @@ export const config: Config = {
       plugins: [require('tailwindcss/nesting'), require('tailwindcss'), require('autoprefixer')],
     }),
   ],
+  rollupPlugins: {
+    after: [nodePolyfills()],
+  },
 };
