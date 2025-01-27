@@ -14,6 +14,25 @@
     "dist/",
     "loader/"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/dyte-ui-kit/dyte-ui-kit.esm.js",
+      "require": "./dist/dyte-ui-kit/dyte-ui-kit.cjs.js"
+    },
+    "./dist/*": {
+      "import": "./dist/*",
+      "types": "./dist/*"
+    },
+    "./components/*": {
+      "import": "./dist/components/*.js",
+      "types": "./dist/components/*.d.ts"
+    },
+    "./loader": {
+      "import": "./loader/index.js",
+      "require": "./loader/index.cjs",
+      "types": "./loader/index.d.ts"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dyte-in/ui-kit.git"

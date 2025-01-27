@@ -1,0 +1,38 @@
+{
+  "name": "@dytesdk/react-ui-kit",
+  "version": "2.2.0-staging.2",
+  "description": "Dyte's UI Kit to support easy UI development for React.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dyte-in/ui-kit.git"
+  },
+  "bugs": {
+    "url": "https://community.dyte.io"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "npm run tsc",
+    "tsc": "tsc -p . --outDir ./dist"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@types/react": "^19.0.8",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "@dytesdk/ui-kit":"*",
+    "@stencil/react-output-target": "^0.8.2"
+  }
+}
