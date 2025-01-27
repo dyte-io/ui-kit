@@ -3,7 +3,7 @@
     "packages/core",
     "packages/react-library",
     "packages/vue-library",
-    "packages/angular-library"
+    "packages/angular-workspace"
   ],
   "scripts": {
     "prepare": "is-ci || husky install",
