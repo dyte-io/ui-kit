@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
@@ -20,7 +20,7 @@ import { defaultConfig } from '../../exports';
 export class DytePlugins {
   private updateActivePlugins: () => void;
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -54,7 +54,7 @@ export class DytePlugins {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting != null) {
       this.canStartPlugins = meeting.self.permissions.plugins.canStart;
       this.canClosePlugins = meeting.self.permissions.plugins.canClose;

@@ -4,55 +4,43 @@
   "description": "Dyte's UI Kit to support easy UI development for React.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dyte-in/ui-kit.git"
+    "url": "git+https://github.com/dyte-io/ui-kit.git"
   },
   "bugs": {
     "url": "https://community.dyte.io"
   },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/es/index.js",
       "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./es": {
-      "default": "./dist/es/index.js",
-      "types": "./dist/es/index.d.ts"
+      "types": "./dist/types/index.d.ts"
     }
   },
-  "scripts": {
-    "build": "npm run clean && npm run compile",
-    "clean": "rm -rf dist",
-    "compile": "npm run tsc && tsc -p tsconfig.es.json",
-    "tsc": "tsc -p .",
-    "rollup": "rollup -c",
-    "lint": "echo \"No lint script\"",
-    "lint:fix": "echo \"No lint:fix script\"",
-    "test": "echo \"No test script\"",
-    "prepublishOnly": "cp package.json package.json.bak && node prepublish.js",
-    "postpublish": "mv package.json.bak package.json"
-  },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist/"
-  ],
   "publishConfig": {
     "access": "public",
     "tag": "latest"
   },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "npm run tsc",
+    "tsc": "tsc -p . --outDir ./dist",
+    "prepublishOnly": "cp package.json package.json.bak && node prepublish.js",
+    "postpublish": "mv package.json.bak package.json"
+  },
+  "license": "UNLICENSED",
   "devDependencies": {
-    "@types/node": "^15.12.2",
-    "@types/react": "^17.0.34",
-    "@types/react-dom": "^17.0.11",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "typescript": "^4.4.3"
+    "@types/react": "^19.0.8",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.7.3"
   },
-  "peerDependencies": {
-    "react": ">=16.8.6",
-    "react-dom": ">=16.8.6"
-  },
-  "license": "UNLICENSED"
+  "dependencies": {
+    "@dytesdk/ui-kit":"*",
+    "@stencil/react-output-target": "^0.8.2"
+  }
 }

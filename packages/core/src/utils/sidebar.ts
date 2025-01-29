@@ -1,7 +1,7 @@
-import { Meeting } from '../types/dyte-client';
+import { DyteClient } from '../types/dyte-client';
 import { isLiveStreamViewer } from './livestream';
 
-export const canViewChat = (meeting: Meeting) => {
+export const canViewChat = (meeting: DyteClient) => {
   if (meeting && !meeting.chat) return false;
   const config = meeting?.self.config;
   if (config && !config.controlBar.elements.chat) return false;
@@ -20,7 +20,7 @@ export const canViewChat = (meeting: Meeting) => {
   );
 };
 
-export const canViewPolls = (meeting: Meeting) => {
+export const canViewPolls = (meeting: DyteClient) => {
   if (meeting && !meeting.polls) return false;
   const config = meeting?.self.config;
   if (config && !config.controlBar.elements.polls) return false;
@@ -29,7 +29,7 @@ export const canViewPolls = (meeting: Meeting) => {
   return polls.canCreate || polls.canView || polls.canVote;
 };
 
-export const canViewParticipants = (meeting: Meeting) => {
+export const canViewParticipants = (meeting: DyteClient) => {
   if (!meeting.self.permissions?.showParticipantList) {
     return false;
   }
@@ -39,7 +39,7 @@ export const canViewParticipants = (meeting: Meeting) => {
   return true;
 };
 
-export const canViewPlugins = (meeting: Meeting) => {
+export const canViewPlugins = (meeting: DyteClient) => {
   if (isLiveStreamViewer(meeting)) return false;
   if (meeting && !meeting.plugins) return false;
   if (meeting.meta.viewType === 'LIVESTREAM') return meeting.stage.status === 'ON_STAGE';

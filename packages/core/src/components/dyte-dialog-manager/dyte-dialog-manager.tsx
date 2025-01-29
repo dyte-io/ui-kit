@@ -3,7 +3,7 @@ import { defaultConfig } from '../../lib/default-ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import storeState from '../../lib/store';
@@ -27,7 +27,7 @@ import storeState from '../../lib/store';
 })
 export class DyteDialogManager {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** UI Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -56,7 +56,7 @@ export class DyteDialogManager {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == undefined) return;
     const { stage } = meeting;
     stage?.addListener('stageStatusUpdate', this.stageStatusUpdateListener);

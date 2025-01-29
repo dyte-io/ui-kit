@@ -1,4 +1,4 @@
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import type { UIConfig } from '../../types/ui-config';
 import { generateConfig } from '../../utils/config';
 import { DyteUIBuilder } from '../builder';
@@ -14,7 +14,7 @@ export interface Addon {
    */
   register: (
     config: UIConfig,
-    meeting: Meeting,
+    meeting: DyteClient,
     getBuilder: (config: UIConfig) => DyteUIBuilder
   ) => UIConfig;
   /**
@@ -31,7 +31,7 @@ export interface Addon {
  * @param config The current UIConfig
  * @returns The updated UIConfig
  */
-export function registerAddons(addons: Addon[], meeting: Meeting, config?: UIConfig) {
+export function registerAddons(addons: Addon[], meeting: DyteClient, config?: UIConfig) {
   if (!config) {
     const generated = generateConfig(meeting.self.config, meeting);
     config = generated.config as UIConfig;

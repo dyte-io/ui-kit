@@ -1,6 +1,7 @@
 import { Host, Component, Event, EventEmitter, Prop, State, h, Element } from '@stencil/core';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { debounce } from 'lodash-es';
+import ResizeObserver from 'resize-observer-polyfill';
 
 export interface ChannelItem {
   id: string;

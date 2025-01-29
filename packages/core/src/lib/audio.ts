@@ -1,4 +1,4 @@
-import { Meeting } from '../types/dyte-client';
+import { DyteClient } from '../types/dyte-client';
 import { disableSettingSinkId } from '../utils/flags';
 import logger from '../utils/logger';
 
@@ -13,13 +13,13 @@ interface PeerAudio {
 export default class DyteAudio {
   private audio: HTMLAudioElement;
   private audioStream: MediaStream;
-  private meeting: Meeting;
+  private meeting: DyteClient;
 
   private audioTracks: PeerAudio[];
 
   private _onError: () => void;
 
-  constructor(meeting: Meeting, audio?: HTMLAudioElement) {
+  constructor(meeting: DyteClient, audio?: HTMLAudioElement) {
     this.meeting = meeting;
     this.audio = audio ?? document.createElement('audio');
     this.audio.autoplay = true;

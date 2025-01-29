@@ -1,7 +1,7 @@
 import { Component, h, Host, Prop, State, Watch } from '@stencil/core';
 import { States, Size, IconPack, defaultIconPack, DyteI18n } from '../../exports';
 import { useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 
 import {
   FormattedStatsObj,
@@ -32,7 +32,7 @@ interface BatteryManager extends EventTarget {
 })
 export class DyteDebuggerSystem {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** States object */
   @Prop() states: States;
@@ -113,7 +113,7 @@ export class DyteDebuggerSystem {
   }
 
   @Watch('meeting')
-  async meetingChanged(meeting: Meeting) {
+  async meetingChanged(meeting: DyteClient) {
     if (!meeting) return;
     if (typeof (navigator as any).getBattery !== 'undefined') {
       this.battery = await (navigator as any).getBattery();

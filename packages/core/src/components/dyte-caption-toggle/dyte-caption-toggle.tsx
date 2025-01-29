@@ -1,7 +1,7 @@
 import { Component, Host, h, Event, EventEmitter, Prop, Watch, State } from '@stencil/core';
 import { defaultConfig, defaultIconPack, IconPack, Size, States, UIConfig } from '../../exports';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import storeState from '../../lib/store';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
@@ -16,7 +16,7 @@ export class DyteCaptionToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** States object */
   @Prop() states: States;
@@ -43,7 +43,7 @@ export class DyteCaptionToggle {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting === null) return;
     this.permissionsUpdateListener();
 

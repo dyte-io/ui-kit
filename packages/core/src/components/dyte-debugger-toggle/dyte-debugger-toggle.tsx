@@ -4,7 +4,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import storeState from '../../lib/store';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 
 @Component({
   tag: 'dyte-debugger-toggle',
@@ -16,7 +16,7 @@ export class DyteDebuggerToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** States object */
   @Prop() states: States;

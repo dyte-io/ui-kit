@@ -1,6 +1,7 @@
 import { Component, Prop, State, Watch, h, writeTask } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../exports';
 import { debounce } from 'lodash-es';
+import ResizeObserver from 'resize-observer-polyfill';
 
 interface Message {
   id: string;
@@ -77,6 +78,7 @@ export class DyteMessageListView {
 
     return {
       disconnect: () => get()?.disconnect(),
+      // @ts-ignore
       observe: (target: Element) => get()?.observe(target, { box: 'border-box' }),
       unobserve: (target: Element) => get()?.unobserve(target),
     };

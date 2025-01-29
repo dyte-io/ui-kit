@@ -2,7 +2,7 @@ import type { RecordingState } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Size } from '../../types/props';
 
 /**
@@ -19,7 +19,7 @@ export class DyteRecordingIndicator {
   private updateRecordingStatus: (recordingState: RecordingState) => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -41,7 +41,7 @@ export class DyteRecordingIndicator {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting != null) {
       this.setIsRecording(meeting.recording.recordingState);
 

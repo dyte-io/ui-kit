@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/core';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
@@ -12,7 +12,7 @@ import storeState from '../../lib/store';
 })
 export class DyteMuteAllConfirmation {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** States object */
   @Prop() states: States;

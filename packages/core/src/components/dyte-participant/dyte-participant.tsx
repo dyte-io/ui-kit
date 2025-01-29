@@ -12,7 +12,7 @@ import {
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { DefaultProps, lenChildren, Render } from '../../lib/render';
-import { Meeting, Participant, Peer } from '../../types/dyte-client';
+import { DyteClient, Participant, Peer } from '../../types/dyte-client';
 import { formatName, shorten } from '../../utils/string';
 import storeState from '../../lib/store';
 import { defaultConfig, UIConfig } from '../../exports';
@@ -48,7 +48,7 @@ export class DyteParticipant {
   @Element() host: HTMLDyteParticipantElement;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Show participant summary */
   @Prop() view: ParticipantViewMode = 'sidebar';
@@ -118,7 +118,7 @@ export class DyteParticipant {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting != null) {
       const { self } = meeting;
       this.canDisableParticipantAudio =
@@ -358,36 +358,40 @@ export class DyteParticipant {
                         </dyte-menu-item>
                       )}
 
-                      {this.canDisableParticipantAudio && isActiveParticipant && this.audioEnabled && (
-                        <dyte-menu-item
-                          iconPack={this.iconPack}
-                          t={this.t}
-                          onClick={() => {
-                            this.participant.disableAudio();
-                          }}
-                        >
-                          <dyte-icon icon={this.iconPack.mic_off} slot="start" />
-                          {this.t('mute')}
-                        </dyte-menu-item>
-                      )}
-
-                      {this.canDisableParticipantVideo && isActiveParticipant && this.videoEnabled && (
-                        <dyte-menu-item
-                          iconPack={this.iconPack}
-                          t={this.t}
-                          onClick={() => {
-                            this.participant.disableVideo();
-                          }}
-                        >
-                          <dyte-icon
-                            icon={this.iconPack.video_off}
-                            slot="start"
+                      {this.canDisableParticipantAudio &&
+                        isActiveParticipant &&
+                        this.audioEnabled && (
+                          <dyte-menu-item
                             iconPack={this.iconPack}
                             t={this.t}
-                          />
-                          {this.t('participants.turn_off_video')}
-                        </dyte-menu-item>
-                      )}
+                            onClick={() => {
+                              this.participant.disableAudio();
+                            }}
+                          >
+                            <dyte-icon icon={this.iconPack.mic_off} slot="start" />
+                            {this.t('mute')}
+                          </dyte-menu-item>
+                        )}
+
+                      {this.canDisableParticipantVideo &&
+                        isActiveParticipant &&
+                        this.videoEnabled && (
+                          <dyte-menu-item
+                            iconPack={this.iconPack}
+                            t={this.t}
+                            onClick={() => {
+                              this.participant.disableVideo();
+                            }}
+                          >
+                            <dyte-icon
+                              icon={this.iconPack.video_off}
+                              slot="start"
+                              iconPack={this.iconPack}
+                              t={this.t}
+                            />
+                            {this.t('participants.turn_off_video')}
+                          </dyte-menu-item>
+                        )}
 
                       {this.canAllowParticipantOnStage &&
                         this.participant?.id !== this.meeting?.self.id && (

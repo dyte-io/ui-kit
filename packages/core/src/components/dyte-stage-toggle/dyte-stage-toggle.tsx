@@ -2,7 +2,7 @@ import type { StageStatus } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State, Event, EventEmitter } from '@stencil/core';
 import { Size, IconPack, defaultIconPack, DyteI18n, States } from '../../exports';
 import { useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { canRequestToJoinStage, canJoinStage } from '../../utils/stage';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import storeState from '../../lib/store';
@@ -23,7 +23,7 @@ export class DyteStageToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -46,7 +46,7 @@ export class DyteStageToggle {
     this.meetingChanged(this.meeting);
   }
 
-  private stageStatusHandler(meeting: Meeting, status: StageStatus) {
+  private stageStatusHandler(meeting: DyteClient, status: StageStatus) {
     this.stageStatus = status;
     if (status === 'ACCEPTED_TO_JOIN_STAGE') {
       meeting.self.setupTracks({ audio: false, video: false });
@@ -63,7 +63,7 @@ export class DyteStageToggle {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
     this.stageStatus = meeting.stage?.status;
     this.stageStatusHandler(meeting, meeting.stage?.status);

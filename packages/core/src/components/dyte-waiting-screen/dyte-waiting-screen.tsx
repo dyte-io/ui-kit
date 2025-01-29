@@ -3,7 +3,7 @@ import { UIConfig } from '../../types/ui-config';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { defaultConfig } from '../../exports';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 
 @Component({
   tag: 'dyte-waiting-screen',
@@ -12,7 +12,7 @@ import { Meeting } from '../../types/dyte-client';
 })
 export class DyteWaitingScreen {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;

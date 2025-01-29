@@ -1,5 +1,5 @@
 import { Component, Host, Prop, State, Watch, h } from '@stencil/core';
-import { Meeting, Peer } from '../../types/dyte-client';
+import { DyteClient, Peer } from '../../types/dyte-client';
 import { UIConfig } from '../../types/ui-config';
 import { Size } from '../../types/props';
 import { DyteI18n, IconPack, States, defaultIconPack, useLanguage } from '../../exports';
@@ -15,7 +15,7 @@ export class DyteAudioTile {
   private hark: hark.Harker;
 
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Config */
   @Prop() config: UIConfig;

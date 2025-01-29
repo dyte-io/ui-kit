@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { shorten } from '../../utils/string';
 import { UIConfig } from '../../types/ui-config';
@@ -23,7 +23,7 @@ import { SocketConnectionState } from '@dytesdk/web-core';
 export class DyteSetupScreen {
   private inputEl: HTMLInputElement;
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** States object */
   @Prop() states: States = storeState;
@@ -66,7 +66,7 @@ export class DyteSetupScreen {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting != null) {
       this.connectionState = meeting.meta.socketState?.state;
       this.canEditName = meeting.self.permissions.canEditDisplayName ?? true;

@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@st
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import state from '../../lib/store';
-import { Meeting, Peer, MediaPermission } from '../../types/dyte-client';
+import { DyteClient, Peer, MediaPermission } from '../../types/dyte-client';
 import { PermissionSettings, Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { StageStatus } from '@dytesdk/web-core';
@@ -43,7 +43,7 @@ export class DyteCameraToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -80,7 +80,7 @@ export class DyteCameraToggle {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting != null) {
       const { self, stage } = meeting;
       this.canProduceVideo = this.meeting.self.permissions.canProduceVideo === 'ALLOWED';

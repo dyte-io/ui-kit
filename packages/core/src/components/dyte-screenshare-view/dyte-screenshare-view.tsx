@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting, Peer } from '../../types/dyte-client';
+import { DyteClient, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import {
   exitFullSreen,
@@ -67,7 +67,7 @@ export class DyteScreenshareView {
   @Prop() participant!: Peer;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Variant */
   @Prop({ reflect: true }) variant: 'solid' | 'gradient' = 'solid';

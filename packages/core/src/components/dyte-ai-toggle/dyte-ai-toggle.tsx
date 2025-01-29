@@ -4,7 +4,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import storeState from '../../lib/store';
 import { Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 
 @Component({
@@ -20,7 +20,7 @@ export class DyteAiToggle {
   @Prop() states: States;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;

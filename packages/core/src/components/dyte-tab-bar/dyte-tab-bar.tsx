@@ -4,7 +4,7 @@ import type { ActiveTabType } from '@dytesdk/web-core';
 import { defaultConfig } from '../../lib/default-ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting, Peer } from '../../types/dyte-client';
+import { DyteClient, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { formatName, shorten } from '../../utils/string';
@@ -26,7 +26,7 @@ export class DyteTabBar {
   @Prop({ reflect: true }) size: Size;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** States object */
   @Prop() states: States;

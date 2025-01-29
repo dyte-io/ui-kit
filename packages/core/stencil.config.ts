@@ -1,13 +1,13 @@
 import { Config } from '@stencil/core';
-import { postcss } from '@stencil/postcss';
-import { reactOutputTarget as react } from '@stencil/react-output-target';
-import { vueOutputTarget as vue } from '@stencil/vue-output-target';
+
+import { reactOutputTarget } from '@stencil/react-output-target';
+import { vueOutputTarget } from '@stencil/vue-output-target';
 import { angularOutputTarget } from '@stencil/angular-output-target';
+
+import { postcss } from '@stencil-community/postcss';
 import nodePolyfills from 'rollup-plugin-node-polyfills';
 
 const webCorePath = require.resolve('@dytesdk/web-core/inlined');
-
-const esModules = ['lodash-es'].join('|');
 
 export const config: Config = {
   namespace: 'dyte-ui-kit',
@@ -19,42 +19,33 @@ export const config: Config = {
     experimentalImportInjection: true,
   },
   testing: {
-    transform: {
-      '^.+\\.(ts|tsx|js|jsx|css)$': '@stencil/core/testing/jest-preprocessor',
-    },
-    transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
+    browserHeadless: 'shell',
   },
   outputTargets: [
-    react({
-      componentCorePackage: '@dytesdk/ui-kit',
-      proxiesFile: '../react-library/src/components/stencil-generated/index.ts',
-      includeDefineCustomElements: true,
-    }),
-    angularOutputTarget({
-      componentCorePackage: '@dytesdk/ui-kit',
-      directivesProxyFile:
-        '../angular-library/projects/components/src/lib/stencil-generated/components.ts',
-      directivesArrayFile:
-        '../angular-library/projects/components/src/lib/stencil-generated/index.ts',
-    }),
-    vue({
-      componentCorePackage: '@dytesdk/ui-kit',
-      proxiesFile: '../vue-library/src/components.ts',
-    }),
     {
       type: 'dist',
       esmLoaderPath: '../loader',
     },
+    angularOutputTarget({
+      componentCorePackage: '@dytesdk/ui-kit',
+      outputType: 'component',
+      directivesProxyFile:
+        '../angular-workspace/projects/component-library/src/lib/stencil-generated/components.ts',
+      directivesArrayFile:
+        '../angular-workspace/projects/component-library/src/lib/stencil-generated/index.ts',
+    }),
+    vueOutputTarget({
+      componentCorePackage: '@dytesdk/ui-kit',
+      proxiesFile: '../vue-library/lib/components.ts',
+    }),
+    reactOutputTarget({
+      // Relative path to where the React components will be generated
+      outDir: '../react-library/src/components/stencil-generated/',
+    }),
     {
       type: 'dist-custom-elements',
-    },
-    {
-      type: 'docs-json',
-      file: 'dist/docs/docs-components.json',
-    },
-    {
-      type: 'docs-vscode',
-      file: 'dist/docs/docs-vscode.json',
+      customElementsExportBehavior: 'auto-define-custom-elements',
+      externalRuntime: false,
     },
     {
       type: 'www',

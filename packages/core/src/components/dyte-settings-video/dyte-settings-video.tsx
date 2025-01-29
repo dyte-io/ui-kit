@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, Watch, State, Event, EventEmitter } from '@stencil/core';
-import { Meeting, Peer } from '../../types/dyte-client';
+import { DyteClient, Peer } from '../../types/dyte-client';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
@@ -25,7 +25,7 @@ import storeState from '../../lib/store';
 })
 export class DyteSettingsVideo {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** States object */
   @Prop() states: States;
@@ -49,7 +49,7 @@ export class DyteSettingsVideo {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
 
     this.videoEnabled = meeting.self.videoEnabled;

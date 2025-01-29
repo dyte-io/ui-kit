@@ -1,6 +1,6 @@
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting, Peer, MediaPermission } from '../../types/dyte-client';
+import { DyteClient, Peer, MediaPermission } from '../../types/dyte-client';
 import { PermissionSettings, Size, States } from '../../types/props';
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import logger from '../../utils/logger';
@@ -44,7 +44,7 @@ export class DyteScreenShareToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -170,7 +170,7 @@ export class DyteScreenShareToggle {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting != null) {
       const { self, stage } = meeting;
       this.canScreenShare = this.meeting.self.permissions.canProduceScreenshare === 'ALLOWED';

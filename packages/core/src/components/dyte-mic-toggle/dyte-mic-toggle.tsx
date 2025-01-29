@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
-import { Meeting, Peer, MediaPermission } from '../../types/dyte-client';
+import { DyteClient, Peer, MediaPermission } from '../../types/dyte-client';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { PermissionSettings, Size, States } from '../../types/props';
@@ -43,7 +43,7 @@ export class DyteMicToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -80,7 +80,7 @@ export class DyteMicToggle {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting != null) {
       const { self, stage } = meeting;
 

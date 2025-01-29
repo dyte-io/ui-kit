@@ -4,7 +4,7 @@ import { UIConfig } from '../types/ui-config';
 import { DesignTokens } from '../types/ui-config/design-tokens';
 import { isValidHexColor } from './color';
 import deepMerge from 'lodash-es/merge';
-import { Meeting } from '../types/dyte-client';
+import { DyteClient } from '../types/dyte-client';
 import { isLiveStreamHost } from './livestream';
 import { canToggleBreakout } from './breakout-rooms';
 
@@ -39,7 +39,7 @@ type ConfigOptions = {
  */
 export const generateConfig = (
   oldConfig: Partial<DyteThemePreset>,
-  meeting: Meeting,
+  meeting: DyteClient,
   toExtend: UIConfig = {},
   options: ConfigOptions = { grid_pagination: true, settings_toggle: true }
 ): { config: UIConfig; data: ConfigData } => {

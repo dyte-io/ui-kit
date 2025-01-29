@@ -3,7 +3,7 @@ import { defaultConfig } from '../../lib/default-ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import storeState from '../../lib/store';
@@ -24,7 +24,7 @@ export interface ModalDataConfig {
 })
 export class DyteJoinStage {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** UI Config */
   @Prop() config: UIConfig = defaultConfig;

@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop, Event, EventEmitter, State, Watch } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import storeState from '../../lib/store';
@@ -22,7 +22,7 @@ export class DyteBreakoutRoomsToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** States object */
   @Prop() states: States;
@@ -49,7 +49,7 @@ export class DyteBreakoutRoomsToggle {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (!meeting) return;
     this.canToggle = canToggleBreakout(meeting);
     meeting.self.permissions.on('permissionsUpdate', this.permissionsUpdateListener);

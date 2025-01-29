@@ -2,7 +2,7 @@ import { Component, Host, h, Prop } from '@stencil/core';
 import { defaultConfig, defaultIconPack, IconPack, UIConfig } from '../../exports';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 
 /**
@@ -23,7 +23,7 @@ export class DyteHeader {
   @Prop() disableRender = false;
 
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;

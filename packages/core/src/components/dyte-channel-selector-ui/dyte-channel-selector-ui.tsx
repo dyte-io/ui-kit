@@ -91,7 +91,7 @@ export class DyteChannelSelectorUi {
     }
   }
 
-  private onSearchInput = (e: KeyboardEvent) => {
+  private onSearchInput = (e: InputEvent) => {
     this.searchQuery = (e.target as HTMLInputElement).value;
   };
 

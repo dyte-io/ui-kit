@@ -1,4 +1,4 @@
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Component, Host, h, Prop } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
@@ -13,7 +13,7 @@ import { useLanguage, DyteI18n } from '../../lib/lang';
 })
 export class DyteMeetingTitle {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;

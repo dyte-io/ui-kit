@@ -11,7 +11,7 @@ import {
   Event,
   EventEmitter,
 } from '@stencil/core';
-import { Meeting, Peer } from '../../types/dyte-client';
+import { DyteClient, Peer } from '../../types/dyte-client';
 import { Chat, ChatChannel, Size } from '../../types/props';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import type { Message, TextMessage } from '@dytesdk/web-core';
@@ -33,6 +33,7 @@ import { States, UIConfig, defaultConfig } from '../../exports';
 import storeState from '../../lib/store';
 import { ChannelItem } from '../dyte-channel-selector-view/dyte-channel-selector-view';
 import { NewMessageEvent } from '../dyte-chat-composer-view/dyte-chat-composer-view';
+import ResizeObserver from 'resize-observer-polyfill';
 
 export type ChatFilter = (message: Message) => boolean;
 
@@ -63,7 +64,7 @@ export class DyteChat {
   @Element() host: HTMLDyteChatElement;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -208,7 +209,7 @@ export class DyteChat {
     }
   }
 
-  private disconnectMeeting = (meeting: Meeting) => {
+  private disconnectMeeting = (meeting: DyteClient) => {
     if (this.isPrivateChatSupported()) {
       meeting?.participants.joined.removeListener('participantJoined', this.onParticipantUpdate);
       meeting?.participants.joined.removeListener('participantLeft', this.onParticipantUpdate);
@@ -230,7 +231,7 @@ export class DyteChat {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting, oldMeeting?: Meeting) {
+  meetingChanged(meeting: DyteClient, oldMeeting?: DyteClient) {
     if (oldMeeting != undefined) this.disconnectMeeting(oldMeeting);
     if (meeting && !meeting.chat) return;
 

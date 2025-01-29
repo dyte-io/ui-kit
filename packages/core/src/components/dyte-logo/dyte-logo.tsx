@@ -1,7 +1,7 @@
 import { UIConfig } from '../../types/ui-config';
 import { Component, Host, h, Prop, Watch } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { defaultConfig } from '../../exports';
 
 /**
@@ -20,7 +20,7 @@ export class DyteLogo {
   @Prop() config: UIConfig = defaultConfig;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Language */
   @Prop() t: DyteI18n = useLanguage();
@@ -42,7 +42,7 @@ export class DyteLogo {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting != null) {
       const meetingLogo = meeting.self?.config?.header?.elements?.logo;
       if (meetingLogo != null && this.logoUrl == null) {

@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@st
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import storeState, { onChange } from '../../lib/store';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { usePaginatedChat } from '../../utils/flags';
 import { canViewChat } from '../../utils/sidebar';
@@ -33,7 +33,7 @@ export class DyteChatToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** States object */
   @Prop() states: States;
@@ -70,7 +70,7 @@ export class DyteChatToggle {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
     if (usePaginatedChat(meeting)) {
       meeting.chat?.getMessages(new Date().getTime(), 1, true).then((res) => {

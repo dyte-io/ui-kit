@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, Event, EventEmitter, State, Watch } from '@st
 import { defaultIconPack, IconPack, Size, States } from '../../exports';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import storeState from '../../lib/store';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 
 @Component({
@@ -15,7 +15,7 @@ export class DyteMuteAllButton {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -43,7 +43,7 @@ export class DyteMuteAllButton {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (!meeting) return;
     this.canDisable = !!meeting?.self.permissions.canDisableParticipantAudio;
     meeting.self.permissions.addListener('permissionsUpdate', this.permissionsUpdateListener);

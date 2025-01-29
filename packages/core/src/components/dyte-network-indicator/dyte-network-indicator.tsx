@@ -2,7 +2,7 @@ import { DyteParticipant } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { defaultIconPack, DyteI18n, IconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
-import { Meeting, Peer } from '../../types/dyte-client';
+import { DyteClient, Peer } from '../../types/dyte-client';
 import { MediaScoreUpdateParams } from '../../types/web-core';
 
 @Component({
@@ -15,7 +15,7 @@ export class DyteNetworkIndicator {
   @Prop() participant: Peer;
 
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** Icon pack */
   @Prop() iconPack: IconPack = defaultIconPack;

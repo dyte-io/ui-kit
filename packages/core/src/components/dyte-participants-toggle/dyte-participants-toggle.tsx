@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@st
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import storeState, { onChange } from '../../lib/store';
-import { Meeting, Peer, WaitlistedParticipant } from '../../types/dyte-client';
+import { DyteClient, Peer, WaitlistedParticipant } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { canViewParticipants } from '../../utils/sidebar';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
@@ -30,7 +30,7 @@ export class DyteParticipantsToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** States object */
   @Prop() states: States;
@@ -94,7 +94,7 @@ export class DyteParticipantsToggle {
   };
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
     this.canViewParticipants = canViewParticipants(meeting);
     meeting?.stage?.on('stageStatusUpdate', this.updateCanView);

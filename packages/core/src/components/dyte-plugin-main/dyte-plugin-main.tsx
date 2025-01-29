@@ -1,7 +1,7 @@
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DytePermissionsPreset, DytePlugin } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State, writeTask } from '@stencil/core';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 
 /**
@@ -17,7 +17,7 @@ export class DytePluginMain {
   private toggleViewModeListener: (data: boolean) => void;
 
   /** Meeting */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Plugin */
   @Prop() plugin!: DytePlugin;
@@ -38,7 +38,7 @@ export class DytePluginMain {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == undefined) return;
     const enabled = this.canInteractWithPlugin();
     this.viewModeEnabled = !enabled;

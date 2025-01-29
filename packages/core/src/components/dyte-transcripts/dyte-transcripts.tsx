@@ -1,5 +1,5 @@
 import { Component, Host, h, Prop, State, Element, Watch, writeTask } from '@stencil/core';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 
 import { Transcript, States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
@@ -25,7 +25,7 @@ export class DyteTranscripts {
   @Element() host: HTMLDyteTranscriptsElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** States object */
   @Prop() states: States = storeState;
@@ -44,12 +44,12 @@ export class DyteTranscripts {
     this.meetingChanged(this.meeting);
   }
 
-  private addListener(meeting: Meeting) {
+  private addListener(meeting: DyteClient) {
     meeting?.ai?.addListener('transcript', this.onTranscript);
     this.listenerAttached = true;
   }
 
-  private clearListeners(meeting: Meeting) {
+  private clearListeners(meeting: DyteClient) {
     this.onTranscript && meeting?.ai?.removeListener('transcript', this.onTranscript);
     this.listenerAttached = false;
     clearTimeout(this.disconnectTimeout);
@@ -62,7 +62,7 @@ export class DyteTranscripts {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting, oldMeeting?: Meeting) {
+  meetingChanged(meeting: DyteClient, oldMeeting?: DyteClient) {
     clearTimeout(this.disconnectTimeout);
     if (oldMeeting !== undefined) this.clearListeners(oldMeeting);
     if (meeting == null) return;

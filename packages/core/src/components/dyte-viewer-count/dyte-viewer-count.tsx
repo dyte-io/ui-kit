@@ -1,7 +1,7 @@
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { showLivestream } from '../../utils/livestream';
 
 export type ViewerCountVariant = 'primary' | 'embedded';
@@ -18,7 +18,7 @@ export class DyteViewerCount {
   private countListener: () => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Viewer count variant */
   @Prop({ reflect: true }) variant: ViewerCountVariant = 'primary';
@@ -35,7 +35,7 @@ export class DyteViewerCount {
     this.meetingChanged(this.meeting);
   }
 
-  private disconnectMeeting = (meeting: Meeting) => {
+  private disconnectMeeting = (meeting: DyteClient) => {
     if (meeting != null && this.countListener != null) {
       meeting.livestream?.removeListener('viewerCountUpdate', this.countListener);
     }
@@ -46,7 +46,7 @@ export class DyteViewerCount {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting, oldMeeting?: Meeting) {
+  meetingChanged(meeting: DyteClient, oldMeeting?: DyteClient) {
     this.disconnectMeeting(oldMeeting);
     if (meeting != null) {
       this.countListener = () => {

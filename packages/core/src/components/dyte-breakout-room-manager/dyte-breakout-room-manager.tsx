@@ -2,7 +2,7 @@ import { Component, h, Host, Prop, Event, EventEmitter, State, writeTask } from 
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { ConnectedMeetingParticipant, States } from '../../types/props';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { getAllConnectedParticipants, participantIdentifier } from '../../utils/breakout-rooms';
 import type { DyteConnectedMeetings, DytePermissionsPreset } from '@dytesdk/web-core';
 import { formatName, shorten } from '../../utils/string';
@@ -17,7 +17,7 @@ const ROOM_TITLE_MIN_CHARS = 3;
 })
 export class DyteBreakoutRoomManager {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
 
   /** Enable updating participants */
   @Prop() assigningParticipants: boolean;

@@ -1,7 +1,7 @@
 import { Component, h, Prop, State, Watch } from '@stencil/core';
 import { UIConfig, Size, IconPack, defaultIconPack, DyteI18n, defaultConfig } from '../../exports';
 import { useLanguage } from '../../lib/lang';
-import { Meeting, WaitlistedParticipant } from '../../types/dyte-client';
+import { DyteClient, WaitlistedParticipant } from '../../types/dyte-client';
 import { ParticipantsViewMode } from '../dyte-participants/dyte-participants';
 
 @Component({
@@ -15,7 +15,7 @@ export class DyteParticipantsWaitlisted {
   private waitlistedParticipantsClearedListener: () => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @Prop() meeting!: DyteClient;
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
 
@@ -71,7 +71,7 @@ export class DyteParticipantsWaitlisted {
   }
 
   @Watch('meeting')
-  meetingChanged(meeting: Meeting) {
+  meetingChanged(meeting: DyteClient) {
     if (meeting == null) return;
     this.waitlistedParticipants = meeting.participants.waitlisted.toArray();
 

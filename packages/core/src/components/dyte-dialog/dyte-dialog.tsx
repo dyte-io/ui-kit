@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 import { defaultConfig } from '../../lib/default-ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Meeting } from '../../types/dyte-client';
+import { DyteClient } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 
@@ -22,7 +22,7 @@ export class DyteDialog {
   @Prop() disableEscapeKey = false;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @Prop() meeting: DyteClient;
 
   /** UI Config */
   @Prop() config: UIConfig = defaultConfig;
