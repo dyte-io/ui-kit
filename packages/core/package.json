@@ -17,7 +17,7 @@
   "exports": {
     ".": {
       "import": "./dist/dyte-ui-kit/dyte-ui-kit.esm.js",
-      "require": "./dist/dyte-ui-kit/dyte-ui-kit.cjs.js"
+      "require": "./dist/cjs/dyte-ui-kit.cjs.js"
     },
     "./dist/*": {
       "import": "./dist/*",
@@ -41,7 +41,7 @@
     "url": "https://community.dyte.io"
   },
   "scripts": {
-    "build": "stencil build",
+    "build": "stencil build && rollup -c",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test:spec": "stencil test --spec --watchAll",
@@ -71,6 +71,9 @@
   "devDependencies": {
     "@dyteinternals/utils": "^3.1.0",
     "@dytesdk/web-core": "staging",
+    "@rollup/plugin-commonjs": "^28.0.2",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^0.4.4",
     "@stencil-community/eslint-plugin": "^0.9.0",
     "@stencil-community/postcss": "^2.2.0",
     "@stencil/angular-output-target": "^0.10.2",
@@ -89,6 +92,7 @@
     "jest": "^29.7.0",
     "jest-cli": "^29.7.0",
     "puppeteer": "^21.9.0",
+    "rollup": "^4.32.1",
     "rollup-plugin-node-polyfills": "^0.2.1",
     "tailwindcss": "3.1.0"
   },
