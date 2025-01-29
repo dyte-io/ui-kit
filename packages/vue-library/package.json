@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dyte-in/ui-kit.git"
+    "url": "git+https://github.com/dyte-io/ui-kit.git"
   },
   "dependencies": {
     "@dytesdk/ui-kit": "*"
   },
   "bugs": {
-    "url": "https://github.com/dyte-in/ui-kit/issues"
+    "url": "https://github.com/dyte-io/ui-kit/issues"
   }
 }
