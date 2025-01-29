@@ -1,8 +1,8 @@
 const fs = require('fs');
 const pkg = require('./package.json');
 
-const dependencies = {
-  ...pkg.dependencies,
+const peerDependencies = {
+  ...pkg.peerDependencies,
   '@dytesdk/ui-kit': pkg.version,
 };
 
@@ -19,7 +19,7 @@ fs.writeFileSync(
   JSON.stringify(
     {
       ...pkg,
-      dependencies,
+      peerDependencies,
       module: 'dist/fesm2015/dytesdk-angular-ui-kit.mjs',
       es2020: 'dist/fesm2020/dytesdk-angular-ui-kit.mjs',
       esm2020: 'dist/esm2020/dytesdk-angular-ui-kit.mjs',
@@ -41,7 +41,6 @@ fs.writeFileSync(
       },
       sideEffects: false,
       name: process.env.GHR === 'true' ? '@dyte-in/angular-ui-kit' : '@dytesdk/angular-ui-kit',
-      repository: process.env.GHR === 'true' ? repository : undefined,
       publishConfig:
         process.env.GHR === 'true' || !env.includes('main') ? { tag } : pkg.publishConfig,
     },

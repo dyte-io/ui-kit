@@ -3,7 +3,7 @@
     "packages/core",
     "packages/react-library",
     "packages/vue-library",
-    "packages/angular-workspace/projects/components-library/"
+    "packages/angular-workspace/projects/component-library"
   ],
   "version": "1.0.0"
 }
