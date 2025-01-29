@@ -13,6 +13,7 @@ import {
 } from '../../exports';
 import { getSize } from '../../utils/size';
 import { getIconPack } from '../../lib/icons';
+import ResizeObserver from 'resize-observer-polyfill';
 
 @Component({
   tag: 'dyte-ui-provider',

@@ -46,8 +46,6 @@ export class DyteAudioGrid {
 
   @Element() host: HTMLDyteAudioGridElement;
 
-  private resizeObserver: ResizeObserver;
-
   connectedCallback() {
     this.meetingChanged(this.meeting);
   }
@@ -69,9 +67,6 @@ export class DyteAudioGrid {
   }
 
   disconnectedCallback() {
-    this.resizeObserver.disconnect();
-    this.resizeObserver = undefined;
-
     this.meeting.participants.active.removeListener(
       'participantJoined',
       this.onParticipantListUpdate

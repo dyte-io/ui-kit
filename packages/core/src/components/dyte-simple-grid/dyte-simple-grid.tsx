@@ -8,6 +8,7 @@ import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { Dimensions, useGrid } from '../../lib/grid';
 import { MediaConnectionState } from '@dytesdk/web-core';
+import ResizeObserver from 'resize-observer-polyfill';
 
 /**
  * A grid component which renders only the participants in a simple grid.

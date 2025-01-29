@@ -33,6 +33,7 @@ import { States, UIConfig, defaultConfig } from '../../exports';
 import storeState from '../../lib/store';
 import { ChannelItem } from '../dyte-channel-selector-view/dyte-channel-selector-view';
 import { NewMessageEvent } from '../dyte-chat-composer-view/dyte-chat-composer-view';
+import ResizeObserver from 'resize-observer-polyfill';
 
 export type ChatFilter = (message: Message) => boolean;
 

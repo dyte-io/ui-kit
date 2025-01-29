@@ -23,6 +23,7 @@ import { getUserPreferences } from '../../utils/user-prefs';
 import { generateConfig } from '../../utils/config';
 import storeState from '../../lib/store';
 import { GridLayout } from '../dyte-grid/dyte-grid';
+import ResizeObserver from 'resize-observer-polyfill';
 
 export type MeetingMode = 'fixed' | 'fill';
 
