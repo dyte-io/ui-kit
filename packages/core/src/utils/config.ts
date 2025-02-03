@@ -457,10 +457,7 @@ export const generateConfig = (
         ['dyte-mic-toggle', { size: 'sm' }],
         ['dyte-camera-toggle', { size: 'sm' }],
       ],
-      'div#setupcontrols-settings': [
-        ['dyte-settings-toggle', { size: 'sm' }],
-        ['dyte-debugger-toggle', { size: 'sm' }],
-      ],
+      'div#setupcontrols-settings': [['dyte-settings-toggle', { size: 'sm' }]],
 
       'dyte-screenshare-view': ['dyte-name-tag', 'dyte-network-indicator'],
 
