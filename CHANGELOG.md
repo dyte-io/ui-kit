@@ -1,3 +1,10 @@
+# [2.2.0-staging.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.4...@dyte-in/ui-kit-v2.2.0-staging.5) (2025-02-03)
+
+
+### Bug Fixes
+
+* hide troubleshooter for setup screen ([2db5506](https://github.com/dyte-io/ui-kit/commit/2db5506b6fe9dd96d60e8da19e72f438d618791d))
+
 # [2.2.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.3...@dyte-in/ui-kit-v2.2.0-staging.4) (2025-02-03)
 
 
