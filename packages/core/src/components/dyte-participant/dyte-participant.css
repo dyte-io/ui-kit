@@ -47,5 +47,5 @@ dyte-icon.more {
 }
 
 #menu-list {
-  @apply absolute z-20;
+  @apply absolute !top-8 !right-4 z-20;
 }
