@@ -1,3 +1,10 @@
+# [2.2.0-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.2...@dyte-in/ui-kit-v2.2.0-staging.3) (2025-02-03)
+
+
+### Bug Fixes
+
+* **livestream:** added logic to recover from fatal errors ([673ebcb](https://github.com/dyte-io/ui-kit/commit/673ebcb7eb3f601d91213316e3b6a3b96d674529))
+
 # [2.2.0-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.1...@dyte-in/ui-kit-v2.2.0-staging.2) (2025-01-13)
 
 
