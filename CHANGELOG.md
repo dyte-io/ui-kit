@@ -1,3 +1,10 @@
+# [2.2.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.3...@dyte-in/ui-kit-v2.2.0-staging.4) (2025-02-03)
+
+
+### Bug Fixes
+
+* **breakout-rooms:** breakout room button is not visible in some edge cases ([6505768](https://github.com/dyte-io/ui-kit/commit/650576815250a9b68c1b20df6ae43cf10716a55c))
+
 # [2.2.0-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.2...@dyte-in/ui-kit-v2.2.0-staging.3) (2025-02-03)
 
 
