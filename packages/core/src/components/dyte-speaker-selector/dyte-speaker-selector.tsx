@@ -59,15 +59,9 @@ export class DyteSpeakerSelector {
     this.meeting?.self.addListener('mediaPermissionUpdate', this.mediaPermissionUpdate);
   }
 
-  private deviceListUpdateListener = ({ devices }) => {
-    const result = devices.reduce(
-      (res: { [kind: string]: MediaDeviceInfo[] }, device: MediaDeviceInfo) => {
-        res[device.kind]?.push(device);
-        return res;
-      },
-      { audioinput: [], audiooutput: [] }
-    );
-    this.speakerDevices = result.audiooutput;
+  private deviceListUpdateListener = async () => {
+    const devices = await this.meeting.self.getSpeakerDevices();
+    this.speakerDevices = devices;
   };
 
   private deviceUpdateListener = ({ device }) => {
