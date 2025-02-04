@@ -59,15 +59,9 @@ export class DyteMicrophoneSelector {
     this.canProduceAudio = this.meeting.self.permissions.canProduceAudio === 'ALLOWED';
   };
 
-  private deviceListUpdateListener = ({ devices }) => {
-    const result = devices.reduce(
-      (res: { [kind: string]: MediaDeviceInfo[] }, device: MediaDeviceInfo) => {
-        res[device.kind]?.push(device);
-        return res;
-      },
-      { audioinput: [], audiooutput: [] }
-    );
-    this.audioinputDevices = result.audioinput;
+  private deviceListUpdateListener = async () => {
+    const devices = await this.meeting.self.getAudioDevices();
+    this.audioinputDevices = devices;
   };
 
   private deviceUpdateListener = ({ device }) => {
