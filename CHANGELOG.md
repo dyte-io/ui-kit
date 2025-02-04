@@ -1,3 +1,10 @@
+# [2.2.0-staging.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.5...@dyte-in/ui-kit-v2.2.0-staging.6) (2025-02-04)
+
+
+### Bug Fixes
+
+* simplify device list logic ([b06fea9](https://github.com/dyte-io/ui-kit/commit/b06fea937cee2229e91267e90aa5b6fa4ed9a4ec))
+
 # [2.2.0-staging.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.4...@dyte-in/ui-kit-v2.2.0-staging.5) (2025-02-03)
 
 
