@@ -1,3 +1,10 @@
+# [2.2.0-staging.7](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.6...@dyte-in/ui-kit-v2.2.0-staging.7) (2025-02-07)
+
+
+### Bug Fixes
+
+* allow hiding self view ([cbd91eb](https://github.com/dyte-io/ui-kit/commit/cbd91eb032c4ac0931a5c4fbedff71030d3c35bd))
+
 # [2.2.0-staging.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.5...@dyte-in/ui-kit-v2.2.0-staging.6) (2025-02-04)
 
 
