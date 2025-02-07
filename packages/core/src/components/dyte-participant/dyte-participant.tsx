@@ -18,7 +18,10 @@ import storeState from '../../lib/store';
 import { defaultConfig, UIConfig } from '../../exports';
 import { FlagsmithFeatureFlags } from '../../utils/flags';
 import { autoPlacement, computePosition, hide, offset, shift } from '@floating-ui/dom';
-import type { DyteParticipant as DyteParticipantType } from '@dytesdk/web-core';
+import type {
+  DyteParticipant as DyteParticipantType,
+  DyteSelf as DyteSelfType,
+} from '@dytesdk/web-core';
 
 export type ParticipantViewMode = 'sidebar';
 
@@ -39,6 +42,10 @@ export class DyteParticipant {
 
   private pinnedListener = ({ isPinned }: Peer) => {
     this.isPinned = isPinned;
+  };
+
+  private toggleTileListener = ({ hidden }: { hidden: boolean }) => {
+    this.isHidden = hidden;
   };
 
   private stageListener = ({ stageStatus }: Peer) => {
@@ -76,6 +83,7 @@ export class DyteParticipant {
   @State() audioEnabled: boolean = false;
   @State() videoEnabled: boolean = false;
   @State() isPinned: boolean = false;
+  @State() isHidden: boolean = false;
   @State() isOnStage: boolean = false;
 
   @State() canDisableParticipantAudio: boolean = false;
@@ -115,6 +123,7 @@ export class DyteParticipant {
       'stageStatusUpdate',
       this.stageListener
     );
+    (this.participant as DyteSelfType).removeListener('toggleTile', this.toggleTileListener);
   }
 
   @Watch('meeting')
@@ -156,6 +165,7 @@ export class DyteParticipant {
       this.audioEnabled = participant.audioEnabled;
       this.videoEnabled = participant.videoEnabled;
       this.isPinned = participant.isPinned;
+      this.isHidden = (participant as DyteSelfType).hidden ?? false;
       this.isOnStage = participant.stageStatus === 'ON_STAGE';
       this.audioUpdateListener = ({ audioEnabled }) => {
         this.audioEnabled = audioEnabled;
@@ -169,6 +179,7 @@ export class DyteParticipant {
       (participant as DyteParticipantType).addListener('pinned', this.pinnedListener);
       (participant as DyteParticipantType).addListener('unpinned', this.pinnedListener);
       (participant as DyteParticipantType).addListener('stageStatusUpdate', this.stageListener);
+      (this.participant as DyteSelfType).addListener('toggleTile', this.toggleTileListener);
     }
   }
 
@@ -357,7 +368,23 @@ export class DyteParticipant {
                           {this.isPinned ? this.t('unpin') : this.t('pin')}
                         </dyte-menu-item>
                       )}
-
+                      {isSelf && (
+                        <dyte-menu-item
+                          iconPack={this.iconPack}
+                          t={this.t}
+                          onClick={() => {
+                            this.isHidden
+                              ? (this.participant as DyteSelfType).show()
+                              : (this.participant as DyteSelfType).hide();
+                          }}
+                        >
+                          <dyte-icon
+                            icon={this.isHidden ? this.iconPack.minimize : this.iconPack.maximize}
+                            slot="start"
+                          />
+                          {!this.meeting.self.hidden ? this.t('minimize') : this.t('maximize')}
+                        </dyte-menu-item>
+                      )}
                       {this.canDisableParticipantAudio && isActiveParticipant && this.audioEnabled && (
                         <dyte-menu-item
                           iconPack={this.iconPack}

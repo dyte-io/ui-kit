@@ -48,6 +48,8 @@ export const defaultLanguage = {
   enable_mic: 'Enable Mic',
   audio: 'Audio',
   test: 'Test',
+  minimize: 'Hide Tile',
+  maximize: 'Show Tile',
   mute_all: 'Mute all',
   'mute_all.description': 'Everyone in the meeting will be muted.',
   'mute_all.header': 'Are you sure?',

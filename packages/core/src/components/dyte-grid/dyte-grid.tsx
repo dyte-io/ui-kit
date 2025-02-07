@@ -53,6 +53,8 @@ export class DyteGrid {
 
   @State() pipEnabled: boolean = false;
 
+  @State() hidden: boolean = false;
+
   @State() roomState: RoomState;
 
   /** Grid Layout */
@@ -111,6 +113,7 @@ export class DyteGrid {
     self.removeListener('roomLeft', this.updateRoomStateListener);
     self.removeListener('roomJoined', this.updateRoomStateListener);
     self.removeListener('screenShareUpdate', this.onSelfScreenShareUpdate);
+    self.removeListener('toggleTile', this.toggleTileListener);
 
     plugins?.all.removeListener('stateUpdate', this.onPluginStateUpdate);
 
@@ -173,6 +176,7 @@ export class DyteGrid {
       self.addListener('screenShareUpdate', this.onSelfScreenShareUpdate);
       self.addListener('pinned', this.onParticipantPinned);
       self.addListener('unpinned', this.onParticipantUnpinned);
+      self.addListener('toggleTile', this.toggleTileListener);
 
       stage?.addListener('stageStatusUpdate', this.stageStatusListener);
 
@@ -230,6 +234,7 @@ export class DyteGrid {
     const { self, participants, stage } = this.meeting;
     // NOTE(ishita1805): checking hiddenParticipant for v2 meetings.
     this.hideSelf =
+      this.hidden ||
       stage.status !== 'ON_STAGE' ||
       self.permissions?.isRecorder ||
       self.permissions.hiddenParticipant;
@@ -347,6 +352,11 @@ export class DyteGrid {
     } else {
       this.removeScreenShare(this.meeting.self);
     }
+  };
+
+  private toggleTileListener = ({ hidden }: { hidden: boolean }) => {
+    this.hidden = hidden;
+    this.updateActiveParticipants();
   };
 
   private onPluginStateUpdate = (plugin: DytePlugin, { active }: { active: boolean }) => {
