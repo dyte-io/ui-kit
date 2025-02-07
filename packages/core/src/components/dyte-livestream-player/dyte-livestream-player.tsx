@@ -1,9 +1,26 @@
 import type { LivestreamState } from '@dytesdk/web-core';
-import { Component, h, Host, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
+import Hls from 'hls.js';
+import {
+  Component,
+  h,
+  Host,
+  Prop,
+  Element,
+  State,
+  Watch,
+  Event,
+  EventEmitter,
+} from '@stencil/core';
 import { Size, DyteI18n, IconPack, defaultIconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
-import { showLivestream, PlayerEventType, PlayerState } from '../../utils/livestream';
+import {
+  showLivestream,
+  PlayerEventType,
+  PlayerState,
+  getLivestreamViewerAllowedQualityLevels,
+} from '../../utils/livestream';
+import { formatSecondsToHHMMSS } from '../../utils/time';
 
 @Component({
   tag: 'dyte-livestream-player',
@@ -11,7 +28,15 @@ import { showLivestream, PlayerEventType, PlayerState } from '../../utils/livest
   shadow: true,
 })
 export class DyteLivestreamPlayer {
-  private player: HTMLVideoElement;
+  private videoRef: HTMLVideoElement;
+
+  private videoContainerRef: HTMLDivElement;
+
+  @Element() el: HTMLDyteLivestreamPlayerElement;
+
+  private hls: Hls;
+
+  private statsIntervalTimer = null;
 
   /** Meeting object */
   @Prop() meeting!: Meeting;
@@ -35,11 +60,21 @@ export class DyteLivestreamPlayer {
 
   @State() playerError: any;
 
-  @State() latency: number = 0;
-
   @State() livestreamId: string = null;
 
   @State() audioPlaybackError: boolean = false;
+
+  @State() qualityLevels: Array<{ level: number; resolution: string }> = [];
+
+  @State() selectedQuality: number = -1; // -1 for auto
+
+  @State() currentTime: number = 0;
+
+  @State() duration: number = 0;
+
+  @State() hideControls: boolean = true;
+
+  private hideControlsTimeout: NodeJS.Timeout = null;
 
   /**
    * Emit API error events
@@ -50,19 +85,32 @@ export class DyteLivestreamPlayer {
   }>;
 
   private livestreamUpdateListener = (state: LivestreamState) => {
-    this.livestreamState = state;
     this.playbackUrl = this.meeting.livestream.playbackUrl;
+    this.livestreamState = state;
+  };
+
+  private updateProgress = () => {
+    this.currentTime = this.videoRef.currentTime;
+  };
+
+  private updateHlsStatsPeriodically = () => {
+    // Total duration is where video is + the latency that is there
+    this.duration = (this.videoRef?.currentTime || 0) + (this.hls?.latency || 0);
+  };
+
+  private fastForwardToLatest = () => {
+    this.videoRef.currentTime = this.duration - 1; // Move to the latest time
   };
 
   @Watch('livestreamState')
   // @ts-ignore
-  private updateLivestreamId() {
+  private async updateLivestreamId() {
     const url = this.meeting.livestream.playbackUrl;
     if (!url || this.livestreamState !== 'LIVESTREAMING') {
+      // If there was a player, clean that up, cleanup all stencil states
+      this.playbackUrl = null;
       this.livestreamId = null;
-      this.player = null;
-      // @ts-ignore
-      window.dyteLivestreamPlayerElement = null;
+      this.cleanupPlayer();
       return;
     }
 
@@ -70,7 +118,47 @@ export class DyteLivestreamPlayer {
     const manifestIndex = parts.findIndex((part) => part === 'manifest');
     const streamId = parts[manifestIndex - 1];
     this.livestreamId = streamId;
+    await this.conditionallyStartLivestreamViewer();
   }
+
+  private async conditionallyStartLivestreamViewer() {
+    if (this.videoRef && this.playbackUrl && !this.hls) {
+      await this.initialiseAndPlayStream();
+    }
+  }
+
+  private togglePlay = () => {
+    if (this.videoRef.paused) {
+      this.videoRef.play();
+      this.playerState = PlayerState.PLAYING;
+    } else {
+      this.videoRef.pause();
+      this.playerState = PlayerState.IDLE;
+    }
+  };
+
+  private changeQuality = (level: number) => {
+    this.selectedQuality = level;
+    if (this.hls) {
+      this.hls.currentLevel = level;
+    }
+  };
+
+  private cleanupPlayer = () => {
+    this.playerState = PlayerState.IDLE;
+    if (this.videoRef) {
+      this.hls?.destroy();
+      this.hls = null;
+    }
+  };
+
+  private onMouseMovePlayer = () => {
+    this.hideControls = false;
+    clearTimeout(this.hideControlsTimeout);
+    this.hideControlsTimeout = setTimeout(() => {
+      this.hideControls = true;
+    }, 5000);
+  };
 
   private getLoadingState = () => {
     let loadingMessage = '';
@@ -93,7 +181,7 @@ export class DyteLivestreamPlayer {
         showIcon = true;
         break;
       case 'LIVESTREAMING':
-        if (this.playerState !== PlayerState.PLAYING) {
+        if (this.playerState !== PlayerState.PLAYING && this.playerState !== PlayerState.PAUSED) {
           loadingMessage = this.t('livestream.starting');
           showIcon = true;
           isLoading = true;
@@ -131,82 +219,133 @@ export class DyteLivestreamPlayer {
     return { isError, errorMessage };
   };
 
-  private isScriptWithSrcPresent(srcUrl) {
-    const scripts = document.querySelectorAll('script');
-    for (let script of scripts) {
-      if (script.src === srcUrl) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  /**
-   * Make sure to call loadLivestreamPlayer before startLivestreamPlayer.
-   */
-  private startLivestreamPlayer = async () => {
+  private initialiseAndPlayStream = async () => {
     try {
       this.meeting.__internals__.logger.info(
-        'dyte-livestream-player:: Initialising player element.'
+        `dyte-livestream-player:: About to initialise HLS. VideoRef? ${!!this
+          .videoRef} playbackUrl: ${this.playbackUrl}`
       );
-      // @ts-ignore
-      await window.__stream.initElement(this.player);
-      this.meeting.__internals__.logger.info('dyte-livestream-player:: About to start player.');
-      // @ts-ignore
-      await window.dyte_hls.play();
-      this.playerState = PlayerState.PLAYING;
-      this.audioPlaybackError = false;
-      this.meeting.__internals__.logger.info(
-        'dyte-livestream-player:: Player has started playing.'
-      );
+      if (Hls.isSupported()) {
+        this.meeting.__internals__.logger.info(
+          `dyte-livestream-player:: Initialising HLS. HLS is Supported`
+        );
+
+        this.hls = new Hls({
+          lowLatencyMode: false,
+        });
+
+        (window as any).dyte_hls = this.hls;
+
+        this.meeting.__internals__.logger.info(`dyte-livestream-player:: Loading source`);
+        this.hls.loadSource(this.playbackUrl);
+        this.meeting.__internals__.logger.info(
+          `dyte-livestream-player:: Attaching video element to HLS`
+        );
+        this.hls.attachMedia(this.videoRef);
+
+        this.meeting.__internals__.logger.info(
+          `dyte-livestream-player:: Waiting async for HLS manifest parsing`
+        );
+
+        this.hls.on(Hls.Events.ERROR, (_event, data) => {
+          if (data.fatal) {
+            this.meeting.__internals__.logger.error(
+              `dyte-livestream-player:: fatal error: ${data.details}`,
+              {
+                error: data.error,
+              }
+            );
+            if (this.playbackUrl && this.livestreamState === 'LIVESTREAMING') {
+              /* 
+                NOTE(ravindra-dyte): Maybe manifest is not ready,
+                maybe levels are not available yet.
+                Keep on retrying every 5 seconds till either livestream is stopped or error is resolved.
+              */
+              setTimeout(() => {
+                if (this.playbackUrl && this.livestreamState === 'LIVESTREAMING') {
+                  this.meeting.__internals__.logger.info(
+                    'dyte-livestream-player:: Retrying playbackUrl'
+                  );
+                  this.hls.loadSource(this.playbackUrl);
+                }
+              }, 5000);
+              return;
+            }
+          } else {
+            this.meeting.__internals__.logger.warn(
+              `dyte-livestream-player:: non-fatal error: ${data.details}`,
+              {
+                error: data.error,
+              }
+            );
+          }
+        });
+
+        this.hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+          this.meeting.__internals__.logger.info('dyte-livestream-player:: media attached');
+        });
+
+        this.hls.on(Hls.Events.MEDIA_DETACHED, () => {
+          this.meeting.__internals__.logger.info('dyte-livestream-player:: media detached');
+        });
+
+        this.hls.on(Hls.Events.DESTROYING, () => {
+          this.meeting.__internals__.logger.info(
+            'dyte-livestream-player:: hls is getting destroyed'
+          );
+        });
+
+        // Listen for manifest parsed to populate quality levels
+        this.hls.on(Hls.Events.MANIFEST_PARSED, async (_, data) => {
+          this.meeting.__internals__.logger.info(`dyte-livestream-player:: HLS manifest parsed`);
+          const { levels: levelsToUse, autoLevelChangeAllowed } =
+            getLivestreamViewerAllowedQualityLevels({
+              meeting: this.meeting,
+              hlsLevels: data.levels,
+            });
+
+          this.qualityLevels = levelsToUse.map((level, index) => ({
+            level: index,
+            resolution: level.height ? `${level.height}p` : 'auto',
+          }));
+          if (autoLevelChangeAllowed) {
+            this.qualityLevels = [{ level: -1, resolution: 'Auto' }, ...this.qualityLevels];
+          }
+          // Set a reasonable starting quality
+          this.hls.currentLevel = this.qualityLevels[0].level;
+
+          try {
+            this.meeting.__internals__.logger.info(
+              'dyte-livestream-player:: About to start video.'
+            );
+            await this.videoRef.play(); // Starts playing the video after it is ready
+            this.meeting.__internals__.logger.info(
+              'dyte-livestream-player:: Video has started playing.'
+            );
+            this.playerState = PlayerState.PLAYING;
+          } catch (error) {
+            this.audioPlaybackError = true;
+            this.meeting.__internals__.logger.error(
+              `dyte-livestream-player:: Video couldn't start. Trying with user gesture again.`,
+              {
+                error,
+              }
+            );
+          }
+        });
+
+        // Setup listeners to show current time and total duration
+        this.videoRef.addEventListener('timeupdate', this.updateProgress);
+        this.statsIntervalTimer = setInterval(this.updateHlsStatsPeriodically, 1000);
+      } else {
+        this.isSupported = false;
+      }
     } catch (error) {
-      this.meeting.__internals__.logger.error(`dyte-livestream-player:: Player couldn't start.`, {
+      this.meeting.__internals__.logger.error(`dyte-livestream-player:: HLS couldn't initialise.`, {
         error,
       });
       // Retry with user gesture
-      this.audioPlaybackError = true;
     }
-  };
-
-  private loadLivestreamPlayer = async () => {
-    const playerSrc = `https://cdn.dyte.in/streams/script.js`;
-    if (!(window as any).__stream && this.isScriptWithSrcPresent(playerSrc)) {
-      // Script loading is ongoing; Do Nothing
-      return false;
-    }
-
-    if ((window as any).__stream) {
-      return true;
-    }
-
-    // Since script is not there, let's add script first
-    return new Promise((resolve) => {
-      const script = document.createElement('script');
-      script.src = playerSrc;
-      script.onload = () => {
-        setTimeout(() => {
-          if ((window as any).__stream) {
-            this.meeting.__internals__.logger.info(
-              `dyte-livestream-player:: Finished script load. Added window._stream.`
-            );
-            resolve(true);
-            return;
-          }
-          this.meeting.__internals__.logger.error(
-            `dyte-livestream-player:: onLoad didn't add window._stream in time.`
-          );
-          resolve(false);
-        }, 1000);
-      };
-      script.onerror = (error: any) => {
-        this.meeting.__internals__.logger.error(
-          `dyte-livestream-player:: CDN script didn't load.`,
-          { error }
-        );
-        resolve(false);
-      };
-      document.head.appendChild(script);
-    });
   };
 
   async connectedCallback() {
@@ -215,16 +354,20 @@ export class DyteLivestreamPlayer {
 
   disconnectedCallback() {
     this.meeting.livestream.removeListener('livestreamUpdate', this.livestreamUpdateListener);
-    this.player = null;
-    // @ts-ignore
-    window.dyteLivestreamPlayerElement = null;
+    this.videoRef.removeEventListener('timeupdate', this.updateProgress);
+    clearInterval(this.statsIntervalTimer);
+    this.videoRef = null;
+    if (this.hls) {
+      this.hls.destroy();
+    }
+    (window as any).dyte_hls = null;
   }
 
   @Watch('meeting')
   meetingChanged(meeting) {
     if (meeting == null) return;
-    this.livestreamState = this.meeting.livestream.state;
     this.playbackUrl = this.meeting.livestream.playbackUrl;
+    this.livestreamState = this.meeting.livestream.state;
     this.meeting.livestream.on('livestreamUpdate', this.livestreamUpdateListener);
   }
 
@@ -235,31 +378,101 @@ export class DyteLivestreamPlayer {
 
     return (
       <Host>
-        <div class="player-container">
-          {this.livestreamState === 'LIVESTREAMING' && this.livestreamId && (
-            <div class="flex h-full w-full items-start justify-center pb-20">
-              <stream
-                width="100%"
-                height="80vh"
-                className="overflow-hidden rounded-lg"
-                src={this.livestreamId}
-                ref={async (self) => {
-                  this.player = self;
-                  // Add player instance on window to satisfy cdn script
-                  // @ts-ignore
-                  window.dyteLivestreamPlayerElement = self;
-                  const isPlayerLoaded = await this.loadLivestreamPlayer();
-                  if (isPlayerLoaded) {
-                    await this.startLivestreamPlayer();
-                  }
-                }}
-                cmcd
-                autoplay
-                force-flavor="llhls"
-                customer-domain-prefix="customer-s8oj0c1n5ek8ah1e"
-              ></stream>
-            </div>
-          )}
+        <div class="player-container h-full max-h-full min-h-full w-full min-w-full max-w-full">
+          <div
+            ref={async (el) => {
+              this.videoContainerRef = el;
+            }}
+            class="video-container relative flex h-full w-full flex-col items-center justify-center pb-20"
+          >
+            <video
+              onMouseMove={this.onMouseMovePlayer}
+              ref={async (el) => {
+                this.videoRef = el;
+                await this.conditionallyStartLivestreamViewer();
+              }}
+              id="livestream-video"
+              style={{ height: `${this.el?.clientHeight}px` }}
+              controls={false} // Custom controls
+              onPlay={() => {
+                if (this.playerState === PlayerState.PAUSED) {
+                  this.playerState = PlayerState.PLAYING;
+                }
+              }}
+              onPause={() => (this.playerState = PlayerState.PAUSED)}
+            ></video>
+            {this.playerState !== PlayerState.IDLE && !this.hideControls && (
+              // <!-- Control Bar -->
+              <div class="control-bar" style={{ width: `${this.videoRef?.clientWidth}px` }}>
+                <div class="control-groups">
+                  {/* <!-- Play/Pause Button --> */}
+                  <dyte-icon
+                    id="playPause"
+                    onClick={this.togglePlay}
+                    size="lg"
+                    class="control-btn"
+                    icon={
+                      this.playerState === PlayerState.PLAYING
+                        ? this.iconPack.pause
+                        : this.iconPack.play
+                    }
+                  />
+
+                  <dyte-icon
+                    size="lg"
+                    class="control-btn"
+                    icon={this.iconPack.fastForward}
+                    onClick={this.fastForwardToLatest}
+                  />
+                  <span class="timings">
+                    {formatSecondsToHHMMSS(this.currentTime)} /{' '}
+                    {formatSecondsToHHMMSS(this.duration)}
+                  </span>
+                </div>
+                <div class="control-groups">
+                  {/* <!-- Quality --> */}
+                  <select
+                    class="level-select"
+                    onChange={(e) =>
+                      this.changeQuality(parseInt((e.target as HTMLSelectElement).value))
+                    }
+                  >
+                    {this.qualityLevels.map((level) => (
+                      <option value={level.level} selected={this.selectedQuality === level.level}>
+                        {level.resolution}
+                      </option>
+                    ))}
+                  </select>
+
+                  {/* <!-- Fullscreen Button --> */}
+                  <dyte-fullscreen-toggle
+                    id="fullscreen"
+                    class="control-btn fullscreen-btn"
+                    targetElement={this.videoContainerRef}
+                    size="sm"
+                    iconPack={this.iconPack}
+                    t={this.t}
+                    ref={(fullScreenToggle) => {
+                      // Create a <style> element
+                      const style = document.createElement('style');
+
+                      // Add CSS rules
+                      style.textContent = `
+                        dyte-controlbar-button {
+                          display: contents;
+                          background-color: var(--bg-brand-500);
+                          color: var(--text-text-on-brand);
+                        }
+                      `;
+
+                      // Append the <style> to the Shadow DOM
+                      fullScreenToggle?.shadowRoot?.appendChild(style);
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
           {this.audioPlaybackError && (
             <div class="unmute-popup">
               <h3>{this.t('audio_playback.title')}</h3>
@@ -267,10 +480,12 @@ export class DyteLivestreamPlayer {
               <dyte-button
                 kind="wide"
                 onClick={() => {
-                  if (this.player) {
-                    this.player.muted = false;
-                  }
                   this.audioPlaybackError = false;
+                  if (this.videoRef) {
+                    this.videoRef.muted = false;
+                    this.videoRef.play();
+                    this.playerState = PlayerState.PLAYING;
+                  }
                 }}
                 title={this.t('audio_playback')}
                 iconPack={this.iconPack}

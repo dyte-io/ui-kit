@@ -126,14 +126,10 @@ export class DyteSetupScreen {
             </div>
           </div>
           <div class="metadata">
-            {this.displayName?.trim() === '' ? (
-              <div class="name">{this.t('setup_screen.join_in_as')}</div>
-            ) : (
-              <div class="label">
-                <p>{this.t('setup_screen.joining_as')}</p>
-                <div class="name">{!this.canEditName && shorten(this.displayName, 20)}</div>
-              </div>
-            )}
+            <div class="name">{this.t('setup_screen.join_in_as')}</div>
+            <div class="label">
+              <div class="name">{!this.canEditName && shorten(this.displayName, 20)}</div>
+            </div>
             {/* TODO: Use `dyte-text-field` */}
             {this.canEditName && (
               <input
