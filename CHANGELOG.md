@@ -1,3 +1,11 @@
+# [2.2.0-staging.8](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.7...@dyte-in/ui-kit-v2.2.0-staging.8) (2025-02-07)
+
+
+### Bug Fixes
+
+* **dyte-participant-tile:** network disconnected icon is not going away due to incorrect field ([65eca1c](https://github.com/dyte-io/ui-kit/commit/65eca1cf9f003d90cb0cdf096233647986baec14))
+* **release:** empty commit to fix previous empty no-dist npm release ([0157d66](https://github.com/dyte-io/ui-kit/commit/0157d666953796f64ec071311fd8744778055b4d))
+
 # [2.2.0-staging.7](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.6...@dyte-in/ui-kit-v2.2.0-staging.7) (2025-02-07)
 
 
