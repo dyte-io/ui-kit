@@ -1,3 +1,28 @@
+# [2.2.0](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.5...@dyte-in/ui-kit-v2.2.0) (2025-02-07)
+
+
+### Bug Fixes
+
+* allow hiding self view ([cbd91eb](https://github.com/dyte-io/ui-kit/commit/cbd91eb032c4ac0931a5c4fbedff71030d3c35bd))
+* **breakout-rooms:** breakout room button is not visible in some edge cases ([6505768](https://github.com/dyte-io/ui-kit/commit/650576815250a9b68c1b20df6ae43cf10716a55c))
+* **build:** build was failing due to web-core and utils mismatch ([cb2f911](https://github.com/dyte-io/ui-kit/commit/cb2f911b0dd6a02caec4f3ff3149a2ce99b8fc54))
+* hide troubleshooter for setup screen ([2db5506](https://github.com/dyte-io/ui-kit/commit/2db5506b6fe9dd96d60e8da19e72f438d618791d))
+* join in as text ([8f9ff5d](https://github.com/dyte-io/ui-kit/commit/8f9ff5dffdca7ea42e3c6e2102a8ef84dd1e1fc9))
+* **livestream-viewer:** level selector and safari fixes ([07f0e99](https://github.com/dyte-io/ui-kit/commit/07f0e99cd2c9f981b95c3d245ea9940b04896d2c))
+* **livestream:** added logic to recover from fatal errors ([673ebcb](https://github.com/dyte-io/ui-kit/commit/673ebcb7eb3f601d91213316e3b6a3b96d674529))
+* **livestream:** adding proper brand colors for player ([331d88a](https://github.com/dyte-io/ui-kit/commit/331d88ac036d1590e16cead5a3115c9471286fa9))
+* **livestream:** reduced fast forward width ([98385f0](https://github.com/dyte-io/ui-kit/commit/98385f0f1b372474d5cb0e5a2bcbee2467b82546))
+* **livestream:** removed hardcoded allowed qualities, fixed web-core package ([b847ed6](https://github.com/dyte-io/ui-kit/commit/b847ed6a34af9bc7ba6592c95fad1ed2bd146ceb))
+* **livestream:** video dimension fixes for poor quality ([b1b5e15](https://github.com/dyte-io/ui-kit/commit/b1b5e152923596dc113ca9424a46fa4caed628b7))
+* **player:** added fast forward, made some fixes ([f2bd2b2](https://github.com/dyte-io/ui-kit/commit/f2bd2b2d835c2f39e03ff5dab6bb2ef009d9b949))
+* simplify device list logic ([b06fea9](https://github.com/dyte-io/ui-kit/commit/b06fea937cee2229e91267e90aa5b6fa4ed9a4ec))
+
+
+### Features
+
+* **livestream:** added ability to control livestream viewer quality ([9db7720](https://github.com/dyte-io/ui-kit/commit/9db77207e876c197a048755d3133cfe52c3f2c12))
+* **player:** adding custom hls based livestream player ([413bb3d](https://github.com/dyte-io/ui-kit/commit/413bb3d28c2004975f20e5e25e1d7657cfd76ad8))
+
 # [2.2.0-staging.8](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0-staging.7...@dyte-in/ui-kit-v2.2.0-staging.8) (2025-02-07)
 
 
