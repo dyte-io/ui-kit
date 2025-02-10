@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { AISection, AIView } from "./components/dyte-ai/dyte-ai";
-import { Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
+import { DyteClient as Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
 import { Chat, ChatChannel, Notification, Poll, PollObject, Size, States, Transcript } from "./types/props";
 import { UIConfig } from "./types/ui-config";
 import { IconPack } from "./lib/icons";
@@ -45,6 +45,46 @@ import { Tab } from "./components/dyte-tab-bar/dyte-tab-bar";
 import { TooltipKind, TooltipVariant } from "./components/dyte-tooltip/dyte-tooltip";
 import { ViewerCountVariant } from "./components/dyte-viewer-count/dyte-viewer-count";
 import { Peer as Peer1 } from ".";
+export { AISection, AIView } from "./components/dyte-ai/dyte-ai";
+export { DyteClient as Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
+export { Chat, ChatChannel, Notification, Poll, PollObject, Size, States, Transcript } from "./types/props";
+export { UIConfig } from "./types/ui-config";
+export { IconPack } from "./lib/icons";
+export { DyteI18n } from "./lib/lang";
+export { AIMessage } from "./types/dyte-ai";
+export { ControlBarVariant } from "./components/dyte-controlbar-button/dyte-controlbar-button";
+export { DyteI18n as DyteI18n1, IconPack as IconPack1, Size as Size1, States as States1, UIConfig as UIConfig1 } from "./exports";
+export { AudioVisualizerVariant } from "./components/dyte-audio-visualizer/dyte-audio-visualizer";
+export { AvatarVariant } from "./components/dyte-avatar/dyte-avatar";
+export { DraftMeeting } from "./utils/breakout-rooms-manager";
+export { ButtonKind, ButtonVariant } from "./components/dyte-button/dyte-button";
+export { DyteBasicParticipant, DytePermissionsPreset, DytePlugin, FileMessage, ImageMessage, Message, TextMessage } from "@dytesdk/web-core";
+export { ChatFilter } from "./components/dyte-chat/dyte-chat";
+export { DyteNewMessageEvent } from "./components/dyte-chat-composer-ui/dyte-chat-composer-ui";
+export { NewMessageEvent } from "./components/dyte-chat-composer-view/dyte-chat-composer-view";
+export { ChatGroup, ChatGroupChangedType } from "./components/dyte-chat-selector-ui/dyte-chat-selector-ui";
+export { ControlBarVariant as ControlBarVariant1 } from "./components/dyte-controlbar-button/dyte-controlbar-button";
+export { GridLayout, GridSize } from "./components/dyte-grid/dyte-grid";
+export { GridPaginationVariants } from "./components/dyte-grid-pagination/dyte-grid-pagination";
+export { IconVariant } from "./components/dyte-icon/dyte-icon";
+export { ModalDataConfig } from "./components/dyte-join-stage/dyte-join-stage";
+export { MeetingMode } from "./components/dyte-meeting/dyte-meeting";
+export { GridLayout as GridLayout1, GridSize as GridSize1 } from "./components/dyte-grid/dyte-grid";
+export { Placement } from "./types/floating-ui";
+export { MessageAction } from "./components/dyte-message-view/dyte-message-view";
+export { DyteNameTagVariant } from "./components/dyte-name-tag/dyte-name-tag";
+export { VNode } from "@stencil/core";
+export { DataNode } from "./components/dyte-paginated-list/dyte-paginated-list";
+export { ParticipantViewMode } from "./components/dyte-participant/dyte-participant";
+export { ParticipantsTabId } from "./components/dyte-participants/dyte-participants";
+export { ParticipantsViewMode } from "./components/dyte-participants/dyte-participants";
+export { DyteSidebarTab, DyteSidebarView } from "./components/dyte-sidebar-ui/dyte-sidebar-ui";
+export { DyteSidebarSection } from "./components/dyte-sidebar/dyte-sidebar";
+export { DyteSidebarTab as DyteSidebarTab1, DyteSidebarView as DyteSidebarView1 } from "./components/dyte-sidebar-ui/dyte-sidebar-ui";
+export { Tab } from "./components/dyte-tab-bar/dyte-tab-bar";
+export { TooltipKind, TooltipVariant } from "./components/dyte-tooltip/dyte-tooltip";
+export { ViewerCountVariant } from "./components/dyte-viewer-count/dyte-viewer-count";
+export { Peer as Peer1 } from ".";
 export namespace Components {
     interface DyteAi {
         /**
@@ -196,6 +236,10 @@ export namespace Components {
          */
         "t": DyteI18n1;
     }
+    /**
+     * An audio visualizer component which visualizes a participants audio.
+     * Commonly used inside `dyte-name-tag`.
+     */
     interface DyteAudioVisualizer {
         /**
           * Hide when there is no audio / audio is muted
@@ -226,6 +270,9 @@ export namespace Components {
          */
         "variant": AudioVisualizerVariant;
     }
+    /**
+     * Avatar component which renders a participant's image or their initials.
+     */
     interface DyteAvatar {
         /**
           * Icon pack
@@ -290,6 +337,10 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which lists all participants, with ability to
+     * run privileged actions on each participant according to your permissions.
+     */
     interface DyteBreakoutRoomParticipants {
         /**
           * Icon pack
@@ -330,6 +381,10 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A button which toggles visibility of breakout rooms.
+     * You need to pass the `meeting` object to it.
+     */
     interface DyteBreakoutRoomsToggle {
         /**
           * Icon pack
@@ -374,6 +429,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A button that follows Dyte's Design System.
+     */
     interface DyteButton {
         /**
           * Where the button is disabled or not
@@ -408,6 +466,17 @@ export namespace Components {
          */
         "variant": ButtonVariant;
     }
+    /**
+     * A component which lets to manage your audio devices and audio preferences.
+     * Emits `dyteStateUpdate` event with data for muting notification sounds:
+     * ```ts
+     * {
+     *  prefs: {
+     *    muteNotificationSounds: boolean
+     *  }
+     * }
+     * ```
+     */
     interface DyteCameraSelector {
         /**
           * Icon pack
@@ -430,6 +499,9 @@ export namespace Components {
          */
         "variant": 'full' | 'inline';
     }
+    /**
+     * A button which toggles your camera.
+     */
     interface DyteCameraToggle {
         /**
           * Icon pack
@@ -596,6 +668,9 @@ export namespace Components {
          */
         "viewAs": 'dropdown' | 'list';
     }
+    /**
+     * Fully featured chat component with image & file upload, emoji picker and auto-scroll.
+     */
     interface DyteChat {
         /**
           * Config
@@ -672,6 +747,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which renders a chat composer
+     */
     interface DyteChatComposerView {
         /**
           * Whether user can send file messages
@@ -900,6 +978,14 @@ export namespace Components {
          */
         "unreadCounts": Record<string, number>;
     }
+    /**
+     * A button which toggles visibility of chat.
+     * You need to pass the `meeting` object to it to see the unread messages count badge.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSidebar: boolean; sidebar: 'chat' }
+     * ```
+     */
     interface DyteChatToggle {
         /**
           * Icon pack
@@ -926,6 +1012,9 @@ export namespace Components {
          */
         "variant": ControlBarVariant;
     }
+    /**
+     * Shows the time elapsed in a meeting.
+     */
     interface DyteClock {
         /**
           * Icon pack
@@ -940,6 +1029,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A confirmation modal.
+     */
     interface DyteConfirmationModal {
         /**
           * Icon pack
@@ -958,6 +1050,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * Controlbar component provides you with various designs as variants.
+     */
     interface DyteControlbar {
         /**
           * Config
@@ -992,6 +1087,9 @@ export namespace Components {
          */
         "variant": 'solid' | 'boxed';
     }
+    /**
+     * A skeleton component used for composing custom controlbar buttons.
+     */
     interface DyteControlbarButton {
         /**
           * Whether icon requires brand color
@@ -1032,8 +1130,11 @@ export namespace Components {
         /**
           * Variant
          */
-        "variant": ControlBarVariant;
+        "variant": ControlBarVariant1;
     }
+    /**
+     * A number picker with increment and decrement buttons.
+     */
     interface DyteCounter {
         /**
           * Icon pack
@@ -1056,6 +1157,9 @@ export namespace Components {
          */
         "value": number;
     }
+    /**
+     * A troubleshooting component to identify and fix any issues in the meeting.
+     */
     interface DyteDebugger {
         /**
           * Icon pack
@@ -1192,6 +1296,9 @@ export namespace Components {
          */
         "t": DyteI18n1;
     }
+    /**
+     * A dialog component.
+     */
     interface DyteDialog {
         /**
           * UI Config
@@ -1230,6 +1337,16 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which handles all dialog elements in a component such as:
+     * - dyte-settings
+     * - dyte-leave-meeting
+     * - dyte-permissions-message
+     * - dyte-image-viewer
+     * - dyte-remote-access-manager
+     * - dyte-breakout-rooms-manager
+     * This components depends on the values from `states` object.
+     */
     interface DyteDialogManager {
         /**
           * UI Config
@@ -1256,6 +1373,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which renders the draft attachment to send
+     */
     interface DyteDraftAttachmentView {
         /**
           * Attachment to display
@@ -1273,6 +1393,9 @@ export namespace Components {
          */
         "t": DyteI18n1;
     }
+    /**
+     * A very simple emoji picker component.
+     */
     interface DyteEmojiPicker {
         /**
           * Icon pack
@@ -1297,6 +1420,9 @@ export namespace Components {
          */
         "t": DyteI18n1;
     }
+    /**
+     * A screen which shows a meeting has ended.
+     */
     interface DyteEndedScreen {
         /**
           * Config object
@@ -1337,6 +1463,9 @@ export namespace Components {
          */
         "t": DyteI18n1;
     }
+    /**
+     * A component which renders a file message from chat.
+     */
     interface DyteFileMessage {
         /**
           * Icon pack
@@ -1363,6 +1492,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which renders a file message.
+     */
     interface DyteFileMessageView {
         /**
           * Icon pack
@@ -1407,6 +1539,10 @@ export namespace Components {
          */
         "t": DyteI18n1;
     }
+    /**
+     * A button which toggles full screen mode for any
+     * existing `dyte-meeting` component in the DOM.
+     */
     interface DyteFullscreenToggle {
         /**
           * Icon pack
@@ -1433,6 +1569,9 @@ export namespace Components {
          */
         "variant": ControlBarVariant;
     }
+    /**
+     * The main grid component which abstracts all the grid handling logic and renders it for you.
+     */
     interface DyteGrid {
         /**
           * The aspect ratio of each participant
@@ -1479,6 +1618,10 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which allows you to change current page and view mode
+     * of active participants list. This is reflected in the `dyte-grid` component.
+     */
     interface DyteGridPagination {
         /**
           * Icon Pack
@@ -1505,6 +1648,9 @@ export namespace Components {
          */
         "variant": GridPaginationVariants;
     }
+    /**
+     * A component that houses all the header components.
+     */
     interface DyteHeader {
         /**
           * Config
@@ -1539,6 +1685,9 @@ export namespace Components {
          */
         "variant": 'solid' | 'boxed';
     }
+    /**
+     * An icon component which accepts an svg string and renders it.
+     */
     interface DyteIcon {
         /**
           * Icon
@@ -1561,6 +1710,10 @@ export namespace Components {
          */
         "variant": IconVariant;
     }
+    /**
+     * A screen that handles the idle state,
+     * i.e; when you are waiting for data about the meeting, specifically the `meeting` object.
+     */
     interface DyteIdleScreen {
         /**
           * Config object
@@ -1579,6 +1732,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which renders an image message from chat.
+     */
     interface DyteImageMessage {
         /**
           * Icon pack
@@ -1605,6 +1761,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which renders an image message.
+     */
     interface DyteImageMessageView {
         /**
           * Icon pack
@@ -1619,6 +1778,9 @@ export namespace Components {
          */
         "url": string;
     }
+    /**
+     * A component which shows an image sent via chat.
+     */
     interface DyteImageViewer {
         /**
           * Icon pack
@@ -1673,6 +1835,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A button which toggles visilibility of the leave confirmation dialog.
+     */
     interface DyteLeaveButton {
         /**
           * Icon pack
@@ -1691,6 +1856,10 @@ export namespace Components {
          */
         "variant": ControlBarVariant;
     }
+    /**
+     * A component which allows you to leave a meeting or
+     * end meeting for all, if you have the permission.
+     */
     interface DyteLeaveMeeting {
         /**
           * Icon pack
@@ -1767,6 +1936,9 @@ export namespace Components {
          */
         "variant": ControlBarVariant;
     }
+    /**
+     * A component which loads the logo from your config, or via the `logo-url` attribute.
+     */
     interface DyteLogo {
         /**
           * Config object
@@ -1795,6 +1967,12 @@ export namespace Components {
          */
         "text": string;
     }
+    /**
+     * A single component which renders an entire meeting UI.
+     * It loads your preset and renders the UI based on it.
+     * With this component, you don't have to handle all the states,
+     * dialogs and other smaller bits of managing the application.
+     */
     interface DyteMeeting {
         /**
           * Whether to apply the design system on the document root from config
@@ -1841,6 +2019,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * Displays the title of the meeting.
+     */
     interface DyteMeetingTitle {
         /**
           * Icon pack
@@ -1855,6 +2036,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A menu component.
+     */
     interface DyteMenu {
         /**
           * Icon pack
@@ -1877,6 +2061,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A menu item component.
+     */
     interface DyteMenuItem {
         /**
           * Icon pack
@@ -1891,6 +2078,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A menu list component.
+     */
     interface DyteMenuList {
         /**
           * Icon pack
@@ -1901,6 +2091,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which renders list of messages.
+     */
     interface DyteMessageListView {
         /**
           * Estimated height of an item
@@ -1969,6 +2162,9 @@ export namespace Components {
          */
         "viewType": 'incoming' | 'outgoing';
     }
+    /**
+     * A button which toggles your microphone.
+     */
     interface DyteMicToggle {
         /**
           * Icon pack
@@ -1991,6 +2187,17 @@ export namespace Components {
          */
         "variant": ControlBarVariant;
     }
+    /**
+     * A component which lets to manage your audio devices and audio preferences.
+     * Emits `dyteStateUpdate` event with data for muting notification sounds:
+     * ```ts
+     * {
+     *  prefs: {
+     *    muteNotificationSounds: boolean
+     *  }
+     * }
+     * ```
+     */
     interface DyteMicrophoneSelector {
         /**
           * Icon pack
@@ -2013,6 +2220,9 @@ export namespace Components {
          */
         "variant": 'full' | 'inline';
     }
+    /**
+     * A grid component which handles screenshares, plugins and participants.
+     */
     interface DyteMixedGrid {
         /**
           * Aspect Ratio of participant tile  Format: `width:height`
@@ -2071,6 +2281,13 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A button which toggles visibility of a more menu.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeMoreMenu: boolean; }
+     * ```
+     */
     interface DyteMoreToggle {
         /**
           * Icon pack
@@ -2129,6 +2346,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which shows a participant's name.
+     */
     interface DyteNameTag {
         /**
           * Icon pack
@@ -2181,6 +2401,11 @@ export namespace Components {
          */
         "t": DyteI18n1;
     }
+    /**
+     * A component which shows a notification.
+     * You need to remove the element after you receive the
+     * `dyteNotificationDismiss` event.
+     */
     interface DyteNotification {
         /**
           * Icon pack
@@ -2199,6 +2424,11 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which handles notifications.
+     * You can configure which notifications you want to see and which ones you want to hear.
+     * There are also certain limits which you can set as well.
+     */
     interface DyteNotifications {
         /**
           * Config object
@@ -2225,6 +2455,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A confirmation modal.
+     */
     interface DyteOverlayModal {
         /**
           * Icon pack
@@ -2293,6 +2526,11 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A participant entry component used inside `dyte-participants` which shows data like:
+     * name, picture and media device status.
+     * You can perform privileged actions on the participant too.
+     */
     interface DyteParticipant {
         /**
           * Config object
@@ -2319,6 +2557,9 @@ export namespace Components {
          */
         "view": ParticipantViewMode;
     }
+    /**
+     * A component which shows count of total joined participants in a meeting.
+     */
     interface DyteParticipantCount {
         /**
           * Icon pack
@@ -2380,6 +2621,10 @@ export namespace Components {
          */
         "variant": 'solid' | 'gradient';
     }
+    /**
+     * A component which plays a participants video and allows for placement
+     * of components like `dyte-name-tag`, `dyte-audio-visualizer` or any other component.
+     */
     interface DyteParticipantTile {
         /**
           * Config object
@@ -2427,6 +2672,10 @@ export namespace Components {
          */
         "variant": 'solid' | 'gradient';
     }
+    /**
+     * A component which lists all participants, with ability to
+     * run privileged actions on each participant according to your permissions.
+     */
     interface DyteParticipants {
         /**
           * Config
@@ -2457,6 +2706,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which plays all the audio from participants and screenshares.
+     */
     interface DyteParticipantsAudio {
         /**
           * Icon pack
@@ -2475,6 +2727,10 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which lists all participants, with ability to
+     * run privileged actions on each participant according to your permissions.
+     */
     interface DyteParticipantsStageList {
         /**
           * Config
@@ -2535,6 +2791,13 @@ export namespace Components {
          */
         "view": ParticipantsViewMode;
     }
+    /**
+     * A button which toggles visibility of participants.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSidebar: boolean; sidebar: 'participants' }
+     * ```
+     */
     interface DyteParticipantsToggle {
         /**
           * Icon pack
@@ -2621,6 +2884,10 @@ export namespace Components {
          */
         "view": ParticipantsViewMode;
     }
+    /**
+     * A component which shows permission related troubleshooting
+     * information.
+     */
     interface DytePermissionsMessage {
         /**
           * Icon Pack
@@ -2669,6 +2936,9 @@ export namespace Components {
          */
         "variant": ControlBarVariant;
     }
+    /**
+     * A component which loads a plugin.
+     */
     interface DytePluginMain {
         /**
           * Icon pack
@@ -2687,6 +2957,10 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which lists all available plugins from their preset,
+     * and ability to enable or disable plugins.
+     */
     interface DytePlugins {
         /**
           * Config
@@ -2709,6 +2983,13 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A button which toggles visibility of plugins.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSidebar: boolean; sidebar: 'plugins' }
+     * ```
+     */
     interface DytePluginsToggle {
         /**
           * Icon pack
@@ -2735,6 +3016,10 @@ export namespace Components {
          */
         "variant": ControlBarVariant;
     }
+    /**
+     * A poll component.
+     * Shows a poll where a user can vote.
+     */
     interface DytePoll {
         /**
           * Icon pack
@@ -2757,6 +3042,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component that lets you create a poll.
+     */
     interface DytePollForm {
         /**
           * Icon pack
@@ -2767,6 +3055,10 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which lists all available plugins a user can access with
+     * the ability to enable or disable them as per their permissions.
+     */
     interface DytePolls {
         /**
           * Config
@@ -2789,6 +3081,14 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A button which toggles visibility of polls.
+     * You need to pass the `meeting` object to it to see the unread polls count badge.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSidebar: boolean; sidebar: 'polls' }
+     * ```
+     */
     interface DytePollsToggle {
         /**
           * Icon pack
@@ -2815,6 +3115,10 @@ export namespace Components {
          */
         "variant": ControlBarVariant;
     }
+    /**
+     * A component which indicates the recording status of a meeting.
+     * It will not render anything if no recording is taking place.
+     */
     interface DyteRecordingIndicator {
         /**
           * Icon pack
@@ -2833,6 +3137,12 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A button which toggles recording state of a meeting.
+     * Only a privileged user can perform this action,
+     * thus the button will not be visible for participants
+     * who don't have the permission to record a meeting.
+     */
     interface DyteRecordingToggle {
         /**
           * Disable the button
@@ -2859,6 +3169,9 @@ export namespace Components {
          */
         "variant": ControlBarVariant;
     }
+    /**
+     * A button which toggles your screenshare.
+     */
     interface DyteScreenShareToggle {
         /**
           * Icon pack
@@ -2885,6 +3198,11 @@ export namespace Components {
          */
         "variant": ControlBarVariant;
     }
+    /**
+     * A component which plays a participant's screenshared video.
+     * It also allows for placement of other components similar to `dyte-participant-tile`.
+     * This component will not render anything if the participant hasn't start screensharing.
+     */
     interface DyteScreenshareView {
         /**
           * Hide full screen button
@@ -2924,6 +3242,10 @@ export namespace Components {
          */
         "variant": 'solid' | 'gradient';
     }
+    /**
+     * A settings component to see and change your audio/video devices
+     * as well as see your connection quality.
+     */
     interface DyteSettings {
         /**
           * Icon pack
@@ -2946,6 +3268,17 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which lets to manage your audio devices and audio preferences.
+     * Emits `dyteStateUpdate` event with data for muting notification sounds:
+     * ```ts
+     * {
+     *  prefs: {
+     *    muteNotificationSounds: boolean
+     *  }
+     * }
+     * ```
+     */
     interface DyteSettingsAudio {
         /**
           * Icon pack
@@ -2968,6 +3301,13 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A button which toggles visibility of settings module.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSettings: boolean; }
+     * ```
+     */
     interface DyteSettingsToggle {
         /**
           * Icon pack
@@ -2990,6 +3330,17 @@ export namespace Components {
          */
         "variant": ControlBarVariant;
     }
+    /**
+     * A component which lets to manage your camera devices and your video preferences.
+     * Emits `dyteStateUpdate` event with data for toggling mirroring of self video:
+     * ```ts
+     * {
+     *  prefs: {
+     *    mirrorVideo: boolean
+     *  }
+     * }
+     * ```
+     */
     interface DyteSettingsVideo {
         /**
           * Icon pack
@@ -3012,6 +3363,10 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A screen shown before joining the meeting, where you can edit your display name,
+     * and media settings.
+     */
     interface DyteSetupScreen {
         /**
           * Config object
@@ -3038,6 +3393,10 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which handles the sidebar and
+     * you can customize which sections you want, and which section you want as the default.
+     */
     interface DyteSidebar {
         /**
           * Config
@@ -3100,12 +3459,15 @@ export namespace Components {
         /**
           * Tabs
          */
-        "tabs": DyteSidebarTab[];
+        "tabs": DyteSidebarTab1[];
         /**
           * View
          */
-        "view": DyteSidebarView;
+        "view": DyteSidebarView1;
     }
+    /**
+     * A grid component which renders only the participants in a simple grid.
+     */
     interface DyteSimpleGrid {
         /**
           * Aspect Ratio of participant tile  Format: `width:height`
@@ -3144,6 +3506,17 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which lets to manage your audio devices and audio preferences.
+     * Emits `dyteStateUpdate` event with data for muting notification sounds:
+     * ```ts
+     * {
+     *  prefs: {
+     *    muteNotificationSounds: boolean
+     *  }
+     * }
+     * ```
+     */
     interface DyteSpeakerSelector {
         /**
           * Icon pack
@@ -3170,6 +3543,9 @@ export namespace Components {
          */
         "variant": 'full' | 'inline';
     }
+    /**
+     * A component which shows an animating spinner.
+     */
     interface DyteSpinner {
         /**
           * Icon pack
@@ -3184,6 +3560,12 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A grid component that renders two lists of participants: `pinnedParticipants` and `participants`.
+     * You can customize the layout to a `column` view, by default is is `row`.
+     * - Participants from `pinnedParticipants[]` are rendered inside a larger grid.
+     * - Participants from `participants[]` array are rendered in a smaller grid.
+     */
     interface DyteSpotlightGrid {
         /**
           * Aspect Ratio of participant tile  Format: `width:height`
@@ -3252,6 +3634,10 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component used as a stage that commonly houses
+     * the `grid` and `sidebar` components.
+     */
     interface DyteStage {
         /**
           * Icon pack
@@ -3284,6 +3670,9 @@ export namespace Components {
          */
         "variant": ControlBarVariant;
     }
+    /**
+     * A switch component which follows Dyte's Design System.
+     */
     interface DyteSwitch {
         /**
           * Whether the switch is enabled/checked
@@ -3344,6 +3733,9 @@ export namespace Components {
          */
         "tabs": Tab[];
     }
+    /**
+     * A component which renders a text composer
+     */
     interface DyteTextComposerView {
         /**
           * Disable the text input (default = false)
@@ -3382,6 +3774,9 @@ export namespace Components {
          */
         "value": string;
     }
+    /**
+     * A text field component.
+     */
     interface DyteTextField {
         /**
           * Disabled
@@ -3404,6 +3799,9 @@ export namespace Components {
          */
         "type": string;
     }
+    /**
+     * A component which renders a text message from chat.
+     */
     interface DyteTextMessage {
         /**
           * Icon pack
@@ -3430,6 +3828,9 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
+    /**
+     * A component which renders a text message from chat.
+     */
     interface DyteTextMessageView {
         /**
           * Renders text as markdown (default = true)
@@ -3440,6 +3841,9 @@ export namespace Components {
          */
         "text": string;
     }
+    /**
+     * Tooltip component which follows Dyte's Design System.
+     */
     interface DyteTooltip {
         /**
           * Delay before showing the tooltip
@@ -3482,6 +3886,11 @@ export namespace Components {
          */
         "variant": TooltipVariant;
     }
+    /**
+     * A component which shows a transcript.
+     * You need to remove the element after you receive the
+     * `dyteTranscriptDismiss` event.
+     */
     interface DyteTranscript {
         /**
           * Language
@@ -3492,6 +3901,11 @@ export namespace Components {
          */
         "transcript": Transcript & { renderedId?: string };
     }
+    /**
+     * A component which handles transcripts.
+     * You can configure which transcripts you want to see and which ones you want to hear.
+     * There are also certain limits which you can set as well.
+     */
     interface DyteTranscripts {
         /**
           * Config object
@@ -3544,6 +3958,9 @@ export namespace Components {
          */
         "t": DyteI18n1;
     }
+    /**
+     * A component which shows count of total joined participants in a meeting.
+     */
     interface DyteViewerCount {
         /**
           * Icon pack
@@ -3601,8 +4018,6 @@ export namespace Components {
           * Language
          */
         "t": DyteI18n;
-    }
-    interface TestComponent {
     }
 }
 export interface DyteAiCustomEvent<T> extends CustomEvent<T> {
@@ -3922,7 +4337,18 @@ export interface DyteTranscriptCustomEvent<T> extends CustomEvent<T> {
     target: HTMLDyteTranscriptElement;
 }
 declare global {
+    interface HTMLDyteAiElementEventMap {
+        "dyteStateUpdate": States;
+    }
     interface HTMLDyteAiElement extends Components.DyteAi, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteAiElementEventMap>(type: K, listener: (this: HTMLDyteAiElement, ev: DyteAiCustomEvent<HTMLDyteAiElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteAiElementEventMap>(type: K, listener: (this: HTMLDyteAiElement, ev: DyteAiCustomEvent<HTMLDyteAiElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteAiElement: {
         prototype: HTMLDyteAiElement;
@@ -3940,7 +4366,18 @@ declare global {
         prototype: HTMLDyteAiHomeElement;
         new (): HTMLDyteAiHomeElement;
     };
+    interface HTMLDyteAiToggleElementEventMap {
+        "dyteStateUpdate": States;
+    }
     interface HTMLDyteAiToggleElement extends Components.DyteAiToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteAiToggleElementEventMap>(type: K, listener: (this: HTMLDyteAiToggleElement, ev: DyteAiToggleCustomEvent<HTMLDyteAiToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteAiToggleElementEventMap>(type: K, listener: (this: HTMLDyteAiToggleElement, ev: DyteAiToggleCustomEvent<HTMLDyteAiToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteAiToggleElement: {
         prototype: HTMLDyteAiToggleElement;
@@ -3964,73 +4401,205 @@ declare global {
         prototype: HTMLDyteAudioTileElement;
         new (): HTMLDyteAudioTileElement;
     };
+    /**
+     * An audio visualizer component which visualizes a participants audio.
+     * Commonly used inside `dyte-name-tag`.
+     */
     interface HTMLDyteAudioVisualizerElement extends Components.DyteAudioVisualizer, HTMLStencilElement {
     }
     var HTMLDyteAudioVisualizerElement: {
         prototype: HTMLDyteAudioVisualizerElement;
         new (): HTMLDyteAudioVisualizerElement;
     };
+    /**
+     * Avatar component which renders a participant's image or their initials.
+     */
     interface HTMLDyteAvatarElement extends Components.DyteAvatar, HTMLStencilElement {
     }
     var HTMLDyteAvatarElement: {
         prototype: HTMLDyteAvatarElement;
         new (): HTMLDyteAvatarElement;
     };
+    interface HTMLDyteBreakoutRoomManagerElementEventMap {
+        "participantsAdd": null;
+        "participantDelete": {
+    customParticipantId: string;
+  };
+        "roomJoin": null;
+        "delete": string;
+        "update": {
+    title: string | undefined;
+    id: string;
+  };
+    }
     interface HTMLDyteBreakoutRoomManagerElement extends Components.DyteBreakoutRoomManager, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteBreakoutRoomManagerElementEventMap>(type: K, listener: (this: HTMLDyteBreakoutRoomManagerElement, ev: DyteBreakoutRoomManagerCustomEvent<HTMLDyteBreakoutRoomManagerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteBreakoutRoomManagerElementEventMap>(type: K, listener: (this: HTMLDyteBreakoutRoomManagerElement, ev: DyteBreakoutRoomManagerCustomEvent<HTMLDyteBreakoutRoomManagerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteBreakoutRoomManagerElement: {
         prototype: HTMLDyteBreakoutRoomManagerElement;
         new (): HTMLDyteBreakoutRoomManagerElement;
     };
+    interface HTMLDyteBreakoutRoomParticipantsElementEventMap {
+        "selectedParticipantsUpdate": string[];
+        "allParticipantsToggleUpdate": string[];
+        "participantsDragging": boolean;
+    }
+    /**
+     * A component which lists all participants, with ability to
+     * run privileged actions on each participant according to your permissions.
+     */
     interface HTMLDyteBreakoutRoomParticipantsElement extends Components.DyteBreakoutRoomParticipants, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteBreakoutRoomParticipantsElementEventMap>(type: K, listener: (this: HTMLDyteBreakoutRoomParticipantsElement, ev: DyteBreakoutRoomParticipantsCustomEvent<HTMLDyteBreakoutRoomParticipantsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteBreakoutRoomParticipantsElementEventMap>(type: K, listener: (this: HTMLDyteBreakoutRoomParticipantsElement, ev: DyteBreakoutRoomParticipantsCustomEvent<HTMLDyteBreakoutRoomParticipantsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteBreakoutRoomParticipantsElement: {
         prototype: HTMLDyteBreakoutRoomParticipantsElement;
         new (): HTMLDyteBreakoutRoomParticipantsElement;
     };
+    interface HTMLDyteBreakoutRoomsManagerElementEventMap {
+        "dyteStateUpdate": Partial<States>;
+    }
     interface HTMLDyteBreakoutRoomsManagerElement extends Components.DyteBreakoutRoomsManager, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteBreakoutRoomsManagerElementEventMap>(type: K, listener: (this: HTMLDyteBreakoutRoomsManagerElement, ev: DyteBreakoutRoomsManagerCustomEvent<HTMLDyteBreakoutRoomsManagerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteBreakoutRoomsManagerElementEventMap>(type: K, listener: (this: HTMLDyteBreakoutRoomsManagerElement, ev: DyteBreakoutRoomsManagerCustomEvent<HTMLDyteBreakoutRoomsManagerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteBreakoutRoomsManagerElement: {
         prototype: HTMLDyteBreakoutRoomsManagerElement;
         new (): HTMLDyteBreakoutRoomsManagerElement;
     };
+    interface HTMLDyteBreakoutRoomsToggleElementEventMap {
+        "dyteStateUpdate": Partial<States>;
+    }
+    /**
+     * A button which toggles visibility of breakout rooms.
+     * You need to pass the `meeting` object to it.
+     */
     interface HTMLDyteBreakoutRoomsToggleElement extends Components.DyteBreakoutRoomsToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteBreakoutRoomsToggleElementEventMap>(type: K, listener: (this: HTMLDyteBreakoutRoomsToggleElement, ev: DyteBreakoutRoomsToggleCustomEvent<HTMLDyteBreakoutRoomsToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteBreakoutRoomsToggleElementEventMap>(type: K, listener: (this: HTMLDyteBreakoutRoomsToggleElement, ev: DyteBreakoutRoomsToggleCustomEvent<HTMLDyteBreakoutRoomsToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteBreakoutRoomsToggleElement: {
         prototype: HTMLDyteBreakoutRoomsToggleElement;
         new (): HTMLDyteBreakoutRoomsToggleElement;
     };
+    interface HTMLDyteBroadcastMessageModalElementEventMap {
+        "dyteStateUpdate": States1;
+    }
     interface HTMLDyteBroadcastMessageModalElement extends Components.DyteBroadcastMessageModal, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteBroadcastMessageModalElementEventMap>(type: K, listener: (this: HTMLDyteBroadcastMessageModalElement, ev: DyteBroadcastMessageModalCustomEvent<HTMLDyteBroadcastMessageModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteBroadcastMessageModalElementEventMap>(type: K, listener: (this: HTMLDyteBroadcastMessageModalElement, ev: DyteBroadcastMessageModalCustomEvent<HTMLDyteBroadcastMessageModalElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteBroadcastMessageModalElement: {
         prototype: HTMLDyteBroadcastMessageModalElement;
         new (): HTMLDyteBroadcastMessageModalElement;
     };
+    /**
+     * A button that follows Dyte's Design System.
+     */
     interface HTMLDyteButtonElement extends Components.DyteButton, HTMLStencilElement {
     }
     var HTMLDyteButtonElement: {
         prototype: HTMLDyteButtonElement;
         new (): HTMLDyteButtonElement;
     };
+    /**
+     * A component which lets to manage your audio devices and audio preferences.
+     * Emits `dyteStateUpdate` event with data for muting notification sounds:
+     * ```ts
+     * {
+     *  prefs: {
+     *    muteNotificationSounds: boolean
+     *  }
+     * }
+     * ```
+     */
     interface HTMLDyteCameraSelectorElement extends Components.DyteCameraSelector, HTMLStencilElement {
     }
     var HTMLDyteCameraSelectorElement: {
         prototype: HTMLDyteCameraSelectorElement;
         new (): HTMLDyteCameraSelectorElement;
     };
+    interface HTMLDyteCameraToggleElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A button which toggles your camera.
+     */
     interface HTMLDyteCameraToggleElement extends Components.DyteCameraToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteCameraToggleElementEventMap>(type: K, listener: (this: HTMLDyteCameraToggleElement, ev: DyteCameraToggleCustomEvent<HTMLDyteCameraToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteCameraToggleElementEventMap>(type: K, listener: (this: HTMLDyteCameraToggleElement, ev: DyteCameraToggleCustomEvent<HTMLDyteCameraToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteCameraToggleElement: {
         prototype: HTMLDyteCameraToggleElement;
         new (): HTMLDyteCameraToggleElement;
     };
+    interface HTMLDyteCaptionToggleElementEventMap {
+        "dyteStateUpdate": States1;
+    }
     interface HTMLDyteCaptionToggleElement extends Components.DyteCaptionToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteCaptionToggleElementEventMap>(type: K, listener: (this: HTMLDyteCaptionToggleElement, ev: DyteCaptionToggleCustomEvent<HTMLDyteCaptionToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteCaptionToggleElementEventMap>(type: K, listener: (this: HTMLDyteCaptionToggleElement, ev: DyteCaptionToggleCustomEvent<HTMLDyteCaptionToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteCaptionToggleElement: {
         prototype: HTMLDyteCaptionToggleElement;
         new (): HTMLDyteCaptionToggleElement;
     };
+    interface HTMLDyteChannelCreatorElementEventMap {
+        "dyteStateUpdate": States1;
+        "switchChannel": string;
+    }
     interface HTMLDyteChannelCreatorElement extends Components.DyteChannelCreator, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteChannelCreatorElementEventMap>(type: K, listener: (this: HTMLDyteChannelCreatorElement, ev: DyteChannelCreatorCustomEvent<HTMLDyteChannelCreatorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteChannelCreatorElementEventMap>(type: K, listener: (this: HTMLDyteChannelCreatorElement, ev: DyteChannelCreatorCustomEvent<HTMLDyteChannelCreatorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteChannelCreatorElement: {
         prototype: HTMLDyteChannelCreatorElement;
@@ -4042,55 +4611,189 @@ declare global {
         prototype: HTMLDyteChannelDetailsElement;
         new (): HTMLDyteChannelDetailsElement;
     };
+    interface HTMLDyteChannelHeaderElementEventMap {
+        "search": string;
+        "searchDismissed": any;
+        "back": void;
+    }
     interface HTMLDyteChannelHeaderElement extends Components.DyteChannelHeader, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteChannelHeaderElementEventMap>(type: K, listener: (this: HTMLDyteChannelHeaderElement, ev: DyteChannelHeaderCustomEvent<HTMLDyteChannelHeaderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteChannelHeaderElementEventMap>(type: K, listener: (this: HTMLDyteChannelHeaderElement, ev: DyteChannelHeaderCustomEvent<HTMLDyteChannelHeaderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteChannelHeaderElement: {
         prototype: HTMLDyteChannelHeaderElement;
         new (): HTMLDyteChannelHeaderElement;
     };
+    interface HTMLDyteChannelSelectorUiElementEventMap {
+        "channelChanged": string;
+    }
     interface HTMLDyteChannelSelectorUiElement extends Components.DyteChannelSelectorUi, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteChannelSelectorUiElementEventMap>(type: K, listener: (this: HTMLDyteChannelSelectorUiElement, ev: DyteChannelSelectorUiCustomEvent<HTMLDyteChannelSelectorUiElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteChannelSelectorUiElementEventMap>(type: K, listener: (this: HTMLDyteChannelSelectorUiElement, ev: DyteChannelSelectorUiCustomEvent<HTMLDyteChannelSelectorUiElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteChannelSelectorUiElement: {
         prototype: HTMLDyteChannelSelectorUiElement;
         new (): HTMLDyteChannelSelectorUiElement;
     };
+    interface HTMLDyteChannelSelectorViewElementEventMap {
+        "channelChange": {
+    id: string;
+    name: string;
+    avatarUrl?: string;
+    icon?: keyof IconPack1;
+    latestMessage?: string;
+    latestMessageTime?: Date;
+    unreadCount?: number;
+  };
+    }
     interface HTMLDyteChannelSelectorViewElement extends Components.DyteChannelSelectorView, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteChannelSelectorViewElementEventMap>(type: K, listener: (this: HTMLDyteChannelSelectorViewElement, ev: DyteChannelSelectorViewCustomEvent<HTMLDyteChannelSelectorViewElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteChannelSelectorViewElementEventMap>(type: K, listener: (this: HTMLDyteChannelSelectorViewElement, ev: DyteChannelSelectorViewCustomEvent<HTMLDyteChannelSelectorViewElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteChannelSelectorViewElement: {
         prototype: HTMLDyteChannelSelectorViewElement;
         new (): HTMLDyteChannelSelectorViewElement;
     };
+    interface HTMLDyteChatElementEventMap {
+        "dyteStateUpdate": States1;
+    }
+    /**
+     * Fully featured chat component with image & file upload, emoji picker and auto-scroll.
+     */
     interface HTMLDyteChatElement extends Components.DyteChat, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteChatElementEventMap>(type: K, listener: (this: HTMLDyteChatElement, ev: DyteChatCustomEvent<HTMLDyteChatElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteChatElementEventMap>(type: K, listener: (this: HTMLDyteChatElement, ev: DyteChatCustomEvent<HTMLDyteChatElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteChatElement: {
         prototype: HTMLDyteChatElement;
         new (): HTMLDyteChatElement;
     };
+    interface HTMLDyteChatComposerUiElementEventMap {
+        "dyteNewMessage": DyteNewMessageEvent;
+        "dyteEditMessage": {
+    id: string;
+    message: string;
+    channelId?: string;
+  };
+        "dyteEditCancelled": any;
+    }
     interface HTMLDyteChatComposerUiElement extends Components.DyteChatComposerUi, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteChatComposerUiElementEventMap>(type: K, listener: (this: HTMLDyteChatComposerUiElement, ev: DyteChatComposerUiCustomEvent<HTMLDyteChatComposerUiElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteChatComposerUiElementEventMap>(type: K, listener: (this: HTMLDyteChatComposerUiElement, ev: DyteChatComposerUiCustomEvent<HTMLDyteChatComposerUiElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteChatComposerUiElement: {
         prototype: HTMLDyteChatComposerUiElement;
         new (): HTMLDyteChatComposerUiElement;
     };
+    interface HTMLDyteChatComposerViewElementEventMap {
+        "newMessage": NewMessageEvent;
+        "editMessage": string;
+        "editCancel": void;
+        "quotedMessageDismiss": void;
+    }
+    /**
+     * A component which renders a chat composer
+     */
     interface HTMLDyteChatComposerViewElement extends Components.DyteChatComposerView, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteChatComposerViewElementEventMap>(type: K, listener: (this: HTMLDyteChatComposerViewElement, ev: DyteChatComposerViewCustomEvent<HTMLDyteChatComposerViewElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteChatComposerViewElementEventMap>(type: K, listener: (this: HTMLDyteChatComposerViewElement, ev: DyteChatComposerViewCustomEvent<HTMLDyteChatComposerViewElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteChatComposerViewElement: {
         prototype: HTMLDyteChatComposerViewElement;
         new (): HTMLDyteChatComposerViewElement;
     };
+    interface HTMLDyteChatMessageElementEventMap {
+        "edit": Message;
+        "reply": Message;
+        "pin": Message;
+        "delete": Message;
+    }
     interface HTMLDyteChatMessageElement extends Components.DyteChatMessage, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteChatMessageElementEventMap>(type: K, listener: (this: HTMLDyteChatMessageElement, ev: DyteChatMessageCustomEvent<HTMLDyteChatMessageElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteChatMessageElementEventMap>(type: K, listener: (this: HTMLDyteChatMessageElement, ev: DyteChatMessageCustomEvent<HTMLDyteChatMessageElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteChatMessageElement: {
         prototype: HTMLDyteChatMessageElement;
         new (): HTMLDyteChatMessageElement;
     };
+    interface HTMLDyteChatMessagesUiElementEventMap {
+        "pinMessage": Message;
+        "dyteStateUpdate": States;
+    }
     interface HTMLDyteChatMessagesUiElement extends Components.DyteChatMessagesUi, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteChatMessagesUiElementEventMap>(type: K, listener: (this: HTMLDyteChatMessagesUiElement, ev: DyteChatMessagesUiCustomEvent<HTMLDyteChatMessagesUiElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteChatMessagesUiElementEventMap>(type: K, listener: (this: HTMLDyteChatMessagesUiElement, ev: DyteChatMessagesUiCustomEvent<HTMLDyteChatMessagesUiElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteChatMessagesUiElement: {
         prototype: HTMLDyteChatMessagesUiElement;
         new (): HTMLDyteChatMessagesUiElement;
     };
+    interface HTMLDyteChatMessagesUiPaginatedElementEventMap {
+        "editMessageInit": {
+    payload: TextMessage;
+    flags: { isReply?: boolean; isEdit?: boolean };
+  };
+        "pinMessage": Message;
+        "deleteMessage": Message;
+        "dyteStateUpdate": States;
+    }
     interface HTMLDyteChatMessagesUiPaginatedElement extends Components.DyteChatMessagesUiPaginated, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteChatMessagesUiPaginatedElementEventMap>(type: K, listener: (this: HTMLDyteChatMessagesUiPaginatedElement, ev: DyteChatMessagesUiPaginatedCustomEvent<HTMLDyteChatMessagesUiPaginatedElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteChatMessagesUiPaginatedElementEventMap>(type: K, listener: (this: HTMLDyteChatMessagesUiPaginatedElement, ev: DyteChatMessagesUiPaginatedCustomEvent<HTMLDyteChatMessagesUiPaginatedElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteChatMessagesUiPaginatedElement: {
         prototype: HTMLDyteChatMessagesUiPaginatedElement;
@@ -4102,49 +4805,130 @@ declare global {
         prototype: HTMLDyteChatSearchResultsElement;
         new (): HTMLDyteChatSearchResultsElement;
     };
+    interface HTMLDyteChatSelectorUiElementEventMap {
+        "dyteChatGroupChanged": ChatGroupChangedType;
+    }
     interface HTMLDyteChatSelectorUiElement extends Components.DyteChatSelectorUi, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteChatSelectorUiElementEventMap>(type: K, listener: (this: HTMLDyteChatSelectorUiElement, ev: DyteChatSelectorUiCustomEvent<HTMLDyteChatSelectorUiElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteChatSelectorUiElementEventMap>(type: K, listener: (this: HTMLDyteChatSelectorUiElement, ev: DyteChatSelectorUiCustomEvent<HTMLDyteChatSelectorUiElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteChatSelectorUiElement: {
         prototype: HTMLDyteChatSelectorUiElement;
         new (): HTMLDyteChatSelectorUiElement;
     };
+    interface HTMLDyteChatToggleElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A button which toggles visibility of chat.
+     * You need to pass the `meeting` object to it to see the unread messages count badge.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSidebar: boolean; sidebar: 'chat' }
+     * ```
+     */
     interface HTMLDyteChatToggleElement extends Components.DyteChatToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteChatToggleElementEventMap>(type: K, listener: (this: HTMLDyteChatToggleElement, ev: DyteChatToggleCustomEvent<HTMLDyteChatToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteChatToggleElementEventMap>(type: K, listener: (this: HTMLDyteChatToggleElement, ev: DyteChatToggleCustomEvent<HTMLDyteChatToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteChatToggleElement: {
         prototype: HTMLDyteChatToggleElement;
         new (): HTMLDyteChatToggleElement;
     };
+    /**
+     * Shows the time elapsed in a meeting.
+     */
     interface HTMLDyteClockElement extends Components.DyteClock, HTMLStencilElement {
     }
     var HTMLDyteClockElement: {
         prototype: HTMLDyteClockElement;
         new (): HTMLDyteClockElement;
     };
+    interface HTMLDyteConfirmationModalElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A confirmation modal.
+     */
     interface HTMLDyteConfirmationModalElement extends Components.DyteConfirmationModal, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteConfirmationModalElementEventMap>(type: K, listener: (this: HTMLDyteConfirmationModalElement, ev: DyteConfirmationModalCustomEvent<HTMLDyteConfirmationModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteConfirmationModalElementEventMap>(type: K, listener: (this: HTMLDyteConfirmationModalElement, ev: DyteConfirmationModalCustomEvent<HTMLDyteConfirmationModalElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteConfirmationModalElement: {
         prototype: HTMLDyteConfirmationModalElement;
         new (): HTMLDyteConfirmationModalElement;
     };
+    /**
+     * Controlbar component provides you with various designs as variants.
+     */
     interface HTMLDyteControlbarElement extends Components.DyteControlbar, HTMLStencilElement {
     }
     var HTMLDyteControlbarElement: {
         prototype: HTMLDyteControlbarElement;
         new (): HTMLDyteControlbarElement;
     };
+    /**
+     * A skeleton component used for composing custom controlbar buttons.
+     */
     interface HTMLDyteControlbarButtonElement extends Components.DyteControlbarButton, HTMLStencilElement {
     }
     var HTMLDyteControlbarButtonElement: {
         prototype: HTMLDyteControlbarButtonElement;
         new (): HTMLDyteControlbarButtonElement;
     };
+    interface HTMLDyteCounterElementEventMap {
+        "valueChange": string;
+    }
+    /**
+     * A number picker with increment and decrement buttons.
+     */
     interface HTMLDyteCounterElement extends Components.DyteCounter, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteCounterElementEventMap>(type: K, listener: (this: HTMLDyteCounterElement, ev: DyteCounterCustomEvent<HTMLDyteCounterElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteCounterElementEventMap>(type: K, listener: (this: HTMLDyteCounterElement, ev: DyteCounterCustomEvent<HTMLDyteCounterElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteCounterElement: {
         prototype: HTMLDyteCounterElement;
         new (): HTMLDyteCounterElement;
     };
+    interface HTMLDyteDebuggerElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A troubleshooting component to identify and fix any issues in the meeting.
+     */
     interface HTMLDyteDebuggerElement extends Components.DyteDebugger, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteDebuggerElementEventMap>(type: K, listener: (this: HTMLDyteDebuggerElement, ev: DyteDebuggerCustomEvent<HTMLDyteDebuggerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteDebuggerElementEventMap>(type: K, listener: (this: HTMLDyteDebuggerElement, ev: DyteDebuggerCustomEvent<HTMLDyteDebuggerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteDebuggerElement: {
         prototype: HTMLDyteDebuggerElement;
@@ -4168,7 +4952,18 @@ declare global {
         prototype: HTMLDyteDebuggerSystemElement;
         new (): HTMLDyteDebuggerSystemElement;
     };
+    interface HTMLDyteDebuggerToggleElementEventMap {
+        "dyteStateUpdate": States;
+    }
     interface HTMLDyteDebuggerToggleElement extends Components.DyteDebuggerToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteDebuggerToggleElementEventMap>(type: K, listener: (this: HTMLDyteDebuggerToggleElement, ev: DyteDebuggerToggleCustomEvent<HTMLDyteDebuggerToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteDebuggerToggleElementEventMap>(type: K, listener: (this: HTMLDyteDebuggerToggleElement, ev: DyteDebuggerToggleCustomEvent<HTMLDyteDebuggerToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteDebuggerToggleElement: {
         prototype: HTMLDyteDebuggerToggleElement;
@@ -4180,25 +4975,89 @@ declare global {
         prototype: HTMLDyteDebuggerVideoElement;
         new (): HTMLDyteDebuggerVideoElement;
     };
+    interface HTMLDyteDialogElementEventMap {
+        "dyteDialogClose": any;
+    }
+    /**
+     * A dialog component.
+     */
     interface HTMLDyteDialogElement extends Components.DyteDialog, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteDialogElementEventMap>(type: K, listener: (this: HTMLDyteDialogElement, ev: DyteDialogCustomEvent<HTMLDyteDialogElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteDialogElementEventMap>(type: K, listener: (this: HTMLDyteDialogElement, ev: DyteDialogCustomEvent<HTMLDyteDialogElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteDialogElement: {
         prototype: HTMLDyteDialogElement;
         new (): HTMLDyteDialogElement;
     };
+    interface HTMLDyteDialogManagerElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A component which handles all dialog elements in a component such as:
+     * - dyte-settings
+     * - dyte-leave-meeting
+     * - dyte-permissions-message
+     * - dyte-image-viewer
+     * - dyte-remote-access-manager
+     * - dyte-breakout-rooms-manager
+     * This components depends on the values from `states` object.
+     */
     interface HTMLDyteDialogManagerElement extends Components.DyteDialogManager, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteDialogManagerElementEventMap>(type: K, listener: (this: HTMLDyteDialogManagerElement, ev: DyteDialogManagerCustomEvent<HTMLDyteDialogManagerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteDialogManagerElementEventMap>(type: K, listener: (this: HTMLDyteDialogManagerElement, ev: DyteDialogManagerCustomEvent<HTMLDyteDialogManagerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteDialogManagerElement: {
         prototype: HTMLDyteDialogManagerElement;
         new (): HTMLDyteDialogManagerElement;
     };
+    interface HTMLDyteDraftAttachmentViewElementEventMap {
+        "deleteAttachment": any;
+    }
+    /**
+     * A component which renders the draft attachment to send
+     */
     interface HTMLDyteDraftAttachmentViewElement extends Components.DyteDraftAttachmentView, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteDraftAttachmentViewElementEventMap>(type: K, listener: (this: HTMLDyteDraftAttachmentViewElement, ev: DyteDraftAttachmentViewCustomEvent<HTMLDyteDraftAttachmentViewElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteDraftAttachmentViewElementEventMap>(type: K, listener: (this: HTMLDyteDraftAttachmentViewElement, ev: DyteDraftAttachmentViewCustomEvent<HTMLDyteDraftAttachmentViewElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteDraftAttachmentViewElement: {
         prototype: HTMLDyteDraftAttachmentViewElement;
         new (): HTMLDyteDraftAttachmentViewElement;
     };
+    interface HTMLDyteEmojiPickerElementEventMap {
+        "pickerClose": void;
+        "dyteEmojiClicked": string;
+    }
+    /**
+     * A very simple emoji picker component.
+     */
     interface HTMLDyteEmojiPickerElement extends Components.DyteEmojiPicker, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteEmojiPickerElementEventMap>(type: K, listener: (this: HTMLDyteEmojiPickerElement, ev: DyteEmojiPickerCustomEvent<HTMLDyteEmojiPickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteEmojiPickerElementEventMap>(type: K, listener: (this: HTMLDyteEmojiPickerElement, ev: DyteEmojiPickerCustomEvent<HTMLDyteEmojiPickerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteEmojiPickerElement: {
         prototype: HTMLDyteEmojiPickerElement;
@@ -4210,85 +5069,201 @@ declare global {
         prototype: HTMLDyteEmojiPickerButtonElement;
         new (): HTMLDyteEmojiPickerButtonElement;
     };
+    /**
+     * A screen which shows a meeting has ended.
+     */
     interface HTMLDyteEndedScreenElement extends Components.DyteEndedScreen, HTMLStencilElement {
     }
     var HTMLDyteEndedScreenElement: {
         prototype: HTMLDyteEndedScreenElement;
         new (): HTMLDyteEndedScreenElement;
     };
+    interface HTMLDyteFileDropzoneElementEventMap {
+        "dropCallback": DragEvent;
+    }
     interface HTMLDyteFileDropzoneElement extends Components.DyteFileDropzone, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteFileDropzoneElementEventMap>(type: K, listener: (this: HTMLDyteFileDropzoneElement, ev: DyteFileDropzoneCustomEvent<HTMLDyteFileDropzoneElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteFileDropzoneElementEventMap>(type: K, listener: (this: HTMLDyteFileDropzoneElement, ev: DyteFileDropzoneCustomEvent<HTMLDyteFileDropzoneElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteFileDropzoneElement: {
         prototype: HTMLDyteFileDropzoneElement;
         new (): HTMLDyteFileDropzoneElement;
     };
+    /**
+     * A component which renders a file message from chat.
+     */
     interface HTMLDyteFileMessageElement extends Components.DyteFileMessage, HTMLStencilElement {
     }
     var HTMLDyteFileMessageElement: {
         prototype: HTMLDyteFileMessageElement;
         new (): HTMLDyteFileMessageElement;
     };
+    /**
+     * A component which renders a file message.
+     */
     interface HTMLDyteFileMessageViewElement extends Components.DyteFileMessageView, HTMLStencilElement {
     }
     var HTMLDyteFileMessageViewElement: {
         prototype: HTMLDyteFileMessageViewElement;
         new (): HTMLDyteFileMessageViewElement;
     };
+    interface HTMLDyteFilePickerButtonElementEventMap {
+        "fileChange": File;
+    }
     interface HTMLDyteFilePickerButtonElement extends Components.DyteFilePickerButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteFilePickerButtonElementEventMap>(type: K, listener: (this: HTMLDyteFilePickerButtonElement, ev: DyteFilePickerButtonCustomEvent<HTMLDyteFilePickerButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteFilePickerButtonElementEventMap>(type: K, listener: (this: HTMLDyteFilePickerButtonElement, ev: DyteFilePickerButtonCustomEvent<HTMLDyteFilePickerButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteFilePickerButtonElement: {
         prototype: HTMLDyteFilePickerButtonElement;
         new (): HTMLDyteFilePickerButtonElement;
     };
+    interface HTMLDyteFullscreenToggleElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A button which toggles full screen mode for any
+     * existing `dyte-meeting` component in the DOM.
+     */
     interface HTMLDyteFullscreenToggleElement extends Components.DyteFullscreenToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteFullscreenToggleElementEventMap>(type: K, listener: (this: HTMLDyteFullscreenToggleElement, ev: DyteFullscreenToggleCustomEvent<HTMLDyteFullscreenToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteFullscreenToggleElementEventMap>(type: K, listener: (this: HTMLDyteFullscreenToggleElement, ev: DyteFullscreenToggleCustomEvent<HTMLDyteFullscreenToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteFullscreenToggleElement: {
         prototype: HTMLDyteFullscreenToggleElement;
         new (): HTMLDyteFullscreenToggleElement;
     };
+    interface HTMLDyteGridElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * The main grid component which abstracts all the grid handling logic and renders it for you.
+     */
     interface HTMLDyteGridElement extends Components.DyteGrid, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteGridElementEventMap>(type: K, listener: (this: HTMLDyteGridElement, ev: DyteGridCustomEvent<HTMLDyteGridElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteGridElementEventMap>(type: K, listener: (this: HTMLDyteGridElement, ev: DyteGridCustomEvent<HTMLDyteGridElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteGridElement: {
         prototype: HTMLDyteGridElement;
         new (): HTMLDyteGridElement;
     };
+    /**
+     * A component which allows you to change current page and view mode
+     * of active participants list. This is reflected in the `dyte-grid` component.
+     */
     interface HTMLDyteGridPaginationElement extends Components.DyteGridPagination, HTMLStencilElement {
     }
     var HTMLDyteGridPaginationElement: {
         prototype: HTMLDyteGridPaginationElement;
         new (): HTMLDyteGridPaginationElement;
     };
+    /**
+     * A component that houses all the header components.
+     */
     interface HTMLDyteHeaderElement extends Components.DyteHeader, HTMLStencilElement {
     }
     var HTMLDyteHeaderElement: {
         prototype: HTMLDyteHeaderElement;
         new (): HTMLDyteHeaderElement;
     };
+    /**
+     * An icon component which accepts an svg string and renders it.
+     */
     interface HTMLDyteIconElement extends Components.DyteIcon, HTMLStencilElement {
     }
     var HTMLDyteIconElement: {
         prototype: HTMLDyteIconElement;
         new (): HTMLDyteIconElement;
     };
+    /**
+     * A screen that handles the idle state,
+     * i.e; when you are waiting for data about the meeting, specifically the `meeting` object.
+     */
     interface HTMLDyteIdleScreenElement extends Components.DyteIdleScreen, HTMLStencilElement {
     }
     var HTMLDyteIdleScreenElement: {
         prototype: HTMLDyteIdleScreenElement;
         new (): HTMLDyteIdleScreenElement;
     };
+    interface HTMLDyteImageMessageElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A component which renders an image message from chat.
+     */
     interface HTMLDyteImageMessageElement extends Components.DyteImageMessage, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteImageMessageElementEventMap>(type: K, listener: (this: HTMLDyteImageMessageElement, ev: DyteImageMessageCustomEvent<HTMLDyteImageMessageElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteImageMessageElementEventMap>(type: K, listener: (this: HTMLDyteImageMessageElement, ev: DyteImageMessageCustomEvent<HTMLDyteImageMessageElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteImageMessageElement: {
         prototype: HTMLDyteImageMessageElement;
         new (): HTMLDyteImageMessageElement;
     };
+    interface HTMLDyteImageMessageViewElementEventMap {
+        "preview": string;
+    }
+    /**
+     * A component which renders an image message.
+     */
     interface HTMLDyteImageMessageViewElement extends Components.DyteImageMessageView, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteImageMessageViewElementEventMap>(type: K, listener: (this: HTMLDyteImageMessageViewElement, ev: DyteImageMessageViewCustomEvent<HTMLDyteImageMessageViewElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteImageMessageViewElementEventMap>(type: K, listener: (this: HTMLDyteImageMessageViewElement, ev: DyteImageMessageViewCustomEvent<HTMLDyteImageMessageViewElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteImageMessageViewElement: {
         prototype: HTMLDyteImageMessageViewElement;
         new (): HTMLDyteImageMessageViewElement;
     };
+    interface HTMLDyteImageViewerElementEventMap {
+        "close": void;
+    }
+    /**
+     * A component which shows an image sent via chat.
+     */
     interface HTMLDyteImageViewerElement extends Components.DyteImageViewer, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteImageViewerElementEventMap>(type: K, listener: (this: HTMLDyteImageViewerElement, ev: DyteImageViewerCustomEvent<HTMLDyteImageViewerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteImageViewerElementEventMap>(type: K, listener: (this: HTMLDyteImageViewerElement, ev: DyteImageViewerCustomEvent<HTMLDyteImageViewerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteImageViewerElement: {
         prototype: HTMLDyteImageViewerElement;
@@ -4300,19 +5275,61 @@ declare global {
         prototype: HTMLDyteInformationTooltipElement;
         new (): HTMLDyteInformationTooltipElement;
     };
+    interface HTMLDyteJoinStageElementEventMap {
+        "dyteStateUpdate": States;
+        "dyteJoinStage": void;
+        "dyteLeaveStage": void;
+    }
     interface HTMLDyteJoinStageElement extends Components.DyteJoinStage, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteJoinStageElementEventMap>(type: K, listener: (this: HTMLDyteJoinStageElement, ev: DyteJoinStageCustomEvent<HTMLDyteJoinStageElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteJoinStageElementEventMap>(type: K, listener: (this: HTMLDyteJoinStageElement, ev: DyteJoinStageCustomEvent<HTMLDyteJoinStageElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteJoinStageElement: {
         prototype: HTMLDyteJoinStageElement;
         new (): HTMLDyteJoinStageElement;
     };
+    interface HTMLDyteLeaveButtonElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A button which toggles visilibility of the leave confirmation dialog.
+     */
     interface HTMLDyteLeaveButtonElement extends Components.DyteLeaveButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteLeaveButtonElementEventMap>(type: K, listener: (this: HTMLDyteLeaveButtonElement, ev: DyteLeaveButtonCustomEvent<HTMLDyteLeaveButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteLeaveButtonElementEventMap>(type: K, listener: (this: HTMLDyteLeaveButtonElement, ev: DyteLeaveButtonCustomEvent<HTMLDyteLeaveButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteLeaveButtonElement: {
         prototype: HTMLDyteLeaveButtonElement;
         new (): HTMLDyteLeaveButtonElement;
     };
+    interface HTMLDyteLeaveMeetingElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A component which allows you to leave a meeting or
+     * end meeting for all, if you have the permission.
+     */
     interface HTMLDyteLeaveMeetingElement extends Components.DyteLeaveMeeting, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteLeaveMeetingElementEventMap>(type: K, listener: (this: HTMLDyteLeaveMeetingElement, ev: DyteLeaveMeetingCustomEvent<HTMLDyteLeaveMeetingElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteLeaveMeetingElementEventMap>(type: K, listener: (this: HTMLDyteLeaveMeetingElement, ev: DyteLeaveMeetingCustomEvent<HTMLDyteLeaveMeetingElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteLeaveMeetingElement: {
         prototype: HTMLDyteLeaveMeetingElement;
@@ -4324,18 +5341,50 @@ declare global {
         prototype: HTMLDyteLivestreamIndicatorElement;
         new (): HTMLDyteLivestreamIndicatorElement;
     };
+    interface HTMLDyteLivestreamPlayerElementEventMap {
+        "dyteAPIError": {
+    trace: string;
+    message: string;
+  };
+    }
     interface HTMLDyteLivestreamPlayerElement extends Components.DyteLivestreamPlayer, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteLivestreamPlayerElementEventMap>(type: K, listener: (this: HTMLDyteLivestreamPlayerElement, ev: DyteLivestreamPlayerCustomEvent<HTMLDyteLivestreamPlayerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteLivestreamPlayerElementEventMap>(type: K, listener: (this: HTMLDyteLivestreamPlayerElement, ev: DyteLivestreamPlayerCustomEvent<HTMLDyteLivestreamPlayerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteLivestreamPlayerElement: {
         prototype: HTMLDyteLivestreamPlayerElement;
         new (): HTMLDyteLivestreamPlayerElement;
     };
+    interface HTMLDyteLivestreamToggleElementEventMap {
+        "dyteStateUpdate": States1;
+        "dyteAPIError": {
+    trace: string;
+    message: string;
+  };
+    }
     interface HTMLDyteLivestreamToggleElement extends Components.DyteLivestreamToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteLivestreamToggleElementEventMap>(type: K, listener: (this: HTMLDyteLivestreamToggleElement, ev: DyteLivestreamToggleCustomEvent<HTMLDyteLivestreamToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteLivestreamToggleElementEventMap>(type: K, listener: (this: HTMLDyteLivestreamToggleElement, ev: DyteLivestreamToggleCustomEvent<HTMLDyteLivestreamToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteLivestreamToggleElement: {
         prototype: HTMLDyteLivestreamToggleElement;
         new (): HTMLDyteLivestreamToggleElement;
     };
+    /**
+     * A component which loads the logo from your config, or via the `logo-url` attribute.
+     */
     interface HTMLDyteLogoElement extends Components.DyteLogo, HTMLStencilElement {
     }
     var HTMLDyteLogoElement: {
@@ -4348,84 +5397,198 @@ declare global {
         prototype: HTMLDyteMarkdownViewElement;
         new (): HTMLDyteMarkdownViewElement;
     };
+    interface HTMLDyteMeetingElementEventMap {
+        "dyteStateUpdate": Partial<States>;
+    }
+    /**
+     * A single component which renders an entire meeting UI.
+     * It loads your preset and renders the UI based on it.
+     * With this component, you don't have to handle all the states,
+     * dialogs and other smaller bits of managing the application.
+     */
     interface HTMLDyteMeetingElement extends Components.DyteMeeting, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteMeetingElementEventMap>(type: K, listener: (this: HTMLDyteMeetingElement, ev: DyteMeetingCustomEvent<HTMLDyteMeetingElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteMeetingElementEventMap>(type: K, listener: (this: HTMLDyteMeetingElement, ev: DyteMeetingCustomEvent<HTMLDyteMeetingElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteMeetingElement: {
         prototype: HTMLDyteMeetingElement;
         new (): HTMLDyteMeetingElement;
     };
+    /**
+     * Displays the title of the meeting.
+     */
     interface HTMLDyteMeetingTitleElement extends Components.DyteMeetingTitle, HTMLStencilElement {
     }
     var HTMLDyteMeetingTitleElement: {
         prototype: HTMLDyteMeetingTitleElement;
         new (): HTMLDyteMeetingTitleElement;
     };
+    /**
+     * A menu component.
+     */
     interface HTMLDyteMenuElement extends Components.DyteMenu, HTMLStencilElement {
     }
     var HTMLDyteMenuElement: {
         prototype: HTMLDyteMenuElement;
         new (): HTMLDyteMenuElement;
     };
+    /**
+     * A menu item component.
+     */
     interface HTMLDyteMenuItemElement extends Components.DyteMenuItem, HTMLStencilElement {
     }
     var HTMLDyteMenuItemElement: {
         prototype: HTMLDyteMenuItemElement;
         new (): HTMLDyteMenuItemElement;
     };
+    /**
+     * A menu list component.
+     */
     interface HTMLDyteMenuListElement extends Components.DyteMenuList, HTMLStencilElement {
     }
     var HTMLDyteMenuListElement: {
         prototype: HTMLDyteMenuListElement;
         new (): HTMLDyteMenuListElement;
     };
+    /**
+     * A component which renders list of messages.
+     */
     interface HTMLDyteMessageListViewElement extends Components.DyteMessageListView, HTMLStencilElement {
     }
     var HTMLDyteMessageListViewElement: {
         prototype: HTMLDyteMessageListViewElement;
         new (): HTMLDyteMessageListViewElement;
     };
+    interface HTMLDyteMessageViewElementEventMap {
+        "action": string;
+    }
     interface HTMLDyteMessageViewElement extends Components.DyteMessageView, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteMessageViewElementEventMap>(type: K, listener: (this: HTMLDyteMessageViewElement, ev: DyteMessageViewCustomEvent<HTMLDyteMessageViewElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteMessageViewElementEventMap>(type: K, listener: (this: HTMLDyteMessageViewElement, ev: DyteMessageViewCustomEvent<HTMLDyteMessageViewElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteMessageViewElement: {
         prototype: HTMLDyteMessageViewElement;
         new (): HTMLDyteMessageViewElement;
     };
+    interface HTMLDyteMicToggleElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A button which toggles your microphone.
+     */
     interface HTMLDyteMicToggleElement extends Components.DyteMicToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteMicToggleElementEventMap>(type: K, listener: (this: HTMLDyteMicToggleElement, ev: DyteMicToggleCustomEvent<HTMLDyteMicToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteMicToggleElementEventMap>(type: K, listener: (this: HTMLDyteMicToggleElement, ev: DyteMicToggleCustomEvent<HTMLDyteMicToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteMicToggleElement: {
         prototype: HTMLDyteMicToggleElement;
         new (): HTMLDyteMicToggleElement;
     };
+    /**
+     * A component which lets to manage your audio devices and audio preferences.
+     * Emits `dyteStateUpdate` event with data for muting notification sounds:
+     * ```ts
+     * {
+     *  prefs: {
+     *    muteNotificationSounds: boolean
+     *  }
+     * }
+     * ```
+     */
     interface HTMLDyteMicrophoneSelectorElement extends Components.DyteMicrophoneSelector, HTMLStencilElement {
     }
     var HTMLDyteMicrophoneSelectorElement: {
         prototype: HTMLDyteMicrophoneSelectorElement;
         new (): HTMLDyteMicrophoneSelectorElement;
     };
+    /**
+     * A grid component which handles screenshares, plugins and participants.
+     */
     interface HTMLDyteMixedGridElement extends Components.DyteMixedGrid, HTMLStencilElement {
     }
     var HTMLDyteMixedGridElement: {
         prototype: HTMLDyteMixedGridElement;
         new (): HTMLDyteMixedGridElement;
     };
+    interface HTMLDyteMoreToggleElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A button which toggles visibility of a more menu.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeMoreMenu: boolean; }
+     * ```
+     */
     interface HTMLDyteMoreToggleElement extends Components.DyteMoreToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteMoreToggleElementEventMap>(type: K, listener: (this: HTMLDyteMoreToggleElement, ev: DyteMoreToggleCustomEvent<HTMLDyteMoreToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteMoreToggleElementEventMap>(type: K, listener: (this: HTMLDyteMoreToggleElement, ev: DyteMoreToggleCustomEvent<HTMLDyteMoreToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteMoreToggleElement: {
         prototype: HTMLDyteMoreToggleElement;
         new (): HTMLDyteMoreToggleElement;
     };
+    interface HTMLDyteMuteAllButtonElementEventMap {
+        "dyteStateUpdate": States1;
+    }
     interface HTMLDyteMuteAllButtonElement extends Components.DyteMuteAllButton, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteMuteAllButtonElementEventMap>(type: K, listener: (this: HTMLDyteMuteAllButtonElement, ev: DyteMuteAllButtonCustomEvent<HTMLDyteMuteAllButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteMuteAllButtonElementEventMap>(type: K, listener: (this: HTMLDyteMuteAllButtonElement, ev: DyteMuteAllButtonCustomEvent<HTMLDyteMuteAllButtonElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteMuteAllButtonElement: {
         prototype: HTMLDyteMuteAllButtonElement;
         new (): HTMLDyteMuteAllButtonElement;
     };
+    interface HTMLDyteMuteAllConfirmationElementEventMap {
+        "dyteStateUpdate": States;
+    }
     interface HTMLDyteMuteAllConfirmationElement extends Components.DyteMuteAllConfirmation, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteMuteAllConfirmationElementEventMap>(type: K, listener: (this: HTMLDyteMuteAllConfirmationElement, ev: DyteMuteAllConfirmationCustomEvent<HTMLDyteMuteAllConfirmationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteMuteAllConfirmationElementEventMap>(type: K, listener: (this: HTMLDyteMuteAllConfirmationElement, ev: DyteMuteAllConfirmationCustomEvent<HTMLDyteMuteAllConfirmationElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteMuteAllConfirmationElement: {
         prototype: HTMLDyteMuteAllConfirmationElement;
         new (): HTMLDyteMuteAllConfirmationElement;
     };
+    /**
+     * A component which shows a participant's name.
+     */
     interface HTMLDyteNameTagElement extends Components.DyteNameTag, HTMLStencilElement {
     }
     var HTMLDyteNameTagElement: {
@@ -4438,19 +5601,54 @@ declare global {
         prototype: HTMLDyteNetworkIndicatorElement;
         new (): HTMLDyteNetworkIndicatorElement;
     };
+    interface HTMLDyteNotificationElementEventMap {
+        "dyteNotificationDismiss": string;
+    }
+    /**
+     * A component which shows a notification.
+     * You need to remove the element after you receive the
+     * `dyteNotificationDismiss` event.
+     */
     interface HTMLDyteNotificationElement extends Components.DyteNotification, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteNotificationElementEventMap>(type: K, listener: (this: HTMLDyteNotificationElement, ev: DyteNotificationCustomEvent<HTMLDyteNotificationElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteNotificationElementEventMap>(type: K, listener: (this: HTMLDyteNotificationElement, ev: DyteNotificationCustomEvent<HTMLDyteNotificationElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteNotificationElement: {
         prototype: HTMLDyteNotificationElement;
         new (): HTMLDyteNotificationElement;
     };
+    /**
+     * A component which handles notifications.
+     * You can configure which notifications you want to see and which ones you want to hear.
+     * There are also certain limits which you can set as well.
+     */
     interface HTMLDyteNotificationsElement extends Components.DyteNotifications, HTMLStencilElement {
     }
     var HTMLDyteNotificationsElement: {
         prototype: HTMLDyteNotificationsElement;
         new (): HTMLDyteNotificationsElement;
     };
+    interface HTMLDyteOverlayModalElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A confirmation modal.
+     */
     interface HTMLDyteOverlayModalElement extends Components.DyteOverlayModal, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteOverlayModalElementEventMap>(type: K, listener: (this: HTMLDyteOverlayModalElement, ev: DyteOverlayModalCustomEvent<HTMLDyteOverlayModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteOverlayModalElementEventMap>(type: K, listener: (this: HTMLDyteOverlayModalElement, ev: DyteOverlayModalCustomEvent<HTMLDyteOverlayModalElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteOverlayModalElement: {
         prototype: HTMLDyteOverlayModalElement;
@@ -4462,12 +5660,34 @@ declare global {
         prototype: HTMLDytePaginatedListElement;
         new (): HTMLDytePaginatedListElement;
     };
+    interface HTMLDyteParticipantElementEventMap {
+        "dyteSendNotification": {
+    trace: string;
+    message: string;
+  };
+    }
+    /**
+     * A participant entry component used inside `dyte-participants` which shows data like:
+     * name, picture and media device status.
+     * You can perform privileged actions on the participant too.
+     */
     interface HTMLDyteParticipantElement extends Components.DyteParticipant, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteParticipantElementEventMap>(type: K, listener: (this: HTMLDyteParticipantElement, ev: DyteParticipantCustomEvent<HTMLDyteParticipantElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteParticipantElementEventMap>(type: K, listener: (this: HTMLDyteParticipantElement, ev: DyteParticipantCustomEvent<HTMLDyteParticipantElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteParticipantElement: {
         prototype: HTMLDyteParticipantElement;
         new (): HTMLDyteParticipantElement;
     };
+    /**
+     * A component which shows count of total joined participants in a meeting.
+     */
     interface HTMLDyteParticipantCountElement extends Components.DyteParticipantCount, HTMLStencilElement {
     }
     var HTMLDyteParticipantCountElement: {
@@ -4480,24 +5700,73 @@ declare global {
         prototype: HTMLDyteParticipantSetupElement;
         new (): HTMLDyteParticipantSetupElement;
     };
+    interface HTMLDyteParticipantTileElementEventMap {
+        "tileLoad": { participant: Peer; videoElement: HTMLVideoElement };
+        "tileUnload": Peer;
+    }
+    /**
+     * A component which plays a participants video and allows for placement
+     * of components like `dyte-name-tag`, `dyte-audio-visualizer` or any other component.
+     */
     interface HTMLDyteParticipantTileElement extends Components.DyteParticipantTile, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteParticipantTileElementEventMap>(type: K, listener: (this: HTMLDyteParticipantTileElement, ev: DyteParticipantTileCustomEvent<HTMLDyteParticipantTileElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteParticipantTileElementEventMap>(type: K, listener: (this: HTMLDyteParticipantTileElement, ev: DyteParticipantTileCustomEvent<HTMLDyteParticipantTileElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteParticipantTileElement: {
         prototype: HTMLDyteParticipantTileElement;
         new (): HTMLDyteParticipantTileElement;
     };
+    interface HTMLDyteParticipantsElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A component which lists all participants, with ability to
+     * run privileged actions on each participant according to your permissions.
+     */
     interface HTMLDyteParticipantsElement extends Components.DyteParticipants, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteParticipantsElementEventMap>(type: K, listener: (this: HTMLDyteParticipantsElement, ev: DyteParticipantsCustomEvent<HTMLDyteParticipantsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteParticipantsElementEventMap>(type: K, listener: (this: HTMLDyteParticipantsElement, ev: DyteParticipantsCustomEvent<HTMLDyteParticipantsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteParticipantsElement: {
         prototype: HTMLDyteParticipantsElement;
         new (): HTMLDyteParticipantsElement;
     };
+    interface HTMLDyteParticipantsAudioElementEventMap {
+        "dialogClose": void;
+    }
+    /**
+     * A component which plays all the audio from participants and screenshares.
+     */
     interface HTMLDyteParticipantsAudioElement extends Components.DyteParticipantsAudio, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteParticipantsAudioElementEventMap>(type: K, listener: (this: HTMLDyteParticipantsAudioElement, ev: DyteParticipantsAudioCustomEvent<HTMLDyteParticipantsAudioElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteParticipantsAudioElementEventMap>(type: K, listener: (this: HTMLDyteParticipantsAudioElement, ev: DyteParticipantsAudioCustomEvent<HTMLDyteParticipantsAudioElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteParticipantsAudioElement: {
         prototype: HTMLDyteParticipantsAudioElement;
         new (): HTMLDyteParticipantsAudioElement;
     };
+    /**
+     * A component which lists all participants, with ability to
+     * run privileged actions on each participant according to your permissions.
+     */
     interface HTMLDyteParticipantsStageListElement extends Components.DyteParticipantsStageList, HTMLStencilElement {
     }
     var HTMLDyteParticipantsStageListElement: {
@@ -4510,7 +5779,25 @@ declare global {
         prototype: HTMLDyteParticipantsStageQueueElement;
         new (): HTMLDyteParticipantsStageQueueElement;
     };
+    interface HTMLDyteParticipantsToggleElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A button which toggles visibility of participants.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSidebar: boolean; sidebar: 'participants' }
+     * ```
+     */
     interface HTMLDyteParticipantsToggleElement extends Components.DyteParticipantsToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteParticipantsToggleElementEventMap>(type: K, listener: (this: HTMLDyteParticipantsToggleElement, ev: DyteParticipantsToggleCustomEvent<HTMLDyteParticipantsToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteParticipantsToggleElementEventMap>(type: K, listener: (this: HTMLDyteParticipantsToggleElement, ev: DyteParticipantsToggleCustomEvent<HTMLDyteParticipantsToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteParticipantsToggleElement: {
         prototype: HTMLDyteParticipantsToggleElement;
@@ -4528,144 +5815,465 @@ declare global {
         prototype: HTMLDyteParticipantsWaitingListElement;
         new (): HTMLDyteParticipantsWaitingListElement;
     };
+    interface HTMLDytePermissionsMessageElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A component which shows permission related troubleshooting
+     * information.
+     */
     interface HTMLDytePermissionsMessageElement extends Components.DytePermissionsMessage, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDytePermissionsMessageElementEventMap>(type: K, listener: (this: HTMLDytePermissionsMessageElement, ev: DytePermissionsMessageCustomEvent<HTMLDytePermissionsMessageElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDytePermissionsMessageElementEventMap>(type: K, listener: (this: HTMLDytePermissionsMessageElement, ev: DytePermissionsMessageCustomEvent<HTMLDytePermissionsMessageElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDytePermissionsMessageElement: {
         prototype: HTMLDytePermissionsMessageElement;
         new (): HTMLDytePermissionsMessageElement;
     };
+    interface HTMLDytePipToggleElementEventMap {
+        "dyteStateUpdate": States1;
+    }
     interface HTMLDytePipToggleElement extends Components.DytePipToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDytePipToggleElementEventMap>(type: K, listener: (this: HTMLDytePipToggleElement, ev: DytePipToggleCustomEvent<HTMLDytePipToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDytePipToggleElementEventMap>(type: K, listener: (this: HTMLDytePipToggleElement, ev: DytePipToggleCustomEvent<HTMLDytePipToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDytePipToggleElement: {
         prototype: HTMLDytePipToggleElement;
         new (): HTMLDytePipToggleElement;
     };
+    /**
+     * A component which loads a plugin.
+     */
     interface HTMLDytePluginMainElement extends Components.DytePluginMain, HTMLStencilElement {
     }
     var HTMLDytePluginMainElement: {
         prototype: HTMLDytePluginMainElement;
         new (): HTMLDytePluginMainElement;
     };
+    interface HTMLDytePluginsElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A component which lists all available plugins from their preset,
+     * and ability to enable or disable plugins.
+     */
     interface HTMLDytePluginsElement extends Components.DytePlugins, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDytePluginsElementEventMap>(type: K, listener: (this: HTMLDytePluginsElement, ev: DytePluginsCustomEvent<HTMLDytePluginsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDytePluginsElementEventMap>(type: K, listener: (this: HTMLDytePluginsElement, ev: DytePluginsCustomEvent<HTMLDytePluginsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDytePluginsElement: {
         prototype: HTMLDytePluginsElement;
         new (): HTMLDytePluginsElement;
     };
+    interface HTMLDytePluginsToggleElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A button which toggles visibility of plugins.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSidebar: boolean; sidebar: 'plugins' }
+     * ```
+     */
     interface HTMLDytePluginsToggleElement extends Components.DytePluginsToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDytePluginsToggleElementEventMap>(type: K, listener: (this: HTMLDytePluginsToggleElement, ev: DytePluginsToggleCustomEvent<HTMLDytePluginsToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDytePluginsToggleElementEventMap>(type: K, listener: (this: HTMLDytePluginsToggleElement, ev: DytePluginsToggleCustomEvent<HTMLDytePluginsToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDytePluginsToggleElement: {
         prototype: HTMLDytePluginsToggleElement;
         new (): HTMLDytePluginsToggleElement;
     };
+    interface HTMLDytePollElementEventMap {
+        "dyteVotePoll": {
+    id: string;
+    index: number;
+  };
+    }
+    /**
+     * A poll component.
+     * Shows a poll where a user can vote.
+     */
     interface HTMLDytePollElement extends Components.DytePoll, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDytePollElementEventMap>(type: K, listener: (this: HTMLDytePollElement, ev: DytePollCustomEvent<HTMLDytePollElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDytePollElementEventMap>(type: K, listener: (this: HTMLDytePollElement, ev: DytePollCustomEvent<HTMLDytePollElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDytePollElement: {
         prototype: HTMLDytePollElement;
         new (): HTMLDytePollElement;
     };
+    interface HTMLDytePollFormElementEventMap {
+        "dyteCreatePoll": PollObject;
+    }
+    /**
+     * A component that lets you create a poll.
+     */
     interface HTMLDytePollFormElement extends Components.DytePollForm, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDytePollFormElementEventMap>(type: K, listener: (this: HTMLDytePollFormElement, ev: DytePollFormCustomEvent<HTMLDytePollFormElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDytePollFormElementEventMap>(type: K, listener: (this: HTMLDytePollFormElement, ev: DytePollFormCustomEvent<HTMLDytePollFormElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDytePollFormElement: {
         prototype: HTMLDytePollFormElement;
         new (): HTMLDytePollFormElement;
     };
+    /**
+     * A component which lists all available plugins a user can access with
+     * the ability to enable or disable them as per their permissions.
+     */
     interface HTMLDytePollsElement extends Components.DytePolls, HTMLStencilElement {
     }
     var HTMLDytePollsElement: {
         prototype: HTMLDytePollsElement;
         new (): HTMLDytePollsElement;
     };
+    interface HTMLDytePollsToggleElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A button which toggles visibility of polls.
+     * You need to pass the `meeting` object to it to see the unread polls count badge.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSidebar: boolean; sidebar: 'polls' }
+     * ```
+     */
     interface HTMLDytePollsToggleElement extends Components.DytePollsToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDytePollsToggleElementEventMap>(type: K, listener: (this: HTMLDytePollsToggleElement, ev: DytePollsToggleCustomEvent<HTMLDytePollsToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDytePollsToggleElementEventMap>(type: K, listener: (this: HTMLDytePollsToggleElement, ev: DytePollsToggleCustomEvent<HTMLDytePollsToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDytePollsToggleElement: {
         prototype: HTMLDytePollsToggleElement;
         new (): HTMLDytePollsToggleElement;
     };
+    /**
+     * A component which indicates the recording status of a meeting.
+     * It will not render anything if no recording is taking place.
+     */
     interface HTMLDyteRecordingIndicatorElement extends Components.DyteRecordingIndicator, HTMLStencilElement {
     }
     var HTMLDyteRecordingIndicatorElement: {
         prototype: HTMLDyteRecordingIndicatorElement;
         new (): HTMLDyteRecordingIndicatorElement;
     };
+    interface HTMLDyteRecordingToggleElementEventMap {
+        "dyteAPIError": {
+    trace: string;
+    message: string;
+  };
+    }
+    /**
+     * A button which toggles recording state of a meeting.
+     * Only a privileged user can perform this action,
+     * thus the button will not be visible for participants
+     * who don't have the permission to record a meeting.
+     */
     interface HTMLDyteRecordingToggleElement extends Components.DyteRecordingToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteRecordingToggleElementEventMap>(type: K, listener: (this: HTMLDyteRecordingToggleElement, ev: DyteRecordingToggleCustomEvent<HTMLDyteRecordingToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteRecordingToggleElementEventMap>(type: K, listener: (this: HTMLDyteRecordingToggleElement, ev: DyteRecordingToggleCustomEvent<HTMLDyteRecordingToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteRecordingToggleElement: {
         prototype: HTMLDyteRecordingToggleElement;
         new (): HTMLDyteRecordingToggleElement;
     };
+    interface HTMLDyteScreenShareToggleElementEventMap {
+        "dyteStateUpdate": States;
+        "dyteAPIError": {
+    trace: string;
+    message: string;
+  };
+    }
+    /**
+     * A button which toggles your screenshare.
+     */
     interface HTMLDyteScreenShareToggleElement extends Components.DyteScreenShareToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteScreenShareToggleElementEventMap>(type: K, listener: (this: HTMLDyteScreenShareToggleElement, ev: DyteScreenShareToggleCustomEvent<HTMLDyteScreenShareToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteScreenShareToggleElementEventMap>(type: K, listener: (this: HTMLDyteScreenShareToggleElement, ev: DyteScreenShareToggleCustomEvent<HTMLDyteScreenShareToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteScreenShareToggleElement: {
         prototype: HTMLDyteScreenShareToggleElement;
         new (): HTMLDyteScreenShareToggleElement;
     };
+    interface HTMLDyteScreenshareViewElementEventMap {
+        "dyteStateUpdate": States;
+        "screensharePlay": {
+    participant: Peer;
+    screenshareParticipant: Peer;
+  };
+    }
+    /**
+     * A component which plays a participant's screenshared video.
+     * It also allows for placement of other components similar to `dyte-participant-tile`.
+     * This component will not render anything if the participant hasn't start screensharing.
+     */
     interface HTMLDyteScreenshareViewElement extends Components.DyteScreenshareView, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteScreenshareViewElementEventMap>(type: K, listener: (this: HTMLDyteScreenshareViewElement, ev: DyteScreenshareViewCustomEvent<HTMLDyteScreenshareViewElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteScreenshareViewElementEventMap>(type: K, listener: (this: HTMLDyteScreenshareViewElement, ev: DyteScreenshareViewCustomEvent<HTMLDyteScreenshareViewElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteScreenshareViewElement: {
         prototype: HTMLDyteScreenshareViewElement;
         new (): HTMLDyteScreenshareViewElement;
     };
+    interface HTMLDyteSettingsElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A settings component to see and change your audio/video devices
+     * as well as see your connection quality.
+     */
     interface HTMLDyteSettingsElement extends Components.DyteSettings, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteSettingsElementEventMap>(type: K, listener: (this: HTMLDyteSettingsElement, ev: DyteSettingsCustomEvent<HTMLDyteSettingsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteSettingsElementEventMap>(type: K, listener: (this: HTMLDyteSettingsElement, ev: DyteSettingsCustomEvent<HTMLDyteSettingsElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteSettingsElement: {
         prototype: HTMLDyteSettingsElement;
         new (): HTMLDyteSettingsElement;
     };
+    interface HTMLDyteSettingsAudioElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A component which lets to manage your audio devices and audio preferences.
+     * Emits `dyteStateUpdate` event with data for muting notification sounds:
+     * ```ts
+     * {
+     *  prefs: {
+     *    muteNotificationSounds: boolean
+     *  }
+     * }
+     * ```
+     */
     interface HTMLDyteSettingsAudioElement extends Components.DyteSettingsAudio, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteSettingsAudioElementEventMap>(type: K, listener: (this: HTMLDyteSettingsAudioElement, ev: DyteSettingsAudioCustomEvent<HTMLDyteSettingsAudioElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteSettingsAudioElementEventMap>(type: K, listener: (this: HTMLDyteSettingsAudioElement, ev: DyteSettingsAudioCustomEvent<HTMLDyteSettingsAudioElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteSettingsAudioElement: {
         prototype: HTMLDyteSettingsAudioElement;
         new (): HTMLDyteSettingsAudioElement;
     };
+    interface HTMLDyteSettingsToggleElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A button which toggles visibility of settings module.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSettings: boolean; }
+     * ```
+     */
     interface HTMLDyteSettingsToggleElement extends Components.DyteSettingsToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteSettingsToggleElementEventMap>(type: K, listener: (this: HTMLDyteSettingsToggleElement, ev: DyteSettingsToggleCustomEvent<HTMLDyteSettingsToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteSettingsToggleElementEventMap>(type: K, listener: (this: HTMLDyteSettingsToggleElement, ev: DyteSettingsToggleCustomEvent<HTMLDyteSettingsToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteSettingsToggleElement: {
         prototype: HTMLDyteSettingsToggleElement;
         new (): HTMLDyteSettingsToggleElement;
     };
+    interface HTMLDyteSettingsVideoElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A component which lets to manage your camera devices and your video preferences.
+     * Emits `dyteStateUpdate` event with data for toggling mirroring of self video:
+     * ```ts
+     * {
+     *  prefs: {
+     *    mirrorVideo: boolean
+     *  }
+     * }
+     * ```
+     */
     interface HTMLDyteSettingsVideoElement extends Components.DyteSettingsVideo, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteSettingsVideoElementEventMap>(type: K, listener: (this: HTMLDyteSettingsVideoElement, ev: DyteSettingsVideoCustomEvent<HTMLDyteSettingsVideoElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteSettingsVideoElementEventMap>(type: K, listener: (this: HTMLDyteSettingsVideoElement, ev: DyteSettingsVideoCustomEvent<HTMLDyteSettingsVideoElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteSettingsVideoElement: {
         prototype: HTMLDyteSettingsVideoElement;
         new (): HTMLDyteSettingsVideoElement;
     };
+    interface HTMLDyteSetupScreenElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A screen shown before joining the meeting, where you can edit your display name,
+     * and media settings.
+     */
     interface HTMLDyteSetupScreenElement extends Components.DyteSetupScreen, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteSetupScreenElementEventMap>(type: K, listener: (this: HTMLDyteSetupScreenElement, ev: DyteSetupScreenCustomEvent<HTMLDyteSetupScreenElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteSetupScreenElementEventMap>(type: K, listener: (this: HTMLDyteSetupScreenElement, ev: DyteSetupScreenCustomEvent<HTMLDyteSetupScreenElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteSetupScreenElement: {
         prototype: HTMLDyteSetupScreenElement;
         new (): HTMLDyteSetupScreenElement;
     };
+    interface HTMLDyteSidebarElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A component which handles the sidebar and
+     * you can customize which sections you want, and which section you want as the default.
+     */
     interface HTMLDyteSidebarElement extends Components.DyteSidebar, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteSidebarElementEventMap>(type: K, listener: (this: HTMLDyteSidebarElement, ev: DyteSidebarCustomEvent<HTMLDyteSidebarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteSidebarElementEventMap>(type: K, listener: (this: HTMLDyteSidebarElement, ev: DyteSidebarCustomEvent<HTMLDyteSidebarElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteSidebarElement: {
         prototype: HTMLDyteSidebarElement;
         new (): HTMLDyteSidebarElement;
     };
+    interface HTMLDyteSidebarUiElementEventMap {
+        "tabChange": string;
+        "sidebarClose": void;
+    }
     interface HTMLDyteSidebarUiElement extends Components.DyteSidebarUi, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteSidebarUiElementEventMap>(type: K, listener: (this: HTMLDyteSidebarUiElement, ev: DyteSidebarUiCustomEvent<HTMLDyteSidebarUiElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteSidebarUiElementEventMap>(type: K, listener: (this: HTMLDyteSidebarUiElement, ev: DyteSidebarUiCustomEvent<HTMLDyteSidebarUiElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteSidebarUiElement: {
         prototype: HTMLDyteSidebarUiElement;
         new (): HTMLDyteSidebarUiElement;
     };
+    /**
+     * A grid component which renders only the participants in a simple grid.
+     */
     interface HTMLDyteSimpleGridElement extends Components.DyteSimpleGrid, HTMLStencilElement {
     }
     var HTMLDyteSimpleGridElement: {
         prototype: HTMLDyteSimpleGridElement;
         new (): HTMLDyteSimpleGridElement;
     };
+    /**
+     * A component which lets to manage your audio devices and audio preferences.
+     * Emits `dyteStateUpdate` event with data for muting notification sounds:
+     * ```ts
+     * {
+     *  prefs: {
+     *    muteNotificationSounds: boolean
+     *  }
+     * }
+     * ```
+     */
     interface HTMLDyteSpeakerSelectorElement extends Components.DyteSpeakerSelector, HTMLStencilElement {
     }
     var HTMLDyteSpeakerSelectorElement: {
         prototype: HTMLDyteSpeakerSelectorElement;
         new (): HTMLDyteSpeakerSelectorElement;
     };
+    /**
+     * A component which shows an animating spinner.
+     */
     interface HTMLDyteSpinnerElement extends Components.DyteSpinner, HTMLStencilElement {
     }
     var HTMLDyteSpinnerElement: {
         prototype: HTMLDyteSpinnerElement;
         new (): HTMLDyteSpinnerElement;
     };
+    /**
+     * A grid component that renders two lists of participants: `pinnedParticipants` and `participants`.
+     * You can customize the layout to a `column` view, by default is is `row`.
+     * - Participants from `pinnedParticipants[]` are rendered inside a larger grid.
+     * - Participants from `participants[]` array are rendered in a smaller grid.
+     */
     interface HTMLDyteSpotlightGridElement extends Components.DyteSpotlightGrid, HTMLStencilElement {
     }
     var HTMLDyteSpotlightGridElement: {
@@ -4678,66 +6286,189 @@ declare global {
         prototype: HTMLDyteSpotlightIndicatorElement;
         new (): HTMLDyteSpotlightIndicatorElement;
     };
+    interface HTMLDyteStageElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A component used as a stage that commonly houses
+     * the `grid` and `sidebar` components.
+     */
     interface HTMLDyteStageElement extends Components.DyteStage, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteStageElementEventMap>(type: K, listener: (this: HTMLDyteStageElement, ev: DyteStageCustomEvent<HTMLDyteStageElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteStageElementEventMap>(type: K, listener: (this: HTMLDyteStageElement, ev: DyteStageCustomEvent<HTMLDyteStageElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteStageElement: {
         prototype: HTMLDyteStageElement;
         new (): HTMLDyteStageElement;
     };
+    interface HTMLDyteStageToggleElementEventMap {
+        "dyteStateUpdate": States1;
+    }
     interface HTMLDyteStageToggleElement extends Components.DyteStageToggle, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteStageToggleElementEventMap>(type: K, listener: (this: HTMLDyteStageToggleElement, ev: DyteStageToggleCustomEvent<HTMLDyteStageToggleElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteStageToggleElementEventMap>(type: K, listener: (this: HTMLDyteStageToggleElement, ev: DyteStageToggleCustomEvent<HTMLDyteStageToggleElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteStageToggleElement: {
         prototype: HTMLDyteStageToggleElement;
         new (): HTMLDyteStageToggleElement;
     };
+    interface HTMLDyteSwitchElementEventMap {
+        "dyteChange": boolean;
+    }
+    /**
+     * A switch component which follows Dyte's Design System.
+     */
     interface HTMLDyteSwitchElement extends Components.DyteSwitch, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteSwitchElementEventMap>(type: K, listener: (this: HTMLDyteSwitchElement, ev: DyteSwitchCustomEvent<HTMLDyteSwitchElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteSwitchElementEventMap>(type: K, listener: (this: HTMLDyteSwitchElement, ev: DyteSwitchCustomEvent<HTMLDyteSwitchElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteSwitchElement: {
         prototype: HTMLDyteSwitchElement;
         new (): HTMLDyteSwitchElement;
     };
+    interface HTMLDyteTabBarElementEventMap {
+        "tabChange": Tab;
+    }
     interface HTMLDyteTabBarElement extends Components.DyteTabBar, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteTabBarElementEventMap>(type: K, listener: (this: HTMLDyteTabBarElement, ev: DyteTabBarCustomEvent<HTMLDyteTabBarElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteTabBarElementEventMap>(type: K, listener: (this: HTMLDyteTabBarElement, ev: DyteTabBarCustomEvent<HTMLDyteTabBarElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteTabBarElement: {
         prototype: HTMLDyteTabBarElement;
         new (): HTMLDyteTabBarElement;
     };
+    interface HTMLDyteTextComposerViewElementEventMap {
+        "textChange": string;
+    }
+    /**
+     * A component which renders a text composer
+     */
     interface HTMLDyteTextComposerViewElement extends Components.DyteTextComposerView, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteTextComposerViewElementEventMap>(type: K, listener: (this: HTMLDyteTextComposerViewElement, ev: DyteTextComposerViewCustomEvent<HTMLDyteTextComposerViewElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteTextComposerViewElementEventMap>(type: K, listener: (this: HTMLDyteTextComposerViewElement, ev: DyteTextComposerViewCustomEvent<HTMLDyteTextComposerViewElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteTextComposerViewElement: {
         prototype: HTMLDyteTextComposerViewElement;
         new (): HTMLDyteTextComposerViewElement;
     };
+    interface HTMLDyteTextFieldElementEventMap {
+        "dyteStateUpdate": States;
+    }
+    /**
+     * A text field component.
+     */
     interface HTMLDyteTextFieldElement extends Components.DyteTextField, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteTextFieldElementEventMap>(type: K, listener: (this: HTMLDyteTextFieldElement, ev: DyteTextFieldCustomEvent<HTMLDyteTextFieldElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteTextFieldElementEventMap>(type: K, listener: (this: HTMLDyteTextFieldElement, ev: DyteTextFieldCustomEvent<HTMLDyteTextFieldElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteTextFieldElement: {
         prototype: HTMLDyteTextFieldElement;
         new (): HTMLDyteTextFieldElement;
     };
+    /**
+     * A component which renders a text message from chat.
+     */
     interface HTMLDyteTextMessageElement extends Components.DyteTextMessage, HTMLStencilElement {
     }
     var HTMLDyteTextMessageElement: {
         prototype: HTMLDyteTextMessageElement;
         new (): HTMLDyteTextMessageElement;
     };
+    /**
+     * A component which renders a text message from chat.
+     */
     interface HTMLDyteTextMessageViewElement extends Components.DyteTextMessageView, HTMLStencilElement {
     }
     var HTMLDyteTextMessageViewElement: {
         prototype: HTMLDyteTextMessageViewElement;
         new (): HTMLDyteTextMessageViewElement;
     };
+    interface HTMLDyteTooltipElementEventMap {
+        "dyteOpenChange": boolean;
+    }
+    /**
+     * Tooltip component which follows Dyte's Design System.
+     */
     interface HTMLDyteTooltipElement extends Components.DyteTooltip, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteTooltipElementEventMap>(type: K, listener: (this: HTMLDyteTooltipElement, ev: DyteTooltipCustomEvent<HTMLDyteTooltipElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteTooltipElementEventMap>(type: K, listener: (this: HTMLDyteTooltipElement, ev: DyteTooltipCustomEvent<HTMLDyteTooltipElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteTooltipElement: {
         prototype: HTMLDyteTooltipElement;
         new (): HTMLDyteTooltipElement;
     };
+    interface HTMLDyteTranscriptElementEventMap {
+        "dyteTranscriptDismiss": {
+    id: string;
+    renderedId: string;
+  };
+    }
+    /**
+     * A component which shows a transcript.
+     * You need to remove the element after you receive the
+     * `dyteTranscriptDismiss` event.
+     */
     interface HTMLDyteTranscriptElement extends Components.DyteTranscript, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteTranscriptElementEventMap>(type: K, listener: (this: HTMLDyteTranscriptElement, ev: DyteTranscriptCustomEvent<HTMLDyteTranscriptElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteTranscriptElementEventMap>(type: K, listener: (this: HTMLDyteTranscriptElement, ev: DyteTranscriptCustomEvent<HTMLDyteTranscriptElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteTranscriptElement: {
         prototype: HTMLDyteTranscriptElement;
         new (): HTMLDyteTranscriptElement;
     };
+    /**
+     * A component which handles transcripts.
+     * You can configure which transcripts you want to see and which ones you want to hear.
+     * There are also certain limits which you can set as well.
+     */
     interface HTMLDyteTranscriptsElement extends Components.DyteTranscripts, HTMLStencilElement {
     }
     var HTMLDyteTranscriptsElement: {
@@ -4750,6 +6481,9 @@ declare global {
         prototype: HTMLDyteUiProviderElement;
         new (): HTMLDyteUiProviderElement;
     };
+    /**
+     * A component which shows count of total joined participants in a meeting.
+     */
     interface HTMLDyteViewerCountElement extends Components.DyteViewerCount, HTMLStencilElement {
     }
     var HTMLDyteViewerCountElement: {
@@ -4767,12 +6501,6 @@ declare global {
     var HTMLDyteWaitingScreenElement: {
         prototype: HTMLDyteWaitingScreenElement;
         new (): HTMLDyteWaitingScreenElement;
-    };
-    interface HTMLTestComponentElement extends Components.TestComponent, HTMLStencilElement {
-    }
-    var HTMLTestComponentElement: {
-        prototype: HTMLTestComponentElement;
-        new (): HTMLTestComponentElement;
     };
     interface HTMLElementTagNameMap {
         "dyte-ai": HTMLDyteAiElement;
@@ -4916,7 +6644,6 @@ declare global {
         "dyte-viewer-count": HTMLDyteViewerCountElement;
         "dyte-virtualized-participant-list": HTMLDyteVirtualizedParticipantListElement;
         "dyte-waiting-screen": HTMLDyteWaitingScreenElement;
-        "test-component": HTMLTestComponentElement;
     }
 }
 declare namespace LocalJSX {
@@ -5078,6 +6805,10 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n1;
     }
+    /**
+     * An audio visualizer component which visualizes a participants audio.
+     * Commonly used inside `dyte-name-tag`.
+     */
     interface DyteAudioVisualizer {
         /**
           * Hide when there is no audio / audio is muted
@@ -5108,6 +6839,9 @@ declare namespace LocalJSX {
          */
         "variant"?: AudioVisualizerVariant;
     }
+    /**
+     * Avatar component which renders a participant's image or their initials.
+     */
     interface DyteAvatar {
         /**
           * Icon pack
@@ -5197,6 +6931,10 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which lists all participants, with ability to
+     * run privileged actions on each participant according to your permissions.
+     */
     interface DyteBreakoutRoomParticipants {
         /**
           * Icon pack
@@ -5253,6 +6991,10 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A button which toggles visibility of breakout rooms.
+     * You need to pass the `meeting` object to it.
+     */
     interface DyteBreakoutRoomsToggle {
         /**
           * Icon pack
@@ -5305,6 +7047,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A button that follows Dyte's Design System.
+     */
     interface DyteButton {
         /**
           * Where the button is disabled or not
@@ -5339,6 +7084,17 @@ declare namespace LocalJSX {
          */
         "variant"?: ButtonVariant;
     }
+    /**
+     * A component which lets to manage your audio devices and audio preferences.
+     * Emits `dyteStateUpdate` event with data for muting notification sounds:
+     * ```ts
+     * {
+     *  prefs: {
+     *    muteNotificationSounds: boolean
+     *  }
+     * }
+     * ```
+     */
     interface DyteCameraSelector {
         /**
           * Icon pack
@@ -5361,6 +7117,9 @@ declare namespace LocalJSX {
          */
         "variant"?: 'full' | 'inline';
     }
+    /**
+     * A button which toggles your camera.
+     */
     interface DyteCameraToggle {
         /**
           * Icon pack
@@ -5571,6 +7330,9 @@ declare namespace LocalJSX {
          */
         "viewAs"?: 'dropdown' | 'list';
     }
+    /**
+     * Fully featured chat component with image & file upload, emoji picker and auto-scroll.
+     */
     interface DyteChat {
         /**
           * Config
@@ -5667,6 +7429,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which renders a chat composer
+     */
     interface DyteChatComposerView {
         /**
           * Whether user can send file messages
@@ -5958,6 +7723,14 @@ declare namespace LocalJSX {
          */
         "unreadCounts"?: Record<string, number>;
     }
+    /**
+     * A button which toggles visibility of chat.
+     * You need to pass the `meeting` object to it to see the unread messages count badge.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSidebar: boolean; sidebar: 'chat' }
+     * ```
+     */
     interface DyteChatToggle {
         /**
           * Icon pack
@@ -5988,6 +7761,9 @@ declare namespace LocalJSX {
          */
         "variant"?: ControlBarVariant;
     }
+    /**
+     * Shows the time elapsed in a meeting.
+     */
     interface DyteClock {
         /**
           * Icon pack
@@ -6002,6 +7778,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A confirmation modal.
+     */
     interface DyteConfirmationModal {
         /**
           * Icon pack
@@ -6024,6 +7803,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * Controlbar component provides you with various designs as variants.
+     */
     interface DyteControlbar {
         /**
           * Config
@@ -6058,6 +7840,9 @@ declare namespace LocalJSX {
          */
         "variant"?: 'solid' | 'boxed';
     }
+    /**
+     * A skeleton component used for composing custom controlbar buttons.
+     */
     interface DyteControlbarButton {
         /**
           * Whether icon requires brand color
@@ -6098,8 +7883,11 @@ declare namespace LocalJSX {
         /**
           * Variant
          */
-        "variant"?: ControlBarVariant;
+        "variant"?: ControlBarVariant1;
     }
+    /**
+     * A number picker with increment and decrement buttons.
+     */
     interface DyteCounter {
         /**
           * Icon pack
@@ -6126,6 +7914,9 @@ declare namespace LocalJSX {
          */
         "value"?: number;
     }
+    /**
+     * A troubleshooting component to identify and fix any issues in the meeting.
+     */
     interface DyteDebugger {
         /**
           * Icon pack
@@ -6270,6 +8061,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n1;
     }
+    /**
+     * A dialog component.
+     */
     interface DyteDialog {
         /**
           * UI Config
@@ -6312,6 +8106,16 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which handles all dialog elements in a component such as:
+     * - dyte-settings
+     * - dyte-leave-meeting
+     * - dyte-permissions-message
+     * - dyte-image-viewer
+     * - dyte-remote-access-manager
+     * - dyte-breakout-rooms-manager
+     * This components depends on the values from `states` object.
+     */
     interface DyteDialogManager {
         /**
           * UI Config
@@ -6342,6 +8146,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which renders the draft attachment to send
+     */
     interface DyteDraftAttachmentView {
         /**
           * Attachment to display
@@ -6363,6 +8170,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n1;
     }
+    /**
+     * A very simple emoji picker component.
+     */
     interface DyteEmojiPicker {
         /**
           * Icon pack
@@ -6395,6 +8205,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n1;
     }
+    /**
+     * A screen which shows a meeting has ended.
+     */
     interface DyteEndedScreen {
         /**
           * Config object
@@ -6439,6 +8252,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n1;
     }
+    /**
+     * A component which renders a file message from chat.
+     */
     interface DyteFileMessage {
         /**
           * Icon pack
@@ -6465,6 +8281,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which renders a file message.
+     */
     interface DyteFileMessageView {
         /**
           * Icon pack
@@ -6513,6 +8332,10 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n1;
     }
+    /**
+     * A button which toggles full screen mode for any
+     * existing `dyte-meeting` component in the DOM.
+     */
     interface DyteFullscreenToggle {
         /**
           * Icon pack
@@ -6543,6 +8366,9 @@ declare namespace LocalJSX {
          */
         "variant"?: ControlBarVariant;
     }
+    /**
+     * The main grid component which abstracts all the grid handling logic and renders it for you.
+     */
     interface DyteGrid {
         /**
           * The aspect ratio of each participant
@@ -6593,6 +8419,10 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which allows you to change current page and view mode
+     * of active participants list. This is reflected in the `dyte-grid` component.
+     */
     interface DyteGridPagination {
         /**
           * Icon Pack
@@ -6619,6 +8449,9 @@ declare namespace LocalJSX {
          */
         "variant"?: GridPaginationVariants;
     }
+    /**
+     * A component that houses all the header components.
+     */
     interface DyteHeader {
         /**
           * Config
@@ -6653,6 +8486,9 @@ declare namespace LocalJSX {
          */
         "variant"?: 'solid' | 'boxed';
     }
+    /**
+     * An icon component which accepts an svg string and renders it.
+     */
     interface DyteIcon {
         /**
           * Icon
@@ -6675,6 +8511,10 @@ declare namespace LocalJSX {
          */
         "variant"?: IconVariant;
     }
+    /**
+     * A screen that handles the idle state,
+     * i.e; when you are waiting for data about the meeting, specifically the `meeting` object.
+     */
     interface DyteIdleScreen {
         /**
           * Config object
@@ -6693,6 +8533,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which renders an image message from chat.
+     */
     interface DyteImageMessage {
         /**
           * Icon pack
@@ -6723,6 +8566,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which renders an image message.
+     */
     interface DyteImageMessageView {
         /**
           * Icon pack
@@ -6741,6 +8587,9 @@ declare namespace LocalJSX {
          */
         "url": string;
     }
+    /**
+     * A component which shows an image sent via chat.
+     */
     interface DyteImageViewer {
         /**
           * Icon pack
@@ -6811,6 +8660,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A button which toggles visilibility of the leave confirmation dialog.
+     */
     interface DyteLeaveButton {
         /**
           * Icon pack
@@ -6833,6 +8685,10 @@ declare namespace LocalJSX {
          */
         "variant"?: ControlBarVariant;
     }
+    /**
+     * A component which allows you to leave a meeting or
+     * end meeting for all, if you have the permission.
+     */
     interface DyteLeaveMeeting {
         /**
           * Icon pack
@@ -6931,6 +8787,9 @@ declare namespace LocalJSX {
          */
         "variant"?: ControlBarVariant;
     }
+    /**
+     * A component which loads the logo from your config, or via the `logo-url` attribute.
+     */
     interface DyteLogo {
         /**
           * Config object
@@ -6959,6 +8818,12 @@ declare namespace LocalJSX {
          */
         "text"?: string;
     }
+    /**
+     * A single component which renders an entire meeting UI.
+     * It loads your preset and renders the UI based on it.
+     * With this component, you don't have to handle all the states,
+     * dialogs and other smaller bits of managing the application.
+     */
     interface DyteMeeting {
         /**
           * Whether to apply the design system on the document root from config
@@ -7009,6 +8874,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * Displays the title of the meeting.
+     */
     interface DyteMeetingTitle {
         /**
           * Icon pack
@@ -7023,6 +8891,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A menu component.
+     */
     interface DyteMenu {
         /**
           * Icon pack
@@ -7045,6 +8916,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A menu item component.
+     */
     interface DyteMenuItem {
         /**
           * Icon pack
@@ -7059,6 +8933,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A menu list component.
+     */
     interface DyteMenuList {
         /**
           * Icon pack
@@ -7069,6 +8946,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which renders list of messages.
+     */
     interface DyteMessageListView {
         /**
           * Estimated height of an item
@@ -7141,6 +9021,9 @@ declare namespace LocalJSX {
          */
         "viewType"?: 'incoming' | 'outgoing';
     }
+    /**
+     * A button which toggles your microphone.
+     */
     interface DyteMicToggle {
         /**
           * Icon pack
@@ -7167,6 +9050,17 @@ declare namespace LocalJSX {
          */
         "variant"?: ControlBarVariant;
     }
+    /**
+     * A component which lets to manage your audio devices and audio preferences.
+     * Emits `dyteStateUpdate` event with data for muting notification sounds:
+     * ```ts
+     * {
+     *  prefs: {
+     *    muteNotificationSounds: boolean
+     *  }
+     * }
+     * ```
+     */
     interface DyteMicrophoneSelector {
         /**
           * Icon pack
@@ -7189,6 +9083,9 @@ declare namespace LocalJSX {
          */
         "variant"?: 'full' | 'inline';
     }
+    /**
+     * A grid component which handles screenshares, plugins and participants.
+     */
     interface DyteMixedGrid {
         /**
           * Aspect Ratio of participant tile  Format: `width:height`
@@ -7247,6 +9144,13 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A button which toggles visibility of a more menu.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeMoreMenu: boolean; }
+     * ```
+     */
     interface DyteMoreToggle {
         /**
           * Icon pack
@@ -7317,6 +9221,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which shows a participant's name.
+     */
     interface DyteNameTag {
         /**
           * Icon pack
@@ -7369,6 +9276,11 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n1;
     }
+    /**
+     * A component which shows a notification.
+     * You need to remove the element after you receive the
+     * `dyteNotificationDismiss` event.
+     */
     interface DyteNotification {
         /**
           * Icon pack
@@ -7391,6 +9303,11 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which handles notifications.
+     * You can configure which notifications you want to see and which ones you want to hear.
+     * There are also certain limits which you can set as well.
+     */
     interface DyteNotifications {
         /**
           * Config object
@@ -7417,6 +9334,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A confirmation modal.
+     */
     interface DyteOverlayModal {
         /**
           * Icon pack
@@ -7477,6 +9397,11 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A participant entry component used inside `dyte-participants` which shows data like:
+     * name, picture and media device status.
+     * You can perform privileged actions on the participant too.
+     */
     interface DyteParticipant {
         /**
           * Config object
@@ -7510,6 +9435,9 @@ declare namespace LocalJSX {
          */
         "view"?: ParticipantViewMode;
     }
+    /**
+     * A component which shows count of total joined participants in a meeting.
+     */
     interface DyteParticipantCount {
         /**
           * Icon pack
@@ -7571,6 +9499,10 @@ declare namespace LocalJSX {
          */
         "variant"?: 'solid' | 'gradient';
     }
+    /**
+     * A component which plays a participants video and allows for placement
+     * of components like `dyte-name-tag`, `dyte-audio-visualizer` or any other component.
+     */
     interface DyteParticipantTile {
         /**
           * Config object
@@ -7626,6 +9558,10 @@ declare namespace LocalJSX {
          */
         "variant"?: 'solid' | 'gradient';
     }
+    /**
+     * A component which lists all participants, with ability to
+     * run privileged actions on each participant according to your permissions.
+     */
     interface DyteParticipants {
         /**
           * Config
@@ -7660,6 +9596,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which plays all the audio from participants and screenshares.
+     */
     interface DyteParticipantsAudio {
         /**
           * Icon pack
@@ -7682,6 +9621,10 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which lists all participants, with ability to
+     * run privileged actions on each participant according to your permissions.
+     */
     interface DyteParticipantsStageList {
         /**
           * Config
@@ -7742,6 +9685,13 @@ declare namespace LocalJSX {
          */
         "view"?: ParticipantsViewMode;
     }
+    /**
+     * A button which toggles visibility of participants.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSidebar: boolean; sidebar: 'participants' }
+     * ```
+     */
     interface DyteParticipantsToggle {
         /**
           * Icon pack
@@ -7832,6 +9782,10 @@ declare namespace LocalJSX {
          */
         "view"?: ParticipantsViewMode;
     }
+    /**
+     * A component which shows permission related troubleshooting
+     * information.
+     */
     interface DytePermissionsMessage {
         /**
           * Icon Pack
@@ -7888,6 +9842,9 @@ declare namespace LocalJSX {
          */
         "variant"?: ControlBarVariant;
     }
+    /**
+     * A component which loads a plugin.
+     */
     interface DytePluginMain {
         /**
           * Icon pack
@@ -7906,6 +9863,10 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which lists all available plugins from their preset,
+     * and ability to enable or disable plugins.
+     */
     interface DytePlugins {
         /**
           * Config
@@ -7932,6 +9893,13 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A button which toggles visibility of plugins.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSidebar: boolean; sidebar: 'plugins' }
+     * ```
+     */
     interface DytePluginsToggle {
         /**
           * Icon pack
@@ -7962,6 +9930,10 @@ declare namespace LocalJSX {
          */
         "variant"?: ControlBarVariant;
     }
+    /**
+     * A poll component.
+     * Shows a poll where a user can vote.
+     */
     interface DytePoll {
         /**
           * Icon pack
@@ -7991,6 +9963,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component that lets you create a poll.
+     */
     interface DytePollForm {
         /**
           * Icon pack
@@ -8005,6 +9980,10 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which lists all available plugins a user can access with
+     * the ability to enable or disable them as per their permissions.
+     */
     interface DytePolls {
         /**
           * Config
@@ -8027,6 +10006,14 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A button which toggles visibility of polls.
+     * You need to pass the `meeting` object to it to see the unread polls count badge.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSidebar: boolean; sidebar: 'polls' }
+     * ```
+     */
     interface DytePollsToggle {
         /**
           * Icon pack
@@ -8057,6 +10044,10 @@ declare namespace LocalJSX {
          */
         "variant"?: ControlBarVariant;
     }
+    /**
+     * A component which indicates the recording status of a meeting.
+     * It will not render anything if no recording is taking place.
+     */
     interface DyteRecordingIndicator {
         /**
           * Icon pack
@@ -8075,6 +10066,12 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A button which toggles recording state of a meeting.
+     * Only a privileged user can perform this action,
+     * thus the button will not be visible for participants
+     * who don't have the permission to record a meeting.
+     */
     interface DyteRecordingToggle {
         /**
           * Disable the button
@@ -8108,6 +10105,9 @@ declare namespace LocalJSX {
          */
         "variant"?: ControlBarVariant;
     }
+    /**
+     * A button which toggles your screenshare.
+     */
     interface DyteScreenShareToggle {
         /**
           * Icon pack
@@ -8145,6 +10145,11 @@ declare namespace LocalJSX {
          */
         "variant"?: ControlBarVariant;
     }
+    /**
+     * A component which plays a participant's screenshared video.
+     * It also allows for placement of other components similar to `dyte-participant-tile`.
+     * This component will not render anything if the participant hasn't start screensharing.
+     */
     interface DyteScreenshareView {
         /**
           * Hide full screen button
@@ -8195,6 +10200,10 @@ declare namespace LocalJSX {
          */
         "variant"?: 'solid' | 'gradient';
     }
+    /**
+     * A settings component to see and change your audio/video devices
+     * as well as see your connection quality.
+     */
     interface DyteSettings {
         /**
           * Icon pack
@@ -8221,6 +10230,17 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which lets to manage your audio devices and audio preferences.
+     * Emits `dyteStateUpdate` event with data for muting notification sounds:
+     * ```ts
+     * {
+     *  prefs: {
+     *    muteNotificationSounds: boolean
+     *  }
+     * }
+     * ```
+     */
     interface DyteSettingsAudio {
         /**
           * Icon pack
@@ -8247,6 +10267,13 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A button which toggles visibility of settings module.
+     * When clicked it emits a `dyteStateUpdate` event with the data:
+     * ```ts
+     * { activeSettings: boolean; }
+     * ```
+     */
     interface DyteSettingsToggle {
         /**
           * Icon pack
@@ -8273,6 +10300,17 @@ declare namespace LocalJSX {
          */
         "variant"?: ControlBarVariant;
     }
+    /**
+     * A component which lets to manage your camera devices and your video preferences.
+     * Emits `dyteStateUpdate` event with data for toggling mirroring of self video:
+     * ```ts
+     * {
+     *  prefs: {
+     *    mirrorVideo: boolean
+     *  }
+     * }
+     * ```
+     */
     interface DyteSettingsVideo {
         /**
           * Icon pack
@@ -8299,6 +10337,10 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A screen shown before joining the meeting, where you can edit your display name,
+     * and media settings.
+     */
     interface DyteSetupScreen {
         /**
           * Config object
@@ -8329,6 +10371,10 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which handles the sidebar and
+     * you can customize which sections you want, and which section you want as the default.
+     */
     interface DyteSidebar {
         /**
           * Config
@@ -8403,12 +10449,15 @@ declare namespace LocalJSX {
         /**
           * Tabs
          */
-        "tabs"?: DyteSidebarTab[];
+        "tabs"?: DyteSidebarTab1[];
         /**
           * View
          */
-        "view"?: DyteSidebarView;
+        "view"?: DyteSidebarView1;
     }
+    /**
+     * A grid component which renders only the participants in a simple grid.
+     */
     interface DyteSimpleGrid {
         /**
           * Aspect Ratio of participant tile  Format: `width:height`
@@ -8447,6 +10496,17 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which lets to manage your audio devices and audio preferences.
+     * Emits `dyteStateUpdate` event with data for muting notification sounds:
+     * ```ts
+     * {
+     *  prefs: {
+     *    muteNotificationSounds: boolean
+     *  }
+     * }
+     * ```
+     */
     interface DyteSpeakerSelector {
         /**
           * Icon pack
@@ -8473,6 +10533,9 @@ declare namespace LocalJSX {
          */
         "variant"?: 'full' | 'inline';
     }
+    /**
+     * A component which shows an animating spinner.
+     */
     interface DyteSpinner {
         /**
           * Icon pack
@@ -8487,6 +10550,12 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A grid component that renders two lists of participants: `pinnedParticipants` and `participants`.
+     * You can customize the layout to a `column` view, by default is is `row`.
+     * - Participants from `pinnedParticipants[]` are rendered inside a larger grid.
+     * - Participants from `participants[]` array are rendered in a smaller grid.
+     */
     interface DyteSpotlightGrid {
         /**
           * Aspect Ratio of participant tile  Format: `width:height`
@@ -8555,6 +10624,10 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component used as a stage that commonly houses
+     * the `grid` and `sidebar` components.
+     */
     interface DyteStage {
         /**
           * Icon pack
@@ -8595,6 +10668,9 @@ declare namespace LocalJSX {
          */
         "variant"?: ControlBarVariant;
     }
+    /**
+     * A switch component which follows Dyte's Design System.
+     */
     interface DyteSwitch {
         /**
           * Whether the switch is enabled/checked
@@ -8663,6 +10739,9 @@ declare namespace LocalJSX {
          */
         "tabs"?: Tab[];
     }
+    /**
+     * A component which renders a text composer
+     */
     interface DyteTextComposerView {
         /**
           * Disable the text input (default = false)
@@ -8701,6 +10780,9 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    /**
+     * A text field component.
+     */
     interface DyteTextField {
         /**
           * Disabled
@@ -8727,6 +10809,9 @@ declare namespace LocalJSX {
          */
         "type"?: string;
     }
+    /**
+     * A component which renders a text message from chat.
+     */
     interface DyteTextMessage {
         /**
           * Icon pack
@@ -8753,6 +10838,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
+    /**
+     * A component which renders a text message from chat.
+     */
     interface DyteTextMessageView {
         /**
           * Renders text as markdown (default = true)
@@ -8763,6 +10851,9 @@ declare namespace LocalJSX {
          */
         "text": string;
     }
+    /**
+     * Tooltip component which follows Dyte's Design System.
+     */
     interface DyteTooltip {
         /**
           * Delay before showing the tooltip
@@ -8809,6 +10900,11 @@ declare namespace LocalJSX {
          */
         "variant"?: TooltipVariant;
     }
+    /**
+     * A component which shows a transcript.
+     * You need to remove the element after you receive the
+     * `dyteTranscriptDismiss` event.
+     */
     interface DyteTranscript {
         /**
           * Dismiss event
@@ -8826,6 +10922,11 @@ declare namespace LocalJSX {
          */
         "transcript": Transcript & { renderedId?: string };
     }
+    /**
+     * A component which handles transcripts.
+     * You can configure which transcripts you want to see and which ones you want to hear.
+     * There are also certain limits which you can set as well.
+     */
     interface DyteTranscripts {
         /**
           * Config object
@@ -8878,6 +10979,9 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n1;
     }
+    /**
+     * A component which shows count of total joined participants in a meeting.
+     */
     interface DyteViewerCount {
         /**
           * Icon pack
@@ -8935,8 +11039,6 @@ declare namespace LocalJSX {
           * Language
          */
         "t"?: DyteI18n;
-    }
-    interface TestComponent {
     }
     interface IntrinsicElements {
         "dyte-ai": DyteAi;
@@ -9080,7 +11182,6 @@ declare namespace LocalJSX {
         "dyte-viewer-count": DyteViewerCount;
         "dyte-virtualized-participant-list": DyteVirtualizedParticipantList;
         "dyte-waiting-screen": DyteWaitingScreen;
-        "test-component": TestComponent;
     }
 }
 export { LocalJSX as JSX };
@@ -9094,15 +11195,47 @@ declare module "@stencil/core" {
             "dyte-ai-transcriptions": LocalJSX.DyteAiTranscriptions & JSXBase.HTMLAttributes<HTMLDyteAiTranscriptionsElement>;
             "dyte-audio-grid": LocalJSX.DyteAudioGrid & JSXBase.HTMLAttributes<HTMLDyteAudioGridElement>;
             "dyte-audio-tile": LocalJSX.DyteAudioTile & JSXBase.HTMLAttributes<HTMLDyteAudioTileElement>;
+            /**
+             * An audio visualizer component which visualizes a participants audio.
+             * Commonly used inside `dyte-name-tag`.
+             */
             "dyte-audio-visualizer": LocalJSX.DyteAudioVisualizer & JSXBase.HTMLAttributes<HTMLDyteAudioVisualizerElement>;
+            /**
+             * Avatar component which renders a participant's image or their initials.
+             */
             "dyte-avatar": LocalJSX.DyteAvatar & JSXBase.HTMLAttributes<HTMLDyteAvatarElement>;
             "dyte-breakout-room-manager": LocalJSX.DyteBreakoutRoomManager & JSXBase.HTMLAttributes<HTMLDyteBreakoutRoomManagerElement>;
+            /**
+             * A component which lists all participants, with ability to
+             * run privileged actions on each participant according to your permissions.
+             */
             "dyte-breakout-room-participants": LocalJSX.DyteBreakoutRoomParticipants & JSXBase.HTMLAttributes<HTMLDyteBreakoutRoomParticipantsElement>;
             "dyte-breakout-rooms-manager": LocalJSX.DyteBreakoutRoomsManager & JSXBase.HTMLAttributes<HTMLDyteBreakoutRoomsManagerElement>;
+            /**
+             * A button which toggles visibility of breakout rooms.
+             * You need to pass the `meeting` object to it.
+             */
             "dyte-breakout-rooms-toggle": LocalJSX.DyteBreakoutRoomsToggle & JSXBase.HTMLAttributes<HTMLDyteBreakoutRoomsToggleElement>;
             "dyte-broadcast-message-modal": LocalJSX.DyteBroadcastMessageModal & JSXBase.HTMLAttributes<HTMLDyteBroadcastMessageModalElement>;
+            /**
+             * A button that follows Dyte's Design System.
+             */
             "dyte-button": LocalJSX.DyteButton & JSXBase.HTMLAttributes<HTMLDyteButtonElement>;
+            /**
+             * A component which lets to manage your audio devices and audio preferences.
+             * Emits `dyteStateUpdate` event with data for muting notification sounds:
+             * ```ts
+             * {
+             *  prefs: {
+             *    muteNotificationSounds: boolean
+             *  }
+             * }
+             * ```
+             */
             "dyte-camera-selector": LocalJSX.DyteCameraSelector & JSXBase.HTMLAttributes<HTMLDyteCameraSelectorElement>;
+            /**
+             * A button which toggles your camera.
+             */
             "dyte-camera-toggle": LocalJSX.DyteCameraToggle & JSXBase.HTMLAttributes<HTMLDyteCameraToggleElement>;
             "dyte-caption-toggle": LocalJSX.DyteCaptionToggle & JSXBase.HTMLAttributes<HTMLDyteCaptionToggleElement>;
             "dyte-channel-creator": LocalJSX.DyteChannelCreator & JSXBase.HTMLAttributes<HTMLDyteChannelCreatorElement>;
@@ -9110,125 +11243,469 @@ declare module "@stencil/core" {
             "dyte-channel-header": LocalJSX.DyteChannelHeader & JSXBase.HTMLAttributes<HTMLDyteChannelHeaderElement>;
             "dyte-channel-selector-ui": LocalJSX.DyteChannelSelectorUi & JSXBase.HTMLAttributes<HTMLDyteChannelSelectorUiElement>;
             "dyte-channel-selector-view": LocalJSX.DyteChannelSelectorView & JSXBase.HTMLAttributes<HTMLDyteChannelSelectorViewElement>;
+            /**
+             * Fully featured chat component with image & file upload, emoji picker and auto-scroll.
+             */
             "dyte-chat": LocalJSX.DyteChat & JSXBase.HTMLAttributes<HTMLDyteChatElement>;
             "dyte-chat-composer-ui": LocalJSX.DyteChatComposerUi & JSXBase.HTMLAttributes<HTMLDyteChatComposerUiElement>;
+            /**
+             * A component which renders a chat composer
+             */
             "dyte-chat-composer-view": LocalJSX.DyteChatComposerView & JSXBase.HTMLAttributes<HTMLDyteChatComposerViewElement>;
             "dyte-chat-message": LocalJSX.DyteChatMessage & JSXBase.HTMLAttributes<HTMLDyteChatMessageElement>;
             "dyte-chat-messages-ui": LocalJSX.DyteChatMessagesUi & JSXBase.HTMLAttributes<HTMLDyteChatMessagesUiElement>;
             "dyte-chat-messages-ui-paginated": LocalJSX.DyteChatMessagesUiPaginated & JSXBase.HTMLAttributes<HTMLDyteChatMessagesUiPaginatedElement>;
             "dyte-chat-search-results": LocalJSX.DyteChatSearchResults & JSXBase.HTMLAttributes<HTMLDyteChatSearchResultsElement>;
             "dyte-chat-selector-ui": LocalJSX.DyteChatSelectorUi & JSXBase.HTMLAttributes<HTMLDyteChatSelectorUiElement>;
+            /**
+             * A button which toggles visibility of chat.
+             * You need to pass the `meeting` object to it to see the unread messages count badge.
+             * When clicked it emits a `dyteStateUpdate` event with the data:
+             * ```ts
+             * { activeSidebar: boolean; sidebar: 'chat' }
+             * ```
+             */
             "dyte-chat-toggle": LocalJSX.DyteChatToggle & JSXBase.HTMLAttributes<HTMLDyteChatToggleElement>;
+            /**
+             * Shows the time elapsed in a meeting.
+             */
             "dyte-clock": LocalJSX.DyteClock & JSXBase.HTMLAttributes<HTMLDyteClockElement>;
+            /**
+             * A confirmation modal.
+             */
             "dyte-confirmation-modal": LocalJSX.DyteConfirmationModal & JSXBase.HTMLAttributes<HTMLDyteConfirmationModalElement>;
+            /**
+             * Controlbar component provides you with various designs as variants.
+             */
             "dyte-controlbar": LocalJSX.DyteControlbar & JSXBase.HTMLAttributes<HTMLDyteControlbarElement>;
+            /**
+             * A skeleton component used for composing custom controlbar buttons.
+             */
             "dyte-controlbar-button": LocalJSX.DyteControlbarButton & JSXBase.HTMLAttributes<HTMLDyteControlbarButtonElement>;
+            /**
+             * A number picker with increment and decrement buttons.
+             */
             "dyte-counter": LocalJSX.DyteCounter & JSXBase.HTMLAttributes<HTMLDyteCounterElement>;
+            /**
+             * A troubleshooting component to identify and fix any issues in the meeting.
+             */
             "dyte-debugger": LocalJSX.DyteDebugger & JSXBase.HTMLAttributes<HTMLDyteDebuggerElement>;
             "dyte-debugger-audio": LocalJSX.DyteDebuggerAudio & JSXBase.HTMLAttributes<HTMLDyteDebuggerAudioElement>;
             "dyte-debugger-screenshare": LocalJSX.DyteDebuggerScreenshare & JSXBase.HTMLAttributes<HTMLDyteDebuggerScreenshareElement>;
             "dyte-debugger-system": LocalJSX.DyteDebuggerSystem & JSXBase.HTMLAttributes<HTMLDyteDebuggerSystemElement>;
             "dyte-debugger-toggle": LocalJSX.DyteDebuggerToggle & JSXBase.HTMLAttributes<HTMLDyteDebuggerToggleElement>;
             "dyte-debugger-video": LocalJSX.DyteDebuggerVideo & JSXBase.HTMLAttributes<HTMLDyteDebuggerVideoElement>;
+            /**
+             * A dialog component.
+             */
             "dyte-dialog": LocalJSX.DyteDialog & JSXBase.HTMLAttributes<HTMLDyteDialogElement>;
+            /**
+             * A component which handles all dialog elements in a component such as:
+             * - dyte-settings
+             * - dyte-leave-meeting
+             * - dyte-permissions-message
+             * - dyte-image-viewer
+             * - dyte-remote-access-manager
+             * - dyte-breakout-rooms-manager
+             * This components depends on the values from `states` object.
+             */
             "dyte-dialog-manager": LocalJSX.DyteDialogManager & JSXBase.HTMLAttributes<HTMLDyteDialogManagerElement>;
+            /**
+             * A component which renders the draft attachment to send
+             */
             "dyte-draft-attachment-view": LocalJSX.DyteDraftAttachmentView & JSXBase.HTMLAttributes<HTMLDyteDraftAttachmentViewElement>;
+            /**
+             * A very simple emoji picker component.
+             */
             "dyte-emoji-picker": LocalJSX.DyteEmojiPicker & JSXBase.HTMLAttributes<HTMLDyteEmojiPickerElement>;
             "dyte-emoji-picker-button": LocalJSX.DyteEmojiPickerButton & JSXBase.HTMLAttributes<HTMLDyteEmojiPickerButtonElement>;
+            /**
+             * A screen which shows a meeting has ended.
+             */
             "dyte-ended-screen": LocalJSX.DyteEndedScreen & JSXBase.HTMLAttributes<HTMLDyteEndedScreenElement>;
             "dyte-file-dropzone": LocalJSX.DyteFileDropzone & JSXBase.HTMLAttributes<HTMLDyteFileDropzoneElement>;
+            /**
+             * A component which renders a file message from chat.
+             */
             "dyte-file-message": LocalJSX.DyteFileMessage & JSXBase.HTMLAttributes<HTMLDyteFileMessageElement>;
+            /**
+             * A component which renders a file message.
+             */
             "dyte-file-message-view": LocalJSX.DyteFileMessageView & JSXBase.HTMLAttributes<HTMLDyteFileMessageViewElement>;
             "dyte-file-picker-button": LocalJSX.DyteFilePickerButton & JSXBase.HTMLAttributes<HTMLDyteFilePickerButtonElement>;
+            /**
+             * A button which toggles full screen mode for any
+             * existing `dyte-meeting` component in the DOM.
+             */
             "dyte-fullscreen-toggle": LocalJSX.DyteFullscreenToggle & JSXBase.HTMLAttributes<HTMLDyteFullscreenToggleElement>;
+            /**
+             * The main grid component which abstracts all the grid handling logic and renders it for you.
+             */
             "dyte-grid": LocalJSX.DyteGrid & JSXBase.HTMLAttributes<HTMLDyteGridElement>;
+            /**
+             * A component which allows you to change current page and view mode
+             * of active participants list. This is reflected in the `dyte-grid` component.
+             */
             "dyte-grid-pagination": LocalJSX.DyteGridPagination & JSXBase.HTMLAttributes<HTMLDyteGridPaginationElement>;
+            /**
+             * A component that houses all the header components.
+             */
             "dyte-header": LocalJSX.DyteHeader & JSXBase.HTMLAttributes<HTMLDyteHeaderElement>;
+            /**
+             * An icon component which accepts an svg string and renders it.
+             */
             "dyte-icon": LocalJSX.DyteIcon & JSXBase.HTMLAttributes<HTMLDyteIconElement>;
+            /**
+             * A screen that handles the idle state,
+             * i.e; when you are waiting for data about the meeting, specifically the `meeting` object.
+             */
             "dyte-idle-screen": LocalJSX.DyteIdleScreen & JSXBase.HTMLAttributes<HTMLDyteIdleScreenElement>;
+            /**
+             * A component which renders an image message from chat.
+             */
             "dyte-image-message": LocalJSX.DyteImageMessage & JSXBase.HTMLAttributes<HTMLDyteImageMessageElement>;
+            /**
+             * A component which renders an image message.
+             */
             "dyte-image-message-view": LocalJSX.DyteImageMessageView & JSXBase.HTMLAttributes<HTMLDyteImageMessageViewElement>;
+            /**
+             * A component which shows an image sent via chat.
+             */
             "dyte-image-viewer": LocalJSX.DyteImageViewer & JSXBase.HTMLAttributes<HTMLDyteImageViewerElement>;
             "dyte-information-tooltip": LocalJSX.DyteInformationTooltip & JSXBase.HTMLAttributes<HTMLDyteInformationTooltipElement>;
             "dyte-join-stage": LocalJSX.DyteJoinStage & JSXBase.HTMLAttributes<HTMLDyteJoinStageElement>;
+            /**
+             * A button which toggles visilibility of the leave confirmation dialog.
+             */
             "dyte-leave-button": LocalJSX.DyteLeaveButton & JSXBase.HTMLAttributes<HTMLDyteLeaveButtonElement>;
+            /**
+             * A component which allows you to leave a meeting or
+             * end meeting for all, if you have the permission.
+             */
             "dyte-leave-meeting": LocalJSX.DyteLeaveMeeting & JSXBase.HTMLAttributes<HTMLDyteLeaveMeetingElement>;
             "dyte-livestream-indicator": LocalJSX.DyteLivestreamIndicator & JSXBase.HTMLAttributes<HTMLDyteLivestreamIndicatorElement>;
             "dyte-livestream-player": LocalJSX.DyteLivestreamPlayer & JSXBase.HTMLAttributes<HTMLDyteLivestreamPlayerElement>;
             "dyte-livestream-toggle": LocalJSX.DyteLivestreamToggle & JSXBase.HTMLAttributes<HTMLDyteLivestreamToggleElement>;
+            /**
+             * A component which loads the logo from your config, or via the `logo-url` attribute.
+             */
             "dyte-logo": LocalJSX.DyteLogo & JSXBase.HTMLAttributes<HTMLDyteLogoElement>;
             "dyte-markdown-view": LocalJSX.DyteMarkdownView & JSXBase.HTMLAttributes<HTMLDyteMarkdownViewElement>;
+            /**
+             * A single component which renders an entire meeting UI.
+             * It loads your preset and renders the UI based on it.
+             * With this component, you don't have to handle all the states,
+             * dialogs and other smaller bits of managing the application.
+             */
             "dyte-meeting": LocalJSX.DyteMeeting & JSXBase.HTMLAttributes<HTMLDyteMeetingElement>;
+            /**
+             * Displays the title of the meeting.
+             */
             "dyte-meeting-title": LocalJSX.DyteMeetingTitle & JSXBase.HTMLAttributes<HTMLDyteMeetingTitleElement>;
+            /**
+             * A menu component.
+             */
             "dyte-menu": LocalJSX.DyteMenu & JSXBase.HTMLAttributes<HTMLDyteMenuElement>;
+            /**
+             * A menu item component.
+             */
             "dyte-menu-item": LocalJSX.DyteMenuItem & JSXBase.HTMLAttributes<HTMLDyteMenuItemElement>;
+            /**
+             * A menu list component.
+             */
             "dyte-menu-list": LocalJSX.DyteMenuList & JSXBase.HTMLAttributes<HTMLDyteMenuListElement>;
+            /**
+             * A component which renders list of messages.
+             */
             "dyte-message-list-view": LocalJSX.DyteMessageListView & JSXBase.HTMLAttributes<HTMLDyteMessageListViewElement>;
             "dyte-message-view": LocalJSX.DyteMessageView & JSXBase.HTMLAttributes<HTMLDyteMessageViewElement>;
+            /**
+             * A button which toggles your microphone.
+             */
             "dyte-mic-toggle": LocalJSX.DyteMicToggle & JSXBase.HTMLAttributes<HTMLDyteMicToggleElement>;
+            /**
+             * A component which lets to manage your audio devices and audio preferences.
+             * Emits `dyteStateUpdate` event with data for muting notification sounds:
+             * ```ts
+             * {
+             *  prefs: {
+             *    muteNotificationSounds: boolean
+             *  }
+             * }
+             * ```
+             */
             "dyte-microphone-selector": LocalJSX.DyteMicrophoneSelector & JSXBase.HTMLAttributes<HTMLDyteMicrophoneSelectorElement>;
+            /**
+             * A grid component which handles screenshares, plugins and participants.
+             */
             "dyte-mixed-grid": LocalJSX.DyteMixedGrid & JSXBase.HTMLAttributes<HTMLDyteMixedGridElement>;
+            /**
+             * A button which toggles visibility of a more menu.
+             * When clicked it emits a `dyteStateUpdate` event with the data:
+             * ```ts
+             * { activeMoreMenu: boolean; }
+             * ```
+             */
             "dyte-more-toggle": LocalJSX.DyteMoreToggle & JSXBase.HTMLAttributes<HTMLDyteMoreToggleElement>;
             "dyte-mute-all-button": LocalJSX.DyteMuteAllButton & JSXBase.HTMLAttributes<HTMLDyteMuteAllButtonElement>;
             "dyte-mute-all-confirmation": LocalJSX.DyteMuteAllConfirmation & JSXBase.HTMLAttributes<HTMLDyteMuteAllConfirmationElement>;
+            /**
+             * A component which shows a participant's name.
+             */
             "dyte-name-tag": LocalJSX.DyteNameTag & JSXBase.HTMLAttributes<HTMLDyteNameTagElement>;
             "dyte-network-indicator": LocalJSX.DyteNetworkIndicator & JSXBase.HTMLAttributes<HTMLDyteNetworkIndicatorElement>;
+            /**
+             * A component which shows a notification.
+             * You need to remove the element after you receive the
+             * `dyteNotificationDismiss` event.
+             */
             "dyte-notification": LocalJSX.DyteNotification & JSXBase.HTMLAttributes<HTMLDyteNotificationElement>;
+            /**
+             * A component which handles notifications.
+             * You can configure which notifications you want to see and which ones you want to hear.
+             * There are also certain limits which you can set as well.
+             */
             "dyte-notifications": LocalJSX.DyteNotifications & JSXBase.HTMLAttributes<HTMLDyteNotificationsElement>;
+            /**
+             * A confirmation modal.
+             */
             "dyte-overlay-modal": LocalJSX.DyteOverlayModal & JSXBase.HTMLAttributes<HTMLDyteOverlayModalElement>;
             "dyte-paginated-list": LocalJSX.DytePaginatedList & JSXBase.HTMLAttributes<HTMLDytePaginatedListElement>;
+            /**
+             * A participant entry component used inside `dyte-participants` which shows data like:
+             * name, picture and media device status.
+             * You can perform privileged actions on the participant too.
+             */
             "dyte-participant": LocalJSX.DyteParticipant & JSXBase.HTMLAttributes<HTMLDyteParticipantElement>;
+            /**
+             * A component which shows count of total joined participants in a meeting.
+             */
             "dyte-participant-count": LocalJSX.DyteParticipantCount & JSXBase.HTMLAttributes<HTMLDyteParticipantCountElement>;
             "dyte-participant-setup": LocalJSX.DyteParticipantSetup & JSXBase.HTMLAttributes<HTMLDyteParticipantSetupElement>;
+            /**
+             * A component which plays a participants video and allows for placement
+             * of components like `dyte-name-tag`, `dyte-audio-visualizer` or any other component.
+             */
             "dyte-participant-tile": LocalJSX.DyteParticipantTile & JSXBase.HTMLAttributes<HTMLDyteParticipantTileElement>;
+            /**
+             * A component which lists all participants, with ability to
+             * run privileged actions on each participant according to your permissions.
+             */
             "dyte-participants": LocalJSX.DyteParticipants & JSXBase.HTMLAttributes<HTMLDyteParticipantsElement>;
+            /**
+             * A component which plays all the audio from participants and screenshares.
+             */
             "dyte-participants-audio": LocalJSX.DyteParticipantsAudio & JSXBase.HTMLAttributes<HTMLDyteParticipantsAudioElement>;
+            /**
+             * A component which lists all participants, with ability to
+             * run privileged actions on each participant according to your permissions.
+             */
             "dyte-participants-stage-list": LocalJSX.DyteParticipantsStageList & JSXBase.HTMLAttributes<HTMLDyteParticipantsStageListElement>;
             "dyte-participants-stage-queue": LocalJSX.DyteParticipantsStageQueue & JSXBase.HTMLAttributes<HTMLDyteParticipantsStageQueueElement>;
+            /**
+             * A button which toggles visibility of participants.
+             * When clicked it emits a `dyteStateUpdate` event with the data:
+             * ```ts
+             * { activeSidebar: boolean; sidebar: 'participants' }
+             * ```
+             */
             "dyte-participants-toggle": LocalJSX.DyteParticipantsToggle & JSXBase.HTMLAttributes<HTMLDyteParticipantsToggleElement>;
             "dyte-participants-viewer-list": LocalJSX.DyteParticipantsViewerList & JSXBase.HTMLAttributes<HTMLDyteParticipantsViewerListElement>;
             "dyte-participants-waiting-list": LocalJSX.DyteParticipantsWaitingList & JSXBase.HTMLAttributes<HTMLDyteParticipantsWaitingListElement>;
+            /**
+             * A component which shows permission related troubleshooting
+             * information.
+             */
             "dyte-permissions-message": LocalJSX.DytePermissionsMessage & JSXBase.HTMLAttributes<HTMLDytePermissionsMessageElement>;
             "dyte-pip-toggle": LocalJSX.DytePipToggle & JSXBase.HTMLAttributes<HTMLDytePipToggleElement>;
+            /**
+             * A component which loads a plugin.
+             */
             "dyte-plugin-main": LocalJSX.DytePluginMain & JSXBase.HTMLAttributes<HTMLDytePluginMainElement>;
+            /**
+             * A component which lists all available plugins from their preset,
+             * and ability to enable or disable plugins.
+             */
             "dyte-plugins": LocalJSX.DytePlugins & JSXBase.HTMLAttributes<HTMLDytePluginsElement>;
+            /**
+             * A button which toggles visibility of plugins.
+             * When clicked it emits a `dyteStateUpdate` event with the data:
+             * ```ts
+             * { activeSidebar: boolean; sidebar: 'plugins' }
+             * ```
+             */
             "dyte-plugins-toggle": LocalJSX.DytePluginsToggle & JSXBase.HTMLAttributes<HTMLDytePluginsToggleElement>;
+            /**
+             * A poll component.
+             * Shows a poll where a user can vote.
+             */
             "dyte-poll": LocalJSX.DytePoll & JSXBase.HTMLAttributes<HTMLDytePollElement>;
+            /**
+             * A component that lets you create a poll.
+             */
             "dyte-poll-form": LocalJSX.DytePollForm & JSXBase.HTMLAttributes<HTMLDytePollFormElement>;
+            /**
+             * A component which lists all available plugins a user can access with
+             * the ability to enable or disable them as per their permissions.
+             */
             "dyte-polls": LocalJSX.DytePolls & JSXBase.HTMLAttributes<HTMLDytePollsElement>;
+            /**
+             * A button which toggles visibility of polls.
+             * You need to pass the `meeting` object to it to see the unread polls count badge.
+             * When clicked it emits a `dyteStateUpdate` event with the data:
+             * ```ts
+             * { activeSidebar: boolean; sidebar: 'polls' }
+             * ```
+             */
             "dyte-polls-toggle": LocalJSX.DytePollsToggle & JSXBase.HTMLAttributes<HTMLDytePollsToggleElement>;
+            /**
+             * A component which indicates the recording status of a meeting.
+             * It will not render anything if no recording is taking place.
+             */
             "dyte-recording-indicator": LocalJSX.DyteRecordingIndicator & JSXBase.HTMLAttributes<HTMLDyteRecordingIndicatorElement>;
+            /**
+             * A button which toggles recording state of a meeting.
+             * Only a privileged user can perform this action,
+             * thus the button will not be visible for participants
+             * who don't have the permission to record a meeting.
+             */
             "dyte-recording-toggle": LocalJSX.DyteRecordingToggle & JSXBase.HTMLAttributes<HTMLDyteRecordingToggleElement>;
+            /**
+             * A button which toggles your screenshare.
+             */
             "dyte-screen-share-toggle": LocalJSX.DyteScreenShareToggle & JSXBase.HTMLAttributes<HTMLDyteScreenShareToggleElement>;
+            /**
+             * A component which plays a participant's screenshared video.
+             * It also allows for placement of other components similar to `dyte-participant-tile`.
+             * This component will not render anything if the participant hasn't start screensharing.
+             */
             "dyte-screenshare-view": LocalJSX.DyteScreenshareView & JSXBase.HTMLAttributes<HTMLDyteScreenshareViewElement>;
+            /**
+             * A settings component to see and change your audio/video devices
+             * as well as see your connection quality.
+             */
             "dyte-settings": LocalJSX.DyteSettings & JSXBase.HTMLAttributes<HTMLDyteSettingsElement>;
+            /**
+             * A component which lets to manage your audio devices and audio preferences.
+             * Emits `dyteStateUpdate` event with data for muting notification sounds:
+             * ```ts
+             * {
+             *  prefs: {
+             *    muteNotificationSounds: boolean
+             *  }
+             * }
+             * ```
+             */
             "dyte-settings-audio": LocalJSX.DyteSettingsAudio & JSXBase.HTMLAttributes<HTMLDyteSettingsAudioElement>;
+            /**
+             * A button which toggles visibility of settings module.
+             * When clicked it emits a `dyteStateUpdate` event with the data:
+             * ```ts
+             * { activeSettings: boolean; }
+             * ```
+             */
             "dyte-settings-toggle": LocalJSX.DyteSettingsToggle & JSXBase.HTMLAttributes<HTMLDyteSettingsToggleElement>;
+            /**
+             * A component which lets to manage your camera devices and your video preferences.
+             * Emits `dyteStateUpdate` event with data for toggling mirroring of self video:
+             * ```ts
+             * {
+             *  prefs: {
+             *    mirrorVideo: boolean
+             *  }
+             * }
+             * ```
+             */
             "dyte-settings-video": LocalJSX.DyteSettingsVideo & JSXBase.HTMLAttributes<HTMLDyteSettingsVideoElement>;
+            /**
+             * A screen shown before joining the meeting, where you can edit your display name,
+             * and media settings.
+             */
             "dyte-setup-screen": LocalJSX.DyteSetupScreen & JSXBase.HTMLAttributes<HTMLDyteSetupScreenElement>;
+            /**
+             * A component which handles the sidebar and
+             * you can customize which sections you want, and which section you want as the default.
+             */
             "dyte-sidebar": LocalJSX.DyteSidebar & JSXBase.HTMLAttributes<HTMLDyteSidebarElement>;
             "dyte-sidebar-ui": LocalJSX.DyteSidebarUi & JSXBase.HTMLAttributes<HTMLDyteSidebarUiElement>;
+            /**
+             * A grid component which renders only the participants in a simple grid.
+             */
             "dyte-simple-grid": LocalJSX.DyteSimpleGrid & JSXBase.HTMLAttributes<HTMLDyteSimpleGridElement>;
+            /**
+             * A component which lets to manage your audio devices and audio preferences.
+             * Emits `dyteStateUpdate` event with data for muting notification sounds:
+             * ```ts
+             * {
+             *  prefs: {
+             *    muteNotificationSounds: boolean
+             *  }
+             * }
+             * ```
+             */
             "dyte-speaker-selector": LocalJSX.DyteSpeakerSelector & JSXBase.HTMLAttributes<HTMLDyteSpeakerSelectorElement>;
+            /**
+             * A component which shows an animating spinner.
+             */
             "dyte-spinner": LocalJSX.DyteSpinner & JSXBase.HTMLAttributes<HTMLDyteSpinnerElement>;
+            /**
+             * A grid component that renders two lists of participants: `pinnedParticipants` and `participants`.
+             * You can customize the layout to a `column` view, by default is is `row`.
+             * - Participants from `pinnedParticipants[]` are rendered inside a larger grid.
+             * - Participants from `participants[]` array are rendered in a smaller grid.
+             */
             "dyte-spotlight-grid": LocalJSX.DyteSpotlightGrid & JSXBase.HTMLAttributes<HTMLDyteSpotlightGridElement>;
             "dyte-spotlight-indicator": LocalJSX.DyteSpotlightIndicator & JSXBase.HTMLAttributes<HTMLDyteSpotlightIndicatorElement>;
+            /**
+             * A component used as a stage that commonly houses
+             * the `grid` and `sidebar` components.
+             */
             "dyte-stage": LocalJSX.DyteStage & JSXBase.HTMLAttributes<HTMLDyteStageElement>;
             "dyte-stage-toggle": LocalJSX.DyteStageToggle & JSXBase.HTMLAttributes<HTMLDyteStageToggleElement>;
+            /**
+             * A switch component which follows Dyte's Design System.
+             */
             "dyte-switch": LocalJSX.DyteSwitch & JSXBase.HTMLAttributes<HTMLDyteSwitchElement>;
             "dyte-tab-bar": LocalJSX.DyteTabBar & JSXBase.HTMLAttributes<HTMLDyteTabBarElement>;
+            /**
+             * A component which renders a text composer
+             */
             "dyte-text-composer-view": LocalJSX.DyteTextComposerView & JSXBase.HTMLAttributes<HTMLDyteTextComposerViewElement>;
+            /**
+             * A text field component.
+             */
             "dyte-text-field": LocalJSX.DyteTextField & JSXBase.HTMLAttributes<HTMLDyteTextFieldElement>;
+            /**
+             * A component which renders a text message from chat.
+             */
             "dyte-text-message": LocalJSX.DyteTextMessage & JSXBase.HTMLAttributes<HTMLDyteTextMessageElement>;
+            /**
+             * A component which renders a text message from chat.
+             */
             "dyte-text-message-view": LocalJSX.DyteTextMessageView & JSXBase.HTMLAttributes<HTMLDyteTextMessageViewElement>;
+            /**
+             * Tooltip component which follows Dyte's Design System.
+             */
             "dyte-tooltip": LocalJSX.DyteTooltip & JSXBase.HTMLAttributes<HTMLDyteTooltipElement>;
+            /**
+             * A component which shows a transcript.
+             * You need to remove the element after you receive the
+             * `dyteTranscriptDismiss` event.
+             */
             "dyte-transcript": LocalJSX.DyteTranscript & JSXBase.HTMLAttributes<HTMLDyteTranscriptElement>;
+            /**
+             * A component which handles transcripts.
+             * You can configure which transcripts you want to see and which ones you want to hear.
+             * There are also certain limits which you can set as well.
+             */
             "dyte-transcripts": LocalJSX.DyteTranscripts & JSXBase.HTMLAttributes<HTMLDyteTranscriptsElement>;
             "dyte-ui-provider": LocalJSX.DyteUiProvider & JSXBase.HTMLAttributes<HTMLDyteUiProviderElement>;
+            /**
+             * A component which shows count of total joined participants in a meeting.
+             */
             "dyte-viewer-count": LocalJSX.DyteViewerCount & JSXBase.HTMLAttributes<HTMLDyteViewerCountElement>;
             "dyte-virtualized-participant-list": LocalJSX.DyteVirtualizedParticipantList & JSXBase.HTMLAttributes<HTMLDyteVirtualizedParticipantListElement>;
             "dyte-waiting-screen": LocalJSX.DyteWaitingScreen & JSXBase.HTMLAttributes<HTMLDyteWaitingScreenElement>;
-            "test-component": LocalJSX.TestComponent & JSXBase.HTMLAttributes<HTMLTestComponentElement>;
         }
     }
 }

@@ -14,7 +14,7 @@ const addZero = (n: number) => Math.trunc(n).toString().padStart(2, '0');
   shadow: true,
 })
 export class DyteClock {
-  private timeout: NodeJS.Timer;
+  private timeout: NodeJS.Timeout;
   private request: number;
 
   /** Meeting object */

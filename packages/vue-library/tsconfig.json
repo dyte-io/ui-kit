@@ -1,15 +1,14 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "outDir": "./lib",
+    "outDir": "./dist",
     "lib": ["dom", "es2020"],
     "module": "es2015",
-    "removeComments": true,
-    "declaration": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "target": "es2017",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declarationDir": "./dist/types"
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "lib"]
+  "include": ["lib"],
+  "exclude": ["node_modules"]
 }
