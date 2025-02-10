@@ -97,7 +97,7 @@ export class DyteBreakoutRoomParticipants {
     });
   }
 
-  private onSearchInput = (e: KeyboardEvent) => {
+  private onSearchInput = (e: InputEvent) => {
     this.search = (e.target as HTMLInputElement).value;
   };
 
