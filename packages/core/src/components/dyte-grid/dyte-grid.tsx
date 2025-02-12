@@ -169,6 +169,7 @@ export class DyteGrid {
         this.canCurrentPeerHost = permissions.acceptStageRequests || permissions.canPresent;
         this.updateStage();
       }
+      this.hidden = meeting.self.hidden;
 
       // Add all listeners
       self.addListener('roomLeft', this.updateRoomStateListener);

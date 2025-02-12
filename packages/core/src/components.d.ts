@@ -3602,8 +3602,6 @@ export namespace Components {
          */
         "t": DyteI18n;
     }
-    interface TestComponent {
-    }
 }
 export interface DyteAiCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -4768,12 +4766,6 @@ declare global {
         prototype: HTMLDyteWaitingScreenElement;
         new (): HTMLDyteWaitingScreenElement;
     };
-    interface HTMLTestComponentElement extends Components.TestComponent, HTMLStencilElement {
-    }
-    var HTMLTestComponentElement: {
-        prototype: HTMLTestComponentElement;
-        new (): HTMLTestComponentElement;
-    };
     interface HTMLElementTagNameMap {
         "dyte-ai": HTMLDyteAiElement;
         "dyte-ai-chat": HTMLDyteAiChatElement;
@@ -4916,7 +4908,6 @@ declare global {
         "dyte-viewer-count": HTMLDyteViewerCountElement;
         "dyte-virtualized-participant-list": HTMLDyteVirtualizedParticipantListElement;
         "dyte-waiting-screen": HTMLDyteWaitingScreenElement;
-        "test-component": HTMLTestComponentElement;
     }
 }
 declare namespace LocalJSX {
@@ -8936,8 +8927,6 @@ declare namespace LocalJSX {
          */
         "t"?: DyteI18n;
     }
-    interface TestComponent {
-    }
     interface IntrinsicElements {
         "dyte-ai": DyteAi;
         "dyte-ai-chat": DyteAiChat;
@@ -9080,7 +9069,6 @@ declare namespace LocalJSX {
         "dyte-viewer-count": DyteViewerCount;
         "dyte-virtualized-participant-list": DyteVirtualizedParticipantList;
         "dyte-waiting-screen": DyteWaitingScreen;
-        "test-component": TestComponent;
     }
 }
 export { LocalJSX as JSX };
@@ -9228,7 +9216,6 @@ declare module "@stencil/core" {
             "dyte-viewer-count": LocalJSX.DyteViewerCount & JSXBase.HTMLAttributes<HTMLDyteViewerCountElement>;
             "dyte-virtualized-participant-list": LocalJSX.DyteVirtualizedParticipantList & JSXBase.HTMLAttributes<HTMLDyteVirtualizedParticipantListElement>;
             "dyte-waiting-screen": LocalJSX.DyteWaitingScreen & JSXBase.HTMLAttributes<HTMLDyteWaitingScreenElement>;
-            "test-component": LocalJSX.TestComponent & JSXBase.HTMLAttributes<HTMLTestComponentElement>;
         }
     }
 }
