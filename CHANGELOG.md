@@ -1,3 +1,18 @@
+## [2.2.1-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.1-staging.1...@dyte-in/ui-kit-v2.2.1-staging.2) (2025-02-13)
+
+
+### Bug Fixes
+
+* error while destructuring meeting ([be2ecc8](https://github.com/dyte-io/ui-kit/commit/be2ecc8a50656954b5bf75a0f20c97a81be295e3))
+
+## [2.2.1-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0...@dyte-in/ui-kit-v2.2.1-staging.1) (2025-02-13)
+
+
+### Bug Fixes
+
+* add source spam on web-core ([ad70a9c](https://github.com/dyte-io/ui-kit/commit/ad70a9c0c20f61769ebad6de906848736a760833))
+* remove unused types ([8dc3e6f](https://github.com/dyte-io/ui-kit/commit/8dc3e6f10e0ecfc2e98538ac711076df97937d82))
+
 # [2.2.0](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.5...@dyte-in/ui-kit-v2.2.0) (2025-02-07)
 
 
