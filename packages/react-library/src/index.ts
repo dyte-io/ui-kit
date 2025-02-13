@@ -1,4 +1,5 @@
-export * from "./components";
+export * from './components/stencil-generated/components';
+
 export {
     sendNotification,
     provideDyteDesignSystem,

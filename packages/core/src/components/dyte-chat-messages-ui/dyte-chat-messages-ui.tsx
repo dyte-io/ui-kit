@@ -32,7 +32,7 @@ export class DyteChatMessagesUi {
   private observingEl: HTMLElement[] = [];
 
   private request: number;
-  private timeout: NodeJS.Timer;
+  private timeout: NodeJS.Timeout;
 
   private autoScrollEnabled: boolean = true;
 

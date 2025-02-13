@@ -4,7 +4,7 @@
     "allowUnreachableCode": false,
     "declaration": false,
     "experimentalDecorators": true,
-    "lib": ["DOM", "es2017", "DOM.Iterable"],
+    "lib": ["DOM", "DOM.Iterable", "es2017"],
     "moduleResolution": "node",
     "module": "esnext",
     "target": "es2017",
@@ -12,8 +12,8 @@
     "noUnusedParameters": true,
     "jsx": "react",
     "jsxFactory": "h",
+    "jsxFragmentFactory": "h.Fragment",
     "resolveJsonModule": true,
-    "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
   "include": ["src"],
