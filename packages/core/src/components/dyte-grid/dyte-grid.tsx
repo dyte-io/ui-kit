@@ -170,6 +170,8 @@ export class DyteGrid {
         this.updateStage();
       }
 
+      this.hidden = meeting.self.hidden;
+
       // Add all listeners
       self.addListener('roomLeft', this.updateRoomStateListener);
       self.addListener('roomJoined', this.updateRoomStateListener);

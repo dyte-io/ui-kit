@@ -24,8 +24,6 @@ export type MediaPermission =
   | 'CANCELED'
   | 'NO_DEVICES_AVAILABLE';
 
-export type { RemoteUpdatePayload } from '@dytesdk/web-core';
-
 // eslint-disable-next-line @stencil-community/ban-exported-const-enums
 export enum RemoteUpdateType {
   REQUEST_RECEIVED = 'REQUEST_RECEIVED',
