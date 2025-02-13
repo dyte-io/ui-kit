@@ -1,3 +1,10 @@
+## [2.2.1-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.1-staging.1...@dyte-in/ui-kit-v2.2.1-staging.2) (2025-02-13)
+
+
+### Bug Fixes
+
+* error while destructuring meeting ([be2ecc8](https://github.com/dyte-io/ui-kit/commit/be2ecc8a50656954b5bf75a0f20c97a81be295e3))
+
 ## [2.2.1-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0...@dyte-in/ui-kit-v2.2.1-staging.1) (2025-02-13)
 
 
