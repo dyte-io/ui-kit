@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.1...@dyte-in/ui-kit-v2.2.2) (2025-02-13)
+
+
+### Bug Fixes
+
+* **release:** adding a empty commit to re-release ([9a70e57](https://github.com/dyte-io/ui-kit/commit/9a70e570e50b78de84f66bd4c476a7a8b2eb7879))
+
 ## [2.2.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0...@dyte-in/ui-kit-v2.2.1) (2025-02-13)
 
 
