@@ -16,7 +16,11 @@ export type DyteI18n = (key: keyof LangDict | (string & {})) => string;
  * @returns A function which handles i18n
  */
 export const useLanguage = (lang: Partial<LangDict | {}> = defaultLanguage): DyteI18n => {
-  const locale = Object.assign({}, defaultLanguage, lang);
+  let locale = defaultLanguage;
+
+  if (lang !== defaultLanguage || Object.keys(lang).length > 0) {
+    locale = Object.assign({}, defaultLanguage, lang);
+  }
 
   return (key) => {
     return locale[key] ?? key;
