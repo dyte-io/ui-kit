@@ -1,3 +1,10 @@
+## [2.2.3-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.2...@dyte-in/ui-kit-v2.2.3-staging.1) (2025-02-18)
+
+
+### Bug Fixes
+
+* optimize locale object handling ([8d20ecc](https://github.com/dyte-io/ui-kit/commit/8d20eccc5727f41268f1248c8cc0702159af6a29))
+
 ## [2.2.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.1...@dyte-in/ui-kit-v2.2.2) (2025-02-13)
 
 
