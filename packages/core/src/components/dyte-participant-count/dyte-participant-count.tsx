@@ -1,9 +1,10 @@
-import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
+import { Component, Host, h, Prop } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { isLiveStreamViewer } from '../../utils/livestream';
 import { Size } from '../../types/props';
+import { DyteState } from '../../lib/coreReactivity';
 
 /**
  * A component which shows count of total joined participants in a meeting.
@@ -14,10 +15,6 @@ import { Size } from '../../types/props';
   shadow: true,
 })
 export class DyteParticipantCount {
-  private countListener: () => void;
-
-  private stageUpdateListener: () => void;
-
   /** Meeting object */
   @Prop() meeting!: Meeting;
 
@@ -30,52 +27,11 @@ export class DyteParticipantCount {
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
-  @State() participantCount: number = 0;
+  @DyteState((m) => isLiveStreamViewer(m))
+  private isViewer: boolean = false;
 
-  @State() isViewer: boolean = false;
-
-  connectedCallback() {
-    this.meetingChanged(this.meeting);
-  }
-
-  private disconnectMeeting = (meeting: Meeting) => {
-    if (meeting != null && this.countListener != null) {
-      meeting.participants.joined.removeListener('participantJoined', this.countListener);
-      meeting.participants.joined.removeListener('participantLeft', this.countListener);
-      meeting?.stage &&
-        this.stageUpdateListener &&
-        meeting.stage.removeListener('stageStatusUpdate', this.stageUpdateListener);
-      meeting.self.removeListener('roomJoined', this.countListener);
-    }
-  };
-
-  disconnectedCallback() {
-    this.disconnectMeeting(this.meeting);
-  }
-
-  @Watch('meeting')
-  meetingChanged(meeting: Meeting, oldMeeting?: Meeting) {
-    this.disconnectMeeting(oldMeeting);
-    if (meeting != null) {
-      this.countListener = () => {
-        this.participantCount =
-          meeting.participants.joined.size + (meeting.self.roomJoined ? 1 : 0);
-      };
-      this.countListener();
-      this.isViewer = isLiveStreamViewer(this.meeting);
-      meeting.participants.joined.addListener('participantJoined', this.countListener);
-      meeting.participants.joined.addListener('participantLeft', this.countListener);
-
-      if (meeting?.stage) {
-        this.stageUpdateListener = () => {
-          this.isViewer = isLiveStreamViewer(this.meeting);
-        };
-        meeting?.stage.addListener('stageStatusUpdate', this.stageUpdateListener);
-      }
-
-      meeting.self.addListener('roomJoined', this.countListener);
-    }
-  }
+  @DyteState((m) => m.participants.joined.size + 1)
+  private participantCount = 0;
 
   render() {
     if (this.isViewer) return null;
