@@ -1,3 +1,10 @@
+## [2.2.3-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.3-staging.1...@dyte-in/ui-kit-v2.2.3-staging.2) (2025-02-27)
+
+
+### Bug Fixes
+
+* checks for toggle button visiblity ([40fbac2](https://github.com/dyte-io/ui-kit/commit/40fbac27e4048bf7400d8de6396ff3d2b3acc220))
+
 ## [2.2.3-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.2...@dyte-in/ui-kit-v2.2.3-staging.1) (2025-02-18)
 
 
