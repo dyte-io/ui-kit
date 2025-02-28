@@ -1,4 +1,4 @@
-import { Component, Host, h, Prop, Element, State } from '@stencil/core';
+import { Component, Host, h, Prop, Element, State, Watch } from '@stencil/core';
 import { defaultConfig } from '../../lib/default-ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
@@ -66,8 +66,13 @@ export class DyteSimpleGrid {
   connectedCallback() {
     this.resizeObserver = new ResizeObserver(this.setHostDimensions);
     this.resizeObserver.observe(this.host);
-    const { meta } = this.meeting;
-    this.mediaConnection = { ...meta.mediaState };
+    this.meetingChanged(this.meeting);
+  }
+
+  @Watch('meeting')
+  meetingChanged(meeting: Meeting) {
+    const meta = meeting?.meta;
+    if (meta) this.mediaConnection = { ...meta.mediaState };
   }
 
   disconnectedCallback() {

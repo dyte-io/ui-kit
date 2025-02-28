@@ -1,3 +1,55 @@
+## [2.2.3-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.3-staging.2...@dyte-in/ui-kit-v2.2.3-staging.3) (2025-02-28)
+
+
+### Bug Fixes
+
+* update mute all description ([44b430e](https://github.com/dyte-io/ui-kit/commit/44b430ea34f3cd3b28a5f43f96f5382145af53ed))
+
+## [2.2.3-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.3-staging.1...@dyte-in/ui-kit-v2.2.3-staging.2) (2025-02-27)
+
+
+### Bug Fixes
+
+* checks for toggle button visiblity ([40fbac2](https://github.com/dyte-io/ui-kit/commit/40fbac27e4048bf7400d8de6396ff3d2b3acc220))
+
+## [2.2.3-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.2...@dyte-in/ui-kit-v2.2.3-staging.1) (2025-02-18)
+
+
+### Bug Fixes
+
+* optimize locale object handling ([8d20ecc](https://github.com/dyte-io/ui-kit/commit/8d20eccc5727f41268f1248c8cc0702159af6a29))
+
+## [2.2.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.1...@dyte-in/ui-kit-v2.2.2) (2025-02-13)
+
+
+### Bug Fixes
+
+* **release:** adding a empty commit to re-release ([9a70e57](https://github.com/dyte-io/ui-kit/commit/9a70e570e50b78de84f66bd4c476a7a8b2eb7879))
+
+## [2.2.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0...@dyte-in/ui-kit-v2.2.1) (2025-02-13)
+
+
+### Bug Fixes
+
+* add source spam on web-core ([ad70a9c](https://github.com/dyte-io/ui-kit/commit/ad70a9c0c20f61769ebad6de906848736a760833))
+* error while destructuring meeting ([be2ecc8](https://github.com/dyte-io/ui-kit/commit/be2ecc8a50656954b5bf75a0f20c97a81be295e3))
+* remove unused types ([8dc3e6f](https://github.com/dyte-io/ui-kit/commit/8dc3e6f10e0ecfc2e98538ac711076df97937d82))
+
+## [2.2.1-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.1-staging.1...@dyte-in/ui-kit-v2.2.1-staging.2) (2025-02-13)
+
+
+### Bug Fixes
+
+* error while destructuring meeting ([be2ecc8](https://github.com/dyte-io/ui-kit/commit/be2ecc8a50656954b5bf75a0f20c97a81be295e3))
+
+## [2.2.1-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.0...@dyte-in/ui-kit-v2.2.1-staging.1) (2025-02-13)
+
+
+### Bug Fixes
+
+* add source spam on web-core ([ad70a9c](https://github.com/dyte-io/ui-kit/commit/ad70a9c0c20f61769ebad6de906848736a760833))
+* remove unused types ([8dc3e6f](https://github.com/dyte-io/ui-kit/commit/8dc3e6f10e0ecfc2e98538ac711076df97937d82))
+
 # [2.2.0](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.1.5...@dyte-in/ui-kit-v2.2.0) (2025-02-07)
 
 
