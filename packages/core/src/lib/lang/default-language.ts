@@ -51,7 +51,7 @@ export const defaultLanguage = {
   minimize: 'Hide Tile',
   maximize: 'Show Tile',
   mute_all: 'Mute all',
-  'mute_all.description': 'Everyone in the meeting will be muted.',
+  'mute_all.description': 'Everyone else in the meeting will be muted.',
   'mute_all.header': 'Are you sure?',
   'mute_all.allow_unmute': 'Allow others to unmute',
   video_off: 'Video Off',
