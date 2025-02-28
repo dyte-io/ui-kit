@@ -1,3 +1,16 @@
+# [2.3.0-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.3-staging.3...@dyte-in/ui-kit-v2.3.0-staging.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* disable sourcemap ([d0afd77](https://github.com/dyte-io/ui-kit/commit/d0afd770c15c33e2cd7a445e553a801861cef14d))
+* upgrade stencil ([9b1412f](https://github.com/dyte-io/ui-kit/commit/9b1412fa55a0411159ec5a6b98f07463bce9d94f))
+
+
+### Features
+
+* upgrade stencil to 4.25.3 ([528269b](https://github.com/dyte-io/ui-kit/commit/528269bd0df33320a4424279aee481bb9b236457))
+
 ## [2.2.3-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.3-staging.2...@dyte-in/ui-kit-v2.2.3-staging.3) (2025-02-28)
 
 

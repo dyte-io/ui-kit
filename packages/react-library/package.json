@@ -1,6 +1,6 @@
 {
   "name": "@dytesdk/react-ui-kit",
-  "version": "2.2.3-staging.3",
+  "version": "2.3.0-staging.1",
   "description": "Dyte's UI Kit to support easy UI development for React.",
   "repository": {
     "type": "git",
@@ -44,7 +44,7 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
-    "@dytesdk/ui-kit":"*",
+    "@dytesdk/ui-kit": "*",
     "@stencil/react-output-target": "^0.8.2"
   },
   "license": "UNLICENSED"
