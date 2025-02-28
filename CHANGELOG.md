@@ -1,3 +1,10 @@
+## [2.2.3-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.3-staging.2...@dyte-in/ui-kit-v2.2.3-staging.3) (2025-02-28)
+
+
+### Bug Fixes
+
+* update mute all description ([44b430e](https://github.com/dyte-io/ui-kit/commit/44b430ea34f3cd3b28a5f43f96f5382145af53ed))
+
 ## [2.2.3-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.3-staging.1...@dyte-in/ui-kit-v2.2.3-staging.2) (2025-02-27)
 
 
