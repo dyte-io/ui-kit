@@ -17,7 +17,7 @@
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
     },
-    "./esm": {
+    "./es": {
       "types": "./dist/types/index.d.ts",
       "default": "./dist/index.js"
     }
