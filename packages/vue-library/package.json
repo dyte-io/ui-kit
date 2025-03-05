@@ -23,7 +23,8 @@
     "url": "git+https://github.com/dyte-io/ui-kit.git"
   },
   "dependencies": {
-    "@dytesdk/ui-kit": "*"
+    "@dytesdk/ui-kit": "*",
+    "@stencil/vue-output-target": "^0.9.6"
   },
   "bugs": {
     "email": "support@dyte.io"
