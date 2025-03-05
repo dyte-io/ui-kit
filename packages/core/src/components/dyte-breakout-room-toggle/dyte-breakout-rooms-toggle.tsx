@@ -2,7 +2,7 @@ import { Component, Host, h, Prop, Event, EventEmitter, State, Watch } from '@st
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
-import { Size, States } from '../../types/props';
+import { PartialStateEvent, Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import storeState from '../../lib/store';
 import { canToggleBreakout } from '../../utils/breakout-rooms';
@@ -37,7 +37,7 @@ export class DyteBreakoutRoomsToggle {
   @Prop() t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
-  @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<Partial<States>>;
+  @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<PartialStateEvent>;
 
   @State() canToggle = false;
 

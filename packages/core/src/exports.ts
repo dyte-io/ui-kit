@@ -15,7 +15,14 @@ export { registerAddons, Addon } from './lib/addons';
 
 // types
 export { UIConfig } from './types/ui-config';
-export { States, Notification, Size, UserPreferences, PollObject } from './types/props';
+export {
+  States,
+  Notification,
+  Size,
+  UserPreferences,
+  PollObject,
+  PartialStateEvent,
+} from './types/props';
 export { Peer } from './types/dyte-client';
 
 // UIConfig, Icon Pack, i18n and Notification Sounds

@@ -7,7 +7,7 @@
 
 /* eslint-disable */
 
-import { type ChatGroupChangedType, type DyteAiCustomEvent, type DyteAiToggleCustomEvent, type DyteBreakoutRoomsManagerCustomEvent, type DyteBreakoutRoomsToggleCustomEvent, type DyteBroadcastMessageModalCustomEvent, type DyteCameraToggleCustomEvent, type DyteCaptionToggleCustomEvent, type DyteChannelCreatorCustomEvent, type DyteChannelSelectorViewCustomEvent, type DyteChatComposerUiCustomEvent, type DyteChatComposerViewCustomEvent, type DyteChatCustomEvent, type DyteChatMessageCustomEvent, type DyteChatMessagesUiCustomEvent, type DyteChatMessagesUiPaginatedCustomEvent, type DyteChatSelectorUiCustomEvent, type DyteChatToggleCustomEvent, type DyteConfirmationModalCustomEvent, type DyteDebuggerCustomEvent, type DyteDebuggerToggleCustomEvent, type DyteDialogManagerCustomEvent, type DyteFileDropzoneCustomEvent, type DyteFilePickerButtonCustomEvent, type DyteFullscreenToggleCustomEvent, type DyteGridCustomEvent, type DyteImageMessageCustomEvent, type DyteJoinStageCustomEvent, type DyteLeaveButtonCustomEvent, type DyteLeaveMeetingCustomEvent, type DyteLivestreamToggleCustomEvent, type DyteMeetingCustomEvent, type DyteMicToggleCustomEvent, type DyteMoreToggleCustomEvent, type DyteMuteAllButtonCustomEvent, type DyteMuteAllConfirmationCustomEvent, type DyteNewMessageEvent, type DyteOverlayModalCustomEvent, type DyteParticipantTileCustomEvent, type DyteParticipantsCustomEvent, type DyteParticipantsToggleCustomEvent, type DytePermissionsMessageCustomEvent, type DytePipToggleCustomEvent, type DytePluginsCustomEvent, type DytePluginsToggleCustomEvent, type DytePollFormCustomEvent, type DytePollsToggleCustomEvent, type DyteScreenShareToggleCustomEvent, type DyteScreenshareViewCustomEvent, type DyteSettingsAudioCustomEvent, type DyteSettingsCustomEvent, type DyteSettingsToggleCustomEvent, type DyteSettingsVideoCustomEvent, type DyteSetupScreenCustomEvent, type DyteSidebarCustomEvent, type DyteStageCustomEvent, type DyteStageToggleCustomEvent, type DyteTabBarCustomEvent, type DyteTextFieldCustomEvent, type IconPack, type Message, type NewMessageEvent, type Peer, type PollObject, type States, type Tab, type TextMessage } from "@dytesdk/ui-kit";
+import { type ChatGroupChangedType, type DyteAiCustomEvent, type DyteAiToggleCustomEvent, type DyteBreakoutRoomsManagerCustomEvent, type DyteBreakoutRoomsToggleCustomEvent, type DyteBroadcastMessageModalCustomEvent, type DyteCameraToggleCustomEvent, type DyteCaptionToggleCustomEvent, type DyteChannelCreatorCustomEvent, type DyteChannelSelectorViewCustomEvent, type DyteChatComposerUiCustomEvent, type DyteChatComposerViewCustomEvent, type DyteChatCustomEvent, type DyteChatMessageCustomEvent, type DyteChatMessagesUiCustomEvent, type DyteChatMessagesUiPaginatedCustomEvent, type DyteChatSelectorUiCustomEvent, type DyteChatToggleCustomEvent, type DyteConfirmationModalCustomEvent, type DyteDebuggerCustomEvent, type DyteDebuggerToggleCustomEvent, type DyteDialogManagerCustomEvent, type DyteFileDropzoneCustomEvent, type DyteFilePickerButtonCustomEvent, type DyteFullscreenToggleCustomEvent, type DyteGridCustomEvent, type DyteImageMessageCustomEvent, type DyteJoinStageCustomEvent, type DyteLeaveButtonCustomEvent, type DyteLeaveMeetingCustomEvent, type DyteLivestreamToggleCustomEvent, type DyteMeetingCustomEvent, type DyteMicToggleCustomEvent, type DyteMoreToggleCustomEvent, type DyteMuteAllButtonCustomEvent, type DyteMuteAllConfirmationCustomEvent, type DyteNewMessageEvent, type DyteOverlayModalCustomEvent, type DyteParticipantTileCustomEvent, type DyteParticipantsCustomEvent, type DyteParticipantsToggleCustomEvent, type DytePermissionsMessageCustomEvent, type DytePipToggleCustomEvent, type DytePluginsCustomEvent, type DytePluginsToggleCustomEvent, type DytePollFormCustomEvent, type DytePollsToggleCustomEvent, type DyteScreenShareToggleCustomEvent, type DyteScreenshareViewCustomEvent, type DyteSettingsAudioCustomEvent, type DyteSettingsCustomEvent, type DyteSettingsToggleCustomEvent, type DyteSettingsVideoCustomEvent, type DyteSetupScreenCustomEvent, type DyteSidebarCustomEvent, type DyteStageCustomEvent, type DyteStageToggleCustomEvent, type DyteTabBarCustomEvent, type DyteTextFieldCustomEvent, type IconPack, type Message, type NewMessageEvent, type PartialStateEvent, type Peer, type PollObject, type States, type Tab, type TextMessage } from "@dytesdk/ui-kit";
 import { DyteAiChat as DyteAiChatElement, defineCustomElement as defineDyteAiChat } from "@dytesdk/ui-kit/dist/components/dyte-ai-chat.js";
 import { DyteAiHome as DyteAiHomeElement, defineCustomElement as defineDyteAiHome } from "@dytesdk/ui-kit/dist/components/dyte-ai-home.js";
 import { DyteAiToggle as DyteAiToggleElement, defineCustomElement as defineDyteAiToggle } from "@dytesdk/ui-kit/dist/components/dyte-ai-toggle.js";
@@ -299,7 +299,7 @@ export const DyteBreakoutRoomParticipants: StencilReactComponent<DyteBreakoutRoo
     defineCustomElement: defineDyteBreakoutRoomParticipants
 });
 
-type DyteBreakoutRoomsManagerEvents = { onDyteStateUpdate: EventName<DyteBreakoutRoomsManagerCustomEvent<Partial<States>>> };
+type DyteBreakoutRoomsManagerEvents = { onDyteStateUpdate: EventName<DyteBreakoutRoomsManagerCustomEvent<PartialStateEvent>> };
 
 export const DyteBreakoutRoomsManager: StencilReactComponent<DyteBreakoutRoomsManagerElement, DyteBreakoutRoomsManagerEvents> = /*@__PURE__*/ createComponent<DyteBreakoutRoomsManagerElement, DyteBreakoutRoomsManagerEvents>({
     tagName: 'dyte-breakout-rooms-manager',
@@ -310,7 +310,7 @@ export const DyteBreakoutRoomsManager: StencilReactComponent<DyteBreakoutRoomsMa
     defineCustomElement: defineDyteBreakoutRoomsManager
 });
 
-type DyteBreakoutRoomsToggleEvents = { onDyteStateUpdate: EventName<DyteBreakoutRoomsToggleCustomEvent<Partial<States>>> };
+type DyteBreakoutRoomsToggleEvents = { onDyteStateUpdate: EventName<DyteBreakoutRoomsToggleCustomEvent<PartialStateEvent>> };
 
 export const DyteBreakoutRoomsToggle: StencilReactComponent<DyteBreakoutRoomsToggleElement, DyteBreakoutRoomsToggleEvents> = /*@__PURE__*/ createComponent<DyteBreakoutRoomsToggleElement, DyteBreakoutRoomsToggleEvents>({
     tagName: 'dyte-breakout-rooms-toggle',
@@ -1062,7 +1062,7 @@ export const DyteMarkdownView: StencilReactComponent<DyteMarkdownViewElement, Dy
     defineCustomElement: defineDyteMarkdownView
 });
 
-type DyteMeetingEvents = { onDyteStateUpdate: EventName<DyteMeetingCustomEvent<Partial<States>>> };
+type DyteMeetingEvents = { onDyteStateUpdate: EventName<DyteMeetingCustomEvent<PartialStateEvent>> };
 
 export const DyteMeeting: StencilReactComponent<DyteMeetingElement, DyteMeetingEvents> = /*@__PURE__*/ createComponent<DyteMeetingElement, DyteMeetingEvents>({
     tagName: 'dyte-meeting',

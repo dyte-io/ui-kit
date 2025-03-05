@@ -88,6 +88,8 @@ export interface States {
   [state: string]: any;
 }
 
+export type PartialStateEvent = Partial<States>;
+
 /**
  * Notification object type, which is used in `<dyte-notification />`.
  */
