@@ -15,6 +15,7 @@ fs.writeFileSync(
   JSON.stringify(
     {
       ...pkg,
+      license: undefined,
       name: process.env.GHR === 'true' ? '@dyte-in/vue-ui-kit' : '@dytesdk/vue-ui-kit',
       dependencies,
       scripts: {

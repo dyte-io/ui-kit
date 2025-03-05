@@ -19,6 +19,7 @@ fs.writeFileSync(
   JSON.stringify(
     {
       ...pkg,
+      license: undefined,
       peerDependencies,
       module: 'dist/fesm2015/dytesdk-angular-ui-kit.mjs',
       es2020: 'dist/fesm2020/dytesdk-angular-ui-kit.mjs',

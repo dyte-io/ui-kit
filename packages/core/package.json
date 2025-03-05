@@ -39,7 +39,7 @@
     "url": "git+https://github.com/dyte-in/ui-kit.git"
   },
   "bugs": {
-    "url": "https://community.dyte.io"
+    "email": "support@dyte.io"
   },
   "scripts": {
     "build": "stencil build && rollup --config rollup.config.mjs",
