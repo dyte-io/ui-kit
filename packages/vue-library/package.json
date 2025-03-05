@@ -1,38 +1,31 @@
 {
   "name": "@dytesdk/vue-ui-kit",
-  "version": "2.2.2",
+  "version": "2.3.0-staging.1",
   "description": "Dyte's UI Kit to support easy UI development for Vue.",
   "license": "UNLICENSED",
-  "main": "lib/index.js",
-  "module": "lib/index.js",
+  "main": "dist/index.js",
+  "types": "dist/types/index.d.ts",
   "files": [
-    "lib"
+    "dist"
   ],
-  "publishConfig": {
-    "access": "public",
-    "tag": "latest"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dyte-in/ui-kit.git"
-  },
-  "types": "lib/index.d.ts",
   "scripts": {
-    "build": "npm run clean && npm run compile",
-    "clean": "rm -rf dist",
-    "compile": "npm run tsc",
-    "tsc": "tsc -p .",
-    "rollup": "rollup -c",
-    "lint": "echo \"No lint script\"",
-    "lint:fix": "echo \"No lint:fix script\"",
-    "test": "echo \"No test script\"",
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "npm run tsc",
+    "tsc": "tsc -p . --outDir ./dist",
     "prepublishOnly": "cp package.json package.json.bak && node prepublish.js",
     "postpublish": "mv package.json.bak package.json"
   },
-  "bugs": {
-    "url": "https://github.com/dyte-in/ui-kit/issues"
+  "publishConfig": {
+    "access": "public"
   },
-  "devDependencies": {
-    "vue": "^3.2.36"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dyte-io/ui-kit.git"
+  },
+  "dependencies": {
+    "@dytesdk/ui-kit": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/dyte-io/ui-kit/issues"
   }
 }

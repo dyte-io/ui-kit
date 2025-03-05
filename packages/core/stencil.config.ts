@@ -1,7 +1,7 @@
 import { Config } from '@stencil/core';
-import { postcss } from '@stencil/postcss';
-import { reactOutputTarget as react } from '@stencil/react-output-target';
-import { vueOutputTarget as vue } from '@stencil/vue-output-target';
+import { postcss } from '@stencil-community/postcss';
+import { reactOutputTarget } from '@stencil/react-output-target';
+import { vueOutputTarget } from '@stencil/vue-output-target';
 import { angularOutputTarget } from '@stencil/angular-output-target';
 import nodePolyfills from 'rollup-plugin-node-polyfills';
 
@@ -25,28 +25,30 @@ export const config: Config = {
     transformIgnorePatterns: [`/node_modules/(?!${esModules})`],
   },
   outputTargets: [
-    react({
-      componentCorePackage: '@dytesdk/ui-kit',
-      proxiesFile: '../react-library/src/components/stencil-generated/index.ts',
-      includeDefineCustomElements: true,
-    }),
+    {
+      type: 'dist',
+      esmLoaderPath: '../loader',
+    },
     angularOutputTarget({
       componentCorePackage: '@dytesdk/ui-kit',
+      outputType: 'component',
       directivesProxyFile:
         '../angular-library/projects/components/src/lib/stencil-generated/components.ts',
       directivesArrayFile:
         '../angular-library/projects/components/src/lib/stencil-generated/index.ts',
     }),
-    vue({
+    vueOutputTarget({
       componentCorePackage: '@dytesdk/ui-kit',
-      proxiesFile: '../vue-library/src/components.ts',
+      proxiesFile: '../vue-library/lib/components.ts',
+    }),
+    reactOutputTarget({
+      // Relative path to where the React components will be generated
+      outDir: '../react-library/src/components/stencil-generated/',
     }),
     {
-      type: 'dist',
-      esmLoaderPath: '../loader',
-    },
-    {
       type: 'dist-custom-elements',
+      customElementsExportBehavior: 'auto-define-custom-elements',
+      externalRuntime: false,
     },
     {
       type: 'docs-json',

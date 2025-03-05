@@ -1,3 +1,37 @@
+# [2.3.0-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.3-staging.3...@dyte-in/ui-kit-v2.3.0-staging.1) (2025-02-28)
+
+
+### Bug Fixes
+
+* disable sourcemap ([d0afd77](https://github.com/dyte-io/ui-kit/commit/d0afd770c15c33e2cd7a445e553a801861cef14d))
+* upgrade stencil ([9b1412f](https://github.com/dyte-io/ui-kit/commit/9b1412fa55a0411159ec5a6b98f07463bce9d94f))
+
+
+### Features
+
+* upgrade stencil to 4.25.3 ([528269b](https://github.com/dyte-io/ui-kit/commit/528269bd0df33320a4424279aee481bb9b236457))
+
+## [2.2.3-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.3-staging.2...@dyte-in/ui-kit-v2.2.3-staging.3) (2025-02-28)
+
+
+### Bug Fixes
+
+* update mute all description ([44b430e](https://github.com/dyte-io/ui-kit/commit/44b430ea34f3cd3b28a5f43f96f5382145af53ed))
+
+## [2.2.3-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.3-staging.1...@dyte-in/ui-kit-v2.2.3-staging.2) (2025-02-27)
+
+
+### Bug Fixes
+
+* checks for toggle button visiblity ([40fbac2](https://github.com/dyte-io/ui-kit/commit/40fbac27e4048bf7400d8de6396ff3d2b3acc220))
+
+## [2.2.3-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.2...@dyte-in/ui-kit-v2.2.3-staging.1) (2025-02-18)
+
+
+### Bug Fixes
+
+* optimize locale object handling ([8d20ecc](https://github.com/dyte-io/ui-kit/commit/8d20eccc5727f41268f1248c8cc0702159af6a29))
+
 ## [2.2.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.1...@dyte-in/ui-kit-v2.2.2) (2025-02-13)
 
 
