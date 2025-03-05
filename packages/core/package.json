@@ -16,8 +16,8 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/dyte-ui-kit/dyte-ui-kit.esm.js",
-      "require": "./dist/cjs/dyte-ui-kit.cjs.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs.js"
     },
     "./dist/*": {
       "import": "./dist/*",
