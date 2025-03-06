@@ -1,10 +1,10 @@
-const fs = require('fs')
-const pkg = require('./package.json')
+const fs = require('fs');
+const pkg = require('./package.json');
 
 const dependencies = {
   ...pkg.dependencies,
-  "@dytesdk/ui-kit": pkg.version,
-}
+  '@dytesdk/ui-kit': pkg.version,
+};
 
 const env = (process.env.ENVIRONMENT || 'staging').replace('refs/heads/', '');
 
@@ -15,10 +15,11 @@ fs.writeFileSync(
   JSON.stringify(
     {
       ...pkg,
+      license: undefined,
       name: process.env.GHR === 'true' ? '@dyte-in/react-ui-kit' : '@dytesdk/react-ui-kit',
       dependencies,
-      publishConfig: (process.env.GHR === 'true' || !env.includes('main'))
-        ? { tag } : pkg.publishConfig,
+      publishConfig:
+        process.env.GHR === 'true' || !env.includes('main') ? { tag } : pkg.publishConfig,
       scripts: {
         postpublish: pkg.scripts.postpublish,
       },
@@ -26,4 +27,4 @@ fs.writeFileSync(
     null,
     2
   )
-)
+);

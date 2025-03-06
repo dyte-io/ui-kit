@@ -321,13 +321,13 @@ export class DyteBreakoutRoomsManager {
 }
 
 
-import type { States as IDyteBreakoutRoomsManagerStates } from '@dytesdk/ui-kit';
+import type { PartialStateEvent as IDyteBreakoutRoomsManagerPartialStateEvent } from '@dytesdk/ui-kit';
 
 export declare interface DyteBreakoutRoomsManager extends Components.DyteBreakoutRoomsManager {
   /**
    * Emits updated state data
    */
-  dyteStateUpdate: EventEmitter<CustomEvent<IDyteBreakoutRoomsManagerPartial<IDyteBreakoutRoomsManagerStates>>>;
+  dyteStateUpdate: EventEmitter<CustomEvent<IDyteBreakoutRoomsManagerPartialStateEvent>>;
 }
 
 
@@ -351,13 +351,13 @@ export class DyteBreakoutRoomsToggle {
 }
 
 
-import type { States as IDyteBreakoutRoomsToggleStates } from '@dytesdk/ui-kit';
+import type { PartialStateEvent as IDyteBreakoutRoomsTogglePartialStateEvent } from '@dytesdk/ui-kit';
 
 export declare interface DyteBreakoutRoomsToggle extends Components.DyteBreakoutRoomsToggle {
   /**
    * Emits updated state data
    */
-  dyteStateUpdate: EventEmitter<CustomEvent<IDyteBreakoutRoomsTogglePartial<IDyteBreakoutRoomsToggleStates>>>;
+  dyteStateUpdate: EventEmitter<CustomEvent<IDyteBreakoutRoomsTogglePartialStateEvent>>;
 }
 
 
@@ -1994,13 +1994,13 @@ export class DyteMeeting {
 }
 
 
-import type { States as IDyteMeetingStates } from '@dytesdk/ui-kit';
+import type { PartialStateEvent as IDyteMeetingPartialStateEvent } from '@dytesdk/ui-kit';
 
 export declare interface DyteMeeting extends Components.DyteMeeting {
   /**
    * Emits updated state data
    */
-  dyteStateUpdate: EventEmitter<CustomEvent<IDyteMeetingPartial<IDyteMeetingStates>>>;
+  dyteStateUpdate: EventEmitter<CustomEvent<IDyteMeetingPartialStateEvent>>;
 }
 
 

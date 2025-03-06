@@ -1,85 +1,59 @@
-<!-- PROJECT LOGO -->
-<p align="center">
-  <a href="https://dyte.io">
-    <img src="https://assets.dyte.io/logo-outlined.png" alt="Logo" width="120" />
-  </a>
+# AngularLibrary
 
-  <h2 align="center">Angular UI Kit by dyte</h3>
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.6.
 
-  <p align="center">
-    A set of UI components to truly customize your meeting UI, in Angular
-    <br />
-    <a href="https://docs.dyte.io"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://app.dyte.io">View Demo</a>
-    ·
-    <a href="https://community.dyte.io">Report Bug</a>
-    ·
-    <a href="https://community.dyte.io">Request Feature</a>
-  </p>
-</p>
+## Development server
 
-<!-- TABLE OF CONTENTS -->
+To start a local development server, run:
 
-## Table of Contents
-
-- [Getting Started](#getting-started)
-- [Usage](#usage)
-- [About](#about)
-
-<!-- GETTING STARTED -->
-
-## Getting Started
-
-> There are separate UI Kit packages for VanillaJS and React. Check out the links to the packages below
-
-> [UI Kit](https://npmjs.com/package/@dytesdk/ui-kit) · [React UI Kit](https://npmjs.com/package/@dytesdk/react-ui-kit)
-
-First, you will need to install the ui-kit along with the [web-core](https://npmjs.com/package/@dytesdk/web-core) package:
-
-```sh
-npm i @dytesdk/angular-ui-kit @dytesdk/web-core
+```bash
+ng serve
 ```
 
-The `web-core` package is the package which handles all the low level logic required for a meeting by interating with our servers. Use it to create a meeting object, which you can pass along to the UI Kit components.
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Usage
+## Code scaffolding
 
-Load the component in your template file (component.html):
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-```html
-<dyte-meeting #myid></dyte-meeting>
+```bash
+ng generate component component-name
 ```
 
-Then initialize and pass the meeting object to the component:
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-```tsx
-class AppComponent {
-  title = 'MyProject';
-  @ViewChild('myid') meetingComponent: DyteMeeting;
-  dyteMeeting: DyteClient;
-
-  async ngAfterViewInit() {
-    const meeting = await DyteClient.init({
-      roomName: '<room-name>',
-      authToken: '<auth-token>',
-      defaults: {
-        video: true,
-        audio: true,
-      },
-    });
-    meeting.joinRoom();
-    this.dyteMeeting = meeting;
-    if (this.meetingComponent) this.meetingComponent.meeting = meeting;
-  }
-}
+```bash
+ng generate --help
 ```
 
-## About
+## Building
 
-`angular-ui-kit` is created & maintained by Dyte, Inc. You can find us on Twitter - [@dyte_io](https://twitter.com/dyte_io) or write to us at `dev [at] dyte.io`.
+To build the project run:
 
-The names and logos for Dyte are trademarks of Dyte, Inc.
+```bash
+ng build
+```
 
-We love open source software! See [our other projects](https://github.com/dyte-io) and [our products](https://dyte.io).
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+
+## Running unit tests
+
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+
+```bash
+ng test
+```
+
+## Running end-to-end tests
+
+For end-to-end (e2e) testing, run:
+
+```bash
+ng e2e
+```
+
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+
+## Additional Resources
+
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

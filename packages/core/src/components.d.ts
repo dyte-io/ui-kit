@@ -7,7 +7,7 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { AISection, AIView } from "./components/dyte-ai/dyte-ai";
 import { DyteClient as Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
-import { Chat, ChatChannel, Notification, Poll, PollObject, Size, States, Transcript } from "./types/props";
+import { Chat, ChatChannel, Notification, PartialStateEvent, Poll, PollObject, Size, States, Transcript } from "./types/props";
 import { UIConfig } from "./types/ui-config";
 import { IconPack } from "./lib/icons";
 import { DyteI18n } from "./lib/lang";
@@ -47,7 +47,7 @@ import { ViewerCountVariant } from "./components/dyte-viewer-count/dyte-viewer-c
 import { Peer as Peer1 } from ".";
 export { AISection, AIView } from "./components/dyte-ai/dyte-ai";
 export { DyteClient as Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
-export { Chat, ChatChannel, Notification, Poll, PollObject, Size, States, Transcript } from "./types/props";
+export { Chat, ChatChannel, Notification, PartialStateEvent, Poll, PollObject, Size, States, Transcript } from "./types/props";
 export { UIConfig } from "./types/ui-config";
 export { IconPack } from "./lib/icons";
 export { DyteI18n } from "./lib/lang";
@@ -4470,7 +4470,7 @@ declare global {
         new (): HTMLDyteBreakoutRoomParticipantsElement;
     };
     interface HTMLDyteBreakoutRoomsManagerElementEventMap {
-        "dyteStateUpdate": Partial<States>;
+        "dyteStateUpdate": PartialStateEvent;
     }
     interface HTMLDyteBreakoutRoomsManagerElement extends Components.DyteBreakoutRoomsManager, HTMLStencilElement {
         addEventListener<K extends keyof HTMLDyteBreakoutRoomsManagerElementEventMap>(type: K, listener: (this: HTMLDyteBreakoutRoomsManagerElement, ev: DyteBreakoutRoomsManagerCustomEvent<HTMLDyteBreakoutRoomsManagerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -4487,7 +4487,7 @@ declare global {
         new (): HTMLDyteBreakoutRoomsManagerElement;
     };
     interface HTMLDyteBreakoutRoomsToggleElementEventMap {
-        "dyteStateUpdate": Partial<States>;
+        "dyteStateUpdate": PartialStateEvent;
     }
     /**
      * A button which toggles visibility of breakout rooms.
@@ -5398,7 +5398,7 @@ declare global {
         new (): HTMLDyteMarkdownViewElement;
     };
     interface HTMLDyteMeetingElementEventMap {
-        "dyteStateUpdate": Partial<States>;
+        "dyteStateUpdate": PartialStateEvent;
     }
     /**
      * A single component which renders an entire meeting UI.
@@ -6981,7 +6981,7 @@ declare namespace LocalJSX {
         /**
           * Emits updated state data
          */
-        "onDyteStateUpdate"?: (event: DyteBreakoutRoomsManagerCustomEvent<Partial<States>>) => void;
+        "onDyteStateUpdate"?: (event: DyteBreakoutRoomsManagerCustomEvent<PartialStateEvent>) => void;
         /**
           * States object
          */
@@ -7007,7 +7007,7 @@ declare namespace LocalJSX {
         /**
           * Emits updated state data
          */
-        "onDyteStateUpdate"?: (event: DyteBreakoutRoomsToggleCustomEvent<Partial<States>>) => void;
+        "onDyteStateUpdate"?: (event: DyteBreakoutRoomsToggleCustomEvent<PartialStateEvent>) => void;
         /**
           * Size
          */
@@ -8860,7 +8860,7 @@ declare namespace LocalJSX {
         /**
           * Emits updated state data
          */
-        "onDyteStateUpdate"?: (event: DyteMeetingCustomEvent<Partial<States>>) => void;
+        "onDyteStateUpdate"?: (event: DyteMeetingCustomEvent<PartialStateEvent>) => void;
         /**
           * Whether to show setup screen or not
          */

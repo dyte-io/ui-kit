@@ -1,8 +1,8 @@
 const fs = require('fs');
 const pkg = require('./package.json');
 
-const peerDependencies = {
-  ...pkg.peerDependencies,
+const dependencies = {
+  ...pkg.dependencies,
   '@dytesdk/ui-kit': pkg.version,
 };
 
@@ -12,6 +12,7 @@ const tag = env == 'main' ? 'latest' : env;
 
 try {
   fs.unlinkSync('./dist/package.json');
+  fs.unlinkSync('./dist/README.md');
 } catch {}
 
 fs.writeFileSync(
@@ -19,27 +20,8 @@ fs.writeFileSync(
   JSON.stringify(
     {
       ...pkg,
-      peerDependencies,
-      module: 'dist/fesm2015/dytesdk-angular-ui-kit.mjs',
-      es2020: 'dist/fesm2020/dytesdk-angular-ui-kit.mjs',
-      esm2020: 'dist/esm2020/dytesdk-angular-ui-kit.mjs',
-      fesm2020: 'dist/fesm2020/dytesdk-angular-ui-kit.mjs',
-      fesm2015: 'dist/fesm2015/dytesdk-angular-ui-kit.mjs',
-      typings: 'dist/dytesdk-angular-ui-kit.d.ts',
-      exports: {
-        './package.json': {
-          default: './package.json',
-        },
-        '.': {
-          types: './dist/dytesdk-angular-ui-kit.d.ts',
-          esm2020: './dist/esm2020/dytesdk-angular-ui-kit.mjs',
-          es2020: './dist/fesm2020/dytesdk-angular-ui-kit.mjs',
-          es2015: './dist/fesm2015/dytesdk-angular-ui-kit.mjs',
-          node: './dist/fesm2015/dytesdk-angular-ui-kit.mjs',
-          default: './dist/fesm2020/dytesdk-angular-ui-kit.mjs',
-        },
-      },
-      sideEffects: false,
+      license: undefined,
+      dependencies,
       name: process.env.GHR === 'true' ? '@dyte-in/angular-ui-kit' : '@dytesdk/angular-ui-kit',
       publishConfig:
         process.env.GHR === 'true' || !env.includes('main') ? { tag } : pkg.publishConfig,

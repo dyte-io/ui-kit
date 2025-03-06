@@ -1,7 +1,7 @@
 import { Component, h, Host, Prop, Event, EventEmitter, State, Watch, Listen } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import { States } from '../../types/props';
+import { PartialStateEvent, States } from '../../types/props';
 import storeState from '../../lib/store';
 import { Meeting } from '../../types/dyte-client';
 import { participantIdentifier, resetRoomCount } from '../../utils/breakout-rooms';
@@ -75,7 +75,7 @@ export class DyteBreakoutRoomsManager {
   @Prop() t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
-  @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<Partial<States>>;
+  @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<PartialStateEvent>;
 
   @Watch('selectedParticipants')
   onSelectedParticipantsChanged(participants) {
@@ -225,7 +225,7 @@ export class DyteBreakoutRoomsManager {
     await this.applyChanges();
   }
 
-  private handleClose = (stateUpdate: EventEmitter<Partial<States>>, store: States) => {
+  private handleClose = (stateUpdate: EventEmitter<PartialStateEvent>, store: States) => {
     stateUpdate.emit({
       activeBreakoutRoomsManager: {
         active: true,

@@ -1,3 +1,26 @@
+## [2.3.1-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.1-staging.1...@dyte-in/ui-kit-v2.3.1-staging.2) (2025-03-06)
+
+
+### Bug Fixes
+
+* **vue:** remove deprecated and non-existent applyPolyfills ([06721f1](https://github.com/dyte-io/ui-kit/commit/06721f180e4e44da337ee1d15215e614cee610ca))
+
+## [2.3.1-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.0...@dyte-in/ui-kit-v2.3.1-staging.1) (2025-03-06)
+
+
+### Bug Fixes
+
+* angular build ([38f1b2a](https://github.com/dyte-io/ui-kit/commit/38f1b2ac75c77025fd817669b530cca9cca8561f))
+* angular build ([5e81994](https://github.com/dyte-io/ui-kit/commit/5e8199402e5ec069c90ec188d5ecf4f27aaed16b))
+* export types properly ([99933dc](https://github.com/dyte-io/ui-kit/commit/99933dcbdfece9d3b5bdfd4da192c3cb03404044))
+* more package.json fixes ([129fa1b](https://github.com/dyte-io/ui-kit/commit/129fa1b15905a4cc4d331b9aca37d1503c94c64d))
+* package.json and support email ([886429c](https://github.com/dyte-io/ui-kit/commit/886429c57c2b765a797817f4a306b66478b2b646))
+* react ui kit export ([33eed82](https://github.com/dyte-io/ui-kit/commit/33eed8283a4324d4003e76502b64b3e35f40a047))
+* rename angular components module ([58d2321](https://github.com/dyte-io/ui-kit/commit/58d23214e5d0b0232a834bcd6a1f262701329805))
+* ui-kit root export filepath ([d19a9d3](https://github.com/dyte-io/ui-kit/commit/d19a9d3fb501cbc15073e355e4f48e2d612572a5))
+* vue package ([7915b57](https://github.com/dyte-io/ui-kit/commit/7915b57e99f5c7ac1410b5633ffe76a8797c1680))
+* vue ui kit ([d64cc60](https://github.com/dyte-io/ui-kit/commit/d64cc60175232ead75c01da1d0f8e24ddf02b2e3))
+
 # [2.3.0](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.2.2...@dyte-in/ui-kit-v2.3.0) (2025-03-05)
 
 
