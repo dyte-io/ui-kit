@@ -1,5 +1,5 @@
 /*
- * Public API Surface of component-library
+ * Public API Surface of components
  */
 
 export * from './lib/components.module';
