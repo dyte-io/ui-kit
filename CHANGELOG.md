@@ -1,3 +1,10 @@
+## [2.3.1-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.1-staging.1...@dyte-in/ui-kit-v2.3.1-staging.2) (2025-03-06)
+
+
+### Bug Fixes
+
+* **vue:** remove deprecated and non-existent applyPolyfills ([06721f1](https://github.com/dyte-io/ui-kit/commit/06721f180e4e44da337ee1d15215e614cee610ca))
+
 ## [2.3.1-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.0...@dyte-in/ui-kit-v2.3.1-staging.1) (2025-03-06)
 
 
