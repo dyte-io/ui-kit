@@ -10,7 +10,7 @@ import {
   EventEmitter,
 } from '@stencil/core';
 import deepMerge from 'lodash-es/merge';
-import { PermissionSettings, Size, States } from '../../types/props';
+import { PartialStateEvent, PermissionSettings, Size, States } from '../../types/props';
 import { getSize } from '../../utils/size';
 import { Meeting, RoomLeftState } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
@@ -130,7 +130,7 @@ export class DyteMeeting {
   @State() iconPack: IconPack = defaultIconPack;
 
   /** Emits updated state data */
-  @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<Partial<States>>;
+  @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<PartialStateEvent>;
 
   connectedCallback() {
     this.leaveRoomTimer = 10000;

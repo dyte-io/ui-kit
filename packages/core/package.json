@@ -16,11 +16,12 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/dyte-ui-kit/dyte-ui-kit.esm.js",
-      "require": "./dist/cjs/dyte-ui-kit.cjs.js"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs.js"
     },
     "./dist/*": {
-      "import": "./dist/*",
+      "default": "./dist/*",
       "types": "./dist/*"
     },
     "./components/*": {
@@ -38,7 +39,7 @@
     "url": "git+https://github.com/dyte-in/ui-kit.git"
   },
   "bugs": {
-    "url": "https://community.dyte.io"
+    "email": "support@dyte.io"
   },
   "scripts": {
     "build": "stencil build && rollup --config rollup.config.mjs",
@@ -77,10 +78,10 @@
     "@stencil-community/eslint-plugin": "^0.10.0",
     "@stencil-community/postcss": "^2.2.0",
     "@stencil/angular-output-target": "^0.10.2",
-    "@stencil/core": "4.26.0",
+    "@stencil/core": "4.27.2",
     "@stencil/react-output-target": "^0.8.2",
-    "@stencil/store": "^2.0.16",
-    "@stencil/vue-output-target": "^0.9.4",
+    "@stencil/store": "^2.1.2",
+    "@stencil/vue-output-target": "^0.9.6",
     "@tailwindcss/line-clamp": "^0.3.1",
     "@types/hark": "^1.2.2",
     "@types/jest": "^29.5.6",

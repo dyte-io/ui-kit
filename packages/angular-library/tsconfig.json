@@ -4,8 +4,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "paths": {
-      "component-library": [
-        "./dist/component-library"
+      "components": [
+        "./dist/components"
       ]
     },
     "outDir": "./dist/out-tsc",

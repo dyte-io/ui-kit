@@ -2,9 +2,14 @@
   "name": "@dytesdk/vue-ui-kit",
   "version": "2.3.0",
   "description": "Dyte's UI Kit to support easy UI development for Vue.",
-  "license": "UNLICENSED",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
   "files": [
     "dist"
   ],
@@ -23,9 +28,10 @@
     "url": "git+https://github.com/dyte-io/ui-kit.git"
   },
   "dependencies": {
-    "@dytesdk/ui-kit": "*"
+    "@dytesdk/ui-kit": "*",
+    "@stencil/vue-output-target": "^0.9.6"
   },
   "bugs": {
-    "url": "https://github.com/dyte-io/ui-kit/issues"
+    "email": "support@dyte.io"
   }
 }
