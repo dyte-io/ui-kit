@@ -1975,14 +1975,14 @@ export declare interface DyteMarkdownView extends Components.DyteMarkdownView {}
 
 
 @ProxyCmp({
-  inputs: ['applyDesignSystem', 'config', 'gridLayout', 'iconPackUrl', 'leaveOnUnmount', 'loadConfigFromPreset', 'meeting', 'mode', 'showSetupScreen', 'size', 't']
+  inputs: ['applyDesignSystem', 'config', 'gridLayout', 'iconPack', 'leaveOnUnmount', 'loadConfigFromPreset', 'meeting', 'mode', 'showSetupScreen', 'size', 't']
 })
 @Component({
   selector: 'dyte-meeting',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['applyDesignSystem', 'config', 'gridLayout', 'iconPackUrl', 'leaveOnUnmount', 'loadConfigFromPreset', 'meeting', 'mode', 'showSetupScreen', 'size', 't'],
+  inputs: ['applyDesignSystem', 'config', 'gridLayout', 'iconPack', 'leaveOnUnmount', 'loadConfigFromPreset', 'meeting', 'mode', 'showSetupScreen', 'size', 't'],
 })
 export class DyteMeeting {
   protected el: HTMLDyteMeetingElement;
@@ -3728,14 +3728,14 @@ export declare interface DyteTranscripts extends Components.DyteTranscripts {}
 
 
 @ProxyCmp({
-  inputs: ['applyDesignSystem', 'config', 'iconPackUrl', 'joinRoom', 'loadConfigFromPreset', 'meeting', 'size', 't']
+  inputs: ['iconPack', 'meeting', 'noRenderUntilMeeting', 't']
 })
 @Component({
   selector: 'dyte-ui-provider',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['applyDesignSystem', 'config', 'iconPackUrl', 'joinRoom', 'loadConfigFromPreset', 'meeting', 'size', 't'],
+  inputs: ['iconPack', 'meeting', 'noRenderUntilMeeting', 't'],
 })
 export class DyteUiProvider {
   protected el: HTMLDyteUiProviderElement;

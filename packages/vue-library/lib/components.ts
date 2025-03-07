@@ -872,9 +872,9 @@ export const DyteMeeting = /*@__PURE__*/ defineContainer<JSX.DyteMeeting>('dyte-
   'showSetupScreen',
   't',
   'config',
-  'iconPackUrl',
   'size',
   'gridLayout',
+  'iconPack',
   'dyteStateUpdate'
 ], [
   'dyteStateUpdate'
@@ -1639,13 +1639,9 @@ export const DyteTranscripts = /*@__PURE__*/ defineContainer<JSX.DyteTranscripts
 
 export const DyteUiProvider = /*@__PURE__*/ defineContainer<JSX.DyteUiProvider>('dyte-ui-provider', undefined, [
   'meeting',
-  'size',
-  'config',
+  'iconPack',
   't',
-  'iconPackUrl',
-  'loadConfigFromPreset',
-  'applyDesignSystem',
-  'joinRoom'
+  'noRenderUntilMeeting'
 ]);
 
 

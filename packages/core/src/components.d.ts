@@ -1987,9 +1987,9 @@ export namespace Components {
          */
         "gridLayout": GridLayout1;
         /**
-          * Icon Pack URL
+          * Icon pack
          */
-        "iconPackUrl": string;
+        "iconPack": IconPack;
         /**
           * Whether participant should leave when this component gets unmounted
          */
@@ -3926,35 +3926,20 @@ export namespace Components {
     }
     interface DyteUiProvider {
         /**
-          * Whether to apply the design system on the document root from config
+          * Icon pack
          */
-        "applyDesignSystem": boolean;
+        "iconPack": IconPack1;
         /**
-          * UI Config
-         */
-        "config": UIConfig1;
-        /**
-          * Icon Pack URL
-         */
-        "iconPackUrl": string;
-        /**
-          * Whether to join the meeting room
-         */
-        "joinRoom": boolean;
-        /**
-          * Whether to load config from preset
-         */
-        "loadConfigFromPreset": boolean;
-        /**
-          * dyte meeting object
+          * Meeting
          */
         "meeting": Meeting;
         /**
-          * Size
+          * Do not render children until meeting is initialized
+          * @default false
          */
-        "size": Size1;
+        "noRenderUntilMeeting": boolean;
         /**
-          * Language
+          * Language utility
          */
         "t": DyteI18n1;
     }
@@ -8838,9 +8823,9 @@ declare namespace LocalJSX {
          */
         "gridLayout"?: GridLayout1;
         /**
-          * Icon Pack URL
+          * Icon pack
          */
-        "iconPackUrl"?: string;
+        "iconPack"?: IconPack;
         /**
           * Whether participant should leave when this component gets unmounted
          */
@@ -10947,35 +10932,20 @@ declare namespace LocalJSX {
     }
     interface DyteUiProvider {
         /**
-          * Whether to apply the design system on the document root from config
+          * Icon pack
          */
-        "applyDesignSystem"?: boolean;
+        "iconPack"?: IconPack1;
         /**
-          * UI Config
-         */
-        "config"?: UIConfig1;
-        /**
-          * Icon Pack URL
-         */
-        "iconPackUrl"?: string;
-        /**
-          * Whether to join the meeting room
-         */
-        "joinRoom"?: boolean;
-        /**
-          * Whether to load config from preset
-         */
-        "loadConfigFromPreset"?: boolean;
-        /**
-          * dyte meeting object
+          * Meeting
          */
         "meeting"?: Meeting;
         /**
-          * Size
+          * Do not render children until meeting is initialized
+          * @default false
          */
-        "size"?: Size1;
+        "noRenderUntilMeeting"?: boolean;
         /**
-          * Language
+          * Language utility
          */
         "t"?: DyteI18n1;
     }
