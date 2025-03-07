@@ -303,13 +303,8 @@
           </form>
         </div>
       </div>
-      <dyte-ui-provider
-        x-show="meeting"
-        x-ref="meeting"
-        :show-setup-screen="data.showSetupScreen ? 'true' : 'false'"
-        x-cloak
-      >
-        <dyte-meeting />
+      <dyte-ui-provider x-show="meeting" x-ref="meeting" x-cloak>
+        <dyte-meeting id="dm" :show-setup-screen="data.showSetupScreen ? 'true' : 'false'" />
       </dyte-ui-provider>
     </div>
   </body>
