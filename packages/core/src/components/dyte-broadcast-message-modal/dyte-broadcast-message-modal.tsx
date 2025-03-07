@@ -3,6 +3,7 @@ import { States } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 
 @Component({
@@ -12,16 +13,24 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 })
 export class DyteBroadcastMessageModal {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;

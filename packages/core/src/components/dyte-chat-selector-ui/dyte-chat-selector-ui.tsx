@@ -2,6 +2,7 @@ import { Component, Host, h, Prop, Event, EventEmitter, State } from '@stencil/c
 import { defaultIconPack, IconPack } from '../../exports';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Peer } from '../../types/dyte-client';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { generateChatGroupKey } from '../../utils/chat';
 
 export type ChatGroup = Pick<Peer, 'userId' | 'name'>;
@@ -28,10 +29,14 @@ export class DyteChatSelectorUi {
   @Prop() groups: ChatGroup[] = [];
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() showParticipantsPanel: boolean = false;
 

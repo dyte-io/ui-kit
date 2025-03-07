@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, h, Method, Prop, State } from '@stencil/core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { defaultIconPack, DyteI18n, IconPack, useLanguage } from '../../exports';
 
 /**
@@ -29,10 +30,14 @@ export class DyteTextComposerView {
   @Prop() keyDownHandler: (e: KeyboardEvent) => void = () => {};
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Event emitted when text changes */
   @Event({ eventName: 'textChange' }) onTextChange: EventEmitter<string>;

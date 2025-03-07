@@ -2,6 +2,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DytePermissionsPreset, DytePlugin } from '@dytesdk/web-core';
 import { Component, Host, h, Prop, Watch, State, writeTask } from '@stencil/core';
 import { Meeting } from '../../types/dyte-client';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 
 /**
@@ -17,16 +18,22 @@ export class DytePluginMain {
   private toggleViewModeListener: (data: boolean) => void;
 
   /** Meeting */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Plugin */
   @Prop() plugin!: DytePlugin;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() canClosePlugin: boolean = false;
 

@@ -32,6 +32,7 @@ import { DyteChannelHeaderCustomEvent } from '../../components';
 import { States, UIConfig, defaultConfig } from '../../exports';
 import storeState from '../../lib/store';
 import { ChannelItem } from '../dyte-channel-selector-view/dyte-channel-selector-view';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { NewMessageEvent } from '../dyte-chat-composer-view/dyte-chat-composer-view';
 
 export type ChatFilter = (message: Message) => boolean;
@@ -63,7 +64,9 @@ export class DyteChat {
   @Element() host: HTMLDyteChatElement;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -72,10 +75,14 @@ export class DyteChat {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** disables private chat */
   @Prop() disablePrivateChat: boolean = false;

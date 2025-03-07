@@ -18,6 +18,7 @@ import storeState from '../../lib/store';
 import { defaultConfig, UIConfig } from '../../exports';
 import { FlagsmithFeatureFlags } from '../../utils/flags';
 import { autoPlacement, computePosition, hide, offset, shift } from '@floating-ui/dom';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import type {
   DyteParticipant as DyteParticipantType,
   DyteSelf as DyteSelfType,
@@ -55,7 +56,9 @@ export class DyteParticipant {
   @Element() host: HTMLDyteParticipantElement;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Show participant summary */
   @Prop() view: ParticipantViewMode = 'sidebar';
@@ -64,10 +67,14 @@ export class DyteParticipant {
   @Prop() participant: Peer;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;
@@ -385,36 +392,40 @@ export class DyteParticipant {
                           {!this.meeting.self.hidden ? this.t('minimize') : this.t('maximize')}
                         </dyte-menu-item>
                       )}
-                      {this.canDisableParticipantAudio && isActiveParticipant && this.audioEnabled && (
-                        <dyte-menu-item
-                          iconPack={this.iconPack}
-                          t={this.t}
-                          onClick={() => {
-                            this.participant.disableAudio();
-                          }}
-                        >
-                          <dyte-icon icon={this.iconPack.mic_off} slot="start" />
-                          {this.t('mute')}
-                        </dyte-menu-item>
-                      )}
-
-                      {this.canDisableParticipantVideo && isActiveParticipant && this.videoEnabled && (
-                        <dyte-menu-item
-                          iconPack={this.iconPack}
-                          t={this.t}
-                          onClick={() => {
-                            this.participant.disableVideo();
-                          }}
-                        >
-                          <dyte-icon
-                            icon={this.iconPack.video_off}
-                            slot="start"
+                      {this.canDisableParticipantAudio &&
+                        isActiveParticipant &&
+                        this.audioEnabled && (
+                          <dyte-menu-item
                             iconPack={this.iconPack}
                             t={this.t}
-                          />
-                          {this.t('participants.turn_off_video')}
-                        </dyte-menu-item>
-                      )}
+                            onClick={() => {
+                              this.participant.disableAudio();
+                            }}
+                          >
+                            <dyte-icon icon={this.iconPack.mic_off} slot="start" />
+                            {this.t('mute')}
+                          </dyte-menu-item>
+                        )}
+
+                      {this.canDisableParticipantVideo &&
+                        isActiveParticipant &&
+                        this.videoEnabled && (
+                          <dyte-menu-item
+                            iconPack={this.iconPack}
+                            t={this.t}
+                            onClick={() => {
+                              this.participant.disableVideo();
+                            }}
+                          >
+                            <dyte-icon
+                              icon={this.iconPack.video_off}
+                              slot="start"
+                              iconPack={this.iconPack}
+                              t={this.t}
+                            />
+                            {this.t('participants.turn_off_video')}
+                          </dyte-menu-item>
+                        )}
 
                       {this.canAllowParticipantOnStage &&
                         this.participant?.id !== this.meeting?.self.id && (

@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteI18n, defaultIconPack, useLanguage } from '../../exports';
 
 export interface DyteSidebarTab {
@@ -33,7 +34,9 @@ export class DyteSidebarUi {
   @Prop() iconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Tab change event */
   @Event() tabChange: EventEmitter<string>;

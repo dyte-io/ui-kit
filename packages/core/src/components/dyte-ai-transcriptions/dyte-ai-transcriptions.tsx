@@ -4,6 +4,7 @@ import { ChatHead } from '../dyte-chat/components/ChatHead';
 import { Meeting } from '../../types/dyte-client';
 import { Transcript } from '../../types/props';
 import { smoothScrollToBottom } from '../../utils/scroll';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import clone from '../../utils/clone';
 
 @Component({
@@ -21,10 +22,14 @@ export class DyteAiTranscriptions {
   @State() captionViewEnabled = false;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   @State() transcriptions: Transcript[] = [];
 

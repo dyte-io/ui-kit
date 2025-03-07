@@ -1,6 +1,7 @@
 import { h, Component, Prop, Host } from '@stencil/core';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import type { Message } from '@dytesdk/web-core';
 
 @Component({
@@ -10,7 +11,9 @@ import type { Message } from '@dytesdk/web-core';
 })
 export class DyteChatSearchResults {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Search query */
   @Prop() query: string;
@@ -19,10 +22,14 @@ export class DyteChatSearchResults {
   @Prop() channelId: string;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   private pageSize = 50;
 

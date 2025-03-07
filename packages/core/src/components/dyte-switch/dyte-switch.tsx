@@ -1,5 +1,6 @@
 import { Component, Host, h, Event, EventEmitter, Prop, Watch } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 
 /**
@@ -24,10 +25,14 @@ export class DyteSwitch {
   @Event({ cancelable: false, composed: false }) dyteChange: EventEmitter<boolean>;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   connectedCallback() {
     this.checkedChange(this.checked);

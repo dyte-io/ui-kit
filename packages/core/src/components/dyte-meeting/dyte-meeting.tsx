@@ -91,10 +91,10 @@ export class DyteMeeting {
   @Element() host: HTMLDyteMeetingElement;
 
   /** Whether to load config from preset */
-  @Prop() loadConfigFromPreset: boolean = false;
+  @Prop({ mutable: true }) loadConfigFromPreset: boolean = false;
 
   /** Whether to apply the design system on the document root from config */
-  @Prop() applyDesignSystem: boolean = false;
+  @Prop({ mutable: true }) applyDesignSystem: boolean = false;
 
   /** Fill type */
   @Prop({ reflect: true }) mode: MeetingMode = 'fixed';

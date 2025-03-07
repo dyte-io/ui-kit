@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, Prop, State, h } from '@stencil/core';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { sanitizeLink } from '../../utils/string';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { downloadFile } from '../../utils/file';
 
 /**
@@ -16,10 +17,14 @@ export class DyteImageMessageView {
   @Prop() url!: string;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** preview event */
   @Event({ eventName: 'preview' }) onPreview: EventEmitter<string>;

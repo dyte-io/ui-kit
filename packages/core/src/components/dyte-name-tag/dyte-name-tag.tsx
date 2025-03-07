@@ -3,6 +3,7 @@ import { Size } from '../../types/props';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { formatName, shorten } from '../../utils/string';
 import { DyteI18n, useLanguage } from '../../lib/lang';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 
 export type DyteNameTagVariant = 'default' | 'text';
@@ -20,7 +21,9 @@ export class DyteNameTag {
   @Prop() participant!: Peer;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -32,10 +35,14 @@ export class DyteNameTag {
   @Prop({ reflect: true }) variant: DyteNameTagVariant = 'default';
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() length: number = 13;
 

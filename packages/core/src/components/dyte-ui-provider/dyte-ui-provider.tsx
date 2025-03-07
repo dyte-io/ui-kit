@@ -8,13 +8,16 @@ import { DyteI18n, IconPack } from '../../exports';
 })
 export class DyteUiProvider {
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @Prop()
+  meeting: Meeting;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack;
+  @Prop()
+  iconPack: IconPack;
 
   /** Language utility */
-  @Prop() t: DyteI18n;
+  @Prop()
+  t: DyteI18n;
 
   /** Do not render children until meeting is initialized
    * @default false

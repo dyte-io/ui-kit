@@ -1,6 +1,7 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Size } from '../../types/props';
 
 export type ControlBarVariant = 'button' | 'horizontal';
@@ -39,10 +40,14 @@ export class DyteControlbarButton {
   @Prop({ reflect: true }) disabled: boolean = false;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Whether icon requires brand color */
   @Prop({ reflect: true }) brandIcon = false;

@@ -1,4 +1,5 @@
 import { Component, Prop, h } from '@stencil/core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { IconPack, defaultIconPack, DyteI18n, useLanguage } from '../../exports';
 
 @Component({
@@ -8,10 +9,14 @@ import { IconPack, defaultIconPack, DyteI18n, useLanguage } from '../../exports'
 })
 export class DyteEmojiPickerButton {
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Active state indicator */
   @Prop() isActive: boolean;

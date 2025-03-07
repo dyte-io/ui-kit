@@ -1,6 +1,7 @@
 import { Component, Prop, h } from '@stencil/core';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { sanitizeLink } from '../../utils/string';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { downloadFile, getExtension, getFileSize } from '../../utils/file';
 
 /**
@@ -22,10 +23,14 @@ export class DyteFileMessageView {
   @Prop() url!: string;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   render() {
     return (

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, h, Host, Prop, State, Watch, Event } from '@stencil/core';
 import { Size, IconPack, defaultIconPack } from '../../exports';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 
 /**
@@ -24,10 +25,14 @@ export class DyteCounter {
   @Prop() minValue: number = 0;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** On change event emitter */
   @Event({ eventName: 'valueChange' }) onChange: EventEmitter<string>;
