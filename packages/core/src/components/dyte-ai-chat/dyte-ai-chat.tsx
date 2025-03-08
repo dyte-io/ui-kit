@@ -1,4 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 
 @Component({
@@ -8,7 +9,9 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 })
 export class DyteAiChat {
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   render() {
     return (

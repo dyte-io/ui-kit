@@ -6,6 +6,7 @@ import storeState from '../../lib/store';
 import { Meeting } from '../../types/dyte-client';
 import { participantIdentifier, resetRoomCount } from '../../utils/breakout-rooms';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import BreakoutRoomsManager, { DraftMeeting } from '../../utils/breakout-rooms-manager';
 
 export type BreakoutManagerState = 'room-config' | 'participants-config';
@@ -63,16 +64,24 @@ export class DyteBreakoutRoomsManager {
   @State() isDragMode: boolean = false;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<PartialStateEvent>;

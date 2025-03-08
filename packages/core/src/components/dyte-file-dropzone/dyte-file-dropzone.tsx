@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop, State, Event, EventEmitter } from '@stencil/core';
 import { defaultIconPack, DyteI18n, IconPack } from '../../exports';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { useLanguage } from '../../lib/lang';
 
 @Component({
@@ -12,10 +13,14 @@ export class DyteFileDropzone {
   @Prop() hostEl: HTMLElement;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** drop event callback */
   @Event({ eventName: 'dropCallback' }) onDropCallback: EventEmitter<DragEvent>;

@@ -4,6 +4,8 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 
+import { SyncWithStore } from '../../utils/sync-with-store';
+
 import { disableSettingSinkId } from '../../utils/flags';
 
 /**
@@ -27,10 +29,14 @@ export class DyteSpeakerSelector {
   private testAudioEl: HTMLAudioElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** variant */
   @Prop() variant: 'full' | 'inline' = 'full';
@@ -39,10 +45,14 @@ export class DyteSpeakerSelector {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() speakerDevices: MediaDeviceInfo[] = [];
   @State() currentDevices: {

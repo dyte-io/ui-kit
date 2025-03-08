@@ -6,6 +6,7 @@ import { Meeting } from '../../types/dyte-client';
 import { getAllConnectedParticipants, participantIdentifier } from '../../utils/breakout-rooms';
 import type { DyteConnectedMeetings, DytePermissionsPreset } from '@dytesdk/web-core';
 import { formatName, shorten } from '../../utils/string';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DraftMeeting } from '../../utils/breakout-rooms-manager';
 
 const ROOM_TITLE_MIN_CHARS = 3;
@@ -17,7 +18,9 @@ const ROOM_TITLE_MIN_CHARS = 3;
 })
 export class DyteBreakoutRoomManager {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Enable updating participants */
   @Prop() assigningParticipants: boolean;
@@ -26,16 +29,22 @@ export class DyteBreakoutRoomManager {
   @Prop() mode: 'edit' | 'create';
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** allow room delete */
   @Prop() allowDelete: boolean = true;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Drag mode */
   @Prop() isDragMode: boolean = false;

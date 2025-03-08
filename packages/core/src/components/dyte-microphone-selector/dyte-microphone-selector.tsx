@@ -3,6 +3,7 @@ import { Meeting } from '../../types/dyte-client';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size } from '../../types/props';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { disableSettingSinkId } from '../../utils/flags';
 
 /**
@@ -24,19 +25,25 @@ import { disableSettingSinkId } from '../../utils/flags';
 })
 export class DyteMicrophoneSelector {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** variant */
   @Prop() variant: 'full' | 'inline' = 'full';
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() audioinputDevices: MediaDeviceInfo[] = [];
   @State() canProduceAudio: boolean = true;

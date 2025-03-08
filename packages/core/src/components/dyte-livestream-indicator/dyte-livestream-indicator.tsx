@@ -3,6 +3,7 @@ import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { Size, DyteI18n, IconPack, defaultIconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { showLivestream } from '../../utils/livestream';
 
 @Component({
@@ -12,18 +13,24 @@ import { showLivestream } from '../../utils/livestream';
 })
 export class DyteLivestreamIndicator {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() isLivestreaming: boolean;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   connectedCallback() {
     this.meetingChanged(this.meeting);

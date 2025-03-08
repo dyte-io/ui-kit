@@ -6,6 +6,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DytePlugin } from '@dytesdk/web-core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { defaultConfig } from '../../exports';
 
 /**
@@ -20,7 +21,9 @@ import { defaultConfig } from '../../exports';
 export class DytePlugins {
   private updateActivePlugins: () => void;
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -29,10 +32,14 @@ export class DytePlugins {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;

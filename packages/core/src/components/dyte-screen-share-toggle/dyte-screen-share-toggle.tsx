@@ -6,6 +6,7 @@ import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@st
 import logger from '../../utils/logger';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { StageStatus } from '@dytesdk/web-core';
 
 const deviceCanScreenShare = () => {
@@ -35,7 +36,9 @@ interface ScreenShareState {
 })
 export class DyteScreenShareToggle {
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
@@ -44,16 +47,22 @@ export class DyteScreenShareToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /**
    * Maximum screen share count (value from preset)

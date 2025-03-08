@@ -4,6 +4,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Meeting } from '../../types/dyte-client';
 
 @Component({
@@ -16,16 +17,24 @@ export class DyteDebuggerToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;

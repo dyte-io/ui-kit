@@ -1,6 +1,7 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Size } from '../../exports';
 
 const parseIcon = (icon: string) => {
@@ -26,13 +27,17 @@ export class DyteIcon {
   @Prop() icon: string;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Icon variant */
   @Prop({ reflect: true }) variant: IconVariant = 'primary';
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Size */
   @Prop({ reflect: true }) size: Size = 'lg';

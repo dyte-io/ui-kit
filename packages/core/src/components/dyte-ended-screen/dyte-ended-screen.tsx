@@ -5,6 +5,7 @@ import { UIConfig } from '../../types/ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import storeState, { onChange } from '../../lib/store';
 import { defaultConfig } from '../../exports';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Meeting } from '../../types/dyte-client';
 
 /**
@@ -27,18 +28,26 @@ export class DyteEndedScreen {
   @State() icon: IconPack = defaultIconPack;
 
   /** Global states */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   @State() message: string = '';
 
   /** Global states */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   connectedCallback() {
     this.statesChanged(this.states);

@@ -7,6 +7,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
 import storeState from '../../lib/store';
 import { defaultConfig } from '../../exports';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { debounce } from 'lodash-es';
 
 export type ParticipantsViewMode = 'sidebar';
@@ -29,10 +30,14 @@ export type Tab = {
 })
 export class DyteParticipants {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -41,13 +46,17 @@ export class DyteParticipants {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Default section */
   @Prop() defaultParticipantsTabId: ParticipantsTabId = 'stage-list';
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() currentParticipantsTabId: ParticipantsTabId = this.defaultParticipantsTabId;
 

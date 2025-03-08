@@ -3,6 +3,7 @@ import { defaultConfig, defaultIconPack, IconPack, UIConfig } from '../../export
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
 import { Meeting } from '../../types/dyte-client';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Size, States } from '../../types/props';
 
 /**
@@ -23,19 +24,27 @@ export class DyteHeader {
   @Prop() disableRender = false;
 
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** States */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Size */
   @Prop({ reflect: true }) size: Size;

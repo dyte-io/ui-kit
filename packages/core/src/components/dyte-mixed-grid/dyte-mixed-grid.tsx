@@ -10,6 +10,7 @@ import { Meeting, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { GridLayout, GridSize } from '../dyte-grid/dyte-grid';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import type { Tab } from '../dyte-tab-bar/dyte-tab-bar';
 
 /**
@@ -52,19 +53,27 @@ export class DyteMixedGrid {
   @Prop({ reflect: true }) size: Size;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** UI Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Grid size */
   @Prop() gridSize: GridSize = defaultGridSize;

@@ -6,6 +6,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { isLiveStreamHost } from '../../utils/livestream';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import storeState from '../../lib/store';
 
 @Component({
@@ -18,16 +19,22 @@ export class DyteLivestreamToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Is Livestream active */
   @State() livestreamState: LivestreamState = 'IDLE';

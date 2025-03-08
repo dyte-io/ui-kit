@@ -18,6 +18,7 @@ import { UIConfig } from '../../types/ui-config';
 import { FlagsmithFeatureFlags } from '../../utils/flags';
 import { defaultConfig } from '../../exports';
 import { DefaultProps, Render } from '../../lib/render';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteParticipant } from '@dytesdk/web-core';
 
 /**
@@ -56,10 +57,14 @@ export class DyteParticipantTile {
   @Prop() participant!: Peer;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;
@@ -71,10 +76,14 @@ export class DyteParticipantTile {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Event triggered when tile is loaded */
   @Event() tileLoad: EventEmitter<{ participant: Peer; videoElement: HTMLVideoElement }>;

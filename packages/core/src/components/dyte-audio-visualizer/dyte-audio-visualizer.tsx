@@ -5,6 +5,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { Size } from '../../types/props';
 import { drawBarsVisualizer } from '../../lib/visualizer';
 import { DyteI18n, useLanguage } from '../../lib/lang';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteParticipant } from '@dytesdk/web-core';
 
 export type AudioVisualizerVariant = 'bars';
@@ -38,10 +39,14 @@ export class DyteAudioVisualizer {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Hide when there is no audio / audio is muted */
   @Prop() hideMuted: boolean = false;

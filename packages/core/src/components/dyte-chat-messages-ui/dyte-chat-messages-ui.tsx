@@ -16,6 +16,7 @@ import { Chat, ChatMessage, States } from '../../types/props';
 import { differenceInMinutes, elapsedDuration, formatDateTime } from '../../utils/date';
 import { smoothScrollToBottom } from '../../utils/scroll';
 import { chatUnreadTimestamps } from '../../utils/user-prefs';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import storeState from '../../lib/store';
 
 @Component({
@@ -52,10 +53,14 @@ export class DyteChatMessagesUi {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Event emitted when a message is pinned or unpinned */
   @Event({ eventName: 'pinMessage' }) onPinMessage: EventEmitter<Message>;

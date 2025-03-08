@@ -20,6 +20,7 @@ import {
   PlayerState,
   getLivestreamViewerAllowedQualityLevels,
 } from '../../utils/livestream';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { formatSecondsToHHMMSS } from '../../utils/time';
 
 @Component({
@@ -39,16 +40,22 @@ export class DyteLivestreamPlayer {
   private statsIntervalTimer = null;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   @State() playbackUrl: string;
 

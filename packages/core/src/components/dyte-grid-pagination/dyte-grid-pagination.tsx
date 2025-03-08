@@ -4,6 +4,7 @@ import { Size, States } from '../../types/props';
 import { Meeting } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { DyteParticipants } from '@dytesdk/web-core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import debounce from 'lodash/debounce';
 
 export type GridPaginationVariants = 'solid' | 'rounded' | 'grid';
@@ -21,10 +22,14 @@ const MASS_ACTIONS_DEBOUNCE_TIMER = 50; // In ms
 })
 export class DyteGridPagination {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size Prop */
   @Prop({ reflect: true }) size: Size;
@@ -33,10 +38,14 @@ export class DyteGridPagination {
   @Prop({ reflect: true }) variant: GridPaginationVariants = 'rounded';
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() page: number = 1;
   @State() pageCount: number = 0;

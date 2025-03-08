@@ -2,6 +2,7 @@ import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { Meeting } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Size } from '../../exports';
 
 @Component({
@@ -11,13 +12,19 @@ import { Size } from '../../exports';
 })
 export class DyteSpotlightIndicator {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Size */
   @Prop({ reflect: true }) size: Size;

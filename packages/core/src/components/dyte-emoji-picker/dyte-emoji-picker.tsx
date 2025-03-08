@@ -2,6 +2,7 @@ import { Component, Host, h, State, EventEmitter, Event, Prop } from '@stencil/c
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { EmojiMetaData } from '../../types/props';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { fetchEmojis } from '../../utils/assets';
 
 /**
@@ -14,10 +15,14 @@ import { fetchEmojis } from '../../utils/assets';
 })
 export class DyteEmojiPicker {
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Close event */
   @Event() pickerClose: EventEmitter<void>;

@@ -2,6 +2,7 @@ import { Component, h, Prop, State, Watch } from '@stencil/core';
 import { UIConfig, Size, IconPack, defaultIconPack, DyteI18n, defaultConfig } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting, Participant, Peer } from '../../types/dyte-client';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { ParticipantsViewMode } from '../dyte-participants/dyte-participants';
 
 @Component({
@@ -17,7 +18,9 @@ export class DyteParticipantsViewers {
   };
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -29,7 +32,9 @@ export class DyteParticipantsViewers {
   @Prop() hideHeader: boolean = false;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** View mode for participants list */
   @Prop() view: ParticipantsViewMode = 'sidebar';
@@ -38,7 +43,9 @@ export class DyteParticipantsViewers {
   @Prop() search: string = '';
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
   @State() stageViewers: Peer[] = [];
 
   connectedCallback() {

@@ -5,6 +5,7 @@ import storeState, { onChange } from '../../lib/store';
 import { Meeting, Peer, WaitlistedParticipant } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { canViewParticipants } from '../../utils/sidebar';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 
 /**
@@ -30,19 +31,27 @@ export class DyteParticipantsToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() participantsActive: boolean = false;
 

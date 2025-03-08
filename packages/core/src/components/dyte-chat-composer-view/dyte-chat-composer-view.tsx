@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, Prop, State, h, Host, writeTask } from '@stencil/core';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import gracefulStorage from '../../utils/graceful-storage';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { MAX_TEXT_LENGTH } from '../../utils/chat';
 
 export type NewMessageEvent =
@@ -53,10 +54,14 @@ export class DyteChatComposerView {
   @Prop() isEditing: boolean = false;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Max length for text input */
   @Prop() maxLength: number;

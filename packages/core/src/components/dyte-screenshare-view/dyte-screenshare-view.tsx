@@ -20,6 +20,7 @@ import {
   isFullScreenSupported,
   requestFullScreen,
 } from '../../utils/full-screen';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteParticipant, DyteSelf } from '@dytesdk/web-core';
 
 /**
@@ -67,7 +68,9 @@ export class DyteScreenshareView {
   @Prop() participant!: Peer;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Variant */
   @Prop({ reflect: true }) variant: 'solid' | 'gradient' = 'solid';
@@ -76,10 +79,14 @@ export class DyteScreenshareView {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() videoExpanded: boolean = false;
 

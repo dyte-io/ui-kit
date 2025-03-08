@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop, EventEmitter, Event, Watch, State } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Transcript } from '../../types/props';
 
 /**
@@ -18,7 +19,9 @@ export class DyteTranscript {
   @Prop() transcript!: Transcript & { renderedId?: string };
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Dismiss event */
   @Event({ eventName: 'dyteTranscriptDismiss' }) dismiss: EventEmitter<{

@@ -4,6 +4,7 @@ import { Meeting } from '../../types/dyte-client';
 import { AIMessage } from '../../types/dyte-ai';
 // import { Middlewares } from '../../types/props';
 import { smoothScrollToBottom } from '../../utils/scroll';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 
 @Component({
@@ -19,7 +20,9 @@ export class DyteAiHome {
   @State() messages: AIMessage[] = [];
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Initial messages */
   @Prop() initialMessages: AIMessage[];

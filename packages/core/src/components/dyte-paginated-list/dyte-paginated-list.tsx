@@ -2,6 +2,7 @@ import { Component, Host, h, VNode, State, Prop, writeTask, Method, Watch } from
 import { debounce } from 'lodash-es';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { smoothScrollToBottom } from '../../utils/scroll';
 
 export interface DataNode {
@@ -44,10 +45,14 @@ export class DytePaginatedList {
   @Prop() autoScroll = true;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** label to show when empty */
   @Prop() emptyListLabel: string = null;

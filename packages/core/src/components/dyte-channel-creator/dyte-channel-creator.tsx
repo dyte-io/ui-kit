@@ -13,6 +13,7 @@ import {
 import { defaultIconPack, DyteI18n, IconPack, States, useLanguage } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
 import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteBasicParticipant } from '@dytesdk/web-core';
 
 @Component({
@@ -22,13 +23,19 @@ import { DyteBasicParticipant } from '@dytesdk/web-core';
 })
 export class DyteChannelCreator {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;

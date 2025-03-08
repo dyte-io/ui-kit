@@ -2,6 +2,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { Component, Host, h, Prop, Event, EventEmitter, Element } from '@stencil/core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import storeState from '../../lib/store';
 
 /**
@@ -21,16 +22,22 @@ import storeState from '../../lib/store';
 export class DyteMoreToggle {
   @Element() host: HTMLDyteMoreToggleElement;
   /** States object */
-  @Prop() states: States = storeState;
+  @SyncWithStore()
+  @Prop()
+  states: States = storeState;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;

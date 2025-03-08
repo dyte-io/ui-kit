@@ -6,6 +6,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { downloadFile } from '../../utils/file';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { States } from '../../types/props';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import storeState from '../../lib/store';
 
 /**
@@ -26,10 +27,14 @@ export class DyteImageMessage {
   @Prop({ reflect: true }) isContinued: boolean = false;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** show message in bubble */
   @Prop() showBubble: boolean = false;

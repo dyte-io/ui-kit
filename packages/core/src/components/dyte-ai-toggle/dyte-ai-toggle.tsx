@@ -5,6 +5,7 @@ import storeState from '../../lib/store';
 import { Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { Meeting } from '../../types/dyte-client';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 
 @Component({
@@ -17,19 +18,27 @@ export class DyteAiToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() aiActive: boolean = false;
 

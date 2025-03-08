@@ -3,6 +3,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { Size } from '../../types/props';
 import { Peer, WaitlistedParticipant } from '../../types/dyte-client';
 import { formatName, getInitials } from '../../utils/string';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 
 export type AvatarVariant = 'circular' | 'square' | 'hexagon';
@@ -26,10 +27,14 @@ export class DyteAvatar {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() imageState: 'loading' | 'loaded' | 'errored' = 'loading';
 

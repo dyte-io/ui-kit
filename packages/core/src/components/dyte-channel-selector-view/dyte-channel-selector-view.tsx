@@ -1,5 +1,6 @@
 import { Host, Component, Event, EventEmitter, Prop, State, h, Element } from '@stencil/core';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { debounce } from 'lodash-es';
 
 export interface ChannelItem {
@@ -39,10 +40,14 @@ export class DyteChannelSelectorView {
   @Prop() hideAvatar: boolean = false;
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Render as dropdown or list (default = list) */
   @Prop() viewAs: 'dropdown' | 'list' = 'list';

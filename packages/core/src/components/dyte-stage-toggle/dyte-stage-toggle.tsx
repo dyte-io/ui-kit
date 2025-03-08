@@ -5,6 +5,7 @@ import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { canRequestToJoinStage, canJoinStage } from '../../utils/stage';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import storeState from '../../lib/store';
 
 interface DataState {
@@ -23,13 +24,17 @@ export class DyteStageToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   @State() stageStatus: StageStatus = 'OFF_STAGE';
 
@@ -126,7 +131,9 @@ export class DyteStageToggle {
   }
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
   render() {
     if (!canRequestToJoinStage(this.meeting)) return;
     return (
