@@ -16,7 +16,6 @@
     "react/jsx-no-bind": [
       "error",
       {
-        // stencil requires arrow functions inside render()
         "allowArrowFunctions": true,
         "ignoreDOMComponents": false,
         "ignoreRefs": false,
