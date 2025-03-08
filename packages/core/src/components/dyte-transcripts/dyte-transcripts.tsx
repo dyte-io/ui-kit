@@ -137,7 +137,7 @@ export class DyteTranscripts {
     }, 400);
   }
 
-  renderTranscripts() {
+  private renderTranscripts() {
     const renderedTranscripts = [];
     this.transcripts.forEach((transcript) => {
       const t = {

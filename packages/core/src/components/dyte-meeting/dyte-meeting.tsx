@@ -64,7 +64,6 @@ export class DyteMeeting {
 
   private mediaPermissionUpdateListener = ({ kind, message }) => {
     if (['audio', 'video'].includes(kind)) {
-      console.log(message, storeState.activeDebugger);
       if (
         (message === 'DENIED' || message === 'SYSTEM_DENIED') &&
         storeState.activeDebugger !== true
