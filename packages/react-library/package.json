@@ -30,7 +30,6 @@
     "rollup": "rollup -c",
     "lint": "echo \"No lint script\"",
     "lint:fix": "echo \"No lint:fix script\"",
-    "test": "echo \"No test script\"",
     "prepublishOnly": "cp package.json package.json.bak && node prepublish.js",
     "postpublish": "mv package.json.bak package.json"
   },
