@@ -1,7 +1,3 @@
-| Linear Issue |
-| :----------: |
-| fixes WEB- |
-
 ### Description
 
 <!-- Add description of changes made -->
