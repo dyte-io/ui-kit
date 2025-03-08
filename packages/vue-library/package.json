@@ -14,7 +14,6 @@
     "dist"
   ],
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1",
     "build": "npm run tsc",
     "tsc": "tsc -p . --outDir ./dist",
     "prepublishOnly": "cp package.json package.json.bak && node prepublish.js",
