@@ -34,13 +34,13 @@ export function SyncWithStore() {
       return connectedCallback?.call(this);
     };
 
-    proto.componentShouldUpdate = function (_newVal, _oldVal, prop: string) {
+    proto.componentShouldUpdate = function (newVal, oldVal, prop: string) {
       if (prop === propName && !isUpdatingFromStore) {
         // if user updates prop after component init, delete callback
         deleteCallback(propName, onChangeCallback);
         onChangeCallback = undefined;
       }
-      return componentShouldUpdate?.call(this);
+      return componentShouldUpdate?.call(this, newVal, oldVal, prop);
     };
 
     proto.disconnectedCallback = function () {
