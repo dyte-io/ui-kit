@@ -1,6 +1,6 @@
 {
   "name": "@dytesdk/vue-ui-kit",
-  "version": "2.3.2",
+  "version": "2.3.3-staging.2",
   "description": "Dyte's UI Kit to support easy UI development for Vue.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
@@ -20,7 +20,8 @@
     "postpublish": "mv package.json.bak package.json"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "tag": "latest"
   },
   "repository": {
     "type": "git",

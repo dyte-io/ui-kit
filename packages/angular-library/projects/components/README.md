@@ -12,8 +12,6 @@
     <a href="https://docs.dyte.io"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://app.dyte.io">View Demo</a>
-    ·
     <a href="https://community.dyte.io">Report Bug</a>
     ·
     <a href="https://community.dyte.io">Request Feature</a>
