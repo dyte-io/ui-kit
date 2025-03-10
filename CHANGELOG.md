@@ -1,3 +1,10 @@
+## [2.3.2-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.2-staging.1...@dyte-in/ui-kit-v2.3.2-staging.2) (2025-03-10)
+
+
+### Bug Fixes
+
+* rollup optional dep error in github action ([529b4cb](https://github.com/dyte-io/ui-kit/commit/529b4cba94129963b92c3ee127945431c8497860))
+
 ## [2.3.2-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.1...@dyte-in/ui-kit-v2.3.2-staging.1) (2025-03-10)
 
 
