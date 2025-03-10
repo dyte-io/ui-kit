@@ -6,4 +6,5 @@ export default defineConfig({
   dts: true,
   clean: true,
   external: ['react', '@dytesdk/ui-kit', '@stencil/react-output-target/runtime'],
+  target: 'es2015',
 });
