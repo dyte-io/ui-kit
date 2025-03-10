@@ -1,3 +1,10 @@
+## [2.3.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.3...@dyte-in/ui-kit-v2.3.4) (2025-03-10)
+
+
+### Bug Fixes
+
+* incorrect env in release action ([952459a](https://github.com/dyte-io/ui-kit/commit/952459abeeeb90b2aadecac4ce83d1f33282ec93))
+
 ## [2.3.4-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.3...@dyte-in/ui-kit-v2.3.4-staging.1) (2025-03-10)
 
 
