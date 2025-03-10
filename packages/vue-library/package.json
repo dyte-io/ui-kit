@@ -20,7 +20,8 @@
     "postpublish": "mv package.json.bak package.json"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "tag": "latest"
   },
   "repository": {
     "type": "git",
