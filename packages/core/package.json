@@ -21,8 +21,8 @@
       "require": "./dist/index.cjs.js"
     },
     "./dist/*": {
-      "default": "./dist/*",
-      "types": "./dist/*"
+      "types": "./dist/*",
+      "default": "./dist/*"
     },
     "./components/*": {
       "import": "./dist/components/*.js",
