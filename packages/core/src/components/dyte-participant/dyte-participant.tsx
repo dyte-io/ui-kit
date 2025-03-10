@@ -385,36 +385,40 @@ export class DyteParticipant {
                           {!this.meeting.self.hidden ? this.t('minimize') : this.t('maximize')}
                         </dyte-menu-item>
                       )}
-                      {this.canDisableParticipantAudio && isActiveParticipant && this.audioEnabled && (
-                        <dyte-menu-item
-                          iconPack={this.iconPack}
-                          t={this.t}
-                          onClick={() => {
-                            this.participant.disableAudio();
-                          }}
-                        >
-                          <dyte-icon icon={this.iconPack.mic_off} slot="start" />
-                          {this.t('mute')}
-                        </dyte-menu-item>
-                      )}
-
-                      {this.canDisableParticipantVideo && isActiveParticipant && this.videoEnabled && (
-                        <dyte-menu-item
-                          iconPack={this.iconPack}
-                          t={this.t}
-                          onClick={() => {
-                            this.participant.disableVideo();
-                          }}
-                        >
-                          <dyte-icon
-                            icon={this.iconPack.video_off}
-                            slot="start"
+                      {this.canDisableParticipantAudio &&
+                        isActiveParticipant &&
+                        this.audioEnabled && (
+                          <dyte-menu-item
                             iconPack={this.iconPack}
                             t={this.t}
-                          />
-                          {this.t('participants.turn_off_video')}
-                        </dyte-menu-item>
-                      )}
+                            onClick={() => {
+                              this.participant.disableAudio();
+                            }}
+                          >
+                            <dyte-icon icon={this.iconPack.mic_off} slot="start" />
+                            {this.t('mute')}
+                          </dyte-menu-item>
+                        )}
+
+                      {this.canDisableParticipantVideo &&
+                        isActiveParticipant &&
+                        this.videoEnabled && (
+                          <dyte-menu-item
+                            iconPack={this.iconPack}
+                            t={this.t}
+                            onClick={() => {
+                              this.participant.disableVideo();
+                            }}
+                          >
+                            <dyte-icon
+                              icon={this.iconPack.video_off}
+                              slot="start"
+                              iconPack={this.iconPack}
+                              t={this.t}
+                            />
+                            {this.t('participants.turn_off_video')}
+                          </dyte-menu-item>
+                        )}
 
                       {this.canAllowParticipantOnStage &&
                         this.participant?.id !== this.meeting?.self.id && (
