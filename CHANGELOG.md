@@ -1,3 +1,10 @@
+## [2.3.3-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.3-staging.1...@dyte-in/ui-kit-v2.3.3-staging.2) (2025-03-10)
+
+
+### Bug Fixes
+
+* ./dist export ([2166d11](https://github.com/dyte-io/ui-kit/commit/2166d119fcf984aa3d12e87dfd8efb6521670840))
+
 ## [2.3.3-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.2...@dyte-in/ui-kit-v2.3.3-staging.1) (2025-03-10)
 
 
