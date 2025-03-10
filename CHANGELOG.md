@@ -1,3 +1,12 @@
+## [2.3.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.1...@dyte-in/ui-kit-v2.3.2) (2025-03-10)
+
+
+### Bug Fixes
+
+* **react:** cjs build ([79977d3](https://github.com/dyte-io/ui-kit/commit/79977d339f96865ba28e3f6e5f2aa7fbdd35c9bc))
+* rollup optional dep error in github action ([529b4cb](https://github.com/dyte-io/ui-kit/commit/529b4cba94129963b92c3ee127945431c8497860))
+* set es2015 target ([faf2b04](https://github.com/dyte-io/ui-kit/commit/faf2b044b8447bff356f77a472b41219d920b358))
+
 ## [2.3.2-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.2-staging.1...@dyte-in/ui-kit-v2.3.2-staging.2) (2025-03-10)
 
 
