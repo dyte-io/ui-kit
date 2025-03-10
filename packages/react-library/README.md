@@ -12,8 +12,6 @@
     <a href="https://docs.dyte.io"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://app.dyte.io">View Demo</a>
-    ·
     <a href="https://community.dyte.io">Report Bug</a>
     ·
     <a href="https://community.dyte.io">Request Feature</a>
@@ -56,14 +54,14 @@ function App() {
 
   useEffect(() => {
     initClient({
-        authToken: '<auth-token>',
-        roomName: '<room-name>',
-        defaults: {
-          audio: true,
-          video: true,
-        },
-      });
-  },[])
+      authToken: '<auth-token>',
+      roomName: '<room-name>',
+      defaults: {
+        audio: true,
+        video: true,
+      },
+    });
+  }, []);
 
   return <DyteMeeting meeting={client} />;
 }
