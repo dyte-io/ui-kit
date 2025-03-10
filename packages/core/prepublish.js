@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { devDependencies, license, ...pkg } = require('./package.json');
+const { devDependencies, license, publishConfig, ...pkg } = require('./package.json');
 
 const env = (process.env.ENVIRONMENT || 'staging').replace('refs/heads/', '');
 
