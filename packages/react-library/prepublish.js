@@ -18,6 +18,7 @@ fs.writeFileSync(
       license: undefined,
       name: process.env.GHR === 'true' ? '@dyte-in/react-ui-kit' : '@dytesdk/react-ui-kit',
       dependencies,
+      devDependencies: undefined,
       publishConfig:
         process.env.GHR === 'true' || !env.includes('main') ? { tag } : pkg.publishConfig,
       scripts: {
