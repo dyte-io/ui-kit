@@ -1,4 +1,4 @@
-export * from './components/stencil-generated/components';
+export * from './components';
 
 export {
   sendNotification,

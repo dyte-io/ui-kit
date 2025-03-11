@@ -42,8 +42,9 @@ export const config: Config = {
       proxiesFile: '../vue-library/lib/components.ts',
     }),
     reactOutputTarget({
-      // Relative path to where the React components will be generated
-      outDir: '../react-library/src/components/stencil-generated/',
+      componentCorePackage: '@dytesdk/ui-kit',
+      proxiesFile: '../react-library/src/components/stencil-generated/index.ts',
+      includeDefineCustomElements: true,
     }),
     {
       type: 'dist-custom-elements',
