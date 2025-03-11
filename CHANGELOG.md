@@ -1,3 +1,10 @@
+## [2.3.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.4...@dyte-in/ui-kit-v2.3.5) (2025-03-11)
+
+
+### Bug Fixes
+
+* revert to older react-output-target ([a5fb103](https://github.com/dyte-io/ui-kit/commit/a5fb1035b5a5c417eab63d11d02a6dc1a7dc14e4))
+
 ## [2.3.5-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.4...@dyte-in/ui-kit-v2.3.5-staging.1) (2025-03-11)
 
 
