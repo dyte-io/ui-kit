@@ -1,3 +1,10 @@
+## [2.3.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.5...@dyte-in/ui-kit-v2.3.6) (2025-03-11)
+
+
+### Bug Fixes
+
+* cjs extension typo in loader ([44b4b8a](https://github.com/dyte-io/ui-kit/commit/44b4b8ae45ec761d4d313cbc97d61fad21aa1c6a))
+
 ## [2.3.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.4...@dyte-in/ui-kit-v2.3.5) (2025-03-11)
 
 
