@@ -1,4 +1,4 @@
-import type Meeting from '@dytesdk/web-core';
+import type DyteClient from '@dytesdk/web-core';
 import type {
   DyteSelf as Self,
   DyteParticipant as Participant,
@@ -11,7 +11,9 @@ type WaitlistedParticipant = Readonly<
 >;
 type Peer = Self | Participant;
 
-export type { Meeting, Peer, Self, Participant, WaitlistedParticipant };
+type Meeting = DyteClient;
+
+export type { Meeting, DyteClient, Peer, Self, Participant, WaitlistedParticipant };
 
 export type RoomLeftState = leaveRoomState;
 

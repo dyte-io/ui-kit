@@ -6,7 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { AISection, AIView } from "./components/dyte-ai/dyte-ai";
-import { DyteClient as Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
+import { Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
 import { Chat, ChatChannel, Notification, PartialStateEvent, Poll, PollObject, Size, States, Transcript } from "./types/props";
 import { UIConfig } from "./types/ui-config";
 import { IconPack } from "./lib/icons";
@@ -46,7 +46,7 @@ import { TooltipKind, TooltipVariant } from "./components/dyte-tooltip/dyte-tool
 import { ViewerCountVariant } from "./components/dyte-viewer-count/dyte-viewer-count";
 import { Peer as Peer1 } from ".";
 export { AISection, AIView } from "./components/dyte-ai/dyte-ai";
-export { DyteClient as Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
+export { Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
 export { Chat, ChatChannel, Notification, PartialStateEvent, Poll, PollObject, Size, States, Transcript } from "./types/props";
 export { UIConfig } from "./types/ui-config";
 export { IconPack } from "./lib/icons";
