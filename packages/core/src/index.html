@@ -44,7 +44,6 @@
           joining: false,
           status: 'Joining...',
           data: {
-            roomName: 'kvvuko-cidyur',
             authToken: '',
             env: 'preprod',
             showSetupScreen: false,
@@ -53,42 +52,14 @@
               video: false,
             },
           },
-          async handleRoutes() {
-            const { pathname } = window.location;
-            /** Matches
-             *    - /meeting/stage/[roomName]
-             *    - /meeting/join/[roomName]
-             *    - /[roomName]
-             */
-            const match = /\/(meeting\/(stage|join)\/)?(?<roomName>.*)/.exec(pathname);
-            const roomName = match.groups.roomName;
-
-            if (roomName) {
-              this.data.roomName = roomName.replace('/', '');
-              this.data.env = 'devel';
-              this.data.showSetupScreen = true;
-              this.data.defaults.audio = true;
-              this.data.defaults.video = true;
-              await this.handleSubmit();
-            }
-          },
           async initialize() {
-            await this.handleRoutes();
-
             const url = new URL(window.location.href);
-            const roomName = url.searchParams.get('roomName');
             const authToken = url.searchParams.get('authToken');
             const env = url.searchParams.get('env');
             const showSetupScreen = url.searchParams.get('showSetupScreen');
             const enableVideo = url.searchParams.get('enableVideo');
             const enableAudio = url.searchParams.get('enableAudio');
-            /**
-             * NOTE(callmetarush): Allowing explicitly set empty
-             * room names for v2 meetings
-             **/
-            if (roomName !== null) {
-              this.data.roomName = roomName;
-            }
+
             if (env) {
               this.data.env = env;
             }
@@ -120,17 +91,6 @@
 
             const apiBase = env === 'prod' ? 'https://api.dyte.io' : `https://api.${env}.dyte.io`;
             const baseURI = env === 'prod' ? 'dyte.io' : `${env}.dyte.io`;
-
-            if (this.data.authToken === '') {
-              this.status = 'Fetching authToken...';
-              const res = await fetch(`${apiBase}/auth/anonymous`);
-              if (!res.ok) {
-                this.joining = false;
-                return;
-              }
-              const { authToken } = await res.json();
-              this.data.authToken = authToken;
-            }
 
             this.status = 'Getting meeting details...';
 
@@ -223,13 +183,13 @@
           </h1>
           <form @submit.prevent="handleSubmit" class="mt-6 flex flex-col">
             <div>
-              <label for="roomName" class="text-sm text-zinc-400">Room Name</label>
+              <label for="authToken" class="text-sm text-zinc-400">Participant Token</label>
               <input
-                id="roomName"
+                id="authToken"
                 type="text"
-                placeholder="Room Name"
+                placeholder="Participant Token"
                 class="input-colors block h-12 w-full rounded-lg border-zinc-800 bg-zinc-800 px-3 text-zinc-300"
-                x-model="data.roomName"
+                x-model="data.authToken"
               />
             </div>
             <div class="mt-4">
@@ -239,8 +199,8 @@
                 class="block h-12 w-full rounded-lg border-zinc-800 bg-zinc-800 px-3 text-zinc-300"
                 x-model="data.env"
               >
-                <option value="preprod">Pre-production</option>
                 <option value="devel">Devel</option>
+                <option value="preprod">Pre-production</option>
                 <option value="prod">Production</option>
               </select>
             </div>

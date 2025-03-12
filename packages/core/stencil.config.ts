@@ -68,10 +68,6 @@ export const config: Config = {
           src: webCorePath,
           dest: 'web-core.js',
         },
-        {
-          src: '../public',
-          dest: '.',
-        },
       ],
     },
   ],
