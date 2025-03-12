@@ -11,6 +11,7 @@ import storeState from '../../lib/store';
 import state from '../../lib/store';
 import { DytePlugin, leaveRoomState } from '@dytesdk/web-core';
 import { isLiveStreamViewer } from '../../utils/livestream';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { defaultGridSize } from '../../lib/grid';
 
 export type GridLayout = 'row' | 'column';
@@ -64,7 +65,9 @@ export class DyteGrid {
   @Prop({ reflect: true }) aspectRatio: string = '16:9';
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Gap between participants */
   @Prop({ reflect: true }) gap: number = 8;
@@ -73,16 +76,22 @@ export class DyteGrid {
   @Prop({ reflect: true }) size: Size;
 
   /** States */
-  @Prop() states: States = storeState;
+  @SyncWithStore()
+  @Prop()
+  states: States = storeState;
 
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Grid size */
   @Prop() gridSize: GridSize = defaultGridSize;

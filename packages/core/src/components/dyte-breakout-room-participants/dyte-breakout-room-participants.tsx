@@ -4,6 +4,7 @@ import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@st
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { getAllConnectedParticipants, participantIdentifier } from '../../utils/breakout-rooms';
 import type { DyteConnectedMeetings } from '@dytesdk/web-core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { formatName, shorten } from '../../utils/string';
 
 type ConnectedPeer = DyteConnectedMeetings['parentMeeting']['participants'][number];
@@ -19,16 +20,22 @@ type ConnectedPeer = DyteConnectedMeetings['parentMeeting']['participants'][numb
 })
 export class DyteBreakoutRoomParticipants {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Participant ids */
   @Prop() participantIds: string[] = [];
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() search: string = '';
 

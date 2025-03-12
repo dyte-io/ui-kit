@@ -4,6 +4,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { Size } from '../../types/props';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 
 /**
@@ -25,13 +26,19 @@ export class DyteRecordingToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;

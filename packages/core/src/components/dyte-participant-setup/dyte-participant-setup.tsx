@@ -6,6 +6,7 @@ import { Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { defaultConfig } from '../../exports';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteSelf } from '@dytesdk/web-core';
 
 export type VideoState = Pick<Peer, 'videoEnabled' | 'videoTrack'>;
@@ -38,7 +39,9 @@ export class DyteParticipantSetup {
   @Prop() participant!: Peer;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;
@@ -50,10 +53,14 @@ export class DyteParticipantSetup {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   connectedCallback() {
     // set videoState before initial render and initialize listeners

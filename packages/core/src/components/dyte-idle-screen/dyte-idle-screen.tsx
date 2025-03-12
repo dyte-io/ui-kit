@@ -3,6 +3,7 @@ import { defaultConfig } from '../../exports';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 import { UIConfig } from '../../types/ui-config';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Meeting } from '../../types/dyte-client';
 
 /**
@@ -16,16 +17,22 @@ import { Meeting } from '../../types/dyte-client';
 })
 export class DyteIdleScreen {
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   render() {
     return (

@@ -2,6 +2,7 @@ import { Component, Event, EventEmitter, Host, Prop, State, Watch, h } from '@st
 import { Meeting } from '../../types/dyte-client';
 import { ChatChannel } from '../../types/props';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteBasicParticipant } from '@dytesdk/web-core';
 
 @Component({
@@ -10,16 +11,22 @@ import { DyteBasicParticipant } from '@dytesdk/web-core';
 })
 export class DyteChannelHeader {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Channel object */
   @Prop() channel: ChatChannel;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** event triggered for search */
   @Event() search: EventEmitter<string>;

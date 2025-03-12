@@ -18,6 +18,7 @@ import storeState from '../../lib/store';
 import { defaultConfig, UIConfig } from '../../exports';
 import { FlagsmithFeatureFlags } from '../../utils/flags';
 import { autoPlacement, computePosition, hide, offset, shift } from '@floating-ui/dom';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import type {
   DyteParticipant as DyteParticipantType,
   DyteSelf as DyteSelfType,
@@ -55,7 +56,9 @@ export class DyteParticipant {
   @Element() host: HTMLDyteParticipantElement;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Show participant summary */
   @Prop() view: ParticipantViewMode = 'sidebar';
@@ -64,10 +67,14 @@ export class DyteParticipant {
   @Prop() participant: Peer;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;

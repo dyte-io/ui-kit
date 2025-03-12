@@ -2,6 +2,7 @@ import { Component, Host, h, Prop, State, Element, Event, EventEmitter } from '@
 import { defaultIconPack, DyteI18n, IconPack } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Size } from '../../types/props';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import type { Message } from '@dytesdk/web-core';
 
 @Component({
@@ -36,10 +37,14 @@ export class DyteChatMessage {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** if sender is self */
   @Prop() isSelf = false;

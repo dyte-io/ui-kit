@@ -4,6 +4,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size } from '../../types/props';
 import { downloadFile } from '../../utils/file';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { formatName, shorten } from '../../utils/string';
 
 /**
@@ -22,10 +23,14 @@ export class DyteImageViewer {
   @Prop({ reflect: true }) size: Size;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Emitted when viewer should be closed */
   @Event() close: EventEmitter<void>;

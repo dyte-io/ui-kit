@@ -20,6 +20,7 @@ import {
   MAX_TEXT_LENGTH,
 } from '../../utils/chat';
 import gracefulStorage from '../../utils/graceful-storage';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import type { DyteBasicParticipant, TextMessage } from '@dytesdk/web-core';
 
 interface DyteText {
@@ -58,10 +59,14 @@ export class DyteChatComposerUi {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Whether to show emoji picker */
   @Prop() disableEmojiPicker? = false;

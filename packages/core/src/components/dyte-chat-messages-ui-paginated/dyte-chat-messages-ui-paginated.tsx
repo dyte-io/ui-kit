@@ -14,6 +14,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { ChatChannel, Size, States } from '../../types/props';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import storeState from '../../lib/store';
 
 @Component({
@@ -27,7 +28,9 @@ export class DyteChatMessagesUiPaginated {
   @Element() host: HTMLDyteChatMessagesUiPaginatedElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /**
    * Selected channel
@@ -43,10 +46,14 @@ export class DyteChatMessagesUiPaginated {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Event for editing a message */
   @Event({ bubbles: true, composed: true }) editMessageInit: EventEmitter<{

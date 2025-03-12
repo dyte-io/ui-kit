@@ -1,4 +1,5 @@
 import { Component, Event, EventEmitter, Host, Prop, State, Watch, h } from '@stencil/core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
 
 /**
@@ -11,10 +12,14 @@ import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports'
 })
 export class DyteDraftAttachmentView {
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Attachment to display */
   @Prop() attachment: {

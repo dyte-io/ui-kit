@@ -6,6 +6,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { UIConfig } from '../../types/ui-config';
 import { defaultConfig } from '../../exports';
 import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import clone from '../../utils/clone';
 
 /**
@@ -25,16 +26,22 @@ export class DyteTranscripts {
   @Element() host: HTMLDyteTranscriptsElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States = storeState;
+  @SyncWithStore()
+  @Prop()
+  states: States = storeState;
 
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() transcripts: Array<Transcript & { renderedId?: string }> = [];
 

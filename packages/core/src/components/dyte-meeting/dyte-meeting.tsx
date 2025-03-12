@@ -24,6 +24,7 @@ import { generateConfig } from '../../utils/config';
 import storeState from '../../lib/store';
 import { GridLayout } from '../dyte-grid/dyte-grid';
 import ResizeObserver from 'resize-observer-polyfill';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 export type MeetingMode = 'fixed' | 'fill';
 
@@ -89,10 +90,10 @@ export class DyteMeeting {
   @Element() host: HTMLDyteMeetingElement;
 
   /** Whether to load config from preset */
-  @Prop() loadConfigFromPreset: boolean = false;
+  @Prop({ mutable: true }) loadConfigFromPreset: boolean = false;
 
   /** Whether to apply the design system on the document root from config */
-  @Prop() applyDesignSystem: boolean = false;
+  @Prop({ mutable: true }) applyDesignSystem: boolean = false;
 
   /** Fill type */
   @Prop({ reflect: true }) mode: MeetingMode = 'fixed';
@@ -101,19 +102,20 @@ export class DyteMeeting {
   @Prop() leaveOnUnmount = false;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Whether to show setup screen or not */
   @Prop({ mutable: true }) showSetupScreen: boolean;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** UI Config */
   @Prop({ mutable: true }) config: UIConfig = defaultConfig;
-
-  /** Icon Pack URL */
-  @Prop({ reflect: true }) iconPackUrl: string;
 
   /** Size */
   @Prop({ reflect: true, mutable: true }) size: Size;
@@ -121,12 +123,16 @@ export class DyteMeeting {
   /** Grid layout */
   @Prop() gridLayout: GridLayout = 'row';
 
-  @State() states: States = {
+  @State()
+  states: States = {
     meeting: 'idle',
     prefs: getUserPreferences(),
   };
 
-  @State() iconPack: IconPack = defaultIconPack;
+  /** Icon pack */
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<PartialStateEvent>;
@@ -145,7 +151,6 @@ export class DyteMeeting {
       provideDyteDesignSystem(document.documentElement, this.config.designTokens);
     }
     this.meetingChanged(this.meeting);
-    this.iconPackUrlChanged(this.iconPackUrl);
   }
 
   private clearListeners(meeting: Meeting) {

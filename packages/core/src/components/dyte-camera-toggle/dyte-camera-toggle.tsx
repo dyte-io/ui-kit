@@ -5,6 +5,7 @@ import state from '../../lib/store';
 import { Meeting, Peer, MediaPermission } from '../../types/dyte-client';
 import { PermissionSettings, Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { StageStatus } from '@dytesdk/web-core';
 
 /**
@@ -43,16 +44,22 @@ export class DyteCameraToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() videoEnabled: boolean = false;
 

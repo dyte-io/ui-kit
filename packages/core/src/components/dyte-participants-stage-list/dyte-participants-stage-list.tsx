@@ -7,6 +7,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { ParticipantsViewMode } from '../dyte-participants/dyte-participants';
 import { defaultConfig } from '../../exports';
 import { Render } from '../../lib/render';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import storeState from '../../lib/store';
 
 /**
@@ -23,7 +24,9 @@ export class DyteParticipants {
   private participantLeftListener: (data: any) => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -35,13 +38,17 @@ export class DyteParticipants {
   @Prop() hideHeader: boolean = false;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** View mode for participants list */
   @Prop() view: ParticipantsViewMode = 'sidebar';
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Search */
   @Prop() search: string = '';

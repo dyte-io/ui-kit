@@ -2,6 +2,7 @@ import { Component, Host, h, Prop, EventEmitter, Event, Watch, State } from '@st
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Notification, Size } from '../../types/props';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { TextMessageView } from '../dyte-text-message/components/TextMessage';
 
 /**
@@ -23,10 +24,14 @@ export class DyteNotification {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Dismiss event */
   @Event({ eventName: 'dyteNotificationDismiss' }) dismiss: EventEmitter<string>;
