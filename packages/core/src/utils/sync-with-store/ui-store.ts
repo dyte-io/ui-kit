@@ -22,16 +22,16 @@ const uiStore = createStore<DyteUIStore>({
   states: initialState,
 });
 
-type Callback<T extends any = any> = (value: T) => void;
+type Callback<T extends any = any> = (newValue: T, oldValue?: T) => void;
 
 const storeCallbacks = new Map<string, Set<Callback>>();
 
 // Handling callbacks on our own since stencil store
 // doesn't provide a way to cleanup store subscriptions.
-uiStore.on('set', (key, newValue) => {
+uiStore.on('set', (key, newValue, oldValue) => {
   const callbacks = storeCallbacks.get(key);
   if (callbacks) {
-    callbacks.forEach((callback) => callback(newValue));
+    callbacks.forEach((callback) => callback(newValue, oldValue));
   }
 });
 
