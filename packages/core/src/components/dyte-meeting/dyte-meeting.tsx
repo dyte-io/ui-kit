@@ -14,7 +14,7 @@ import { PartialStateEvent, PermissionSettings, Size, States } from '../../types
 import { getSize } from '../../utils/size';
 import { Meeting, RoomLeftState } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { defaultIconPack, getIconPack, IconPack } from '../../lib/icons';
+import { defaultIconPack, IconPack } from '../../lib/icons';
 import { UIConfig } from '../../types/ui-config';
 import { defaultConfig } from '../../lib/default-ui-config';
 import { Render } from '../../lib/render';
@@ -227,11 +227,6 @@ export class DyteMeeting {
         meeting.joinRoom();
       }
     }
-  }
-
-  @Watch('iconPackUrl')
-  async iconPackUrlChanged(url: string) {
-    this.iconPack = await getIconPack(url);
   }
 
   @Listen('dyteStateUpdate')
