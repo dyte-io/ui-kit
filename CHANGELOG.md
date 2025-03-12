@@ -1,3 +1,19 @@
+# [2.4.0-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.6...@dyte-in/ui-kit-v2.4.0-staging.1) (2025-03-12)
+
+
+### Bug Fixes
+
+* componentShouldUpdate call ([c8bdc67](https://github.com/dyte-io/ui-kit/commit/c8bdc679e40e959b43a070b5dc18d0981eea8ad6))
+* do not listen to changes once prop is updated manually after init ([ea2d0b8](https://github.com/dyte-io/ui-kit/commit/ea2d0b82229736e5be0137218d0f2e2889551c1a))
+* **sync-store:** pass oldValue in callback ([017a925](https://github.com/dyte-io/ui-kit/commit/017a925e5a258efbc5153b10b6e6d7c6879746e7))
+* SyncWithStore logic ([abc11cd](https://github.com/dyte-io/ui-kit/commit/abc11cd5d4888d64c9897d435ea4efed30216209))
+* use @SyncWithStore decorator in every component ([6272e6c](https://github.com/dyte-io/ui-kit/commit/6272e6c9934dce1935df7a3ca2cea78550ce84df))
+
+
+### Features
+
+* share common props using DyteUIProvider ([76f7058](https://github.com/dyte-io/ui-kit/commit/76f705829d1cc767e14a8dad491fa39361a73a74))
+
 ## [2.3.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.5...@dyte-in/ui-kit-v2.3.6) (2025-03-11)
 
 
