@@ -1,3 +1,10 @@
+# [2.4.0-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.1...@dyte-in/ui-kit-v2.4.0-staging.2) (2025-03-12)
+
+
+### Bug Fixes
+
+* remove unused @Watch method ([90e60d0](https://github.com/dyte-io/ui-kit/commit/90e60d0632dbf28d032b3d9b02a4476e4bb71070))
+
 # [2.4.0-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.6...@dyte-in/ui-kit-v2.4.0-staging.1) (2025-03-12)
 
 
