@@ -279,6 +279,7 @@ export const defaultLanguage = {
   'ended.kicked': 'You were removed from the meeting.',
   'ended.disconnected': 'The call ended because the connection was lost.',
   'ended.network': 'Please check your internet connection and try again.',
+  'ended.unauthorized': 'You are not authorized to join this meeting.',
   network: 'Network',
   'network.reconnecting': 'Connection lost. Trying to reconnect.',
   'network.delay_extended': 'Taking too long to reconnect. Please check your network connection.',

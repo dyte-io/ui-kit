@@ -82,7 +82,7 @@ export interface States {
   image?: ImageMessage;
   prefs?: UserPreferences;
   sidebar?: DyteSidebarSection;
-  roomLeftState?: RoomLeftState;
+  roomLeftState?: RoomLeftState | 'unauthorized';
   sidebarFloating?: boolean;
   participantsTabId?: ParticipantsTabId;
   [state: string]: any;
