@@ -57,7 +57,6 @@ export class DyteDebuggerToggle {
         <dyte-controlbar-button
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={() => this.toggleDebugger()}
           icon={this.iconPack.debug}
           label={this.t('Troubleshooting')}

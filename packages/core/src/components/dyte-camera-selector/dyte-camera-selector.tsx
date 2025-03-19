@@ -126,12 +126,7 @@ export class DyteCameraSelector {
           <div class={'group container ' + this.variant} part="camera-selection">
             <label>
               {this.variant !== 'inline' && this.t('camera')}
-              <dyte-icon
-                icon={this.iconPack.video_on}
-                iconPack={this.iconPack}
-                t={this.t}
-                size="sm"
-              />
+              <dyte-icon icon={this.iconPack.video_on} size="sm" />
             </label>
             <div class="row">
               <select

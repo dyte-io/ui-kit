@@ -434,10 +434,6 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * Icon pack
-         */
-        "iconPack": IconPack;
-        /**
           * Button type
          */
         "kind": ButtonKind;
@@ -449,10 +445,6 @@ export namespace Components {
           * Size
          */
         "size": Size;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
         /**
           * Button type
          */
@@ -1020,10 +1012,6 @@ export namespace Components {
           * Meeting object
          */
         "meeting": Meeting;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
     }
     /**
      * A confirmation modal.
@@ -1119,10 +1107,6 @@ export namespace Components {
           * Size
          */
         "size": Size;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
         /**
           * Variant
          */
@@ -1505,10 +1489,6 @@ export namespace Components {
          */
         "size": number;
         /**
-          * Language
-         */
-        "t": DyteI18n1;
-        /**
           * Url of the file
          */
         "url": string;
@@ -1690,17 +1670,9 @@ export namespace Components {
          */
         "icon": string;
         /**
-          * Icon pack
-         */
-        "iconPack": IconPack;
-        /**
           * Size
          */
         "size": Size1;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
         /**
           * Icon variant
          */
@@ -3551,10 +3523,6 @@ export namespace Components {
           * Size
          */
         "size": Size1;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
     }
     /**
      * A grid component that renders two lists of participants: `pinnedParticipants` and `participants`.
@@ -3850,10 +3818,6 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * Icon pack
-         */
-        "iconPack": IconPack;
-        /**
           * Tooltip kind
          */
         "kind": TooltipKind;
@@ -3873,10 +3837,6 @@ export namespace Components {
           * Size
          */
         "size": Size;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
         /**
           * Tooltip variant
          */
@@ -7033,10 +6993,6 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * Icon pack
-         */
-        "iconPack"?: IconPack;
-        /**
           * Button type
          */
         "kind"?: ButtonKind;
@@ -7048,10 +7004,6 @@ declare namespace LocalJSX {
           * Size
          */
         "size"?: Size;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
         /**
           * Button type
          */
@@ -7750,10 +7702,6 @@ declare namespace LocalJSX {
           * Meeting object
          */
         "meeting"?: Meeting;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
     }
     /**
      * A confirmation modal.
@@ -7853,10 +7801,6 @@ declare namespace LocalJSX {
           * Size
          */
         "size"?: Size;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
         /**
           * Variant
          */
@@ -8275,10 +8219,6 @@ declare namespace LocalJSX {
          */
         "size": number;
         /**
-          * Language
-         */
-        "t"?: DyteI18n1;
-        /**
           * Url of the file
          */
         "url": string;
@@ -8472,17 +8412,9 @@ declare namespace LocalJSX {
          */
         "icon"?: string;
         /**
-          * Icon pack
-         */
-        "iconPack"?: IconPack;
-        /**
           * Size
          */
         "size"?: Size1;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
         /**
           * Icon variant
          */
@@ -10522,10 +10454,6 @@ declare namespace LocalJSX {
           * Size
          */
         "size"?: Size1;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
     }
     /**
      * A grid component that renders two lists of participants: `pinnedParticipants` and `participants`.
@@ -10841,10 +10769,6 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * Icon pack
-         */
-        "iconPack"?: IconPack;
-        /**
           * Tooltip kind
          */
         "kind"?: TooltipKind;
@@ -10868,10 +10792,6 @@ declare namespace LocalJSX {
           * Size
          */
         "size"?: Size;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
         /**
           * Tooltip variant
          */

@@ -136,7 +136,6 @@ export class DytePollsToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           class={{ active: this.pollsActive }}
           onClick={() => this.togglePollsTab()}
           icon={this.iconPack.poll}

@@ -86,7 +86,6 @@ export class DyteMoreToggle {
         <dyte-controlbar-button
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={(e) => {
             e.stopPropagation();
             this.toggleMoreMenu();

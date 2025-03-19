@@ -110,14 +110,8 @@ export class DytePluginMain {
           <div>{this.plugin.name}</div>
           {this.canClosePlugin && (
             <div>
-              <dyte-button
-                kind="icon"
-                onClick={() => this.plugin.deactivate()}
-                part="button"
-                iconPack={this.iconPack}
-                t={this.t}
-              >
-                <dyte-icon icon={this.iconPack.dismiss} iconPack={this.iconPack} t={this.t} />
+              <dyte-button kind="icon" onClick={() => this.plugin.deactivate()} part="button">
+                <dyte-icon icon={this.iconPack.dismiss} />
               </dyte-button>
             </div>
           )}

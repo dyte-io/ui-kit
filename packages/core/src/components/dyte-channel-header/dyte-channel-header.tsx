@@ -112,15 +112,8 @@ export class DyteChannelHeader {
           </div>
           <div class="channel-tools">
             {!this.channel.isDirectMessage && (
-              <dyte-tooltip
-                label={this.t('chat.channel_members')}
-                iconPack={this.iconPack}
-                t={this.t}
-                variant="primary"
-              >
+              <dyte-tooltip label={this.t('chat.channel_members')} variant="primary">
                 <dyte-button
-                  iconPack={this.iconPack}
-                  t={this.t}
                   kind="button"
                   variant="secondary"
                   size="md"
@@ -129,7 +122,7 @@ export class DyteChannelHeader {
                   }}
                   class="br-primary-btn"
                 >
-                  <dyte-icon icon={this.iconPack.people} iconPack={this.iconPack} t={this.t} />
+                  <dyte-icon icon={this.iconPack.people} />
                 </dyte-button>
               </dyte-tooltip>
             )}

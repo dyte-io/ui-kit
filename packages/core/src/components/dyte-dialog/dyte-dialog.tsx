@@ -89,13 +89,11 @@ export class DyteDialog {
               kind="icon"
               variant="ghost"
               onClick={() => this.close()}
-              iconPack={this.iconPack}
-              t={this.t}
               type="button"
               aria-label={this.t('dialog.close')}
               role="button"
             >
-              <dyte-icon icon={this.iconPack.dismiss} iconPack={this.iconPack} t={this.t} />
+              <dyte-icon icon={this.iconPack.dismiss} />
             </dyte-button>
           )}
         </div>

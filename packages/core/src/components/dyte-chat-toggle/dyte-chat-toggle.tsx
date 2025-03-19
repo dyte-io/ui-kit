@@ -155,7 +155,6 @@ export class DyteChatToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           class={{ active: this.chatActive }}
           onClick={this.toggleChat}
           icon={this.iconPack.chat}

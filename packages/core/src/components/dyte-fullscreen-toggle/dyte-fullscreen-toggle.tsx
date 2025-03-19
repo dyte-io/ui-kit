@@ -93,7 +93,6 @@ export class DyteFullscreenToggle {
         <dyte-controlbar-button
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={this.toggleFullScreen}
           icon={
             this.fullScreenActive

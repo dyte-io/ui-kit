@@ -92,14 +92,7 @@ export class DyteParticipantCount {
         role="log"
         aria-label={`${this.participantCount} ${this.t('participants')}`}
       >
-        <dyte-icon
-          icon={this.iconPack.people}
-          tabIndex={-1}
-          aria-hidden={true}
-          part="icon"
-          iconPack={this.iconPack}
-          t={this.t}
-        />
+        <dyte-icon icon={this.iconPack.people} tabIndex={-1} aria-hidden={true} part="icon" />
         {this.participantCount}
       </Host>
     );

@@ -159,19 +159,8 @@ export class DyteSetupScreen {
                 }}
               />
             )}
-            <dyte-button
-              size="lg"
-              kind="wide"
-              onClick={this.join}
-              disabled={disabled}
-              iconPack={this.iconPack}
-              t={this.t}
-            >
-              {this.isJoining ? (
-                <dyte-spinner iconPack={this.iconPack} t={this.t} />
-              ) : (
-                this.t('join')
-              )}
+            <dyte-button size="lg" kind="wide" onClick={this.join} disabled={disabled}>
+              {this.isJoining ? <dyte-spinner iconPack={this.iconPack} /> : this.t('join')}
             </dyte-button>
 
             {this.connectionState !== 'connected' && (

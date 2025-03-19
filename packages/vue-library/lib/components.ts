@@ -177,8 +177,6 @@ export const DyteButton = /*@__PURE__*/ defineContainer<JSX.DyteButton>('dyte-bu
   'kind',
   'reverse',
   'disabled',
-  'iconPack',
-  't',
   'type'
 ]);
 
@@ -443,8 +441,7 @@ export const DyteChatToggle = /*@__PURE__*/ defineContainer<JSX.DyteChatToggle>(
 
 export const DyteClock = /*@__PURE__*/ defineContainer<JSX.DyteClock>('dyte-clock', undefined, [
   'meeting',
-  'iconPack',
-  't'
+  'iconPack'
 ]);
 
 
@@ -480,7 +477,6 @@ export const DyteControlbarButton = /*@__PURE__*/ defineContainer<JSX.DyteContro
   'isLoading',
   'disabled',
   'iconPack',
-  't',
   'brandIcon'
 ]);
 
@@ -649,8 +645,7 @@ export const DyteFileMessageView = /*@__PURE__*/ defineContainer<JSX.DyteFileMes
   'name',
   'size',
   'url',
-  'iconPack',
-  't'
+  'iconPack'
 ]);
 
 
@@ -721,9 +716,7 @@ export const DyteHeader = /*@__PURE__*/ defineContainer<JSX.DyteHeader>('dyte-he
 
 export const DyteIcon = /*@__PURE__*/ defineContainer<JSX.DyteIcon>('dyte-icon', undefined, [
   'icon',
-  'iconPack',
   'variant',
-  't',
   'size'
 ]);
 
@@ -1481,8 +1474,7 @@ export const DyteSpeakerSelector = /*@__PURE__*/ defineContainer<JSX.DyteSpeaker
 
 export const DyteSpinner = /*@__PURE__*/ defineContainer<JSX.DyteSpinner>('dyte-spinner', undefined, [
   'iconPack',
-  'size',
-  't'
+  'size'
 ]);
 
 
@@ -1611,8 +1603,6 @@ export const DyteTooltip = /*@__PURE__*/ defineContainer<JSX.DyteTooltip>('dyte-
   'size',
   'placement',
   'delay',
-  'iconPack',
-  't',
   'dyteOpenChange'
 ], [
   'dyteOpenChange'

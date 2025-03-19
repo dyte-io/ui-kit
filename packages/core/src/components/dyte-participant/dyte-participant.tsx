@@ -314,8 +314,6 @@ export class DyteParticipant {
                 class={{
                   red: !this.audioEnabled,
                 }}
-                iconPack={this.iconPack}
-                t={this.t}
                 icon={this.audioEnabled ? this.iconPack.mic_on : this.iconPack.mic_off}
               />
             )}
@@ -325,8 +323,6 @@ export class DyteParticipant {
                 class={{
                   red: !this.videoEnabled,
                 }}
-                iconPack={this.iconPack}
-                t={this.t}
                 icon={this.videoEnabled ? this.iconPack.video_on : this.iconPack.video_off}
               />
             )}
@@ -341,13 +337,7 @@ export class DyteParticipant {
               }) > 0) && (
               <div class="menu">
                 <span id="trigger" onClick={this.onMenuToggle}>
-                  <dyte-button
-                    variant="ghost"
-                    kind="icon"
-                    slot="trigger"
-                    iconPack={this.iconPack}
-                    t={this.t}
-                  >
+                  <dyte-button variant="ghost" kind="icon" slot="trigger">
                     <dyte-icon class="more" icon={this.iconPack.more_vertical} />
                   </dyte-button>
                 </span>
@@ -369,8 +359,6 @@ export class DyteParticipant {
                           <dyte-icon
                             icon={this.isPinned ? this.iconPack.pin_off : this.iconPack.pin}
                             slot="start"
-                            iconPack={this.iconPack}
-                            t={this.t}
                           />
                           {this.isPinned ? this.t('unpin') : this.t('pin')}
                         </dyte-menu-item>
@@ -417,12 +405,7 @@ export class DyteParticipant {
                               this.participant.disableVideo();
                             }}
                           >
-                            <dyte-icon
-                              icon={this.iconPack.video_off}
-                              slot="start"
-                              iconPack={this.iconPack}
-                              t={this.t}
-                            />
+                            <dyte-icon icon={this.iconPack.video_off} slot="start" />
                             {this.t('participants.turn_off_video')}
                           </dyte-menu-item>
                         )}
@@ -436,8 +419,6 @@ export class DyteParticipant {
                             onClick={this.inviteToStageToggle}
                           >
                             <dyte-icon
-                              iconPack={this.iconPack}
-                              t={this.t}
                               icon={
                                 this.isOnStage
                                   ? this.iconPack.leave_stage
@@ -460,12 +441,7 @@ export class DyteParticipant {
                             this.meeting?.participants.kick(this.participant?.id);
                           }}
                         >
-                          <dyte-icon
-                            icon={this.iconPack.dismiss}
-                            slot="start"
-                            iconPack={this.iconPack}
-                            t={this.t}
-                          />
+                          <dyte-icon icon={this.iconPack.dismiss} slot="start" />
                           {this.t('kick')}
                         </dyte-menu-item>
                       )}

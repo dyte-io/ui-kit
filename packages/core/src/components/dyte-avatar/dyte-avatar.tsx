@@ -49,7 +49,7 @@ export class DyteAvatar {
     if (picture && picture.length > 0 && this.imageState !== 'errored') {
       return (
         <div class="image-ctr">
-          {this.imageState === 'loading' && <dyte-spinner iconPack={this.iconPack} t={this.t} />}
+          {this.imageState === 'loading' && <dyte-spinner iconPack={this.iconPack} />}
           <img
             src={picture}
             class={{ loaded: this.imageState === 'loaded' }}

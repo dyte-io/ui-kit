@@ -302,21 +302,14 @@ export class DyteChatMessagesUi {
                       </dyte-message-view>
                       {message.pinned && (
                         <div class="pin-button" part="pin-button">
-                          <dyte-tooltip label={this.t('unpin')} iconPack={this.iconPack} t={this.t}>
+                          <dyte-tooltip label={this.t('unpin')}>
                             <dyte-button
                               kind="icon"
                               variant="ghost"
                               onClick={() => this.onMessageActionHandler('pin_message', message)}
-                              iconPack={this.iconPack}
-                              t={this.t}
                               disabled={!this.canPinMessages}
                             >
-                              <dyte-icon
-                                icon={this.iconPack.pin}
-                                iconPack={this.iconPack}
-                                t={this.t}
-                                size="sm"
-                              />
+                              <dyte-icon icon={this.iconPack.pin} size="sm" />
                             </dyte-button>
                           </dyte-tooltip>
                         </div>
@@ -339,10 +332,8 @@ export class DyteChatMessagesUi {
             kind="icon"
             part="show-new-messages"
             onClick={this.scrollToBottom}
-            iconPack={this.iconPack}
-            t={this.t}
           >
-            <dyte-icon icon={this.iconPack.chevron_down} iconPack={this.iconPack} t={this.t} />
+            <dyte-icon icon={this.iconPack.chevron_down} />
           </dyte-button>
         </div>
       </Host>

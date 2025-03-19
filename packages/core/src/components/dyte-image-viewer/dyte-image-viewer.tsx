@@ -62,27 +62,12 @@ export class DyteImageViewer {
             <span class="displayName">{formatName(shorten(this.image.displayName))}</span>
           </div>
           <div class="actions">
-            <dyte-button
-              onClick={() => downloadFile(this.image.link, { fallbackName: 'image' })}
-              iconPack={this.iconPack}
-              t={this.t}
-            >
-              <dyte-icon
-                icon={this.iconPack.download}
-                slot="start"
-                iconPack={this.iconPack}
-                t={this.t}
-              />
+            <dyte-button onClick={() => downloadFile(this.image.link, { fallbackName: 'image' })}>
+              <dyte-icon icon={this.iconPack.download} slot="start" />
               Download
             </dyte-button>
-            <dyte-button
-              kind="icon"
-              variant="secondary"
-              onClick={() => this.close.emit()}
-              iconPack={this.iconPack}
-              t={this.t}
-            >
-              <dyte-icon icon={this.iconPack.dismiss} iconPack={this.iconPack} t={this.t} />
+            <dyte-button kind="icon" variant="secondary" onClick={() => this.close.emit()}>
+              <dyte-icon icon={this.iconPack.dismiss} />
             </dyte-button>
           </div>
         </div>

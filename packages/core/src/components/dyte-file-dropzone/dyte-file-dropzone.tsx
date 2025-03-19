@@ -49,7 +49,7 @@ export class DyteFileDropzone {
     return (
       <Host>
         <div id="dropzone" class={{ active: this.dropzoneActivated }} part="dropzone">
-          <dyte-icon icon={this.iconPack.attach} iconPack={this.iconPack} t={this.t} />
+          <dyte-icon icon={this.iconPack.attach} />
           <p>{this.t('chat.send_attachment')}</p>
         </div>
       </Host>

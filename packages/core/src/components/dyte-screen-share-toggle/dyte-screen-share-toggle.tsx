@@ -321,14 +321,11 @@ export class DyteScreenShareToggle {
           label={this.screenShareState.tooltipLabel}
           delay={600}
           part="tooltip"
-          iconPack={this.iconPack}
-          t={this.t}
         >
           <dyte-controlbar-button
             part="controlbar-button"
             size={this.size}
             iconPack={this.iconPack}
-            t={this.t}
             variant={this.variant}
             label={this.screenShareState.label}
             icon={this.screenShareState.icon}

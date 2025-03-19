@@ -1,6 +1,5 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import { useLanguage, DyteI18n } from '../../lib/lang';
 import { SyncWithStore } from '../../utils/sync-with-store';
 import { Size } from '../../types/props';
 
@@ -44,11 +43,6 @@ export class DyteControlbarButton {
   @Prop()
   iconPack: IconPack = defaultIconPack;
 
-  /** Language */
-  @SyncWithStore()
-  @Prop()
-  t: DyteI18n = useLanguage();
-
   /** Whether icon requires brand color */
   @Prop({ reflect: true }) brandIcon = false;
 
@@ -57,17 +51,9 @@ export class DyteControlbarButton {
       <Host>
         <button aria-label={this.label} part="button">
           {this.isLoading ? (
-            <dyte-spinner id="icon" part="spinner" iconPack={this.iconPack} t={this.t} />
+            <dyte-spinner id="icon" part="spinner" iconPack={this.iconPack} />
           ) : (
-            <dyte-icon
-              id="icon"
-              icon={this.icon}
-              tabIndex={-1}
-              aria-hidden={true}
-              part="icon"
-              iconPack={this.iconPack}
-              t={this.t}
-            />
+            <dyte-icon id="icon" icon={this.icon} tabIndex={-1} aria-hidden={true} part="icon" />
           )}
           <span class="label" part="label">
             {this.label}
@@ -77,8 +63,6 @@ export class DyteControlbarButton {
               id="warning-indicator"
               icon={this.iconPack.warning}
               part="warning-indicator"
-              iconPack={this.iconPack}
-              t={this.t}
             />
           )}
         </button>

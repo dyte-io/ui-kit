@@ -151,12 +151,7 @@ export class DyteSpeakerSelector {
             <div class="container">
               <label>
                 {this.variant !== 'inline' && this.t('settings.speaker_output')}
-                <dyte-icon
-                  icon={this.iconPack.speaker}
-                  iconPack={this.iconPack}
-                  t={this.t}
-                  size="sm"
-                />
+                <dyte-icon icon={this.iconPack.speaker} size="sm" />
               </label>
               <div class="row">
                 <select
@@ -176,18 +171,8 @@ export class DyteSpeakerSelector {
             </div>
           )}
           {this.variant === 'full' && (
-            <dyte-button
-              variant="secondary"
-              onClick={() => this.testAudio()}
-              iconPack={this.iconPack}
-              t={this.t}
-            >
-              <dyte-icon
-                icon={this.iconPack.speaker}
-                slot="start"
-                iconPack={this.iconPack}
-                t={this.t}
-              />
+            <dyte-button variant="secondary" onClick={() => this.testAudio()}>
+              <dyte-icon icon={this.iconPack.speaker} slot="start" />
               {this.t('test')}
             </dyte-button>
           )}

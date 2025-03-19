@@ -58,14 +58,8 @@ export class DyteCounter {
   render() {
     return (
       <Host>
-        <dyte-button
-          kind="icon"
-          variant="ghost"
-          onClick={() => this.decrement()}
-          iconPack={this.iconPack}
-          t={this.t}
-        >
-          <dyte-icon icon={this.iconPack.subtract} iconPack={this.iconPack} t={this.t} />
+        <dyte-button kind="icon" variant="ghost" onClick={() => this.decrement()}>
+          <dyte-icon icon={this.iconPack.subtract} />
         </dyte-button>
         <input
           type="number"
@@ -80,14 +74,8 @@ export class DyteCounter {
             }
           }}
         />
-        <dyte-button
-          kind="icon"
-          variant="ghost"
-          onClick={() => this.increment()}
-          iconPack={this.iconPack}
-          t={this.t}
-        >
-          <dyte-icon icon={this.iconPack.add} iconPack={this.iconPack} t={this.t} />
+        <dyte-button kind="icon" variant="ghost" onClick={() => this.increment()}>
+          <dyte-icon icon={this.iconPack.add} />
         </dyte-button>
       </Host>
     );

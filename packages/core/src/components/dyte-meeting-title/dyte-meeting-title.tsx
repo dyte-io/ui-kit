@@ -35,7 +35,7 @@ export class DyteMeetingTitle {
 
     return (
       <Host tabIndex={0} role="banner" aria-label={title}>
-        <dyte-tooltip label={title} part="tooltip" iconPack={this.iconPack} t={this.t}>
+        <dyte-tooltip label={title} part="tooltip">
           <div class="title" part="title">
             {title}
           </div>

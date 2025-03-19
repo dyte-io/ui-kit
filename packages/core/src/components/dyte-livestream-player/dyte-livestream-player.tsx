@@ -263,7 +263,7 @@ export class DyteLivestreamPlayer {
               }
             );
             if (this.playbackUrl && this.livestreamState === 'LIVESTREAMING') {
-              /* 
+              /*
                 NOTE(ravindra-dyte): Maybe manifest is not ready,
                 maybe levels are not available yet.
                 Keep on retrying every 5 seconds till either livestream is stopped or error is resolved.
@@ -495,8 +495,6 @@ export class DyteLivestreamPlayer {
                   }
                 }}
                 title={this.t('audio_playback')}
-                iconPack={this.iconPack}
-                t={this.t}
               >
                 {this.t('audio_playback')}
               </dyte-button>
@@ -504,20 +502,14 @@ export class DyteLivestreamPlayer {
           )}
           {isError && (
             <div class="loader">
-              <dyte-icon icon={this.iconPack.warning} t={this.t} />
+              <dyte-icon icon={this.iconPack.warning} />
               <p>{errorMessage}</p>
             </div>
           )}
           {!isError && isLoading && (
             <div class="loader">
               {showIcon && (
-                <dyte-spinner
-                  id="icon"
-                  part="spinner"
-                  iconPack={this.iconPack}
-                  t={this.t}
-                  size="md"
-                />
+                <dyte-spinner id="icon" part="spinner" iconPack={this.iconPack} size="md" />
               )}
               <p>{loadingMessage}</p>
             </div>

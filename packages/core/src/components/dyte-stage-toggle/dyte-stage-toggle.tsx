@@ -144,14 +144,11 @@ export class DyteStageToggle {
           label={this.state.label}
           delay={600}
           part="tooltip"
-          iconPack={this.iconPack}
-          t={this.t}
         >
           <dyte-controlbar-button
             part="controlbar-button"
             size={this.size}
             iconPack={this.iconPack}
-            t={this.t}
             variant={this.variant}
             label={this.state.label}
             icon={this.state.icon}

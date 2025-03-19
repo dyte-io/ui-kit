@@ -392,14 +392,14 @@ export declare interface DyteBroadcastMessageModal extends Components.DyteBroadc
 
 
 @ProxyCmp({
-  inputs: ['disabled', 'iconPack', 'kind', 'reverse', 'size', 't', 'type', 'variant']
+  inputs: ['disabled', 'kind', 'reverse', 'size', 'type', 'variant']
 })
 @Component({
   selector: 'dyte-button',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['disabled', 'iconPack', 'kind', 'reverse', 'size', 't', 'type', 'variant'],
+  inputs: ['disabled', 'kind', 'reverse', 'size', 'type', 'variant'],
 })
 export class DyteButton {
   protected el: HTMLDyteButtonElement;
@@ -959,14 +959,14 @@ export declare interface DyteChatToggle extends Components.DyteChatToggle {
 
 
 @ProxyCmp({
-  inputs: ['iconPack', 'meeting', 't']
+  inputs: ['iconPack', 'meeting']
 })
 @Component({
   selector: 'dyte-clock',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['iconPack', 'meeting', 't'],
+  inputs: ['iconPack', 'meeting'],
 })
 export class DyteClock {
   protected el: HTMLDyteClockElement;
@@ -1033,14 +1033,14 @@ export declare interface DyteControlbar extends Components.DyteControlbar {}
 
 
 @ProxyCmp({
-  inputs: ['brandIcon', 'disabled', 'icon', 'iconPack', 'isLoading', 'label', 'showWarning', 'size', 't', 'variant']
+  inputs: ['brandIcon', 'disabled', 'icon', 'iconPack', 'isLoading', 'label', 'showWarning', 'size', 'variant']
 })
 @Component({
   selector: 'dyte-controlbar-button',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['brandIcon', 'disabled', 'icon', 'iconPack', 'isLoading', 'label', 'showWarning', 'size', 't', 'variant'],
+  inputs: ['brandIcon', 'disabled', 'icon', 'iconPack', 'isLoading', 'label', 'showWarning', 'size', 'variant'],
 })
 export class DyteControlbarButton {
   protected el: HTMLDyteControlbarButtonElement;
@@ -1443,14 +1443,14 @@ export declare interface DyteFileMessage extends Components.DyteFileMessage {}
 
 
 @ProxyCmp({
-  inputs: ['iconPack', 'name', 'size', 't', 'url']
+  inputs: ['iconPack', 'name', 'size', 'url']
 })
 @Component({
   selector: 'dyte-file-message-view',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['iconPack', 'name', 'size', 't', 'url'],
+  inputs: ['iconPack', 'name', 'size', 'url'],
 })
 export class DyteFileMessageView {
   protected el: HTMLDyteFileMessageViewElement;
@@ -1597,14 +1597,14 @@ export declare interface DyteHeader extends Components.DyteHeader {}
 
 
 @ProxyCmp({
-  inputs: ['icon', 'iconPack', 'size', 't', 'variant']
+  inputs: ['icon', 'size', 'variant']
 })
 @Component({
   selector: 'dyte-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['icon', 'iconPack', 'size', 't', 'variant'],
+  inputs: ['icon', 'size', 'variant'],
 })
 export class DyteIcon {
   protected el: HTMLDyteIconElement;
@@ -3363,14 +3363,14 @@ export declare interface DyteSpeakerSelector extends Components.DyteSpeakerSelec
 
 
 @ProxyCmp({
-  inputs: ['iconPack', 'size', 't']
+  inputs: ['iconPack', 'size']
 })
 @Component({
   selector: 'dyte-spinner',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['iconPack', 'size', 't'],
+  inputs: ['iconPack', 'size'],
 })
 export class DyteSpinner {
   protected el: HTMLDyteSpinnerElement;
@@ -3650,14 +3650,14 @@ export declare interface DyteTextMessageView extends Components.DyteTextMessageV
 
 
 @ProxyCmp({
-  inputs: ['delay', 'disabled', 'iconPack', 'kind', 'label', 'open', 'placement', 'size', 't', 'variant']
+  inputs: ['delay', 'disabled', 'kind', 'label', 'open', 'placement', 'size', 'variant']
 })
 @Component({
   selector: 'dyte-tooltip',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['delay', 'disabled', 'iconPack', 'kind', 'label', 'open', 'placement', 'size', 't', 'variant'],
+  inputs: ['delay', 'disabled', 'kind', 'label', 'open', 'placement', 'size', 'variant'],
 })
 export class DyteTooltip {
   protected el: HTMLDyteTooltipElement;

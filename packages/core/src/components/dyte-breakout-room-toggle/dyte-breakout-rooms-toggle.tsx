@@ -90,7 +90,6 @@ export class DyteBreakoutRoomsToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={this.breakoutRoomToggle}
           icon={this.iconPack.breakout_rooms}
           label={this.t('breakout_rooms')}

@@ -101,8 +101,6 @@ export class DyteTextComposerView {
               id="warning-indicator"
               icon={this.iconPack.warning}
               part="warning-indicator"
-              iconPack={this.iconPack}
-              t={this.t}
             />{' '}
             {this.maxLengthBreached} / {this.maxLength} {this.t('chat.max_limit_warning')}
           </div>
@@ -113,8 +111,6 @@ export class DyteTextComposerView {
               id="warning-indicator"
               icon={this.iconPack.warning}
               part="warning-indicator"
-              iconPack={this.iconPack}
-              t={this.t}
             />{' '}
             {this.t('chat.rate_limit_error')}
           </div>

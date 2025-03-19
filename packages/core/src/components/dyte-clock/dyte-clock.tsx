@@ -1,6 +1,5 @@
 import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import { DyteI18n, useLanguage } from '../../lib/lang';
 import { SyncWithStore } from '../../utils/sync-with-store';
 import { Meeting } from '../../types/dyte-client';
 
@@ -27,11 +26,6 @@ export class DyteClock {
   @SyncWithStore()
   @Prop()
   iconPack: IconPack = defaultIconPack;
-
-  /** Language */
-  @SyncWithStore()
-  @Prop()
-  t: DyteI18n = useLanguage();
 
   @State() startedTime: string;
   @State() timeDiff: number;
@@ -95,14 +89,7 @@ export class DyteClock {
     return (
       <Host tabIndex={0} role="timer" aria-live="off">
         {this.startedTime !== undefined && [
-          <dyte-icon
-            icon={this.iconPack.clock}
-            aria-hidden={true}
-            tabIndex={-1}
-            part="icon"
-            iconPack={this.iconPack}
-            t={this.t}
-          />,
+          <dyte-icon icon={this.iconPack.clock} aria-hidden={true} tabIndex={-1} part="icon" />,
           <span part="text">{this.getFormattedTime()}</span>,
         ]}
       </Host>

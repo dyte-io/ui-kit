@@ -142,10 +142,8 @@ export class DyteSettings {
           >
             {this.t('audio')}
             <div class="right">
-              <dyte-icon icon={this.iconPack.mic_on} iconPack={this.iconPack} t={this.t} />
-              {this.size === 'sm' && (
-                <dyte-icon icon={this.iconPack.chevron_right} iconPack={this.iconPack} t={this.t} />
-              )}
+              <dyte-icon icon={this.iconPack.mic_on} />
+              {this.size === 'sm' && <dyte-icon icon={this.iconPack.chevron_right} />}
             </div>
           </button>
 
@@ -157,26 +155,15 @@ export class DyteSettings {
             >
               {this.t('video')}
               <div class="right">
-                <dyte-icon icon={this.iconPack.video_on} iconPack={this.iconPack} t={this.t} />
-                {this.size === 'sm' && (
-                  <dyte-icon
-                    icon={this.iconPack.chevron_right}
-                    iconPack={this.iconPack}
-                    t={this.t}
-                  />
-                )}
+                <dyte-icon icon={this.iconPack.video_on} />
+                {this.size === 'sm' && <dyte-icon icon={this.iconPack.chevron_right} />}
               </div>
             </button>
           )}
           <button type="none" title={`Your network condition is ${this.networkStatus}`}>
             {this.t('connection')}
             <div class="right">
-              <dyte-icon
-                icon={this.iconPack.wifi}
-                class={this.networkStatus}
-                iconPack={this.iconPack}
-                t={this.t}
-              />
+              <dyte-icon icon={this.iconPack.wifi} class={this.networkStatus} />
             </div>
           </button>
         </aside>
@@ -187,10 +174,8 @@ export class DyteSettings {
                 kind="icon"
                 class="back-btn"
                 onClick={() => (this.isMobileMainVisible = false)}
-                iconPack={this.iconPack}
-                t={this.t}
               >
-                <dyte-icon icon={this.iconPack.chevron_left} iconPack={this.iconPack} t={this.t} />
+                <dyte-icon icon={this.iconPack.chevron_left} />
               </dyte-button>
               <h2>{this.t(this.activeTab === 'audio' ? 'audio' : 'video')}</h2>
             </header>

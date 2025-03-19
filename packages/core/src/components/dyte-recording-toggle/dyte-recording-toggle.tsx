@@ -182,7 +182,6 @@ export class DyteRecordingToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={this.toggleRecording}
           icon={this.getIcon()}
           isLoading={this.isLoading()}

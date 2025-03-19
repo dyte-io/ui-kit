@@ -189,8 +189,6 @@ export class DyteParticipantsAudio {
                   this.onDyteDialogClose();
                 }}
                 title={this.t('audio_playback')}
-                iconPack={this.iconPack}
-                t={this.t}
               >
                 {this.t('audio_playback')}
               </dyte-button>

@@ -225,8 +225,6 @@ export class DyteParticipantTile {
             class="pinned-icon"
             icon={this.iconPack.pin}
             aria-label={this.t('pinned')}
-            iconPack={this.iconPack}
-            t={this.t}
             part="pinned-icon"
           />
         )}
@@ -236,8 +234,6 @@ export class DyteParticipantTile {
               class="network-icon"
               icon={this.iconPack.disconnected}
               aria-label={this.t('pinned')}
-              iconPack={this.iconPack}
-              t={this.t}
               part="pinned-icon"
             />
           </div>

@@ -71,12 +71,7 @@ export class DyteSpotlightIndicator {
     if (!this.canSpotlight) return;
     return (
       <Host>
-        <dyte-tooltip
-          size={'md'}
-          iconPack={this.iconPack}
-          t={this.t}
-          label={this.t('remote_access.indicator')}
-        >
+        <dyte-tooltip size={'md'} label={this.t('remote_access.indicator')}>
           <div
             id="sync-button"
             class={{
@@ -88,8 +83,6 @@ export class DyteSpotlightIndicator {
             <span class="name">Sync</span>
             <dyte-icon
               id="icon"
-              iconPack={this.iconPack}
-              t={this.t}
               icon={this.isSpotlighted ? this.iconPack.checkmark : this.iconPack.warning}
               tabIndex={-1}
               aria-hidden={true}

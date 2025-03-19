@@ -270,12 +270,7 @@ export class DyteChatMessagesUiPaginated {
               </div>
               {message.pinned && (
                 <div class="pin-icon" part="pin-icon">
-                  <dyte-icon
-                    icon={this.iconPack.pin}
-                    iconPack={this.iconPack}
-                    t={this.t}
-                    size="sm"
-                  />
+                  <dyte-icon icon={this.iconPack.pin} size="sm" />
                 </div>
               )}
             </div>

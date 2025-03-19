@@ -82,7 +82,6 @@ export class DytePipToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={() => this.togglePip()}
           icon={pipEnabled ? this.iconPack.pip_on : this.iconPack.pip_off}
           label={pipEnabled ? this.t('pip_off') : this.t('pip_on')}

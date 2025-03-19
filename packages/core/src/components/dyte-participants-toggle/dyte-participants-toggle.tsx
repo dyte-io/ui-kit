@@ -186,7 +186,6 @@ export class DyteParticipantsToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           class={{ active: this.participantsActive }}
           onClick={() => this.toggleParticipantsTab()}
           icon={this.iconPack.participants}

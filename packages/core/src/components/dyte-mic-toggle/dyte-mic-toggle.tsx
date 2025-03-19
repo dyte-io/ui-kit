@@ -200,20 +200,13 @@ export class DyteMicToggle {
 
     return (
       <Host title={label}>
-        <dyte-tooltip
-          kind="block"
-          label={tooltipLabel}
-          part="tooltip"
-          iconPack={this.iconPack}
-          t={this.t}
-        >
+        <dyte-tooltip kind="block" label={tooltipLabel} part="tooltip">
           <dyte-controlbar-button
             part="controlbar-button"
             icon={icon}
             label={label}
             size={this.size}
             iconPack={this.iconPack}
-            t={this.t}
             variant={this.variant}
             class={classList}
             onClick={this.toggleMic}

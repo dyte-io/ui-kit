@@ -115,8 +115,6 @@ export class DyteSettingsVideo {
                       icon={this.iconPack.video_off}
                       tabIndex={-1}
                       aria-hidden={true}
-                      iconPack={this.iconPack}
-                      t={this.t}
                     />
                     <div>{this.t('settings.camera_off')}</div>
                   </div>

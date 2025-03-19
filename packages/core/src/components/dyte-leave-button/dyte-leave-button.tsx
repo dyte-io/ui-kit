@@ -47,7 +47,6 @@ export class DyteLeaveButton {
         <dyte-controlbar-button
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           class="leave red-icon"
           onClick={this.leave}
           icon={this.iconPack.call_end}
