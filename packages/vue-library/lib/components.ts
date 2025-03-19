@@ -9,7 +9,6 @@ import type { JSX } from '@dytesdk/ui-kit';
 
 
 export const DyteAi = /*@__PURE__*/ defineContainer<JSX.DyteAi>('dyte-ai', undefined, [
-  'defaultSection',
   'meeting',
   'states',
   'config',

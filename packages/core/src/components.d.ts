@@ -5,12 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AISection, AIView } from "./components/dyte-ai/dyte-ai";
 import { Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
 import { Chat, ChatChannel, Notification, PartialStateEvent, Poll, PollObject, Size, States, Transcript } from "./types/props";
 import { UIConfig } from "./types/ui-config";
 import { IconPack } from "./lib/icons";
 import { DyteI18n } from "./lib/lang";
+import { AIView } from "./components/dyte-ai/dyte-ai";
 import { AIMessage } from "./types/dyte-ai";
 import { ControlBarVariant } from "./components/dyte-controlbar-button/dyte-controlbar-button";
 import { DyteI18n as DyteI18n1, IconPack as IconPack1, Size as Size1, States as States1, UIConfig as UIConfig1 } from "./exports";
@@ -45,12 +45,12 @@ import { Tab } from "./components/dyte-tab-bar/dyte-tab-bar";
 import { TooltipKind, TooltipVariant } from "./components/dyte-tooltip/dyte-tooltip";
 import { ViewerCountVariant } from "./components/dyte-viewer-count/dyte-viewer-count";
 import { Peer as Peer1 } from ".";
-export { AISection, AIView } from "./components/dyte-ai/dyte-ai";
 export { Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
 export { Chat, ChatChannel, Notification, PartialStateEvent, Poll, PollObject, Size, States, Transcript } from "./types/props";
 export { UIConfig } from "./types/ui-config";
 export { IconPack } from "./lib/icons";
 export { DyteI18n } from "./lib/lang";
+export { AIView } from "./components/dyte-ai/dyte-ai";
 export { AIMessage } from "./types/dyte-ai";
 export { ControlBarVariant } from "./components/dyte-controlbar-button/dyte-controlbar-button";
 export { DyteI18n as DyteI18n1, IconPack as IconPack1, Size as Size1, States as States1, UIConfig as UIConfig1 } from "./exports";
@@ -91,10 +91,6 @@ export namespace Components {
           * Config
          */
         "config": UIConfig;
-        /**
-          * Default section
-         */
-        "defaultSection": AISection;
         /**
           * Icon pack
          */
@@ -6637,10 +6633,6 @@ declare namespace LocalJSX {
           * Config
          */
         "config"?: UIConfig;
-        /**
-          * Default section
-         */
-        "defaultSection"?: AISection;
         /**
           * Icon pack
          */

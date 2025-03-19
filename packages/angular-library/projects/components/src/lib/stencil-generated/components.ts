@@ -8,14 +8,14 @@ import { Components } from '@dytesdk/ui-kit';
 
 
 @ProxyCmp({
-  inputs: ['config', 'defaultSection', 'iconPack', 'meeting', 'size', 'states', 't', 'view']
+  inputs: ['config', 'iconPack', 'meeting', 'size', 'states', 't', 'view']
 })
 @Component({
   selector: 'dyte-ai',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['config', 'defaultSection', 'iconPack', 'meeting', 'size', 'states', 't', 'view'],
+  inputs: ['config', 'iconPack', 'meeting', 'size', 'states', 't', 'view'],
 })
 export class DyteAi {
   protected el: HTMLDyteAiElement;

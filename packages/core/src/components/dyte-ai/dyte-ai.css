@@ -14,28 +14,7 @@
   @apply text-text-lg mx-0 mt-4 mb-2 select-none p-0 text-center font-normal;
 }
 
-#mobile-header {
-  @apply mt-2 flex items-center justify-evenly;
-  border-bottom: theme('borderWidth.sm') solid theme('colors.background.600');
-}
-
-#mobile-header dyte-button {
-  border-bottom: theme('borderWidth.md') solid transparent;
-  @apply relative rounded-none hover:bg-transparent;
-}
-
-#mobile-header dyte-button.active {
-  border-color: theme('colors.brand.400');
-}
-
-#mobile-header dyte-button .dot {
-  font-size: 48px;
-  @apply text-brand-500 absolute -top-[26px] -right-1;
-}
-
-dyte-ai-home,
-dyte-ai-transcriptions,
-dyte-ai-chat {
+dyte-ai-transcriptions {
   flex: 1;
 }
 
