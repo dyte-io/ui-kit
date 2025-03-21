@@ -3,8 +3,6 @@ import * as d from './components';
 
 export const DIRECTIVES = [
   d.DyteAi,
-  d.DyteAiChat,
-  d.DyteAiHome,
   d.DyteAiToggle,
   d.DyteAiTranscriptions,
   d.DyteAudioGrid,

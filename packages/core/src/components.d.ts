@@ -11,7 +11,6 @@ import { UIConfig } from "./types/ui-config";
 import { IconPack } from "./lib/icons";
 import { DyteI18n } from "./lib/lang";
 import { AIView } from "./components/dyte-ai/dyte-ai";
-import { AIMessage } from "./types/dyte-ai";
 import { ControlBarVariant } from "./components/dyte-controlbar-button/dyte-controlbar-button";
 import { DyteI18n as DyteI18n1, IconPack as IconPack1, Size as Size1, States as States1, UIConfig as UIConfig1 } from "./exports";
 import { AudioVisualizerVariant } from "./components/dyte-audio-visualizer/dyte-audio-visualizer";
@@ -51,7 +50,6 @@ export { UIConfig } from "./types/ui-config";
 export { IconPack } from "./lib/icons";
 export { DyteI18n } from "./lib/lang";
 export { AIView } from "./components/dyte-ai/dyte-ai";
-export { AIMessage } from "./types/dyte-ai";
 export { ControlBarVariant } from "./components/dyte-controlbar-button/dyte-controlbar-button";
 export { DyteI18n as DyteI18n1, IconPack as IconPack1, Size as Size1, States as States1, UIConfig as UIConfig1 } from "./exports";
 export { AudioVisualizerVariant } from "./components/dyte-audio-visualizer/dyte-audio-visualizer";
@@ -115,22 +113,6 @@ export namespace Components {
           * View type
          */
         "view": AIView;
-    }
-    interface DyteAiChat {
-        /**
-          * Language
-         */
-        "t": DyteI18n;
-    }
-    interface DyteAiHome {
-        /**
-          * Initial messages
-         */
-        "initialMessages": AIMessage[];
-        /**
-          * Meeting object
-         */
-        "meeting": Meeting;
     }
     interface DyteAiToggle {
         /**
@@ -4295,18 +4277,6 @@ declare global {
         prototype: HTMLDyteAiElement;
         new (): HTMLDyteAiElement;
     };
-    interface HTMLDyteAiChatElement extends Components.DyteAiChat, HTMLStencilElement {
-    }
-    var HTMLDyteAiChatElement: {
-        prototype: HTMLDyteAiChatElement;
-        new (): HTMLDyteAiChatElement;
-    };
-    interface HTMLDyteAiHomeElement extends Components.DyteAiHome, HTMLStencilElement {
-    }
-    var HTMLDyteAiHomeElement: {
-        prototype: HTMLDyteAiHomeElement;
-        new (): HTMLDyteAiHomeElement;
-    };
     interface HTMLDyteAiToggleElementEventMap {
         "dyteStateUpdate": States;
     }
@@ -6445,8 +6415,6 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "dyte-ai": HTMLDyteAiElement;
-        "dyte-ai-chat": HTMLDyteAiChatElement;
-        "dyte-ai-home": HTMLDyteAiHomeElement;
         "dyte-ai-toggle": HTMLDyteAiToggleElement;
         "dyte-ai-transcriptions": HTMLDyteAiTranscriptionsElement;
         "dyte-audio-grid": HTMLDyteAudioGridElement;
@@ -6621,22 +6589,6 @@ declare namespace LocalJSX {
           * View type
          */
         "view"?: AIView;
-    }
-    interface DyteAiChat {
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
-    }
-    interface DyteAiHome {
-        /**
-          * Initial messages
-         */
-        "initialMessages"?: AIMessage[];
-        /**
-          * Meeting object
-         */
-        "meeting"?: Meeting;
     }
     interface DyteAiToggle {
         /**
@@ -10924,8 +10876,6 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "dyte-ai": DyteAi;
-        "dyte-ai-chat": DyteAiChat;
-        "dyte-ai-home": DyteAiHome;
         "dyte-ai-toggle": DyteAiToggle;
         "dyte-ai-transcriptions": DyteAiTranscriptions;
         "dyte-audio-grid": DyteAudioGrid;
@@ -11071,8 +11021,6 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "dyte-ai": LocalJSX.DyteAi & JSXBase.HTMLAttributes<HTMLDyteAiElement>;
-            "dyte-ai-chat": LocalJSX.DyteAiChat & JSXBase.HTMLAttributes<HTMLDyteAiChatElement>;
-            "dyte-ai-home": LocalJSX.DyteAiHome & JSXBase.HTMLAttributes<HTMLDyteAiHomeElement>;
             "dyte-ai-toggle": LocalJSX.DyteAiToggle & JSXBase.HTMLAttributes<HTMLDyteAiToggleElement>;
             "dyte-ai-transcriptions": LocalJSX.DyteAiTranscriptions & JSXBase.HTMLAttributes<HTMLDyteAiTranscriptionsElement>;
             "dyte-audio-grid": LocalJSX.DyteAudioGrid & JSXBase.HTMLAttributes<HTMLDyteAudioGridElement>;

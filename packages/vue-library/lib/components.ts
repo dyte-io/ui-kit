@@ -22,17 +22,6 @@ export const DyteAi = /*@__PURE__*/ defineContainer<JSX.DyteAi>('dyte-ai', undef
 ]);
 
 
-export const DyteAiChat = /*@__PURE__*/ defineContainer<JSX.DyteAiChat>('dyte-ai-chat', undefined, [
-  't'
-]);
-
-
-export const DyteAiHome = /*@__PURE__*/ defineContainer<JSX.DyteAiHome>('dyte-ai-home', undefined, [
-  'meeting',
-  'initialMessages'
-]);
-
-
 export const DyteAiToggle = /*@__PURE__*/ defineContainer<JSX.DyteAiToggle>('dyte-ai-toggle', undefined, [
   'variant',
   'states',

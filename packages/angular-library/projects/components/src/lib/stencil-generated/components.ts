@@ -38,50 +38,6 @@ export declare interface DyteAi extends Components.DyteAi {
 
 
 @ProxyCmp({
-  inputs: ['t']
-})
-@Component({
-  selector: 'dyte-ai-chat',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['t'],
-})
-export class DyteAiChat {
-  protected el: HTMLDyteAiChatElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface DyteAiChat extends Components.DyteAiChat {}
-
-
-@ProxyCmp({
-  inputs: ['initialMessages', 'meeting']
-})
-@Component({
-  selector: 'dyte-ai-home',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['initialMessages', 'meeting'],
-})
-export class DyteAiHome {
-  protected el: HTMLDyteAiHomeElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface DyteAiHome extends Components.DyteAiHome {}
-
-
-@ProxyCmp({
   inputs: ['iconPack', 'meeting', 'size', 'states', 't', 'variant']
 })
 @Component({
