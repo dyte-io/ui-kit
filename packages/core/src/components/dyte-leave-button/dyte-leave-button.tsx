@@ -4,7 +4,6 @@ import { States, Size } from '../../types/props';
 import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 /**
  * A button which toggles visilibility of the leave confirmation dialog.
@@ -36,7 +35,6 @@ export class DyteLeaveButton {
 
   private leave = () => {
     this.stateUpdate.emit({ activeLeaveConfirmation: true });
-    storeState.activeLeaveConfirmation = true;
   };
 
   render() {

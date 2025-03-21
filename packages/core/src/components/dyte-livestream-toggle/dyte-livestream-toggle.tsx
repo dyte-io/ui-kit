@@ -7,7 +7,6 @@ import { Meeting } from '../../types/dyte-client';
 import { isLiveStreamHost } from '../../utils/livestream';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 @Component({
   tag: 'dyte-livestream-toggle',
@@ -91,7 +90,6 @@ export class DyteLivestreamToggle {
     this.livestreamState = state;
     if (state === 'LIVESTREAMING' || state === 'IDLE') {
       this.stateUpdate.emit({ activeMoreMenu: false });
-      storeState.activeMoreMenu = false;
     }
   };
 

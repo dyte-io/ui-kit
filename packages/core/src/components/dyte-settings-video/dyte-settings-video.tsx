@@ -5,7 +5,6 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { getPreference, setPreference } from '../../utils/user-prefs';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 /**
  * A component which lets to manage your camera devices and your video preferences.
@@ -78,13 +77,13 @@ export class DyteSettingsVideo {
 
     const defaults = {
       meeting: this.meeting,
-      states: this.states || storeState,
+      states: this.states,
       size: this.size,
       iconPack: this.iconPack,
       t: this.t,
     };
 
-    const states = this.states || storeState;
+    const states = this.states;
     const initialMirrorPreference =
       states?.prefs?.mirrorVideo === true || getPreference('mirror-video') === 'true';
 
@@ -134,7 +133,6 @@ export class DyteSettingsVideo {
               onDyteChange={(e) => {
                 const { checked } = e.target as HTMLDyteSwitchElement;
                 this.stateUpdate.emit({ prefs: { mirrorVideo: checked } });
-                storeState.prefs = { ...(storeState.prefs ?? {}), mirrorVideo: checked };
                 setPreference('mirror-video', checked);
               }}
             />

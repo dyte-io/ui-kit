@@ -1,15 +1,4 @@
-import {
-  Component,
-  Host,
-  h,
-  Prop,
-  Watch,
-  State,
-  Event,
-  EventEmitter,
-  forceUpdate,
-} from '@stencil/core';
-import storeState, { onChange } from '../../lib/store';
+import { Component, Host, h, Prop, Watch, State, Event, EventEmitter } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting, Peer } from '../../types/dyte-client';
@@ -32,8 +21,6 @@ import { DyteParticipant } from '@dytesdk/web-core';
 })
 export class DyteParticipantTile {
   private videoEl: HTMLVideoElement;
-
-  private removeStateChangeListener: () => void;
 
   private playTimeout: any;
 
@@ -102,12 +89,6 @@ export class DyteParticipantTile {
     // set videoState before initial render and initialize listeners
     if (this.meeting) this.meetingChanged(this.meeting);
     else this.participantsChanged(this.participant);
-    if (this.states === undefined) {
-      // This re-renders on any pref change
-      // There are currently only two prefs, so it is fine
-      // Could not find a way to subscribe to a nested property
-      this.removeStateChangeListener = onChange('prefs', () => forceUpdate(this));
-    }
   }
 
   disconnectedCallback() {
@@ -119,7 +100,6 @@ export class DyteParticipantTile {
     (this.participant as DyteParticipant).removeListener('unpinned', this.onPinned);
     this.meeting.meta.off('mediaConnectionUpdate', this.mediaConnectionUpdateListener);
     this.tileUnload.emit(this.participant);
-    this.removeStateChangeListener && this.removeStateChangeListener();
   }
 
   @Watch('meeting')
@@ -167,7 +147,7 @@ export class DyteParticipantTile {
   private isMirrored() {
     if (this.participant != null) {
       if (this.isSelf()) {
-        const states = this.states || storeState;
+        const states = this.states;
         const mirrorVideo = states?.prefs?.mirrorVideo;
         if (typeof mirrorVideo === 'boolean') {
           return mirrorVideo;
@@ -177,7 +157,7 @@ export class DyteParticipantTile {
     return false;
   }
 
-  private onPause = (event) => {
+  private onPause = (event: Event) => {
     if (
       this.isSelf() &&
       this.meeting?.__internals__.features.hasFeature(
@@ -199,7 +179,7 @@ export class DyteParticipantTile {
     const defaults: DefaultProps = {
       meeting: this.meeting,
       size: this.size,
-      states: this.states || storeState,
+      states: this.states,
       config: this.config,
       iconPack: this.iconPack,
       t: this.t,

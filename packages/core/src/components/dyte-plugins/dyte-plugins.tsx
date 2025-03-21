@@ -5,7 +5,6 @@ import { UIConfig } from '../../types/ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DytePlugin } from '@dytesdk/web-core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState from '../../lib/store';
 import { SyncWithStore } from '../../utils/sync-with-store';
 import { defaultConfig } from '../../exports';
 
@@ -79,8 +78,6 @@ export class DytePlugins {
 
   private close = () => {
     this.stateUpdate.emit({ activeSidebar: false, sidebar: undefined });
-    storeState.activeSidebar = false;
-    storeState.sidebar = undefined;
   };
 
   render() {

@@ -7,12 +7,11 @@ import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import debounce from 'lodash/debounce';
 import { DefaultProps, Render } from '../../lib/render';
-import storeState from '../../lib/store';
-import state from '../../lib/store';
 import { DytePlugin, leaveRoomState } from '@dytesdk/web-core';
 import { isLiveStreamViewer } from '../../utils/livestream';
 import { SyncWithStore } from '../../utils/sync-with-store';
 import { defaultGridSize } from '../../lib/grid';
+import { uiState } from '../../utils/sync-with-store/ui-store';
 
 export type GridLayout = 'row' | 'column';
 
@@ -78,7 +77,7 @@ export class DyteGrid {
   /** States */
   @SyncWithStore()
   @Prop()
-  states: States = storeState;
+  states: States;
 
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;
@@ -215,28 +214,28 @@ export class DyteGrid {
   @Watch('screenShareParticipants')
   screenShareParticipantsChanged(participants: Peer[]) {
     const activeScreenShare = participants.length > 0;
-    if (!!state.activeScreenShare === activeScreenShare) return;
+    if (!!uiState.states.activeScreenShare === activeScreenShare) return;
 
     this.stateUpdate.emit({ activeScreenShare });
-    state.activeScreenShare = activeScreenShare;
+    uiState.states.activeScreenShare = activeScreenShare;
   }
 
   @Watch('plugins')
   pluginsChanged(plugins: DytePlugin[]) {
     const activePlugin = plugins.length > 0;
-    if (!!state.activePlugin === activePlugin) return;
+    if (!!uiState.states.activePlugin === activePlugin) return;
 
     this.stateUpdate.emit({ activePlugin });
-    state.activePlugin = activePlugin;
+    uiState.states.activePlugin = activePlugin;
   }
 
   @Watch('pinnedParticipants')
   pinnedParticipantsChanged(participants: Peer[]) {
     const activeSpotlight = participants.length > 0;
-    if (!!state.activeSpotlight === activeSpotlight) return;
+    if (!!uiState.states.activeSpotlight === activeSpotlight) return;
 
     this.stateUpdate.emit({ activeSpotlight });
-    state.activeSpotlight = activeSpotlight;
+    uiState.states.activeSpotlight = activeSpotlight;
   }
 
   private invalidRoomStates = ['init', 'waitlisted', 'ended', 'kicked', 'rejected'];
@@ -396,7 +395,7 @@ export class DyteGrid {
     const defaults: DefaultProps = {
       meeting: this.meeting,
       size: this.size,
-      states: this.states || storeState,
+      states: this.states,
       config: this.config,
       iconPack: this.iconPack,
       t: this.t,

@@ -5,7 +5,6 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { getPreference, setPreference } from '../../utils/user-prefs';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 /**
  * A component which lets to manage your audio devices and audio preferences.
@@ -56,13 +55,13 @@ export class DyteSettingsAudio {
 
     const defaults = {
       meeting: this.meeting,
-      states: this.states || storeState,
+      states: this.states,
       size: this.size,
       iconPack: this.iconPack,
       t: this.t,
     };
 
-    const states = this.states || storeState;
+    const states = this.states;
     const initialNotificationSoundsPreference =
       states?.prefs?.muteNotificationSounds === true ||
       getPreference('mute-notification-sounds') === 'true';
@@ -89,7 +88,6 @@ export class DyteSettingsAudio {
                 const { checked } = e.target as HTMLDyteSwitchElement;
                 const muteNotificationSounds = !checked;
                 this.stateUpdate.emit({ prefs: { muteNotificationSounds } });
-                storeState.prefs = { ...(storeState.prefs ?? {}), muteNotificationSounds };
                 setPreference('mute-notification-sounds', muteNotificationSounds);
               }}
               iconPack={this.iconPack}

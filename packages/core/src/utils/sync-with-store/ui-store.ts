@@ -5,6 +5,11 @@ import { defaultIconPack, type IconPack } from '../../lib/icons';
 import { type States } from '../../types/props';
 import { getUserPreferences } from '../user-prefs';
 
+export const getInitialStates = (): States => ({
+  meeting: 'idle',
+  prefs: getUserPreferences(),
+});
+
 export interface DyteUIStore {
   meeting: Meeting | undefined;
   iconPack: IconPack;
@@ -12,16 +17,11 @@ export interface DyteUIStore {
   states: States;
 }
 
-const initialState: States = {
-  meeting: 'idle',
-  prefs: getUserPreferences(),
-};
-
 const uiStore = createStore<DyteUIStore>({
   meeting: undefined,
   t: useLanguage(),
   iconPack: defaultIconPack,
-  states: initialState,
+  states: getInitialStates(),
 });
 
 const elementsMap = new Map<string, any[]>();
@@ -66,5 +66,6 @@ function removeElement(propName: string, element: any) {
   }
 }
 
-export default uiStore;
-export { appendElement, removeElement };
+const uiState = uiStore.state;
+
+export { uiStore, uiState, appendElement, removeElement };

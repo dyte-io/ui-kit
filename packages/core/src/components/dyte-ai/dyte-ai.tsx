@@ -5,7 +5,6 @@ import { UIConfig } from '../../types/ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultConfig } from '../../lib/default-ui-config';
-import storeState from '../../lib/store';
 import { SyncWithStore } from '../../utils/sync-with-store';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 
@@ -73,7 +72,6 @@ export class DyteAi {
 
   private close = () => {
     this.stateUpdate.emit({ activeAI: false });
-    storeState.activeAI = false;
   };
 
   render() {
@@ -87,7 +85,7 @@ export class DyteAi {
     const defaults = {
       meeting: this.meeting,
       config: this.config,
-      states: this.states || storeState,
+      states: this.states,
       size: this.size,
       t: this.t,
       iconPack: this.iconPack,

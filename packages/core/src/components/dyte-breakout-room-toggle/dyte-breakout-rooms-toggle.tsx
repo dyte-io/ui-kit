@@ -4,7 +4,6 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { PartialStateEvent, Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
 import { SyncWithStore } from '../../utils/sync-with-store';
 import { canToggleBreakout } from '../../utils/breakout-rooms';
 
@@ -76,10 +75,6 @@ export class DyteBreakoutRoomsToggle {
         mode,
       },
     });
-    storeState.activeBreakoutRoomsManager = {
-      active: !storeState.activeBreakoutRoomsManager?.active,
-      mode,
-    };
   };
 
   render() {
