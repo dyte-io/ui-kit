@@ -4,7 +4,6 @@ import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 /**
  * A confirmation modal.
@@ -42,14 +41,9 @@ export class DyteOverlayModal {
     if (this.states.activeOverlayModal.timeout) {
       setTimeout(() => {
         this.stateUpdate.emit({ activeOverlayModal: { active: false } });
-        storeState.activeOverlayModal = { active: false };
       }, this.states.activeOverlayModal.timeout);
     }
   }
-
-  componentDidLoad() {}
-
-  disconnectedCallback() {}
 
   render() {
     return (

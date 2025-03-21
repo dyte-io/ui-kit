@@ -131,7 +131,6 @@ export const DIRECTIVES = [
   d.DyteSwitch,
   d.DyteTabBar,
   d.DyteTextComposerView,
-  d.DyteTextField,
   d.DyteTextMessage,
   d.DyteTextMessageView,
   d.DyteTooltip,

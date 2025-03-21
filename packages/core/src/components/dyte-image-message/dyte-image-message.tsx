@@ -7,7 +7,6 @@ import { downloadFile } from '../../utils/file';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { States } from '../../types/props';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 /**
  * A component which renders an image message from chat.
@@ -69,7 +68,6 @@ export class DyteImageMessage {
               onClick={() => {
                 if (this.status === 'loaded') {
                   this.stateUpdate.emit({ image: this.message });
-                  storeState.image = this.message;
                 }
               }}
             />
@@ -99,7 +97,6 @@ export class DyteImageMessage {
                   kind="icon"
                   onClick={() => {
                     this.stateUpdate.emit({ image: this.message });
-                    storeState.image = this.message;
                   }}
                 >
                   <dyte-icon icon={this.iconPack.full_screen_maximize} />

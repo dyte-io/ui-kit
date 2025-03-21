@@ -14,8 +14,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { DefaultProps, lenChildren, Render } from '../../lib/render';
 import { Meeting, Participant, Peer } from '../../types/dyte-client';
 import { formatName, shorten } from '../../utils/string';
-import storeState from '../../lib/store';
-import { defaultConfig, UIConfig } from '../../exports';
+import { defaultConfig, States, UIConfig } from '../../exports';
 import { FlagsmithFeatureFlags } from '../../utils/flags';
 import { autoPlacement, computePosition, hide, offset, shift } from '@floating-ui/dom';
 import { SyncWithStore } from '../../utils/sync-with-store';
@@ -59,6 +58,11 @@ export class DyteParticipant {
   @SyncWithStore()
   @Prop()
   meeting: Meeting;
+
+  /** States */
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Show participant summary */
   @Prop() view: ParticipantViewMode = 'sidebar';
@@ -289,7 +293,7 @@ export class DyteParticipant {
     const defaults: DefaultProps = {
       meeting: this.meeting,
       size: 'sm',
-      states: storeState,
+      states: this.states,
       config: this.config,
       iconPack: this.iconPack,
       t: this.t,

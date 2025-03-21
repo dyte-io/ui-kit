@@ -4,7 +4,6 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 type SettingsTab = 'audio' | 'video' | 'connection';
 
@@ -115,7 +114,6 @@ export class DyteSettings {
 
   private close() {
     this.stateUpdate.emit({ activeSettings: false });
-    storeState.activeSettings = false;
   }
 
   render() {
@@ -123,7 +121,7 @@ export class DyteSettings {
 
     const defaults = {
       meeting: this.meeting,
-      states: this.states || storeState,
+      states: this.states,
       iconPack: this.iconPack,
       t: this.t,
     };

@@ -2499,6 +2499,10 @@ export namespace Components {
          */
         "participant": Peer;
         /**
+          * States
+         */
+        "states": States1;
+        /**
           * Language
          */
         "t": DyteI18n;
@@ -2706,6 +2710,10 @@ export namespace Components {
           * Size
          */
         "size": Size;
+        /**
+          * Meeting object
+         */
+        "states": States1;
         /**
           * Language
          */
@@ -3608,6 +3616,10 @@ export namespace Components {
          */
         "size": Size1;
         /**
+          * States
+         */
+        "states": States1;
+        /**
           * Language
          */
         "t": DyteI18n1;
@@ -3719,31 +3731,6 @@ export namespace Components {
           * Default value for text input
          */
         "value": string;
-    }
-    /**
-     * A text field component.
-     */
-    interface DyteTextField {
-        /**
-          * Disabled
-         */
-        "disabled": boolean;
-        /**
-          * Icon pack
-         */
-        "iconPack": IconPack;
-        /**
-          * Placeholder text
-         */
-        "placeholder": string;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
-        /**
-          * Input type
-         */
-        "type": string;
     }
     /**
      * A component which renders a text message from chat.
@@ -4247,10 +4234,6 @@ export interface DyteTextComposerViewCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDyteTextComposerViewElement;
 }
-export interface DyteTextFieldCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLDyteTextFieldElement;
-}
 export interface DyteTooltipCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDyteTooltipElement;
@@ -4258,6 +4241,10 @@ export interface DyteTooltipCustomEvent<T> extends CustomEvent<T> {
 export interface DyteTranscriptCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDyteTranscriptElement;
+}
+export interface DyteUiProviderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDyteUiProviderElement;
 }
 declare global {
     interface HTMLDyteAiElementEventMap {
@@ -5309,7 +5296,7 @@ declare global {
         new (): HTMLDyteMarkdownViewElement;
     };
     interface HTMLDyteMeetingElementEventMap {
-        "dyteStateUpdate": PartialStateEvent;
+        "dyteStatesUpdate": States;
     }
     /**
      * A single component which renders an entire meeting UI.
@@ -6292,26 +6279,6 @@ declare global {
         prototype: HTMLDyteTextComposerViewElement;
         new (): HTMLDyteTextComposerViewElement;
     };
-    interface HTMLDyteTextFieldElementEventMap {
-        "dyteStateUpdate": States;
-    }
-    /**
-     * A text field component.
-     */
-    interface HTMLDyteTextFieldElement extends Components.DyteTextField, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLDyteTextFieldElementEventMap>(type: K, listener: (this: HTMLDyteTextFieldElement, ev: DyteTextFieldCustomEvent<HTMLDyteTextFieldElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLDyteTextFieldElementEventMap>(type: K, listener: (this: HTMLDyteTextFieldElement, ev: DyteTextFieldCustomEvent<HTMLDyteTextFieldElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLDyteTextFieldElement: {
-        prototype: HTMLDyteTextFieldElement;
-        new (): HTMLDyteTextFieldElement;
-    };
     /**
      * A component which renders a text message from chat.
      */
@@ -6386,7 +6353,18 @@ declare global {
         prototype: HTMLDyteTranscriptsElement;
         new (): HTMLDyteTranscriptsElement;
     };
+    interface HTMLDyteUiProviderElementEventMap {
+        "dyteStatesUpdate": States1;
+    }
     interface HTMLDyteUiProviderElement extends Components.DyteUiProvider, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteUiProviderElementEventMap>(type: K, listener: (this: HTMLDyteUiProviderElement, ev: DyteUiProviderCustomEvent<HTMLDyteUiProviderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteUiProviderElementEventMap>(type: K, listener: (this: HTMLDyteUiProviderElement, ev: DyteUiProviderCustomEvent<HTMLDyteUiProviderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteUiProviderElement: {
         prototype: HTMLDyteUiProviderElement;
@@ -6543,7 +6521,6 @@ declare global {
         "dyte-switch": HTMLDyteSwitchElement;
         "dyte-tab-bar": HTMLDyteTabBarElement;
         "dyte-text-composer-view": HTMLDyteTextComposerViewElement;
-        "dyte-text-field": HTMLDyteTextFieldElement;
         "dyte-text-message": HTMLDyteTextMessageElement;
         "dyte-text-message-view": HTMLDyteTextMessageViewElement;
         "dyte-tooltip": HTMLDyteTooltipElement;
@@ -8719,9 +8696,9 @@ declare namespace LocalJSX {
          */
         "mode"?: MeetingMode;
         /**
-          * Emits updated state data
+          * States
          */
-        "onDyteStateUpdate"?: (event: DyteMeetingCustomEvent<PartialStateEvent>) => void;
+        "onDyteStatesUpdate"?: (event: DyteMeetingCustomEvent<States>) => void;
         /**
           * Whether to show setup screen or not
          */
@@ -9288,6 +9265,10 @@ declare namespace LocalJSX {
          */
         "participant"?: Peer;
         /**
+          * States
+         */
+        "states"?: States1;
+        /**
           * Language
          */
         "t"?: DyteI18n;
@@ -9511,6 +9492,10 @@ declare namespace LocalJSX {
           * Size
          */
         "size"?: Size;
+        /**
+          * Meeting object
+         */
+        "states"?: States1;
         /**
           * Language
          */
@@ -10517,6 +10502,10 @@ declare namespace LocalJSX {
          */
         "size"?: Size1;
         /**
+          * States
+         */
+        "states"?: States1;
+        /**
           * Language
          */
         "t"?: DyteI18n1;
@@ -10636,35 +10625,6 @@ declare namespace LocalJSX {
           * Default value for text input
          */
         "value"?: string;
-    }
-    /**
-     * A text field component.
-     */
-    interface DyteTextField {
-        /**
-          * Disabled
-         */
-        "disabled"?: boolean;
-        /**
-          * Icon pack
-         */
-        "iconPack"?: IconPack;
-        /**
-          * Emits updated state data
-         */
-        "onDyteStateUpdate"?: (event: DyteTextFieldCustomEvent<States>) => void;
-        /**
-          * Placeholder text
-         */
-        "placeholder"?: string;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
-        /**
-          * Input type
-         */
-        "type"?: string;
     }
     /**
      * A component which renders a text message from chat.
@@ -10808,6 +10768,10 @@ declare namespace LocalJSX {
           * @default false
          */
         "noRenderUntilMeeting"?: boolean;
+        /**
+          * States
+         */
+        "onDyteStatesUpdate"?: (event: DyteUiProviderCustomEvent<States1>) => void;
         /**
           * Language utility
          */
@@ -11004,7 +10968,6 @@ declare namespace LocalJSX {
         "dyte-switch": DyteSwitch;
         "dyte-tab-bar": DyteTabBar;
         "dyte-text-composer-view": DyteTextComposerView;
-        "dyte-text-field": DyteTextField;
         "dyte-text-message": DyteTextMessage;
         "dyte-text-message-view": DyteTextMessageView;
         "dyte-tooltip": DyteTooltip;
@@ -11501,10 +11464,6 @@ declare module "@stencil/core" {
              * A component which renders a text composer
              */
             "dyte-text-composer-view": LocalJSX.DyteTextComposerView & JSXBase.HTMLAttributes<HTMLDyteTextComposerViewElement>;
-            /**
-             * A text field component.
-             */
-            "dyte-text-field": LocalJSX.DyteTextField & JSXBase.HTMLAttributes<HTMLDyteTextFieldElement>;
             /**
              * A component which renders a text message from chat.
              */

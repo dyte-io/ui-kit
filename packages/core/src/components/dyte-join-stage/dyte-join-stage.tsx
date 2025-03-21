@@ -7,7 +7,6 @@ import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 export interface ModalDataConfig {
   title: string;
@@ -75,7 +74,7 @@ export class DyteJoinStage {
     const defaults = {
       meeting: this.meeting,
       size: this.size,
-      states: this.states || storeState,
+      states: this.states,
       config: this.config,
       iconPack: this.iconPack,
       t: this.t,

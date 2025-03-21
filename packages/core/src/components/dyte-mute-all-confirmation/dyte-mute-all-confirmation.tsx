@@ -4,7 +4,6 @@ import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 @Component({
   tag: 'dyte-mute-all-confirmation',
@@ -39,7 +38,6 @@ export class DyteMuteAllConfirmation {
 
   private onClose = () => {
     this.stateUpdate.emit({ activeMuteAllConfirmation: false });
-    storeState.activeMuteAllConfirmation = false;
   };
 
   private onMuteAll = () => {

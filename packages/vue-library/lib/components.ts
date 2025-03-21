@@ -856,9 +856,9 @@ export const DyteMeeting = /*@__PURE__*/ defineContainer<JSX.DyteMeeting>('dyte-
   'size',
   'gridLayout',
   'iconPack',
-  'dyteStateUpdate'
+  'dyteStatesUpdate'
 ], [
-  'dyteStateUpdate'
+  'dyteStatesUpdate'
 ]);
 
 
@@ -1058,6 +1058,7 @@ export const DytePaginatedList = /*@__PURE__*/ defineContainer<JSX.DytePaginated
 
 export const DyteParticipant = /*@__PURE__*/ defineContainer<JSX.DyteParticipant>('dyte-participant', undefined, [
   'meeting',
+  'states',
   'view',
   'participant',
   'iconPack',
@@ -1136,6 +1137,7 @@ export const DyteParticipantsAudio = /*@__PURE__*/ defineContainer<JSX.DyteParti
 
 export const DyteParticipantsStageList = /*@__PURE__*/ defineContainer<JSX.DyteParticipantsStageList>('dyte-participants-stage-list', undefined, [
   'meeting',
+  'states',
   'config',
   'size',
   'hideHeader',
@@ -1505,6 +1507,7 @@ export const DyteStageToggle = /*@__PURE__*/ defineContainer<JSX.DyteStageToggle
   'meeting',
   'size',
   'iconPack',
+  'states',
   't',
   'dyteStateUpdate'
 ], [
@@ -1552,18 +1555,6 @@ export const DyteTextComposerView = /*@__PURE__*/ defineContainer<JSX.DyteTextCo
   'textChange'
 ], [
   'textChange'
-]);
-
-
-export const DyteTextField = /*@__PURE__*/ defineContainer<JSX.DyteTextField>('dyte-text-field', undefined, [
-  'type',
-  'placeholder',
-  'disabled',
-  'iconPack',
-  't',
-  'dyteStateUpdate'
-], [
-  'dyteStateUpdate'
 ]);
 
 
@@ -1619,7 +1610,10 @@ export const DyteUiProvider = /*@__PURE__*/ defineContainer<JSX.DyteUiProvider>(
   'meeting',
   'iconPack',
   't',
-  'noRenderUntilMeeting'
+  'noRenderUntilMeeting',
+  'dyteStatesUpdate'
+], [
+  'dyteStatesUpdate'
 ]);
 
 

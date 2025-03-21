@@ -4,7 +4,6 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 @Component({
   tag: 'dyte-pip-toggle',
@@ -70,7 +69,6 @@ export class DytePipToggle {
     }
 
     this.stateUpdate.emit({ activeMoreMenu: false });
-    storeState.activeMoreMenu = false;
   }
 
   render() {

@@ -2,7 +2,6 @@ import { Component, h, Host, Prop, Event, EventEmitter, State, Watch, Listen } f
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { PartialStateEvent, States } from '../../types/props';
-import storeState from '../../lib/store';
 import { Meeting } from '../../types/dyte-client';
 import { participantIdentifier, resetRoomCount } from '../../utils/breakout-rooms';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
@@ -275,18 +274,15 @@ export class DyteBreakoutRoomsManager {
       activeBreakoutRoomsManager: { active: false },
       activeConfirmationModal,
     });
-    storeState.activeBreakoutRoomsManager = { active: false };
-    storeState.activeConfirmationModal = activeConfirmationModal;
   };
 
   private close = () => {
     this.stateManager.discardChanges();
-    this.stateUpdate?.emit({
+    this.stateUpdate.emit({
       activeBreakoutRoomsManager: {
         active: false,
       },
     });
-    storeState.activeBreakoutRoomsManager = { active: false };
   };
 
   private applyChanges = async () => {

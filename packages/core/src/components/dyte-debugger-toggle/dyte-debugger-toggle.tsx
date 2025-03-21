@@ -3,7 +3,6 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
 import { SyncWithStore } from '../../utils/sync-with-store';
 import { Meeting } from '../../types/dyte-client';
 
@@ -47,8 +46,6 @@ export class DyteDebuggerToggle {
       activeDebugger: !this.states?.activeDebugger,
       activeMoreMenu: false,
     });
-    storeState.activeDebugger = !storeState.activeDebugger;
-    storeState.activeMoreMenu = false;
   }
 
   render() {

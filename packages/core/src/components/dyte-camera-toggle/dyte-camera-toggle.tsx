@@ -1,7 +1,6 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import state from '../../lib/store';
 import { Meeting, Peer, MediaPermission } from '../../types/dyte-client';
 import { PermissionSettings, Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
@@ -135,7 +134,6 @@ export class DyteCameraToggle {
         kind: 'video',
       };
       this.stateUpdate.emit({ activePermissionsMessage: permissionModalSettings });
-      state.activePermissionsMessage = permissionModalSettings;
       return false;
     }
 

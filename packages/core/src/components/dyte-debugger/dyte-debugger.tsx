@@ -4,7 +4,6 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 export type DebuggerTab = 'audio' | 'video' | 'screenshare' | 'system';
 
@@ -76,7 +75,6 @@ export class DyteDebugger {
 
   private close() {
     this.stateUpdate.emit({ activeDebugger: false });
-    storeState.activeDebugger = false;
   }
 
   private getActiveTab() {
@@ -99,7 +97,7 @@ export class DyteDebugger {
 
     const defaults = {
       meeting: this.meeting,
-      states: this.states || storeState,
+      states: this.states,
       iconPack: this.iconPack,
       t: this.t,
       size: this.size,

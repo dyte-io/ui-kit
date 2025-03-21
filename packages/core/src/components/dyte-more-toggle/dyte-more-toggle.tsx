@@ -3,7 +3,6 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { Component, Host, h, Prop, Event, EventEmitter, Element } from '@stencil/core';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 /**
  * A button which toggles visibility of a more menu.
@@ -24,7 +23,7 @@ export class DyteMoreToggle {
   /** States object */
   @SyncWithStore()
   @Prop()
-  states: States = storeState;
+  states: States;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -55,22 +54,19 @@ export class DyteMoreToggle {
   }
 
   private handleKeyDown = ({ key }: { key: string }) => {
-    if (key === 'Escape' && this.states.activeMoreMenu) {
+    if (key === 'Escape') {
       this.stateUpdate.emit({ activeMoreMenu: false });
-      storeState.activeMoreMenu = !storeState.activeMoreMenu;
     }
   };
 
   private handleOnClick = (e: MouseEvent) => {
     if (!e.composedPath().includes(this.host) && this.states.activeMoreMenu) {
       this.stateUpdate.emit({ activeMoreMenu: false });
-      storeState.activeMoreMenu = !storeState.activeMoreMenu;
     }
   };
 
   private toggleMoreMenu = () => {
-    this.stateUpdate.emit({ activeMoreMenu: !storeState.activeMoreMenu });
-    storeState.activeMoreMenu = !storeState.activeMoreMenu;
+    this.stateUpdate.emit({ activeMoreMenu: !this.states.activeMoreMenu });
   };
 
   render() {

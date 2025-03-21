@@ -1,7 +1,6 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState, { onChange } from '../../lib/store';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { canViewPlugins } from '../../utils/sidebar';
@@ -23,8 +22,6 @@ import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-but
   shadow: true,
 })
 export class DytePluginsToggle {
-  private removeStateChangeListener: () => void;
-
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
@@ -56,7 +53,6 @@ export class DytePluginsToggle {
   @State() canViewPlugins: boolean = false;
 
   disconnectedCallback() {
-    this.removeStateChangeListener && this.removeStateChangeListener();
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.updateCanView);
     this.meeting?.self?.permissions.removeListener('pluginsUpdate', this.updateCanView);
   }
@@ -64,7 +60,6 @@ export class DytePluginsToggle {
   connectedCallback() {
     this.statesChanged(this.states);
     this.meetingChanged(this.meeting);
-    this.removeStateChangeListener = onChange('sidebar', () => this.statesChanged());
   }
 
   @Watch('meeting')
@@ -76,8 +71,7 @@ export class DytePluginsToggle {
   }
 
   @Watch('states')
-  statesChanged(s?: States) {
-    const states = s || storeState;
+  statesChanged(states?: States) {
     if (states != null) {
       this.pluginsActive = states.activeSidebar === true && states.sidebar === 'plugins';
     }
@@ -87,7 +81,7 @@ export class DytePluginsToggle {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   private togglePlugins() {
-    const states = this.states || storeState;
+    const states = this.states;
     this.pluginsActive = !(states?.activeSidebar && states?.sidebar === 'plugins');
     this.stateUpdate.emit({
       activeSidebar: this.pluginsActive,
@@ -95,10 +89,6 @@ export class DytePluginsToggle {
       activeMoreMenu: false,
       activeAI: false,
     });
-    storeState.activeSidebar = this.pluginsActive;
-    storeState.sidebar = this.pluginsActive ? 'plugins' : undefined;
-    storeState.activeMoreMenu = false;
-    storeState.activeAI = false;
   }
 
   private updateCanView = () => {
