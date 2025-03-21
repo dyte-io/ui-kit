@@ -1,3 +1,10 @@
+# [2.4.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.3...@dyte-in/ui-kit-v2.4.0-staging.4) (2025-03-21)
+
+
+### Bug Fixes
+
+* export uiStore ([a06f7c5](https://github.com/dyte-io/ui-kit/commit/a06f7c5b9ae70193fadf791066416052ab21dab8))
+
 # [2.4.0-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.2...@dyte-in/ui-kit-v2.4.0-staging.3) (2025-03-21)
 
 
