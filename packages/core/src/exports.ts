@@ -9,6 +9,7 @@ export { sendNotification } from './utils/notification';
 export { DyteUIBuilder } from './lib/builder';
 export { onChange as onStateStoreChange } from './lib/store';
 export { statesStore };
+export { default as uiStore } from './utils/sync-with-store/ui-store';
 
 // addons
 export { registerAddons, Addon } from './lib/addons';
