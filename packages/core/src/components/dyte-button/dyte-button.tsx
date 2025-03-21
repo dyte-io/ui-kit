@@ -1,7 +1,5 @@
 import { Size } from '../../types/props';
 import { Component, Host, h, Prop } from '@stencil/core';
-import { IconPack, defaultIconPack } from '../../lib/icons';
-import { useLanguage, DyteI18n } from '../../lib/lang';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'ghost';
 
@@ -34,12 +32,6 @@ export class DyteButton {
 
   /** Where the button is disabled or not */
   @Prop({ reflect: true }) disabled: boolean = false;
-
-  /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
-
-  /** Language */
-  @Prop() t: DyteI18n = useLanguage();
 
   /** Button type */
   @Prop({ reflect: true }) type: HTMLButtonElement['type'] = 'button';

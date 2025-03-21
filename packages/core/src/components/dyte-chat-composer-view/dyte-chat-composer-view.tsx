@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, Prop, State, h, Host, writeTask } from '@stencil/core';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import gracefulStorage from '../../utils/graceful-storage';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { MAX_TEXT_LENGTH } from '../../utils/chat';
 
 export type NewMessageEvent =
@@ -53,10 +54,14 @@ export class DyteChatComposerView {
   @Prop() isEditing: boolean = false;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Max length for text input */
   @Prop() maxLength: number;
@@ -260,7 +265,6 @@ export class DyteChatComposerView {
                 class="dismiss"
                 icon={this.iconPack.dismiss}
                 onClick={this.onQuotedMessageDismissHandler}
-                {...uiProps}
               />
             </div>
           </div>
@@ -321,18 +325,12 @@ export class DyteChatComposerView {
             </div>
             <div class="right" part="chat-buttons-right">
               {!this.isEditing && (
-                <dyte-tooltip
-                  variant="primary"
-                  label={this.t('chat.send_msg')}
-                  delay={2000}
-                  {...uiProps}
-                >
+                <dyte-tooltip variant="primary" label={this.t('chat.send_msg')} delay={2000}>
                   <dyte-button
                     kind="icon"
                     disabled={this.disableSendButton}
                     onClick={() => this.handleSendMessage()}
                     title={this.t('chat.send_msg')}
-                    {...uiProps}
                   >
                     <dyte-icon icon={this.iconPack.send} />
                   </dyte-button>
@@ -340,33 +338,21 @@ export class DyteChatComposerView {
               )}
               {this.isEditing && (
                 <div class="edit-buttons">
-                  <dyte-tooltip
-                    variant="secondary"
-                    label={this.t('cancel')}
-                    delay={2000}
-                    {...uiProps}
-                  >
+                  <dyte-tooltip variant="secondary" label={this.t('cancel')} delay={2000}>
                     <dyte-button
                       kind="icon"
                       variant="secondary"
                       onClick={() => this.handleEditCancel()}
                       title={this.t('cancel')}
-                      {...uiProps}
                     >
                       <dyte-icon icon={this.iconPack.dismiss} />
                     </dyte-button>
                   </dyte-tooltip>
-                  <dyte-tooltip
-                    variant="primary"
-                    label={this.t('chat.update_msg')}
-                    delay={2000}
-                    {...uiProps}
-                  >
+                  <dyte-tooltip variant="primary" label={this.t('chat.update_msg')} delay={2000}>
                     <dyte-button
                       kind="icon"
                       onClick={() => this.handleEditMessage()}
                       title={this.t('chat.send_msg')}
-                      {...uiProps}
                     >
                       <dyte-icon icon={this.iconPack.checkmark} />
                     </dyte-button>

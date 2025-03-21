@@ -1,6 +1,7 @@
 import { Meeting } from '../../types/dyte-client';
 import { Component, Host, h, Prop } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 
 /**
@@ -13,13 +14,19 @@ import { useLanguage, DyteI18n } from '../../lib/lang';
 })
 export class DyteMeetingTitle {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   render() {
     const title = this.meeting?.meta.meetingTitle;
@@ -28,7 +35,7 @@ export class DyteMeetingTitle {
 
     return (
       <Host tabIndex={0} role="banner" aria-label={title}>
-        <dyte-tooltip label={title} part="tooltip" iconPack={this.iconPack} t={this.t}>
+        <dyte-tooltip label={title} part="tooltip">
           <div class="title" part="title">
             {title}
           </div>

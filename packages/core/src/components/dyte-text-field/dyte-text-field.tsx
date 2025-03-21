@@ -2,6 +2,7 @@ import { States } from '../../types/props';
 import { Component, Event, EventEmitter, h, Host, Prop } from '@stencil/core';
 import storeState from '../../lib/store';
 import { IconPack, defaultIconPack } from '../../lib/icons';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 
 /**
@@ -28,10 +29,14 @@ export class DyteTextField {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   connectedCallback() {
     this.stateUpdate.emit({ abc: false });

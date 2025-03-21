@@ -1,3 +1,50 @@
+# [2.4.0-staging.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.4...@dyte-in/ui-kit-v2.4.0-staging.5) (2025-03-21)
+
+
+### Bug Fixes
+
+* do not import from exports ([c2897ef](https://github.com/dyte-io/ui-kit/commit/c2897ef32938e4f5bcfc844e082b2d259c3a03e0))
+
+# [2.4.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.3...@dyte-in/ui-kit-v2.4.0-staging.4) (2025-03-21)
+
+
+### Bug Fixes
+
+* export uiStore ([a06f7c5](https://github.com/dyte-io/ui-kit/commit/a06f7c5b9ae70193fadf791066416052ab21dab8))
+
+# [2.4.0-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.2...@dyte-in/ui-kit-v2.4.0-staging.3) (2025-03-21)
+
+
+### Bug Fixes
+
+* remove unused ai components ([02fc5cf](https://github.com/dyte-io/ui-kit/commit/02fc5cf2fba07312faa5c3d8553774901d9d6456))
+* remove unused props from primitive components ([b1198e8](https://github.com/dyte-io/ui-kit/commit/b1198e8c95c0c8fadc2a105bed3183dd2921ebbc))
+* show transcriptions in ai component ([d3b42db](https://github.com/dyte-io/ui-kit/commit/d3b42db423c1af06fbeddaf9db7a323d17c7e441))
+* size of transcriptions title ([ba85b7b](https://github.com/dyte-io/ui-kit/commit/ba85b7b20371965c6cf2f67a462cf6f71e60878d))
+
+# [2.4.0-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.1...@dyte-in/ui-kit-v2.4.0-staging.2) (2025-03-12)
+
+
+### Bug Fixes
+
+* remove unused @Watch method ([90e60d0](https://github.com/dyte-io/ui-kit/commit/90e60d0632dbf28d032b3d9b02a4476e4bb71070))
+
+# [2.4.0-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.6...@dyte-in/ui-kit-v2.4.0-staging.1) (2025-03-12)
+
+
+### Bug Fixes
+
+* componentShouldUpdate call ([c8bdc67](https://github.com/dyte-io/ui-kit/commit/c8bdc679e40e959b43a070b5dc18d0981eea8ad6))
+* do not listen to changes once prop is updated manually after init ([ea2d0b8](https://github.com/dyte-io/ui-kit/commit/ea2d0b82229736e5be0137218d0f2e2889551c1a))
+* **sync-store:** pass oldValue in callback ([017a925](https://github.com/dyte-io/ui-kit/commit/017a925e5a258efbc5153b10b6e6d7c6879746e7))
+* SyncWithStore logic ([abc11cd](https://github.com/dyte-io/ui-kit/commit/abc11cd5d4888d64c9897d435ea4efed30216209))
+* use @SyncWithStore decorator in every component ([6272e6c](https://github.com/dyte-io/ui-kit/commit/6272e6c9934dce1935df7a3ca2cea78550ce84df))
+
+
+### Features
+
+* share common props using DyteUIProvider ([76f7058](https://github.com/dyte-io/ui-kit/commit/76f705829d1cc767e14a8dad491fa39361a73a74))
+
 ## [2.3.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.5...@dyte-in/ui-kit-v2.3.6) (2025-03-11)
 
 

@@ -3,6 +3,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { States, Size } from '../../types/props';
 import { Component, Host, h, Prop, Event, EventEmitter } from '@stencil/core';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import storeState from '../../lib/store';
 
 /**
@@ -21,10 +22,14 @@ export class DyteLeaveButton {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
@@ -42,7 +47,6 @@ export class DyteLeaveButton {
         <dyte-controlbar-button
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           class="leave red-icon"
           onClick={this.leave}
           icon={this.iconPack.call_end}

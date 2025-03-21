@@ -32,6 +32,7 @@ import { DyteChannelHeaderCustomEvent } from '../../components';
 import { States, UIConfig, defaultConfig } from '../../exports';
 import storeState from '../../lib/store';
 import { ChannelItem } from '../dyte-channel-selector-view/dyte-channel-selector-view';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { NewMessageEvent } from '../dyte-chat-composer-view/dyte-chat-composer-view';
 
 export type ChatFilter = (message: Message) => boolean;
@@ -63,7 +64,9 @@ export class DyteChat {
   @Element() host: HTMLDyteChatElement;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -72,10 +75,14 @@ export class DyteChat {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** disables private chat */
   @Prop() disablePrivateChat: boolean = false;
@@ -685,21 +692,17 @@ export class DyteChat {
         <div class="banner">
           <dyte-icon
             icon={this.iconPack.create_channel_illustration}
-            iconPack={this.iconPack}
-            t={this.t}
             slot="start"
             class={'create-channel-illustration'}
           />
           <dyte-button
-            iconPack={this.iconPack}
-            t={this.t}
             kind="wide"
             variant="primary"
             size="md"
             onClick={this.onChannelCreateClicked}
             class="welcome-new-channel"
           >
-            <dyte-icon icon={this.iconPack.add} iconPack={this.iconPack} t={this.t} slot="start" />
+            <dyte-icon icon={this.iconPack.add} slot="start" />
             <span>{this.t('chat.new_channel')}</span>
           </dyte-button>
 
@@ -803,12 +806,12 @@ export class DyteChat {
     if (this.meeting.chat.pinned.length === 0) return null;
 
     return (
-      <dyte-tooltip label={this.t('chat.toggle_pinned_msgs')} iconPack={this.iconPack} t={this.t}>
+      <dyte-tooltip label={this.t('chat.toggle_pinned_msgs')}>
         <div
           class={{ 'pinned-messages-header': true, active: this.showPinnedMessages }}
           onClick={this.onTogglePinnedMessages}
         >
-          <dyte-icon icon={this.iconPack.pin} iconPack={this.iconPack} t={this.t} />
+          <dyte-icon icon={this.iconPack.pin} />
           {this.t('chat.pinned_msgs')}
           {` (${this.meeting.chat.pinned.length})`}
         </div>
@@ -843,21 +846,15 @@ export class DyteChat {
               >
                 <div class="channel-selector-header" slot="header">
                   <dyte-logo meeting={this.meeting} config={this.config} t={this.t} />
-                  <dyte-tooltip
-                    label={this.t('chat.new_channel')}
-                    iconPack={this.iconPack}
-                    t={this.t}
-                  >
+                  <dyte-tooltip label={this.t('chat.new_channel')}>
                     <dyte-button
-                      iconPack={this.iconPack}
-                      t={this.t}
                       kind="button"
                       variant="ghost"
                       size="md"
                       onClick={this.onChannelCreateClicked}
                       class="channel-create-btn"
                     >
-                      <dyte-icon icon={this.iconPack.add} iconPack={this.iconPack} t={this.t} />
+                      <dyte-icon icon={this.iconPack.add} />
                     </dyte-button>
                   </dyte-tooltip>
                 </div>
@@ -875,7 +872,7 @@ export class DyteChat {
           <div class="chat">
             {this.isFileMessagingAllowed() && (
               <div id="dropzone" class={{ active: this.dropzoneActivated }} part="dropzone">
-                <dyte-icon icon={this.iconPack.attach} iconPack={this.iconPack} t={this.t} />
+                <dyte-icon icon={this.iconPack.attach} />
                 <p>{this.t('chat.send_attachment')}</p>
               </div>
             )}

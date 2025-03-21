@@ -3,6 +3,7 @@ import { States } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 
 @Component({
@@ -12,16 +13,24 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 })
 export class DyteBroadcastMessageModal {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
@@ -78,25 +87,15 @@ export class DyteBroadcastMessageModal {
           {this.successMessage ? (
             <p>
               Message sent to {this.messagePayload.to}
-              <dyte-icon icon={this.iconPack.checkmark} iconPack={this.iconPack} t={this.t} />
+              <dyte-icon icon={this.iconPack.checkmark} />
             </p>
           ) : (
             <div class="content-row">
-              <dyte-button
-                onClick={() => this.close()}
-                variant="secondary"
-                iconPack={this.iconPack}
-                t={this.t}
-              >
+              <dyte-button onClick={() => this.close()} variant="secondary">
                 Cancel
               </dyte-button>
               &ensp;
-              <dyte-button
-                variant="primary"
-                onClick={() => this.sendMessage()}
-                iconPack={this.iconPack}
-                t={this.t}
-              >
+              <dyte-button variant="primary" onClick={() => this.sendMessage()}>
                 Send
               </dyte-button>
             </div>

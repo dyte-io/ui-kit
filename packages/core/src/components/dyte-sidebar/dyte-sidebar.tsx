@@ -14,6 +14,7 @@ import {
 } from '../../utils/sidebar';
 import { DyteSidebarTab, DyteSidebarView } from '../dyte-sidebar-ui/dyte-sidebar-ui';
 import { Render } from '../../lib/render';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { StageStatus } from '@dytesdk/web-core';
 
 export type DyteSidebarSection = 'chat' | 'polls' | 'participants' | 'plugins';
@@ -39,19 +40,27 @@ export class DyteSidebar {
   @Prop() defaultSection: DyteSidebarSection = 'chat';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Size */
   @Prop({ reflect: true }) size: Size;

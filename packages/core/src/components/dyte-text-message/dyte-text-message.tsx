@@ -4,6 +4,7 @@ import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 import { hasOnlyEmojis } from '../../utils/string';
 import { ChatHead } from '../dyte-chat/components/ChatHead';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { TextMessageView } from './components/TextMessage';
 
 /**
@@ -23,10 +24,14 @@ export class DyteTextMessage {
   @Prop({ reflect: true }) isContinued: boolean = false;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** show message in bubble */
   @Prop() showBubble: boolean = false;

@@ -8,6 +8,7 @@ import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { Dimensions, useGrid } from '../../lib/grid';
 import ResizeObserver from 'resize-observer-polyfill';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { MediaConnectionState } from '@dytesdk/web-core';
 
 /**
@@ -38,19 +39,27 @@ export class DyteSimpleGrid {
   @Prop({ reflect: true }) size: Size;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** UI Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() dimensions: Dimensions = { width: 0, height: 0 };
 

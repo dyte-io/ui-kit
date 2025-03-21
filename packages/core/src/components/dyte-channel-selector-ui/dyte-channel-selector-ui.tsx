@@ -2,6 +2,7 @@ import { Component, Host, h, Prop, Event, EventEmitter, State } from '@stencil/c
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { ChatChannel } from '../../types/props';
 import type { Message } from '@dytesdk/web-core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { TextMessageView } from '../dyte-text-message/components/TextMessage';
 
 @Component({
@@ -20,10 +21,14 @@ export class DyteChannelSelectorUi {
   @Prop() selectedChannelId: string;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** show recent message in channel */
   @Prop() showRecentMessage = false;
@@ -152,8 +157,6 @@ export class DyteChannelSelectorUi {
         <div class="container" ref={(el) => (this.$el = el)}>
           {this.isHidden && (
             <dyte-button
-              iconPack={this.iconPack}
-              t={this.t}
               kind="icon"
               variant="ghost"
               size="md"
@@ -162,8 +165,6 @@ export class DyteChannelSelectorUi {
             >
               <dyte-icon
                 icon={this.isHidden ? this.iconPack.chevron_left : this.iconPack.dismiss}
-                iconPack={this.iconPack}
-                t={this.t}
               />
             </dyte-button>
           )}
@@ -176,12 +177,7 @@ export class DyteChannelSelectorUi {
                 placeholder={this.t('chat.search_conversations')}
                 onInput={this.onSearchInput}
               />
-              <dyte-icon
-                icon={this.iconPack.search}
-                iconPack={this.iconPack}
-                t={this.t}
-                class="search-icon"
-              />
+              <dyte-icon icon={this.iconPack.search} class="search-icon" />
             </div>
           </div>
           <div class="channel-container scrollbar" role="list">
@@ -230,8 +226,6 @@ export class DyteChannelSelectorUi {
         {!this.isHidden && (
           <div class="overlay-container">
             <dyte-button
-              iconPack={this.iconPack}
-              t={this.t}
               kind="icon"
               variant="ghost"
               size="md"
@@ -240,8 +234,6 @@ export class DyteChannelSelectorUi {
             >
               <dyte-icon
                 icon={this.isHidden ? this.iconPack.chevron_left : this.iconPack.dismiss}
-                iconPack={this.iconPack}
-                t={this.t}
               />
             </dyte-button>
           </div>

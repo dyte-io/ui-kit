@@ -6,6 +6,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DytePlugin } from '@dytesdk/web-core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { defaultConfig } from '../../exports';
 
 /**
@@ -20,7 +21,9 @@ import { defaultConfig } from '../../exports';
 export class DytePlugins {
   private updateActivePlugins: () => void;
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -29,10 +32,14 @@ export class DytePlugins {
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
@@ -91,21 +98,13 @@ export class DytePlugins {
                   <dyte-button
                     kind="icon"
                     size="lg"
-                    iconPack={this.iconPack}
-                    t={this.t}
                     onClick={() => {
                       plugin.activate();
                       this.close();
                     }}
                     aria-label={`${this.t('activate')} ${plugin.name}`}
                   >
-                    <dyte-icon
-                      icon={this.iconPack.rocket}
-                      tabIndex={-1}
-                      aria-hidden={true}
-                      iconPack={this.iconPack}
-                      t={this.t}
-                    />
+                    <dyte-icon icon={this.iconPack.rocket} tabIndex={-1} aria-hidden={true} />
                   </dyte-button>
                 </div>
               )}
@@ -117,17 +116,9 @@ export class DytePlugins {
                     onClick={() => {
                       plugin.deactivate();
                     }}
-                    iconPack={this.iconPack}
-                    t={this.t}
                     aria-label={`${this.t('close')} ${plugin.name}`}
                   >
-                    <dyte-icon
-                      icon={this.iconPack.dismiss}
-                      tabIndex={-1}
-                      aria-hidden={true}
-                      iconPack={this.iconPack}
-                      t={this.t}
-                    />
+                    <dyte-icon icon={this.iconPack.dismiss} tabIndex={-1} aria-hidden={true} />
                   </dyte-button>
                 </div>
               )}

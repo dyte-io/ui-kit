@@ -5,6 +5,7 @@ import { Meeting } from '../../types/dyte-client';
 import { PartialStateEvent, Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { canToggleBreakout } from '../../utils/breakout-rooms';
 
 /**
@@ -22,19 +23,27 @@ export class DyteBreakoutRoomsToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<PartialStateEvent>;
@@ -81,7 +90,6 @@ export class DyteBreakoutRoomsToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={this.breakoutRoomToggle}
           icon={this.iconPack.breakout_rooms}
           label={this.t('breakout_rooms')}

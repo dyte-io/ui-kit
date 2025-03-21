@@ -9,8 +9,6 @@ import { defineCustomElements } from '@dytesdk/ui-kit/loader';
 
 defineCustomElements();
 export const DyteAi = /*@__PURE__*/createReactComponent<JSX.DyteAi, HTMLDyteAiElement>('dyte-ai');
-export const DyteAiChat = /*@__PURE__*/createReactComponent<JSX.DyteAiChat, HTMLDyteAiChatElement>('dyte-ai-chat');
-export const DyteAiHome = /*@__PURE__*/createReactComponent<JSX.DyteAiHome, HTMLDyteAiHomeElement>('dyte-ai-home');
 export const DyteAiToggle = /*@__PURE__*/createReactComponent<JSX.DyteAiToggle, HTMLDyteAiToggleElement>('dyte-ai-toggle');
 export const DyteAiTranscriptions = /*@__PURE__*/createReactComponent<JSX.DyteAiTranscriptions, HTMLDyteAiTranscriptionsElement>('dyte-ai-transcriptions');
 export const DyteAudioGrid = /*@__PURE__*/createReactComponent<JSX.DyteAudioGrid, HTMLDyteAudioGridElement>('dyte-audio-grid');

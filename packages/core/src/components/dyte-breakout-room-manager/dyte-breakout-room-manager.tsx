@@ -6,6 +6,7 @@ import { Meeting } from '../../types/dyte-client';
 import { getAllConnectedParticipants, participantIdentifier } from '../../utils/breakout-rooms';
 import type { DyteConnectedMeetings, DytePermissionsPreset } from '@dytesdk/web-core';
 import { formatName, shorten } from '../../utils/string';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DraftMeeting } from '../../utils/breakout-rooms-manager';
 
 const ROOM_TITLE_MIN_CHARS = 3;
@@ -17,7 +18,9 @@ const ROOM_TITLE_MIN_CHARS = 3;
 })
 export class DyteBreakoutRoomManager {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Enable updating participants */
   @Prop() assigningParticipants: boolean;
@@ -26,16 +29,22 @@ export class DyteBreakoutRoomManager {
   @Prop() mode: 'edit' | 'create';
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** allow room delete */
   @Prop() allowDelete: boolean = true;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Drag mode */
   @Prop() isDragMode: boolean = false;
@@ -243,8 +252,6 @@ export class DyteBreakoutRoomManager {
               <dyte-icon
                 class="show-on-hover"
                 icon={this.iconPack.dismiss}
-                iconPack={this.iconPack}
-                t={this.t}
                 onClick={() => {
                   this.onParticipantDelete.emit(participant);
                 }}
@@ -282,7 +289,7 @@ export class DyteBreakoutRoomManager {
             />
             {this.editingTitleRoomId !== this.room.id && (
               <span class="participant-count">
-                (<dyte-icon icon={this.iconPack.people} iconPack={this.iconPack} t={this.t} />
+                (<dyte-icon icon={this.iconPack.people} />
                 {this.room?.participants?.length ?? '0'})
               </span>
             )}
@@ -293,8 +300,6 @@ export class DyteBreakoutRoomManager {
                     ? this.t('breakout_rooms.save_room_name')
                     : this.t('breakout_rooms.edit_room_name')
                 }
-                iconPack={this.iconPack}
-                t={this.t}
               >
                 <dyte-icon
                   icon={
@@ -302,8 +307,6 @@ export class DyteBreakoutRoomManager {
                       ? this.iconPack.checkmark
                       : this.iconPack.edit
                   }
-                  iconPack={this.iconPack}
-                  t={this.t}
                   class="show-on-hover"
                   onClick={this.onEditClick}
                 />
@@ -314,17 +317,10 @@ export class DyteBreakoutRoomManager {
               {this.permissions.canAlterConnectedMeetings &&
                 !this.room.isParent &&
                 this.allowDelete && (
-                  <dyte-tooltip
-                    label={this.t('breakout_rooms.delete')}
-                    class="danger"
-                    iconPack={this.iconPack}
-                    t={this.t}
-                  >
+                  <dyte-tooltip label={this.t('breakout_rooms.delete')} class="danger">
                     <dyte-icon
                       icon={this.iconPack.delete}
                       class="show-on-hover"
-                      iconPack={this.iconPack}
-                      t={this.t}
                       onClick={() => {
                         this.deleteRoom.emit();
                       }}
@@ -335,8 +331,6 @@ export class DyteBreakoutRoomManager {
                 this.permissions.canAlterConnectedMeetings &&
                 !this.room.isParent && (
                   <dyte-button
-                    iconPack={this.iconPack}
-                    t={this.t}
                     kind="button"
                     variant="ghost"
                     class="assign-button"
@@ -350,8 +344,6 @@ export class DyteBreakoutRoomManager {
                 !this.assigningParticipants &&
                 this.permissions.canSwitchConnectedMeetings && (
                   <dyte-button
-                    iconPack={this.iconPack}
-                    t={this.t}
                     kind="button"
                     variant="ghost"
                     class="assign-button"
@@ -369,8 +361,6 @@ export class DyteBreakoutRoomManager {
                   icon={
                     this.showExpandedCard ? this.iconPack.chevron_up : this.iconPack.chevron_down
                   }
-                  iconPack={this.iconPack}
-                  t={this.t}
                   onClick={() => this.toggleCardDisplay()}
                 />
               )}

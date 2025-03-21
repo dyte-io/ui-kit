@@ -3,6 +3,7 @@ import { Meeting } from '../../types/dyte-client';
 import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import storeState from '../../lib/store';
 
 /**
@@ -22,16 +23,24 @@ export class DyteLeaveMeeting {
   };
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() canEndMeeting: boolean = false;
 
@@ -120,22 +129,14 @@ export class DyteLeaveMeeting {
               : this.t('leave_confirmation')}
           </p>
           <div class="content">
-            <dyte-button
-              variant="secondary"
-              onClick={this.close}
-              iconPack={this.iconPack}
-              class="secondary-btn"
-              t={this.t}
-            >
+            <dyte-button variant="secondary" onClick={this.close} class="secondary-btn">
               {this.t('cancel')}
             </dyte-button>
             {this.isBreakoutRoomsActive && this.isChildMeeting && this.canJoinMainRoom && (
               <dyte-button
                 variant="secondary"
                 onClick={this.handleJoinMainRoom}
-                iconPack={this.iconPack}
                 class="secondary-btn"
-                t={this.t}
               >
                 {this.t('breakout_rooms.leave_confirmation.main_room_btn')}
               </dyte-button>
@@ -144,23 +145,16 @@ export class DyteLeaveMeeting {
               variant={this.canEndMeeting ? 'secondary' : 'danger'}
               title={this.t('leave')}
               onClick={this.handleLeave}
-              iconPack={this.iconPack}
               class={{
                 'secondary-btn': this.canEndMeeting,
                 'secondary-danger-btn': this.canEndMeeting,
               }}
-              t={this.t}
             >
               {this.t('leave')}
             </dyte-button>
 
             {this.canEndMeeting && (
-              <dyte-button
-                variant="danger"
-                onClick={this.handleEndMeeting}
-                iconPack={this.iconPack}
-                t={this.t}
-              >
+              <dyte-button variant="danger" onClick={this.handleEndMeeting}>
                 {this.t('end.all')}
               </dyte-button>
             )}

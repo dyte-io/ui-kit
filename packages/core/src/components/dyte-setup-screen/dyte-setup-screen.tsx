@@ -9,6 +9,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import gracefulStorage from '../../utils/graceful-storage';
 import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { SocketConnectionState } from '@dytesdk/web-core';
 
 /**
@@ -23,10 +24,14 @@ import { SocketConnectionState } from '@dytesdk/web-core';
 export class DyteSetupScreen {
   private inputEl: HTMLInputElement;
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States = storeState;
+  @SyncWithStore()
+  @Prop()
+  states: States = storeState;
 
   /** Size */
   @Prop({ reflect: true }) size: Size;
@@ -38,10 +43,14 @@ export class DyteSetupScreen {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() displayName: string;
 
@@ -150,19 +159,8 @@ export class DyteSetupScreen {
                 }}
               />
             )}
-            <dyte-button
-              size="lg"
-              kind="wide"
-              onClick={this.join}
-              disabled={disabled}
-              iconPack={this.iconPack}
-              t={this.t}
-            >
-              {this.isJoining ? (
-                <dyte-spinner iconPack={this.iconPack} t={this.t} />
-              ) : (
-                this.t('join')
-              )}
+            <dyte-button size="lg" kind="wide" onClick={this.join} disabled={disabled}>
+              {this.isJoining ? <dyte-spinner iconPack={this.iconPack} /> : this.t('join')}
             </dyte-button>
 
             {this.connectionState !== 'connected' && (

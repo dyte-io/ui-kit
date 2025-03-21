@@ -13,6 +13,7 @@ import {
 import { defaultIconPack, DyteI18n, IconPack, States, useLanguage } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
 import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteBasicParticipant } from '@dytesdk/web-core';
 
 @Component({
@@ -22,13 +23,19 @@ import { DyteBasicParticipant } from '@dytesdk/web-core';
 })
 export class DyteChannelCreator {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
@@ -157,8 +164,6 @@ export class DyteChannelCreator {
               <span>{member.name}</span>
               <dyte-icon
                 icon={this.iconPack.dismiss}
-                iconPack={this.iconPack}
-                t={this.t}
                 onClick={() => {
                   this.selectedMemberIds.delete(member.userId);
                   forceUpdate(this.$el);
@@ -242,8 +247,6 @@ export class DyteChannelCreator {
         <footer>
           <dyte-button
             kind="button"
-            iconPack={this.iconPack}
-            t={this.t}
             size="lg"
             disabled={this.channelName.length === 0}
             onClick={this.onClickHandler}

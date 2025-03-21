@@ -1,5 +1,6 @@
 import { Component, Event, EventEmitter, Host, Prop, h } from '@stencil/core';
 import { elapsedDuration, formatDateTime } from '../../utils/date';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { IconPack, defaultIconPack } from '../../exports';
 
 export interface MessageAction {
@@ -42,7 +43,9 @@ export class DyteMessageView {
   @Prop() time: Date;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** action event */
   @Event({ eventName: 'action' }) onAction: EventEmitter<string>;
