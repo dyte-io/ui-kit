@@ -1,6 +1,8 @@
 import { createStore } from '@stencil/store';
-import { defaultIconPack, DyteI18n, IconPack, States, useLanguage } from '../../exports';
 import { Meeting } from '../../types/dyte-client';
+import { useLanguage, type DyteI18n } from '../../lib/lang';
+import { defaultIconPack, type IconPack } from '../../lib/icons';
+import { type States } from '../../types/props';
 import { getUserPreferences } from '../user-prefs';
 
 export interface DyteUIStore {
