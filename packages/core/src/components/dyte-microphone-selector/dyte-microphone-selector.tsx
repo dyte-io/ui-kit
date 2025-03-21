@@ -139,12 +139,7 @@ export class DyteMicrophoneSelector {
           <div part="microphone-selection" class={'group container ' + this.variant}>
             <label slot="label">
               {this.variant !== 'inline' && this.t('settings.microphone_input')}
-              <dyte-icon
-                icon={this.iconPack.mic_on}
-                iconPack={this.iconPack}
-                t={this.t}
-                size="sm"
-              />
+              <dyte-icon icon={this.iconPack.mic_on} size="sm" />
             </label>
             <div class="row">
               <select

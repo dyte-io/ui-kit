@@ -73,8 +73,6 @@ export class DyteRecordingIndicator {
               aria-hidden={true}
               tabIndex={-1}
               part="icon"
-              iconPack={this.iconPack}
-              t={this.t}
             />
             <span>{this.t('recording.label')}</span>
           </div>

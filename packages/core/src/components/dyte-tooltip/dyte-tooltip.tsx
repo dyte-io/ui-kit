@@ -11,9 +11,6 @@ import {
 } from '@stencil/core';
 import { arrow, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { Size } from '../../types/props';
-import { IconPack, defaultIconPack } from '../../lib/icons';
-import { useLanguage, DyteI18n } from '../../lib/lang';
-import { SyncWithStore } from '../../utils/sync-with-store';
 import { Placement } from '../../types/floating-ui';
 
 export type TooltipVariant = 'primary' | 'secondary';
@@ -58,16 +55,6 @@ export class DyteMenu {
 
   /** Delay before showing the tooltip */
   @Prop() delay: number = 0;
-
-  /** Icon pack */
-  @SyncWithStore()
-  @Prop()
-  iconPack: IconPack = defaultIconPack;
-
-  /** Language */
-  @SyncWithStore()
-  @Prop()
-  t: DyteI18n = useLanguage();
 
   @State() isInFocus: boolean = false;
 

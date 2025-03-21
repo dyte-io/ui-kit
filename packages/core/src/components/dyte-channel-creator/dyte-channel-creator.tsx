@@ -164,8 +164,6 @@ export class DyteChannelCreator {
               <span>{member.name}</span>
               <dyte-icon
                 icon={this.iconPack.dismiss}
-                iconPack={this.iconPack}
-                t={this.t}
                 onClick={() => {
                   this.selectedMemberIds.delete(member.userId);
                   forceUpdate(this.$el);
@@ -249,8 +247,6 @@ export class DyteChannelCreator {
         <footer>
           <dyte-button
             kind="button"
-            iconPack={this.iconPack}
-            t={this.t}
             size="lg"
             disabled={this.channelName.length === 0}
             onClick={this.onClickHandler}

@@ -77,7 +77,6 @@ export class DyteAiToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           class={{ active: this.aiActive }}
           onClick={() => this.toggleAI()}
           icon={this.iconPack.meeting_ai}

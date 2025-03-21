@@ -349,10 +349,8 @@ export class DytePaginatedList {
               variant="secondary"
               part="show-new-messages"
               onClick={() => this.onDownArrowClicked()}
-              iconPack={this.iconPack}
-              t={this.t}
             >
-              <dyte-icon icon={this.iconPack.chevron_down} iconPack={this.iconPack} t={this.t} />
+              <dyte-icon icon={this.iconPack.chevron_down} />
             </dyte-button>
           </div>
           <div

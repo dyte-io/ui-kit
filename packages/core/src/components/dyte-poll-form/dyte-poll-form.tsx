@@ -103,22 +103,14 @@ export class DytePoll {
                   class="auto remove-option"
                   variant="secondary"
                   onClick={() => this.removeOption(index)}
-                  iconPack={this.iconPack}
-                  t={this.t}
                 >
-                  <dyte-icon icon={this.iconPack.subtract} iconPack={this.iconPack} t={this.t} />
+                  <dyte-icon icon={this.iconPack.subtract} />
                 </dyte-button>
               )}
             </div>
           ))}
 
-          <dyte-button
-            class="add-option"
-            variant="secondary"
-            onClick={() => this.addOption()}
-            iconPack={this.iconPack}
-            t={this.t}
-          >
+          <dyte-button class="add-option" variant="secondary" onClick={() => this.addOption()}>
             {this.t('polls.option')}
           </dyte-button>
 
@@ -142,12 +134,7 @@ export class DytePoll {
             {this.t('polls.results.hide')}
           </label>
 
-          <dyte-button
-            kind="wide"
-            onClick={() => this.handleSubmit()}
-            iconPack={this.iconPack}
-            t={this.t}
-          >
+          <dyte-button kind="wide" onClick={() => this.handleSubmit()}>
             {this.t('polls.create')}
           </dyte-button>
           {this.error && <span class="error-text">{this.error.message}</span>}

@@ -157,8 +157,6 @@ export class DyteChannelSelectorUi {
         <div class="container" ref={(el) => (this.$el = el)}>
           {this.isHidden && (
             <dyte-button
-              iconPack={this.iconPack}
-              t={this.t}
               kind="icon"
               variant="ghost"
               size="md"
@@ -167,8 +165,6 @@ export class DyteChannelSelectorUi {
             >
               <dyte-icon
                 icon={this.isHidden ? this.iconPack.chevron_left : this.iconPack.dismiss}
-                iconPack={this.iconPack}
-                t={this.t}
               />
             </dyte-button>
           )}
@@ -181,12 +177,7 @@ export class DyteChannelSelectorUi {
                 placeholder={this.t('chat.search_conversations')}
                 onInput={this.onSearchInput}
               />
-              <dyte-icon
-                icon={this.iconPack.search}
-                iconPack={this.iconPack}
-                t={this.t}
-                class="search-icon"
-              />
+              <dyte-icon icon={this.iconPack.search} class="search-icon" />
             </div>
           </div>
           <div class="channel-container scrollbar" role="list">
@@ -235,8 +226,6 @@ export class DyteChannelSelectorUi {
         {!this.isHidden && (
           <div class="overlay-container">
             <dyte-button
-              iconPack={this.iconPack}
-              t={this.t}
               kind="icon"
               variant="ghost"
               size="md"
@@ -245,8 +234,6 @@ export class DyteChannelSelectorUi {
             >
               <dyte-icon
                 icon={this.isHidden ? this.iconPack.chevron_left : this.iconPack.dismiss}
-                iconPack={this.iconPack}
-                t={this.t}
               />
             </dyte-button>
           </div>

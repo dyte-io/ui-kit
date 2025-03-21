@@ -116,7 +116,6 @@ export class DytePluginsToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           class={{ active: this.pluginsActive }}
           onClick={() => this.togglePlugins()}
           icon={this.iconPack.rocket}

@@ -84,8 +84,6 @@ export class DyteConfirmationModal {
                 variant="secondary"
                 title={state.cancelText ? this.t(state.cancelText) : this.t('cancel')}
                 onClick={this.close}
-                iconPack={this.iconPack}
-                t={this.t}
                 class="br-secondary-btn"
               >
                 {state.cancelText ? this.t(state.cancelText) : this.t('cancel')}
@@ -94,8 +92,6 @@ export class DyteConfirmationModal {
                 onClick={() => this.onConfirmation()}
                 variant={this.states.activeConfirmationModal?.variant ?? 'danger'}
                 title={state.ctaText ? this.t(state.ctaText) : this.t('yes')}
-                iconPack={this.iconPack}
-                t={this.t}
               >
                 {state.ctaText ? this.t(state.ctaText) : this.t('yes')}
               </dyte-button>

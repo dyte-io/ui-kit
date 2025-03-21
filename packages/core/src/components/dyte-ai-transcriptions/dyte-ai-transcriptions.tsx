@@ -19,8 +19,6 @@ export class DyteAiTranscriptions {
 
   @State() isProcessing = false;
 
-  @State() captionViewEnabled = false;
-
   /** Language */
   @SyncWithStore()
   @Prop()
@@ -154,16 +152,6 @@ export class DyteAiTranscriptions {
   render() {
     return (
       <Host>
-        {/* <div class="caption-view">
-          <div>{this.t('ai.caption_view')}</div>
-          <dyte-switch
-            checked={this.captionViewEnabled}
-            onDyteChange={(e) => {
-              this.captionViewEnabled = e.detail;
-            }}
-          />
-        </div> */}
-
         <div class="search-bar">
           <input
             type="text"
@@ -189,8 +177,6 @@ export class DyteAiTranscriptions {
             {this.renderTranscripts()}
           </div>
         )}
-
-        {this.captionViewEnabled && <dyte-ai-caption />}
       </Host>
     );
   }

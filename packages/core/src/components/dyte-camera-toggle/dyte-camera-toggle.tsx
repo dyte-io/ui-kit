@@ -200,18 +200,11 @@ export class DyteCameraToggle {
 
     return (
       <Host title={label}>
-        <dyte-tooltip
-          kind="block"
-          label={tooltipLabel}
-          part="tooltip"
-          iconPack={this.iconPack}
-          t={this.t}
-        >
+        <dyte-tooltip kind="block" label={tooltipLabel} part="tooltip">
           <dyte-controlbar-button
             part="controlbar-button"
             size={this.size}
             iconPack={this.iconPack}
-            t={this.t}
             class={classList}
             variant={this.variant}
             label={label}

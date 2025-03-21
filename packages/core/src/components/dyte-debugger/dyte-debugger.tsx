@@ -122,10 +122,8 @@ export class DyteDebugger {
           >
             {this.t('debugger.audio.label')}
             <div class="right">
-              <dyte-icon icon={this.iconPack.mic_on} iconPack={this.iconPack} t={this.t} />
-              {this.size === 'sm' && (
-                <dyte-icon icon={this.iconPack.chevron_right} iconPack={this.iconPack} t={this.t} />
-              )}
+              <dyte-icon icon={this.iconPack.mic_on} />
+              {this.size === 'sm' && <dyte-icon icon={this.iconPack.chevron_right} />}
             </div>
           </button>
           <button
@@ -135,10 +133,8 @@ export class DyteDebugger {
           >
             {this.t('debugger.video.label')}
             <div class="right">
-              <dyte-icon icon={this.iconPack.video_on} iconPack={this.iconPack} t={this.t} />
-              {this.size === 'sm' && (
-                <dyte-icon icon={this.iconPack.chevron_right} iconPack={this.iconPack} t={this.t} />
-              )}
+              <dyte-icon icon={this.iconPack.video_on} />
+              {this.size === 'sm' && <dyte-icon icon={this.iconPack.chevron_right} />}
             </div>
           </button>
           <button
@@ -148,14 +144,8 @@ export class DyteDebugger {
           >
             {this.t('debugger.screenshare.label')}
             <div class="right">
-              <dyte-icon
-                icon={this.iconPack.share_screen_start}
-                iconPack={this.iconPack}
-                t={this.t}
-              />
-              {this.size === 'sm' && (
-                <dyte-icon icon={this.iconPack.chevron_right} iconPack={this.iconPack} t={this.t} />
-              )}
+              <dyte-icon icon={this.iconPack.share_screen_start} />
+              {this.size === 'sm' && <dyte-icon icon={this.iconPack.chevron_right} />}
             </div>
           </button>
           <button
@@ -165,10 +155,8 @@ export class DyteDebugger {
           >
             {this.t('debugger.system.label')}
             <div class="right">
-              <dyte-icon icon={this.iconPack.settings} iconPack={this.iconPack} t={this.t} />
-              {this.size === 'sm' && (
-                <dyte-icon icon={this.iconPack.chevron_right} iconPack={this.iconPack} t={this.t} />
-              )}
+              <dyte-icon icon={this.iconPack.settings} />
+              {this.size === 'sm' && <dyte-icon icon={this.iconPack.chevron_right} />}
             </div>
           </button>
         </aside>
@@ -180,10 +168,8 @@ export class DyteDebugger {
                 kind="icon"
                 class="back-btn"
                 onClick={() => (this.isMobileMainVisible = false)}
-                iconPack={this.iconPack}
-                t={this.t}
               >
-                <dyte-icon icon={this.iconPack.chevron_left} iconPack={this.iconPack} t={this.t} />
+                <dyte-icon icon={this.iconPack.chevron_left} />
               </dyte-button>
               <h4>{tab}</h4>
             </header>

@@ -175,12 +175,7 @@ export class DyteAudioVisualizer {
             part="canvas"
           ></canvas>
           {!this.isScreenShare && !this.audioEnabled && this.hideMuted !== true && (
-            <dyte-icon
-              icon={this.iconPack.mic_off}
-              part="mic-off-icon"
-              iconPack={this.iconPack}
-              t={this.t}
-            />
+            <dyte-icon icon={this.iconPack.mic_off} part="mic-off-icon" />
           )}
         </div>
       </Host>

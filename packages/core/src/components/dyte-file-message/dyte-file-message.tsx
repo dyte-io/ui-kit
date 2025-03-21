@@ -63,12 +63,10 @@ export class DyteFileMessage {
             <dyte-button
               variant="secondary"
               kind="icon"
-              iconPack={this.iconPack}
-              t={this.t}
               onClick={() => downloadFile(link, { name: this.message.name, fallbackName: 'file' })}
               part="button"
             >
-              <dyte-icon icon={this.iconPack.download} iconPack={this.iconPack} t={this.t} />
+              <dyte-icon icon={this.iconPack.download} />
             </dyte-button>
           </div>
         </div>

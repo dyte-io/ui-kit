@@ -96,17 +96,13 @@ export class DytePolls {
                   {item.votes.slice(0, this.MAX_VOTES_RENDER).map((vote) => {
                     if (this.poll.anonymous && this.self !== this.poll.createdByUserId) return;
                     return (
-                      <dyte-tooltip label={vote.name} iconPack={this.iconPack} t={this.t}>
+                      <dyte-tooltip label={vote.name}>
                         <div class="vote">{getInitials(vote.name)}</div>
                       </dyte-tooltip>
                     );
                   })}
                   {item.votes.length > this.MAX_VOTES_RENDER && (
-                    <dyte-tooltip
-                      label={`+${item.votes.length - this.MAX_VOTES_RENDER} more `}
-                      iconPack={this.iconPack}
-                      t={this.t}
-                    >
+                    <dyte-tooltip label={`+${item.votes.length - this.MAX_VOTES_RENDER} more `}>
                       <div class="vote">+{item.votes.length - this.MAX_VOTES_RENDER}</div>
                     </dyte-tooltip>
                   )}

@@ -79,7 +79,7 @@ export class DyteImageMessage {
                 title={this.t('chat.img.loading')}
                 aria-label={this.t('chat.img.loading')}
               >
-                <dyte-spinner iconPack={this.iconPack} t={this.t} />
+                <dyte-spinner iconPack={this.iconPack} />
               </div>
             )}
             {this.status === 'errored' && (
@@ -88,7 +88,7 @@ export class DyteImageMessage {
                 title={this.t('chat.error.img_not_found')}
                 aria-label={this.t('chat.error.img_not_found')}
               >
-                <dyte-icon icon={this.iconPack.image_off} iconPack={this.iconPack} t={this.t} />
+                <dyte-icon icon={this.iconPack.image_off} />
               </div>
             )}
             {this.status === 'loaded' && (
@@ -101,8 +101,6 @@ export class DyteImageMessage {
                     this.stateUpdate.emit({ image: this.message });
                     storeState.image = this.message;
                   }}
-                  iconPack={this.iconPack}
-                  t={this.t}
                 >
                   <dyte-icon icon={this.iconPack.full_screen_maximize} />
                 </dyte-button>
@@ -111,10 +109,8 @@ export class DyteImageMessage {
                   variant="secondary"
                   kind="icon"
                   onClick={() => downloadFile(this.message.link, { fallbackName: 'image' })}
-                  iconPack={this.iconPack}
-                  t={this.t}
                 >
-                  <dyte-icon icon={this.iconPack.download} iconPack={this.iconPack} t={this.t} />
+                  <dyte-icon icon={this.iconPack.download} />
                 </dyte-button>
               </div>
             )}

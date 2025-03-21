@@ -88,7 +88,6 @@ export class DyteCaptionToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={() => this.toggleCaptions()}
           icon={captionsEnabled ? this.iconPack.captionsOff : this.iconPack.captionsOn}
           label={captionsEnabled ? this.t('transcript.off') : this.t('transcript.on')}

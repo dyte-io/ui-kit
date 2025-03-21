@@ -99,8 +99,6 @@ export class DyteJoinStage {
             variant="secondary"
             onClick={() => this.leaveStage.emit()}
             title={this.dataConfig.label.reject}
-            iconPack={this.iconPack}
-            t={this.t}
           >
             {this.dataConfig.label.reject}
           </dyte-button>
@@ -111,8 +109,6 @@ export class DyteJoinStage {
               this.joinStage.emit();
             }}
             title={this.dataConfig.label.accept}
-            iconPack={this.iconPack}
-            t={this.t}
           >
             {this.isLoading ? (
               <dyte-icon icon={this.iconPack.spinner} />

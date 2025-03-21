@@ -140,46 +140,22 @@ export class DyteParticipantsWaitlisted {
                 </p>
               </div>
               <div class="waitlist-controls">
-                <dyte-tooltip
-                  label={this.t('waitlist.deny_request')}
-                  variant="secondary"
-                  iconPack={this.iconPack}
-                  t={this.t}
-                >
+                <dyte-tooltip label={this.t('waitlist.deny_request')} variant="secondary">
                   <dyte-button
                     variant="secondary"
                     kind="icon"
-                    iconPack={this.iconPack}
-                    t={this.t}
                     onClick={() => this.rejectWaitingRoomRequest(participant.id)}
                   >
-                    <dyte-icon
-                      class="deny"
-                      icon={this.iconPack.dismiss}
-                      iconPack={this.iconPack}
-                      t={this.t}
-                    />
+                    <dyte-icon class="deny" icon={this.iconPack.dismiss} />
                   </dyte-button>
                 </dyte-tooltip>
-                <dyte-tooltip
-                  label={this.t('waitlist.accept_request')}
-                  variant="secondary"
-                  iconPack={this.iconPack}
-                  t={this.t}
-                >
+                <dyte-tooltip label={this.t('waitlist.accept_request')} variant="secondary">
                   <dyte-button
                     variant="secondary"
                     kind="icon"
-                    iconPack={this.iconPack}
-                    t={this.t}
                     onClick={() => this.acceptWaitingRoomRequest(participant.id)}
                   >
-                    <dyte-icon
-                      class="accept"
-                      icon={this.iconPack.checkmark}
-                      iconPack={this.iconPack}
-                      t={this.t}
-                    />
+                    <dyte-icon class="accept" icon={this.iconPack.checkmark} />
                   </dyte-button>
                 </dyte-tooltip>
               </div>
@@ -190,8 +166,6 @@ export class DyteParticipantsWaitlisted {
           class="accept-all-button"
           variant="secondary"
           kind="wide"
-          iconPack={this.iconPack}
-          t={this.t}
           onClick={this.acceptAllWaitingRoomRequests}
         >
           {this.t('waitlist.accept_all')}

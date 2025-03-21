@@ -81,7 +81,6 @@ export class DyteMuteAllButton {
             label={label}
             size={this.size}
             iconPack={this.iconPack}
-            t={this.t}
             variant={this.variant}
             onClick={this.onMuteAll}
           />

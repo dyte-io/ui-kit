@@ -137,8 +137,6 @@ export class DytePolls {
               onClick={() => this.toggleCreateState()}
               variant={this.create ? 'secondary' : 'primary'}
               part="button"
-              iconPack={this.iconPack}
-              t={this.t}
             >
               {this.create ? this.t('polls.cancel') : this.t('polls.create')}
             </dyte-button>

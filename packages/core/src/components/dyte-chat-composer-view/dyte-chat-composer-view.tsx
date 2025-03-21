@@ -265,7 +265,6 @@ export class DyteChatComposerView {
                 class="dismiss"
                 icon={this.iconPack.dismiss}
                 onClick={this.onQuotedMessageDismissHandler}
-                {...uiProps}
               />
             </div>
           </div>
@@ -326,18 +325,12 @@ export class DyteChatComposerView {
             </div>
             <div class="right" part="chat-buttons-right">
               {!this.isEditing && (
-                <dyte-tooltip
-                  variant="primary"
-                  label={this.t('chat.send_msg')}
-                  delay={2000}
-                  {...uiProps}
-                >
+                <dyte-tooltip variant="primary" label={this.t('chat.send_msg')} delay={2000}>
                   <dyte-button
                     kind="icon"
                     disabled={this.disableSendButton}
                     onClick={() => this.handleSendMessage()}
                     title={this.t('chat.send_msg')}
-                    {...uiProps}
                   >
                     <dyte-icon icon={this.iconPack.send} />
                   </dyte-button>
@@ -345,33 +338,21 @@ export class DyteChatComposerView {
               )}
               {this.isEditing && (
                 <div class="edit-buttons">
-                  <dyte-tooltip
-                    variant="secondary"
-                    label={this.t('cancel')}
-                    delay={2000}
-                    {...uiProps}
-                  >
+                  <dyte-tooltip variant="secondary" label={this.t('cancel')} delay={2000}>
                     <dyte-button
                       kind="icon"
                       variant="secondary"
                       onClick={() => this.handleEditCancel()}
                       title={this.t('cancel')}
-                      {...uiProps}
                     >
                       <dyte-icon icon={this.iconPack.dismiss} />
                     </dyte-button>
                   </dyte-tooltip>
-                  <dyte-tooltip
-                    variant="primary"
-                    label={this.t('chat.update_msg')}
-                    delay={2000}
-                    {...uiProps}
-                  >
+                  <dyte-tooltip variant="primary" label={this.t('chat.update_msg')} delay={2000}>
                     <dyte-button
                       kind="icon"
                       onClick={() => this.handleEditMessage()}
                       title={this.t('chat.send_msg')}
-                      {...uiProps}
                     >
                       <dyte-icon icon={this.iconPack.checkmark} />
                     </dyte-button>

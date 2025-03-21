@@ -54,7 +54,7 @@ export class DyteOverlayModal {
   render() {
     return (
       <Host>
-        <dyte-icon icon={this.states.activeOverlayModal.icon} iconPack={this.iconPack} t={this.t} />
+        <dyte-icon icon={this.states.activeOverlayModal.icon} />
         <h2>{this.states.activeOverlayModal.title}</h2>
         <p>{this.states.activeOverlayModal.description}</p>
       </Host>

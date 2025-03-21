@@ -63,7 +63,6 @@ export class DyteSettingsToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={() => this.toggleSettings()}
           icon={this.iconPack.settings}
           label={text}

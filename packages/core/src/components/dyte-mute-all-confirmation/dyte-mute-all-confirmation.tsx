@@ -57,22 +57,10 @@ export class DyteMuteAllConfirmation {
           <p class="message">{this.t('mute_all.description')}</p>
           <div class="content">
             <div class="leave-meeting">
-              <dyte-button
-                variant="secondary"
-                title={this.t('close')}
-                onClick={this.onClose}
-                iconPack={this.iconPack}
-                t={this.t}
-              >
+              <dyte-button variant="secondary" title={this.t('close')} onClick={this.onClose}>
                 {this.t('cancel')}
               </dyte-button>
-              <dyte-button
-                variant="danger"
-                title={this.t('mute_all')}
-                onClick={this.onMuteAll}
-                iconPack={this.iconPack}
-                t={this.t}
-              >
+              <dyte-button variant="danger" title={this.t('mute_all')} onClick={this.onMuteAll}>
                 {this.t('mute_all')}
               </dyte-button>
             </div>

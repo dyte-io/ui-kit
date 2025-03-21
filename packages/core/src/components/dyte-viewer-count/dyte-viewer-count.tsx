@@ -68,14 +68,7 @@ export class DyteViewerCount {
     if (!showLivestream(this.meeting)) return null;
     return (
       <Host tabIndex={0} role="log" aria-label={`${this.viewerCount} ${this.t('viewers')}`}>
-        <dyte-icon
-          icon={this.iconPack.viewers}
-          tabIndex={-1}
-          aria-hidden={true}
-          part="icon"
-          iconPack={this.iconPack}
-          t={this.t}
-        />
+        <dyte-icon icon={this.iconPack.viewers} tabIndex={-1} aria-hidden={true} part="icon" />
         {this.viewerCount} {this.t('viewers')}
       </Host>
     );

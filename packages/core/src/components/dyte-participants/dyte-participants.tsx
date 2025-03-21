@@ -246,12 +246,7 @@ export class DyteParticipants {
     return (
       <Host>
         <div class="search" part="search">
-          <dyte-icon
-            icon={this.iconPack.search}
-            part="search-icon"
-            iconPack={this.iconPack}
-            t={this.t}
-          />
+          <dyte-icon icon={this.iconPack.search} part="search-icon" />
           <input
             type="search"
             autocomplete="off"

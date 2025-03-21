@@ -147,7 +147,6 @@ export class DyteLivestreamToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           isLoading={this.isLoading()}
           class={{ 'active-livestream': this.livestreamState === 'LIVESTREAMING' }}
           onClick={() => this.toggleLivestream()}

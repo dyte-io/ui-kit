@@ -44,7 +44,6 @@ export class DyteIdleScreen {
               aria-label="Idle, waiting for meeting data"
               part="spinner"
               iconPack={this.iconPack}
-              t={this.t}
             />
           </div>
         </slot>

@@ -87,25 +87,15 @@ export class DyteBroadcastMessageModal {
           {this.successMessage ? (
             <p>
               Message sent to {this.messagePayload.to}
-              <dyte-icon icon={this.iconPack.checkmark} iconPack={this.iconPack} t={this.t} />
+              <dyte-icon icon={this.iconPack.checkmark} />
             </p>
           ) : (
             <div class="content-row">
-              <dyte-button
-                onClick={() => this.close()}
-                variant="secondary"
-                iconPack={this.iconPack}
-                t={this.t}
-              >
+              <dyte-button onClick={() => this.close()} variant="secondary">
                 Cancel
               </dyte-button>
               &ensp;
-              <dyte-button
-                variant="primary"
-                onClick={() => this.sendMessage()}
-                iconPack={this.iconPack}
-                t={this.t}
-              >
+              <dyte-button variant="primary" onClick={() => this.sendMessage()}>
                 Send
               </dyte-button>
             </div>

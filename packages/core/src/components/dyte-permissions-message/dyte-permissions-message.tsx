@@ -211,12 +211,7 @@ export class DytePermissionsMessage {
     return (
       <Host>
         <h2>
-          <dyte-icon
-            class="text-icon"
-            icon={this.iconPack.warning}
-            iconPack={this.iconPack}
-            t={this.t}
-          />
+          <dyte-icon class="text-icon" icon={this.iconPack.warning} />
           {this.getTitle()}
         </h2>
         {this.svgSteps.length > 0 && (
@@ -239,45 +234,21 @@ export class DytePermissionsMessage {
             target="_blank"
             rel="noreferrer external noreferrer noopener"
           >
-            <dyte-icon
-              class="text-icon"
-              icon={this.iconPack.attach}
-              iconPack={this.iconPack}
-              t={this.t}
-            />
+            <dyte-icon class="text-icon" icon={this.iconPack.attach} />
             {this.t('cta.help')}
           </a>
         )}
 
         <div class="actions">
-          <dyte-button
-            size="lg"
-            kind="wide"
-            variant="secondary"
-            onClick={this.continue}
-            iconPack={this.iconPack}
-            t={this.t}
-          >
+          <dyte-button size="lg" kind="wide" variant="secondary" onClick={this.continue}>
             {this.t('cta.continue')}
           </dyte-button>
           {showMacDeepLink ? (
-            <dyte-button
-              size="lg"
-              kind="wide"
-              onClick={this.openMacSystemSettings}
-              iconPack={this.iconPack}
-              t={this.t}
-            >
+            <dyte-button size="lg" kind="wide" onClick={this.openMacSystemSettings}>
               {this.t('cta.system_settings')}
             </dyte-button>
           ) : (
-            <dyte-button
-              size="lg"
-              kind="wide"
-              onClick={this.reload}
-              iconPack={this.iconPack}
-              t={this.t}
-            >
+            <dyte-button size="lg" kind="wide" onClick={this.reload}>
               {this.t('cta.reload')}
             </dyte-button>
           )}

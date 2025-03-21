@@ -92,8 +92,6 @@ export class DyteTabBar {
                 title={`${name}'s Screen Share`}
                 key={tab.participant.id}
                 kind="icon"
-                iconPack={this.iconPack}
-                t={this.t}
                 variant={isActive ? 'primary' : 'secondary'}
                 class={{
                   tab: true,
@@ -102,11 +100,7 @@ export class DyteTabBar {
                 onClick={() => this.tabChange.emit(tab)}
               >
                 <div class="center col">
-                  <dyte-icon
-                    icon={this.iconPack.share_screen_person}
-                    iconPack={this.iconPack}
-                    t={this.t}
-                  />
+                  <dyte-icon icon={this.iconPack.share_screen_person} />
                   <span class="name">
                     {participant.id === this.meeting?.self.id ? this.t('you') : shorten(name, 6)}
                   </span>
@@ -120,8 +114,6 @@ export class DyteTabBar {
                 title={plugin.name}
                 key={plugin.id}
                 kind="icon"
-                iconPack={this.iconPack}
-                t={this.t}
                 variant={isActive ? 'primary' : 'secondary'}
                 class={{
                   tab: true,

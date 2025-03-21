@@ -60,8 +60,6 @@ export class DyteNotification {
               class="icon"
               icon={this.notification.icon}
               variant={this.notification.iconVariant ?? 'primary'}
-              iconPack={this.iconPack}
-              t={this.t}
             />
           )}
           {this.notification.image != null &&
@@ -83,8 +81,6 @@ export class DyteNotification {
                 size="sm"
                 variant={this.notification.button.variant}
                 onClick={() => this.notification.button.onClick()}
-                iconPack={this.iconPack}
-                t={this.t}
               >
                 {this.notification.button.text}
               </dyte-button>
@@ -94,8 +90,6 @@ export class DyteNotification {
               class="dismiss"
               icon={this.iconPack.dismiss}
               onClick={() => this.dismiss.emit(this.notification.id)}
-              iconPack={this.iconPack}
-              t={this.t}
             />
           </div>
         </div>
