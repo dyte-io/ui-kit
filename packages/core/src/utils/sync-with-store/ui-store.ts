@@ -24,34 +24,47 @@ const uiStore = createStore<DyteUIStore>({
   states: initialState,
 });
 
-type Callback<T extends any = any> = (newValue: T, oldValue?: T) => void;
+const elementsMap = new Map<string, any[]>();
 
-const storeCallbacks = new Map<string, Set<Callback>>();
-
-// Handling callbacks on our own since stencil store
-// doesn't provide a way to cleanup store subscriptions.
-uiStore.on('set', (key, newValue, oldValue) => {
-  const callbacks = storeCallbacks.get(key);
-  if (callbacks) {
-    callbacks.forEach((callback) => callback(newValue, oldValue));
-  }
+uiStore.use({
+  set: (propName, newValue, oldValue) => {
+    const elements = elementsMap.get(propName as string);
+    if (elements) {
+      elementsMap.set(
+        propName as string,
+        elements.filter((element) => {
+          const currentValue = element[propName];
+          if (currentValue === oldValue) {
+            element[propName] = newValue;
+            return true;
+          } else {
+            return false;
+          }
+        })
+      );
+    }
+  },
 });
 
-function addCallback(key: keyof DyteUIStore, callback: Callback) {
-  const callbacks = storeCallbacks.get(key) || new Set();
-  callbacks.add(callback);
-  storeCallbacks.set(key, callbacks);
+function appendElement(propName: string, element: any) {
+  const elements = elementsMap.get(propName);
+  if (!elements) {
+    elementsMap.set(propName, [element]);
+  } else {
+    elements.push(element);
+  }
 }
 
-function deleteCallback(key: keyof DyteUIStore, callback: Callback) {
-  const callbacks = storeCallbacks.get(key);
-  if (callbacks) {
-    callbacks.delete(callback);
-    if (callbacks.size === 0) {
-      storeCallbacks.delete(key);
+function removeElement(propName: string, element: any) {
+  const elements = elementsMap.get(propName);
+  if (elements && elements.length > 0) {
+    const index = elements.indexOf(element);
+    if (index !== -1) {
+      elements.splice(index, 1);
+      elementsMap.set(propName, elements);
     }
   }
 }
 
 export default uiStore;
-export { addCallback, deleteCallback };
+export { appendElement, removeElement };
