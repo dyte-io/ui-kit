@@ -11,7 +11,7 @@
 }
 
 .title {
-  @apply text-text-lg mx-0 mt-4 mb-2 select-none p-0 text-center font-normal;
+  @apply text-text-md mx-0 mt-4 mb-2 select-none p-0 text-center font-normal;
 }
 
 dyte-ai-transcriptions {
