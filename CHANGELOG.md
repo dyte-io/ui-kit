@@ -1,3 +1,10 @@
+# [2.4.0-staging.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.4...@dyte-in/ui-kit-v2.4.0-staging.5) (2025-03-21)
+
+
+### Bug Fixes
+
+* do not import from exports ([c2897ef](https://github.com/dyte-io/ui-kit/commit/c2897ef32938e4f5bcfc844e082b2d259c3a03e0))
+
 # [2.4.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.3...@dyte-in/ui-kit-v2.4.0-staging.4) (2025-03-21)
 
 
