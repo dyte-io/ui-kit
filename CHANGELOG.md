@@ -1,3 +1,13 @@
+# [2.4.0-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.2...@dyte-in/ui-kit-v2.4.0-staging.3) (2025-03-21)
+
+
+### Bug Fixes
+
+* remove unused ai components ([02fc5cf](https://github.com/dyte-io/ui-kit/commit/02fc5cf2fba07312faa5c3d8553774901d9d6456))
+* remove unused props from primitive components ([b1198e8](https://github.com/dyte-io/ui-kit/commit/b1198e8c95c0c8fadc2a105bed3183dd2921ebbc))
+* show transcriptions in ai component ([d3b42db](https://github.com/dyte-io/ui-kit/commit/d3b42db423c1af06fbeddaf9db7a323d17c7e441))
+* size of transcriptions title ([ba85b7b](https://github.com/dyte-io/ui-kit/commit/ba85b7b20371965c6cf2f67a462cf6f71e60878d))
+
 # [2.4.0-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.1...@dyte-in/ui-kit-v2.4.0-staging.2) (2025-03-12)
 
 
