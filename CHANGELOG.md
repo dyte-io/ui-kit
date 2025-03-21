@@ -1,3 +1,10 @@
+# [2.4.0-staging.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.5...@dyte-in/ui-kit-v2.4.0-staging.6) (2025-03-21)
+
+
+### Bug Fixes
+
+* simplify sync-with-store internals ([f7654d6](https://github.com/dyte-io/ui-kit/commit/f7654d6f33381455c80930c57d473b4ddf2829f4))
+
 # [2.4.0-staging.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.4...@dyte-in/ui-kit-v2.4.0-staging.5) (2025-03-21)
 
 
