@@ -1,3 +1,18 @@
+# [2.4.0-staging.10](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.9...@dyte-in/ui-kit-v2.4.0-staging.10) (2025-03-24)
+
+
+### Bug Fixes
+
+* export getInitialStates() ([47841e3](https://github.com/dyte-io/ui-kit/commit/47841e393583d1e634e0133f6cb53909cfd44e56))
+* react-ui-kit build error on new web-core version ([4f21962](https://github.com/dyte-io/ui-kit/commit/4f219627dc4dc5dc123c02dfb9ce2f9686df53fd))
+* state updates in ui-provider ([82a76e7](https://github.com/dyte-io/ui-kit/commit/82a76e76ab88ca8e0656cbbfe600234003a813d3))
+* sync size with store ([94baeef](https://github.com/dyte-io/ui-kit/commit/94baeef426005b065e0032bc7916716c436abbdb))
+
+
+### Features
+
+* react hooks to listen to store updates ([c0de7f7](https://github.com/dyte-io/ui-kit/commit/c0de7f71af0f68234be20ed78e591755a2629606))
+
 # [2.4.0-staging.9](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.8...@dyte-in/ui-kit-v2.4.0-staging.9) (2025-03-24)
 
 
