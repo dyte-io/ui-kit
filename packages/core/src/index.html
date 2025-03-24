@@ -147,6 +147,30 @@
             },
           };
 
+          const response = await (
+              await fetch('https://api.dyte.io/iceservers', {
+                headers: {
+                  accept: 'application/json, text/plain, */*',
+                  authorization: `Bearer ${authToken}`,
+                  'dyte-tracing-id': '37c2c908-9af5-4c5e-808e-09d51105f2b2',
+                  'sec-ch-ua': '"Chromium";v="134", "Not:A-Brand";v="24", "Google Chrome";v="134"',
+                  'sec-ch-ua-mobile': '?0',
+                  'sec-ch-ua-platform': '"macOS"',
+                  traceparent: '00-37c2c9089af54c5e808e09d51105f2b2-ca95e41dccc047bf-01',
+                  'x-dyte-web-core-version': '1.34.0',
+                },
+                referrer: 'https://app.dyte.io/',
+                referrerPolicy: 'strict-origin-when-cross-origin',
+                body: null,
+                method: 'GET',
+              })
+            ).json();
+            const iceServers = response.iceServers.filter((server) => {
+              const { url } = server;
+              return !url.includes('transport=tcp');
+            });
+
+
           try {
             const meeting = await DyteClient.init({
               roomName,
@@ -154,6 +178,9 @@
               authToken,
               defaults,
               modules,
+              cachedUserDetails: {
+                  iceServers,
+                },
             });
 
             if (!location.href.includes('http://localhost:3333/')) {
