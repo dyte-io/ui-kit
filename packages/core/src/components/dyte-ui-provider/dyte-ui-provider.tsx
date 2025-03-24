@@ -7,7 +7,6 @@ import {
   Host,
   Listen,
   Prop,
-  State,
   Watch,
 } from '@stencil/core';
 import { Meeting, RoomLeftState } from '../../types/dyte-client';
@@ -30,6 +29,7 @@ const LEAVE_ROOM_TIMER = 10000;
 
 @Component({
   tag: 'dyte-ui-provider',
+  styleUrl: 'dyte-ui-provider.css',
 })
 export class DyteUiProvider {
   @Element() host: HTMLDyteUiProviderElement;
@@ -61,9 +61,7 @@ export class DyteUiProvider {
    */
   @Prop() noRenderUntilMeeting: boolean = false;
 
-  @State() states: States;
-
-  /** States */
+  /** States event */
   @Event({ eventName: 'dyteStatesUpdate' }) statesUpdate: EventEmitter<States>;
 
   private authErrorListener: (ev: CustomEvent<Error>) => void;
@@ -227,10 +225,6 @@ export class DyteUiProvider {
   }
 
   render() {
-    return (
-      <Host style={{ display: 'block', width: '100%', height: '100%' }}>
-        {this.noRenderUntilMeeting && !this.meeting ? null : <slot />}
-      </Host>
-    );
+    return <Host>{this.noRenderUntilMeeting && !this.meeting ? null : <slot />}</Host>;
   }
 }
