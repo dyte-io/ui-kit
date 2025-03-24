@@ -18,7 +18,7 @@ import { useLanguage, DyteI18n } from '../../lib/lang';
 })
 export class DyteMenuItem {
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
   @SyncWithStore()

@@ -27,7 +27,7 @@ export class DyteSpotlightIndicator {
   t: DyteI18n = useLanguage();
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   @State() canSpotlight: boolean;
 

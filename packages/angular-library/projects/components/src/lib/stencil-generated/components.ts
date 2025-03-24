@@ -3654,14 +3654,14 @@ export declare interface DyteTranscripts extends Components.DyteTranscripts {}
 
 
 @ProxyCmp({
-  inputs: ['iconPack', 'meeting', 'noRenderUntilMeeting', 't']
+  inputs: ['config', 'iconPack', 'meeting', 'noRenderUntilMeeting', 'showSetupScreen', 'size', 't']
 })
 @Component({
   selector: 'dyte-ui-provider',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['iconPack', 'meeting', 'noRenderUntilMeeting', 't'],
+  inputs: ['config', 'iconPack', 'meeting', 'noRenderUntilMeeting', 'showSetupScreen', 'size', 't'],
 })
 export class DyteUiProvider {
   protected el: HTMLDyteUiProviderElement;

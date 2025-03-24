@@ -20,7 +20,7 @@ export class DyteEndedScreen {
   @Prop() config: UIConfig = defaultConfig;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon */
   @State() icon: IconPack = defaultIconPack;

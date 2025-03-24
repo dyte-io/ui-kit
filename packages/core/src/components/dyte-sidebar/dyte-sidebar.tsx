@@ -62,7 +62,7 @@ export class DyteSidebar {
   t: DyteI18n = useLanguage();
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** View type */
   @Prop({ reflect: true }) view: DyteSidebarView = 'sidebar';

@@ -37,7 +37,7 @@ export class DyteAudioGrid {
   iconPack: IconPack = defaultIconPack;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Language */
   @SyncWithStore()

@@ -72,7 +72,7 @@ export class DyteGrid {
   @Prop({ reflect: true }) gap: number = 8;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** States */
   @SyncWithStore()

@@ -16,7 +16,7 @@ export class DyteCounter {
   @State() input: string = '1';
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Initial value */
   @Prop() value: number;

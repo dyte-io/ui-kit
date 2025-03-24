@@ -21,7 +21,7 @@ export class DyteNotification {
   @Prop() notification!: Notification;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
   @SyncWithStore()

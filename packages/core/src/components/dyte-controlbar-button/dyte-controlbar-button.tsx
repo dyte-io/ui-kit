@@ -21,7 +21,7 @@ export class DyteControlbarButton {
   @Prop() showWarning: boolean = false;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Label of button */
   @Prop() label: string;

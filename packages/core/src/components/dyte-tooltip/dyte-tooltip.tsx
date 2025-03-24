@@ -12,6 +12,7 @@ import {
 import { arrow, computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { Size } from '../../types/props';
 import { Placement } from '../../types/floating-ui';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 export type TooltipVariant = 'primary' | 'secondary';
 export type TooltipKind = 'inline' | 'block';
@@ -48,7 +49,7 @@ export class DyteMenu {
   @Prop({ reflect: true }) kind: TooltipKind = 'inline';
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Placement of menu */
   @Prop() placement: Placement = 'top';

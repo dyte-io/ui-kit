@@ -4,6 +4,7 @@ import {
   Event,
   EventEmitter,
   h,
+  Host,
   Listen,
   Prop,
   State,
@@ -46,7 +47,7 @@ export class DyteUiProvider {
   t: DyteI18n;
 
   /** Config */
-  @Prop() config: UIConfig;
+  @Prop() config: UIConfig = defaultConfig;
 
   /** Size */
   @Prop({ reflect: true, mutable: true }) size: Size;
@@ -101,13 +102,15 @@ export class DyteUiProvider {
   }
 
   disconnectedCallback() {
+    this.resizeObserver.disconnect();
+    window.removeEventListener('dyteError', this.authErrorListener);
+
     if (!this.meeting) return;
     this.meeting.self.removeListener('roomLeft', this.roomLeftListener);
     this.meeting.self.removeListener('roomJoined', this.roomJoinedListener);
     this.meeting.self.removeListener('waitlisted', this.waitlistedListener);
     this.meeting.self.removeListener('mediaPermissionUpdate', this.mediaPermissionUpdateListener);
     this.meeting.meta.removeListener('socketConnectionUpdate', this.socketConnectionUpdateListener);
-    window.removeEventListener('dyteError', this.authErrorListener);
   }
 
   @Watch('meeting')
@@ -162,19 +165,18 @@ export class DyteUiProvider {
     uiStore.state.size = newSize;
   }
 
-  private handleResize() {
+  private handleResize = () => {
     this.size = getSize(this.host.clientWidth);
-  }
+  };
 
   private loadTheme = () => {
-    let config = this.config;
-    if (config === defaultConfig) {
-      const generatedConfig = generateConfig(this.meeting.self.config, this.meeting);
-      config = generatedConfig.config;
+    if (this.config === defaultConfig) {
+      const { config } = generateConfig(this.meeting.self.config, this.meeting);
+      this.config = config;
     }
 
-    if (config.designTokens) {
-      provideDyteDesignSystem(document.documentElement, config.designTokens);
+    if (this.config?.designTokens) {
+      provideDyteDesignSystem(document.documentElement, this.config.designTokens);
     }
   };
 
@@ -225,10 +227,10 @@ export class DyteUiProvider {
   }
 
   render() {
-    if (this.noRenderUntilMeeting && !this.meeting) {
-      return null;
-    }
-
-    return <slot />;
+    return (
+      <Host style={{ display: 'block', width: '100%', height: '100%' }}>
+        {this.noRenderUntilMeeting && !this.meeting ? null : <slot />}
+      </Host>
+    );
   }
 }

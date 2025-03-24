@@ -60,7 +60,7 @@ export class DyteParticipantTile {
   @Prop({ reflect: true }) variant: 'solid' | 'gradient' = 'solid';
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
   @SyncWithStore()

@@ -24,7 +24,7 @@ export class DyteAudioTile {
   @Prop() config: UIConfig;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** States */
   @SyncWithStore()

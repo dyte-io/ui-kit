@@ -18,7 +18,7 @@ export class DyteSpinner {
   iconPack: IconPack = defaultIconPack;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size = 'md';
+  @SyncWithStore() @Prop({ reflect: true }) size: Size = 'md';
 
   render() {
     return (
