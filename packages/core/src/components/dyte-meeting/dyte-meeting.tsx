@@ -121,7 +121,7 @@ export class DyteMeeting {
     if (typeof window !== 'undefined') {
       this.authErrorListener = (ev) => {
         if (ev.detail.message.includes('401')) {
-          this.setStates({ meeting: 'ended', roomLeftState: 'unauthorized' });
+          this.updateStates({ meeting: 'ended', roomLeftState: 'unauthorized' });
         }
       };
       window.addEventListener('dyteError', this.authErrorListener);
