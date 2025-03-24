@@ -1,3 +1,15 @@
+# [2.4.0-staging.7](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.6...@dyte-in/ui-kit-v2.4.0-staging.7) (2025-03-24)
+
+
+### Bug Fixes
+
+* upgrade web-core ([fcf0d18](https://github.com/dyte-io/ui-kit/commit/fcf0d18c49c95dc983e4a49b041b1aafde3bac96))
+
+
+### Features
+
+* show invalid auth token error ([8cba9cc](https://github.com/dyte-io/ui-kit/commit/8cba9cca710c9559400faf66063af1e85c5adcad))
+
 # [2.4.0-staging.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.5...@dyte-in/ui-kit-v2.4.0-staging.6) (2025-03-21)
 
 
