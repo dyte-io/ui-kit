@@ -1,6 +1,6 @@
 {
   "name": "@dytesdk/angular-ui-kit",
-  "version": "2.4.0-staging.8",
+  "version": "2.4.0-staging.9",
   "description": "Dyte's UI Kit to support easy UI development for Angular Projects",
   "peerDependencies": {
     "@angular/common": ">=12",

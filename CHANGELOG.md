@@ -1,3 +1,10 @@
+# [2.4.0-staging.9](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.8...@dyte-in/ui-kit-v2.4.0-staging.9) (2025-03-24)
+
+
+### Bug Fixes
+
+* unreported merge conflict ([b01b792](https://github.com/dyte-io/ui-kit/commit/b01b792ff685d4b61a394b8097f8eebf7b6d6638))
+
 # [2.4.0-staging.8](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.7...@dyte-in/ui-kit-v2.4.0-staging.8) (2025-03-24)
 
 
