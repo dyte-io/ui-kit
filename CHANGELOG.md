@@ -1,3 +1,10 @@
+# [2.4.0-staging.11](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.10...@dyte-in/ui-kit-v2.4.0-staging.11) (2025-03-24)
+
+
+### Bug Fixes
+
+* remove react ui-hooks and cleanup ([3e21e4b](https://github.com/dyte-io/ui-kit/commit/3e21e4b6d9945a8f4633ae9ba4cc91d24c430f4a))
+
 # [2.4.0-staging.10](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.9...@dyte-in/ui-kit-v2.4.0-staging.10) (2025-03-24)
 
 
