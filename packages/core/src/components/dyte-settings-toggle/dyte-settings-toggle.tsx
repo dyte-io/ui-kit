@@ -4,7 +4,6 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 /**
  * A button which toggles visibility of settings module.
@@ -46,12 +45,9 @@ export class DyteSettingsToggle {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   private toggleSettings() {
-    this.stateUpdate.emit({
-      activeSettings: !this.states?.activeSettings,
-      activeMoreMenu: false,
-    });
-    storeState.activeSettings = !storeState.activeSettings;
-    storeState.activeMoreMenu = false;
+    const updatePartial = { activeSettings: true, activeMoreMenu: false };
+    this.states = { ...this.states, ...updatePartial };
+    this.stateUpdate.emit(updatePartial);
   }
 
   render() {

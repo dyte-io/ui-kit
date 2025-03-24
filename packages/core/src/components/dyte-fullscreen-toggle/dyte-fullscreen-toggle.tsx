@@ -10,7 +10,6 @@ import {
 } from '../../utils/full-screen';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 /**
  * A button which toggles full screen mode for any
@@ -80,7 +79,6 @@ export class DyteFullscreenToggle {
       this.fullScreenActive = false;
     }
     this.stateUpdate.emit({ activeMoreMenu: false });
-    storeState.activeMoreMenu = false;
   };
 
   render() {

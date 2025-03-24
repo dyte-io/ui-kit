@@ -5,7 +5,6 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { States } from '../../types/props';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 const steps = {
   'Chrome.Desktop.audio': ['Chrome1.svg', 'Chrome2.svg', 'Chrome3.svg'],
@@ -106,7 +105,6 @@ export class DytePermissionsMessage {
     this.stateUpdate.emit({
       activePermissionsMessage: { enabled: false },
     });
-    storeState.activePermissionsMessage = { enabled: false };
   };
 
   private reload = () => {

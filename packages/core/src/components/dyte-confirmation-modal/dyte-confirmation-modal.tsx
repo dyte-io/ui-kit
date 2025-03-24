@@ -4,7 +4,6 @@ import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 /**
  * A confirmation modal.
@@ -55,15 +54,15 @@ export class DyteConfirmationModal {
   }
 
   private close = () => {
-    this.states.activeConfirmationModal.onClose(this.stateUpdate, storeState, this.meeting);
+    this.states.activeConfirmationModal.onClose(this.stateUpdate, this.states, this.meeting);
     this.stateUpdate.emit({ activeConfirmationModal: { active: false } });
-    storeState.activeConfirmationModal = { active: false };
+    this.states.activeConfirmationModal = { active: false };
   };
 
   private onConfirmation = async () => {
-    this.states.activeConfirmationModal.onClick(this.stateUpdate, storeState, this.meeting);
+    this.states.activeConfirmationModal.onClick(this.stateUpdate, this.states, this.meeting);
     this.stateUpdate.emit({ activeConfirmationModal: { active: false } });
-    storeState.activeConfirmationModal = { active: false };
+    this.states.activeConfirmationModal = { active: false };
   };
 
   render() {

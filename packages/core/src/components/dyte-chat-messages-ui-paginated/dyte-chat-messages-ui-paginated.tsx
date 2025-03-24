@@ -15,7 +15,6 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { ChatChannel, Size, States } from '../../types/props';
 import { SyncWithStore } from '../../utils/sync-with-store';
-import storeState from '../../lib/store';
 
 @Component({
   tag: 'dyte-chat-messages-ui-paginated',
@@ -263,7 +262,6 @@ export class DyteChatMessagesUiPaginated {
                     url={message.link}
                     onPreview={() => {
                       this.stateUpdate.emit({ image: message });
-                      storeState.image = message;
                     }}
                   ></dyte-image-message-view>
                 )}

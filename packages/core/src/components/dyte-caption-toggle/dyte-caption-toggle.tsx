@@ -3,7 +3,6 @@ import { defaultConfig, defaultIconPack, IconPack, Size, States, UIConfig } from
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
 import { SyncWithStore } from '../../utils/sync-with-store';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 
@@ -72,11 +71,7 @@ export class DyteCaptionToggle {
   };
 
   private toggleCaptions() {
-    this.stateUpdate.emit({ activeCaptions: !storeState.activeCaptions });
-    storeState.activeCaptions = !storeState.activeCaptions;
-
-    this.stateUpdate.emit({ activeMoreMenu: false });
-    storeState.activeMoreMenu = false;
+    this.stateUpdate.emit({ activeCaptions: !this.states.activeCaptions, activeMoreMenu: false });
   }
 
   render() {

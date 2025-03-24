@@ -1945,18 +1945,18 @@ export class DyteMeeting {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['dyteStateUpdate']);
+    proxyOutputs(this, this.el, ['dyteStatesUpdate']);
   }
 }
 
 
-import type { PartialStateEvent as IDyteMeetingPartialStateEvent } from '@dytesdk/ui-kit';
+import type { States as IDyteMeetingStates } from '@dytesdk/ui-kit';
 
 export declare interface DyteMeeting extends Components.DyteMeeting {
   /**
-   * Emits updated state data
+   * States
    */
-  dyteStateUpdate: EventEmitter<CustomEvent<IDyteMeetingPartialStateEvent>>;
+  dyteStatesUpdate: EventEmitter<CustomEvent<IDyteMeetingStates>>;
 }
 
 
@@ -2410,14 +2410,14 @@ export declare interface DytePaginatedList extends Components.DytePaginatedList 
 
 
 @ProxyCmp({
-  inputs: ['config', 'iconPack', 'meeting', 'participant', 't', 'view']
+  inputs: ['config', 'iconPack', 'meeting', 'participant', 'states', 't', 'view']
 })
 @Component({
   selector: 'dyte-participant',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['config', 'iconPack', 'meeting', 'participant', 't', 'view'],
+  inputs: ['config', 'iconPack', 'meeting', 'participant', 'states', 't', 'view'],
 })
 export class DyteParticipant {
   protected el: HTMLDyteParticipantElement;
@@ -2574,14 +2574,14 @@ export declare interface DyteParticipantsAudio extends Components.DyteParticipan
 
 
 @ProxyCmp({
-  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
+  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 'states', 't', 'view']
 })
 @Component({
   selector: 'dyte-participants-stage-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 't', 'view'],
+  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 'states', 't', 'view'],
 })
 export class DyteParticipantsStageList {
   protected el: HTMLDyteParticipantsStageListElement;
@@ -3415,14 +3415,14 @@ export declare interface DyteStage extends Components.DyteStage {
 
 
 @ProxyCmp({
-  inputs: ['iconPack', 'meeting', 'size', 't', 'variant']
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't', 'variant']
 })
 @Component({
   selector: 'dyte-stage-toggle',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['iconPack', 'meeting', 'size', 't', 'variant'],
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't', 'variant'],
 })
 export class DyteStageToggle {
   protected el: HTMLDyteStageToggleElement;
@@ -3528,36 +3528,6 @@ export declare interface DyteTextComposerView extends Components.DyteTextCompose
    * Event emitted when text changes
    */
   textChange: EventEmitter<CustomEvent<string>>;
-}
-
-
-@ProxyCmp({
-  inputs: ['disabled', 'iconPack', 'placeholder', 't', 'type']
-})
-@Component({
-  selector: 'dyte-text-field',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['disabled', 'iconPack', 'placeholder', 't', 'type'],
-})
-export class DyteTextField {
-  protected el: HTMLDyteTextFieldElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['dyteStateUpdate']);
-  }
-}
-
-
-import type { States as IDyteTextFieldStates } from '@dytesdk/ui-kit';
-
-export declare interface DyteTextField extends Components.DyteTextField {
-  /**
-   * Emits updated state data
-   */
-  dyteStateUpdate: EventEmitter<CustomEvent<IDyteTextFieldStates>>;
 }
 
 
@@ -3698,11 +3668,19 @@ export class DyteUiProvider {
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['dyteStatesUpdate']);
   }
 }
 
 
-export declare interface DyteUiProvider extends Components.DyteUiProvider {}
+import type { States as IDyteUiProviderStates } from '@dytesdk/ui-kit';
+
+export declare interface DyteUiProvider extends Components.DyteUiProvider {
+  /**
+   * States
+   */
+  dyteStatesUpdate: EventEmitter<CustomEvent<IDyteUiProviderStates>>;
+}
 
 
 @ProxyCmp({

@@ -5,7 +5,6 @@ import { UIConfig } from '../../types/ui-config';
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Render } from '../../lib/render';
-import storeState from '../../lib/store';
 import { defaultConfig } from '../../exports';
 import { SyncWithStore } from '../../utils/sync-with-store';
 import { debounce } from 'lodash-es';
@@ -107,7 +106,6 @@ export class DyteParticipants {
 
   @Watch('currentParticipantsTabId')
   currentParticipantsTabIdChanged() {
-    storeState.participantsTabId = this.currentParticipantsTabId;
     this.stateUpdate.emit({
       participantsTabId: this.currentParticipantsTabId,
     });
@@ -237,7 +235,7 @@ export class DyteParticipants {
   render() {
     const defaults = {
       meeting: this.meeting,
-      states: this.states || storeState,
+      states: this.states,
       config: this.config,
       size: this.size,
       iconPack: this.iconPack,
