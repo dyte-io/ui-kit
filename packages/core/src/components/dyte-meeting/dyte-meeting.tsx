@@ -137,7 +137,17 @@ export class DyteMeeting {
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<PartialStateEvent>;
 
+  private authErrorListener: (ev: CustomEvent<Error>) => void;
+
   connectedCallback() {
+    if (typeof window !== 'undefined') {
+      this.authErrorListener = (ev) => {
+        if (ev.detail.message.includes('401')) {
+          this.setStates({ meeting: 'ended', roomLeftState: 'unauthorized' });
+        }
+      };
+      window.addEventListener('dyteError', this.authErrorListener);
+    }
     this.leaveRoomTimer = 10000;
     this.loadConfigFromPreset = true;
     this.applyDesignSystem = true;
@@ -227,6 +237,8 @@ export class DyteMeeting {
         meeting.joinRoom();
       }
     }
+
+    window.removeEventListener('dyteError', this.authErrorListener);
   }
 
   @Listen('dyteStateUpdate')

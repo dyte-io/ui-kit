@@ -94,6 +94,9 @@ export class DyteEndedScreen {
         case 'connected-meeting':
           this.message = this.getBreakoutRoomsMessage(states);
           break;
+        case 'unauthorized':
+          this.message = 'ended.unauthorized';
+          break;
         default:
           this.message = 'ended';
       }
