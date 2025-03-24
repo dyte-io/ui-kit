@@ -1,0 +1,1 @@
+import{c as s}from"./p-c709b180.js";import{g as o}from"./p-e497ad6d.js";const{state:a,onChange:p}=s({prefs:o()});export{p as o,a as s}
