@@ -1,3 +1,10 @@
+# [2.4.0-staging.8](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.7...@dyte-in/ui-kit-v2.4.0-staging.8) (2025-03-24)
+
+
+### Bug Fixes
+
+* simplified state management ([057e883](https://github.com/dyte-io/ui-kit/commit/057e88374632cf7e9012af3775ca5951a20b8361))
+
 # [2.4.0-staging.7](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.6...@dyte-in/ui-kit-v2.4.0-staging.7) (2025-03-24)
 
 
