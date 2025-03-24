@@ -3851,6 +3851,10 @@ export namespace Components {
     }
     interface DyteUiProvider {
         /**
+          * Config
+         */
+        "config": UIConfig1;
+        /**
           * Icon pack
          */
         "iconPack": IconPack1;
@@ -3863,6 +3867,14 @@ export namespace Components {
           * @default false
          */
         "noRenderUntilMeeting": boolean;
+        /**
+          * Whether to show setup screen or not
+         */
+        "showSetupScreen": boolean;
+        /**
+          * Size
+         */
+        "size": Size1;
         /**
           * Language utility
          */
@@ -10756,6 +10768,10 @@ declare namespace LocalJSX {
     }
     interface DyteUiProvider {
         /**
+          * Config
+         */
+        "config"?: UIConfig1;
+        /**
           * Icon pack
          */
         "iconPack"?: IconPack1;
@@ -10772,6 +10788,14 @@ declare namespace LocalJSX {
           * States
          */
         "onDyteStatesUpdate"?: (event: DyteUiProviderCustomEvent<States1>) => void;
+        /**
+          * Whether to show setup screen or not
+         */
+        "showSetupScreen"?: boolean;
+        /**
+          * Size
+         */
+        "size"?: Size1;
         /**
           * Language utility
          */

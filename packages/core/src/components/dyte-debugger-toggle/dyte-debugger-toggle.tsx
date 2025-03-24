@@ -39,7 +39,7 @@ export class DyteDebuggerToggle {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   private toggleDebugger() {
     this.stateUpdate.emit({

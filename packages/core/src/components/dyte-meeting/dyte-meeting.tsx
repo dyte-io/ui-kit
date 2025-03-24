@@ -156,6 +156,7 @@ export class DyteMeeting {
     }
     this.resizeObserver.disconnect();
     this.clearListeners(this.meeting);
+    window.removeEventListener('dyteError', this.authErrorListener);
   }
 
   @Watch('meeting')

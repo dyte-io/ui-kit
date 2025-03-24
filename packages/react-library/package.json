@@ -27,7 +27,7 @@
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist",
     "compile": "npm run tsc && tsc -p tsconfig.es.json",
-    "tsc": "tsc -p .",
+    "tsc": "tsc -p tsconfig.json",
     "rollup": "rollup -c",
     "lint": "echo \"No lint script\"",
     "lint:fix": "echo \"No lint:fix script\"",

@@ -24,7 +24,7 @@ export class DyteAvatar {
   @Prop({ reflect: true }) variant: AvatarVariant = 'circular';
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
   @SyncWithStore()

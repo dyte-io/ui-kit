@@ -41,7 +41,7 @@ export class DyteRecordingToggle {
   iconPack: IconPack = defaultIconPack;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Disable the button */
   @Prop() disabled: boolean = false;

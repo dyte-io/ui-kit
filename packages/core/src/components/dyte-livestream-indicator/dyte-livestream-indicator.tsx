@@ -18,7 +18,7 @@ export class DyteLivestreamIndicator {
   meeting: Meeting;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Language */
   @SyncWithStore()

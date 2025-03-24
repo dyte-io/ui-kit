@@ -102,7 +102,7 @@ export class DyteNotifications {
   t: DyteI18n = useLanguage();
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
   @SyncWithStore()

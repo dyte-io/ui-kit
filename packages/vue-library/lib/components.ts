@@ -1610,6 +1610,9 @@ export const DyteUiProvider = /*@__PURE__*/ defineContainer<JSX.DyteUiProvider>(
   'meeting',
   'iconPack',
   't',
+  'config',
+  'size',
+  'showSetupScreen',
   'noRenderUntilMeeting',
   'dyteStatesUpdate'
 ], [

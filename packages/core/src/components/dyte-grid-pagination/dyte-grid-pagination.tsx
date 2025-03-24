@@ -32,7 +32,7 @@ export class DyteGridPagination {
   states: States;
 
   /** Size Prop */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Variant */
   @Prop({ reflect: true }) variant: GridPaginationVariants = 'rounded';

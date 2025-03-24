@@ -36,7 +36,7 @@ export class DyteAudioVisualizer {
   @Prop() participant: Peer;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
   @SyncWithStore()

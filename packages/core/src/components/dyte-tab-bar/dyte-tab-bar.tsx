@@ -24,7 +24,7 @@ export interface Tab {
 })
 export class DyteTabBar {
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Meeting object */
   @SyncWithStore()

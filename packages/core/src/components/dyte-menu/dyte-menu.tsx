@@ -24,7 +24,7 @@ export class DyteMenu {
   private clickedThis: boolean = false;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Placement of menu */
   @Prop() placement: Placement = 'bottom-end';

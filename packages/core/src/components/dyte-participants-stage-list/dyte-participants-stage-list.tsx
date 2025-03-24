@@ -36,7 +36,7 @@ export class DyteParticipants {
   @Prop() config: UIConfig = defaultConfig;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Hide Stage Participants Count Header */
   @Prop() hideHeader: boolean = false;

@@ -36,7 +36,7 @@ export class DyteSimpleGrid {
   @Prop() gap: number = 8;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Meeting object */
   @SyncWithStore()

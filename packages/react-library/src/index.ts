@@ -1,5 +1,7 @@
 export * from './components';
 
+export * from './hooks/use-dyte-states';
+
 export {
   sendNotification,
   provideDyteDesignSystem,

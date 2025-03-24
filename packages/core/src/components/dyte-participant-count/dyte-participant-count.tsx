@@ -35,7 +35,7 @@ export class DyteParticipantCount {
   t: DyteI18n = useLanguage();
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   @State() participantCount: number = 0;
 

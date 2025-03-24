@@ -1,5 +1,6 @@
 import { Component, Host, h, Prop } from '@stencil/core';
 import { Size } from '../../exports';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 const parseIcon = (icon: string) => {
   try {
@@ -27,7 +28,7 @@ export class DyteIcon {
   @Prop({ reflect: true }) variant: IconVariant = 'primary';
 
   /** Size */
-  @Prop({ reflect: true }) size: Size = 'lg';
+  @SyncWithStore() @Prop({ reflect: true }) size: Size = 'lg';
 
   render() {
     return (

@@ -42,7 +42,7 @@ export class DyteSpeakerSelector {
   @Prop() variant: 'full' | 'inline' = 'full';
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
   @SyncWithStore()

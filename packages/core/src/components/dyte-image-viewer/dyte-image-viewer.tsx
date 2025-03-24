@@ -20,7 +20,7 @@ export class DyteImageViewer {
   @Prop() image!: ImageMessage;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Language */
   @SyncWithStore()

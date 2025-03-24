@@ -4,6 +4,8 @@ import { useLanguage, type DyteI18n } from '../../lib/lang';
 import { defaultIconPack, type IconPack } from '../../lib/icons';
 import { type States } from '../../types/props';
 import { getUserPreferences } from '../user-prefs';
+import { defaultConfig, UIConfig } from '../../exports';
+import { Size } from '../../exports';
 
 export const getInitialStates = (): States => ({
   meeting: 'idle',
@@ -12,9 +14,11 @@ export const getInitialStates = (): States => ({
 
 export interface DyteUIStore {
   meeting: Meeting | undefined;
-  iconPack: IconPack;
   t: DyteI18n;
+  iconPack: IconPack;
   states: States;
+  config: UIConfig;
+  size: Size | undefined;
 }
 
 const uiStore = createStore<DyteUIStore>({
@@ -22,6 +26,8 @@ const uiStore = createStore<DyteUIStore>({
   t: useLanguage(),
   iconPack: defaultIconPack,
   states: getInitialStates(),
+  config: defaultConfig,
+  size: undefined,
 });
 
 const elementsMap = new Map<string, any[]>();

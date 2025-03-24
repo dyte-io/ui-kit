@@ -18,7 +18,7 @@ export class DyteLeaveButton {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
   @SyncWithStore()
