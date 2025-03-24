@@ -263,9 +263,13 @@
           </form>
         </div>
       </div>
-      <dyte-ui-provider x-show="meeting" x-ref="meeting" x-cloak>
-        <dyte-meeting id="dm" :show-setup-screen="data.showSetupScreen ? 'true' : 'false'" />
-      </dyte-ui-provider>
+      <dyte-meeting
+        x-show="meeting"
+        x-ref="meeting"
+        x-cloak
+        id="dm"
+        :show-setup-screen="data.showSetupScreen ? 'true' : 'false'"
+      />
     </div>
   </body>
 </html>

@@ -3677,7 +3677,7 @@ import type { States as IDyteUiProviderStates } from '@dytesdk/ui-kit';
 
 export declare interface DyteUiProvider extends Components.DyteUiProvider {
   /**
-   * States
+   * States event
    */
   dyteStatesUpdate: EventEmitter<CustomEvent<IDyteUiProviderStates>>;
 }

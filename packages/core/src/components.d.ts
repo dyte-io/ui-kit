@@ -10785,7 +10785,7 @@ declare namespace LocalJSX {
          */
         "noRenderUntilMeeting"?: boolean;
         /**
-          * States
+          * States event
          */
         "onDyteStatesUpdate"?: (event: DyteUiProviderCustomEvent<States1>) => void;
         /**
