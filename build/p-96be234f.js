@@ -1,0 +1,1 @@
+const s=s=>s>=1080?"lg":s>=768?"md":"sm";export{s as g}
