@@ -1305,7 +1305,6 @@ export namespace Components {
      * - dyte-leave-meeting
      * - dyte-permissions-message
      * - dyte-image-viewer
-     * - dyte-remote-access-manager
      * - dyte-breakout-rooms-manager
      * This components depends on the values from `states` object.
      */
@@ -4914,7 +4913,6 @@ declare global {
      * - dyte-leave-meeting
      * - dyte-permissions-message
      * - dyte-image-viewer
-     * - dyte-remote-access-manager
      * - dyte-breakout-rooms-manager
      * This components depends on the values from `states` object.
      */
@@ -7974,7 +7972,6 @@ declare namespace LocalJSX {
      * - dyte-leave-meeting
      * - dyte-permissions-message
      * - dyte-image-viewer
-     * - dyte-remote-access-manager
      * - dyte-breakout-rooms-manager
      * This components depends on the values from `states` object.
      */
@@ -11122,7 +11119,6 @@ declare module "@stencil/core" {
              * - dyte-leave-meeting
              * - dyte-permissions-message
              * - dyte-image-viewer
-             * - dyte-remote-access-manager
              * - dyte-breakout-rooms-manager
              * This components depends on the values from `states` object.
              */

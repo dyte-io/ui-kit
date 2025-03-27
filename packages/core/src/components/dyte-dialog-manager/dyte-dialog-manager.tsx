@@ -2,7 +2,6 @@ import { Component, Watch, Host, h, Prop, Event, EventEmitter } from '@stencil/c
 import { defaultConfig } from '../../lib/default-ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Render } from '../../lib/render';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
@@ -15,7 +14,6 @@ import { SyncWithStore } from '../../utils/sync-with-store';
  * - dyte-leave-meeting
  * - dyte-permissions-message
  * - dyte-image-viewer
- * - dyte-remote-access-manager
  * - dyte-breakout-rooms-manager
  *
  * This components depends on the values from `states` object.
@@ -118,11 +116,7 @@ export class DyteDialogManager {
             iconPack={this.iconPack}
             t={this.t}
           >
-            <Render
-              element="dyte-image-viewer"
-              defaults={defaults}
-              props={{ image, onClose: onImageClose }}
-            />
+            <dyte-image-viewer {...defaults} image={image} onClose={onImageClose} />
           </dyte-dialog>
         </Host>
       );
@@ -135,7 +129,7 @@ export class DyteDialogManager {
             iconPack={this.iconPack}
             t={this.t}
           >
-            <Render element="dyte-settings" defaults={defaults} />
+            <dyte-settings {...defaults} />
           </dyte-dialog>
         </Host>
       );
@@ -148,7 +142,7 @@ export class DyteDialogManager {
             iconPack={this.iconPack}
             t={this.t}
           >
-            <Render element="dyte-debugger" defaults={defaults} />
+            <dyte-debugger {...defaults} />
           </dyte-dialog>
         </Host>
       );
@@ -161,7 +155,7 @@ export class DyteDialogManager {
             iconPack={this.iconPack}
             t={this.t}
           >
-            <Render element="dyte-leave-meeting" defaults={defaults} />
+            <dyte-dyte-leave-meeting {...defaults} />
           </dyte-dialog>
         </Host>
       );
@@ -169,20 +163,7 @@ export class DyteDialogManager {
       return (
         <Host>
           <dyte-dialog open hideCloseButton iconPack={this.iconPack} t={this.t}>
-            <Render element="dyte-permissions-message" defaults={defaults} />
-          </dyte-dialog>
-        </Host>
-      );
-    } else if (states?.activeRemoteAccessManager === true) {
-      return (
-        <Host>
-          <dyte-dialog
-            open
-            onDyteDialogClose={() => this.updateStoreState('activeRemoteAccessManager', false)}
-            iconPack={this.iconPack}
-            t={this.t}
-          >
-            <Render element="dyte-remote-access-manager" defaults={defaults} />
+            <dyte-dyte-permissions-message {...defaults} />
           </dyte-dialog>
         </Host>
       );
@@ -200,11 +181,7 @@ export class DyteDialogManager {
             iconPack={this.iconPack}
             t={this.t}
           >
-            <Render
-              element="dyte-breakout-rooms-manager"
-              defaults={defaults}
-              props={{ mode: this.meeting.connectedMeetings.isActive ? 'view' : 'create' }}
-            />
+            <dyte-breakout-rooms-manager {...defaults} />
           </dyte-dialog>
         </Host>
       );
@@ -217,7 +194,7 @@ export class DyteDialogManager {
             iconPack={this.iconPack}
             t={this.t}
           >
-            <Render element="dyte-confirmation-modal" defaults={defaults} />
+            <dyte-confirmation-modal {...defaults} />
           </dyte-dialog>
         </Host>
       );
@@ -241,7 +218,7 @@ export class DyteDialogManager {
             iconPack={this.iconPack}
             t={this.t}
           >
-            <Render element="dyte-broadcast-message-modal" defaults={defaults} />
+            <dyte-broadcast-message-modal {...defaults} />
           </dyte-dialog>
         </Host>
       );
@@ -282,7 +259,7 @@ export class DyteDialogManager {
             iconPack={this.iconPack}
             t={this.t}
           >
-            <Render element="dyte-mute-all-confirmation" defaults={defaults} />
+            <dyte-mute-all-confirmation {...defaults} />
           </dyte-dialog>
         </Host>
       );
@@ -297,7 +274,7 @@ export class DyteDialogManager {
             iconPack={this.iconPack}
             t={this.t}
           >
-            <Render element="dyte-channel-creator" defaults={defaults} />
+            <dyte-channel-creator {...defaults} />
           </dyte-dialog>
         </Host>
       );
