@@ -252,15 +252,15 @@ export class DyteMeeting {
       t: this.t,
     };
 
+    if (uiState.states.viewType === 'CHAT') {
+      return <dyte-chat {...defaults} />;
+    }
+
     const elementProps = {
       'dyte-grid': {
         layout: this.gridLayout,
       },
     };
-
-    if (uiState.states.viewType === 'CHAT') {
-      return <Render element="dyte-chat" defaults={defaults} />;
-    }
 
     return <Render element="dyte-meeting" defaults={defaults} asHost elementProps={elementProps} />;
   }
