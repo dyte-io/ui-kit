@@ -239,18 +239,15 @@ export class DyteMixedGrid {
               />
             ))}
             {this.plugins.map((plugin) => (
-              <Render
-                element="dyte-plugin-main"
-                defaults={defaults}
-                props={{
-                  plugin,
-                  key: plugin.id,
-                  style: {
-                    display:
-                      this.activeTab?.type === 'plugin' && this.activeTab?.plugin.id === plugin.id
-                        ? 'flex'
-                        : 'none',
-                  },
+              <dyte-plugin-main
+                {...defaults}
+                plugin={plugin}
+                key={plugin.id}
+                style={{
+                  display:
+                    this.activeTab?.type === 'plugin' && this.activeTab?.plugin.id === plugin.id
+                      ? 'flex'
+                      : 'none',
                 }}
               />
             ))}

@@ -12,7 +12,6 @@ import {
   canViewPolls,
 } from '../../utils/sidebar';
 import { DyteSidebarTab, DyteSidebarView } from '../dyte-sidebar-ui/dyte-sidebar-ui';
-import { Render } from '../../lib/render';
 import { SyncWithStore } from '../../utils/sync-with-store';
 import { StageStatus } from '@dytesdk/web-core';
 
@@ -200,22 +199,12 @@ export class DyteSidebar {
               </dyte-button>
             </div>
           )}
-          {defaults.states.sidebar === 'chat' && (
-            <Render element="dyte-chat" defaults={defaults} props={{ slot: 'chat' }} />
-          )}
-          {defaults.states.sidebar === 'polls' && (
-            <Render element="dyte-polls" defaults={defaults} props={{ slot: 'polls' }} />
-          )}
+          {defaults.states.sidebar === 'chat' && <dyte-chat {...defaults} slot="chat" />}
+          {defaults.states.sidebar === 'polls' && <dyte-polls {...defaults} slot="polls" />}
           {defaults.states.sidebar === 'participants' && (
-            <Render
-              element="dyte-participants"
-              defaults={defaults}
-              props={{ slot: 'participants' }}
-            />
+            <dyte-participants {...defaults} slot="participants" />
           )}
-          {defaults.states.sidebar === 'plugins' && (
-            <Render element="dyte-plugins" defaults={defaults} props={{ slot: 'plugins' }} />
-          )}
+          {defaults.states.sidebar === 'plugins' && <dyte-plugins {...defaults} slot="plugins" />}
         </dyte-sidebar-ui>
       </Host>
     );

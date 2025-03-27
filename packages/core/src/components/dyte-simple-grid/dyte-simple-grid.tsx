@@ -107,32 +107,33 @@ export class DyteSimpleGrid {
 
     return (
       <Host>
-        {this.participants.map((participant, index) => {
-          const { top, left } = getPosition(index);
+        <slot>
+          {this.participants.map((participant, index) => {
+            const { top, left } = getPosition(index);
 
-          return (
-            <Render
-              element="dyte-participant-tile"
-              defaults={defaults}
-              props={{
-                participant,
-                style: {
-                  position: 'absolute',
-                  top: `${top}px`,
-                  left: `${left}px`,
-                  width: `${width}px`,
-                  height: `${height}px`,
-                },
-                key: participant.id,
-                'data-participant': participant.id,
-                mediaConnection: this.mediaConnection,
-              }}
-              childProps={{ participant }}
-              deepProps
-            />
-          );
-        })}
-        <slot />
+            return (
+              <Render
+                element="dyte-participant-tile"
+                defaults={defaults}
+                props={{
+                  participant,
+                  style: {
+                    position: 'absolute',
+                    top: `${top}px`,
+                    left: `${left}px`,
+                    width: `${width}px`,
+                    height: `${height}px`,
+                  },
+                  key: participant.id,
+                  'data-participant': participant.id,
+                  mediaConnection: this.mediaConnection,
+                }}
+                childProps={{ participant }}
+                deepProps
+              />
+            );
+          })}
+        </slot>
       </Host>
     );
   }

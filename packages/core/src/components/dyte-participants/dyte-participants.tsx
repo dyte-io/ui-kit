@@ -4,7 +4,6 @@ import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { Render } from '../../lib/render';
 import { defaultConfig } from '../../exports';
 import { SyncWithStore } from '../../utils/sync-with-store';
 import { debounce } from 'lodash-es';
@@ -274,14 +273,7 @@ export class DyteParticipants {
           >
             {(!this.currentParticipantsTabId || this.currentParticipantsTabId === 'stage-list') && (
               <div slot="stage-list" style={{ marginTop: '10px', height: '100%' }}>
-                <Render
-                  element="dyte-participants-stage-list"
-                  defaults={defaults}
-                  props={{
-                    search: this.search,
-                    hideHeader: true,
-                  }}
-                />
+                <dyte-participants-stage-list {...defaults} search={this.search} hideHeader />
               </div>
             )}
             {this.currentParticipantsTabId === 'requests' && (
@@ -291,20 +283,13 @@ export class DyteParticipants {
                     {this.t('participants.no_pending_requests')}
                   </div>
                 )}
-                <Render element="dyte-participants-stage-queue" defaults={defaults} />
-                <Render element="dyte-participants-waiting-list" defaults={defaults} />
+                <dyte-participants-stage-queue {...defaults} />
+                <dyte-participants-waiting-list {...defaults} />
               </div>
             )}
             {this.currentParticipantsTabId === 'viewer-list' && (
               <div slot="viewer-list" style={{ marginTop: '10px', height: '100%' }}>
-                <Render
-                  element="dyte-participants-viewer-list"
-                  defaults={defaults}
-                  props={{
-                    search: this.search,
-                    hideHeader: true,
-                  }}
-                />
+                <dyte-participants-viewer-list {...defaults} search={this.search} hideHeader />
               </div>
             )}
           </dyte-sidebar-ui>
