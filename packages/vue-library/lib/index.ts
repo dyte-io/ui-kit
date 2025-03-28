@@ -1,2 +1,3 @@
+export * from '@dytesdk/ui-kit';
 export * from './components';
 export * from './plugin';
