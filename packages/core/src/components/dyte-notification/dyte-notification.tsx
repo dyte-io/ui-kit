@@ -2,6 +2,7 @@ import { Component, Host, h, Prop, EventEmitter, Event, Watch, State } from '@st
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Notification, Size } from '../../types/props';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { TextMessageView } from '../dyte-text-message/components/TextMessage';
 
 /**
@@ -20,13 +21,17 @@ export class DyteNotification {
   @Prop() notification!: Notification;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Dismiss event */
   @Event({ eventName: 'dyteNotificationDismiss' }) dismiss: EventEmitter<string>;
@@ -55,8 +60,6 @@ export class DyteNotification {
               class="icon"
               icon={this.notification.icon}
               variant={this.notification.iconVariant ?? 'primary'}
-              iconPack={this.iconPack}
-              t={this.t}
             />
           )}
           {this.notification.image != null &&
@@ -78,8 +81,6 @@ export class DyteNotification {
                 size="sm"
                 variant={this.notification.button.variant}
                 onClick={() => this.notification.button.onClick()}
-                iconPack={this.iconPack}
-                t={this.t}
               >
                 {this.notification.button.text}
               </dyte-button>
@@ -89,8 +90,6 @@ export class DyteNotification {
               class="dismiss"
               icon={this.iconPack.dismiss}
               onClick={() => this.dismiss.emit(this.notification.id)}
-              iconPack={this.iconPack}
-              t={this.t}
             />
           </div>
         </div>

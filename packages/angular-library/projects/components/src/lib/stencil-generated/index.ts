@@ -3,8 +3,6 @@ import * as d from './components';
 
 export const DIRECTIVES = [
   d.DyteAi,
-  d.DyteAiChat,
-  d.DyteAiHome,
   d.DyteAiToggle,
   d.DyteAiTranscriptions,
   d.DyteAudioGrid,
@@ -133,7 +131,6 @@ export const DIRECTIVES = [
   d.DyteSwitch,
   d.DyteTabBar,
   d.DyteTextComposerView,
-  d.DyteTextField,
   d.DyteTextMessage,
   d.DyteTextMessageView,
   d.DyteTooltip,

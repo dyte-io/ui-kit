@@ -1,29 +1,19 @@
-import {
-  Component,
-  h,
-  State,
-  Element,
-  Listen,
-  Prop,
-  Watch,
-  Event,
-  EventEmitter,
-} from '@stencil/core';
+import { Component, h, Element, Listen, Prop, Watch, Event, EventEmitter } from '@stencil/core';
 import deepMerge from 'lodash-es/merge';
-import { PartialStateEvent, PermissionSettings, Size, States } from '../../types/props';
+import { PermissionSettings, Size, States } from '../../types/props';
 import { getSize } from '../../utils/size';
 import { Meeting, RoomLeftState } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import { defaultIconPack, getIconPack, IconPack } from '../../lib/icons';
+import { defaultIconPack, IconPack } from '../../lib/icons';
 import { UIConfig } from '../../types/ui-config';
 import { defaultConfig } from '../../lib/default-ui-config';
 import { Render } from '../../lib/render';
 import { provideDyteDesignSystem } from '../../index';
-import { getUserPreferences } from '../../utils/user-prefs';
 import { generateConfig } from '../../utils/config';
-import storeState from '../../lib/store';
 import { GridLayout } from '../dyte-grid/dyte-grid';
 import ResizeObserver from 'resize-observer-polyfill';
+import { SyncWithStore } from '../../utils/sync-with-store';
+import { uiState } from '../../utils/sync-with-store/ui-store';
 
 export type MeetingMode = 'fixed' | 'fill';
 
@@ -45,35 +35,30 @@ export class DyteMeeting {
   private leaveRoomTimer: number;
 
   private roomJoinedListener = () => {
-    this.setStates({ meeting: 'joined' });
-    storeState.meeting = 'joined';
+    this.updateStates({ meeting: 'joined' });
   };
 
   private waitlistedListener = () => {
-    this.setStates({ meeting: 'waiting' });
-    storeState.meeting = 'waiting';
+    this.updateStates({ meeting: 'waiting' });
   };
 
   private roomLeftListener = ({ state }: { state: RoomLeftState }) => {
     // Let socketConnectionUpdate listener handle this case.
     if (state === 'disconnected' || state === 'failed') return;
-    this.setStates({ meeting: 'ended', roomLeftState: state });
-    storeState.meeting = 'ended';
-    storeState.roomLeftState = state;
+    this.updateStates({ meeting: 'ended', roomLeftState: state });
   };
 
   private mediaPermissionUpdateListener = ({ kind, message }) => {
     if (['audio', 'video'].includes(kind)) {
       if (
         (message === 'DENIED' || message === 'SYSTEM_DENIED') &&
-        storeState.activeDebugger !== true
+        uiState.states.activeDebugger !== true
       ) {
         const permissionModalSettings: PermissionSettings = {
           enabled: true,
           kind,
         };
-        this.setStates({ activePermissionsMessage: permissionModalSettings });
-        storeState.activePermissionsMessage = permissionModalSettings;
+        this.updateStates({ activePermissionsMessage: permissionModalSettings });
       }
     }
   };
@@ -89,10 +74,10 @@ export class DyteMeeting {
   @Element() host: HTMLDyteMeetingElement;
 
   /** Whether to load config from preset */
-  @Prop() loadConfigFromPreset: boolean = false;
+  @Prop({ mutable: true }) loadConfigFromPreset: boolean = false;
 
   /** Whether to apply the design system on the document root from config */
-  @Prop() applyDesignSystem: boolean = false;
+  @Prop({ mutable: true }) applyDesignSystem: boolean = false;
 
   /** Fill type */
   @Prop({ reflect: true }) mode: MeetingMode = 'fixed';
@@ -101,19 +86,20 @@ export class DyteMeeting {
   @Prop() leaveOnUnmount = false;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Whether to show setup screen or not */
   @Prop({ mutable: true }) showSetupScreen: boolean;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** UI Config */
   @Prop({ mutable: true }) config: UIConfig = defaultConfig;
-
-  /** Icon Pack URL */
-  @Prop({ reflect: true }) iconPackUrl: string;
 
   /** Size */
   @Prop({ reflect: true, mutable: true }) size: Size;
@@ -121,17 +107,25 @@ export class DyteMeeting {
   /** Grid layout */
   @Prop() gridLayout: GridLayout = 'row';
 
-  @State() states: States = {
-    meeting: 'idle',
-    prefs: getUserPreferences(),
-  };
+  /** Icon pack */
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
-  @State() iconPack: IconPack = defaultIconPack;
+  /** States */
+  @Event({ eventName: 'dyteStatesUpdate' }) statesUpdate: EventEmitter<States>;
 
-  /** Emits updated state data */
-  @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<PartialStateEvent>;
+  private authErrorListener: (ev: CustomEvent<Error>) => void;
 
   connectedCallback() {
+    if (typeof window !== 'undefined') {
+      this.authErrorListener = (ev) => {
+        if (ev.detail.message.includes('401')) {
+          this.updateStates({ meeting: 'ended', roomLeftState: 'unauthorized' });
+        }
+      };
+      window.addEventListener('dyteError', this.authErrorListener);
+    }
     this.leaveRoomTimer = 10000;
     this.loadConfigFromPreset = true;
     this.applyDesignSystem = true;
@@ -145,11 +139,10 @@ export class DyteMeeting {
       provideDyteDesignSystem(document.documentElement, this.config.designTokens);
     }
     this.meetingChanged(this.meeting);
-    this.iconPackUrlChanged(this.iconPackUrl);
   }
 
   private clearListeners(meeting: Meeting) {
-    if (meeting == undefined) return;
+    if (!meeting) return;
     meeting.self.removeListener('roomLeft', this.roomLeftListener);
     meeting.self.removeListener('roomJoined', this.roomJoinedListener);
     meeting.self.removeListener('waitlisted', this.waitlistedListener);
@@ -163,13 +156,14 @@ export class DyteMeeting {
     }
     this.resizeObserver.disconnect();
     this.clearListeners(this.meeting);
+    window.removeEventListener('dyteError', this.authErrorListener);
   }
 
   @Watch('meeting')
   meetingChanged(meeting: Meeting) {
-    if (meeting == null) return;
+    if (!meeting) return;
 
-    this.setStates({ viewType: meeting.meta.viewType });
+    this.updateStates({ viewType: meeting.meta.viewType });
 
     if (this.loadConfigFromPreset && meeting.self.config != null) {
       const theme = meeting.self.config;
@@ -187,7 +181,7 @@ export class DyteMeeting {
 
       if (
         meeting.connectedMeetings.supportsConnectedMeetings &&
-        storeState.activeBreakoutRoomsManager?.destinationMeetingId
+        uiState.states.activeBreakoutRoomsManager?.destinationMeetingId
       ) {
         this.showSetupScreen = false;
       }
@@ -211,56 +205,56 @@ export class DyteMeeting {
     }
 
     if (meeting.self.roomJoined) {
-      this.states = { ...this.states, meeting: 'joined' };
-      storeState.meeting = 'joined';
+      this.updateStates({ meeting: 'joined' });
     } else {
       if (this.showSetupScreen) {
-        this.states = { ...this.states, meeting: 'setup' };
-        storeState.meeting = 'setup';
+        this.updateStates({ meeting: 'setup' });
       } else {
         // join directly to the meeting
         meeting.joinRoom();
       }
     }
-  }
 
-  @Watch('iconPackUrl')
-  async iconPackUrlChanged(url: string) {
-    this.iconPack = await getIconPack(url);
+    window.removeEventListener('dyteError', this.authErrorListener);
   }
 
   @Listen('dyteStateUpdate')
   listenState(e: CustomEvent<States>) {
-    e.stopPropagation();
-    this.setStates(e.detail);
+    this.updateStates(e.detail);
   }
 
   private handleChangingMeeting(destinationMeetingId: string) {
-    storeState.activeBreakoutRoomsManager = {
-      ...storeState.activeBreakoutRoomsManager,
-      destinationMeetingId,
-    };
+    this.updateStates({
+      activeBreakoutRoomsManager: {
+        ...uiState.states.activeBreakoutRoomsManager,
+        destinationMeetingId,
+      },
+    });
   }
 
   private handleResize() {
     this.size = getSize(this.host.clientWidth);
   }
 
-  private setStates(states: Partial<States>) {
-    const newStates = Object.assign({}, this.states);
-    deepMerge(newStates, states);
-    this.states = newStates;
+  private updateStates(states: Partial<States>) {
+    const newStates = Object.assign({}, uiState.states);
+    uiState.states = deepMerge(newStates, states);
+    this.statesUpdate.emit(uiState.states);
   }
 
   render() {
     const defaults = {
       meeting: this.meeting,
       size: this.size,
-      states: this.states || storeState,
+      states: uiState.states,
       config: this.config,
       iconPack: this.iconPack,
       t: this.t,
     };
+
+    if (uiState.states.viewType === 'CHAT') {
+      return <dyte-chat {...defaults} />;
+    }
 
     const elementProps = {
       'dyte-grid': {
@@ -268,8 +262,6 @@ export class DyteMeeting {
       },
     };
 
-    if (this.meeting?.meta?.viewType === 'CHAT')
-      return <Render element="dyte-chat" defaults={defaults} />;
     return <Render element="dyte-meeting" defaults={defaults} asHost elementProps={elementProps} />;
   }
 }

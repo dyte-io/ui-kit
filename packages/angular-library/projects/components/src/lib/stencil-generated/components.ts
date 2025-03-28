@@ -8,14 +8,14 @@ import { Components } from '@dytesdk/ui-kit';
 
 
 @ProxyCmp({
-  inputs: ['config', 'defaultSection', 'iconPack', 'meeting', 'size', 'states', 't', 'view']
+  inputs: ['config', 'iconPack', 'meeting', 'size', 'states', 't', 'view']
 })
 @Component({
   selector: 'dyte-ai',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['config', 'defaultSection', 'iconPack', 'meeting', 'size', 'states', 't', 'view'],
+  inputs: ['config', 'iconPack', 'meeting', 'size', 'states', 't', 'view'],
 })
 export class DyteAi {
   protected el: HTMLDyteAiElement;
@@ -35,50 +35,6 @@ export declare interface DyteAi extends Components.DyteAi {
    */
   dyteStateUpdate: EventEmitter<CustomEvent<IDyteAiStates>>;
 }
-
-
-@ProxyCmp({
-  inputs: ['t']
-})
-@Component({
-  selector: 'dyte-ai-chat',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['t'],
-})
-export class DyteAiChat {
-  protected el: HTMLDyteAiChatElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface DyteAiChat extends Components.DyteAiChat {}
-
-
-@ProxyCmp({
-  inputs: ['initialMessages', 'meeting']
-})
-@Component({
-  selector: 'dyte-ai-home',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['initialMessages', 'meeting'],
-})
-export class DyteAiHome {
-  protected el: HTMLDyteAiHomeElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-  }
-}
-
-
-export declare interface DyteAiHome extends Components.DyteAiHome {}
 
 
 @ProxyCmp({
@@ -392,14 +348,14 @@ export declare interface DyteBroadcastMessageModal extends Components.DyteBroadc
 
 
 @ProxyCmp({
-  inputs: ['disabled', 'iconPack', 'kind', 'reverse', 'size', 't', 'type', 'variant']
+  inputs: ['disabled', 'kind', 'reverse', 'size', 'type', 'variant']
 })
 @Component({
   selector: 'dyte-button',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['disabled', 'iconPack', 'kind', 'reverse', 'size', 't', 'type', 'variant'],
+  inputs: ['disabled', 'kind', 'reverse', 'size', 'type', 'variant'],
 })
 export class DyteButton {
   protected el: HTMLDyteButtonElement;
@@ -959,14 +915,14 @@ export declare interface DyteChatToggle extends Components.DyteChatToggle {
 
 
 @ProxyCmp({
-  inputs: ['iconPack', 'meeting', 't']
+  inputs: ['iconPack', 'meeting']
 })
 @Component({
   selector: 'dyte-clock',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['iconPack', 'meeting', 't'],
+  inputs: ['iconPack', 'meeting'],
 })
 export class DyteClock {
   protected el: HTMLDyteClockElement;
@@ -1033,14 +989,14 @@ export declare interface DyteControlbar extends Components.DyteControlbar {}
 
 
 @ProxyCmp({
-  inputs: ['brandIcon', 'disabled', 'icon', 'iconPack', 'isLoading', 'label', 'showWarning', 'size', 't', 'variant']
+  inputs: ['brandIcon', 'disabled', 'icon', 'iconPack', 'isLoading', 'label', 'showWarning', 'size', 'variant']
 })
 @Component({
   selector: 'dyte-controlbar-button',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['brandIcon', 'disabled', 'icon', 'iconPack', 'isLoading', 'label', 'showWarning', 'size', 't', 'variant'],
+  inputs: ['brandIcon', 'disabled', 'icon', 'iconPack', 'isLoading', 'label', 'showWarning', 'size', 'variant'],
 })
 export class DyteControlbarButton {
   protected el: HTMLDyteControlbarButtonElement;
@@ -1443,14 +1399,14 @@ export declare interface DyteFileMessage extends Components.DyteFileMessage {}
 
 
 @ProxyCmp({
-  inputs: ['iconPack', 'name', 'size', 't', 'url']
+  inputs: ['iconPack', 'name', 'size', 'url']
 })
 @Component({
   selector: 'dyte-file-message-view',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['iconPack', 'name', 'size', 't', 'url'],
+  inputs: ['iconPack', 'name', 'size', 'url'],
 })
 export class DyteFileMessageView {
   protected el: HTMLDyteFileMessageViewElement;
@@ -1597,14 +1553,14 @@ export declare interface DyteHeader extends Components.DyteHeader {}
 
 
 @ProxyCmp({
-  inputs: ['icon', 'iconPack', 'size', 't', 'variant']
+  inputs: ['icon', 'size', 'variant']
 })
 @Component({
   selector: 'dyte-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['icon', 'iconPack', 'size', 't', 'variant'],
+  inputs: ['icon', 'size', 'variant'],
 })
 export class DyteIcon {
   protected el: HTMLDyteIconElement;
@@ -1975,32 +1931,32 @@ export declare interface DyteMarkdownView extends Components.DyteMarkdownView {}
 
 
 @ProxyCmp({
-  inputs: ['applyDesignSystem', 'config', 'gridLayout', 'iconPackUrl', 'leaveOnUnmount', 'loadConfigFromPreset', 'meeting', 'mode', 'showSetupScreen', 'size', 't']
+  inputs: ['applyDesignSystem', 'config', 'gridLayout', 'iconPack', 'leaveOnUnmount', 'loadConfigFromPreset', 'meeting', 'mode', 'showSetupScreen', 'size', 't']
 })
 @Component({
   selector: 'dyte-meeting',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['applyDesignSystem', 'config', 'gridLayout', 'iconPackUrl', 'leaveOnUnmount', 'loadConfigFromPreset', 'meeting', 'mode', 'showSetupScreen', 'size', 't'],
+  inputs: ['applyDesignSystem', 'config', 'gridLayout', 'iconPack', 'leaveOnUnmount', 'loadConfigFromPreset', 'meeting', 'mode', 'showSetupScreen', 'size', 't'],
 })
 export class DyteMeeting {
   protected el: HTMLDyteMeetingElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['dyteStateUpdate']);
+    proxyOutputs(this, this.el, ['dyteStatesUpdate']);
   }
 }
 
 
-import type { PartialStateEvent as IDyteMeetingPartialStateEvent } from '@dytesdk/ui-kit';
+import type { States as IDyteMeetingStates } from '@dytesdk/ui-kit';
 
 export declare interface DyteMeeting extends Components.DyteMeeting {
   /**
-   * Emits updated state data
+   * States
    */
-  dyteStateUpdate: EventEmitter<CustomEvent<IDyteMeetingPartialStateEvent>>;
+  dyteStatesUpdate: EventEmitter<CustomEvent<IDyteMeetingStates>>;
 }
 
 
@@ -2454,14 +2410,14 @@ export declare interface DytePaginatedList extends Components.DytePaginatedList 
 
 
 @ProxyCmp({
-  inputs: ['config', 'iconPack', 'meeting', 'participant', 't', 'view']
+  inputs: ['config', 'iconPack', 'meeting', 'participant', 'states', 't', 'view']
 })
 @Component({
   selector: 'dyte-participant',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['config', 'iconPack', 'meeting', 'participant', 't', 'view'],
+  inputs: ['config', 'iconPack', 'meeting', 'participant', 'states', 't', 'view'],
 })
 export class DyteParticipant {
   protected el: HTMLDyteParticipantElement;
@@ -2618,14 +2574,14 @@ export declare interface DyteParticipantsAudio extends Components.DyteParticipan
 
 
 @ProxyCmp({
-  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 't', 'view']
+  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 'states', 't', 'view']
 })
 @Component({
   selector: 'dyte-participants-stage-list',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 't', 'view'],
+  inputs: ['config', 'hideHeader', 'iconPack', 'meeting', 'search', 'size', 'states', 't', 'view'],
 })
 export class DyteParticipantsStageList {
   protected el: HTMLDyteParticipantsStageListElement;
@@ -3363,14 +3319,14 @@ export declare interface DyteSpeakerSelector extends Components.DyteSpeakerSelec
 
 
 @ProxyCmp({
-  inputs: ['iconPack', 'size', 't']
+  inputs: ['iconPack', 'size']
 })
 @Component({
   selector: 'dyte-spinner',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['iconPack', 'size', 't'],
+  inputs: ['iconPack', 'size'],
 })
 export class DyteSpinner {
   protected el: HTMLDyteSpinnerElement;
@@ -3459,14 +3415,14 @@ export declare interface DyteStage extends Components.DyteStage {
 
 
 @ProxyCmp({
-  inputs: ['iconPack', 'meeting', 'size', 't', 'variant']
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't', 'variant']
 })
 @Component({
   selector: 'dyte-stage-toggle',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['iconPack', 'meeting', 'size', 't', 'variant'],
+  inputs: ['iconPack', 'meeting', 'size', 'states', 't', 'variant'],
 })
 export class DyteStageToggle {
   protected el: HTMLDyteStageToggleElement;
@@ -3576,36 +3532,6 @@ export declare interface DyteTextComposerView extends Components.DyteTextCompose
 
 
 @ProxyCmp({
-  inputs: ['disabled', 'iconPack', 'placeholder', 't', 'type']
-})
-@Component({
-  selector: 'dyte-text-field',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  template: '<ng-content></ng-content>',
-  // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['disabled', 'iconPack', 'placeholder', 't', 'type'],
-})
-export class DyteTextField {
-  protected el: HTMLDyteTextFieldElement;
-  constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
-    c.detach();
-    this.el = r.nativeElement;
-    proxyOutputs(this, this.el, ['dyteStateUpdate']);
-  }
-}
-
-
-import type { States as IDyteTextFieldStates } from '@dytesdk/ui-kit';
-
-export declare interface DyteTextField extends Components.DyteTextField {
-  /**
-   * Emits updated state data
-   */
-  dyteStateUpdate: EventEmitter<CustomEvent<IDyteTextFieldStates>>;
-}
-
-
-@ProxyCmp({
   inputs: ['iconPack', 'isContinued', 'message', 'now', 'showBubble', 't']
 })
 @Component({
@@ -3650,14 +3576,14 @@ export declare interface DyteTextMessageView extends Components.DyteTextMessageV
 
 
 @ProxyCmp({
-  inputs: ['delay', 'disabled', 'iconPack', 'kind', 'label', 'open', 'placement', 'size', 't', 'variant']
+  inputs: ['delay', 'disabled', 'kind', 'label', 'open', 'placement', 'size', 'variant']
 })
 @Component({
   selector: 'dyte-tooltip',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['delay', 'disabled', 'iconPack', 'kind', 'label', 'open', 'placement', 'size', 't', 'variant'],
+  inputs: ['delay', 'disabled', 'kind', 'label', 'open', 'placement', 'size', 'variant'],
 })
 export class DyteTooltip {
   protected el: HTMLDyteTooltipElement;
@@ -3728,25 +3654,33 @@ export declare interface DyteTranscripts extends Components.DyteTranscripts {}
 
 
 @ProxyCmp({
-  inputs: ['applyDesignSystem', 'config', 'iconPackUrl', 'joinRoom', 'loadConfigFromPreset', 'meeting', 'size', 't']
+  inputs: ['config', 'iconPack', 'meeting', 'noRenderUntilMeeting', 'showSetupScreen', 'size', 't']
 })
 @Component({
   selector: 'dyte-ui-provider',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['applyDesignSystem', 'config', 'iconPackUrl', 'joinRoom', 'loadConfigFromPreset', 'meeting', 'size', 't'],
+  inputs: ['config', 'iconPack', 'meeting', 'noRenderUntilMeeting', 'showSetupScreen', 'size', 't'],
 })
 export class DyteUiProvider {
   protected el: HTMLDyteUiProviderElement;
   constructor(c: ChangeDetectorRef, r: ElementRef, protected z: NgZone) {
     c.detach();
     this.el = r.nativeElement;
+    proxyOutputs(this, this.el, ['dyteStatesUpdate']);
   }
 }
 
 
-export declare interface DyteUiProvider extends Components.DyteUiProvider {}
+import type { States as IDyteUiProviderStates } from '@dytesdk/ui-kit';
+
+export declare interface DyteUiProvider extends Components.DyteUiProvider {
+  /**
+   * States event
+   */
+  dyteStatesUpdate: EventEmitter<CustomEvent<IDyteUiProviderStates>>;
+}
 
 
 @ProxyCmp({

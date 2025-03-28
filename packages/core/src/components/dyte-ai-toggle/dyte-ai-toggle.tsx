@@ -1,10 +1,10 @@
 import { Component, Host, h, Prop, State, Event, EventEmitter, Watch } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState from '../../lib/store';
 import { Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 import { Meeting } from '../../types/dyte-client';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 
 @Component({
@@ -17,19 +17,27 @@ export class DyteAiToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() aiActive: boolean = false;
 
@@ -38,21 +46,17 @@ export class DyteAiToggle {
 
   @Watch('states')
   statesChanged(s?: States) {
-    const states = s || storeState;
+    const states = s;
     this.aiActive = states.activeAI;
   }
 
   private toggleAI() {
-    const states = this.states || storeState;
-    this.aiActive = !states?.activeAI;
+    this.aiActive = !this.states?.activeAI;
     this.stateUpdate.emit({
       activeAI: this.aiActive,
       activeMoreMenu: false,
       activeSidebar: false,
     });
-    storeState.activeAI = this.aiActive;
-    storeState.activeMoreMenu = false;
-    storeState.activeSidebar = false;
   }
 
   render() {
@@ -68,7 +72,6 @@ export class DyteAiToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           class={{ active: this.aiActive }}
           onClick={() => this.toggleAI()}
           icon={this.iconPack.meeting_ai}

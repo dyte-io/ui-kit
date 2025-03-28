@@ -1,6 +1,7 @@
 import { Component, Host, Prop, h } from '@stencil/core';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { ChatChannel } from '../../types/props';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteBasicParticipant } from '@dytesdk/web-core';
 
 @Component({
@@ -13,10 +14,14 @@ export class DyteChannelDetails {
   @Prop() channel!: ChatChannel;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** List of channel members */
   @Prop() members: DyteBasicParticipant[] = [];

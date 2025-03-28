@@ -20,6 +20,7 @@ import {
   isFullScreenSupported,
   requestFullScreen,
 } from '../../utils/full-screen';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteParticipant, DyteSelf } from '@dytesdk/web-core';
 
 /**
@@ -67,19 +68,25 @@ export class DyteScreenshareView {
   @Prop() participant!: Peer;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Variant */
   @Prop({ reflect: true }) variant: 'solid' | 'gradient' = 'solid';
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() videoExpanded: boolean = false;
 
@@ -204,22 +211,14 @@ export class DyteScreenshareView {
         <div id="controls" key="controls">
           {/* Full screen button */}
           {!this.hideFullScreenButton && !isSelf && isFullScreenSupported() && (
-            <dyte-tooltip label={text} iconPack={this.iconPack} t={this.t}>
+            <dyte-tooltip label={text}>
               <dyte-button
                 id="full-screen-btn"
                 kind="icon"
                 onClick={this.toggleFullScreen}
                 title={text}
-                iconPack={this.iconPack}
-                t={this.t}
               >
-                <dyte-icon
-                  icon={icon}
-                  aria-hidden={true}
-                  tabIndex={-1}
-                  iconPack={this.iconPack}
-                  t={this.t}
-                />
+                <dyte-icon icon={icon} aria-hidden={true} tabIndex={-1} />
               </dyte-button>
             </dyte-tooltip>
           )}
@@ -236,23 +235,14 @@ export class DyteScreenshareView {
                   onClick={() => {
                     this.meeting.self.disableScreenShare();
                   }}
-                  iconPack={this.iconPack}
-                  t={this.t}
                 >
-                  <dyte-icon
-                    icon={this.iconPack.share_screen_stop}
-                    slot="start"
-                    iconPack={this.iconPack}
-                    t={this.t}
-                  />
+                  <dyte-icon icon={this.iconPack.share_screen_stop} slot="start" />
                   {this.t('screenshare.stop')}
                 </dyte-button>
               )}
               <dyte-button
                 variant="secondary"
                 id="expand-btn"
-                iconPack={this.iconPack}
-                t={this.t}
                 onClick={() => {
                   this.videoExpanded = !this.videoExpanded;
                 }}
@@ -264,8 +254,6 @@ export class DyteScreenshareView {
                       : this.iconPack.full_screen_maximize
                   }
                   slot="start"
-                  iconPack={this.iconPack}
-                  t={this.t}
                 />
                 {this.videoExpanded
                   ? this.t('screenshare.min_preview')

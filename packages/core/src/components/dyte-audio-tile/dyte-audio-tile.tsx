@@ -4,6 +4,7 @@ import { UIConfig } from '../../types/ui-config';
 import { Size } from '../../types/props';
 import { DyteI18n, IconPack, States, defaultIconPack, useLanguage } from '../../exports';
 import hark from 'hark';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteParticipant } from '@dytesdk/web-core';
 
 @Component({
@@ -15,22 +16,30 @@ export class DyteAudioTile {
   private hark: hark.Harker;
 
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Config */
   @Prop() config: UIConfig;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** States */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Participant object */
   @Prop() participant: Peer;

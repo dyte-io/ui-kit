@@ -8,6 +8,7 @@ import { Meeting, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { formatName, shorten } from '../../utils/string';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { GridLayout } from '../dyte-grid/dyte-grid';
 
 export interface Tab {
@@ -23,13 +24,17 @@ export interface Tab {
 })
 export class DyteTabBar {
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** UI Config */
   @Prop() config: UIConfig = defaultConfig;
@@ -38,10 +43,14 @@ export class DyteTabBar {
   @Prop({ reflect: true }) layout: GridLayout = 'row';
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Active tab */
   @Prop() activeTab: Tab;
@@ -83,8 +92,6 @@ export class DyteTabBar {
                 title={`${name}'s Screen Share`}
                 key={tab.participant.id}
                 kind="icon"
-                iconPack={this.iconPack}
-                t={this.t}
                 variant={isActive ? 'primary' : 'secondary'}
                 class={{
                   tab: true,
@@ -93,11 +100,7 @@ export class DyteTabBar {
                 onClick={() => this.tabChange.emit(tab)}
               >
                 <div class="center col">
-                  <dyte-icon
-                    icon={this.iconPack.share_screen_person}
-                    iconPack={this.iconPack}
-                    t={this.t}
-                  />
+                  <dyte-icon icon={this.iconPack.share_screen_person} />
                   <span class="name">
                     {participant.id === this.meeting?.self.id ? this.t('you') : shorten(name, 6)}
                   </span>
@@ -111,8 +114,6 @@ export class DyteTabBar {
                 title={plugin.name}
                 key={plugin.id}
                 kind="icon"
-                iconPack={this.iconPack}
-                t={this.t}
                 variant={isActive ? 'primary' : 'secondary'}
                 class={{
                   tab: true,

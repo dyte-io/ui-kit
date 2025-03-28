@@ -4,6 +4,7 @@ import { ChatHead } from '../dyte-chat/components/ChatHead';
 import { Meeting } from '../../types/dyte-client';
 import { Transcript } from '../../types/props';
 import { smoothScrollToBottom } from '../../utils/scroll';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import clone from '../../utils/clone';
 
 @Component({
@@ -18,13 +19,15 @@ export class DyteAiTranscriptions {
 
   @State() isProcessing = false;
 
-  @State() captionViewEnabled = false;
-
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   @State() transcriptions: Transcript[] = [];
 
@@ -149,16 +152,6 @@ export class DyteAiTranscriptions {
   render() {
     return (
       <Host>
-        {/* <div class="caption-view">
-          <div>{this.t('ai.caption_view')}</div>
-          <dyte-switch
-            checked={this.captionViewEnabled}
-            onDyteChange={(e) => {
-              this.captionViewEnabled = e.detail;
-            }}
-          />
-        </div> */}
-
         <div class="search-bar">
           <input
             type="text"
@@ -184,8 +177,6 @@ export class DyteAiTranscriptions {
             {this.renderTranscripts()}
           </div>
         )}
-
-        {this.captionViewEnabled && <dyte-ai-caption />}
       </Host>
     );
   }

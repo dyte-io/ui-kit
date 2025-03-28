@@ -3,6 +3,7 @@ import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Size } from '../../types/props';
 
 /**
@@ -19,16 +20,22 @@ export class DyteRecordingIndicator {
   private updateRecordingStatus: (recordingState: RecordingState) => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   @State() isRecording: boolean;
 
@@ -66,8 +73,6 @@ export class DyteRecordingIndicator {
               aria-hidden={true}
               tabIndex={-1}
               part="icon"
-              iconPack={this.iconPack}
-              t={this.t}
             />
             <span>{this.t('recording.label')}</span>
           </div>

@@ -2,6 +2,7 @@ import { Component, Host, h, Prop, Watch, State, writeTask } from '@stencil/core
 import { Meeting } from '../../types/dyte-client';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Size } from '../../types/props';
 
 /**
@@ -23,19 +24,25 @@ import { Size } from '../../types/props';
 })
 export class DyteCameraSelector {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** variant */
   @Prop() variant: 'full' | 'inline' = 'full';
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() videoDevices: MediaDeviceInfo[] = [];
 
@@ -119,12 +126,7 @@ export class DyteCameraSelector {
           <div class={'group container ' + this.variant} part="camera-selection">
             <label>
               {this.variant !== 'inline' && this.t('camera')}
-              <dyte-icon
-                icon={this.iconPack.video_on}
-                iconPack={this.iconPack}
-                t={this.t}
-                size="sm"
-              />
+              <dyte-icon icon={this.iconPack.video_on} size="sm" />
             </label>
             <div class="row">
               <select

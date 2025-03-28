@@ -3,8 +3,8 @@ import { DyteI18n, defaultLanguage, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import storeState, { onChange } from '../../lib/store';
 import { defaultConfig } from '../../exports';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Meeting } from '../../types/dyte-client';
 
 /**
@@ -16,44 +16,46 @@ import { Meeting } from '../../types/dyte-client';
   shadow: true,
 })
 export class DyteEndedScreen {
-  private removeStateChangeListener: () => void;
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon */
   @State() icon: IconPack = defaultIconPack;
 
   /** Global states */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   @State() message: string = '';
 
   /** Global states */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   connectedCallback() {
     this.statesChanged(this.states);
-    this.removeStateChangeListener = onChange('roomLeftState', () => this.statesChanged());
-  }
-
-  disconnectedCallback() {
-    this.removeStateChangeListener && this.removeStateChangeListener();
   }
 
   private getBreakoutRoomsMessage(states: States) {
     let message: keyof typeof defaultLanguage;
     if (states?.roomLeftState === 'connected-meeting') {
       if (
-        storeState.activeBreakoutRoomsManager?.destinationMeetingId ===
+        this.states.activeBreakoutRoomsManager?.destinationMeetingId ===
         this.meeting.connectedMeetings.parentMeeting.id
       ) {
         message = 'breakout_rooms.move_reason.switch_main_room';
@@ -66,8 +68,7 @@ export class DyteEndedScreen {
   }
 
   @Watch('states')
-  statesChanged(s?: States) {
-    const states = s || storeState;
+  statesChanged(states: States) {
     if (states != null) {
       switch (states?.roomLeftState) {
         case 'left':
@@ -84,6 +85,9 @@ export class DyteEndedScreen {
           break;
         case 'connected-meeting':
           this.message = this.getBreakoutRoomsMessage(states);
+          break;
+        case 'unauthorized':
+          this.message = 'ended.unauthorized';
           break;
         default:
           this.message = 'ended';
@@ -105,7 +109,7 @@ export class DyteEndedScreen {
   }
 
   render() {
-    const states = this.states || storeState;
+    const states = this.states;
     if (states.roomLeftState === 'connected-meeting') {
       return this.renderBreakoutRoomScreen();
     }

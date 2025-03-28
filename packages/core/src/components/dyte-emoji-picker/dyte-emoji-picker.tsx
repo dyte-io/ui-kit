@@ -2,6 +2,7 @@ import { Component, Host, h, State, EventEmitter, Event, Prop } from '@stencil/c
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { EmojiMetaData } from '../../types/props';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { fetchEmojis } from '../../utils/assets';
 
 /**
@@ -14,10 +15,14 @@ import { fetchEmojis } from '../../utils/assets';
 })
 export class DyteEmojiPicker {
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Close event */
   @Event() pickerClose: EventEmitter<void>;
@@ -55,7 +60,7 @@ export class DyteEmojiPicker {
     if (this.emojiList?.length > 0) {
       return (
         <div id="loader">
-          <dyte-spinner iconPack={this.iconPack} t={this.t}></dyte-spinner>
+          <dyte-spinner iconPack={this.iconPack} />
         </div>
       );
     }
@@ -63,8 +68,6 @@ export class DyteEmojiPicker {
       <div id="emoji-grid" class="scrollbar max-w-40">
         {this.filteredEmojis.map((e) => (
           <dyte-button
-            iconPack={this.iconPack}
-            t={this.t}
             key={`emoji-button-${e.name}`}
             class="emoji"
             variant="ghost"

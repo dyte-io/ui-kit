@@ -2,7 +2,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { Component, Host, h, Prop, Event, EventEmitter, Element } from '@stencil/core';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 /**
  * A button which toggles visibility of a more menu.
@@ -21,16 +21,22 @@ import storeState from '../../lib/store';
 export class DyteMoreToggle {
   @Element() host: HTMLDyteMoreToggleElement;
   /** States object */
-  @Prop() states: States = storeState;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
@@ -48,22 +54,19 @@ export class DyteMoreToggle {
   }
 
   private handleKeyDown = ({ key }: { key: string }) => {
-    if (key === 'Escape' && this.states.activeMoreMenu) {
+    if (key === 'Escape') {
       this.stateUpdate.emit({ activeMoreMenu: false });
-      storeState.activeMoreMenu = !storeState.activeMoreMenu;
     }
   };
 
   private handleOnClick = (e: MouseEvent) => {
     if (!e.composedPath().includes(this.host) && this.states.activeMoreMenu) {
       this.stateUpdate.emit({ activeMoreMenu: false });
-      storeState.activeMoreMenu = !storeState.activeMoreMenu;
     }
   };
 
   private toggleMoreMenu = () => {
-    this.stateUpdate.emit({ activeMoreMenu: !storeState.activeMoreMenu });
-    storeState.activeMoreMenu = !storeState.activeMoreMenu;
+    this.stateUpdate.emit({ activeMoreMenu: !this.states.activeMoreMenu });
   };
 
   render() {
@@ -79,7 +82,6 @@ export class DyteMoreToggle {
         <dyte-controlbar-button
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={(e) => {
             e.stopPropagation();
             this.toggleMoreMenu();

@@ -3,7 +3,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 /**
  * A button which toggles visibility of settings module.
@@ -24,27 +24,30 @@ export class DyteSettingsToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   private toggleSettings() {
-    this.stateUpdate.emit({
-      activeSettings: !this.states?.activeSettings,
-      activeMoreMenu: false,
-    });
-    storeState.activeSettings = !storeState.activeSettings;
-    storeState.activeMoreMenu = false;
+    const updatePartial = { activeSettings: true, activeMoreMenu: false };
+    this.states = { ...this.states, ...updatePartial };
+    this.stateUpdate.emit(updatePartial);
   }
 
   render() {
@@ -56,7 +59,6 @@ export class DyteSettingsToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={() => this.toggleSettings()}
           icon={this.iconPack.settings}
           label={text}

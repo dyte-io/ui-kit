@@ -7,6 +7,7 @@ import { Render } from '../../lib/render';
 import { Meeting, Peer } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { GridLayout, GridSize } from '../dyte-grid/dyte-grid';
 
 /**
@@ -43,22 +44,30 @@ export class DyteSpotlightGrid {
   @Prop() gap: number = 8;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** UI Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Grid size */
   @Prop() gridSize: GridSize = defaultGridSize;

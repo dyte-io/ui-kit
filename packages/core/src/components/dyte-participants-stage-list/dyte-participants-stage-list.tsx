@@ -5,9 +5,9 @@ import { UIConfig } from '../../types/ui-config';
 import { Component, Host, h, Prop, State, Watch } from '@stencil/core';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { ParticipantsViewMode } from '../dyte-participants/dyte-participants';
-import { defaultConfig } from '../../exports';
+import { defaultConfig, States } from '../../exports';
 import { Render } from '../../lib/render';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 /**
  * A component which lists all participants, with ability to
@@ -23,25 +23,36 @@ export class DyteParticipants {
   private participantLeftListener: (data: any) => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
+
+  /** Meeting object */
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Hide Stage Participants Count Header */
   @Prop() hideHeader: boolean = false;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** View mode for participants list */
   @Prop() view: ParticipantsViewMode = 'sidebar';
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Search */
   @Prop() search: string = '';
@@ -110,7 +121,7 @@ export class DyteParticipants {
       view: this.view,
       t: this.t,
       config: this.config,
-      states: storeState,
+      states: this.states,
       size: this.size,
       iconPack: this.iconPack,
     };

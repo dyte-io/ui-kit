@@ -21,6 +21,7 @@ import type {
 } from '@dytesdk/web-core';
 import { defaultConfig } from '../../exports';
 import { parseMessageForTarget } from '../../utils/chat';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { showLivestream } from '../../utils/livestream';
 
 function parseConfig(config: Config) {
@@ -83,22 +84,30 @@ export class DyteNotifications {
   @Element() host: HTMLDyteNotificationsElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   @State() notifications: Notification[] = [];
 

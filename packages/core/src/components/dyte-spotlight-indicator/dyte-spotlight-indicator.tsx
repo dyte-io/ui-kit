@@ -2,6 +2,7 @@ import { Component, Host, h, Prop, Watch, State } from '@stencil/core';
 import { Meeting } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Size } from '../../exports';
 
 @Component({
@@ -11,16 +12,22 @@ import { Size } from '../../exports';
 })
 export class DyteSpotlightIndicator {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   @State() canSpotlight: boolean;
 
@@ -64,12 +71,7 @@ export class DyteSpotlightIndicator {
     if (!this.canSpotlight) return;
     return (
       <Host>
-        <dyte-tooltip
-          size={'md'}
-          iconPack={this.iconPack}
-          t={this.t}
-          label={this.t('remote_access.indicator')}
-        >
+        <dyte-tooltip size={'md'} label={this.t('remote_access.indicator')}>
           <div
             id="sync-button"
             class={{
@@ -81,8 +83,6 @@ export class DyteSpotlightIndicator {
             <span class="name">Sync</span>
             <dyte-icon
               id="icon"
-              iconPack={this.iconPack}
-              t={this.t}
               icon={this.isSpotlighted ? this.iconPack.checkmark : this.iconPack.warning}
               tabIndex={-1}
               aria-hidden={true}

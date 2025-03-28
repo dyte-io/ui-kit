@@ -5,13 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { AISection, AIView } from "./components/dyte-ai/dyte-ai";
 import { Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
 import { Chat, ChatChannel, Notification, PartialStateEvent, Poll, PollObject, Size, States, Transcript } from "./types/props";
 import { UIConfig } from "./types/ui-config";
 import { IconPack } from "./lib/icons";
 import { DyteI18n } from "./lib/lang";
-import { AIMessage } from "./types/dyte-ai";
+import { AIView } from "./components/dyte-ai/dyte-ai";
 import { ControlBarVariant } from "./components/dyte-controlbar-button/dyte-controlbar-button";
 import { DyteI18n as DyteI18n1, IconPack as IconPack1, Size as Size1, States as States1, UIConfig as UIConfig1 } from "./exports";
 import { AudioVisualizerVariant } from "./components/dyte-audio-visualizer/dyte-audio-visualizer";
@@ -45,13 +44,12 @@ import { Tab } from "./components/dyte-tab-bar/dyte-tab-bar";
 import { TooltipKind, TooltipVariant } from "./components/dyte-tooltip/dyte-tooltip";
 import { ViewerCountVariant } from "./components/dyte-viewer-count/dyte-viewer-count";
 import { Peer as Peer1 } from ".";
-export { AISection, AIView } from "./components/dyte-ai/dyte-ai";
 export { Meeting, Peer, WaitlistedParticipant } from "./types/dyte-client";
 export { Chat, ChatChannel, Notification, PartialStateEvent, Poll, PollObject, Size, States, Transcript } from "./types/props";
 export { UIConfig } from "./types/ui-config";
 export { IconPack } from "./lib/icons";
 export { DyteI18n } from "./lib/lang";
-export { AIMessage } from "./types/dyte-ai";
+export { AIView } from "./components/dyte-ai/dyte-ai";
 export { ControlBarVariant } from "./components/dyte-controlbar-button/dyte-controlbar-button";
 export { DyteI18n as DyteI18n1, IconPack as IconPack1, Size as Size1, States as States1, UIConfig as UIConfig1 } from "./exports";
 export { AudioVisualizerVariant } from "./components/dyte-audio-visualizer/dyte-audio-visualizer";
@@ -92,10 +90,6 @@ export namespace Components {
          */
         "config": UIConfig;
         /**
-          * Default section
-         */
-        "defaultSection": AISection;
-        /**
           * Icon pack
          */
         "iconPack": IconPack;
@@ -119,22 +113,6 @@ export namespace Components {
           * View type
          */
         "view": AIView;
-    }
-    interface DyteAiChat {
-        /**
-          * Language
-         */
-        "t": DyteI18n;
-    }
-    interface DyteAiHome {
-        /**
-          * Initial messages
-         */
-        "initialMessages": AIMessage[];
-        /**
-          * Meeting object
-         */
-        "meeting": Meeting;
     }
     interface DyteAiToggle {
         /**
@@ -438,10 +416,6 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * Icon pack
-         */
-        "iconPack": IconPack;
-        /**
           * Button type
          */
         "kind": ButtonKind;
@@ -453,10 +427,6 @@ export namespace Components {
           * Size
          */
         "size": Size;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
         /**
           * Button type
          */
@@ -1024,10 +994,6 @@ export namespace Components {
           * Meeting object
          */
         "meeting": Meeting;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
     }
     /**
      * A confirmation modal.
@@ -1123,10 +1089,6 @@ export namespace Components {
           * Size
          */
         "size": Size;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
         /**
           * Variant
          */
@@ -1343,7 +1305,6 @@ export namespace Components {
      * - dyte-leave-meeting
      * - dyte-permissions-message
      * - dyte-image-viewer
-     * - dyte-remote-access-manager
      * - dyte-breakout-rooms-manager
      * This components depends on the values from `states` object.
      */
@@ -1508,10 +1469,6 @@ export namespace Components {
           * Size of the file
          */
         "size": number;
-        /**
-          * Language
-         */
-        "t": DyteI18n1;
         /**
           * Url of the file
          */
@@ -1694,17 +1651,9 @@ export namespace Components {
          */
         "icon": string;
         /**
-          * Icon pack
-         */
-        "iconPack": IconPack;
-        /**
           * Size
          */
         "size": Size1;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
         /**
           * Icon variant
          */
@@ -1987,9 +1936,9 @@ export namespace Components {
          */
         "gridLayout": GridLayout1;
         /**
-          * Icon Pack URL
+          * Icon pack
          */
-        "iconPackUrl": string;
+        "iconPack": IconPack;
         /**
           * Whether participant should leave when this component gets unmounted
          */
@@ -2549,6 +2498,10 @@ export namespace Components {
          */
         "participant": Peer;
         /**
+          * States
+         */
+        "states": States1;
+        /**
           * Language
          */
         "t": DyteI18n;
@@ -2756,6 +2709,10 @@ export namespace Components {
           * Size
          */
         "size": Size;
+        /**
+          * Meeting object
+         */
+        "states": States1;
         /**
           * Language
          */
@@ -3555,10 +3512,6 @@ export namespace Components {
           * Size
          */
         "size": Size1;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
     }
     /**
      * A grid component that renders two lists of participants: `pinnedParticipants` and `participants`.
@@ -3661,6 +3614,10 @@ export namespace Components {
           * Size
          */
         "size": Size1;
+        /**
+          * States
+         */
+        "states": States1;
         /**
           * Language
          */
@@ -3775,31 +3732,6 @@ export namespace Components {
         "value": string;
     }
     /**
-     * A text field component.
-     */
-    interface DyteTextField {
-        /**
-          * Disabled
-         */
-        "disabled": boolean;
-        /**
-          * Icon pack
-         */
-        "iconPack": IconPack;
-        /**
-          * Placeholder text
-         */
-        "placeholder": string;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
-        /**
-          * Input type
-         */
-        "type": string;
-    }
-    /**
      * A component which renders a text message from chat.
      */
     interface DyteTextMessage {
@@ -3854,10 +3786,6 @@ export namespace Components {
          */
         "disabled": boolean;
         /**
-          * Icon pack
-         */
-        "iconPack": IconPack;
-        /**
           * Tooltip kind
          */
         "kind": TooltipKind;
@@ -3877,10 +3805,6 @@ export namespace Components {
           * Size
          */
         "size": Size;
-        /**
-          * Language
-         */
-        "t": DyteI18n;
         /**
           * Tooltip variant
          */
@@ -3926,35 +3850,32 @@ export namespace Components {
     }
     interface DyteUiProvider {
         /**
-          * Whether to apply the design system on the document root from config
-         */
-        "applyDesignSystem": boolean;
-        /**
-          * UI Config
+          * Config
          */
         "config": UIConfig1;
         /**
-          * Icon Pack URL
+          * Icon pack
          */
-        "iconPackUrl": string;
+        "iconPack": IconPack1;
         /**
-          * Whether to join the meeting room
-         */
-        "joinRoom": boolean;
-        /**
-          * Whether to load config from preset
-         */
-        "loadConfigFromPreset": boolean;
-        /**
-          * dyte meeting object
+          * Meeting
          */
         "meeting": Meeting;
+        /**
+          * Do not render children until meeting is initialized
+          * @default false
+         */
+        "noRenderUntilMeeting": boolean;
+        /**
+          * Whether to show setup screen or not
+         */
+        "showSetupScreen": boolean;
         /**
           * Size
          */
         "size": Size1;
         /**
-          * Language
+          * Language utility
          */
         "t": DyteI18n1;
     }
@@ -4324,10 +4245,6 @@ export interface DyteTextComposerViewCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDyteTextComposerViewElement;
 }
-export interface DyteTextFieldCustomEvent<T> extends CustomEvent<T> {
-    detail: T;
-    target: HTMLDyteTextFieldElement;
-}
 export interface DyteTooltipCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDyteTooltipElement;
@@ -4335,6 +4252,10 @@ export interface DyteTooltipCustomEvent<T> extends CustomEvent<T> {
 export interface DyteTranscriptCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLDyteTranscriptElement;
+}
+export interface DyteUiProviderCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLDyteUiProviderElement;
 }
 declare global {
     interface HTMLDyteAiElementEventMap {
@@ -4353,18 +4274,6 @@ declare global {
     var HTMLDyteAiElement: {
         prototype: HTMLDyteAiElement;
         new (): HTMLDyteAiElement;
-    };
-    interface HTMLDyteAiChatElement extends Components.DyteAiChat, HTMLStencilElement {
-    }
-    var HTMLDyteAiChatElement: {
-        prototype: HTMLDyteAiChatElement;
-        new (): HTMLDyteAiChatElement;
-    };
-    interface HTMLDyteAiHomeElement extends Components.DyteAiHome, HTMLStencilElement {
-    }
-    var HTMLDyteAiHomeElement: {
-        prototype: HTMLDyteAiHomeElement;
-        new (): HTMLDyteAiHomeElement;
     };
     interface HTMLDyteAiToggleElementEventMap {
         "dyteStateUpdate": States;
@@ -5004,7 +4913,6 @@ declare global {
      * - dyte-leave-meeting
      * - dyte-permissions-message
      * - dyte-image-viewer
-     * - dyte-remote-access-manager
      * - dyte-breakout-rooms-manager
      * This components depends on the values from `states` object.
      */
@@ -5398,7 +5306,7 @@ declare global {
         new (): HTMLDyteMarkdownViewElement;
     };
     interface HTMLDyteMeetingElementEventMap {
-        "dyteStateUpdate": PartialStateEvent;
+        "dyteStatesUpdate": States;
     }
     /**
      * A single component which renders an entire meeting UI.
@@ -6381,26 +6289,6 @@ declare global {
         prototype: HTMLDyteTextComposerViewElement;
         new (): HTMLDyteTextComposerViewElement;
     };
-    interface HTMLDyteTextFieldElementEventMap {
-        "dyteStateUpdate": States;
-    }
-    /**
-     * A text field component.
-     */
-    interface HTMLDyteTextFieldElement extends Components.DyteTextField, HTMLStencilElement {
-        addEventListener<K extends keyof HTMLDyteTextFieldElementEventMap>(type: K, listener: (this: HTMLDyteTextFieldElement, ev: DyteTextFieldCustomEvent<HTMLDyteTextFieldElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLDyteTextFieldElementEventMap>(type: K, listener: (this: HTMLDyteTextFieldElement, ev: DyteTextFieldCustomEvent<HTMLDyteTextFieldElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
-        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
-    }
-    var HTMLDyteTextFieldElement: {
-        prototype: HTMLDyteTextFieldElement;
-        new (): HTMLDyteTextFieldElement;
-    };
     /**
      * A component which renders a text message from chat.
      */
@@ -6475,7 +6363,18 @@ declare global {
         prototype: HTMLDyteTranscriptsElement;
         new (): HTMLDyteTranscriptsElement;
     };
+    interface HTMLDyteUiProviderElementEventMap {
+        "dyteStatesUpdate": States1;
+    }
     interface HTMLDyteUiProviderElement extends Components.DyteUiProvider, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLDyteUiProviderElementEventMap>(type: K, listener: (this: HTMLDyteUiProviderElement, ev: DyteUiProviderCustomEvent<HTMLDyteUiProviderElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLDyteUiProviderElementEventMap>(type: K, listener: (this: HTMLDyteUiProviderElement, ev: DyteUiProviderCustomEvent<HTMLDyteUiProviderElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLDyteUiProviderElement: {
         prototype: HTMLDyteUiProviderElement;
@@ -6504,8 +6403,6 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "dyte-ai": HTMLDyteAiElement;
-        "dyte-ai-chat": HTMLDyteAiChatElement;
-        "dyte-ai-home": HTMLDyteAiHomeElement;
         "dyte-ai-toggle": HTMLDyteAiToggleElement;
         "dyte-ai-transcriptions": HTMLDyteAiTranscriptionsElement;
         "dyte-audio-grid": HTMLDyteAudioGridElement;
@@ -6634,7 +6531,6 @@ declare global {
         "dyte-switch": HTMLDyteSwitchElement;
         "dyte-tab-bar": HTMLDyteTabBarElement;
         "dyte-text-composer-view": HTMLDyteTextComposerViewElement;
-        "dyte-text-field": HTMLDyteTextFieldElement;
         "dyte-text-message": HTMLDyteTextMessageElement;
         "dyte-text-message-view": HTMLDyteTextMessageViewElement;
         "dyte-tooltip": HTMLDyteTooltipElement;
@@ -6653,17 +6549,13 @@ declare namespace LocalJSX {
          */
         "config"?: UIConfig;
         /**
-          * Default section
-         */
-        "defaultSection"?: AISection;
-        /**
           * Icon pack
          */
         "iconPack"?: IconPack;
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -6685,22 +6577,6 @@ declare namespace LocalJSX {
          */
         "view"?: AIView;
     }
-    interface DyteAiChat {
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
-    }
-    interface DyteAiHome {
-        /**
-          * Initial messages
-         */
-        "initialMessages"?: AIMessage[];
-        /**
-          * Meeting object
-         */
-        "meeting": Meeting;
-    }
     interface DyteAiToggle {
         /**
           * Icon pack
@@ -6709,7 +6585,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -6739,7 +6615,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Language
          */
@@ -6888,7 +6764,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Mode in which selector is used
          */
@@ -6943,7 +6819,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits an event when all participants are selected or deselected
          */
@@ -6977,7 +6853,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -7003,7 +6879,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -7056,10 +6932,6 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * Icon pack
-         */
-        "iconPack"?: IconPack;
-        /**
           * Button type
          */
         "kind"?: ButtonKind;
@@ -7071,10 +6943,6 @@ declare namespace LocalJSX {
           * Size
          */
         "size"?: Size;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
         /**
           * Button type
          */
@@ -7103,7 +6971,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -7158,7 +7026,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -7188,7 +7056,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -7232,7 +7100,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Event emitted when back button is clicked
          */
@@ -7634,7 +7502,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Event emitted when a message is deleted
          */
@@ -7683,7 +7551,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Search query
          */
@@ -7772,11 +7640,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
+        "meeting"?: Meeting;
     }
     /**
      * A confirmation modal.
@@ -7877,10 +7741,6 @@ declare namespace LocalJSX {
          */
         "size"?: Size;
         /**
-          * Language
-         */
-        "t"?: DyteI18n;
-        /**
           * Variant
          */
         "variant"?: ControlBarVariant1;
@@ -7925,7 +7785,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -7951,7 +7811,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -7973,7 +7833,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -7995,7 +7855,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -8047,7 +7907,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -8112,7 +7972,6 @@ declare namespace LocalJSX {
      * - dyte-leave-meeting
      * - dyte-permissions-message
      * - dyte-image-viewer
-     * - dyte-remote-access-manager
      * - dyte-breakout-rooms-manager
      * This components depends on the values from `states` object.
      */
@@ -8298,10 +8157,6 @@ declare namespace LocalJSX {
          */
         "size": number;
         /**
-          * Language
-         */
-        "t"?: DyteI18n1;
-        /**
           * Url of the file
          */
         "url": string;
@@ -8397,7 +8252,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -8431,7 +8286,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size Prop
          */
@@ -8495,17 +8350,9 @@ declare namespace LocalJSX {
          */
         "icon"?: string;
         /**
-          * Icon pack
-         */
-        "iconPack"?: IconPack;
-        /**
           * Size
          */
         "size"?: Size1;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
         /**
           * Icon variant
          */
@@ -8719,7 +8566,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -8737,7 +8584,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emit API error events
          */
@@ -8838,9 +8685,9 @@ declare namespace LocalJSX {
          */
         "gridLayout"?: GridLayout1;
         /**
-          * Icon Pack URL
+          * Icon pack
          */
-        "iconPackUrl"?: string;
+        "iconPack"?: IconPack;
         /**
           * Whether participant should leave when this component gets unmounted
          */
@@ -8858,9 +8705,9 @@ declare namespace LocalJSX {
          */
         "mode"?: MeetingMode;
         /**
-          * Emits updated state data
+          * States
          */
-        "onDyteStateUpdate"?: (event: DyteMeetingCustomEvent<PartialStateEvent>) => void;
+        "onDyteStatesUpdate"?: (event: DyteMeetingCustomEvent<States>) => void;
         /**
           * Whether to show setup screen or not
          */
@@ -8885,7 +8732,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Language
          */
@@ -9069,7 +8916,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -9320,7 +9167,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -9427,6 +9274,10 @@ declare namespace LocalJSX {
          */
         "participant"?: Peer;
         /**
+          * States
+         */
+        "states"?: States1;
+        /**
           * Language
          */
         "t"?: DyteI18n;
@@ -9446,7 +9297,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -9578,7 +9429,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -9607,7 +9458,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Callback to execute when the dialog is closed
          */
@@ -9641,7 +9492,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Search
          */
@@ -9650,6 +9501,10 @@ declare namespace LocalJSX {
           * Size
          */
         "size"?: Size;
+        /**
+          * Meeting object
+         */
+        "states"?: States1;
         /**
           * Language
          */
@@ -9671,7 +9526,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -9738,7 +9593,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Search
          */
@@ -9768,7 +9623,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -9820,7 +9675,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -9853,7 +9708,7 @@ declare namespace LocalJSX {
         /**
           * Meeting
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Plugin
          */
@@ -9879,7 +9734,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -9996,7 +9851,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -10056,7 +9911,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -10212,7 +10067,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -10249,7 +10104,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Event updated state
          */
@@ -10353,7 +10208,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Emits updated state data
          */
@@ -10515,7 +10370,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Size
          */
@@ -10545,10 +10400,6 @@ declare namespace LocalJSX {
           * Size
          */
         "size"?: Size1;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
     }
     /**
      * A grid component that renders two lists of participants: `pinnedParticipants` and `participants`.
@@ -10659,6 +10510,10 @@ declare namespace LocalJSX {
           * Size
          */
         "size"?: Size1;
+        /**
+          * States
+         */
+        "states"?: States1;
         /**
           * Language
          */
@@ -10781,35 +10636,6 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
-     * A text field component.
-     */
-    interface DyteTextField {
-        /**
-          * Disabled
-         */
-        "disabled"?: boolean;
-        /**
-          * Icon pack
-         */
-        "iconPack"?: IconPack;
-        /**
-          * Emits updated state data
-         */
-        "onDyteStateUpdate"?: (event: DyteTextFieldCustomEvent<States>) => void;
-        /**
-          * Placeholder text
-         */
-        "placeholder"?: string;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
-        /**
-          * Input type
-         */
-        "type"?: string;
-    }
-    /**
      * A component which renders a text message from chat.
      */
     interface DyteTextMessage {
@@ -10864,10 +10690,6 @@ declare namespace LocalJSX {
          */
         "disabled"?: boolean;
         /**
-          * Icon pack
-         */
-        "iconPack"?: IconPack;
-        /**
           * Tooltip kind
          */
         "kind"?: TooltipKind;
@@ -10891,10 +10713,6 @@ declare namespace LocalJSX {
           * Size
          */
         "size"?: Size;
-        /**
-          * Language
-         */
-        "t"?: DyteI18n;
         /**
           * Tooltip variant
          */
@@ -10935,7 +10753,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * States object
          */
@@ -10947,35 +10765,36 @@ declare namespace LocalJSX {
     }
     interface DyteUiProvider {
         /**
-          * Whether to apply the design system on the document root from config
-         */
-        "applyDesignSystem"?: boolean;
-        /**
-          * UI Config
+          * Config
          */
         "config"?: UIConfig1;
         /**
-          * Icon Pack URL
+          * Icon pack
          */
-        "iconPackUrl"?: string;
+        "iconPack"?: IconPack1;
         /**
-          * Whether to join the meeting room
-         */
-        "joinRoom"?: boolean;
-        /**
-          * Whether to load config from preset
-         */
-        "loadConfigFromPreset"?: boolean;
-        /**
-          * dyte meeting object
+          * Meeting
          */
         "meeting"?: Meeting;
+        /**
+          * Do not render children until meeting is initialized
+          * @default false
+         */
+        "noRenderUntilMeeting"?: boolean;
+        /**
+          * States event
+         */
+        "onDyteStatesUpdate"?: (event: DyteUiProviderCustomEvent<States1>) => void;
+        /**
+          * Whether to show setup screen or not
+         */
+        "showSetupScreen"?: boolean;
         /**
           * Size
          */
         "size"?: Size1;
         /**
-          * Language
+          * Language utility
          */
         "t"?: DyteI18n1;
     }
@@ -10990,7 +10809,7 @@ declare namespace LocalJSX {
         /**
           * Meeting object
          */
-        "meeting": Meeting;
+        "meeting"?: Meeting;
         /**
           * Language
          */
@@ -11042,8 +10861,6 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "dyte-ai": DyteAi;
-        "dyte-ai-chat": DyteAiChat;
-        "dyte-ai-home": DyteAiHome;
         "dyte-ai-toggle": DyteAiToggle;
         "dyte-ai-transcriptions": DyteAiTranscriptions;
         "dyte-audio-grid": DyteAudioGrid;
@@ -11172,7 +10989,6 @@ declare namespace LocalJSX {
         "dyte-switch": DyteSwitch;
         "dyte-tab-bar": DyteTabBar;
         "dyte-text-composer-view": DyteTextComposerView;
-        "dyte-text-field": DyteTextField;
         "dyte-text-message": DyteTextMessage;
         "dyte-text-message-view": DyteTextMessageView;
         "dyte-tooltip": DyteTooltip;
@@ -11189,8 +11005,6 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "dyte-ai": LocalJSX.DyteAi & JSXBase.HTMLAttributes<HTMLDyteAiElement>;
-            "dyte-ai-chat": LocalJSX.DyteAiChat & JSXBase.HTMLAttributes<HTMLDyteAiChatElement>;
-            "dyte-ai-home": LocalJSX.DyteAiHome & JSXBase.HTMLAttributes<HTMLDyteAiHomeElement>;
             "dyte-ai-toggle": LocalJSX.DyteAiToggle & JSXBase.HTMLAttributes<HTMLDyteAiToggleElement>;
             "dyte-ai-transcriptions": LocalJSX.DyteAiTranscriptions & JSXBase.HTMLAttributes<HTMLDyteAiTranscriptionsElement>;
             "dyte-audio-grid": LocalJSX.DyteAudioGrid & JSXBase.HTMLAttributes<HTMLDyteAudioGridElement>;
@@ -11305,7 +11119,6 @@ declare module "@stencil/core" {
              * - dyte-leave-meeting
              * - dyte-permissions-message
              * - dyte-image-viewer
-             * - dyte-remote-access-manager
              * - dyte-breakout-rooms-manager
              * This components depends on the values from `states` object.
              */
@@ -11671,10 +11484,6 @@ declare module "@stencil/core" {
              * A component which renders a text composer
              */
             "dyte-text-composer-view": LocalJSX.DyteTextComposerView & JSXBase.HTMLAttributes<HTMLDyteTextComposerViewElement>;
-            /**
-             * A text field component.
-             */
-            "dyte-text-field": LocalJSX.DyteTextField & JSXBase.HTMLAttributes<HTMLDyteTextFieldElement>;
             /**
              * A component which renders a text message from chat.
              */

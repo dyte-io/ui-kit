@@ -4,6 +4,7 @@ import DyteAudio from '../../lib/audio';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import type { StageStatus } from '@dytesdk/web-core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { isLiveStreamViewer } from '../../utils/livestream';
 
 /**
@@ -29,13 +30,19 @@ export class DyteParticipantsAudio {
   private stageStatusUpdateListener: (status: StageStatus) => void;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Pass existing audio element */
   @Prop() preloadedAudioElem: HTMLAudioElement = undefined;
@@ -182,8 +189,6 @@ export class DyteParticipantsAudio {
                   this.onDyteDialogClose();
                 }}
                 title={this.t('audio_playback')}
-                iconPack={this.iconPack}
-                t={this.t}
               >
                 {this.t('audio_playback')}
               </dyte-button>

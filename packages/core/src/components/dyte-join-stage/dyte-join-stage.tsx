@@ -6,7 +6,7 @@ import { Render } from '../../lib/render';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 export interface ModalDataConfig {
   title: string;
@@ -24,22 +24,30 @@ export interface ModalDataConfig {
 })
 export class DyteJoinStage {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** UI Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Content Config */
   @Prop() dataConfig: ModalDataConfig = {
@@ -66,7 +74,7 @@ export class DyteJoinStage {
     const defaults = {
       meeting: this.meeting,
       size: this.size,
-      states: this.states || storeState,
+      states: this.states,
       config: this.config,
       iconPack: this.iconPack,
       t: this.t,
@@ -90,8 +98,6 @@ export class DyteJoinStage {
             variant="secondary"
             onClick={() => this.leaveStage.emit()}
             title={this.dataConfig.label.reject}
-            iconPack={this.iconPack}
-            t={this.t}
           >
             {this.dataConfig.label.reject}
           </dyte-button>
@@ -102,8 +108,6 @@ export class DyteJoinStage {
               this.joinStage.emit();
             }}
             title={this.dataConfig.label.accept}
-            iconPack={this.iconPack}
-            t={this.t}
           >
             {this.isLoading ? (
               <dyte-icon icon={this.iconPack.spinner} />

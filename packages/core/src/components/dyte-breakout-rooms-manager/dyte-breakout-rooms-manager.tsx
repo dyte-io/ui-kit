@@ -2,10 +2,10 @@ import { Component, h, Host, Prop, Event, EventEmitter, State, Watch, Listen } f
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { PartialStateEvent, States } from '../../types/props';
-import storeState from '../../lib/store';
 import { Meeting } from '../../types/dyte-client';
 import { participantIdentifier, resetRoomCount } from '../../utils/breakout-rooms';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import BreakoutRoomsManager, { DraftMeeting } from '../../utils/breakout-rooms-manager';
 
 export type BreakoutManagerState = 'room-config' | 'participants-config';
@@ -63,16 +63,24 @@ export class DyteBreakoutRoomsManager {
   @State() isDragMode: boolean = false;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<PartialStateEvent>;
@@ -266,18 +274,15 @@ export class DyteBreakoutRoomsManager {
       activeBreakoutRoomsManager: { active: false },
       activeConfirmationModal,
     });
-    storeState.activeBreakoutRoomsManager = { active: false };
-    storeState.activeConfirmationModal = activeConfirmationModal;
   };
 
   private close = () => {
     this.stateManager.discardChanges();
-    this.stateUpdate?.emit({
+    this.stateUpdate.emit({
       activeBreakoutRoomsManager: {
         active: false,
       },
     });
-    storeState.activeBreakoutRoomsManager = { active: false };
   };
 
   private applyChanges = async () => {
@@ -444,8 +449,6 @@ export class DyteBreakoutRoomsManager {
           <footer>
             <dyte-button
               kind="button"
-              iconPack={this.iconPack}
-              t={this.t}
               size="lg"
               title={this.t('create')}
               disabled={this.roomConfig.rooms === 0}
@@ -488,8 +491,6 @@ export class DyteBreakoutRoomsManager {
               >
                 <dyte-tooltip
                   label={this.t('breakout_rooms.shuffle_participants')}
-                  iconPack={this.iconPack}
-                  t={this.t}
                   slot="shuffle-button"
                 >
                   <dyte-button
@@ -497,15 +498,13 @@ export class DyteBreakoutRoomsManager {
                       this.roomConfig.mode === 'edit' ||
                       this.stateManager.unassignedParticipants.length === 0
                     }
-                    iconPack={this.iconPack}
-                    t={this.t}
                     kind="button"
                     variant="secondary"
                     size="md"
                     onClick={() => this.assignParticipantsRandomly()}
                     class="shuffle-button br-primary-btn"
                   >
-                    <dyte-icon icon={this.iconPack.shuffle} iconPack={this.iconPack} t={this.t} />
+                    <dyte-icon icon={this.iconPack.shuffle} />
                   </dyte-button>
                 </dyte-tooltip>
               </dyte-breakout-room-participants>
@@ -516,8 +515,6 @@ export class DyteBreakoutRoomsManager {
                   )}`}</span>
                   <dyte-button
                     disabled={this.roomConfig.mode === 'edit'}
-                    iconPack={this.iconPack}
-                    t={this.t}
                     kind="button"
                     variant="ghost"
                     size="md"
@@ -538,27 +535,15 @@ export class DyteBreakoutRoomsManager {
 
                 {!this.assigningParticipants && (
                   <div class="cta-buttons">
-                    <dyte-button
-                      kind="button"
-                      variant="secondary"
-                      iconPack={this.iconPack}
-                      t={this.t}
-                      class="br-primary-btn"
-                    >
+                    <dyte-button kind="button" variant="secondary" class="br-primary-btn">
                       <div onClick={this.onAddNewRoom}>
-                        <dyte-icon icon={this.iconPack.add} iconPack={this.iconPack} t={this.t} />
+                        <dyte-icon icon={this.iconPack.add} />
                         {this.t('breakout_rooms.add_room')}
                       </div>
                     </dyte-button>
                     {this.stateManager.allConnectedMeetings.flatMap((m) => m.participants)
                       .length !== 0 && (
-                      <dyte-button
-                        kind="button"
-                        variant="ghost"
-                        onClick={this.onUnassignAll}
-                        iconPack={this.iconPack}
-                        t={this.t}
-                      >
+                      <dyte-button kind="button" variant="ghost" onClick={this.onUnassignAll}>
                         {this.t('breakout_rooms.unassign_all')}
                       </dyte-button>
                     )}
@@ -592,13 +577,11 @@ export class DyteBreakoutRoomsManager {
                 <dyte-button
                   kind="button"
                   variant="secondary"
-                  iconPack={this.iconPack}
-                  t={this.t}
                   onClick={this.onAddNewRoom}
                   class="add-room-jumbo-btn br-secondary-btn"
                 >
                   <div>
-                    <dyte-icon icon={this.iconPack.add} iconPack={this.iconPack} t={this.t} />
+                    <dyte-icon icon={this.iconPack.add} />
                     <span>{this.t('breakout_rooms.add_room_brief')}</span>
                   </div>
                 </dyte-button>
@@ -609,17 +592,13 @@ export class DyteBreakoutRoomsManager {
             <div
               class={{ 'status-bar': true, 'ephemeral-status': this.ephemeralStatusText !== '' }}
             >
-              {this.ephemeralStatusText !== '' && (
-                <dyte-icon icon={this.iconPack.checkmark} iconPack={this.iconPack} t={this.t} />
-              )}
+              {this.ephemeralStatusText !== '' && <dyte-icon icon={this.iconPack.checkmark} />}
               {this.getStatusText()}
             </div>
             <div class="breakout-actions">
               {this.roomConfig.mode === 'create' && this.permissions.canAlterConnectedMeetings && (
                 <dyte-button
                   size="md"
-                  iconPack={this.iconPack}
-                  t={this.t}
                   class="start-breakout-button"
                   onClick={() => this.enableConfirmationModal('start-breakout')}
                 >
@@ -631,8 +610,6 @@ export class DyteBreakoutRoomsManager {
                 this.permissions.canAlterConnectedMeetings && (
                   <dyte-button
                     size="md"
-                    iconPack={this.iconPack}
-                    t={this.t}
                     class="color-danger"
                     variant="ghost"
                     onClick={() => this.discardChanges()}
@@ -643,13 +620,7 @@ export class DyteBreakoutRoomsManager {
               {this.roomConfig.mode === 'edit' &&
                 this.stateManager.hasLocalChanges &&
                 this.permissions.canAlterConnectedMeetings && (
-                  <dyte-button
-                    size="md"
-                    iconPack={this.iconPack}
-                    t={this.t}
-                    class="update-breakout-button"
-                    onClick={this.applyChanges}
-                  >
+                  <dyte-button size="md" class="update-breakout-button" onClick={this.applyChanges}>
                     {this.t('breakout_rooms.update_breakout')}
                   </dyte-button>
                 )}
@@ -658,8 +629,6 @@ export class DyteBreakoutRoomsManager {
                 this.permissions.canAlterConnectedMeetings && (
                   <dyte-button
                     size="md"
-                    iconPack={this.iconPack}
-                    t={this.t}
                     class="close-breakout-button"
                     onClick={() => this.enableConfirmationModal('close-breakout')}
                   >

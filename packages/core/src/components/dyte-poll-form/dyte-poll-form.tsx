@@ -1,6 +1,7 @@
 import { Component, Host, h, Prop, State, EventEmitter, Event } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { PollObject } from '../../types/props';
 
 /**
@@ -18,10 +19,14 @@ export class DytePoll {
   @Event({ eventName: 'dyteCreatePoll' }) onCreate: EventEmitter<PollObject>;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Options */
   @State() options = ['', ''];
@@ -98,22 +103,14 @@ export class DytePoll {
                   class="auto remove-option"
                   variant="secondary"
                   onClick={() => this.removeOption(index)}
-                  iconPack={this.iconPack}
-                  t={this.t}
                 >
-                  <dyte-icon icon={this.iconPack.subtract} iconPack={this.iconPack} t={this.t} />
+                  <dyte-icon icon={this.iconPack.subtract} />
                 </dyte-button>
               )}
             </div>
           ))}
 
-          <dyte-button
-            class="add-option"
-            variant="secondary"
-            onClick={() => this.addOption()}
-            iconPack={this.iconPack}
-            t={this.t}
-          >
+          <dyte-button class="add-option" variant="secondary" onClick={() => this.addOption()}>
             {this.t('polls.option')}
           </dyte-button>
 
@@ -137,12 +134,7 @@ export class DytePoll {
             {this.t('polls.results.hide')}
           </label>
 
-          <dyte-button
-            kind="wide"
-            onClick={() => this.handleSubmit()}
-            iconPack={this.iconPack}
-            t={this.t}
-          >
+          <dyte-button kind="wide" onClick={() => this.handleSubmit()}>
             {this.t('polls.create')}
           </dyte-button>
           {this.error && <span class="error-text">{this.error.message}</span>}

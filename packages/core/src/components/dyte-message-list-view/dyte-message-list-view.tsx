@@ -1,5 +1,6 @@
 import { Component, Prop, State, Watch, h, writeTask } from '@stencil/core';
 import { IconPack, defaultIconPack } from '../../exports';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { debounce } from 'lodash-es';
 
 interface Message {
@@ -38,7 +39,9 @@ export class DyteMessageListView {
   @Prop() estimateItemSize: number = 100;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   @State() range: { start: number; end: number };
 

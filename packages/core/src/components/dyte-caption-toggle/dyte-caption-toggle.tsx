@@ -3,7 +3,7 @@ import { defaultConfig, defaultIconPack, IconPack, Size, States, UIConfig } from
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 
 @Component({
@@ -16,22 +16,30 @@ export class DyteCaptionToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
@@ -63,11 +71,7 @@ export class DyteCaptionToggle {
   };
 
   private toggleCaptions() {
-    this.stateUpdate.emit({ activeCaptions: !storeState.activeCaptions });
-    storeState.activeCaptions = !storeState.activeCaptions;
-
-    this.stateUpdate.emit({ activeMoreMenu: false });
-    storeState.activeMoreMenu = false;
+    this.stateUpdate.emit({ activeCaptions: !this.states.activeCaptions, activeMoreMenu: false });
   }
 
   render() {
@@ -79,7 +83,6 @@ export class DyteCaptionToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={() => this.toggleCaptions()}
           icon={captionsEnabled ? this.iconPack.captionsOff : this.iconPack.captionsOn}
           label={captionsEnabled ? this.t('transcript.off') : this.t('transcript.on')}

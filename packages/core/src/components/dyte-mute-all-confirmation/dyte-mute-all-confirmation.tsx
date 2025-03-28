@@ -3,7 +3,7 @@ import { Meeting } from '../../types/dyte-client';
 import { States } from '../../types/props';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultIconPack, IconPack } from '../../lib/icons';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 @Component({
   tag: 'dyte-mute-all-confirmation',
@@ -12,16 +12,24 @@ import storeState from '../../lib/store';
 })
 export class DyteMuteAllConfirmation {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() allowUnmute = true;
 
@@ -30,7 +38,6 @@ export class DyteMuteAllConfirmation {
 
   private onClose = () => {
     this.stateUpdate.emit({ activeMuteAllConfirmation: false });
-    storeState.activeMuteAllConfirmation = false;
   };
 
   private onMuteAll = () => {
@@ -48,22 +55,10 @@ export class DyteMuteAllConfirmation {
           <p class="message">{this.t('mute_all.description')}</p>
           <div class="content">
             <div class="leave-meeting">
-              <dyte-button
-                variant="secondary"
-                title={this.t('close')}
-                onClick={this.onClose}
-                iconPack={this.iconPack}
-                t={this.t}
-              >
+              <dyte-button variant="secondary" title={this.t('close')} onClick={this.onClose}>
                 {this.t('cancel')}
               </dyte-button>
-              <dyte-button
-                variant="danger"
-                title={this.t('mute_all')}
-                onClick={this.onMuteAll}
-                iconPack={this.iconPack}
-                t={this.t}
-              >
+              <dyte-button variant="danger" title={this.t('mute_all')} onClick={this.onMuteAll}>
                 {this.t('mute_all')}
               </dyte-button>
             </div>

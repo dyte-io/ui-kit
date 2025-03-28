@@ -1,3 +1,112 @@
+# [2.4.0-staging.12](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.11...@dyte-in/ui-kit-v2.4.0-staging.12) (2025-03-28)
+
+
+### Bug Fixes
+
+* re-export everything from ui-kit core ([be290b6](https://github.com/dyte-io/ui-kit/commit/be290b6347508cdf04e34ef94189312ff1fb416b))
+
+# [2.4.0-staging.11](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.10...@dyte-in/ui-kit-v2.4.0-staging.11) (2025-03-24)
+
+
+### Bug Fixes
+
+* remove react ui-hooks and cleanup ([3e21e4b](https://github.com/dyte-io/ui-kit/commit/3e21e4b6d9945a8f4633ae9ba4cc91d24c430f4a))
+
+# [2.4.0-staging.10](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.9...@dyte-in/ui-kit-v2.4.0-staging.10) (2025-03-24)
+
+
+### Bug Fixes
+
+* export getInitialStates() ([47841e3](https://github.com/dyte-io/ui-kit/commit/47841e393583d1e634e0133f6cb53909cfd44e56))
+* react-ui-kit build error on new web-core version ([4f21962](https://github.com/dyte-io/ui-kit/commit/4f219627dc4dc5dc123c02dfb9ce2f9686df53fd))
+* state updates in ui-provider ([82a76e7](https://github.com/dyte-io/ui-kit/commit/82a76e76ab88ca8e0656cbbfe600234003a813d3))
+* sync size with store ([94baeef](https://github.com/dyte-io/ui-kit/commit/94baeef426005b065e0032bc7916716c436abbdb))
+
+
+### Features
+
+* react hooks to listen to store updates ([c0de7f7](https://github.com/dyte-io/ui-kit/commit/c0de7f71af0f68234be20ed78e591755a2629606))
+
+# [2.4.0-staging.9](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.8...@dyte-in/ui-kit-v2.4.0-staging.9) (2025-03-24)
+
+
+### Bug Fixes
+
+* unreported merge conflict ([b01b792](https://github.com/dyte-io/ui-kit/commit/b01b792ff685d4b61a394b8097f8eebf7b6d6638))
+
+# [2.4.0-staging.8](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.7...@dyte-in/ui-kit-v2.4.0-staging.8) (2025-03-24)
+
+
+### Bug Fixes
+
+* simplified state management ([057e883](https://github.com/dyte-io/ui-kit/commit/057e88374632cf7e9012af3775ca5951a20b8361))
+
+# [2.4.0-staging.7](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.6...@dyte-in/ui-kit-v2.4.0-staging.7) (2025-03-24)
+
+
+### Bug Fixes
+
+* upgrade web-core ([fcf0d18](https://github.com/dyte-io/ui-kit/commit/fcf0d18c49c95dc983e4a49b041b1aafde3bac96))
+
+
+### Features
+
+* show invalid auth token error ([8cba9cc](https://github.com/dyte-io/ui-kit/commit/8cba9cca710c9559400faf66063af1e85c5adcad))
+
+# [2.4.0-staging.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.5...@dyte-in/ui-kit-v2.4.0-staging.6) (2025-03-21)
+
+
+### Bug Fixes
+
+* simplify sync-with-store internals ([f7654d6](https://github.com/dyte-io/ui-kit/commit/f7654d6f33381455c80930c57d473b4ddf2829f4))
+
+# [2.4.0-staging.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.4...@dyte-in/ui-kit-v2.4.0-staging.5) (2025-03-21)
+
+
+### Bug Fixes
+
+* do not import from exports ([c2897ef](https://github.com/dyte-io/ui-kit/commit/c2897ef32938e4f5bcfc844e082b2d259c3a03e0))
+
+# [2.4.0-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.3...@dyte-in/ui-kit-v2.4.0-staging.4) (2025-03-21)
+
+
+### Bug Fixes
+
+* export uiStore ([a06f7c5](https://github.com/dyte-io/ui-kit/commit/a06f7c5b9ae70193fadf791066416052ab21dab8))
+
+# [2.4.0-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.2...@dyte-in/ui-kit-v2.4.0-staging.3) (2025-03-21)
+
+
+### Bug Fixes
+
+* remove unused ai components ([02fc5cf](https://github.com/dyte-io/ui-kit/commit/02fc5cf2fba07312faa5c3d8553774901d9d6456))
+* remove unused props from primitive components ([b1198e8](https://github.com/dyte-io/ui-kit/commit/b1198e8c95c0c8fadc2a105bed3183dd2921ebbc))
+* show transcriptions in ai component ([d3b42db](https://github.com/dyte-io/ui-kit/commit/d3b42db423c1af06fbeddaf9db7a323d17c7e441))
+* size of transcriptions title ([ba85b7b](https://github.com/dyte-io/ui-kit/commit/ba85b7b20371965c6cf2f67a462cf6f71e60878d))
+
+# [2.4.0-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.1...@dyte-in/ui-kit-v2.4.0-staging.2) (2025-03-12)
+
+
+### Bug Fixes
+
+* remove unused @Watch method ([90e60d0](https://github.com/dyte-io/ui-kit/commit/90e60d0632dbf28d032b3d9b02a4476e4bb71070))
+
+# [2.4.0-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.6...@dyte-in/ui-kit-v2.4.0-staging.1) (2025-03-12)
+
+
+### Bug Fixes
+
+* componentShouldUpdate call ([c8bdc67](https://github.com/dyte-io/ui-kit/commit/c8bdc679e40e959b43a070b5dc18d0981eea8ad6))
+* do not listen to changes once prop is updated manually after init ([ea2d0b8](https://github.com/dyte-io/ui-kit/commit/ea2d0b82229736e5be0137218d0f2e2889551c1a))
+* **sync-store:** pass oldValue in callback ([017a925](https://github.com/dyte-io/ui-kit/commit/017a925e5a258efbc5153b10b6e6d7c6879746e7))
+* SyncWithStore logic ([abc11cd](https://github.com/dyte-io/ui-kit/commit/abc11cd5d4888d64c9897d435ea4efed30216209))
+* use @SyncWithStore decorator in every component ([6272e6c](https://github.com/dyte-io/ui-kit/commit/6272e6c9934dce1935df7a3ca2cea78550ce84df))
+
+
+### Features
+
+* share common props using DyteUIProvider ([76f7058](https://github.com/dyte-io/ui-kit/commit/76f705829d1cc767e14a8dad491fa39361a73a74))
+
 ## [2.3.6](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.5...@dyte-in/ui-kit-v2.3.6) (2025-03-11)
 
 

@@ -1,10 +1,10 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState, { onChange } from '../../lib/store';
 import { Meeting, Peer, WaitlistedParticipant } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { canViewParticipants } from '../../utils/sidebar';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 
 /**
@@ -24,25 +24,32 @@ import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-but
 export class DyteParticipantsToggle {
   private waitlistedParticipantJoinedListener: (participant: WaitlistedParticipant) => void;
   private waitlistedParticipantLeftListener: (participant: WaitlistedParticipant) => void;
-  private removeStateChangeListener: () => void;
 
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() participantsActive: boolean = false;
 
@@ -55,11 +62,9 @@ export class DyteParticipantsToggle {
   connectedCallback() {
     this.meetingChanged(this.meeting);
     this.statesChanged(this.states);
-    this.removeStateChangeListener = onChange('sidebar', () => this.statesChanged());
   }
 
   disconnectedCallback() {
-    this.removeStateChangeListener && this.removeStateChangeListener();
     if (this.meeting == null) return;
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.updateCanView);
     this.waitlistedParticipantJoinedListener &&
@@ -133,8 +138,7 @@ export class DyteParticipantsToggle {
   }
 
   @Watch('states')
-  statesChanged(s?: States) {
-    const states = s || storeState;
+  statesChanged(states?: States) {
     if (states != null) {
       this.participantsActive = states.activeSidebar === true && states.sidebar === 'participants';
     }
@@ -144,12 +148,8 @@ export class DyteParticipantsToggle {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   private toggleParticipantsTab() {
-    const states = this.states || storeState;
+    const states = this.states;
     this.participantsActive = !(states?.activeSidebar && states?.sidebar === 'participants');
-    storeState.activeSidebar = this.participantsActive;
-    storeState.sidebar = this.participantsActive ? 'participants' : undefined;
-    storeState.activeMoreMenu = false;
-    storeState.activeAI = false;
     this.stateUpdate.emit({
       activeSidebar: this.participantsActive,
       sidebar: this.participantsActive ? 'participants' : undefined,
@@ -177,7 +177,6 @@ export class DyteParticipantsToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           class={{ active: this.participantsActive }}
           onClick={() => this.toggleParticipantsTab()}
           icon={this.iconPack.participants}

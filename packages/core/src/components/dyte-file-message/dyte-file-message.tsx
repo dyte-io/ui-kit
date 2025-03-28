@@ -4,6 +4,7 @@ import { ChatHead } from '../dyte-chat/components/ChatHead';
 import { sanitizeLink } from '../../utils/string';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { downloadFile, getExtension, getFileSize } from '../../utils/file';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 
 /**
@@ -23,10 +24,14 @@ export class DyteFileMessage {
   @Prop({ reflect: true }) isContinued: boolean = false;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** show message in bubble */
   @Prop() showBubble: boolean = false;
@@ -58,12 +63,10 @@ export class DyteFileMessage {
             <dyte-button
               variant="secondary"
               kind="icon"
-              iconPack={this.iconPack}
-              t={this.t}
               onClick={() => downloadFile(link, { name: this.message.name, fallbackName: 'file' })}
               part="button"
             >
-              <dyte-icon icon={this.iconPack.download} iconPack={this.iconPack} t={this.t} />
+              <dyte-icon icon={this.iconPack.download} />
             </dyte-button>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import { Component, Event, Prop, h, EventEmitter } from '@stencil/core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
 
 @Component({
@@ -17,10 +18,14 @@ export class DyteFilePickerButton {
   @Prop() icon: keyof IconPack = 'attach';
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Event when a file is selected for upload */
   @Event({ eventName: 'fileChange' }) onFileChange: EventEmitter<File>;
@@ -57,19 +62,11 @@ export class DyteFilePickerButton {
   };
 
   render() {
-    const uiProps = { iconPack: this.iconPack, t: this.t };
     const label = this.label || this.t('chat.send_file');
     const icon = this.iconPack[this.icon];
     return (
-      <dyte-tooltip label={label} {...uiProps}>
-        <dyte-button
-          variant="ghost"
-          kind="icon"
-          onClick={() => this.uploadFile()}
-          title={label}
-          iconPack={this.iconPack}
-          t={this.t}
-        >
+      <dyte-tooltip label={label}>
+        <dyte-button variant="ghost" kind="icon" onClick={() => this.uploadFile()} title={label}>
           <dyte-icon icon={icon} />
         </dyte-button>
       </dyte-tooltip>

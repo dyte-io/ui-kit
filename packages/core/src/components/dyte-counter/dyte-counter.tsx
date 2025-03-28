@@ -1,5 +1,6 @@
 import { Component, EventEmitter, h, Host, Prop, State, Watch, Event } from '@stencil/core';
 import { Size, IconPack, defaultIconPack } from '../../exports';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { useLanguage, DyteI18n } from '../../lib/lang';
 
 /**
@@ -15,7 +16,7 @@ export class DyteCounter {
   @State() input: string = '1';
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Initial value */
   @Prop() value: number;
@@ -24,10 +25,14 @@ export class DyteCounter {
   @Prop() minValue: number = 0;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** On change event emitter */
   @Event({ eventName: 'valueChange' }) onChange: EventEmitter<string>;
@@ -53,14 +58,8 @@ export class DyteCounter {
   render() {
     return (
       <Host>
-        <dyte-button
-          kind="icon"
-          variant="ghost"
-          onClick={() => this.decrement()}
-          iconPack={this.iconPack}
-          t={this.t}
-        >
-          <dyte-icon icon={this.iconPack.subtract} iconPack={this.iconPack} t={this.t} />
+        <dyte-button kind="icon" variant="ghost" onClick={() => this.decrement()}>
+          <dyte-icon icon={this.iconPack.subtract} />
         </dyte-button>
         <input
           type="number"
@@ -75,14 +74,8 @@ export class DyteCounter {
             }
           }}
         />
-        <dyte-button
-          kind="icon"
-          variant="ghost"
-          onClick={() => this.increment()}
-          iconPack={this.iconPack}
-          t={this.t}
-        >
-          <dyte-icon icon={this.iconPack.add} iconPack={this.iconPack} t={this.t} />
+        <dyte-button kind="icon" variant="ghost" onClick={() => this.increment()}>
+          <dyte-icon icon={this.iconPack.add} />
         </dyte-button>
       </Host>
     );

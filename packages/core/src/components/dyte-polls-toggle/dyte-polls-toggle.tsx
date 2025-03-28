@@ -1,10 +1,10 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState, { onChange } from '../../lib/store';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { canViewPolls } from '../../utils/sidebar';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 
 /**
@@ -24,25 +24,31 @@ import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-but
   shadow: true,
 })
 export class DytePollsToggle {
-  private removeStateChangeListener: () => void;
-
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() pollsActive: boolean = false;
 
@@ -57,11 +63,9 @@ export class DytePollsToggle {
   connectedCallback() {
     this.meetingChanged(this.meeting);
     this.statesChanged(this.states);
-    this.removeStateChangeListener = onChange('sidebar', () => this.statesChanged());
   }
 
   disconnectedCallback() {
-    this.removeStateChangeListener && this.removeStateChangeListener();
     this.meeting?.polls?.removeListener('pollsUpdate', this.onPollsUpdate);
     this.meeting?.self?.permissions.removeListener('pollsUpdate', this.updateCanView);
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.updateCanView);
@@ -80,8 +84,7 @@ export class DytePollsToggle {
   }
 
   @Watch('states')
-  statesChanged(s?: States) {
-    const states = s || storeState;
+  statesChanged(states?: States) {
     if (states != null) {
       this.pollsActive = states.activeSidebar === true && states.sidebar === 'polls';
     }
@@ -91,7 +94,7 @@ export class DytePollsToggle {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   private togglePollsTab() {
-    const states = this.states || storeState;
+    const states = this.states;
     this.unreadPollsCount = 0;
     this.pollsActive = !(states?.activeSidebar && states?.sidebar === 'polls');
     this.stateUpdate.emit({
@@ -100,10 +103,6 @@ export class DytePollsToggle {
       activeMoreMenu: false,
       activeAI: false,
     });
-    storeState.activeSidebar = this.pollsActive;
-    storeState.sidebar = this.pollsActive ? 'polls' : undefined;
-    storeState.activeMoreMenu = false;
-    storeState.activeAI = false;
   }
 
   private updateCanView = () => {
@@ -127,7 +126,6 @@ export class DytePollsToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           class={{ active: this.pollsActive }}
           onClick={() => this.togglePollsTab()}
           icon={this.iconPack.poll}

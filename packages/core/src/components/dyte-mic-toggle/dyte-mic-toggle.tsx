@@ -4,7 +4,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { PermissionSettings, Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { StageStatus } from '@dytesdk/web-core';
 
 /**
@@ -43,16 +43,22 @@ export class DyteMicToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() audioEnabled: boolean = false;
 
@@ -129,7 +135,6 @@ export class DyteMicToggle {
         kind: 'audio',
       };
       this.stateUpdate.emit({ activePermissionsMessage: permissionModalSettings });
-      storeState.activePermissionsMessage = permissionModalSettings;
       return false;
     }
 
@@ -193,20 +198,13 @@ export class DyteMicToggle {
 
     return (
       <Host title={label}>
-        <dyte-tooltip
-          kind="block"
-          label={tooltipLabel}
-          part="tooltip"
-          iconPack={this.iconPack}
-          t={this.t}
-        >
+        <dyte-tooltip kind="block" label={tooltipLabel} part="tooltip">
           <dyte-controlbar-button
             part="controlbar-button"
             icon={icon}
             label={label}
             size={this.size}
             iconPack={this.iconPack}
-            t={this.t}
             variant={this.variant}
             class={classList}
             onClick={this.toggleMic}

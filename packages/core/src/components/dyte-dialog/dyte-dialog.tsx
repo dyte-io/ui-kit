@@ -4,6 +4,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { UIConfig } from '../../types/ui-config';
 
 /**
@@ -22,22 +23,30 @@ export class DyteDialog {
   @Prop() disableEscapeKey = false;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** UI Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Whether a dialog is open or not */
   @Prop({ reflect: true, mutable: true }) open: boolean = true;
@@ -80,13 +89,11 @@ export class DyteDialog {
               kind="icon"
               variant="ghost"
               onClick={() => this.close()}
-              iconPack={this.iconPack}
-              t={this.t}
               type="button"
               aria-label={this.t('dialog.close')}
               role="button"
             >
-              <dyte-icon icon={this.iconPack.dismiss} iconPack={this.iconPack} t={this.t} />
+              <dyte-icon icon={this.iconPack.dismiss} />
             </dyte-button>
           )}
         </div>

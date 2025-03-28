@@ -3,6 +3,7 @@ import { computePosition, flip, offset, shift } from '@floating-ui/dom';
 import { Size } from '../../types/props';
 import { IconPack, defaultIconPack } from '../../lib/icons';
 import { useLanguage, DyteI18n } from '../../lib/lang';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Placement } from '../../types/floating-ui';
 
 /**
@@ -23,7 +24,7 @@ export class DyteMenu {
   private clickedThis: boolean = false;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Placement of menu */
   @Prop() placement: Placement = 'bottom-end';
@@ -32,10 +33,14 @@ export class DyteMenu {
   @Prop() offset: number = 10;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   componentDidLoad() {
     document.addEventListener('click', this.handleOutsideClick);

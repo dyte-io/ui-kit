@@ -2,6 +2,7 @@ import { Component, h, Prop, State, Watch } from '@stencil/core';
 import { UIConfig, Size, IconPack, defaultIconPack, DyteI18n, defaultConfig } from '../../exports';
 import { useLanguage } from '../../lib/lang';
 import { Meeting, Participant, Peer } from '../../types/dyte-client';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { ParticipantsViewMode } from '../dyte-participants/dyte-participants';
 
 @Component({
@@ -11,22 +12,28 @@ import { ParticipantsViewMode } from '../dyte-participants/dyte-participants';
 })
 export class DyteParticipantsStaged {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** View mode for participants list */
   @Prop() view: ParticipantsViewMode = 'sidebar';
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() stageRequestedParticipants: Peer[] = [];
 
@@ -138,38 +145,19 @@ export class DyteParticipantsStaged {
                 </p>
               </div>
               <div class="waitlist-controls">
-                <dyte-tooltip
-                  label={this.t('stage_request.deny_request')}
-                  variant="secondary"
-                  iconPack={this.iconPack}
-                  t={this.t}
-                >
+                <dyte-tooltip label={this.t('stage_request.deny_request')} variant="secondary">
                   <dyte-button
                     variant="secondary"
                     kind="icon"
                     onClick={() => this.rejectStageRequest(participant)}
-                    iconPack={this.iconPack}
-                    t={this.t}
                   >
-                    <dyte-icon
-                      class="deny"
-                      icon={this.iconPack.dismiss}
-                      iconPack={this.iconPack}
-                      t={this.t}
-                    />
+                    <dyte-icon class="deny" icon={this.iconPack.dismiss} />
                   </dyte-button>
                 </dyte-tooltip>
-                <dyte-tooltip
-                  label={this.t('stage_request.accept_request')}
-                  variant="secondary"
-                  iconPack={this.iconPack}
-                  t={this.t}
-                >
+                <dyte-tooltip label={this.t('stage_request.accept_request')} variant="secondary">
                   <dyte-button
                     variant="secondary"
                     kind="icon"
-                    iconPack={this.iconPack}
-                    t={this.t}
                     onClick={() => this.acceptStageRequest(participant)}
                   >
                     <dyte-icon class="accept" icon={this.iconPack.checkmark} />
@@ -183,19 +171,11 @@ export class DyteParticipantsStaged {
           <dyte-button
             class="accept-all-button"
             variant="secondary"
-            iconPack={this.iconPack}
-            t={this.t}
             onClick={this.acceptAllStageRequest}
           >
             {this.t('stage_request.accept_all')}
           </dyte-button>
-          <dyte-button
-            class="deny-all-button"
-            variant="danger"
-            iconPack={this.iconPack}
-            t={this.t}
-            onClick={this.denyAllStageRequest}
-          >
+          <dyte-button class="deny-all-button" variant="danger" onClick={this.denyAllStageRequest}>
             {this.t('stage_request.deny_all')}
           </dyte-button>
         </div>

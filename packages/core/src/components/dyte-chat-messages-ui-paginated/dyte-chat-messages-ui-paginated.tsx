@@ -14,7 +14,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { ChatChannel, Size, States } from '../../types/props';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 @Component({
   tag: 'dyte-chat-messages-ui-paginated',
@@ -27,7 +27,9 @@ export class DyteChatMessagesUiPaginated {
   @Element() host: HTMLDyteChatMessagesUiPaginatedElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /**
    * Selected channel
@@ -40,13 +42,17 @@ export class DyteChatMessagesUiPaginated {
   @Prop() selectedChannelId?: string;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Event for editing a message */
   @Event({ bubbles: true, composed: true }) editMessageInit: EventEmitter<{
@@ -256,19 +262,13 @@ export class DyteChatMessagesUiPaginated {
                     url={message.link}
                     onPreview={() => {
                       this.stateUpdate.emit({ image: message });
-                      storeState.image = message;
                     }}
                   ></dyte-image-message-view>
                 )}
               </div>
               {message.pinned && (
                 <div class="pin-icon" part="pin-icon">
-                  <dyte-icon
-                    icon={this.iconPack.pin}
-                    iconPack={this.iconPack}
-                    t={this.t}
-                    size="sm"
-                  />
+                  <dyte-icon icon={this.iconPack.pin} size="sm" />
                 </div>
               )}
             </div>

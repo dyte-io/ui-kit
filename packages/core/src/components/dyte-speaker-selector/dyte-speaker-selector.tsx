@@ -4,6 +4,8 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 
+import { SyncWithStore } from '../../utils/sync-with-store';
+
 import { disableSettingSinkId } from '../../utils/flags';
 
 /**
@@ -27,22 +29,30 @@ export class DyteSpeakerSelector {
   private testAudioEl: HTMLAudioElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** variant */
   @Prop() variant: 'full' | 'inline' = 'full';
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() speakerDevices: MediaDeviceInfo[] = [];
   @State() currentDevices: {
@@ -141,12 +151,7 @@ export class DyteSpeakerSelector {
             <div class="container">
               <label>
                 {this.variant !== 'inline' && this.t('settings.speaker_output')}
-                <dyte-icon
-                  icon={this.iconPack.speaker}
-                  iconPack={this.iconPack}
-                  t={this.t}
-                  size="sm"
-                />
+                <dyte-icon icon={this.iconPack.speaker} size="sm" />
               </label>
               <div class="row">
                 <select
@@ -166,18 +171,8 @@ export class DyteSpeakerSelector {
             </div>
           )}
           {this.variant === 'full' && (
-            <dyte-button
-              variant="secondary"
-              onClick={() => this.testAudio()}
-              iconPack={this.iconPack}
-              t={this.t}
-            >
-              <dyte-icon
-                icon={this.iconPack.speaker}
-                slot="start"
-                iconPack={this.iconPack}
-                t={this.t}
-              />
+            <dyte-button variant="secondary" onClick={() => this.testAudio()}>
+              <dyte-icon icon={this.iconPack.speaker} slot="start" />
               {this.t('test')}
             </dyte-button>
           )}

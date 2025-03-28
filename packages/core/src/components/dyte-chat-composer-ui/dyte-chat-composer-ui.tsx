@@ -20,6 +20,7 @@ import {
   MAX_TEXT_LENGTH,
 } from '../../utils/chat';
 import gracefulStorage from '../../utils/graceful-storage';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import type { DyteBasicParticipant, TextMessage } from '@dytesdk/web-core';
 
 interface DyteText {
@@ -55,13 +56,17 @@ export class DyteChatComposerUi {
   @Prop() canSendFiles = false;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Whether to show emoji picker */
   @Prop() disableEmojiPicker? = false;
@@ -399,7 +404,6 @@ export class DyteChatComposerUi {
   };
 
   render() {
-    const uiProps = { iconPack: this.iconPack, t: this.t, size: this.size };
     let defaultValue = '';
     if (this.prefill.editMessage?.message) {
       defaultValue = stripOutReplyBlock(this.prefill.editMessage.message);
@@ -447,40 +451,34 @@ export class DyteChatComposerUi {
             <div class="left" part="chat-buttons-left">
               {!this.prefill.editMessage &&
                 this.canSendFiles && [
-                  <dyte-tooltip label={this.t('chat.send_file')} {...uiProps}>
+                  <dyte-tooltip label={this.t('chat.send_file')}>
                     <dyte-button
                       variant="ghost"
                       kind="icon"
                       onClick={() => this.uploadFile('file')}
                       title={this.t('chat.send_file')}
-                      iconPack={this.iconPack}
-                      t={this.t}
                     >
                       <dyte-icon icon={this.iconPack.attach} />
                     </dyte-button>
                   </dyte-tooltip>,
-                  <dyte-tooltip label={this.t('chat.send_img')} {...uiProps}>
+                  <dyte-tooltip label={this.t('chat.send_img')}>
                     <dyte-button
                       variant="ghost"
                       kind="icon"
                       onClick={() => this.uploadFile('image')}
                       title={this.t('chat.send_img')}
-                      iconPack={this.iconPack}
-                      t={this.t}
                     >
                       <dyte-icon icon={this.iconPack.image} />
                     </dyte-button>
                   </dyte-tooltip>,
                 ]}
               {!this.prefill.editMessage && this.canSendTextMessage && !this.disableEmojiPicker && (
-                <dyte-tooltip label={this.t('chat.send_emoji')} {...uiProps}>
+                <dyte-tooltip label={this.t('chat.send_emoji')}>
                   <dyte-button
                     variant="ghost"
                     kind="icon"
                     class={{ active: this.emojiPickerActive }}
                     title={this.t('chat.send_emoji')}
-                    iconPack={this.iconPack}
-                    t={this.t}
                     onClick={() => {
                       this.emojiPickerActive = !this.emojiPickerActive;
                     }}
@@ -494,18 +492,11 @@ export class DyteChatComposerUi {
             {this.canSendTextMessage && (
               <div class="right" part="chat-buttons-right">
                 {!this.prefill.editMessage && (
-                  <dyte-tooltip
-                    variant="primary"
-                    label={this.t('chat.send_msg')}
-                    delay={2000}
-                    {...uiProps}
-                  >
+                  <dyte-tooltip variant="primary" label={this.t('chat.send_msg')} delay={2000}>
                     <dyte-button
                       kind="icon"
                       onClick={() => this.handleSendMessage()}
                       title={this.t('chat.send_msg')}
-                      iconPack={this.iconPack}
-                      t={this.t}
                     >
                       <dyte-icon icon={this.iconPack.send} />
                     </dyte-button>
@@ -513,35 +504,21 @@ export class DyteChatComposerUi {
                 )}
                 {this.prefill.editMessage && (
                   <div class="edit-buttons">
-                    <dyte-tooltip
-                      variant="secondary"
-                      label={this.t('cancel')}
-                      delay={2000}
-                      {...uiProps}
-                    >
+                    <dyte-tooltip variant="secondary" label={this.t('cancel')} delay={2000}>
                       <dyte-button
                         kind="icon"
                         variant="secondary"
                         onClick={() => this.handleEditCancel()}
                         title={this.t('cancel')}
-                        iconPack={this.iconPack}
-                        t={this.t}
                       >
                         <dyte-icon icon={this.iconPack.dismiss} />
                       </dyte-button>
                     </dyte-tooltip>
-                    <dyte-tooltip
-                      variant="primary"
-                      label={this.t('chat.update_msg')}
-                      delay={2000}
-                      {...uiProps}
-                    >
+                    <dyte-tooltip variant="primary" label={this.t('chat.update_msg')} delay={2000}>
                       <dyte-button
                         kind="icon"
                         onClick={() => this.handleEditMessage()}
                         title={this.t('chat.send_msg')}
-                        iconPack={this.iconPack}
-                        t={this.t}
                       >
                         <dyte-icon icon={this.iconPack.checkmark} />
                       </dyte-button>

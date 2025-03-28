@@ -1,8 +1,8 @@
 import { Component, Host, h, Prop, Event, EventEmitter, State, Watch } from '@stencil/core';
 import { defaultIconPack, IconPack, Size, States } from '../../exports';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState from '../../lib/store';
 import { Meeting } from '../../types/dyte-client';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 
 @Component({
@@ -15,16 +15,22 @@ export class DyteMuteAllButton {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
@@ -55,7 +61,6 @@ export class DyteMuteAllButton {
 
   private onMuteAll = () => {
     this.stateUpdate.emit({ activeMuteAllConfirmation: true });
-    storeState.activeMuteAllConfirmation = true;
   };
 
   render() {
@@ -74,7 +79,6 @@ export class DyteMuteAllButton {
             label={label}
             size={this.size}
             iconPack={this.iconPack}
-            t={this.t}
             variant={this.variant}
             onClick={this.onMuteAll}
           />

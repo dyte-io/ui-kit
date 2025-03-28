@@ -4,7 +4,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { getPreference, setPreference } from '../../utils/user-prefs';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 /**
  * A component which lets to manage your camera devices and your video preferences.
@@ -25,19 +25,27 @@ import storeState from '../../lib/store';
 })
 export class DyteSettingsVideo {
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() videoEnabled: boolean;
 
@@ -69,13 +77,13 @@ export class DyteSettingsVideo {
 
     const defaults = {
       meeting: this.meeting,
-      states: this.states || storeState,
+      states: this.states,
       size: this.size,
       iconPack: this.iconPack,
       t: this.t,
     };
 
-    const states = this.states || storeState;
+    const states = this.states;
     const initialMirrorPreference =
       states?.prefs?.mirrorVideo === true || getPreference('mirror-video') === 'true';
 
@@ -106,8 +114,6 @@ export class DyteSettingsVideo {
                       icon={this.iconPack.video_off}
                       tabIndex={-1}
                       aria-hidden={true}
-                      iconPack={this.iconPack}
-                      t={this.t}
                     />
                     <div>{this.t('settings.camera_off')}</div>
                   </div>
@@ -127,7 +133,6 @@ export class DyteSettingsVideo {
               onDyteChange={(e) => {
                 const { checked } = e.target as HTMLDyteSwitchElement;
                 this.stateUpdate.emit({ prefs: { mirrorVideo: checked } });
-                storeState.prefs = { ...(storeState.prefs ?? {}), mirrorVideo: checked };
                 setPreference('mirror-video', checked);
               }}
             />

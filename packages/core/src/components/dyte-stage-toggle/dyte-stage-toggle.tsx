@@ -5,7 +5,8 @@ import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { canRequestToJoinStage, canJoinStage } from '../../utils/stage';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
+import { uiState } from '../../utils/sync-with-store/ui-store';
 
 interface DataState {
   label: string;
@@ -23,13 +24,27 @@ export class DyteStageToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
+
+  /** States */
+  @SyncWithStore()
+  @Prop()
+  states: States;
+
+  /** Language */
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() stageStatus: StageStatus = 'OFF_STAGE';
 
@@ -51,7 +66,6 @@ export class DyteStageToggle {
     if (status === 'ACCEPTED_TO_JOIN_STAGE') {
       meeting.self.setupTracks({ audio: false, video: false });
       this.stateUpdate.emit({ activeJoinStage: true });
-      storeState.activeJoinStage = true;
     }
     this.state = this.getState();
   }
@@ -81,8 +95,8 @@ export class DyteStageToggle {
     if (stageStatus === 'OFF_STAGE') {
       this?.meeting?.stage?.requestAccess();
       if (canJoinStage(this.meeting)) {
+        uiState.states.activeJoinStage = true;
         this.stateUpdate.emit({ activeJoinStage: true });
-        storeState.activeJoinStage = true;
       }
     }
 
@@ -125,8 +139,6 @@ export class DyteStageToggle {
     return { label, disabled, icon };
   }
 
-  /** Language */
-  @Prop() t: DyteI18n = useLanguage();
   render() {
     if (!canRequestToJoinStage(this.meeting)) return;
     return (
@@ -137,14 +149,11 @@ export class DyteStageToggle {
           label={this.state.label}
           delay={600}
           part="tooltip"
-          iconPack={this.iconPack}
-          t={this.t}
         >
           <dyte-controlbar-button
             part="controlbar-button"
             size={this.size}
             iconPack={this.iconPack}
-            t={this.t}
             variant={this.variant}
             label={this.state.label}
             icon={this.state.icon}

@@ -9,7 +9,7 @@ import {
   requestFullScreen,
 } from '../../utils/full-screen';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 /**
  * A button which toggles full screen mode for any
@@ -22,7 +22,9 @@ import storeState from '../../lib/store';
 })
 export class DyteFullscreenToggle {
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Target Element to fullscreen */
   @Prop() targetElement: HTMLElement;
@@ -31,13 +33,17 @@ export class DyteFullscreenToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Emits updated state data */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
@@ -73,7 +79,6 @@ export class DyteFullscreenToggle {
       this.fullScreenActive = false;
     }
     this.stateUpdate.emit({ activeMoreMenu: false });
-    storeState.activeMoreMenu = false;
   };
 
   render() {
@@ -86,7 +91,6 @@ export class DyteFullscreenToggle {
         <dyte-controlbar-button
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           onClick={this.toggleFullScreen}
           icon={
             this.fullScreenActive

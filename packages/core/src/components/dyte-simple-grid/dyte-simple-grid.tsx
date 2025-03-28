@@ -8,6 +8,7 @@ import { Size, States } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { Dimensions, useGrid } from '../../lib/grid';
 import ResizeObserver from 'resize-observer-polyfill';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { MediaConnectionState } from '@dytesdk/web-core';
 
 /**
@@ -35,22 +36,30 @@ export class DyteSimpleGrid {
   @Prop() gap: number = 8;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** UI Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() dimensions: Dimensions = { width: 0, height: 0 };
 
@@ -98,32 +107,33 @@ export class DyteSimpleGrid {
 
     return (
       <Host>
-        {this.participants.map((participant, index) => {
-          const { top, left } = getPosition(index);
+        <slot>
+          {this.participants.map((participant, index) => {
+            const { top, left } = getPosition(index);
 
-          return (
-            <Render
-              element="dyte-participant-tile"
-              defaults={defaults}
-              props={{
-                participant,
-                style: {
-                  position: 'absolute',
-                  top: `${top}px`,
-                  left: `${left}px`,
-                  width: `${width}px`,
-                  height: `${height}px`,
-                },
-                key: participant.id,
-                'data-participant': participant.id,
-                mediaConnection: this.mediaConnection,
-              }}
-              childProps={{ participant }}
-              deepProps
-            />
-          );
-        })}
-        <slot />
+            return (
+              <Render
+                element="dyte-participant-tile"
+                defaults={defaults}
+                props={{
+                  participant,
+                  style: {
+                    position: 'absolute',
+                    top: `${top}px`,
+                    left: `${left}px`,
+                    width: `${width}px`,
+                    height: `${height}px`,
+                  },
+                  key: participant.id,
+                  'data-participant': participant.id,
+                  mediaConnection: this.mediaConnection,
+                }}
+                childProps={{ participant }}
+                deepProps
+              />
+            );
+          })}
+        </slot>
       </Host>
     );
   }

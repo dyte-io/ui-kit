@@ -6,6 +6,7 @@ import { Meeting } from '../../types/dyte-client';
 import { PollObject, Size, Poll } from '../../types/props';
 import { UIConfig } from '../../types/ui-config';
 import { smoothScrollToBottom } from '../../utils/scroll';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { DytePermissionsPreset } from '@dytesdk/web-core';
 
 /**
@@ -23,19 +24,25 @@ export class DytePolls {
   private pollEl: HTMLDivElement;
 
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Create State */
   @State() create: boolean = false;
@@ -130,8 +137,6 @@ export class DytePolls {
               onClick={() => this.toggleCreateState()}
               variant={this.create ? 'secondary' : 'primary'}
               part="button"
-              iconPack={this.iconPack}
-              t={this.t}
             >
               {this.create ? this.t('polls.cancel') : this.t('polls.create')}
             </dyte-button>

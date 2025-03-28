@@ -1,6 +1,7 @@
 import { Component, Prop, h } from '@stencil/core';
-import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
+import { IconPack, defaultIconPack } from '../../exports';
 import { sanitizeLink } from '../../utils/string';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { downloadFile, getExtension, getFileSize } from '../../utils/file';
 
 /**
@@ -22,10 +23,9 @@ export class DyteFileMessageView {
   @Prop() url!: string;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
-
-  /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   render() {
     return (
@@ -33,14 +33,12 @@ export class DyteFileMessageView {
         <dyte-button
           variant="secondary"
           kind="icon"
-          iconPack={this.iconPack}
-          t={this.t}
           onClick={() =>
             downloadFile(sanitizeLink(this.url), { name: this.name, fallbackName: 'file' })
           }
           part="button"
         >
-          <dyte-icon icon={this.iconPack.download} iconPack={this.iconPack} t={this.t} />
+          <dyte-icon icon={this.iconPack.download} />
         </dyte-button>
         <div class="file-data">
           <div class="name">{this.name}</div>

@@ -4,6 +4,7 @@ import { Size, States } from '../../types/props';
 import { Meeting } from '../../types/dyte-client';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { DyteParticipants } from '@dytesdk/web-core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import debounce from 'lodash/debounce';
 
 export type GridPaginationVariants = 'solid' | 'rounded' | 'grid';
@@ -21,22 +22,30 @@ const MASS_ACTIONS_DEBOUNCE_TIMER = 50; // In ms
 })
 export class DyteGridPagination {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size Prop */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Variant */
   @Prop({ reflect: true }) variant: GridPaginationVariants = 'rounded';
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() page: number = 1;
   @State() pageCount: number = 0;
@@ -165,18 +174,16 @@ export class DyteGridPagination {
           disabled={this.pageCount === 0}
           onClick={this.prevPage}
           aria-label={this.t('page.prev')}
-          iconPack={this.iconPack}
-          t={this.t}
         >
-          <dyte-icon icon={this.iconPack.chevron_left} iconPack={this.iconPack} t={this.t} />
+          <dyte-icon icon={this.iconPack.chevron_left} />
         </dyte-button>
         {this.variant !== 'grid' && (
           <div class="center">
             <span class="page">
               {this.pageCount === 0 ? (
-                <dyte-tooltip label={this.t('layout.auto')} iconPack={this.iconPack} t={this.t}>
-                  <dyte-button kind="icon" class="auto" iconPack={this.iconPack} t={this.t}>
-                    <dyte-icon icon={this.iconPack.wand} iconPack={this.iconPack} t={this.t} />
+                <dyte-tooltip label={this.t('layout.auto')}>
+                  <dyte-button kind="icon" class="auto">
+                    <dyte-icon icon={this.iconPack.wand} />
                   </dyte-button>
                 </dyte-tooltip>
               ) : (
@@ -203,16 +210,8 @@ export class DyteGridPagination {
           disabled={this.page !== 0 && this.page === this.pageCount}
           onClick={this.nextPage}
           aria-label={this.t('page.next')}
-          iconPack={this.iconPack}
-          t={this.t}
         >
-          <dyte-icon
-            icon={this.iconPack.chevron_right}
-            tabIndex={-1}
-            aria-hidden={true}
-            iconPack={this.iconPack}
-            t={this.t}
-          />
+          <dyte-icon icon={this.iconPack.chevron_right} tabIndex={-1} aria-hidden={true} />
         </dyte-button>
       </Host>
     );

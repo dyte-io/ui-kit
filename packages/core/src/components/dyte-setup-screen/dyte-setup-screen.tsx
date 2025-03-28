@@ -8,7 +8,7 @@ import { Render } from '../../lib/render';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import gracefulStorage from '../../utils/graceful-storage';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { SocketConnectionState } from '@dytesdk/web-core';
 
 /**
@@ -23,13 +23,17 @@ import { SocketConnectionState } from '@dytesdk/web-core';
 export class DyteSetupScreen {
   private inputEl: HTMLInputElement;
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States = storeState;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Config object */
   @Prop() config: UIConfig = defaultConfig;
@@ -38,10 +42,14 @@ export class DyteSetupScreen {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() displayName: string;
 
@@ -67,11 +75,10 @@ export class DyteSetupScreen {
 
   @Watch('meeting')
   meetingChanged(meeting: Meeting) {
-    if (meeting != null) {
+    if (!meeting) {
       this.connectionState = meeting.meta.socketState?.state;
       this.canEditName = meeting.self.permissions.canEditDisplayName ?? true;
       this.displayName = meeting.self.name?.trim() || (this.canEditName ? '' : 'Participant');
-      storeState.meeting = 'setup';
       meeting.meta.addListener('socketConnectionUpdate', this.socketStateUpdate);
     }
   }
@@ -102,7 +109,7 @@ export class DyteSetupScreen {
     const defaults = {
       meeting: this.meeting,
       config: this.config,
-      states: this.states || storeState,
+      states: this.states,
       size: this.size,
       iconPack: this.iconPack,
       t: this.t,
@@ -150,19 +157,8 @@ export class DyteSetupScreen {
                 }}
               />
             )}
-            <dyte-button
-              size="lg"
-              kind="wide"
-              onClick={this.join}
-              disabled={disabled}
-              iconPack={this.iconPack}
-              t={this.t}
-            >
-              {this.isJoining ? (
-                <dyte-spinner iconPack={this.iconPack} t={this.t} />
-              ) : (
-                this.t('join')
-              )}
+            <dyte-button size="lg" kind="wide" onClick={this.join} disabled={disabled}>
+              {this.isJoining ? <dyte-spinner iconPack={this.iconPack} /> : this.t('join')}
             </dyte-button>
 
             {this.connectionState !== 'connected' && (

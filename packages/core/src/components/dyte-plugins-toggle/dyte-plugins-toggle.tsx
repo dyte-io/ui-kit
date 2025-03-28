@@ -1,10 +1,10 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState, { onChange } from '../../lib/store';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { canViewPlugins } from '../../utils/sidebar';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 
 /**
@@ -22,32 +22,37 @@ import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-but
   shadow: true,
 })
 export class DytePluginsToggle {
-  private removeStateChangeListener: () => void;
-
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() pluginsActive: boolean = false;
 
   @State() canViewPlugins: boolean = false;
 
   disconnectedCallback() {
-    this.removeStateChangeListener && this.removeStateChangeListener();
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.updateCanView);
     this.meeting?.self?.permissions.removeListener('pluginsUpdate', this.updateCanView);
   }
@@ -55,7 +60,6 @@ export class DytePluginsToggle {
   connectedCallback() {
     this.statesChanged(this.states);
     this.meetingChanged(this.meeting);
-    this.removeStateChangeListener = onChange('sidebar', () => this.statesChanged());
   }
 
   @Watch('meeting')
@@ -67,8 +71,7 @@ export class DytePluginsToggle {
   }
 
   @Watch('states')
-  statesChanged(s?: States) {
-    const states = s || storeState;
+  statesChanged(states?: States) {
     if (states != null) {
       this.pluginsActive = states.activeSidebar === true && states.sidebar === 'plugins';
     }
@@ -78,7 +81,7 @@ export class DytePluginsToggle {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   private togglePlugins() {
-    const states = this.states || storeState;
+    const states = this.states;
     this.pluginsActive = !(states?.activeSidebar && states?.sidebar === 'plugins');
     this.stateUpdate.emit({
       activeSidebar: this.pluginsActive,
@@ -86,10 +89,6 @@ export class DytePluginsToggle {
       activeMoreMenu: false,
       activeAI: false,
     });
-    storeState.activeSidebar = this.pluginsActive;
-    storeState.sidebar = this.pluginsActive ? 'plugins' : undefined;
-    storeState.activeMoreMenu = false;
-    storeState.activeAI = false;
   }
 
   private updateCanView = () => {
@@ -107,7 +106,6 @@ export class DytePluginsToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           class={{ active: this.pluginsActive }}
           onClick={() => this.togglePlugins()}
           icon={this.iconPack.rocket}

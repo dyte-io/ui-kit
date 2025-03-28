@@ -1,4 +1,5 @@
 import { Component, h, Host, Prop } from '@stencil/core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { IconPack, defaultIconPack } from '../../exports';
 
 @Component({
@@ -8,7 +9,9 @@ import { IconPack, defaultIconPack } from '../../exports';
 })
 export class DyteInformationTooltip {
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   render() {
     return (

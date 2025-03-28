@@ -4,6 +4,7 @@ import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@st
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { getAllConnectedParticipants, participantIdentifier } from '../../utils/breakout-rooms';
 import type { DyteConnectedMeetings } from '@dytesdk/web-core';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { formatName, shorten } from '../../utils/string';
 
 type ConnectedPeer = DyteConnectedMeetings['parentMeeting']['participants'][number];
@@ -19,16 +20,22 @@ type ConnectedPeer = DyteConnectedMeetings['parentMeeting']['participants'][numb
 })
 export class DyteBreakoutRoomParticipants {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Participant ids */
   @Prop() participantIds: string[] = [];
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() search: string = '';
 
@@ -147,13 +154,7 @@ export class DyteBreakoutRoomParticipants {
       <Host>
         <div class="search-wrapper">
           <div class="search" part="search">
-            <dyte-icon
-              icon={this.iconPack.search}
-              part="search-icon"
-              iconPack={this.iconPack}
-              t={this.t}
-              class="search-icon"
-            />
+            <dyte-icon icon={this.iconPack.search} part="search-icon" class="search-icon" />
             <input
               type="search"
               autocomplete="off"
@@ -168,16 +169,12 @@ export class DyteBreakoutRoomParticipants {
           <div class="title-wrapper">
             <span>{this.t('breakout_rooms.main_room')}</span>
             <span class="participant-count">
-              (<dyte-icon icon={this.iconPack.people} iconPack={this.iconPack} t={this.t} />
+              (<dyte-icon icon={this.iconPack.people} />
               {this.participantsToShow.length})
             </span>
           </div>
           {this.selectedParticipantIds.length !== 0 && (
-            <dyte-tooltip
-              label={this.t('breakout_rooms.select_all')}
-              iconPack={this.iconPack}
-              t={this.t}
-            >
+            <dyte-tooltip label={this.t('breakout_rooms.select_all')}>
               <input
                 type="checkbox"
                 checked={this.selectedParticipantIds.length === this.participantsToShow.length}
@@ -223,8 +220,6 @@ export class DyteBreakoutRoomParticipants {
               <dyte-icon
                 icon={this.iconPack.people_checked}
                 part="search-icon"
-                iconPack={this.iconPack}
-                t={this.t}
                 class="search-icon"
               />
               <p>{this.t('breakout_rooms.all_assigned')}</p>

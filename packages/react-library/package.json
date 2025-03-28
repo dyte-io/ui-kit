@@ -1,6 +1,6 @@
 {
   "name": "@dytesdk/react-ui-kit",
-  "version": "2.3.6",
+  "version": "2.4.0-staging.12",
   "description": "Dyte's UI Kit to support easy UI development for React.",
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
     "build": "npm run clean && npm run compile",
     "clean": "rm -rf dist",
     "compile": "npm run tsc && tsc -p tsconfig.es.json",
-    "tsc": "tsc -p .",
+    "tsc": "tsc -p tsconfig.json",
     "rollup": "rollup -c",
     "lint": "echo \"No lint script\"",
     "lint:fix": "echo \"No lint:fix script\"",

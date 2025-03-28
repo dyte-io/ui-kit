@@ -1,10 +1,10 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import state from '../../lib/store';
 import { Meeting, Peer, MediaPermission } from '../../types/dyte-client';
 import { PermissionSettings, Size, States } from '../../types/props';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { StageStatus } from '@dytesdk/web-core';
 
 /**
@@ -43,16 +43,22 @@ export class DyteCameraToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() videoEnabled: boolean = false;
 
@@ -128,7 +134,6 @@ export class DyteCameraToggle {
         kind: 'video',
       };
       this.stateUpdate.emit({ activePermissionsMessage: permissionModalSettings });
-      state.activePermissionsMessage = permissionModalSettings;
       return false;
     }
 
@@ -193,18 +198,11 @@ export class DyteCameraToggle {
 
     return (
       <Host title={label}>
-        <dyte-tooltip
-          kind="block"
-          label={tooltipLabel}
-          part="tooltip"
-          iconPack={this.iconPack}
-          t={this.t}
-        >
+        <dyte-tooltip kind="block" label={tooltipLabel} part="tooltip">
           <dyte-controlbar-button
             part="controlbar-button"
             size={this.size}
             iconPack={this.iconPack}
-            t={this.t}
             class={classList}
             variant={this.variant}
             label={label}

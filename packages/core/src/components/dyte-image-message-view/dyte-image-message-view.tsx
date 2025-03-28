@@ -1,6 +1,7 @@
 import { Component, Event, EventEmitter, Prop, State, h } from '@stencil/core';
 import { DyteI18n, IconPack, defaultIconPack, useLanguage } from '../../exports';
 import { sanitizeLink } from '../../utils/string';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { downloadFile } from '../../utils/file';
 
 /**
@@ -16,10 +17,14 @@ export class DyteImageMessageView {
   @Prop() url!: string;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** preview event */
   @Event({ eventName: 'preview' }) onPreview: EventEmitter<string>;
@@ -49,7 +54,7 @@ export class DyteImageMessageView {
             title={this.t('chat.img.loading')}
             aria-label={this.t('chat.img.loading')}
           >
-            <dyte-spinner iconPack={this.iconPack} t={this.t} />
+            <dyte-spinner iconPack={this.iconPack} />
           </div>
         )}
         {this.status === 'errored' && (
@@ -58,7 +63,7 @@ export class DyteImageMessageView {
             title={this.t('chat.error.img_not_found')}
             aria-label={this.t('chat.error.img_not_found')}
           >
-            <dyte-icon icon={this.iconPack.image_off} iconPack={this.iconPack} t={this.t} />
+            <dyte-icon icon={this.iconPack.image_off} />
           </div>
         )}
         {this.status === 'loaded' && (
@@ -70,8 +75,6 @@ export class DyteImageMessageView {
               onClick={() => {
                 this.onPreview.emit(this.url);
               }}
-              iconPack={this.iconPack}
-              t={this.t}
             >
               <dyte-icon icon={this.iconPack.full_screen_maximize} />
             </dyte-button>
@@ -80,10 +83,8 @@ export class DyteImageMessageView {
               variant="secondary"
               kind="icon"
               onClick={() => downloadFile(this.url, { fallbackName: 'image' })}
-              iconPack={this.iconPack}
-              t={this.t}
             >
-              <dyte-icon icon={this.iconPack.download} iconPack={this.iconPack} t={this.t} />
+              <dyte-icon icon={this.iconPack.download} />
             </dyte-button>
           </div>
         )}

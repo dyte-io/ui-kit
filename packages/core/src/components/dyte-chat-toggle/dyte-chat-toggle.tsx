@@ -1,11 +1,11 @@
 import { Component, Host, h, Prop, State, Watch, Event, EventEmitter } from '@stencil/core';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
-import storeState, { onChange } from '../../lib/store';
 import { Meeting } from '../../types/dyte-client';
 import { Size, States } from '../../types/props';
 import { usePaginatedChat } from '../../utils/flags';
 import { canViewChat } from '../../utils/sidebar';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
 
 /**
@@ -25,27 +25,33 @@ import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-but
   shadow: true,
 })
 export class DyteChatToggle {
-  private removeStateChangeListener: () => void;
-
   @State() unreadMessageCount: number = 0;
 
   /** Variant */
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   @State() chatActive: boolean = false;
 
@@ -59,11 +65,9 @@ export class DyteChatToggle {
   connectedCallback() {
     this.meetingChanged(this.meeting);
     this.statesChanged(this.states);
-    this.removeStateChangeListener = onChange('sidebar', () => this.statesChanged());
   }
 
   disconnectedCallback() {
-    this.removeStateChangeListener && this.removeStateChangeListener();
     this.meeting?.chat?.removeListener('chatUpdate', this.onChatUpdate);
     this.meeting?.stage?.removeListener('stageStatusUpdate', this.updateCanView);
     this.meeting?.self?.permissions.removeListener('chatUpdate', this.updateCanView);
@@ -88,8 +92,7 @@ export class DyteChatToggle {
   }
 
   @Watch('states')
-  statesChanged(s?: States) {
-    const states = s || storeState;
+  statesChanged(states: States) {
     if (states != null) {
       this.chatActive = states.activeSidebar === true && states.sidebar === 'chat';
     }
@@ -108,16 +111,12 @@ export class DyteChatToggle {
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
 
   private toggleChat = () => {
-    const states = this.states || storeState;
+    const states = this.states;
     this.chatActive = !(states?.activeSidebar && states?.sidebar === 'chat');
     if (this.chatActive) {
       this.unreadMessageCount = 0;
       this.hasNewMessages = false;
     }
-    storeState.activeSidebar = this.chatActive;
-    storeState.activeMoreMenu = false;
-    storeState.sidebar = this.chatActive ? 'chat' : undefined;
-    storeState.activeAI = false;
     this.stateUpdate.emit({
       activeSidebar: this.chatActive,
       sidebar: this.chatActive ? 'chat' : undefined,
@@ -146,7 +145,6 @@ export class DyteChatToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           class={{ active: this.chatActive }}
           onClick={this.toggleChat}
           icon={this.iconPack.chat}

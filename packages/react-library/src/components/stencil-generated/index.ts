@@ -9,8 +9,6 @@ import { defineCustomElements } from '@dytesdk/ui-kit/loader';
 
 defineCustomElements();
 export const DyteAi = /*@__PURE__*/createReactComponent<JSX.DyteAi, HTMLDyteAiElement>('dyte-ai');
-export const DyteAiChat = /*@__PURE__*/createReactComponent<JSX.DyteAiChat, HTMLDyteAiChatElement>('dyte-ai-chat');
-export const DyteAiHome = /*@__PURE__*/createReactComponent<JSX.DyteAiHome, HTMLDyteAiHomeElement>('dyte-ai-home');
 export const DyteAiToggle = /*@__PURE__*/createReactComponent<JSX.DyteAiToggle, HTMLDyteAiToggleElement>('dyte-ai-toggle');
 export const DyteAiTranscriptions = /*@__PURE__*/createReactComponent<JSX.DyteAiTranscriptions, HTMLDyteAiTranscriptionsElement>('dyte-ai-transcriptions');
 export const DyteAudioGrid = /*@__PURE__*/createReactComponent<JSX.DyteAudioGrid, HTMLDyteAudioGridElement>('dyte-audio-grid');
@@ -139,7 +137,6 @@ export const DyteStageToggle = /*@__PURE__*/createReactComponent<JSX.DyteStageTo
 export const DyteSwitch = /*@__PURE__*/createReactComponent<JSX.DyteSwitch, HTMLDyteSwitchElement>('dyte-switch');
 export const DyteTabBar = /*@__PURE__*/createReactComponent<JSX.DyteTabBar, HTMLDyteTabBarElement>('dyte-tab-bar');
 export const DyteTextComposerView = /*@__PURE__*/createReactComponent<JSX.DyteTextComposerView, HTMLDyteTextComposerViewElement>('dyte-text-composer-view');
-export const DyteTextField = /*@__PURE__*/createReactComponent<JSX.DyteTextField, HTMLDyteTextFieldElement>('dyte-text-field');
 export const DyteTextMessage = /*@__PURE__*/createReactComponent<JSX.DyteTextMessage, HTMLDyteTextMessageElement>('dyte-text-message');
 export const DyteTextMessageView = /*@__PURE__*/createReactComponent<JSX.DyteTextMessageView, HTMLDyteTextMessageViewElement>('dyte-text-message-view');
 export const DyteTooltip = /*@__PURE__*/createReactComponent<JSX.DyteTooltip, HTMLDyteTooltipElement>('dyte-tooltip');

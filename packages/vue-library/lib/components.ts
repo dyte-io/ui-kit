@@ -9,7 +9,6 @@ import type { JSX } from '@dytesdk/ui-kit';
 
 
 export const DyteAi = /*@__PURE__*/ defineContainer<JSX.DyteAi>('dyte-ai', undefined, [
-  'defaultSection',
   'meeting',
   'states',
   'config',
@@ -20,17 +19,6 @@ export const DyteAi = /*@__PURE__*/ defineContainer<JSX.DyteAi>('dyte-ai', undef
   'dyteStateUpdate'
 ], [
   'dyteStateUpdate'
-]);
-
-
-export const DyteAiChat = /*@__PURE__*/ defineContainer<JSX.DyteAiChat>('dyte-ai-chat', undefined, [
-  't'
-]);
-
-
-export const DyteAiHome = /*@__PURE__*/ defineContainer<JSX.DyteAiHome>('dyte-ai-home', undefined, [
-  'meeting',
-  'initialMessages'
 ]);
 
 
@@ -178,8 +166,6 @@ export const DyteButton = /*@__PURE__*/ defineContainer<JSX.DyteButton>('dyte-bu
   'kind',
   'reverse',
   'disabled',
-  'iconPack',
-  't',
   'type'
 ]);
 
@@ -444,8 +430,7 @@ export const DyteChatToggle = /*@__PURE__*/ defineContainer<JSX.DyteChatToggle>(
 
 export const DyteClock = /*@__PURE__*/ defineContainer<JSX.DyteClock>('dyte-clock', undefined, [
   'meeting',
-  'iconPack',
-  't'
+  'iconPack'
 ]);
 
 
@@ -481,7 +466,6 @@ export const DyteControlbarButton = /*@__PURE__*/ defineContainer<JSX.DyteContro
   'isLoading',
   'disabled',
   'iconPack',
-  't',
   'brandIcon'
 ]);
 
@@ -650,8 +634,7 @@ export const DyteFileMessageView = /*@__PURE__*/ defineContainer<JSX.DyteFileMes
   'name',
   'size',
   'url',
-  'iconPack',
-  't'
+  'iconPack'
 ]);
 
 
@@ -722,9 +705,7 @@ export const DyteHeader = /*@__PURE__*/ defineContainer<JSX.DyteHeader>('dyte-he
 
 export const DyteIcon = /*@__PURE__*/ defineContainer<JSX.DyteIcon>('dyte-icon', undefined, [
   'icon',
-  'iconPack',
   'variant',
-  't',
   'size'
 ]);
 
@@ -872,12 +853,12 @@ export const DyteMeeting = /*@__PURE__*/ defineContainer<JSX.DyteMeeting>('dyte-
   'showSetupScreen',
   't',
   'config',
-  'iconPackUrl',
   'size',
   'gridLayout',
-  'dyteStateUpdate'
+  'iconPack',
+  'dyteStatesUpdate'
 ], [
-  'dyteStateUpdate'
+  'dyteStatesUpdate'
 ]);
 
 
@@ -1077,6 +1058,7 @@ export const DytePaginatedList = /*@__PURE__*/ defineContainer<JSX.DytePaginated
 
 export const DyteParticipant = /*@__PURE__*/ defineContainer<JSX.DyteParticipant>('dyte-participant', undefined, [
   'meeting',
+  'states',
   'view',
   'participant',
   'iconPack',
@@ -1155,6 +1137,7 @@ export const DyteParticipantsAudio = /*@__PURE__*/ defineContainer<JSX.DyteParti
 
 export const DyteParticipantsStageList = /*@__PURE__*/ defineContainer<JSX.DyteParticipantsStageList>('dyte-participants-stage-list', undefined, [
   'meeting',
+  'states',
   'config',
   'size',
   'hideHeader',
@@ -1482,8 +1465,7 @@ export const DyteSpeakerSelector = /*@__PURE__*/ defineContainer<JSX.DyteSpeaker
 
 export const DyteSpinner = /*@__PURE__*/ defineContainer<JSX.DyteSpinner>('dyte-spinner', undefined, [
   'iconPack',
-  'size',
-  't'
+  'size'
 ]);
 
 
@@ -1525,6 +1507,7 @@ export const DyteStageToggle = /*@__PURE__*/ defineContainer<JSX.DyteStageToggle
   'meeting',
   'size',
   'iconPack',
+  'states',
   't',
   'dyteStateUpdate'
 ], [
@@ -1575,18 +1558,6 @@ export const DyteTextComposerView = /*@__PURE__*/ defineContainer<JSX.DyteTextCo
 ]);
 
 
-export const DyteTextField = /*@__PURE__*/ defineContainer<JSX.DyteTextField>('dyte-text-field', undefined, [
-  'type',
-  'placeholder',
-  'disabled',
-  'iconPack',
-  't',
-  'dyteStateUpdate'
-], [
-  'dyteStateUpdate'
-]);
-
-
 export const DyteTextMessage = /*@__PURE__*/ defineContainer<JSX.DyteTextMessage>('dyte-text-message', undefined, [
   'message',
   'now',
@@ -1612,8 +1583,6 @@ export const DyteTooltip = /*@__PURE__*/ defineContainer<JSX.DyteTooltip>('dyte-
   'size',
   'placement',
   'delay',
-  'iconPack',
-  't',
   'dyteOpenChange'
 ], [
   'dyteOpenChange'
@@ -1639,13 +1608,15 @@ export const DyteTranscripts = /*@__PURE__*/ defineContainer<JSX.DyteTranscripts
 
 export const DyteUiProvider = /*@__PURE__*/ defineContainer<JSX.DyteUiProvider>('dyte-ui-provider', undefined, [
   'meeting',
-  'size',
-  'config',
+  'iconPack',
   't',
-  'iconPackUrl',
-  'loadConfigFromPreset',
-  'applyDesignSystem',
-  'joinRoom'
+  'config',
+  'size',
+  'showSetupScreen',
+  'noRenderUntilMeeting',
+  'dyteStatesUpdate'
+], [
+  'dyteStatesUpdate'
 ]);
 
 

@@ -5,7 +5,6 @@ import { UIConfig } from '../../types/ui-config';
 import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { defaultConfig } from '../../lib/default-ui-config';
-import storeState from '../../lib/store';
 import {
   canViewChat,
   canViewParticipants,
@@ -13,7 +12,7 @@ import {
   canViewPolls,
 } from '../../utils/sidebar';
 import { DyteSidebarTab, DyteSidebarView } from '../dyte-sidebar-ui/dyte-sidebar-ui';
-import { Render } from '../../lib/render';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { StageStatus } from '@dytesdk/web-core';
 
 export type DyteSidebarSection = 'chat' | 'polls' | 'participants' | 'plugins';
@@ -39,22 +38,30 @@ export class DyteSidebar {
   @Prop() defaultSection: DyteSidebarSection = 'chat';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Config */
   @Prop() config: UIConfig = defaultConfig;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** View type */
   @Prop({ reflect: true }) view: DyteSidebarView = 'sidebar';
@@ -72,7 +79,7 @@ export class DyteSidebar {
     this.viewChanged(this.view);
     this.statesChanged(this.states);
     this.meetingChanged(this.meeting);
-    this.isFloating = storeState?.sidebarFloating || false;
+    this.isFloating = this.states?.sidebarFloating || false;
   }
 
   disconnectedCallback() {
@@ -93,7 +100,7 @@ export class DyteSidebar {
 
   @Watch('states')
   statesChanged(s?: States) {
-    const states = s || storeState;
+    const states = s;
     if (states?.sidebar) {
       this.currentTab = states.sidebar;
     }
@@ -127,14 +134,10 @@ export class DyteSidebar {
   private viewSection(section: DyteSidebarSection) {
     this.currentTab = section;
     this.stateUpdate.emit({ activeSidebar: true, sidebar: this.currentTab });
-    storeState.activeSidebar = true;
-    storeState.sidebar = this.currentTab;
   }
 
   private close = () => {
     this.stateUpdate.emit({ activeSidebar: false, sidebar: this.defaultSection });
-    storeState.sidebar = this.currentTab;
-    storeState.activeSidebar = false;
   };
 
   private updateEnabledSections(meeting: Meeting = this.meeting) {
@@ -156,14 +159,13 @@ export class DyteSidebar {
 
   private toggleFloating = () => {
     this.isFloating = !this.isFloating;
-    storeState.sidebarFloating = this.isFloating;
   };
 
   render() {
     const defaults = {
       meeting: this.meeting,
       config: this.config,
-      states: this.states || storeState,
+      states: this.states,
       size: this.size,
       t: this.t,
       iconPack: this.iconPack,
@@ -197,22 +199,12 @@ export class DyteSidebar {
               </dyte-button>
             </div>
           )}
-          {defaults.states.sidebar === 'chat' && (
-            <Render element="dyte-chat" defaults={defaults} props={{ slot: 'chat' }} />
-          )}
-          {defaults.states.sidebar === 'polls' && (
-            <Render element="dyte-polls" defaults={defaults} props={{ slot: 'polls' }} />
-          )}
+          {defaults.states.sidebar === 'chat' && <dyte-chat {...defaults} slot="chat" />}
+          {defaults.states.sidebar === 'polls' && <dyte-polls {...defaults} slot="polls" />}
           {defaults.states.sidebar === 'participants' && (
-            <Render
-              element="dyte-participants"
-              defaults={defaults}
-              props={{ slot: 'participants' }}
-            />
+            <dyte-participants {...defaults} slot="participants" />
           )}
-          {defaults.states.sidebar === 'plugins' && (
-            <Render element="dyte-plugins" defaults={defaults} props={{ slot: 'plugins' }} />
-          )}
+          {defaults.states.sidebar === 'plugins' && <dyte-plugins {...defaults} slot="plugins" />}
         </dyte-sidebar-ui>
       </Host>
     );

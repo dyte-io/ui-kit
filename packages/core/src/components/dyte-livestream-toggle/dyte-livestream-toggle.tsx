@@ -6,7 +6,7 @@ import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 import { isLiveStreamHost } from '../../utils/livestream';
 import { ControlBarVariant } from '../dyte-controlbar-button/dyte-controlbar-button';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 @Component({
   tag: 'dyte-livestream-toggle',
@@ -18,16 +18,22 @@ export class DyteLivestreamToggle {
   @Prop({ reflect: true }) variant: ControlBarVariant = 'button';
 
   /** Meeting object */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Is Livestream active */
   @State() livestreamState: LivestreamState = 'IDLE';
@@ -84,7 +90,6 @@ export class DyteLivestreamToggle {
     this.livestreamState = state;
     if (state === 'LIVESTREAMING' || state === 'IDLE') {
       this.stateUpdate.emit({ activeMoreMenu: false });
-      storeState.activeMoreMenu = false;
     }
   };
 
@@ -140,7 +145,6 @@ export class DyteLivestreamToggle {
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}
-          t={this.t}
           isLoading={this.isLoading()}
           class={{ 'active-livestream': this.livestreamState === 'LIVESTREAMING' }}
           onClick={() => this.toggleLivestream()}

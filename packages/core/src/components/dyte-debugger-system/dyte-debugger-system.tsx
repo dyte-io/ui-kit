@@ -3,6 +3,8 @@ import { States, Size, IconPack, defaultIconPack, DyteI18n } from '../../exports
 import { useLanguage } from '../../lib/lang';
 import { Meeting } from '../../types/dyte-client';
 
+import { SyncWithStore } from '../../utils/sync-with-store';
+
 import {
   FormattedStatsObj,
   getBatteryChargingVerdict,
@@ -32,19 +34,27 @@ interface BatteryManager extends EventTarget {
 })
 export class DyteDebuggerSystem {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Is Network section expanded */
   @State() isBatterySectionOpen: boolean = true;

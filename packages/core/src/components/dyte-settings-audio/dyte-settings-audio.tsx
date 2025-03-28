@@ -4,7 +4,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size, States } from '../../types/props';
 import { getPreference, setPreference } from '../../utils/user-prefs';
-import storeState from '../../lib/store';
+import { SyncWithStore } from '../../utils/sync-with-store';
 
 /**
  * A component which lets to manage your audio devices and audio preferences.
@@ -25,19 +25,27 @@ import storeState from '../../lib/store';
 })
 export class DyteSettingsAudio {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Event updated state */
   @Event({ eventName: 'dyteStateUpdate' }) stateUpdate: EventEmitter<States>;
@@ -47,13 +55,13 @@ export class DyteSettingsAudio {
 
     const defaults = {
       meeting: this.meeting,
-      states: this.states || storeState,
+      states: this.states,
       size: this.size,
       iconPack: this.iconPack,
       t: this.t,
     };
 
-    const states = this.states || storeState;
+    const states = this.states;
     const initialNotificationSoundsPreference =
       states?.prefs?.muteNotificationSounds === true ||
       getPreference('mute-notification-sounds') === 'true';
@@ -80,7 +88,6 @@ export class DyteSettingsAudio {
                 const { checked } = e.target as HTMLDyteSwitchElement;
                 const muteNotificationSounds = !checked;
                 this.stateUpdate.emit({ prefs: { muteNotificationSounds } });
-                storeState.prefs = { ...(storeState.prefs ?? {}), muteNotificationSounds };
                 setPreference('mute-notification-sounds', muteNotificationSounds);
               }}
               iconPack={this.iconPack}

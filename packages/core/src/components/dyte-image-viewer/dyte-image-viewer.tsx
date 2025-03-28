@@ -4,6 +4,7 @@ import { defaultIconPack, IconPack } from '../../lib/icons';
 import { DyteI18n, useLanguage } from '../../lib/lang';
 import { Size } from '../../types/props';
 import { downloadFile } from '../../utils/file';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { formatName, shorten } from '../../utils/string';
 
 /**
@@ -19,13 +20,17 @@ export class DyteImageViewer {
   @Prop() image!: ImageMessage;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Emitted when viewer should be closed */
   @Event() close: EventEmitter<void>;
@@ -57,27 +62,12 @@ export class DyteImageViewer {
             <span class="displayName">{formatName(shorten(this.image.displayName))}</span>
           </div>
           <div class="actions">
-            <dyte-button
-              onClick={() => downloadFile(this.image.link, { fallbackName: 'image' })}
-              iconPack={this.iconPack}
-              t={this.t}
-            >
-              <dyte-icon
-                icon={this.iconPack.download}
-                slot="start"
-                iconPack={this.iconPack}
-                t={this.t}
-              />
+            <dyte-button onClick={() => downloadFile(this.image.link, { fallbackName: 'image' })}>
+              <dyte-icon icon={this.iconPack.download} slot="start" />
               Download
             </dyte-button>
-            <dyte-button
-              kind="icon"
-              variant="secondary"
-              onClick={() => this.close.emit()}
-              iconPack={this.iconPack}
-              t={this.t}
-            >
-              <dyte-icon icon={this.iconPack.dismiss} iconPack={this.iconPack} t={this.t} />
+            <dyte-button kind="icon" variant="secondary" onClick={() => this.close.emit()}>
+              <dyte-icon icon={this.iconPack.dismiss} />
             </dyte-button>
           </div>
         </div>

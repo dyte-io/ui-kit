@@ -9,6 +9,8 @@ import {
   AudioProducerScoreStats,
 } from '@dytesdk/web-core';
 
+import { SyncWithStore } from '../../utils/sync-with-store';
+
 import {
   FormattedStatsObj,
   getBitrateVerdict,
@@ -25,19 +27,27 @@ import {
 })
 export class DyteDebuggerScreenShare {
   /** Meeting object */
-  @Prop() meeting!: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** States object */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Icon pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Is Network section expanded */
   @State() isNetworkOpen: boolean = true;

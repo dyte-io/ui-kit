@@ -9,6 +9,7 @@ import {
   defaultIconPack,
   useLanguage,
 } from '../../exports';
+import { SyncWithStore } from '../../utils/sync-with-store';
 import { Render } from '../../lib/render';
 
 @Component({
@@ -18,22 +19,30 @@ import { Render } from '../../lib/render';
 })
 export class DyteAudioGrid {
   /** Meeting */
-  @Prop() meeting: Meeting;
+  @SyncWithStore()
+  @Prop()
+  meeting: Meeting;
 
   /** Config */
   @Prop() config: UIConfig;
 
   /** States */
-  @Prop() states: States;
+  @SyncWithStore()
+  @Prop()
+  states: States;
 
   /** Icon Pack */
-  @Prop() iconPack: IconPack = defaultIconPack;
+  @SyncWithStore()
+  @Prop()
+  iconPack: IconPack = defaultIconPack;
 
   /** Size */
-  @Prop({ reflect: true }) size: Size;
+  @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
   /** Language */
-  @Prop() t: DyteI18n = useLanguage();
+  @SyncWithStore()
+  @Prop()
+  t: DyteI18n = useLanguage();
 
   /** Whether to hide self in the grid */
   @Prop() hideSelf = false;
