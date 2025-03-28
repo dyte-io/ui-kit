@@ -1,3 +1,10 @@
+# [2.4.0-staging.12](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.11...@dyte-in/ui-kit-v2.4.0-staging.12) (2025-03-28)
+
+
+### Bug Fixes
+
+* re-export everything from ui-kit core ([be290b6](https://github.com/dyte-io/ui-kit/commit/be290b6347508cdf04e34ef94189312ff1fb416b))
+
 # [2.4.0-staging.11](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0-staging.10...@dyte-in/ui-kit-v2.4.0-staging.11) (2025-03-24)
 
 
