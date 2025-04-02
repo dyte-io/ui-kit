@@ -44,6 +44,12 @@ export class DytePluginMain {
     this.pluginChanged(this.plugin);
   }
 
+  private onIframeRef(el: HTMLIFrameElement) {
+    if (el === this.iframeEl) return;
+    this.iframeEl = el;
+    this.plugin?.addPluginView(el, 'plugin-main');
+  }
+
   @Watch('meeting')
   meetingChanged(meeting: Meeting) {
     if (meeting == undefined) return;
@@ -63,7 +69,7 @@ export class DytePluginMain {
       this.viewModeEnabled = enable;
     };
     if (plugin != null) {
-      plugin.addPluginView(this.iframeEl, 'plugin-main');
+      this.iframeEl && plugin.addPluginView(this.iframeEl, 'plugin-main');
       plugin.addListener('toggleViewMode', this.toggleViewModeListener);
     }
   }
@@ -120,7 +126,7 @@ export class DytePluginMain {
           {!(this.canInteractWithPlugin() || !this.viewModeEnabled) ? (
             <div class="block-inputs" />
           ) : null}
-          <iframe ref={(el) => (this.iframeEl = el)} part="iframe" />
+          <iframe ref={(el) => this.onIframeRef(el)} part="iframe" />
         </div>
       </Host>
     );
