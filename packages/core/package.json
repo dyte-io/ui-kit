@@ -1,6 +1,6 @@
 {
   "name": "@dytesdk/ui-kit",
-  "version": "2.4.0",
+  "version": "2.4.1-staging.1",
   "description": "Dyte's UI kit to support easy UI development over the core web library.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",

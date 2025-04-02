@@ -1,3 +1,10 @@
+## [2.4.1-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0...@dyte-in/ui-kit-v2.4.1-staging.1) (2025-04-02)
+
+
+### Bug Fixes
+
+* handle iframe not found exceptions ([8eb9230](https://github.com/dyte-io/ui-kit/commit/8eb92308332173dfc93298cfacc0af8e0d431a84))
+
 # [2.4.0](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.6...@dyte-in/ui-kit-v2.4.0) (2025-03-28)
 
 
