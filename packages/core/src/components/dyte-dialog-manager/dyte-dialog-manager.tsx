@@ -155,7 +155,7 @@ export class DyteDialogManager {
             iconPack={this.iconPack}
             t={this.t}
           >
-            <dyte-dyte-leave-meeting {...defaults} />
+            <dyte-leave-meeting {...defaults} />
           </dyte-dialog>
         </Host>
       );
@@ -163,7 +163,7 @@ export class DyteDialogManager {
       return (
         <Host>
           <dyte-dialog open hideCloseButton iconPack={this.iconPack} t={this.t}>
-            <dyte-dyte-permissions-message {...defaults} />
+            <dyte-permissions-message {...defaults} />
           </dyte-dialog>
         </Host>
       );
