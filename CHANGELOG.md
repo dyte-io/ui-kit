@@ -1,3 +1,10 @@
+## [2.4.1-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.1-staging.1...@dyte-in/ui-kit-v2.4.1-staging.2) (2025-04-03)
+
+
+### Bug Fixes
+
+* incorrect check in setup screen ([20271af](https://github.com/dyte-io/ui-kit/commit/20271af95006d592931c8d18ed2b26157ba5e64e))
+
 ## [2.4.1-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0...@dyte-in/ui-kit-v2.4.1-staging.1) (2025-04-02)
 
 
