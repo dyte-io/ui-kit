@@ -1,3 +1,10 @@
+## [2.4.1-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.1-staging.2...@dyte-in/ui-kit-v2.4.1-staging.3) (2025-04-03)
+
+
+### Bug Fixes
+
+* use arrow function in plugin-main to avoid state issues ([7192b11](https://github.com/dyte-io/ui-kit/commit/7192b1132d0484f429961c9278c0f77fa2cb9c8e))
+
 ## [2.4.1-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.1-staging.1...@dyte-in/ui-kit-v2.4.1-staging.2) (2025-04-03)
 
 
