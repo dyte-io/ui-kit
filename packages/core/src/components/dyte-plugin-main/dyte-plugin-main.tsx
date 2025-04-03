@@ -44,11 +44,11 @@ export class DytePluginMain {
     this.pluginChanged(this.plugin);
   }
 
-  private onIframeRef(el: HTMLIFrameElement) {
+  private onIframeRef = (el: HTMLIFrameElement) => {
     if (el === this.iframeEl) return;
     this.iframeEl = el;
     this.plugin?.addPluginView(el, 'plugin-main');
-  }
+  };
 
   @Watch('meeting')
   meetingChanged(meeting: Meeting) {
