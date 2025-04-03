@@ -1,3 +1,10 @@
+## [2.4.1-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.1-staging.3...@dyte-in/ui-kit-v2.4.1-staging.4) (2025-04-03)
+
+
+### Bug Fixes
+
+* incorrect tag usage ([03fa86f](https://github.com/dyte-io/ui-kit/commit/03fa86f48705e65e8eba12fe19b05b944a56e619))
+
 ## [2.4.1-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.1-staging.2...@dyte-in/ui-kit-v2.4.1-staging.3) (2025-04-03)
 
 
