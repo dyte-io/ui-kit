@@ -15,8 +15,6 @@
 }
 
 :host([variant='horizontal']) {
-  @apply flex flex-row-reverse items-center;
-
   .waiting-participants-count {
     @apply right-4 top-auto;
   }

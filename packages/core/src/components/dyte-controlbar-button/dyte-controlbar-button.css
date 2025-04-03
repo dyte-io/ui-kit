@@ -8,11 +8,10 @@
   --icon-size: var(--dyte-controlbar-button-icon-size, theme('spacing.7'));
   --button-spacing: var(--dyte-controlbar-button-spacing, theme('spacing.1'));
 
-  @apply relative box-border inline-flex !outline-none;
-  @apply min-w-20 mx-0.5 h-full w-auto;
-  @apply select-none rounded-md transition-colors;
+  @apply relative box-border inline-flex;
+  @apply min-w-20 h-full w-auto px-0.5;
+  @apply select-none transition-colors;
   @apply text-text-1000;
-  border: theme('borderWidth.md') solid theme('colors.transparent');
 
   background-color: var(--background-color);
 }
@@ -32,7 +31,8 @@ button {
 button {
   @apply box-border inline-flex h-full w-full flex-1 flex-col;
   @apply items-center justify-center;
-  @apply cursor-pointer border-none bg-transparent text-inherit outline-none;
+  @apply cursor-pointer rounded-md border-none bg-transparent text-inherit outline-offset-[-2px];
+  border: theme('borderWidth.md') solid theme('colors.transparent');
 }
 
 .label {
@@ -50,7 +50,7 @@ button {
   @apply h-3 w-3;
 }
 
-:host(:hover) {
+:host(:hover) button {
   @apply bg-background-800;
 }
 
@@ -66,14 +66,18 @@ button {
   --button-spacing: 0px;
 }
 
-:host(.leave:hover) {
+:host(.leave:hover) button {
   @apply bg-background-1000 text-danger;
   border: theme('borderWidth.md') solid theme('colors.danger');
 }
 
-:host(.active) {
+:host(.active) button {
   @apply text-brand-400;
   border: theme('borderWidth.md') solid theme('colors.brand.400');
+}
+
+button:focus-visible {
+  outline: 2px solid theme('colors.brand.400');
 }
 
 :host(.active-livestream) {
@@ -88,9 +92,12 @@ button {
 }
 
 :host([variant='horizontal']) {
-  @apply m-0 h-12 w-full px-5 py-3;
+  @apply w-full;
 
   button {
+    /* 7px because the parent container has an 8px radius, but a 1px thick border */
+    @apply rounded-[7px];
+    @apply m-0 h-12 w-full px-5 py-3;
     @apply flex-row justify-start;
   }
 
