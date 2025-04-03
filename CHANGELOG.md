@@ -1,3 +1,31 @@
+## [2.4.1-staging.4](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.1-staging.3...@dyte-in/ui-kit-v2.4.1-staging.4) (2025-04-03)
+
+
+### Bug Fixes
+
+* incorrect tag usage ([03fa86f](https://github.com/dyte-io/ui-kit/commit/03fa86f48705e65e8eba12fe19b05b944a56e619))
+
+## [2.4.1-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.1-staging.2...@dyte-in/ui-kit-v2.4.1-staging.3) (2025-04-03)
+
+
+### Bug Fixes
+
+* use arrow function in plugin-main to avoid state issues ([7192b11](https://github.com/dyte-io/ui-kit/commit/7192b1132d0484f429961c9278c0f77fa2cb9c8e))
+
+## [2.4.1-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.1-staging.1...@dyte-in/ui-kit-v2.4.1-staging.2) (2025-04-03)
+
+
+### Bug Fixes
+
+* incorrect check in setup screen ([20271af](https://github.com/dyte-io/ui-kit/commit/20271af95006d592931c8d18ed2b26157ba5e64e))
+
+## [2.4.1-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0...@dyte-in/ui-kit-v2.4.1-staging.1) (2025-04-02)
+
+
+### Bug Fixes
+
+* handle iframe not found exceptions ([8eb9230](https://github.com/dyte-io/ui-kit/commit/8eb92308332173dfc93298cfacc0af8e0d431a84))
+
 # [2.4.0](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.3.6...@dyte-in/ui-kit-v2.4.0) (2025-03-28)
 
 

@@ -75,7 +75,7 @@ export class DyteSetupScreen {
 
   @Watch('meeting')
   meetingChanged(meeting: Meeting) {
-    if (!meeting) {
+    if (meeting) {
       this.connectionState = meeting.meta.socketState?.state;
       this.canEditName = meeting.self.permissions.canEditDisplayName ?? true;
       this.displayName = meeting.self.name?.trim() || (this.canEditName ? '' : 'Participant');
