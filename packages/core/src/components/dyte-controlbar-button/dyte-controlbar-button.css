@@ -6,10 +6,9 @@
     theme('colors.background.1000')
   );
   --icon-size: var(--dyte-controlbar-button-icon-size, theme('spacing.7'));
-  --button-spacing: var(--dyte-controlbar-button-spacing, theme('spacing.1'));
 
   @apply relative box-border inline-flex;
-  @apply min-w-20 h-full w-auto px-0.5;
+  @apply min-w-20 h-full w-auto;
   @apply select-none transition-colors;
   @apply text-text-1000;
 
@@ -29,7 +28,7 @@ button {
 }
 
 button {
-  @apply box-border inline-flex h-full w-full flex-1 flex-col;
+  @apply box-border inline-flex h-full w-full flex-1 flex-col gap-1 px-1;
   @apply items-center justify-center;
   @apply cursor-pointer rounded-md border-none bg-transparent text-inherit outline-offset-[-2px];
   border: theme('borderWidth.md') solid theme('colors.transparent');
@@ -55,15 +54,8 @@ button {
 }
 
 #icon {
-  margin-bottom: var(--button-spacing);
   width: var(--icon-size);
   height: var(--icon-size);
-}
-
-/* Remove margin-bottom for `sm` buttons and in horizontal variant */
-:host([size='sm']),
-:host([variant='horizontal']) {
-  --button-spacing: 0px;
 }
 
 :host(.leave:hover) button {
@@ -85,7 +77,7 @@ button:focus-visible {
 }
 
 :host([size='sm']) {
-  @apply min-w-14 mx-0;
+  @apply min-w-14;
   .label {
     @apply hidden;
   }
@@ -97,12 +89,12 @@ button:focus-visible {
   button {
     /* 7px because the parent container has an 8px radius, but a 1px thick border */
     @apply rounded-[7px];
-    @apply m-0 h-12 w-full px-5 py-3;
-    @apply flex-row justify-start;
+    @apply h-12 w-full px-5 py-3;
+    @apply flex-row justify-start gap-3;
   }
 
   #icon {
-    @apply mr-3 w-6;
+    @apply w-6;
   }
 
   .label {
@@ -120,8 +112,6 @@ button:focus-visible {
 
 @media only screen and (max-device-height: 480px) and (orientation: landscape) {
   :host {
-    @apply mx-0;
-
     .label {
       @apply hidden;
     }

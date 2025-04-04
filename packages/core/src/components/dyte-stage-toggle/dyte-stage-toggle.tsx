@@ -140,7 +140,7 @@ export class DyteStageToggle {
   }
 
   render() {
-    if (!canRequestToJoinStage(this.meeting)) return;
+    if (!canRequestToJoinStage(this.meeting)) return <Host data-hidden />;
     return (
       <Host title={this.state.label}>
         <dyte-tooltip

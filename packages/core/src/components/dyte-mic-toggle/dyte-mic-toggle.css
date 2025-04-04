@@ -4,6 +4,11 @@
   display: block;
 }
 
+/* useful for removing from layouts that may have gap */
+:host([data-hidden]) {
+  display: none;
+}
+
 :host(.audioDisabled) {
   :slotted(dyte-icon) {
     @apply text-danger;

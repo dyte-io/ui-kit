@@ -72,7 +72,7 @@ export class DytePipToggle {
   }
 
   render() {
-    if (!this.pipSupported) return;
+    if (!this.pipSupported) return <Host data-hidden />;
     const pipEnabled = this.meeting.participants.pip.isActive;
     return (
       <Host role="log" aria-label={`Picture-in-Picture mode`}>

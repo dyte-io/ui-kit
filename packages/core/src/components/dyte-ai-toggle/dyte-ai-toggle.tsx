@@ -63,7 +63,7 @@ export class DyteAiToggle {
     const text = this.t('ai.meeting_ai');
 
     if (!(this.meeting?.self?.permissions as DytePermissionsPreset).transcriptionEnabled) {
-      return null;
+      return <Host data-hidden />;
     }
 
     return (

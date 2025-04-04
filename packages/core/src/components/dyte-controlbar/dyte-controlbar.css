@@ -1,7 +1,7 @@
 @import '../../styles/reset.css';
 
 :host {
-  @apply bg-background-1000 box-border flex items-center px-4;
+  @apply bg-background-1000 box-border flex items-center gap-0.5 px-4;
   @apply relative z-10;
 }
 
