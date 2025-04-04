@@ -110,7 +110,7 @@ export class DytePollsToggle {
   };
 
   render() {
-    if (!this.canViewPolls) return;
+    if (!this.canViewPolls) return <Host data-hidden />;
     const text = this.t('polls');
     // TODO(callmetarush): Just showing polls for all V2 users irrespective of themes
     // untill we get ui theme for V2.

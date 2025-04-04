@@ -138,7 +138,7 @@ export class DyteLivestreamToggle {
   };
 
   render() {
-    if (!isLiveStreamHost(this.meeting)) return;
+    if (!isLiveStreamHost(this.meeting)) return <Host data-hidden />;
     return (
       <Host>
         <dyte-controlbar-button

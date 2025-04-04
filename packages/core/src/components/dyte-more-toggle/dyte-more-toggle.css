@@ -6,6 +6,7 @@
 
 .more-menu {
   @apply border-background-600 border-sm bg-background-1000 absolute -right-24 bottom-16 z-50 mb-3 box-border max-h-[60vh] w-64 overflow-auto rounded-md border-solid outline-none;
+  @apply flex flex-col items-stretch;
 }
 
 :host([size='sm']) {
