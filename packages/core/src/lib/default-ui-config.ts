@@ -76,10 +76,12 @@ export const defaultConfig: UIConfig = {
     'div#controlbar-left': {
       display: 'flex',
       alignItems: 'center',
+      gap: 'var(--dyte-space-1, 4px)',
     },
     'div#controlbar-center': {
       display: 'flex',
       alignItems: 'center',
+      gap: 'var(--dyte-space-1, 4px)',
       position: 'relative',
       overflow: 'visible',
       justifyContent: 'center',
@@ -88,11 +90,13 @@ export const defaultConfig: UIConfig = {
       display: 'flex',
       flex: '1',
       alignItems: 'center',
+      gap: 'var(--dyte-space-1, 4px)',
       justifyContent: 'center',
     },
     'div#controlbar-right': {
       display: 'flex',
       alignItems: 'center',
+      gap: 'var(--dyte-space-1, 4px)',
       justifyContent: 'flex-end',
     },
     'dyte-settings': {

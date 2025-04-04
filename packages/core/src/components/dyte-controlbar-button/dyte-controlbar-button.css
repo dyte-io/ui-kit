@@ -9,7 +9,7 @@
   --button-spacing: var(--dyte-controlbar-button-spacing, theme('spacing.1'));
 
   @apply relative box-border inline-flex;
-  @apply min-w-20 h-full w-auto px-0.5;
+  @apply min-w-20 h-full w-auto;
   @apply select-none transition-colors;
   @apply text-text-1000;
 
@@ -29,7 +29,7 @@ button {
 }
 
 button {
-  @apply box-border inline-flex h-full w-full flex-1 flex-col;
+  @apply box-border inline-flex h-full w-full flex-1 flex-col px-1;
   @apply items-center justify-center;
   @apply cursor-pointer rounded-md border-none bg-transparent text-inherit outline-offset-[-2px];
   border: theme('borderWidth.md') solid theme('colors.transparent');

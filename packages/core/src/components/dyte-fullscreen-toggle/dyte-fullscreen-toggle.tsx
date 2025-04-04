@@ -83,7 +83,7 @@ export class DyteFullscreenToggle {
 
   render() {
     if (!this.isFullScreenSupported) {
-      return null;
+      return <Host data-hidden />;
     }
 
     return (

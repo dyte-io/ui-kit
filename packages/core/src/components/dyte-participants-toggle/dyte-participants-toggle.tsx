@@ -163,7 +163,7 @@ export class DyteParticipantsToggle {
   };
 
   render() {
-    if (!this.canViewParticipants) return;
+    if (!this.canViewParticipants) return <Host data-hidden />;
     const text = this.t('participants');
     // const badgeCount = this.waitlistedParticipants.length + this.stageRequestedParticipants.length;
     return (

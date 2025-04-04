@@ -191,7 +191,7 @@ export class DyteMicToggle {
       !this.canProduceAudio ||
       ['OFF_STAGE', 'REQUESTED_TO_JOIN_STAGE'].includes(this.stageStatus)
     ) {
-      return null;
+      return <Host data-hidden />;
     }
 
     const { tooltipLabel, label, icon, classList, showWarning, disable } = this.getState();

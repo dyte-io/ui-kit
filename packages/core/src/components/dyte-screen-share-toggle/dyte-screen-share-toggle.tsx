@@ -306,7 +306,7 @@ export class DyteScreenShareToggle {
       !this.canScreenShare ||
       ['OFF_STAGE', 'REQUESTED_TO_JOIN_STAGE'].includes(this.stageStatus)
     ) {
-      return null;
+      return <Host data-hidden />;
     }
 
     return (

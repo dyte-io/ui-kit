@@ -96,7 +96,7 @@ export class DytePluginsToggle {
   };
 
   render() {
-    if (!this.canViewPlugins) return;
+    if (!this.canViewPlugins) return <Host data-hidden />;
 
     const text = this.t('plugins');
 
