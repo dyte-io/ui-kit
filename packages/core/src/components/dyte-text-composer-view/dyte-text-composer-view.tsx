@@ -54,6 +54,7 @@ export class DyteTextComposerView {
     if (text !== '') {
       this.maybeResize(text);
     }
+    this.$textArea.focus();
   }
 
   /** Sets value of the text input */
