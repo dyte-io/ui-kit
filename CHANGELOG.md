@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.1...@dyte-in/ui-kit-v2.5.0) (2025-04-07)
+
+
+### Features
+
+* **dyte-text-composer-view:** focus textarea when opening chat ([34e1ec3](https://github.com/dyte-io/ui-kit/commit/34e1ec321bdd7249045d8a6f245d4ac5e9dc26cc))
+
 ## [2.4.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.4.0...@dyte-in/ui-kit-v2.4.1) (2025-04-03)
 
 
