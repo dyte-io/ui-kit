@@ -1273,14 +1273,14 @@ export declare interface DyteDraftAttachmentView extends Components.DyteDraftAtt
 
 
 @ProxyCmp({
-  inputs: ['iconPack', 't']
+  inputs: ['focusWhenOpened', 'iconPack', 't']
 })
 @Component({
   selector: 'dyte-emoji-picker',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['iconPack', 't'],
+  inputs: ['focusWhenOpened', 'iconPack', 't'],
 })
 export class DyteEmojiPicker {
   protected el: HTMLDyteEmojiPickerElement;

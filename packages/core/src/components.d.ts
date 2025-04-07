@@ -1359,6 +1359,10 @@ export namespace Components {
      */
     interface DyteEmojiPicker {
         /**
+          * Controls whether or not to focus on mount
+         */
+        "focusWhenOpened": boolean;
+        /**
           * Icon pack
          */
         "iconPack": IconPack;
@@ -8033,6 +8037,10 @@ declare namespace LocalJSX {
      * A very simple emoji picker component.
      */
     interface DyteEmojiPicker {
+        /**
+          * Controls whether or not to focus on mount
+         */
+        "focusWhenOpened"?: boolean;
         /**
           * Icon pack
          */

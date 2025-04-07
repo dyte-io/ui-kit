@@ -24,6 +24,10 @@ export class DyteEmojiPicker {
   @Prop()
   t: DyteI18n = useLanguage();
 
+  /** Controls whether or not to focus on mount */
+  @Prop()
+  focusWhenOpened = true;
+
   /** Close event */
   @Event() pickerClose: EventEmitter<void>;
 
@@ -36,12 +40,21 @@ export class DyteEmojiPicker {
    */
   @Event({ eventName: 'dyteEmojiClicked' }) emojiClicked: EventEmitter<string>;
 
+  /** Input element ref */
+  private inputElement!: HTMLInputElement;
+
   componentWillLoad() {
     // Don't use async here as it will block the render
     fetchEmojis().then((e) => {
       this.emojiList = e;
-      this.handleInputChange({ value: '' });
+      this.handleInputChange(this.inputElement);
     });
+  }
+
+  componentDidLoad() {
+    if (this.focusWhenOpened) {
+      this.inputElement.focus();
+    }
   }
 
   private handleInputChange(target) {
@@ -101,6 +114,7 @@ export class DyteEmojiPicker {
             value={this.filterVal}
             onInput={(event) => this.handleInputChange(event.target)}
             placeholder={this.t('search')}
+            ref={(el) => (this.inputElement = el)}
           ></input>
           {this.mapEmojiList()}
         </div>
