@@ -72,10 +72,10 @@ export class DytePipToggle {
   }
 
   render() {
-    if (!this.pipSupported) return;
+    if (!this.pipSupported) return <Host data-hidden />;
     const pipEnabled = this.meeting.participants.pip.isActive;
     return (
-      <Host tabIndex={0} role="log" aria-label={`Picture-in-Picture mode`}>
+      <Host role="log" aria-label={`Picture-in-Picture mode`}>
         <dyte-controlbar-button
           part="controlbar-button"
           size={this.size}

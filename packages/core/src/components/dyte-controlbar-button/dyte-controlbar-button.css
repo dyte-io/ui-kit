@@ -6,13 +6,11 @@
     theme('colors.background.1000')
   );
   --icon-size: var(--dyte-controlbar-button-icon-size, theme('spacing.7'));
-  --button-spacing: var(--dyte-controlbar-button-spacing, theme('spacing.1'));
 
-  @apply relative box-border inline-flex !outline-none;
-  @apply min-w-20 mx-0.5 h-full w-auto;
-  @apply select-none rounded-md transition-colors;
+  @apply relative box-border inline-flex;
+  @apply min-w-20 h-full w-auto;
+  @apply select-none transition-colors;
   @apply text-text-1000;
-  border: theme('borderWidth.md') solid theme('colors.transparent');
 
   background-color: var(--background-color);
 }
@@ -30,9 +28,10 @@ button {
 }
 
 button {
-  @apply box-border inline-flex h-full w-full flex-1 flex-col;
+  @apply box-border inline-flex h-full w-full flex-1 flex-col gap-1 px-1;
   @apply items-center justify-center;
-  @apply cursor-pointer border-none bg-transparent text-inherit outline-none;
+  @apply cursor-pointer rounded-md border-none bg-transparent text-inherit outline-offset-[-2px];
+  border: theme('borderWidth.md') solid theme('colors.transparent');
 }
 
 .label {
@@ -50,30 +49,27 @@ button {
   @apply h-3 w-3;
 }
 
-:host(:hover) {
+:host(:hover) button {
   @apply bg-background-800;
 }
 
 #icon {
-  margin-bottom: var(--button-spacing);
   width: var(--icon-size);
   height: var(--icon-size);
 }
 
-/* Remove margin-bottom for `sm` buttons and in horizontal variant */
-:host([size='sm']),
-:host([variant='horizontal']) {
-  --button-spacing: 0px;
-}
-
-:host(.leave:hover) {
+:host(.leave:hover) button {
   @apply bg-background-1000 text-danger;
   border: theme('borderWidth.md') solid theme('colors.danger');
 }
 
-:host(.active) {
+:host(.active) button {
   @apply text-brand-400;
   border: theme('borderWidth.md') solid theme('colors.brand.400');
+}
+
+button:focus-visible {
+  outline: 2px solid theme('colors.brand.400');
 }
 
 :host(.active-livestream) {
@@ -81,21 +77,24 @@ button {
 }
 
 :host([size='sm']) {
-  @apply min-w-14 mx-0;
+  @apply min-w-14;
   .label {
     @apply hidden;
   }
 }
 
 :host([variant='horizontal']) {
-  @apply m-0 h-12 w-full px-5 py-3;
+  @apply w-full;
 
   button {
-    @apply flex-row justify-start;
+    /* 7px because the parent container has an 8px radius, but a 1px thick border */
+    @apply rounded-[7px];
+    @apply h-12 w-full px-5 py-3;
+    @apply flex-row justify-start gap-3;
   }
 
   #icon {
-    @apply mr-3 w-6;
+    @apply w-6;
   }
 
   .label {
@@ -113,8 +112,6 @@ button {
 
 @media only screen and (max-device-height: 480px) and (orientation: landscape) {
   :host {
-    @apply mx-0;
-
     .label {
       @apply hidden;
     }

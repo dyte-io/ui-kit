@@ -296,6 +296,7 @@ export const generateConfig = (
       'div#controlbar-left': {
         display: 'flex',
         alignItems: 'center',
+        gap: 'var(--dyte-space-1, 4px)',
       },
       'div#controlbar-center': {
         display: 'flex',
@@ -303,6 +304,7 @@ export const generateConfig = (
         position: 'relative',
         overflow: 'visible',
         justifyContent: 'center',
+        gap: 'var(--dyte-space-1, 4px)',
       },
       'div#controlbar-mobile': {
         display: 'flex',
@@ -310,11 +312,13 @@ export const generateConfig = (
         alignItems: 'center',
         justifyContent: 'center',
         zIndex: '10000',
+        gap: 'var(--dyte-space-1, 4px)',
       },
       'div#controlbar-right': {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
+        gap: 'var(--dyte-space-1, 4px)',
       },
       'dyte-settings': {
         width: '720px',
