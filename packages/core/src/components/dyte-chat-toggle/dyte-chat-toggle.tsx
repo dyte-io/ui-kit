@@ -130,7 +130,7 @@ export class DyteChatToggle {
   };
 
   render() {
-    if (!this.canViewChat) return;
+    if (!this.canViewChat) return <Host data-hidden />;
     return (
       <Host title={this.t('chat')}>
         {usePaginatedChat(this.meeting)
