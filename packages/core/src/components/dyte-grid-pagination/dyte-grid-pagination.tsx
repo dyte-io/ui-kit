@@ -162,7 +162,7 @@ export class DyteGridPagination {
     const isAudioRoom = meta?.viewType === 'AUDIO_ROOM';
 
     if (isAudioRoom || !this.showPagination) {
-      return;
+      return <Host data-hidden />;
     }
 
     return (

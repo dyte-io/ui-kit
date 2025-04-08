@@ -65,7 +65,7 @@ export class DyteRecordingIndicator {
 
   render() {
     return (
-      <Host>
+      <Host data-hidden={!this.isRecording}>
         {this.isRecording && (
           <div class="indicator" aria-label={this.t('recording.indicator')} part="indicator">
             <dyte-icon

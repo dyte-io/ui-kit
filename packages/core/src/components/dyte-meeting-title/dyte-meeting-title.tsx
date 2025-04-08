@@ -31,10 +31,10 @@ export class DyteMeetingTitle {
   render() {
     const title = this.meeting?.meta.meetingTitle;
 
-    if (title == null) return null;
+    if (title == null) return <Host data-hidden />;
 
     return (
-      <Host tabIndex={0} role="banner" aria-label={title}>
+      <Host role="banner" aria-label={title}>
         <dyte-tooltip label={title} part="tooltip">
           <div class="title" part="title">
             {title}

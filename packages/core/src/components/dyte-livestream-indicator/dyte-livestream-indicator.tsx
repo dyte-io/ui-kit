@@ -50,7 +50,7 @@ export class DyteLivestreamIndicator {
   };
 
   render() {
-    if (!showLivestream(this.meeting) || !this.isLivestreaming) return;
+    if (!showLivestream(this.meeting) || !this.isLivestreaming) return <Host data-hidden />;
 
     return (
       <Host>

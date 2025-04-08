@@ -86,9 +86,10 @@ export class DyteClock {
   }
 
   render() {
+    const showClock = this.startedTime !== undefined;
     return (
-      <Host tabIndex={0} role="timer" aria-live="off">
-        {this.startedTime !== undefined && [
+      <Host data-hidden={!showClock} tabIndex={0} role="timer" aria-live="off">
+        {showClock && [
           <dyte-icon icon={this.iconPack.clock} aria-hidden={true} tabIndex={-1} part="icon" />,
           <span part="text">{this.getFormattedTime()}</span>,
         ]}
