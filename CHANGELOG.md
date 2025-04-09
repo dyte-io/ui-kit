@@ -1,3 +1,10 @@
+# [3.0.0-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.0-staging.1...@dyte-in/ui-kit-v3.0.0-staging.2) (2025-04-09)
+
+
+### Features
+
+* **dyte-emoji-picker:** optionally focus emoji picker search when opened ([43a2d41](https://github.com/dyte-io/ui-kit/commit/43a2d417ecd27cd744e1feca629977c62cd79968))
+
 # [3.0.0-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.5.0...@dyte-in/ui-kit-v3.0.0-staging.1) (2025-04-08)
 
 
