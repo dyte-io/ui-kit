@@ -585,6 +585,7 @@ export const DyteDraftAttachmentView = /*@__PURE__*/ defineContainer<JSX.DyteDra
 export const DyteEmojiPicker = /*@__PURE__*/ defineContainer<JSX.DyteEmojiPicker>('dyte-emoji-picker', undefined, [
   'iconPack',
   't',
+  'focusWhenOpened',
   'pickerClose',
   'dyteEmojiClicked'
 ], [
