@@ -17,7 +17,7 @@
 }
 
 #emoji-grid {
-  @apply mt-2 box-border flex flex-row flex-wrap;
+  @apply mt-2 box-border flex flex-row flex-wrap content-start;
   @apply overflow-x-hidden overflow-y-scroll;
   @apply h-full;
   grid-auto-rows: minmax(min-content, max-content);
