@@ -73,6 +73,15 @@ export class DyteDialog {
     }
   };
 
+  private dialogEl: HTMLDialogElement;
+
+  componentDidRender() {
+    if (this.open && !this.dialogEl.open) {
+      // we need to call showModal() to get the ::backdrop
+      this.dialogEl.showModal();
+    }
+  }
+
   render() {
     if (!this.open) {
       return null;
@@ -80,7 +89,23 @@ export class DyteDialog {
 
     return (
       <Host>
-        <div id="dialog" part="container" role="dialog" aria-modal="true">
+        <dialog
+          ref={(el) => (this.dialogEl = el)}
+          id="dialog"
+          part="container"
+          onClose={this.close}
+          onClick={(e) => {
+            // clicked outside the children of dialog
+            if (!this.disableEscapeKey && e.target === this.dialogEl) {
+              this.close();
+            }
+          }}
+          onKeyDown={(e) => {
+            if (this.disableEscapeKey && e.key === 'Escape') {
+              e.preventDefault();
+            }
+          }}
+        >
           <slot />
           {!this.hideCloseButton && (
             <dyte-button
@@ -96,7 +121,7 @@ export class DyteDialog {
               <dyte-icon icon={this.iconPack.dismiss} />
             </dyte-button>
           )}
-        </div>
+        </dialog>
       </Host>
     );
   }
