@@ -1,6 +1,6 @@
 {
   "name": "@dytesdk/vue-ui-kit",
-  "version": "3.0.0-staging.2",
+  "version": "3.0.0",
   "description": "Dyte's UI Kit to support easy UI development for Vue.",
   "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
