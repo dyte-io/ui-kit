@@ -653,20 +653,31 @@ export class DyteNotifications {
     );
   }
 
+  @State()
+  paused = false;
+
   render() {
     return (
       <Host>
-        {this.notifications.map((notification) => (
-          <dyte-notification
-            size={this.size}
-            key={notification.id}
-            data-id={notification.id}
-            notification={notification}
-            onDyteNotificationDismiss={(e: CustomEvent<string>) => this.handleDismiss(e)}
-            iconPack={this.iconPack}
-            t={this.t}
-          />
-        ))}
+        <div
+          onMouseEnter={() => (this.paused = true)}
+          onFocusin={() => (this.paused = true)}
+          onMouseLeave={() => (this.paused = false)}
+          onFocusout={() => (this.paused = false)}
+        >
+          {this.notifications.map((notification) => (
+            <dyte-notification
+              size={this.size}
+              key={notification.id}
+              data-id={notification.id}
+              notification={notification}
+              onDyteNotificationDismiss={(e: CustomEvent<string>) => this.handleDismiss(e)}
+              iconPack={this.iconPack}
+              paused={this.paused}
+              t={this.t}
+            />
+          ))}
+        </div>
       </Host>
     );
   }

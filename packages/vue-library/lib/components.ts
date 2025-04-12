@@ -1014,6 +1014,7 @@ export const DyteNetworkIndicator = /*@__PURE__*/ defineContainer<JSX.DyteNetwor
 
 export const DyteNotification = /*@__PURE__*/ defineContainer<JSX.DyteNotification>('dyte-notification', undefined, [
   'notification',
+  'paused',
   'size',
   'iconPack',
   't',

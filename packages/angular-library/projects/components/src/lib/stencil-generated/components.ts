@@ -2307,14 +2307,14 @@ export declare interface DyteNetworkIndicator extends Components.DyteNetworkIndi
 
 
 @ProxyCmp({
-  inputs: ['iconPack', 'notification', 'size', 't']
+  inputs: ['iconPack', 'notification', 'paused', 'size', 't']
 })
 @Component({
   selector: 'dyte-notification',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: '<ng-content></ng-content>',
   // eslint-disable-next-line @angular-eslint/no-inputs-metadata-property
-  inputs: ['iconPack', 'notification', 'size', 't'],
+  inputs: ['iconPack', 'notification', 'paused', 'size', 't'],
 })
 export class DyteNotification {
   protected el: HTMLDyteNotificationElement;

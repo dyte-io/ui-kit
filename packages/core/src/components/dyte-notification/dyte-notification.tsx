@@ -20,6 +20,9 @@ export class DyteNotification {
   /** Message */
   @Prop() notification!: Notification;
 
+  /** Stops timeout when true */
+  @Prop() paused: boolean;
+
   /** Size */
   @SyncWithStore() @Prop({ reflect: true }) size: Size;
 
@@ -42,10 +45,21 @@ export class DyteNotification {
     this.notificationChanged(this.notification);
   }
 
+  private timeout: number;
+
+  @Watch('paused')
+  pausedChanged(paused: boolean) {
+    if (paused) {
+      clearTimeout(this.timeout);
+    } else {
+      this.notificationChanged(this.notification);
+    }
+  }
+
   @Watch('notification')
   notificationChanged(notification: Notification) {
-    if (notification != null && typeof notification.duration === 'number') {
-      setTimeout(() => {
+    if (notification != null && typeof notification.duration === 'number' && !this.paused) {
+      this.timeout = window.setTimeout(() => {
         this.dismiss.emit(notification.id);
       }, notification.duration);
     }
@@ -85,12 +99,9 @@ export class DyteNotification {
                 {this.notification.button.text}
               </dyte-button>
             )}
-            <dyte-icon
-              aria-label={this.t('dismiss')}
-              class="dismiss"
-              icon={this.iconPack.dismiss}
-              onClick={() => this.dismiss.emit(this.notification.id)}
-            />
+            <button onClick={() => this.dismiss.emit(this.notification.id)} class="dismiss">
+              <dyte-icon aria-label={this.t('dismiss')} icon={this.iconPack.dismiss} />
+            </button>
           </div>
         </div>
       </Host>
