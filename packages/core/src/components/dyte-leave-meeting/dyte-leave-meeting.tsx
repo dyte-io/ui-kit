@@ -139,20 +139,16 @@ export class DyteLeaveMeeting {
                 {this.t('breakout_rooms.leave_confirmation.main_room_btn')}
               </dyte-button>
             )}
-            <dyte-button
-              variant={this.canEndMeeting ? 'secondary' : 'danger'}
-              title={this.t('leave')}
-              onClick={this.handleLeave}
-              class={{
-                'secondary-btn': this.canEndMeeting,
-                'secondary-danger-btn': this.canEndMeeting,
-              }}
-            >
+            <dyte-button variant="danger" title={this.t('leave')} onClick={this.handleLeave}>
               {this.t('leave')}
             </dyte-button>
 
             {this.canEndMeeting && (
-              <dyte-button variant="danger" onClick={this.handleEndMeeting}>
+              <dyte-button
+                variant="danger"
+                class="secondary-btn secondary-danger-btn"
+                onClick={this.handleEndMeeting}
+              >
                 {this.t('end.all')}
               </dyte-button>
             )}
