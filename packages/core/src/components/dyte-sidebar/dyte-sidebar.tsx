@@ -14,6 +14,7 @@ import {
 import { DyteSidebarTab, DyteSidebarView } from '../dyte-sidebar-ui/dyte-sidebar-ui';
 import { SyncWithStore } from '../../utils/sync-with-store';
 import { StageStatus } from '@dytesdk/web-core';
+import { Render } from '../../lib/render';
 
 export type DyteSidebarSection = 'chat' | 'polls' | 'participants' | 'plugins';
 
@@ -199,10 +200,16 @@ export class DyteSidebar {
               </dyte-button>
             </div>
           )}
-          {defaults.states.sidebar === 'chat' && <dyte-chat {...defaults} slot="chat" />}
+          {defaults.states.sidebar === 'chat' && (
+            <Render element="dyte-chat" defaults={defaults} props={{ slot: 'chat' }} />
+          )}
           {defaults.states.sidebar === 'polls' && <dyte-polls {...defaults} slot="polls" />}
           {defaults.states.sidebar === 'participants' && (
-            <dyte-participants {...defaults} slot="participants" />
+            <Render
+              element="dyte-participants"
+              defaults={defaults}
+              props={{ slot: 'participants' }}
+            />
           )}
           {defaults.states.sidebar === 'plugins' && <dyte-plugins {...defaults} slot="plugins" />}
         </dyte-sidebar-ui>
