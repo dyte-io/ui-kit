@@ -1,3 +1,17 @@
+## [3.0.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.0...@dyte-in/ui-kit-v3.0.1) (2025-04-14)
+
+
+### Bug Fixes
+
+* render participants and chat components using Render ([6fc6b54](https://github.com/dyte-io/ui-kit/commit/6fc6b5422436f1304841a1379591383d0e0f5231))
+
+## [3.0.1-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.0...@dyte-in/ui-kit-v3.0.1-staging.1) (2025-04-14)
+
+
+### Bug Fixes
+
+* render participants and chat components using Render ([6fc6b54](https://github.com/dyte-io/ui-kit/commit/6fc6b5422436f1304841a1379591383d0e0f5231))
+
 # [3.0.0](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v2.5.0...@dyte-in/ui-kit-v3.0.0) (2025-04-09)
 
 
