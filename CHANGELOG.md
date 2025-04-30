@@ -1,3 +1,11 @@
+## [3.0.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.1...@dyte-in/ui-kit-v3.0.2) (2025-04-30)
+
+
+### Bug Fixes
+
+* **breakout-rooms:** breakout rooms were not starting the first time ([810abbe](https://github.com/dyte-io/ui-kit/commit/810abbe577b512911ccad0f24d5f286733be8535))
+* **breakout-rooms:** updated ui-kit provider as well for state sync ([e648312](https://github.com/dyte-io/ui-kit/commit/e648312e8e2dabce8a178351e39c10f76980ab87))
+
 ## [3.0.2-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.1...@dyte-in/ui-kit-v3.0.2-staging.1) (2025-04-30)
 
 
