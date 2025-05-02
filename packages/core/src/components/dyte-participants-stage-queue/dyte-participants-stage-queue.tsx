@@ -51,6 +51,9 @@ export class DyteParticipantsStaged {
     if (meeting == null) return;
 
     this.updateRequestList();
+    meeting.participants.joined.on('stageStatusUpdate', (e) => {
+      this.updateStageRequestedParticipants();
+    });
     meeting.stage?.on('stageAccessRequestUpdate', this.updateRequestList);
   }
 
@@ -63,23 +66,19 @@ export class DyteParticipantsStaged {
   private acceptStageRequest = async (p: Peer) => {
     const { userId } = p;
     await this.meeting.stage.grantAccess([userId]);
-    this.updateStageRequestedParticipants();
   };
 
   private rejectStageRequest = async (p: Peer) => {
     const { userId } = p;
     await this.meeting.stage.denyAccess([userId]);
-    this.updateStageRequestedParticipants();
   };
 
   private acceptAllStageRequest = async () => {
     await this.meeting.stage.grantAccess(this.stageRequestedParticipants.map((p) => p.userId));
-    this.updateStageRequestedParticipants();
   };
 
   private denyAllStageRequest = async () => {
     await this.meeting.stage?.denyAccess(this.stageRequestedParticipants.map((p) => p.userId));
-    this.updateStageRequestedParticipants();
   };
 
   private shouldShowStageRequests = () => {
