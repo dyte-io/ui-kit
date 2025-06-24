@@ -1,3 +1,10 @@
+## [3.0.3-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.2...@dyte-in/ui-kit-v3.0.3-staging.1) (2025-06-24)
+
+
+### Bug Fixes
+
+* **angular:** support older angular versions ([dc92ecb](https://github.com/dyte-io/ui-kit/commit/dc92ecb5ebe45f799cbd0958db5c5ce972201d7d))
+
 ## [3.0.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.1...@dyte-in/ui-kit-v3.0.2) (2025-04-30)
 
 
