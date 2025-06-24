@@ -1,10 +1,10 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { defineCustomElements } from '@dytesdk/ui-kit/loader';
 import { DIRECTIVES } from './stencil-generated';
+import { defineCustomElements } from '@dytesdk/ui-kit/loader';
 
 @NgModule({
+  declarations: [...DIRECTIVES],
   exports: [...DIRECTIVES],
-  imports: [...DIRECTIVES],
   providers: [
     {
       provide: APP_INITIALIZER,

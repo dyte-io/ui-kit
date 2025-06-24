@@ -26,14 +26,5 @@
     "postpublish": "mv package.json.bak package.json"
   },
   "module": "dist/fesm2022/dytesdk-angular-ui-kit.mjs",
-  "typings": "dist/index.d.ts",
-  "exports": {
-    "./package.json": {
-      "default": "./package.json"
-    },
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/fesm2022/dytesdk-angular-ui-kit.mjs"
-    }
-  }
+  "typings": "dist/index.d.ts"
 }
