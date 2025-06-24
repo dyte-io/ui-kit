@@ -1,3 +1,10 @@
+## [3.0.4-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.3...@dyte-in/ui-kit-v3.0.4-staging.1) (2025-06-24)
+
+
+### Bug Fixes
+
+* longer notifications get cut off ([9d8bedd](https://github.com/dyte-io/ui-kit/commit/9d8beddf53b9cf884cffe204040d03e3011307f7))
+
 ## [3.0.3-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.3-staging.1...@dyte-in/ui-kit-v3.0.3-staging.2) (2025-06-24)
 
 ### Bug Fixes
