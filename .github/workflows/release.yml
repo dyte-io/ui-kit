@@ -33,14 +33,9 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
           ENVIRONMENT: ${{ github.ref }}
-        run: npx semantic-release
-
-      - name: Publish
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
-          ENVIRONMENT: ${{ github.ref }}
-        run: npx lerna exec -- npm publish --access public
+        run: |
+          npx semantic-release
+          npx lerna exec -- npm publish --access public
 
       - name: Update staging branch
         if: |
