@@ -1,3 +1,10 @@
+## [3.0.5](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.4...@dyte-in/ui-kit-v3.0.5) (2025-06-26)
+
+
+### Bug Fixes
+
+* release minor version ([db96535](https://github.com/dyte-io/ui-kit/commit/db965354bb9275575abdd1405c98171c4bc4f5a1))
+
 ## [3.0.5-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.4...@dyte-in/ui-kit-v3.0.5-staging.1) (2025-06-26)
 
 
