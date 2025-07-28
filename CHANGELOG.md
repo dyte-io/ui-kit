@@ -1,3 +1,11 @@
+## [3.0.7](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.6...@dyte-in/ui-kit-v3.0.7) (2025-07-28)
+
+
+### Bug Fixes
+
+* angular package.json ([eb42656](https://github.com/dyte-io/ui-kit/commit/eb42656e00c35b6a5facd4d760d86c4f7136047c))
+* truncate notifications after two lines ([fb1f81f](https://github.com/dyte-io/ui-kit/commit/fb1f81fd4f293e92b8efe931bc0d894e68311151))
+
 ## [3.0.7-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.6...@dyte-in/ui-kit-v3.0.7-staging.1) (2025-07-24)
 
 
