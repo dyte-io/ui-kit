@@ -13,6 +13,8 @@ const env = (process.env.ENVIRONMENT || 'staging').replace('refs/heads/', '');
 
 const tag = env == 'main' ? 'latest' : env;
 
+console.log('angular-ui-kit: prepublish:env', { env, tag });
+
 fs.writeFileSync(
   './dist/package.json',
   JSON.stringify(
