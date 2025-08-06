@@ -1,3 +1,12 @@
+## [3.0.8-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.8-staging.2...@dyte-in/ui-kit-v3.0.8-staging.3) (2025-08-06)
+
+
+### Bug Fixes
+
+* **angular:** keepLifecycleScripts ([4ed24d1](https://github.com/dyte-io/ui-kit/commit/4ed24d167513f532c3cd3efa875d280e4af5964f))
+* **angular:** prepublish script ([9f9d406](https://github.com/dyte-io/ui-kit/commit/9f9d406d9cf40539690e3bba94e85169a9c8cee3))
+* **angular:** scripts ([fe8a066](https://github.com/dyte-io/ui-kit/commit/fe8a06689aea477b5457275d0f3ca5c49289e84d))
+
 ## [3.0.8-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.8-staging.1...@dyte-in/ui-kit-v3.0.8-staging.2) (2025-08-06)
 
 
