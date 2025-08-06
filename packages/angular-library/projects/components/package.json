@@ -15,7 +15,8 @@
     "tag": "latest"
   },
   "files": [
-    "dist/"
+    "*",
+    "!prepublish.js"
   ],
   "bugs": {
     "email": "support@dyte.io"
