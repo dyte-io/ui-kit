@@ -14,9 +14,6 @@
     "access": "public",
     "tag": "latest"
   },
-  "files": [
-    "dist/"
-  ],
   "bugs": {
     "email": "support@dyte.io"
   },
