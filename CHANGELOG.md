@@ -1,3 +1,11 @@
+## [3.0.8-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.8-staging.1...@dyte-in/ui-kit-v3.0.8-staging.2) (2025-08-06)
+
+
+### Bug Fixes
+
+* **angular:** package.json files and prepublish ([5646e85](https://github.com/dyte-io/ui-kit/commit/5646e852f1d485659351b1f00f3df0860a52c574))
+* **angular:** remove files from package.json ([008b5e0](https://github.com/dyte-io/ui-kit/commit/008b5e033750b15e3c3d3591ebd3adcfa23487bf))
+
 ## [3.0.8-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.7...@dyte-in/ui-kit-v3.0.8-staging.1) (2025-08-06)
 
 
