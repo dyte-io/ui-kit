@@ -1,3 +1,11 @@
+## [3.0.8-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.7...@dyte-in/ui-kit-v3.0.8-staging.1) (2025-08-06)
+
+
+### Bug Fixes
+
+* **angular:** types and module fields in package.json ([f9dd217](https://github.com/dyte-io/ui-kit/commit/f9dd217cb37fc428bd2b4027dbd7021237b95cb0))
+* release angular dist dir entirely ([f2d06e5](https://github.com/dyte-io/ui-kit/commit/f2d06e5f2b0a3fda58a5a72026e9bc0f4046dfa6))
+
 ## [3.0.7](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.6...@dyte-in/ui-kit-v3.0.7) (2025-07-28)
 
 
