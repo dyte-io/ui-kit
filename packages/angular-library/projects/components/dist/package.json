@@ -1,0 +1,47 @@
+{
+  "name": "@dytesdk/angular-ui-kit",
+  "version": "3.0.8",
+  "description": "Dyte's UI Kit to support easy UI development for Angular Projects",
+  "peerDependencies": {
+    "@angular/common": ">=12",
+    "@angular/core": ">=12"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0",
+    "@dytesdk/ui-kit": "*"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "files": [
+    "*",
+    "!prepublish.js"
+  ],
+  "bugs": {
+    "email": "support@dyte.io"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "prepublishOnly": "node prepublish.js"
+  },
+  "module": "fesm2015/dytesdk-angular-ui-kit.mjs",
+  "es2020": "fesm2020/dytesdk-angular-ui-kit.mjs",
+  "esm2020": "esm2020/dytesdk-angular-ui-kit.mjs",
+  "fesm2020": "fesm2020/dytesdk-angular-ui-kit.mjs",
+  "fesm2015": "fesm2015/dytesdk-angular-ui-kit.mjs",
+  "typings": "dytesdk-angular-ui-kit.d.ts",
+  "exports": {
+    "./package.json": {
+      "default": "./package.json"
+    },
+    ".": {
+      "types": "./dytesdk-angular-ui-kit.d.ts",
+      "esm2020": "./esm2020/dytesdk-angular-ui-kit.mjs",
+      "es2020": "./fesm2020/dytesdk-angular-ui-kit.mjs",
+      "es2015": "./fesm2015/dytesdk-angular-ui-kit.mjs",
+      "node": "./fesm2015/dytesdk-angular-ui-kit.mjs",
+      "default": "./fesm2020/dytesdk-angular-ui-kit.mjs"
+    }
+  }
+}
