@@ -1,3 +1,28 @@
+## [3.0.8-staging.3](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.8-staging.2...@dyte-in/ui-kit-v3.0.8-staging.3) (2025-08-06)
+
+
+### Bug Fixes
+
+* **angular:** keepLifecycleScripts ([4ed24d1](https://github.com/dyte-io/ui-kit/commit/4ed24d167513f532c3cd3efa875d280e4af5964f))
+* **angular:** prepublish script ([9f9d406](https://github.com/dyte-io/ui-kit/commit/9f9d406d9cf40539690e3bba94e85169a9c8cee3))
+* **angular:** scripts ([fe8a066](https://github.com/dyte-io/ui-kit/commit/fe8a06689aea477b5457275d0f3ca5c49289e84d))
+
+## [3.0.8-staging.2](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.8-staging.1...@dyte-in/ui-kit-v3.0.8-staging.2) (2025-08-06)
+
+
+### Bug Fixes
+
+* **angular:** package.json files and prepublish ([5646e85](https://github.com/dyte-io/ui-kit/commit/5646e852f1d485659351b1f00f3df0860a52c574))
+* **angular:** remove files from package.json ([008b5e0](https://github.com/dyte-io/ui-kit/commit/008b5e033750b15e3c3d3591ebd3adcfa23487bf))
+
+## [3.0.8-staging.1](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.7...@dyte-in/ui-kit-v3.0.8-staging.1) (2025-08-06)
+
+
+### Bug Fixes
+
+* **angular:** types and module fields in package.json ([f9dd217](https://github.com/dyte-io/ui-kit/commit/f9dd217cb37fc428bd2b4027dbd7021237b95cb0))
+* release angular dist dir entirely ([f2d06e5](https://github.com/dyte-io/ui-kit/commit/f2d06e5f2b0a3fda58a5a72026e9bc0f4046dfa6))
+
 ## [3.0.7](https://github.com/dyte-io/ui-kit/compare/@dyte-in/ui-kit-v3.0.6...@dyte-in/ui-kit-v3.0.7) (2025-07-28)
 
 

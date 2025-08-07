@@ -1,4 +1,7 @@
 const fs = require('fs');
+if (!fs.existsSync('./package.json')) {
+  throw new Error('Angular UI Kit dist not found');
+}
 const pkg = require('./package.json');
 
 const dependencies = {
@@ -10,10 +13,7 @@ const env = (process.env.ENVIRONMENT || 'staging').replace('refs/heads/', '');
 
 const tag = env == 'main' ? 'latest' : env;
 
-try {
-  fs.unlinkSync('./dist/package.json');
-  fs.unlinkSync('./dist/README.md');
-} catch {}
+console.log('angular-ui-kit: prepublish:env', { env, tag });
 
 fs.writeFileSync(
   './package.json',
